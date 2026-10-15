@@ -124,5 +124,5 @@ the organophosphorus class; the manuscript explains why.
 
 ## Citation
 
-Please cite the paper. Once the archived release has a DOI, cite that for the
-code and data.
+Please cite the paper. For the code and data, cite this repository at the
+tagged release `v1.0`, which is the state the manuscript refers to.
