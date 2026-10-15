@@ -1,0 +1,18 @@
+{
+ "n": 257,
+ "n_fail": 2,
+ "failures": [
+  {
+   "cas": "19624-22-7",
+   "name": "Pentaborane",
+   "formula": "C14H14NO4PS",
+   "missing": "B"
+  },
+  {
+   "cas": "27137-85-5",
+   "name": "Trichlorophenylsilane",
+   "formula": "C6H7Cl5Si",
+   "missing": "Cl:5>3 (다성분 레코드 — 환산 분자량 오류)"
+  }
+ ]
+}

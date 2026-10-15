@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+outputs/_log_*.txt
+outputs/*.npy
+outputs/*.zip
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.spl
+paper/*.synctex.gz

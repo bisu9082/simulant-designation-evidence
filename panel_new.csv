@@ -1,0 +1,8 @@
+compound_name,compound_class,agent_series,input_smiles,cas,note
+DCP,literature_simulant,,CCOP(=O)(OCC)Cl,814-49-3,diethyl chlorophosphate — 반응기반 광학탐지 표준 모사체
+DFP,literature_simulant,,CC(C)OP(=O)(OC(C)C)F,55-91-4,diisopropyl fluorophosphate
+DCNP,literature_simulant,,CCOP(=O)(C#N)OCC,2942-58-7,diethyl cyanophosphonate
+CEES,literature_simulant,,CCSCCCl,693-07-2,2-chloroethyl ethyl sulfide — HD 표준 모사체
+methyl salicylate,literature_simulant,,COC(=O)C1=CC=CC=C1O,119-36-8,HD 대리물로 통용
+dichlorvos,interferent,,COP(=O)(OC)OC=C(Cl)Cl,62-73-7,유기인 살충제 — 현장 간섭물
+malathion,interferent,,CCOC(=O)CC(C(=O)OCC)SP(=S)(OC)OC,121-75-5,유기인 살충제 — 현장 간섭물

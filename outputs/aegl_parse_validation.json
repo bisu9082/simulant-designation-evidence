@@ -1,0 +1,18 @@
+{
+  "engine": "pdftotext -layout",
+  "method": "character column position",
+  "source_items": 269,
+  "source_with_aegl3": 259,
+  "by_provenance": {
+    "value": 250,
+    "footnote": 8,
+    "footnote_prose": 1
+  },
+  "trainset_checked": 257,
+  "trainset_notfound": 0,
+  "trainset_mismatch": 0,
+  "panel_checked": 19,
+  "panel_mismatch": 0,
+  "comma_rows_source": 25,
+  "comma_rows_checked": 25
+}

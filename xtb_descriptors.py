@@ -7,11 +7,11 @@
 
   dipole_moment_D            쌍극자 모멘트 (Debye)
   E_HOMO_eV / E_LUMO_eV      프런티어 궤도 에너지
-  electrophilicity_index_eV  ω = μ² / (2η),  μ=(E_H+E_L)/2,  η=E_L−E_H
+  electrophilicity_index_eV  ω = μ² / (2η),  μ=(E_H+E_L)/2,  η=(E_L−E_H)/2
   q_P                        인 원자 Mulliken 전하
   q_phosphoryl_O             P=O 산소 Mulliken 전하
   wiberg_PO                  P=O Wiberg 결합차수
-  fukui_f_plus_P             인 원자 친전자 Fukui 지수 f(+)
+  fukui_f_plus_P             인 원자 친핵성공격 감수성 Fukui 지수 f(+)
 
 형태 처리: ETKDGv3 5 conformer → xtb --opt tight → 전자 물성은
           xtb 전체에너지 기반 298 K Boltzmann 가중 평균.
@@ -187,7 +187,8 @@ def one_molecule(name, smi, nproc, keep=None):
            'E_HOMO_eV': avg('homo'), 'E_LUMO_eV': avg('lumo')}
     if out['E_HOMO_eV'] != '' and out['E_LUMO_eV'] != '':
         mu  = (out['E_HOMO_eV'] + out['E_LUMO_eV']) / 2.0
-        eta = out['E_LUMO_eV'] - out['E_HOMO_eV']
+        # Parr 정의: eta = 간극의 절반 (2026-10-12 교정)
+        eta = (out['E_LUMO_eV'] - out['E_HOMO_eV']) / 2.0
         out['electrophilicity_index_eV'] = mu * mu / (2 * eta) if eta > 0 else ''
     else:
         out['electrophilicity_index_eV'] = ''

@@ -1,0 +1,186 @@
+{
+ "seed": 49374,
+ "n_boot": 1000,
+ "westfall_young": {
+  "panel35_incumbent3": {
+   "n_perm": 2024,
+   "n_tests": 18,
+   "observed_min_p": 0.15118577075098813,
+   "which_test": "merged:median_diff",
+   "wy_adjusted_p": 0.4016798418972332
+  },
+  "panel35_incumbent_plus_lit8": {
+   "n_perm": 735471,
+   "n_tests": 18,
+   "observed_min_p": 0.039280950574529794,
+   "which_test": "merged:mean_logratio",
+   "wy_adjusted_p": 0.11341031801389857
+  },
+  "panel28_incumbent3": {
+   "n_perm": 680,
+   "n_tests": 18,
+   "observed_min_p": 0.025,
+   "which_test": "merged:mean_diff",
+   "wy_adjusted_p": 0.075
+  }
+ },
+ "distance_bootstrap": {
+  "n_boot": 1000,
+  "incumbent3": {
+   "median": 0,
+   "mean": 0.701,
+   "ci": [
+    0,
+    3
+   ],
+   "frac_zero": 0.588,
+   "frac_le1": 0.828,
+   "unbounded_median": 0,
+   "retention": {
+    "sarin (GB)": 0.378,
+    "soman (GD)": 0.144,
+    "lewisite 1 (L)": 0.006,
+    "hydrogen cyanide (AC)": 0.004,
+    "cyanogen chloride (CK)": 0.021,
+    "phosgene (CG)": 0.01,
+    "chloropicrin (PS)": 0.011,
+    "cyclosarin (GF)": 0.127
+   }
+  },
+  "incumbent_plus_lit8": {
+   "median": 5,
+   "mean": 4.603,
+   "ci": [
+    4,
+    6
+   ],
+   "frac_zero": 0.0,
+   "frac_le1": 0.002,
+   "unbounded_median": 5,
+   "retention": {
+    "sarin (GB)": 0.995,
+    "soman (GD)": 0.993,
+    "tabun (GA)": 0.525,
+    "sulfur mustard (HD)": 1.0,
+    "lewisite 1 (L)": 0.051,
+    "hydrogen cyanide (AC)": 0.004,
+    "cyanogen chloride (CK)": 0.021,
+    "phosgene (CG)": 0.027,
+    "chloropicrin (PS)": 0.016,
+    "cyclosarin (GF)": 0.966,
+    "VX": 0.005
+   }
+  },
+  "difference": {
+   "median": 4,
+   "mean": 3.902,
+   "ci": [
+    1,
+    6
+   ],
+   "frac_positive": 1.0
+  },
+  "per_agent_gap": [
+   {
+    "agent": "sarin (GB)",
+    "gap_median": 0.12157834666826675,
+    "gap_ci": [
+     0.0,
+     1.2388006056104959
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "soman (GD)",
+    "gap_median": 0.5620484174554689,
+    "gap_ci": [
+     0.0,
+     1.6921487235675778
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "tabun (GA)",
+    "gap_median": 0.9093391433492679,
+    "gap_ci": [
+     0.1783668477111477,
+     2.6081908681961
+    ],
+    "gap_excludes_zero": true
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "gap_median": 1.1771283742878267,
+    "gap_ci": [
+     0.6115856824283393,
+     2.1125621729062005
+    ],
+    "gap_excludes_zero": true
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "gap_median": 0.08288290995240068,
+    "gap_ci": [
+     0.0,
+     0.5437971610404722
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "gap_median": 0.0,
+    "gap_ci": [
+     0.0,
+     0.2132203109887704
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "gap_median": 0.0,
+    "gap_ci": [
+     0.0,
+     0.20219922908187682
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "gap_median": 0.0,
+    "gap_ci": [
+     0.0,
+     0.7344669615092416
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "gap_median": 0.0,
+    "gap_ci": [
+     0.0,
+     0.31599213710433893
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "gap_median": 0.49068476801986327,
+    "gap_ci": [
+     0.0,
+     1.4315559369587598
+    ],
+    "gap_excludes_zero": false
+   },
+   {
+    "agent": "VX",
+    "gap_median": 0.30493724381753823,
+    "gap_ci": [
+     0.0,
+     0.8000273621383533
+    ],
+    "gap_excludes_zero": false
+   }
+  ],
+  "n_gap_excluding_zero": 2
+ }
+}
