@@ -1,0 +1,125 @@
+{
+  "n_train": 230,
+  "smarts": {
+    "organophosphorus_ester": "[PX4](=[OX1,SX1])([OX2,SX2,NX3])([OX2,SX2,NX3,CX4])[OX2,SX2,F,$(C#N)]",
+    "carbamate_ester": "[NX3;H1,H2][CX3](=[OX1])[OX2]"
+  },
+  "n_ache": 13,
+  "n_by_group": {
+    "organophosphorus_ester": 10,
+    "carbamate_ester": 3
+  },
+  "frac_ache": 0.05652173913043478,
+  "ache_compounds": [
+    {
+      "cas": "298-02-2",
+      "name": "Phorate",
+      "aegl3_mgm3": 0.22,
+      "err_log": 2.2471203848746937
+    },
+    {
+      "cas": "116-06-3",
+      "name": "Aldicarb",
+      "aegl3_mgm3": 0.47,
+      "err_log": 1.5955097342560944
+    },
+    {
+      "cas": "13171-21-6",
+      "name": "Phosphamidon",
+      "aegl3_mgm3": 1.1,
+      "err_log": 0.7745766736341405
+    },
+    {
+      "cas": "6923-22-4",
+      "name": "Monocrotophos",
+      "aegl3_mgm3": 1.3,
+      "err_log": 0.781601440316716
+    },
+    {
+      "cas": "141-66-2",
+      "name": "Dicrotophos",
+      "aegl3_mgm3": 1.6,
+      "err_log": 0.39458026840204563
+    },
+    {
+      "cas": "22224-92-6",
+      "name": "Fenamiphos",
+      "aegl3_mgm3": 3.0,
+      "err_log": 0.15177208609777515
+    },
+    {
+      "cas": "56-38-2",
+      "name": "Parathion",
+      "aegl3_mgm3": 3.6,
+      "err_log": 0.2367601659071601
+    },
+    {
+      "cas": "298-00-0",
+      "name": "Methyl parathion",
+      "aegl3_mgm3": 6.4,
+      "err_log": -0.04255243828876798
+    },
+    {
+      "cas": "10265-92-6",
+      "name": "Methamidophos",
+      "aegl3_mgm3": 10.0,
+      "err_log": 0.26505672442161843
+    },
+    {
+      "cas": "23135-22-0",
+      "name": "Oxamyl",
+      "aegl3_mgm3": 16.0,
+      "err_log": -0.5980616460834272
+    },
+    {
+      "cas": "16752-77-5",
+      "name": "Methomyl",
+      "aegl3_mgm3": 21.0,
+      "err_log": -0.2854712573718141
+    },
+    {
+      "cas": "62-73-7",
+      "name": "Dichlorvos",
+      "aegl3_mgm3": 72.30298568507158,
+      "err_log": -1.131323002949653
+    },
+    {
+      "cas": "121-75-5",
+      "name": "Malathion",
+      "aegl3_mgm3": 500.0,
+      "err_log": -2.42944821954381
+    }
+  ],
+  "sarin_aegl3_mgm3": 0.366708,
+  "n_ache_more_toxic_than_sarin": 1,
+  "ache_more_toxic_than_sarin": [
+    {
+      "name": "Phorate",
+      "aegl3_mgm3": 0.22
+    }
+  ],
+  "err_all": 0.0014157334001341304,
+  "err_ache": 0.1507785318209824,
+  "err_rest": -0.007532268348580298,
+  "low10_cut_mgm3": 3.5591959180892614,
+  "low10_max_mgm3": 3.212154601226994,
+  "low10_n": 23,
+  "low10_err": 1.4075109092219074,
+  "low10_safe_frac": 1.0,
+  "high10_cut_mgm3": 7871.143777000805,
+  "high10_min_mgm3": 8093.6114519427365,
+  "high10_n": 23,
+  "high10_err": -1.1315408271327514,
+  "high10_safe_frac": 0.043478260869565216,
+  "most_toxic_ache": {
+    "name": "Phorate",
+    "err_log": 2.2471203848746937,
+    "fold_too_safe": 176.65274278994676
+  },
+  "least_toxic_ache": {
+    "name": "Malathion",
+    "err_log": -2.42944821954381,
+    "fold_too_toxic": 268.81173226682967
+  },
+  "source": "outputs/qsar_oof.csv (qsar_tox.py 가 내보낸 out-of-fold 예측)"
+}

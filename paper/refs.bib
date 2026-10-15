@@ -1,0 +1,869 @@
+% simulant / refs.bib — GATE 7 대응 검증본
+% 원칙 [C-3]: 검증되지 않은 항목은 이 파일에 넣지 않는다.
+% 검증 절차 (2026-10-10):
+%   외부문헌 : Crossref 제목검색 -> DOI 직접 조회 -> 제목 유사도 >=0.80 +
+%              저널명 일치 + type in {journal-article, book-chapter} 확인.
+%              보조자료(.s00N) / ChemInform 초록 / IUPAC Gold Book /
+%              ScienceOpen 'Review of' / 독일어판 Angewandte 레코드는 전량 탈락.
+%   자기인용 : Crossref DOI 조회 -> 저자 family='Kang' + given='Ku' 이중 대조
+%              (리졸브 성공 + Kang 부재 = 허구 판정 규칙 적용). 21/21 통과.
+%   철회점검 : Crossref update-to 플래그 확인. 해당 0건.
+%   미등록   : SciPy 1.0 은 추정 DOI(...0686-5)가 404 -> Semantic Scholar 로
+%              실제 DOI(...0686-2) 확인 후 Crossref 재검증하여 수록.
+
+
+%% ---- 선행 검증 항목 (Step 5) ----
+@article{webb2025,
+  author  = {Webb, Sally and Coulon, Frederic and Temple, Tracey},
+  title   = {A critical review of liquid, low toxicity chemical warfare agent
+             simulants: Enhancing accuracy, safety, and methodological
+             approaches for sampling},
+  journal = {Journal of Hazardous Materials},
+  volume  = {492},
+  pages   = {138021},
+  year    = {2025},
+  doi     = {10.1016/j.jhazmat.2025.138021}
+}
+
+@article{agrawal2018,
+  author  = {Agrawal, Mayank and Sava Gallis, Dorina F. and
+             Greathouse, Jeffery A. and Sholl, David S.},
+  title   = {How Useful Are Common Simulants of Chemical Warfare Agents at
+             Predicting Adsorption Behavior?},
+  journal = {The Journal of Physical Chemistry C},
+  volume  = {122},
+  number  = {45},
+  pages   = {26061--26069},
+  year    = {2018},
+  doi     = {10.1021/acs.jpcc.8b08856}
+}
+
+@article{bannwarth2019,
+  author  = {Bannwarth, Christoph and Ehlert, Sebastian and Grimme, Stefan},
+  title   = {{GFN2-xTB}---An Accurate and Broadly Parametrized Self-Consistent
+             Tight-Binding Quantum Chemical Method with Multipole Electrostatics
+             and Density-Dependent Dispersion Contributions},
+  journal = {Journal of Chemical Theory and Computation},
+  volume  = {15},
+  number  = {3},
+  pages   = {1652--1671},
+  year    = {2019},
+  doi     = {10.1021/acs.jctc.8b01176}
+}
+
+@article{wang2020,
+  author  = {Wang, Shuzhe and Witek, Jagna and Landrum, Gregory A. and
+             Riniker, Sereina},
+  title   = {Improving Conformer Generation for Small Rings and Macrocycles
+             Based on Distance Geometry and Experimental Torsional-Angle
+             Preferences},
+  journal = {Journal of Chemical Information and Modeling},
+  volume  = {60},
+  number  = {4},
+  pages   = {2044--2058},
+  year    = {2020},
+  doi     = {10.1021/acs.jcim.0c00025}
+}
+
+@article{watson2006,
+  author  = {Watson, Annetta and Opresko, Dennis and Young, Robert and
+             Hauschild, Veronique},
+  title   = {Development and Application of Acute Exposure Guideline Levels
+             ({AEGLs}) for Chemical Warfare Nerve and Sulfur Mustard Agents},
+  journal = {Journal of Toxicology and Environmental Health, Part B},
+  volume  = {9},
+  number  = {3},
+  pages   = {173--263},
+  year    = {2006},
+  doi     = {10.1080/15287390500194441}
+}
+
+@misc{epaaegl2018,
+  author       = {{U.S. Environmental Protection Agency}},
+  title        = {{Compiled AEGL Values, 27 July 2018}},
+  howpublished = {\url{https://www.epa.gov/sites/default/files/2018-08/documents/compiled_aegls_update_27jul2018.pdf}},
+  year         = {2018},
+  note         = {Accessed 2026-10-09}
+}
+
+@techreport{epapprtv2006,
+  author      = {{U.S. Environmental Protection Agency}},
+  title       = {Provisional Peer Reviewed Toxicity Values for Dimethyl
+                 Methylphosphonate ({CASRN} 756-79-6)},
+  institution = {National Center for Environmental Assessment,
+                 Office of Research and Development},
+  number      = {EPA/690/R-06/014F},
+  year        = {2006},
+  note        = {\url{https://cfpub.epa.gov/ncea/pprtv/documents/Dimethylmethylphosphonate.pdf},
+                 accessed 2026-10-09}
+}
+
+@misc{rdkit,
+  author       = {Landrum, Greg and others},
+  title        = {{RDKit}: Open-source cheminformatics},
+  howpublished = {\url{https://www.rdkit.org}},
+  year         = {2026},
+  note         = {Version 2026.03.6. Cited by name, version and project URL:
+                  the Zenodo {DOI}s registered for {RDKit} identify individual
+                  releases (10.5281/zenodo.10398 is release 2014.03.1) and no
+                  version-independent concept {DOI} could be verified, so none
+                  is given here}
+}
+
+
+%% ---- 시뮬런트 선정·타당성 ----
+@article{bartelthunt2008,
+  author  = {Bartelt-Hunt, Shannon L. and Knappe, Detlef R. U. and Barlaz, Morton A.},
+  title   = {A Review of Chemical Warfare Agent Simulants for the Study of Environmental Behavior},
+  journal = {Critical Reviews in Environmental Science and Technology},
+  volume  = {38},
+  number  = {2},
+  pages   = {112--136},
+  year    = {2008},
+  doi     = {10.1080/10643380701643650}
+}
+
+@article{kim2011,
+  author  = {Kim, Kibong and Tsay, Olga G. and Atwood, David A. and Churchill, David G.},
+  title   = {Destruction and Detection of Chemical Warfare Agents},
+  journal = {Chemical Reviews},
+  volume  = {111},
+  number  = {9},
+  pages   = {5345--5403},
+  year    = {2011},
+  doi     = {10.1021/cr100193y}
+}
+
+@article{jang2015,
+  author  = {Jang, Yoon Jeong and Kim, Kibong and Tsay, Olga G. and Atwood, David A. and Churchill, David G.},
+  title   = {Update 1 of: Destruction and Detection of Chemical Warfare Agents},
+  journal = {Chemical Reviews},
+  volume  = {115},
+  number  = {24},
+  pages   = {PR1--PR76},
+  year    = {2015},
+  doi     = {10.1021/acs.chemrev.5b00402}
+}
+
+@article{mondloch2015,
+  author  = {Mondloch, Joseph E. and Katz, Michael J. and III, William C. Isley and Ghosh, Pritha and Liao, Peilin and Bury, Wojciech and Wagner, George W. and Hall, Morgan G. and DeCoste, Jared B. and Peterson, Gregory W. and Snurr, Randall Q. and Cramer, Christopher J. and Hupp, Joseph T. and Farha, Omar K.},
+  title   = {Destruction of chemical warfare agents using metal--organic frameworks},
+  journal = {Nature Materials},
+  volume  = {14},
+  number  = {5},
+  pages   = {512--516},
+  year    = {2015},
+  doi     = {10.1038/nmat4238}
+}
+
+@article{moon2015,
+  author  = {Moon, Su-Young and Liu, Yangyang and Hupp, Joseph T. and Farha, Omar K.},
+  title   = {Instantaneous Hydrolysis of Nerve-Agent Simulants with a Six-Connected Zirconium-Based Metal--Organic Framework},
+  journal = {Angewandte Chemie International Edition},
+  volume  = {54},
+  number  = {23},
+  pages   = {6795--6799},
+  year    = {2015},
+  doi     = {10.1002/anie.201502155}
+}
+
+@article{sambrook2013,
+  author  = {Sambrook, M. R. and Notman, S.},
+  title   = {Supramolecular chemistry and chemical warfare agents: from fundamentals of recognition to catalysis and sensing},
+  journal = {Chemical Society Reviews},
+  volume  = {42},
+  number  = {24},
+  pages   = {9251},
+  year    = {2013},
+  doi     = {10.1039/c3cs60230c}
+}
+
+@article{ebeam,
+  author  = {Chi, Ho Sub and Park, Jung-mi and Yoo, Jin and Choi, Gyoung Jun and Hong, Sung Hoon and Son, Jiyoung and Lee, Jong-Gon and Kang, Ku},
+  title   = {Feasibility study of electron beam irradiation for decontamination of chemical and biological warfare agent simulants: Dosimetric and operational evaluation},
+  journal = {Applied Radiation and Isotopes},
+  volume  = {232},
+  pages   = {112582},
+  year    = {2026},
+  doi     = {10.1016/j.apradiso.2026.112582}
+}
+
+
+%% ---- 검출 — 비색/센서 어레이, 증기상 ----
+@article{askim2013,
+  author  = {Askim, Jon R. and Mahmoudi, Morteza and Suslick, Kenneth S.},
+  title   = {Optical sensor arrays for chemical sensing: the optoelectronic nose},
+  journal = {Chemical Society Reviews},
+  volume  = {42},
+  number  = {22},
+  pages   = {8649},
+  year    = {2013},
+  doi     = {10.1039/c3cs60179j}
+}
+
+@article{rakow2000,
+  author  = {Rakow, Neal A. and Suslick, Kenneth S.},
+  title   = {A colorimetric sensor array for odour visualization},
+  journal = {Nature},
+  volume  = {406},
+  number  = {6797},
+  pages   = {710--713},
+  year    = {2000},
+  doi     = {10.1038/35021028}
+}
+
+@article{lin2011,
+  author  = {Lin, Hengwei and Jang, Minseok and Suslick, Kenneth S.},
+  title   = {Preoxidation for Colorimetric Sensor Array Detection of {VOCs}},
+  journal = {Journal of the American Chemical Society},
+  volume  = {133},
+  number  = {42},
+  pages   = {16786--16789},
+  year    = {2011},
+  doi     = {10.1021/ja207718t}
+}
+
+@article{royo2007,
+  author  = {Royo, Santiago and Mart{\'i}nez-M{\'a}{\~n}ez, Ram{\'o}n and Sancen{\'o}n, F{\'e}lix and Costero, Ana M. and Parra, Margarita and Gil, Salvador},
+  title   = {Chromogenic and fluorogenic reagents for chemical warfare nerve agents' detection},
+  journal = {Chemical Communications},
+  number  = {46},
+  pages   = {4839},
+  year    = {2007},
+  doi     = {10.1039/b707063b}
+}
+
+@article{eubanks2007,
+  author  = {Eubanks, Lisa M. and Dickerson, Tobin J. and Janda, Kim D.},
+  title   = {Technological advancements for the detection of and protection against biological and chemical warfare agents},
+  journal = {Chemical Society Reviews},
+  volume  = {36},
+  number  = {3},
+  pages   = {458},
+  year    = {2007},
+  doi     = {10.1039/b615227a}
+}
+
+@article{hazref,
+  author  = {Kim, Jeongyun and Kang, Ku and Shin, Myeongsik and Kim, Soohwan and Yoo, Jin and Kim, Min-Kun and Lee, Won Bo and Lee, Doo-Hee},
+  title   = {Machine learning-enhanced colorimetric sensor array for rapid detection of nerve agents},
+  journal = {Journal of Hazardous Materials},
+  volume  = {501},
+  pages   = {140703},
+  year    = {2026},
+  doi     = {10.1016/j.jhazmat.2025.140703}
+}
+
+@article{group3ref,
+  author  = {Shin, Myeongsik and Kang, Ku and Kim, Jeongyun and Kim, Soohwan and Yoo, Jin and Jang, Yoon Jeong and Kim, Min-Kun and Anslyn, Eric V. and Lee, Doo-Hee},
+  title   = {Portable machine learning--integrated optical sensor array for rapid and selective detection of authentic {Novichok} nerve agents},
+  journal = {Sensors and Actuators B: Chemical},
+  volume  = {457},
+  pages   = {139706},
+  year    = {2026},
+  doi     = {10.1016/j.snb.2026.139706}
+}
+
+@article{ondeviceref,
+  author  = {Bae, Sojeong and Kang, Ku and Kim, Young Kyun and Jang, Yoon Jeong and Lee, Doo-Hee},
+  title   = {Field-deployable real-time {AI} System for chemical warfare agent detection using {YOLOv8} and colorimetric sensors},
+  journal = {Chemometrics and Intelligent Laboratory Systems},
+  volume  = {261},
+  pages   = {105365},
+  year    = {2025},
+  doi     = {10.1016/j.chemolab.2025.105365}
+}
+
+
+%% ---- 반자동 양자화학 (GFN2-xTB) 및 반응성 지표 ----
+@article{gfnxtb2017,
+  author  = {Grimme, Stefan and Bannwarth, Christoph and Shushkov, Philip},
+  title   = {A Robust and Accurate Tight-Binding Quantum Chemical Method for Structures, Vibrational Frequencies, and Noncovalent Interactions of Large Molecular Systems Parametrized for All {spd}-Block Elements ( Z = 1--86)},
+  journal = {Journal of Chemical Theory and Computation},
+  volume  = {13},
+  number  = {5},
+  pages   = {1989--2009},
+  year    = {2017},
+  doi     = {10.1021/acs.jctc.7b00118}
+}
+
+@article{xtbreview2021,
+  author  = {Bannwarth, Christoph and Caldeweyher, Eike and Ehlert, Sebastian and Hansen, Andreas and Pracht, Philipp and Seibert, Jakob and Spicher, Sebastian and Grimme, Stefan},
+  title   = {Extended tight-binding quantum chemistry methods},
+  journal = {WIREs Computational Molecular Science},
+  volume  = {11},
+  number  = {2},
+  pages   = {e1493},
+  year    = {2020},
+  doi     = {10.1002/wcms.1493}
+}
+
+@article{ehlert2021,
+  author  = {Ehlert, Sebastian and Stahn, Marcel and Spicher, Sebastian and Grimme, Stefan},
+  title   = {Robust and Efficient Implicit Solvation Model for Fast Semiempirical Methods},
+  journal = {Journal of Chemical Theory and Computation},
+  volume  = {17},
+  number  = {7},
+  pages   = {4250--4261},
+  year    = {2021},
+  doi     = {10.1021/acs.jctc.1c00471}
+}
+
+@article{pracht2020,
+  author  = {Pracht, Philipp and Bohle, Fabian and Grimme, Stefan},
+  title   = {Automated exploration of the low-energy chemical space with fast quantum chemical methods},
+  journal = {Physical Chemistry Chemical Physics},
+  volume  = {22},
+  number  = {14},
+  pages   = {7169--7192},
+  year    = {2020},
+  doi     = {10.1039/c9cp06869d}
+}
+
+@article{parr1999,
+  author  = {Parr, Robert G. and Szentp{\'a}ly, L{\'a}szl{\'o} v. and Liu, Shubin},
+  title   = {Electrophilicity Index},
+  journal = {Journal of the American Chemical Society},
+  volume  = {121},
+  number  = {9},
+  pages   = {1922--1924},
+  year    = {1999},
+  doi     = {10.1021/ja983494x}
+}
+
+@article{parryang1984,
+  author  = {Parr, Robert G. and Yang, Weitao},
+  title   = {Density functional approach to the frontier-electron theory of chemical reactivity},
+  journal = {Journal of the American Chemical Society},
+  volume  = {106},
+  number  = {14},
+  pages   = {4049--4050},
+  year    = {1984},
+  doi     = {10.1021/ja00326a036}
+}
+
+@article{yangmortier1986,
+  author  = {Yang, Weitao. and Mortier, Wilfried J.},
+  title   = {The use of global and local molecular parameters for the analysis of the gas-phase basicity of amines},
+  journal = {Journal of the American Chemical Society},
+  volume  = {108},
+  number  = {19},
+  pages   = {5708--5711},
+  year    = {1986},
+  doi     = {10.1021/ja00279a008}
+}
+
+@article{domingo2016,
+  author  = {Domingo, Luis and R{\'i}os-Guti{\'e}rrez, Mar and P{\'e}rez, Patricia},
+  title   = {Applications of the Conceptual Density Functional Theory Indices to Organic Chemistry Reactivity},
+  journal = {Molecules},
+  volume  = {21},
+  number  = {6},
+  pages   = {748},
+  year    = {2016},
+  doi     = {10.3390/molecules21060748}
+}
+
+@article{geerlings2003,
+  author  = {Geerlings, P. and Proft, F. De and Langenaeker, W.},
+  title   = {Conceptual Density Functional Theory},
+  journal = {Chemical Reviews},
+  volume  = {103},
+  number  = {5},
+  pages   = {1793--1874},
+  year    = {2003},
+  doi     = {10.1021/cr990029p}
+}
+
+@article{wiberg1968,
+  author  = {Wiberg, K.B.},
+  title   = {Application of the {Pople--Santry--Segal} {CNDO} method to the cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane},
+  journal = {Tetrahedron},
+  volume  = {24},
+  number  = {3},
+  pages   = {1083--1096},
+  year    = {1968},
+  doi     = {10.1016/0040-4020(68)88057-3}
+}
+
+@article{mayer1983,
+  author  = {Mayer, I.},
+  title   = {Charge, bond order and valence in the \emph{ab initio} {SCF} theory},
+  journal = {Chemical Physics Letters},
+  volume  = {97},
+  number  = {3},
+  pages   = {270--274},
+  year    = {1983},
+  doi     = {10.1016/0009-2614(83)80005-0}
+}
+
+
+%% ---- 구조 서술자·형태 생성·QSAR 방법론 ----
+@article{riniker2015,
+  author  = {Riniker, Sereina and Landrum, Gregory A.},
+  title   = {Better Informed Distance Geometry: Using What We Know To Improve Conformation Generation},
+  journal = {Journal of Chemical Information and Modeling},
+  volume  = {55},
+  number  = {12},
+  pages   = {2562--2574},
+  year    = {2015},
+  doi     = {10.1021/acs.jcim.5b00654}
+}
+
+@article{wildman1999,
+  author  = {Wildman, Scott A. and Crippen, Gordon M.},
+  title   = {Prediction of Physicochemical Parameters by Atomic Contributions},
+  journal = {Journal of Chemical Information and Computer Sciences},
+  volume  = {39},
+  number  = {5},
+  pages   = {868--873},
+  year    = {1999},
+  doi     = {10.1021/ci990307l}
+}
+
+@article{ertl2000,
+  author  = {Ertl, Peter and Rohde, Bernhard and Selzer, Paul},
+  title   = {Fast Calculation of Molecular Polar Surface Area as a Sum of Fragment-Based Contributions and Its Application to the Prediction of Drug Transport Properties},
+  journal = {Journal of Medicinal Chemistry},
+  volume  = {43},
+  number  = {20},
+  pages   = {3714--3717},
+  year    = {2000},
+  doi     = {10.1021/jm000942e}
+}
+
+@article{rogers2010,
+  author  = {Rogers, David and Hahn, Mathew},
+  title   = {Extended-Connectivity Fingerprints},
+  journal = {Journal of Chemical Information and Modeling},
+  volume  = {50},
+  number  = {5},
+  pages   = {742--754},
+  year    = {2010},
+  doi     = {10.1021/ci100050t}
+}
+
+@article{kier1985,
+  author  = {Kier, Lemont B.},
+  title   = {Shape Indexes of Orders One and Three from Molecular Graphs},
+  journal = {Quantitative Structure-Activity Relationships},
+  volume  = {5},
+  number  = {1},
+  pages   = {1--7},
+  year    = {1986},
+  doi     = {10.1002/qsar.19860050102}
+}
+
+@article{halgren1996,
+  author  = {Halgren, Thomas A.},
+  title   = {Merck molecular force field. {I}. Basis, form, scope, parameterization, and performance of {MMFF94}},
+  journal = {Journal of Computational Chemistry},
+  volume  = {17},
+  number  = {5-6},
+  pages   = {490--519},
+  year    = {1996},
+  doi     = {10.1002/(sici)1096-987x(199604)17:5/6<490::aid-jcc1>3.0.co;2-p}
+}
+
+@article{rappe1992,
+  author  = {Rappe, A. K. and Casewit, C. J. and Colwell, K. S. and Goddard, W. A. and Skiff, W. M.},
+  title   = {{UFF}, a full periodic table force field for molecular mechanics and molecular dynamics simulations},
+  journal = {Journal of the American Chemical Society},
+  volume  = {114},
+  number  = {25},
+  pages   = {10024--10035},
+  year    = {1992},
+  doi     = {10.1021/ja00051a040}
+}
+
+@article{sheridan2004,
+  author  = {Sheridan, Robert P. and Feuston, Bradley P. and Maiorov, Vladimir N. and Kearsley, Simon K.},
+  title   = {Similarity to Molecules in the Training Set Is a Good Discriminator for Prediction Accuracy in {QSAR}},
+  journal = {Journal of Chemical Information and Computer Sciences},
+  volume  = {44},
+  number  = {6},
+  pages   = {1912--1928},
+  year    = {2004},
+  doi     = {10.1021/ci049782w}
+}
+
+@article{netzeva2005,
+  author  = {Netzeva, Tatiana I. and Worth, Andrew P. and Aldenberg, Tom and Benigni, Romualdo and Cronin, Mark T.D. and Gramatica, Paola and Jaworska, Joanna S. and Kahn, Scott and Klopman, Gilles and Marchant, Carol A. and Myatt, Glenn and Nikolova-Jeliazkova, Nina and Patlewicz, Grace Y. and Perkins, Roger and Roberts, David W. and Schultz, Terry W. and Stanton, David T. and Sandt, Johannes J.M. van de and Tong, Weida and Veith, Gilman and Yang, Chihae},
+  title   = {Current Status of Methods for Defining the Applicability Domain of (Quantitative) Structure-Activity Relationships},
+  journal = {Alternatives to Laboratory Animals},
+  volume  = {33},
+  number  = {2},
+  pages   = {155--173},
+  year    = {2005},
+  doi     = {10.1177/026119290503300209}
+}
+
+@article{tropsha2010,
+  author  = {Tropsha, Alexander},
+  title   = {Best Practices for {QSAR} Model Development, Validation, and Exploitation},
+  journal = {Molecular Informatics},
+  volume  = {29},
+  number  = {6-7},
+  pages   = {476--488},
+  year    = {2010},
+  doi     = {10.1002/minf.201000061}
+}
+
+@article{gramatica2007,
+  author  = {Gramatica, Paola},
+  title   = {Principles of {QSAR} models validation: internal and external},
+  journal = {QSAR \& Combinatorial Science},
+  volume  = {26},
+  number  = {5},
+  pages   = {694--701},
+  year    = {2007},
+  doi     = {10.1002/qsar.200610151}
+}
+
+@article{roy2015,
+  author  = {Roy, Kunal and Kar, Supratik and Ambure, Pravin},
+  title   = {On a simple approach for determining applicability domain of {QSAR} models},
+  journal = {Chemometrics and Intelligent Laboratory Systems},
+  volume  = {145},
+  pages   = {22--29},
+  year    = {2015},
+  doi     = {10.1016/j.chemolab.2015.04.013}
+}
+
+@article{williams2017,
+  author  = {Williams, Antony J. and Grulke, Christopher M. and Edwards, Jeff and McEachran, Andrew D. and Mansouri, Kamel and Baker, Nancy C. and Patlewicz, Grace and Shah, Imran and Wambaugh, John F. and Judson, Richard S. and Richard, Ann M.},
+  title   = {The {CompTox} Chemistry Dashboard: a community data resource for environmental chemistry},
+  journal = {Journal of Cheminformatics},
+  volume  = {9},
+  number  = {1},
+  pages   = {61},
+  year    = {2017},
+  doi     = {10.1186/s13321-017-0247-6}
+}
+
+@article{pubchem2025,
+  author  = {Kim, Sunghwan and Chen, Jie and Cheng, Tiejun and Gindulyte, Asta and He, Jia and He, Siqian and Li, Qingliang and Shoemaker, Benjamin A and Thiessen, Paul A and Yu, Bo and Zaslavsky, Leonid and Zhang, Jian and Bolton, Evan E},
+  title   = {{PubChem} 2025 update},
+  journal = {Nucleic Acids Research},
+  volume  = {53},
+  number  = {D1},
+  pages   = {D1516--D1525},
+  year    = {2024},
+  doi     = {10.1093/nar/gkae1059}
+}
+
+@article{dbpcarto,
+  author  = {Kang, Ku and Lee, Doo-Hee and Kim, Jeoungyun and Yoo, Jin},
+  title   = {Condition-dependent risk cartography of brominated disinfection by-products in seawater desalination},
+  journal = {Journal of Environmental Chemical Engineering},
+  volume  = {14},
+  number  = {5},
+  pages   = {125179},
+  year    = {2026},
+  doi     = {10.1016/j.jece.2026.125179}
+}
+
+@article{openset,
+  author  = {Kang, Ku and Kim, Jeongyun and Jang, Yoon Jeong and Shin, Myeongsik and Kim, Soohwan and Yoo, Jin},
+  title   = {Open-set combustion-fingerprint classification with out-of-distribution alerting for environmental fire-hazard screening},
+  journal = {Journal of Hazardous Materials},
+  volume  = {516},
+  pages   = {143199},
+  year    = {2026},
+  doi     = {10.1016/j.jhazmat.2026.143199}
+}
+
+
+%% ---- 급성 흡입독성·AEGL·유기인계 독성학 ----
+@article{tenberge1986,
+  author  = {{ten Berge}, W. F. and Zwart, A. and Appelman, L. M.},
+  title   = {Concentration---time mortality response relationship of irritant and systemically acting vapours and gases},
+  journal = {Journal of Hazardous Materials},
+  volume  = {13},
+  number  = {3},
+  pages   = {301--309},
+  year    = {1986},
+  doi     = {10.1016/0304-3894(86)85003-8}
+}
+
+@article{munro1999,
+  author  = {Munro, N B and Talmage, S S and Griffin, G D and Waters, L C and Watson, A P and King, J F and Hauschild, V},
+  title   = {The sources, fate, and toxicity of chemical warfare agent degradation products},
+  journal = {Environmental Health Perspectives},
+  volume  = {107},
+  number  = {12},
+  pages   = {933--974},
+  year    = {1999},
+  doi     = {10.1289/ehp.99107933}
+}
+
+@article{worek2020,
+  author  = {Worek, Franz and Thiermann, Horst and Wille, Timo},
+  title   = {Organophosphorus compounds and oximes: a critical review},
+  journal = {Archives of Toxicology},
+  volume  = {94},
+  number  = {7},
+  pages   = {2275--2292},
+  year    = {2020},
+  doi     = {10.1007/s00204-020-02797-0}
+}
+
+@article{thiermann2013,
+  author  = {Thiermann, Horst and Worek, Franz and Kehe, Kai},
+  title   = {Limitations and challenges in treatment of acute chemical warfare agent poisoning},
+  journal = {Chemico-Biological Interactions},
+  volume  = {206},
+  number  = {3},
+  pages   = {435--443},
+  year    = {2013},
+  doi     = {10.1016/j.cbi.2013.09.015}
+}
+
+@incollection{bajgar2004,
+  author  = {Bajgar, Jiri},
+  title   = {Organophosphates/Nerve Agent Poisoning: Mechanism of Action, Diagnosis, Prophylaxis, and Treatment},
+  journal = {Advances in Clinical Chemistry},
+  pages   = {151--216},
+  year    = {2004},
+  doi     = {10.1016/s0065-2423(04)38006-6}
+}
+
+@article{qsarld50,
+  author  = {Jang, Youngchan and Kim, Jeongyun and Lee, Doo-Hee and Yoo, Jin and Park, Jeongwan and Kang, Ku},
+  title   = {Hybrid {QSAR} modeling of {LD50} in organophosphorus nerve agents: a mechanistic approach using {DFT} and molecular docking},
+  journal = {Computational Toxicology},
+  volume  = {35},
+  pages   = {100363},
+  year    = {2025},
+  doi     = {10.1016/j.comtox.2025.100363}
+}
+
+@article{ppesuit,
+  author  = {Chi, Ho Sub and Kim, Eunjoo and Kim, Jeongyun and Byun, Ki-Deuk and Kang, Ku},
+  title   = {Chemical protective suit performance against {TICs} and {CWAs}: permeation resistance and {PPE} safety evaluation},
+  journal = {Next Research},
+  volume  = {2},
+  number  = {3},
+  pages   = {100688},
+  year    = {2025},
+  doi     = {10.1016/j.nexres.2025.100688}
+}
+
+
+%% ---- 구조 경보 및 이중용도 거버넌스 ----
+@article{enoch2011,
+  author  = {Enoch, S. J. and Ellison, C. M. and Schultz, T. W. and Cronin, M. T. D.},
+  title   = {A review of the electrophilic reaction chemistry involved in covalent protein binding relevant to toxicity},
+  journal = {Critical Reviews in Toxicology},
+  volume  = {41},
+  number  = {9},
+  pages   = {783--802},
+  year    = {2011},
+  doi     = {10.3109/10408444.2011.598141}
+}
+
+@article{benigni2008,
+  author  = {BENIGNI, R and BOSSA, C},
+  title   = {Structure alerts for carcinogenicity, and the \emph{Salmonella} assay system: A novel insight through the chemical relational databases technology},
+  journal = {Mutation Research/Reviews in Mutation Research},
+  volume  = {659},
+  number  = {3},
+  pages   = {248--261},
+  year    = {2008},
+  doi     = {10.1016/j.mrrev.2008.05.003}
+}
+
+@article{urbina2022,
+  author  = {Urbina, Fabio and Lentzos, Filippa and Invernizzi, C{\'e}dric and Ekins, Sean},
+  title   = {Dual use of artificial-intelligence-powered drug discovery},
+  journal = {Nature Machine Intelligence},
+  volume  = {4},
+  number  = {3},
+  pages   = {189--191},
+  year    = {2022},
+  doi     = {10.1038/s42256-022-00465-9}
+}
+
+@article{cbrndisclose,
+  author  = {Kim, Daesoo and Yoo, Jin and Kang, Ku},
+  title   = {Exposure and disclosure in countering {CBRN} threats: implications for nonproliferation strategy},
+  journal = {The Nonproliferation Review},
+  volume  = {33},
+  number  = {4-6},
+  pages   = {283--306},
+  year    = {2026},
+  doi     = {10.1080/10736700.2026.2685340}
+}
+
+
+%% ---- 통계 ----
+@article{efron1986,
+  author  = {Efron, B. and Tibshirani, R.},
+  title   = {Bootstrap Methods for Standard Errors, Confidence Intervals, and Other Measures of Statistical Accuracy},
+  journal = {Statistical Science},
+  volume  = {1},
+  number  = {1},
+  year    = {1986},
+  doi     = {10.1214/ss/1177013815}
+}
+
+@article{shapiro1965,
+  author  = {Shapiro, S. S. and Wilk, M. B.},
+  title   = {An Analysis of Variance Test for Normality (Complete Samples)},
+  journal = {Biometrika},
+  volume  = {52},
+  number  = {3/4},
+  pages   = {591},
+  year    = {1965},
+  doi     = {10.2307/2333709}
+}
+
+@article{nakagawa2007,
+  author  = {Nakagawa, Shinichi and Cuthill, Innes C.},
+  title   = {Effect size, confidence interval and statistical significance: a practical guide for biologists},
+  journal = {Biological Reviews},
+  volume  = {82},
+  number  = {4},
+  pages   = {591--605},
+  year    = {2007},
+  doi     = {10.1111/j.1469-185x.2007.00027.x}
+}
+
+
+%% ---- 소프트웨어 ----
+@article{numpy2020,
+  author  = {Harris, Charles R. and Millman, K. Jarrod and Walt, St{\'e}fan J. van der and Gommers, Ralf and Virtanen, Pauli and Cournapeau, David and Wieser, Eric and Taylor, Julian and Berg, Sebastian and Smith, Nathaniel J. and Kern, Robert and Picus, Matti and Hoyer, Stephan and Kerkwijk, Marten H. van and Brett, Matthew and Haldane, Allan and R{\'i}o, Jaime Fern{\'a}ndez del and Wiebe, Mark and Peterson, Pearu and G{\'e}rard-Marchant, Pierre and Sheppard, Kevin and Reddy, Tyler and Weckesser, Warren and Abbasi, Hameer and Gohlke, Christoph and Oliphant, Travis E.},
+  title   = {Array programming with NumPy},
+  journal = {Nature},
+  volume  = {585},
+  number  = {7825},
+  pages   = {357--362},
+  year    = {2020},
+  doi     = {10.1038/s41586-020-2649-2}
+}
+
+@article{scipy2020,
+  author  = {Virtanen, Pauli and Gommers, Ralf and Oliphant, Travis E. and Haberland, Matt and Reddy, Tyler and Cournapeau, David and Burovski, Evgeni and Peterson, Pearu and Weckesser, Warren and Bright, Jonathan and Walt, St{\'e}fan J. van der and Brett, Matthew and Wilson, Joshua and Millman, K. Jarrod and Mayorov, Nikolay and Nelson, Andrew R. J. and Jones, Eric and Kern, Robert and Larson, Eric and Carey, C J and Polat, {\.I}lhan and Feng, Yu and Moore, Eric W. and VanderPlas, Jake and Laxalde, Denis and Perktold, Josef and Cimrman, Robert and Henriksen, Ian and Quintero, E. A. and Harris, Charles R. and Archibald, Anne M. and Ribeiro, Ant{\^o}nio H. and Pedregosa, Fabian and Mulbregt, Paul van and Vijaykumar, Aditya and Bardelli, Alessandro Pietro and Rothberg, Alex and Hilboll, Andreas and Kloeckner, Andreas and Scopatz, Anthony and Lee, Antony and Rokem, Ariel and Woods, C. Nathan and Fulton, Chad and Masson, Charles and H{\"a}ggstr{\"o}m, Christian and Fitzgerald, Clark and Nicholson, David A. and Hagen, David R. and Pasechnik, Dmitrii V. and Olivetti, Emanuele and Martin, Eric and Wieser, Eric and Silva, Fabrice and Lenders, Felix and Wilhelm, Florian and Young, G. and Price, Gavin A. and Ingold, Gert-Ludwig and Allen, Gregory E. and Lee, Gregory R. and Audren, Herv{\'e} and Probst, Irvin and Dietrich, J{\"o}rg P. and Silterra, Jacob and Webber, James T and Slavi{\v c}, Janko and Nothman, Joel and Buchner, Johannes and Kulick, Johannes and Sch{\"o}nberger, Johannes L. and Cardoso, Jos{\'e} Vin{\'i}cius de Miranda and Reimer, Joscha and Harrington, Joseph and Rodr{\'i}guez, Juan Luis Cano and Nunez-Iglesias, Juan and Kuczynski, Justin and Tritz, Kevin and Thoma, Martin and Newville, Matthew and K{\"u}mmerer, Matthias and Bolingbroke, Maximilian and Tartre, Michael and Pak, Mikhail and Smith, Nathaniel J. and Nowaczyk, Nikolai and Shebanov, Nikolay and Pavlyk, Oleksandr and Brodtkorb, Per A. and Lee, Perry and McGibbon, Robert T. and Feldbauer, Roman and Lewis, Sam and Tygier, Sam and Sievert, Scott and Vigna, Sebastiano and Peterson, Stefan and More, Surhud and Pudlik, Tadeusz and Oshima, Takuya and Pingel, Thomas J. and Robitaille, Thomas P. and Spura, Thomas and Jones, Thouis R. and Cera, Tim and Leslie, Tim and Zito, Tiziano and Krauss, Tom and Upadhyay, Utkarsh and Halchenko, Yaroslav O. and V{\'a}zquez-Baeza, Yoshiki},
+  title   = {SciPy 1.0: fundamental algorithms for scientific computing in Python},
+  journal = {Nature Methods},
+  volume  = {17},
+  number  = {3},
+  pages   = {261--272},
+  year    = {2020},
+  doi     = {10.1038/s41592-019-0686-2}
+}
+
+@article{matplotlib2007,
+  author  = {Hunter, John D.},
+  title   = {Matplotlib: A 2D Graphics Environment},
+  journal = {Computing in Science \& Engineering},
+  volume  = {9},
+  number  = {3},
+  pages   = {90--95},
+  year    = {2007},
+  doi     = {10.1109/mcse.2007.55}
+}
+
+@incollection{mckinney2010,
+  author  = {McKinney, Wes},
+  title   = {Data Structures for Statistical Computing in Python},
+  journal = {Proceedings of the Python in Science Conference},
+  pages   = {56--61},
+  year    = {2010},
+  doi     = {10.25080/majora-92bf1922-00a}
+}
+
+@article{wilcoxon1945,
+  author  = {Wilcoxon, Frank},
+  title   = {Individual Comparisons by Ranking Methods},
+  journal = {Biometrics Bulletin},
+  volume  = {1},
+  number  = {6},
+  pages   = {80},
+  year    = {1945},
+  doi     = {10.2307/3001968}
+}
+
+@article{mantel1967,
+  author  = {Mantel, Nathan},
+  title   = {The Detection of Disease Clustering and a Generalized Regression
+             Approach},
+  journal = {Cancer Research},
+  volume  = {27},
+  number  = {2},
+  pages   = {209--220},
+  year    = {1967},
+  note    = {PMID: 6018555}
+}
+
+@article{benjamini1995,
+  author  = {Benjamini, Yoav and Hochberg, Yosef},
+  title   = {Controlling the False Discovery Rate: A Practical and Powerful
+             Approach to Multiple Testing},
+  journal = {Journal of the Royal Statistical Society: Series B
+             (Methodological)},
+  volume  = {57},
+  number  = {1},
+  pages   = {289--300},
+  year    = {1995},
+  doi     = {10.1111/j.2517-6161.1995.tb02031.x}
+}
+
+@techreport{niosh2002simulant,
+  author      = {{National Institute for Occupational Safety and Health}},
+  title       = {Chemical Warfare Agent {(CWA)} Simulant Program for
+                 Respirator Materials Resistance Testing},
+  institution = {National Personal Protective Technology Laboratory, NIOSH},
+  year        = {2002},
+  month       = jul,
+  note        = {Dated 31 July 2002},
+  url         = {https://archive.cdc.gov/www_cdc_gov/niosh/npptl/standardsdev/cbrn/apr/concepts/pdfs/simulantjul31-508.pdf}
+}
+
+@misc{seitzinger2006simulant,
+  author  = {Seitzinger, Alan T. and Genovese, James A.},
+  title   = {Chemical Agent Simulant Training Composition},
+  note    = {{U.S. Patent US 7,129,094 B1}, assigned to the United States
+             Department of the Army. Filed 16 May 2003; granted 31 October 2006},
+  year    = {2006},
+  url     = {https://patents.google.com/patent/US7129094B1/en}
+}
+
+@book{nrc1997mist,
+  author    = {{National Research Council}},
+  title     = {Technical Assessment of the Man-in-Simulant Test Program},
+  publisher = {The National Academies Press},
+  address   = {Washington, DC},
+  year      = {1997},
+  doi       = {10.17226/5936}
+}
+
+@article{lawrence2025simulants,
+  author  = {Lawrence, David S. and Van Houten, Kelly A.},
+  title   = {Simulants for Chemical and Explosive Threats},
+  journal = {Johns Hopkins APL Technical Digest},
+  volume  = {37},
+  number  = {4},
+  year    = {2025}
+}
+
+@article{liji2005,
+  author  = {Li, Jian and Ji, Lei},
+  title   = {Adjusting Multiple Testing in Multilocus Analyses Using the
+             Eigenvalues of a Correlation Matrix},
+  journal = {Heredity},
+  volume  = {95},
+  number  = {3},
+  pages   = {221--227},
+  year    = {2005},
+  doi     = {10.1038/sj.hdy.6800717}
+}
+
+@book{westfall1993,
+  author    = {Westfall, Peter H. and Young, S. Stanley},
+  title     = {Resampling-Based Multiple Testing: Examples and Methods for
+               $p$-Value Adjustment},
+  publisher = {Wiley},
+  address   = {New York},
+  year      = {1993}
+}

@@ -1,0 +1,21 @@
+{
+ "Fig_toxicity": {
+  "panel_a": "dichloromethane, a designated simulant, ranks 3 of 19\non this axis: methanol and n-hexane score higher.\nIt is 1,411,800$\\times$ less acutely toxic than VX\nand 1,397$\\times$ less than hydrogen cyanide.",
+  "panel_b_header": "no regulator-grade acute inhalation value exists for any of these 9"
+ },
+ "Fig_qsar_failure": {
+  "panel_b": "14 of the 20 agents pass the domain check,\nand all 20 are wrong by 0.40 to 3.42 log\n(a factor of 2.5 to 2,600), always in the unsafe direction.\nThe worst inside the domain is wrong by 2.68 log."
+ },
+ "Fig_main": {
+  "panel_e": "DMMP's P centre is more susceptible\nto nucleophilic attack than VX's\nby $2.7\\times$",
+  "panel_d_A_rdkit": "exact p = 0.028",
+  "panel_d_B_electronic": "exact p = 0.275",
+  "panel_d_C_merged": "exact p = 0.025"
+ },
+ "Fig_panel": {
+  "panel_a": "valid matches: 3 of 11 on the 28-compound panel, 0 of 11 on the 35-compound panel with the same three simulants, 5 of 11 once the five literature simulants are admitted as simulants.",
+  "panel_b": "incumbent three match a median of 0 of 11 agents (95% CI 0 to 3); the field's eight match a median of 5 (95% CI 4 to 6).",
+  "panel_c": "only the pre-specified-statistic scheme on the 28-compound panel falls below 0.05.",
+  "panel_d": "only the pre-specified-statistic scheme on the 28-compound panel falls below 0.05."
+ }
+}

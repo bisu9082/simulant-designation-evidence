@@ -1,0 +1,36 @@
+compound_name,compound_class,agent_series,input_smiles
+DMMP,simulant,,COP(C)(=O)OC
+acetone,interferent,,CC(C)=O
+methanol,interferent,,CO
+acetonitrile,interferent,,CC#N
+chloroform,interferent,,ClC(Cl)Cl
+n-hexane,interferent,,CCCCCC
+THF,interferent,,C1CCOC1
+ethyl acetate,interferent,,CCOC(C)=O
+benzene,interferent,,c1ccccc1
+water,interferent,,O
+dichloromethane,simulant,pulmonary,ClCCl
+DPGME,simulant,blister,COCC(C)OCC(C)O
+ethanol,interferent,,CCO
+toluene,interferent,,Cc1ccccc1
+DMSO,interferent,,CS(C)=O
+p-dichlorobenzene,interferent,,Clc1ccc(Cl)cc1
+p-xylene,interferent,,Cc1ccc(C)cc1
+sarin (GB),real_agent,G,CC(C)OP(C)(F)=O
+soman (GD),real_agent,G,CC(C)(C)C(C)OP(C)(F)=O
+tabun (GA),real_agent,G,CCOP(=O)(C#N)N(C)C
+sulfur mustard (HD),real_agent,H,ClCCSCCCl
+lewisite 1 (L),real_agent,L,Cl/C=C/[As](Cl)Cl
+hydrogen cyanide (AC),real_agent,blood,C#N
+cyanogen chloride (CK),real_agent,blood,ClC#N
+phosgene (CG),real_agent,choking,O=C(Cl)Cl
+chloropicrin (PS),real_agent,vomit/irritant,[O-][N+](=O)C(Cl)(Cl)Cl
+cyclosarin (GF),real_agent,G,O=P(C)(F)OC1CCCCC1
+VX,real_agent,V,CCOP(C)(=O)SCCN(C(C)C)C(C)C
+DCP,literature_simulant,,CCOP(=O)(OCC)Cl
+DFP,literature_simulant,,CC(C)OP(=O)(OC(C)C)F
+DCNP,literature_simulant,,CCOP(=O)(C#N)OCC
+CEES,literature_simulant,,CCSCCCl
+methyl salicylate,literature_simulant,,COC(=O)C1=CC=CC=C1O
+dichlorvos,interferent,,COP(=O)(OC)OC=C(Cl)Cl
+malathion,interferent,,CCOC(=O)CC(C(=O)OCC)SP(=S)(OC)OC

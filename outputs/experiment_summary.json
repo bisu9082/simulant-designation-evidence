@@ -1,0 +1,385 @@
+{
+  "seed": 42,
+  "bootstrap_samples": 10000,
+  "corr_cutoff": 0.95,
+  "drop_pathological": false,
+  "pathological_detected": [
+    "kappa2",
+    "kappa3"
+  ],
+  "class_counts": {
+    "interferent": 14,
+    "real_agent": 11,
+    "simulant": 3
+  },
+  "simulants": [
+    "DMMP",
+    "dichloromethane",
+    "DPGME"
+  ],
+  "conditions": [
+    {
+      "condition": "A_rdkit",
+      "n_in": 51,
+      "n_kept": 38,
+      "kept": [
+        "MW",
+        "logP_crippen",
+        "MR_crippen",
+        "TPSA",
+        "HBA",
+        "HBD",
+        "rot_bonds",
+        "n_arom_rings",
+        "fraction_csp3",
+        "n_heteroatoms",
+        "balaban_j",
+        "chi1v",
+        "chi3v",
+        "kappa1",
+        "kappa2",
+        "kappa3",
+        "n_P",
+        "n_P_F",
+        "n_P_S",
+        "n_P_CN",
+        "n_P_alkoxy",
+        "n_P_C",
+        "n_As",
+        "n_S_divalent",
+        "n_halogen",
+        "n_nitrile",
+        "n_nitro",
+        "n_carbonyl",
+        "lser_S_proxy",
+        "RadiusOfGyration",
+        "Asphericity",
+        "Eccentricity",
+        "InertialShapeFactor",
+        "NPR1",
+        "NPR2",
+        "PMI1",
+        "PMI2",
+        "SpherocityIndex"
+      ],
+      "dropped": [
+        [
+          "labute_asa",
+          "MW",
+          0.9581637241821443
+        ],
+        [
+          "chi0v",
+          "MW",
+          0.9531910876552402
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
+        ],
+        [
+          "lser_B_proxy",
+          "HBA",
+          1.0
+        ],
+        [
+          "n_OH",
+          "HBD",
+          1.0
+        ],
+        [
+          "lser_A_proxy",
+          "HBD",
+          1.0
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi4v",
+          "chi3v",
+          0.9518607261430984
+        ],
+        [
+          "n_PdO",
+          "n_P",
+          1.0
+        ],
+        [
+          "is_organophosphorus",
+          "n_P",
+          1.0
+        ],
+        [
+          "n_P_N",
+          "n_P_CN",
+          1.0
+        ],
+        [
+          "PMI3",
+          "PMI2",
+          0.9971961939263446
+        ]
+      ],
+      "evr": [
+        0.364792773507508,
+        0.11933226277110753,
+        0.10036217437429337,
+        0.06755917764444039,
+        0.06341583004020514
+      ],
+      "pc1_pc2": 0.48412503627861553,
+      "pc1_loadings": {
+        "kappa1": 0.2632861898163644,
+        "PMI1": 0.24882049065411774,
+        "MW": 0.24820226440646947,
+        "MR_crippen": 0.2458592570231504,
+        "chi1v": 0.24351133899166452,
+        "chi3v": 0.2434602984336098
+      },
+      "n_interferent_closer": 6,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": -0.08248674028910727,
+      "p_value": 0.9358874039999575,
+      "cohens_dz": -0.02487068797440552,
+      "mean_diff": -0.05272550039865384,
+      "ci_95": [
+        -1.2565789385344641,
+        1.1526299355277003
+      ],
+      "shapiro_p": 0.06674355915483735
+    },
+    {
+      "condition": "B_electronic",
+      "n_in": 3,
+      "n_kept": 3,
+      "kept": [
+        "dipole_moment_D",
+        "E_LUMO_eV",
+        "E_HOMO_eV"
+      ],
+      "dropped": [],
+      "evr": [
+        0.37035767538450065,
+        0.3338844114562583,
+        0.29575791315924105
+      ],
+      "pc1_pc2": 0.704242086840759,
+      "pc1_loadings": {
+        "E_HOMO_eV": 0.7096856820167194,
+        "E_LUMO_eV": 0.6157947767508354,
+        "dipole_moment_D": -0.3422616333550294
+      },
+      "n_interferent_closer": 10,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": 2.7054880153376977,
+      "p_value": 0.02210414777961365,
+      "cohens_dz": 0.8157353292434943,
+      "mean_diff": 0.4043810763636831,
+      "ci_95": [
+        0.15778005858022406,
+        0.7073795418997563
+      ],
+      "shapiro_p": 0.10477177321179149
+    },
+    {
+      "condition": "C_merged",
+      "n_in": 54,
+      "n_kept": 41,
+      "kept": [
+        "MW",
+        "logP_crippen",
+        "MR_crippen",
+        "TPSA",
+        "HBA",
+        "HBD",
+        "rot_bonds",
+        "n_arom_rings",
+        "fraction_csp3",
+        "n_heteroatoms",
+        "balaban_j",
+        "chi1v",
+        "chi3v",
+        "kappa1",
+        "kappa2",
+        "kappa3",
+        "n_P",
+        "n_P_F",
+        "n_P_S",
+        "n_P_CN",
+        "n_P_alkoxy",
+        "n_P_C",
+        "n_As",
+        "n_S_divalent",
+        "n_halogen",
+        "n_nitrile",
+        "n_nitro",
+        "n_carbonyl",
+        "lser_S_proxy",
+        "RadiusOfGyration",
+        "Asphericity",
+        "Eccentricity",
+        "InertialShapeFactor",
+        "NPR1",
+        "NPR2",
+        "PMI1",
+        "PMI2",
+        "SpherocityIndex",
+        "dipole_moment_D",
+        "E_LUMO_eV",
+        "E_HOMO_eV"
+      ],
+      "dropped": [
+        [
+          "labute_asa",
+          "MW",
+          0.9581637241821443
+        ],
+        [
+          "chi0v",
+          "MW",
+          0.9531910876552402
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
+        ],
+        [
+          "lser_B_proxy",
+          "HBA",
+          1.0
+        ],
+        [
+          "n_OH",
+          "HBD",
+          1.0
+        ],
+        [
+          "lser_A_proxy",
+          "HBD",
+          1.0
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi4v",
+          "chi3v",
+          0.9518607261430984
+        ],
+        [
+          "n_PdO",
+          "n_P",
+          1.0
+        ],
+        [
+          "is_organophosphorus",
+          "n_P",
+          1.0
+        ],
+        [
+          "n_P_N",
+          "n_P_CN",
+          1.0
+        ],
+        [
+          "PMI3",
+          "PMI2",
+          0.9971961939263446
+        ]
+      ],
+      "evr": [
+        0.3455831551008448,
+        0.12287860953685271,
+        0.1046059233057514,
+        0.07310612275206983,
+        0.06242813969816161
+      ],
+      "pc1_pc2": 0.4684617646376975,
+      "pc1_loadings": {
+        "kappa1": 0.2601595823769341,
+        "PMI1": 0.24623326065114837,
+        "MW": 0.24409394786109298,
+        "MR_crippen": 0.24352391276102542,
+        "chi3v": 0.24143251063188534,
+        "chi1v": 0.24071224022084833
+      },
+      "n_interferent_closer": 6,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": -0.3204070220359907,
+      "p_value": 0.7552546020006909,
+      "cohens_dz": -0.09660635202622868,
+      "mean_diff": -0.206248257969994,
+      "ci_95": [
+        -1.3965582984957168,
+        0.9907157604003495
+      ],
+      "shapiro_p": 0.07224482739660602
+    }
+  ],
+  "p_local": {
+    "table": {
+      "sarin (GB)": {
+        "q_P": 0.54044,
+        "q_phosphoryl_O": -0.42847,
+        "wiberg_PO": 1.95274,
+        "fukui_f_plus_P": 0.66793
+      },
+      "soman (GD)": {
+        "q_P": 0.5446,
+        "q_phosphoryl_O": -0.43006,
+        "wiberg_PO": 1.95068,
+        "fukui_f_plus_P": 0.63692
+      },
+      "cyclosarin (GF)": {
+        "q_P": 0.53868,
+        "q_phosphoryl_O": -0.42662,
+        "wiberg_PO": 1.95465,
+        "fukui_f_plus_P": 0.63203
+      },
+      "DMMP": {
+        "q_P": 0.4663,
+        "q_phosphoryl_O": -0.44588,
+        "wiberg_PO": 1.92461,
+        "fukui_f_plus_P": 0.55852
+      },
+      "tabun (GA)": {
+        "q_P": 0.34433,
+        "q_phosphoryl_O": -0.38982,
+        "wiberg_PO": 2.01462,
+        "fukui_f_plus_P": 0.42143
+      },
+      "VX": {
+        "q_P": 0.33196,
+        "q_phosphoryl_O": -0.40303,
+        "wiberg_PO": 1.98628,
+        "fukui_f_plus_P": 0.20431
+      }
+    },
+    "G3_mean": 0.6456266666666667,
+    "G3_sd": 0.019469387081604127,
+    "DMMP_z_vs_G3": -4.4740323001215785,
+    "DMMP_over_GB": 0.8361954096986212,
+    "VX_over_GB": 0.3058853472669291,
+    "DMMP_over_VX": 2.733689002006755
+  }
+}

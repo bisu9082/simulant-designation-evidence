@@ -1,0 +1,8 @@
+# 원고 Reproducibility 절에 기재한 버전. 이 조합에서 산출물이 재현된다.
+numpy==2.5.3
+scipy==1.18.1
+pandas==3.0.5
+scikit-learn==1.9.1
+matplotlib==3.11.2
+rdkit==2026.3.6
+pdfplumber==0.11.10
