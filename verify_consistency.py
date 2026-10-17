@@ -195,6 +195,13 @@ def load_facts():
     f['meff28'] = fam['meff']
     f['meff_p28'] = fam['meff_adjusted_min_p']
 
+    md = json.load(open('outputs/mde.json'))
+    f['mde_delta35'] = md['panel35_incumbent3']['mde_delta']
+    f['mde_gap_median'] = md['panel35_incumbent3']['gap_median']
+    f['mde_gap_min'] = md['panel35_incumbent3']['gap_min']
+    f['mde_p0_35'] = md['panel35_incumbent3']['p_at_zero']
+    f['mde_p0_28'] = md['panel28_incumbent3']['p_at_zero']
+
     mb = json.load(open('outputs/match_by_panel.json'))
     f['match35_inc'] = mb['panel35_incumbent3']['n_match']
     f['match35_lit'] = mb['panel35_incumbent_plus_lit8']['n_match']
@@ -207,19 +214,90 @@ def load_facts():
     f['dmmp_gb_35'] = _inc['sarin (GB)']['d_norm']
     f['cees_hd'] = _lit['sulfur mustard (HD)']['d_norm']
 
+    # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
+    # 없었다. 144건 검사를 통과하는 동안 11행 중 9행이 구판 값이었다. 동료
+    # 검토에서 지적돼 전수 대조로 돌린다. 같은 이유로 res:match 산문의
+    # 공간별 수치도 전부 사실표에 올린다.
+    _p28 = {a['agent']: a for a in mb['panel28_incumbent3']['agents']}
+    _T3 = {'GB': 'sarin (GB)', 'GD': 'soman (GD)',
+           'CK': 'cyanogen chloride (CK)', 'GF': 'cyclosarin (GF)',
+           'AC': 'hydrogen cyanide (AC)', 'CG': 'phosgene (CG)',
+           'HD': 'sulfur mustard (HD)', 'GA': 'tabun (GA)',
+           'L': 'lewisite 1 (L)', 'PS': 'chloropicrin (PS)', 'VX': 'VX'}
+    for _code, _nm in _T3.items():
+        f[f't3_{_code}'] = _p28[_nm]['d_norm']
+
+    # 공간별 정규화 거리와 포스겐의 최근접 경쟁자. 산문이 세 공간을 섞어
+    # 적었던 자리이므로 공간을 키에 박아 둔다.
+    _dt = pd.read_csv('outputs/distance_table_normalized.csv')
+    _SP = {'A_rdkit': 'struct', 'B_electronic': 'elec', 'C_merged': 'merged'}
+    for _cond, _g in _dt.groupby('condition'):
+        _tag = _SP[_cond]
+        _nn = float(_g.nn_median_space.iloc[0])
+        for _, _r in _g.iterrows():
+            _code = re.search(r'\((\w+)\)$', _r.real_agent)
+            _code = _code.group(1) if _code else 'VX'
+            f[f'{_tag}_{_code}'] = float(_r.d_sim_norm)
+            if _code == 'CG':
+                f[f'{_tag}_CG_rival'] = float(_r.d_interferent) / _nn
+
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
     f['pct_elec'] = pc['electronic']
     f['pct_pc3'] = pc['struct_pc3']
 
+    # 블록 가중 민감도 (2026-10-17 신설, SI res:blockbalance).
+    bb = json.load(open('outputs/blockbalance.json'))
+    _S6 = ['mean_diff', 'median_diff', 'mean_logratio', 'mean_dsim',
+           'n_closer', 'n_valid']
+    _BBTAG = {'panel35_incumbent3': '35',
+              'panel35_incumbent_plus_lit8': '35lit',
+              'panel28_incumbent3': '28'}
+    for _lab, _tag in _BBTAG.items():
+        _p = bb[_lab]['block_balanced']['p']
+        f[f'bb_minp{_tag}'] = min(_p[s] for s in _S6)
+        f[f'bb_match{_tag}'] = bb[_lab]['block_balanced']['n_valid']
+        f[f'bb_cur_match{_tag}'] = bb[_lab]['equal_per_descriptor']['n_valid']
+        f[f'bb_meandiff{_tag}'] = _p['mean_diff']
+    f['bb_nstruct'] = bb['panel28_incumbent3']['n_struct']
+    f['bb_nelec'] = bb['panel28_incumbent3']['n_elec']
+
+    # 블록균등 병합공간 + 기존 구조·전자 = 18검정 가족의 BH 최소 q.
+    def _bh_min(ps):
+        o = sorted(ps)
+        m = len(o)
+        q = [o[i] * m / (i + 1) for i in range(m)]
+        for i in range(m - 2, -1, -1):
+            q[i] = min(q[i], q[i + 1])
+        return q[0]
+    _rc = json.load(open('outputs/rollback_c.json'))
+    _RCMAP = {'panel28_designated3': ('panel28_incumbent3', '28'),
+              'panel35_designated3': ('panel35_incumbent3', '35'),
+              'panel35_designated_plus_literature8':
+                  ('panel35_incumbent_plus_lit8', '35lit')}
+    for _lab, (_bblab, _tag) in _RCMAP.items():
+        _sp = _rc['panels'][_lab]
+        _ps = [_sp[s]['statistics'][k]['p']
+               for s in ('structural', 'electronic3') for k in _S6]
+        _ps += [bb[_bblab]['block_balanced']['p'][k] for k in _S6]
+        f[f'bbq_{_tag}'] = _bh_min(_ps)
+        # 사전지정 통계량 3검정도 가중에 따라 달라질 수 있으므로 같이 둔다.
+        f[f'bbpre_{_tag}'] = _bh_min(
+            [_sp['structural']['statistics']['mean_diff']['p'],
+             _sp['electronic3']['statistics']['mean_diff']['p'],
+             bb[_bblab]['block_balanced']['p']['mean_diff']])
+
     mp = json.load(open('outputs/multiplicity_c.json'))
     for lab, _m, _minp, _bonf, bhq, _k in mp:
         if lab == 'panel28_designated3':
             f['bh_q28'] = bhq
+            f['minp28'] = _minp
         if lab == 'panel35_designated3':
             f['bh_q35'] = bhq
+            f['minp35'] = _minp
         if lab == 'panel35_designated_plus_literature8':
             f['bh_q35lit'] = bhq
+            f['minp35lit'] = _minp
     return f
 
 
@@ -241,7 +319,7 @@ CHECKS = [
                       r'excluding the authentic agents\s*\n?themselves \(\$n=(\d+)\$\)',
                       r'(\d[\d,]*)-compound\s*\n?AEGL pool',
                       r'all but \w+ of the (\d[\d,]*) compounds in the',
-                      r'independent across the (\d[\d,]*) compounds',
+                      r'association across the (\d[\d,]*)\s*\n?compounds',
                       r'for the (\d[\d,]*) candidates\s*\n?carrying both axes',
                       r'of the (\d[\d,]*), none combines'], 0),
     ('dcm_aegl3', [r'dichloromethane[,\s]+(\d[\d,\\]*)~mg~m',
@@ -342,7 +420,7 @@ CHECKS = [
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('q_prespec28', [r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
     ('meff28', [r'estimates ([\d.]+) effective tests'], 0.005),
-    ('meff_p28', [r'and gives\s*\n?([\d.]+), so the approximation'], 0.0005),
+    ('meff_p28', [r'and gives\s*\n?([\d.]+), conservative here by a factor'], 0.0005),
     ('match35_inc', [r'twenty-eight-compound panel and (\w+) on the primary one'], 0),
     ('match35_lit', [r'Admitting the\s*\n?five as simulants gives (\w+) matched agents'], 0),
     ('match28_inc', [r'agents of eleven, against\s*\n?(\w+) on the twenty-eight-compound panel'], 0),
@@ -351,6 +429,20 @@ CHECKS = [
     ('dfp_gf', [r'is present, at [\d.]+, [\d.]+ and ([\d.]+) from'], 0.005),
     ('dmmp_gb_35', [r'1.14 typical nearest-neighbour separations from DMMP on the\s*\n?smaller panel and\s*\n?([\d.]+) on the larger'], 0.005),
     ('cees_hd', [r'sulfide at ([\d.]+) from sulfur mustard'], 0.005),
+    # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
+    ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
+                     r'returns \$p<0\.05\$ at\s*\n?\$\\delta = ([\d.]+)\$',
+                     r'"mde_delta35": "([\d.]+)"'], 0.005),
+    ('mde_gap_median', [r'carry has a median of\s*\n?([\d.]+)',
+                        r'median of ([\d.]+), more than twice',
+                        r'"gap_median35": "([\d.]+)"'], 0.0005),
+    ('mde_gap_min', [r'only at sarin, where it is\s*\n?([\d.]+)',
+                     r'it is ([\d.]+), does it fall below',
+                     r'"gap_min35": "([\d.]+)"'], 0.0005),
+    ('mde_p0_35', [r'it returns ([\d.]+) on\s*\n?the primary panel',
+                   r'"p_at_zero35": "([\d.]+)"'], 0.0005),
+    ('mde_p0_28', [r'and ([\d.]+) on the twenty-eight-compound panel, reproducing',
+                   r'"p_at_zero28": "([\d.]+)"'], 0.0005),
     # 9.625 의 소수 둘째자리 반올림 경계이므로 허용오차를 0.006 으로 둔다
     ('null_exp35', [r'expectation of ([\d.]+) set by the 21:3'], 0.006),
     ('null_exp28', [r'smaller panel against ([\d.]+)'], 0.005),
@@ -365,6 +457,71 @@ CHECKS = [
     ('ret_ga8', [r'cyanophosphonate in ([\d.]+)\\%'], 0.05),
     ('phorate_fold', [r'is predicted (\d[\d,]*) times\s*\n?too safe'], 1),
     ('malathion_fold', [r'is predicted (\d[\d,]*) times too toxic'], 1),
+    # 표 3 (tab:match) 전수 대조. 2026-10-17 신설. 이 표는 그때까지 검증기에
+    # 등록되지 않아 11행 중 9행이 구판 값인 채로 144건 검사를 통과했다.
+    ('t3_GB', [r'GB & DMMP & ([\d.]+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
+    ('t3_GD', [r'GD & DMMP & ([\d.]+) &',
+               r'Sarin \([\d.]+\), soman \(([\d.]+)\)'], 0.0005),
+    ('t3_CK', [r'CK & DCM & ([\d.]+) &'], 0.0005),
+    ('t3_GF', [r'GF & DMMP & ([\d.]+) &',
+               r'cyclosarin \(([\d.]+)\) are matched'], 0.0005),
+    ('t3_AC', [r'AC & DCM & ([\d.]+) &'], 0.0005),
+    ('t3_CG', [r'CG & DCM & ([\d.]+) &',
+               r'merged space \([\d.]+ against ([\d.]+)\)'], 0.0005),
+    ('t3_HD', [r'HD & DCM & ([\d.]+) &'], 0.0005),
+    ('t3_GA', [r'GA & DMMP & ([\d.]+) &', r'tabun at ([\d.]+) and VX',
+               r'passes its value of ([\d.]+)'], 0.0005),
+    ('t3_L', [r'L & DCM & ([\d.]+) &'], 0.0005),
+    ('t3_PS', [r'PS & DMMP & ([\d.]+) &'], 0.0005),
+    ('t3_VX', [r'VX & DPGME & ([\d.]+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
+    # res:match 산문의 공간별 수치. 종전 산문은 세 공간의 원거리와 정규화
+    # 거리를 섞어 적었고 어느 값도 산출물과 대조되지 않았다.
+    ('struct_GD', [r'soman at ([\d.]+)\s*\n?and cyclosarin at'], 0.0005),
+    ('struct_GF', [r'cyclosarin at ([\d.]+) falling outside'], 0.0005),
+    ('struct_VX', [r'and ([\d.]+) in the structural\s*\n?space that is not a match'],
+     0.0005),
+    ('merged_VX', [r'at ([\d.]+) typical separations in the merged space'], 0.0005),
+    ('elec_AC', [r'dichloromethane at ([\d.]+),\s*\n?because acetonitrile'], 0.0005),
+    ('struct_CG', [r'structural space \([\d.]+ typical separations\s*\n?against ([\d.]+)\)'],
+     0.005),
+    ('minp35', [r'Smallest nominal \$p\$ \(18 tests\)\s+& ([\d.]+) &',
+                r'eighteen-test family there is ([\d.]+)\s*\n?with equal weight per'],
+     0.0005),
+    ('minp35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & ([\d.]+) &'],
+     0.0005),
+    ('minp28', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & [\d.]+ & ([\d.]+)'],
+     0.0005),
+    ('elec_CG', [r'electronic space \([\d.]+ against ([\d.]+)\)'], 0.005),
+    ('struct_CG_rival', [r'structural space \(([\d.]+) typical separations'], 0.005),
+    ('merged_CG_rival', [r'ethyl acetate in the merged space \(([\d.]+) against'], 0.005),
+    ('elec_CG_rival', [r'chloroform in the electronic space \(([\d.]+) against'], 0.005),
+    # 블록 가중 민감도 (2026-10-17). SI 표 + SI 산문 + 본문 한 문장 3경로.
+    ('bb_nstruct', [r'Weighting the (\d+) structural', r'\$n_\{s\}=(\d+)\$',
+                    r'puts (\d+) structural coordinates'], 0),
+    ('bb_nelec', [r'and (\d+) electronic descriptors as two equal blocks',
+                  r'\$n_\{e\}=(\d+)\$'], 0),
+    ('bb_minp35', [r'lowers that value to ([\d.]+)',
+                   r'Thirty-five, incumbent three & \d+/11 & [\d.]+ & ([\d.]+) &',
+                   r'0\.151 with equal weight per descriptor and ([\d.]+) with'],
+     0.0005),
+    ('bb_minp35lit',
+     [r'Thirty-five, plus literature eight & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('bb_minp28',
+     [r'Twenty-eight, incumbent three & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('bbq_35', [r'Thirty-five, incumbent three & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     0.0005),
+    ('bbq_35lit',
+     [r'Thirty-five, plus literature eight & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     0.0005),
+    ('bbq_28',
+     [r'Twenty-eight, incumbent three & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     0.0005),
+    ('bb_match35', [r'Thirty-five, incumbent three & (\d+)/11'], 0),
+    ('bb_match35lit', [r'Thirty-five, plus literature eight & (\d+)/11'], 0),
+    ('bb_match28', [r'Twenty-eight, incumbent three & (\d+)/11'], 0),
+    ('bb_meandiff28', [r'there falls from 0\.025 to ([\d.]+)'], 0.0005),
+    ('bbpre_28', [r'which stays at ([\d.]+) on the twenty-eight-compound panel'],
+     0.0005),
 ]
 
 WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,

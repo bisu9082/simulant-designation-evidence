@@ -326,6 +326,108 @@ defensible panels, is not an argument. Picking a space, a panel and a statistic
 fixes the answer, and the practice this paper examines has never written down
 which to pick.
 
+\subsection{Weighting the two descriptor blocks equally}
+\label{res:blockbalance}
+
+The merged space puts 38 structural coordinates and 3 electronic ones into one
+Euclidean distance. Standardising each descriptor equalises the variance per
+coordinate, not per block, so the expected contribution is 38 against 3 and the
+merged distance is in practice a structural distance. The main text says so; this
+section quantifies it, because a reader is entitled to ask whether the merged
+result is an artifact of that imbalance. A colleague who read a draft asked
+exactly this.
+
+We repeated the whole analysis on a distance that equalises the expected
+contribution of the two blocks,
+\begin{equation}
+d_{\mathrm{bal}}^{2}=\frac{1}{n_{s}}\sum_{i=1}^{n_{s}}(\Delta z_{s,i})^{2}
+ +\frac{1}{n_{e}}\sum_{j=1}^{n_{e}}(\Delta z_{e,j})^{2},
+\end{equation}
+with $n_{s}=38$ and $n_{e}=3$, leaving the structural and electronic spaces
+untouched since each is a single block. The same exact enumeration was used, over
+the same three configurations, with the same six statistics.
+
+\begin{table}[!htb]
+\centering
+\caption{Equal weight per descriptor against equal weight per block, in the
+merged space. Valid-match counts are identical under the two weightings. The
+smallest $p$ is taken over the eighteen-test family of three spaces by six
+statistics, and $q$ is the Benjamini--Hochberg adjusted value of that family.}
+\label{tab:blockbalance}
+\small
+\begin{tabular}{lccccc}
+\hline
+ & Valid & \multicolumn{2}{c}{Smallest nominal $p$}
+ & \multicolumn{2}{c}{Smallest $q$} \\
+Configuration & matches & per descriptor & per block
+ & per descriptor & per block \\
+\hline
+Thirty-five, incumbent three & 0/11 & 0.151 & 0.076 & 0.617 & 0.617 \\
+Thirty-five, plus literature eight & 5/11 & 0.039 & 0.021 & 0.212 & 0.222 \\
+Twenty-eight, incumbent three & 3/11 & 0.025 & 0.009 & 0.159 & 0.132 \\
+\hline
+\end{tabular}
+\end{table}
+
+Two things follow, and they point in opposite directions. The valid-match counts
+do not move at all: zero of eleven on the primary panel, five with the literature
+eight admitted, three on the twenty-eight-compound panel, exactly as reported in
+the main text. The paper's headline is therefore invariant to the weighting, and
+so is the pre-specified-statistic counterfactual of Table~\ref{M-tab:family},
+which stays at 0.042 on the twenty-eight-compound panel: the merged nominal value
+there falls from 0.025 to 0.015, but the value that binds after correction is the
+structural one, which the reweighting does not touch. No configuration has a
+Benjamini--Hochberg adjusted value below 0.05 under either weighting.
+
+Every nominal $p$ falls, however, and that is why the main text states the
+primary-panel result as a conclusion about significance rather than as a
+numerical floor. The smallest value of the eighteen-test family there is 0.151
+with equal weight per descriptor and 0.076 with equal weight per block, so a
+floor quoted from either weighting would not hold under the other. The direction
+is away from the designations: equalising the blocks makes the incumbent
+simulants look better on the nominal scale while leaving them with no agent
+matched. Block weighting is therefore a fourth choice of the same kind as the
+panel, the space and the statistic, and it was not declared in advance either.
+We report it because we did not pre-register it, and because a reader who did
+would have obtained numbers we would not otherwise have published.
+
+\subsection{What the test could have detected}
+\label{res:mde}
+
+A null result invites the question whether the design could have seen an effect
+at all, and the exact enumeration answers it without further assumption. We
+moved the incumbent simulants closer to the agents by $\delta$, measured in
+typical nearest-neighbour separations of the same space, left the rest of the
+panel untouched, and read the shifted statistic against the null built from the
+unmodified distances. The reading is conditional: on this panel, with only the
+designated three made more faithful, the test returns $p<0.05$ at
+$\delta = 0.22$ (Figure~\ref{fig:mde}). At $\delta = 0$ it returns 0.2831 on
+the primary panel and 0.0250 on the twenty-eight-compound panel, reproducing
+Table~\ref{M-tab:ablation}.
+
+The comparison that matters is between that value and the deficit the incumbent
+compounds actually carry. Across the eleven agents the normalised difference
+between the nearest incumbent simulant and the nearest other compound has a
+median of 0.463, more than twice the detectable value. Only at sarin, where it
+is 0.117, does it fall below what the test can resolve, and that is the agent at
+which the descriptor bootstrap of Section~\ref{M-res:panels} is also weakest,
+recovering DMMP as nearest in 37.8\% of replicates. The null on the primary
+panel is therefore a statement about the data rather than about the sensitivity
+of the design, with sarin the one case where the two cannot be separated.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.86\textwidth]{Fig_mde.png}
+\caption{What the permutation test could have detected. One-sided exact $p$ for
+the mean-difference statistic as the incumbent simulants are moved $\delta$
+typical nearest-neighbour separations closer to the eleven agents, with the rest
+of each panel unchanged and the null taken from the unmodified distances. On the
+primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.22$. The shaded
+band spans that value and the median deficit the incumbent compounds actually
+carry, 0.46; the deficit falls below the detectable value only at sarin.}
+\label{fig:mde}
+\end{figure}
+
 \subsection{Local reactivity at phosphorus}
 \label{res:plocal}
 
@@ -657,7 +759,7 @@ another.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{Fig_h1.png}
-\caption{Fidelity and safety are independent. (a) Electronic-space distance to
+\caption{Fidelity and safety are not monotonically associated. (a) Electronic-space distance to
 the nearest authentic agent against measured AEGL-3 for the 207 candidates
 carrying both axes; crosses are compounds excluded by the structural filter. The
 upper dashed line is the measured AEGL-3 of dichloromethane, the incumbent
@@ -670,7 +772,7 @@ the interferents, and DMMP is Tier~C.}
 \label{fig:h1}
 \end{figure}
 
-\subsection{Fidelity and safety are independent}
+\subsection{Fidelity and safety are not monotonically associated}
 \label{res:h1}
 
 Across the 207 candidates carrying both measured axes (Fig.~\ref{fig:h1}a),
@@ -764,7 +866,8 @@ is noted rather than excluded. Dichloromethane and DPGME raise no alert.
 \label{S-disc}
 
 The decoupling result is what makes the rest actionable. Because fidelity and
-acute toxicity are independent across the compounds where both are measured, the
+acute toxicity show no monotonic association across the compounds where both are
+measured, the
 pursuit of a simulant that is both faithful and safe is not a pursuit along a
 trade-off curve, and the screen bears that out. Against the incumbent's own
 safety value the quadrant is empty, which says more about dichloromethane than
