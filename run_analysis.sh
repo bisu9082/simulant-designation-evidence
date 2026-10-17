@@ -23,6 +23,8 @@
 #   deltaE_power         Fisher 통합 + 검정력
 #   rollback_c           방향 C 전용 (omega 종속, 차원 통제, Mantel, 중심화 바닥)
 #   match_by_panel       패널 3구성 x 작용제 11종 최근접 모사체와 유효매칭
+#   mde                  최소검출효과 — 음성 결과가 검정력 부족이 아님을 보인다
+#   blockbalance         구조38 대 전자3 블록 가중 민감도 (SI res:blockbalance)
 #   stat_supplement(2)   보정 체계 5종, 백색화 통제, WY minP, 서술자 부트스트랩
 #
 # 의존 순서 (독성축, Supplementary):
@@ -62,7 +64,7 @@ run_strict() {
 run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
            deltaE_premise.py deltaE_power.py rollback_c.py match_by_panel.py \
-           stat_supplement.py stat_supplement2.py
+           mde.py blockbalance.py stat_supplement.py stat_supplement2.py
 
 # 독성축. parse -> trainset -> 동일성검사 -> QSAR 순서를 지켜야 한다.
 run_strict parse_aegl.py build_tox_trainset.py

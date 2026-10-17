@@ -1,0 +1,92 @@
+{
+ "panel35_incumbent3": {
+  "n_struct": 38,
+  "n_elec": 3,
+  "equal_per_descriptor": {
+   "p": {
+    "mean_diff": 0.28310276679841895,
+    "median_diff": 0.15118577075098813,
+    "mean_logratio": 0.36561264822134387,
+    "mean_dsim": 0.183300395256917,
+    "n_closer": 1.0,
+    "n_valid": 1.0
+   },
+   "n_perm": 2024,
+   "nn_median": 3.4987592509640457,
+   "n_valid": 0
+  },
+  "block_balanced": {
+   "p": {
+    "mean_diff": 0.18824110671936758,
+    "median_diff": 0.07608695652173914,
+    "mean_logratio": 0.26037549407114624,
+    "mean_dsim": 0.08843873517786562,
+    "n_closer": 1.0,
+    "n_valid": 1.0
+   },
+   "n_perm": 2024,
+   "nn_median": 0.8200069503799792,
+   "n_valid": 0
+  }
+ },
+ "panel35_incumbent_plus_lit8": {
+  "n_struct": 38,
+  "n_elec": 3,
+  "equal_per_descriptor": {
+   "p": {
+    "mean_diff": 0.05261526287236343,
+    "median_diff": 0.3257640342039319,
+    "mean_logratio": 0.039280950574529794,
+    "mean_dsim": 0.1279982487412828,
+    "n_closer": 0.31909483854563947,
+    "n_valid": 0.15942028985507245
+   },
+   "n_perm": 735471,
+   "nn_median": 3.4987592509640457,
+   "n_valid": 5
+  },
+  "block_balanced": {
+   "p": {
+    "mean_diff": 0.029280556269383837,
+    "median_diff": 0.20884168104520776,
+    "mean_logratio": 0.02087913731472757,
+    "mean_dsim": 0.052699562593222574,
+    "n_closer": 0.3242724730138918,
+    "n_valid": 0.3242724730138918
+   },
+   "n_perm": 735471,
+   "nn_median": 0.8200069503799792,
+   "n_valid": 5
+  }
+ },
+ "panel28_incumbent3": {
+  "n_struct": 38,
+  "n_elec": 3,
+  "equal_per_descriptor": {
+   "p": {
+    "mean_diff": 0.025,
+    "median_diff": 0.12352941176470589,
+    "mean_logratio": 0.03235294117647059,
+    "mean_dsim": 0.041176470588235294,
+    "n_closer": 0.11029411764705882,
+    "n_valid": 0.23529411764705882
+   },
+   "n_perm": 680,
+   "nn_median": 3.8732143303217406,
+   "n_valid": 3
+  },
+  "block_balanced": {
+   "p": {
+    "mean_diff": 0.014705882352941176,
+    "median_diff": 0.05,
+    "mean_logratio": 0.030882352941176472,
+    "mean_dsim": 0.008823529411764706,
+    "n_closer": 0.14852941176470588,
+    "n_valid": 0.3044117647058823
+   },
+   "n_perm": 680,
+   "nn_median": 0.8699375321050145,
+   "n_valid": 3
+  }
+ }
+}

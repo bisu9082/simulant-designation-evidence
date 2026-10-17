@@ -18,8 +18,8 @@ TEX = 'paper/main.tex'
 # (설명, 원문, 주입할 오류)
 CASES = [
     ('한 양을 두 값으로 (208/218 계열)',
-     'independent across the 207 compounds',
-     'independent across the 218 compounds'),
+     'association across the 207',
+     'association across the 218'),
     ('초록이 Results 와 다른 Spearman 을 싣는다',
      '(Spearman $r=+0.004$',
      'independent (Spearman $r=-0.022$'),
@@ -68,6 +68,15 @@ CASES = [
     ('35종 귀무기대 오기 (9.63 대 6.63)',
      'expectation of 9.63 set by the 21:3',
      'expectation of 6.63 set by the 21:3'),
+    ('최소검출효과 오기 (0.22 대 0.42) — 검정력 주장이 뒤집힌다',
+     'moved 0.22 typical nearest-neighbour',
+     'moved 0.42 typical nearest-neighbour'),
+    ('실제 결손 중위 오기 (0.463 대 0.163) — 검출 가능 폭보다 작아진다',
+     'carry has a median of\n0.463',
+     'carry has a median of\n0.163'),
+    ('사린 결손 오기 (0.117 대 0.317)',
+     'only at sarin, where it is 0.117',
+     'only at sarin, where it is 0.317'),
     ('CEES-HD 거리 오기 (0.57 대 1.57)',
      'sulfide at 0.57 from sulfur mustard',
      'sulfide at 1.57 from sulfur mustard'),
@@ -86,6 +95,30 @@ CASES = [
     ('표 1 의 28종 전자공간 행이 구판 (0.275 대 0.297)',
      '& electronic  &  3 & 0.275 &',
      '& electronic  &  3 & 0.297 &'),
+    ('블록균등 최소 p 오기 (0.076 대 0.176) — 가중 의존성 진술이 무력화된다',
+     'lowers that value to 0.076',
+     'lowers that value to 0.176'),
+    # --- 표 3 (2026-10-17 추가). 이 표는 그때까지 검증기에 등록되지 않아
+    # 11행 중 9행이 구판 값인 채로 144건 검사를 통과했다. 동료 검토에서
+    # 지적됐다. 반올림으로 설명되지 않던 두 행과 산문·표 불일치를 시험한다.
+    ('표 3 PS 행이 구판 (2.530 대 2.70) — 반올림으로 설명 안 됨',
+     'PS & DMMP & 2.530 & no',
+     'PS & DMMP & 2.70 & no'),
+    ('표 3 CG 행이 구판 (1.600 대 1.64)',
+     'CG & DCM & 1.600 & no',
+     'CG & DCM & 1.64 & no'),
+    ('표 3 GA 행이 임계값 2 를 넘지 않게 보이도록 오기',
+     'GA & DMMP & 2.003 & no',
+     'GA & DMMP & 1.903 & no'),
+    ('산문이 표 3 과 다른 소만 거리를 싣는다 (1.417 대 1.40)',
+     'soman (1.417) and',
+     'soman (1.40) and'),
+    ('전자공간 유효매칭 개수 주장이 산문에만 있고 거리는 구판 (1.407 대 1.335)',
+     'dichloromethane at 1.407,',
+     'dichloromethane at 1.335,'),
+    ('포스겐 경쟁 거리를 다른 공간의 값으로 섞어 씀 (1.12 대 1.14)',
+     'ethyl acetate in the merged space (1.12 against',
+     'ethyl acetate in the merged space (1.14 against'),
 ]
 
 # 커버레터·하이라이트도 검사 대상이다 (2026-10-13 추가).
@@ -133,6 +166,13 @@ SUPP_CASES = [
     ('충실도 비율 오기 (3.1 대 3.6)',
      'trichloroethylene, is 3.1 times closer',
      'trichloroethylene, is 3.6 times closer'),
+    # --- 블록 가중 민감도 (2026-10-17 추가).
+    ('SI 블록균등 표의 28종 q 가 0.05 밑으로 오기',
+     'Twenty-eight, incumbent three & 3/11 & 0.025 & 0.009 & 0.159 & 0.132',
+     'Twenty-eight, incumbent three & 3/11 & 0.025 & 0.009 & 0.159 & 0.032'),
+    ('블록균등에서 유효매칭이 변한 것처럼 오기 (0/11 대 2/11)',
+     'Thirty-five, incumbent three & 0/11',
+     'Thirty-five, incumbent three & 2/11'),
 ]
 
 
