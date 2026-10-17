@@ -23,6 +23,73 @@ import pandas as pd
 
 TEX = 'paper/main.tex'
 
+# 사실표가 읽는 산출물 전부 (2026-10-17 신설).
+#
+# 왜 필요한가. 저장소를 새로 클론해 검증기를 돌리자 outputs/mde.json 하나가
+# 없다는 FileNotFoundError 로 즉시 죽었고, 그 뒤에 또 무엇이 없는지는 알 수
+# 없었다. 실제로는 산출물 4건과 도판 1건이 빠져 있었다. 한 건씩 터지는 대신
+# 빠진 것을 한 번에 전부 보고한다. 이 목록은 '저장소가 담아야 하는 산출물'의
+# 계약서 구실도 한다.
+REQUIRED_OUTPUTS = [
+    'outputs/aegl_parse_validation.json',
+    'outputs/blockbalance.json',
+    'outputs/dim_percentiles.json',
+    'outputs/distance_table_normalized.csv',
+    'outputs/experiment_summary.json',
+    'outputs/figure_annotations.json',
+    'outputs/h1_candidates.csv',
+    'outputs/h1_summary.json',
+    'outputs/match_by_panel.json',
+    'outputs/mde.json',
+    'outputs/minority_regression.json',
+    'outputs/multiplicity_c.json',
+    'outputs/permutation_sidedness.json',
+    'outputs/qsar_heldout.csv',
+    'outputs/qsar_tox_summary.json',
+    'outputs/rollback_c.json',
+    'outputs/stat_supplement.json',
+    'outputs/stat_supplement2.json',
+    'outputs/toxicity_aegl.csv',
+    'outputs/toxicity_predicted.csv',
+]
+
+# 도판 스크립트가 추가로 읽는 것. 검증기 자체는 쓰지 않으나 이것이 없으면
+# build_paper.sh --figs 가 깨지고, 그러면 원고에 구판 그림이 남는다.
+REQUIRED_FOR_FIGURES = [
+    'outputs/_electronic_with_gap.csv',
+    'outputs/_pca_scores.npy',
+    'outputs/_null_A_rdkit.npy',
+    'outputs/_null_B_electronic.npy',
+    'outputs/_null_C_merged.npy',
+    'outputs/electronic_distance_table.csv',
+    'outputs/electronic_space_summary.json',
+    'outputs/h1_gate_tiers.json',
+    'outputs/sanity_checks.json',
+]
+
+FIGURES = ['Fig_main.png', 'Fig_panel.png', 'Fig_toxicity.png',
+           'Fig_qsar_failure.png', 'Fig_h1.png', 'Fig_mde.png']
+
+
+def preflight():
+    """산출물·도판 존재를 먼저 전수 확인한다. 없으면 전부 나열하고 멈춘다."""
+    import os
+    missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
+    figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
+    nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
+    if missing or figless or nofig:
+        print('[verify] 사전 점검 실패 — 필요한 산출물이 없다.')
+        for p in missing:
+            print(f'   사실표 필수 누락: {p}')
+        for p in figless:
+            print(f'   도판 생성 필수 누락: {p}')
+        for f in nofig:
+            print(f'   원고 도판 누락: paper/{f}')
+        print('[verify] sh run_analysis.sh && sh build_paper.sh --figs 를 먼저 '
+              '실행하거나, 저장소에서 빠진 파일을 추가할 것.')
+        return False
+    return True
+
 
 def load_facts():
     """산출물에서만 읽는다. 여기에 손으로 적은 수치는 없다."""
@@ -540,6 +607,8 @@ def tonum(s):
 
 
 def main():
+    if not preflight():
+        return 1
     f = load_facts()
     def strip_comments(s):
         # LaTeX 주석은 PDF 에 들어가지 않는다. 주석을 읽으면 '보관용' 문구가
