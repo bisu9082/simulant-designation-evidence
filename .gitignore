@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 outputs/_log_*.txt
-outputs/*.npy
 outputs/*.zip
 paper/*.aux
 paper/*.log
