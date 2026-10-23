@@ -64,10 +64,10 @@ run_strict() {
 run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
            deltaE_premise.py deltaE_power.py rollback_c.py match_by_panel.py \
-           mde.py blockbalance.py stat_supplement.py stat_supplement2.py
+           mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py
 
 # 독성축. parse -> trainset -> 동일성검사 -> QSAR 순서를 지켜야 한다.
-run_strict parse_aegl.py build_tox_trainset.py
+run_strict parse_aegl.py build_tox_trainset.py cite_facts.py
 
 # 동일성 검사는 보고서다. FAIL 2건(Pentaborane 구조 불일치, 다성분 레코드)은
 # 원고가 제외했다고 적은 그 두 건이므로 비정상 종료로 파이프라인을 세우지

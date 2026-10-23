@@ -1,0 +1,13 @@
+space,a,b,d
+structural (A_rdkit),phosgene (CG),dichloromethane,6.0219
+structural (A_rdkit),phosgene (CG),ethyl acetate,3.9356
+structural (A_rdkit),VX,DPGME,11.8374
+structural (A_rdkit),VX,DMMP,11.9289
+electronic (B_electronic),phosgene (CG),dichloromethane,2.1814
+electronic (B_electronic),phosgene (CG),ethyl acetate,2.2842
+electronic (B_electronic),VX,DPGME,3.1498
+electronic (B_electronic),VX,DMMP,3.6369
+merged (C_merged),phosgene (CG),dichloromethane,6.4048
+merged (C_merged),phosgene (CG),ethyl acetate,4.5504
+merged (C_merged),VX,DPGME,12.2493
+merged (C_merged),VX,DMMP,12.471

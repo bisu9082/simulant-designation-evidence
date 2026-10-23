@@ -1,0 +1,97 @@
+{
+  "handoff_id": "HO-7",
+  "from_step": 7,
+  "to_step": 8,
+  "completed_at": "2026-10-10",
+  "gate_passed": true,
+  "gate_checklist": {
+    "layer1_arxiv": "N/A — 프리프린트 인용 0건",
+    "layer2_crossref_resolved": "74/74",
+    "layer3_semantic_scholar_indexed": "67/74",
+    "layer4_relevance_ge_0_5": "74/74",
+    "integrity_score": 0.984,
+    "threshold": 0.8,
+    "hallucinated": 0,
+    "removed_relevance_lt_0_5": 0,
+    "retraction_flags": 0
+  },
+  "citation_verification": {
+    "n_references_total": 74,
+    "n_added_this_step": 66,
+    "n_before": 8,
+    "n_citation_sites_in_text": 86,
+    "self_citations_used": 14,
+    "self_citation_rate": 0.189,
+    "self_citation_candidates_verified": 21,
+    "self_citation_reserve_unused": 7,
+    "selfcite_audit": {
+      "doi_resolved": "21/21",
+      "author_family_Kang": "21/21",
+      "author_given_Ku": "21/21",
+      "resolved_but_no_Kang_2026_07_19_failure_mode": 0,
+      "under_review_cited": 0
+    },
+    "rejected_search_artifacts": 9,
+    "rejected_types": [
+      "supporting-information DOI (.s00N)",
+      "ChemInform abstract",
+      "IUPAC Gold Book entry",
+      "ScienceOpen 'Review of' record",
+      "German-language Angewandte (ange.)",
+      "unrelated top hit"
+    ],
+    "method_statement_corrections": 5
+  },
+  "integrity_score": 0.984,
+  "paper_final": {
+    "tex": "paper/main.tex",
+    "bib": "paper/refs.bib",
+    "pdf": "paper/main.pdf",
+    "pages": 20,
+    "compile": "clean — undefined citations 0, uncited entries 0"
+  },
+  "unresolved": [
+    "[확인 필요] Chem. Rev. 2015 (Update 1 of: Destruction and Detection of CWA) 제1저자 Yoon Jeong Jang 이 본 논문 교신저자 본인인지. 동일인이면 자기인용 15/74 = 20.3%",
+    "[확인 필요] 자기인용 비율 18.9% (위 건 포함 시 20.3%) — JHM 심사 지적 가능, 축소 여부 Ku 판단",
+    "[확인 필요] Jang 교신저자 기관 이메일 (현재 gmail). Ku 주소는 기관메일 반영 완료",
+    "[확인 필요] JHM 담당 에디터 성함 (ScienceDirect robots 차단으로 미확인, 우회하지 않음)",
+    "[확인 필요] GF 공기중 기준치 (EPA 표 GD/GF 통합 열)",
+    "[확인 필요] d3(A/B/C/D → Novichok) 및 HN(HN-1/2/3) 동일성 매핑",
+    "[수집 불가] DMMP·DPGME 흡입독성 regulator-grade 값 (EPA 도출 거부)",
+    "[수집 불가] EPA CTX API (프록시 502 / DNS 실패)",
+    "[수집 불가] RDKit 버전 독립 concept DOI (DataCite 미확인) — DOI 없이 버전·URL 인용",
+    "[수행 필요] 추천 심사위원 소속·이메일 (cover_letter.tex 주석에 후보 4인, Ku 확인 필요)"
+  ],
+  "docx_report": "Step7_인용검증_및_투고산출물_완료보고서_20261010.docx",
+  "step7_deliverables": {
+    "highlights": {
+      "path": "submission/highlights.tex",
+      "n": 5,
+      "max_chars": 82,
+      "limit": 85
+    },
+    "cover_letter": {
+      "path": "submission/cover_letter.pdf",
+      "pages": 2,
+      "words": 798
+    },
+    "graphical_abstract": {
+      "path": "submission/graphical_abstract.png",
+      "px": "3382x1376",
+      "ratio": "2.46:1",
+      "elsevier_min_met": true,
+      "content": "실측만 — 680 전수 순열 귀무분포 2종 + 140종 충실도x안전성 평면"
+    },
+    "submission_package": "submission/ (manuscript.pdf, main.tex, refs.bib, cover_letter, highlights, GA, Fig 4종, raw data)"
+  },
+  "manuscript_format": {
+    "class": "elsarticle [1p,times]",
+    "bibstyle": "elsarticle-num",
+    "tables_inline": "표 4종을 첫 참조 문단 직후로 이동 (p6~p11)",
+    "overfull_hbox": 0,
+    "em_dash_in_body": 0,
+    "banned_ai_vocab": 0,
+    "citet_author_names_restored": 13
+  },
+  "step7_complete": true
+}

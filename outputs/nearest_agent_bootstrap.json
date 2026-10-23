@@ -1,0 +1,55 @@
+{
+ "n_boot": 1000,
+ "seed": 49374,
+ "panel": "descriptor_cache_xtb.csv",
+ "g_series": [
+  "cyclosarin (GF)",
+  "sarin (GB)",
+  "soman (GD)",
+  "tabun (GA)"
+ ],
+ "simulants": {
+  "DMMP": {
+   "counts": {
+    "sarin (GB)": 933,
+    "tabun (GA)": 57,
+    "chloropicrin (PS)": 6,
+    "sulfur mustard (HD)": 2,
+    "lewisite 1 (L)": 2
+   },
+   "top_agent": "sarin (GB)",
+   "top_pct": 93.3,
+   "g_series_pct": 99.0
+  },
+  "dichloromethane": {
+   "counts": {
+    "cyanogen chloride (CK)": 534,
+    "phosgene (CG)": 223,
+    "sulfur mustard (HD)": 151,
+    "lewisite 1 (L)": 54,
+    "hydrogen cyanide (AC)": 18,
+    "sarin (GB)": 14,
+    "chloropicrin (PS)": 6
+   },
+   "top_agent": "cyanogen chloride (CK)",
+   "top_pct": 53.4,
+   "g_series_pct": 1.4
+  },
+  "DPGME": {
+   "counts": {
+    "sulfur mustard (HD)": 470,
+    "cyclosarin (GF)": 234,
+    "sarin (GB)": 135,
+    "tabun (GA)": 98,
+    "lewisite 1 (L)": 18,
+    "phosgene (CG)": 16,
+    "chloropicrin (PS)": 14,
+    "cyanogen chloride (CK)": 11,
+    "hydrogen cyanide (AC)": 4
+   },
+   "top_agent": "sulfur mustard (HD)",
+   "top_pct": 47.0,
+   "g_series_pct": 46.7
+  }
+ }
+}

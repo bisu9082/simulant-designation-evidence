@@ -17,6 +17,12 @@ import os
 
 PATH = 'outputs/figure_annotations.json'
 
+# 2026-10-20. 등재부가 누적만 하고 지우지 않아, 폐기된 도판(Fig_panel,
+# Fig_qsar_failure)의 주석이 파일에 남아 검증 대상에 계속 들어갔다. 사라진
+# 패널의 구판 문자열이 본문 검사를 대신 통과시킬 수 있는 구멍이므로, 한
+# 프로세스에서 어떤 도판을 처음 기록할 때 그 도판의 기존 항목을 비운다.
+_STARTED = set()
+
 
 def record(figure, key, text):
     """도판 하나의 주석 한 덩어리를 기록한다."""
@@ -26,6 +32,9 @@ def record(figure, key, text):
             d = json.load(open(PATH))
         except Exception:
             d = {}
+    if figure not in _STARTED:
+        _STARTED.add(figure)
+        d[figure] = {}
     d.setdefault(figure, {})[key] = text
     json.dump(d, open(PATH, 'w'), indent=1, ensure_ascii=False)
     return text
