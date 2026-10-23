@@ -1,0 +1,258 @@
+status,formula,missing,cas,aegl_name,mw
+PASS,CCl4,,56-23-5,Carbon tetrachloride,153.8
+PASS,C2H8N2,,57-14-7,"1,1- Dimethyl hydrazine",60.1
+PASS,CH6N2,,60-34-4,Methyl hydrazine,46.072
+PASS,C6H7N,,62-53-3,Aniline,93.13
+ADVISORY,CHCl3,Cl:3>1,67-66-3,Chloroform,119.37
+PASS,C3H7NO,,68-12-2,"N,N-Dimethylformamide",73.09
+PASS,CH3Br,,74-83-9,Methyl bromide,94.94
+PASS,CH3Cl,,74-87-3,Methyl chloride,50.49
+PASS,CHN,,74-90-8,Hydrogen cyanide,27.025
+PASS,CH4S,,74-93-1,Methyl mercaptan,48.11
+PASS,C3H8,,74-98-6,Propane,44.1
+PASS,C2H3Cl,,75-01-4,Vinyl chloride,62.5
+PASS,C2H3N,,75-05-8,Acetonitrile,41.05
+PASS,C2H6S,,75-08-1,Ethyl mercaptan,62.14
+PASS,CS2,,75-15-0,Carbon disulfide,76.15
+PASS,C2H4O,,75-21-8,Ethylene oxide,44.05
+PASS,CCl2O,,75-44-5,Phosgene,98.91
+PASS,CH4Cl2Si,,75-54-7,Methyl dichlorosilane,115.03
+PASS,C3H7N,,75-55-8,Propylenimine,57.09
+PASS,C3H6O,,75-56-9,Propylene oxide,58.08
+PASS,C3H9ClSi,,75-77-4,Trimethyl chlorosilane,108.64
+PASS,C2H6Cl2Si,,75-78-5,Dimethyl dichlorosilane,129.06
+PASS,CH3Cl3Si,,75-79-6,Methyl trichlorosilane,149.47
+PASS,C4H7NO,,75-86-5,Acetone cyanohydrin,85.1
+PASS,C2H3Cl3Si,,75-94-5,Vinyl trichlorosilane,161.48
+PASS,C5H11N2O2P,,77-81-6,Agent GA (Tabun),162.13
+PASS,C4H7N,,78-82-0,Isobutyronitrile,69.11
+PASS,C4H6O,,78-85-3,Methacrylaldehyde,70.09
+PASS,C4H8O,,78-93-3,Methyl ethyl ketone,72.11
+PASS,C3H5ClO,,78-95-5,Chloroacetone,92.52
+PASS,C2H4O3,,79-21-0,Peracetic Acid,76.05
+PASS,C2H3ClO2,,79-22-1,Methyl chloroformate,94.5
+PASS,C12H10Cl2Si,,80-10-4,Diphenyl dichlorosilane,253.19
+PASS,C9H6N2O2,,91-08-7,"2,6-Toluenediisocyanate",174.16
+PASS,C7H16FO2P,,96-64-0,Agent GD (Soman),182.17
+PASS,C6H5Cl3Si,,98-13-5,Trichlorophenysilane,211.5
+PASS,C7H5N,,100-47-0,Benzonitrile,103.12
+PASS,C7H5NO,,103-71-9,Phenyl isocyanate,119.12
+PASS,C3H5ClO,,106-89-8,Epichlorohydrin,92.52
+PASS,C4H10,,106-97-8,Butane,58.12
+PASS,C3H4O,,107-02-8,Acrolein,56.06
+PASS,C2H5ClO,,107-07-3,Ethylene chlorohydrin (2-Chloroethanol),80.51
+PASS,C3H7N,,107-11-9,Allyl Amine,57.09
+PASS,C3H5N,,107-12-0,Propionitrile,55.08
+PASS,C3H3N,,107-13-1,Acrylonitrile,53.06
+PASS,C2H2ClN,,107-14-2,Chloroacetonitrile,75.5
+PASS,C2H8N2,,107-15-3,Ethylene diamine,60.1
+PASS,C3H6O,,107-18-6,Allyl alcohol,58.08
+PASS,C3H4O,,107-19-7,Propargyl alcohol,56.06
+PASS,C2H3ClO,,107-20-0,Chloroacetaldehyde,78.5
+PASS,C2H5ClO,,107-30-2,Chloromethyl methyl ether,80.51
+PASS,C3H5Cl3Si,,107-37-9,Allyl trichlorosilane,175.51
+PASS,C4H10FO2P,,107-44-8,Agent GB (Sarin),140.09
+PASS,C5H11Cl3Si,,107-72-2,Amy ltrichlorosilane,205.6
+PASS,C4H6O2,,108-05-4,Vinyl acetate,86.09
+PASS,C4H7ClO2,,108-23-6,Isopropyl chloroformate,122.55
+PASS,C7H8,,108-88-3,Toluene,92.14
+PASS,C6H5Cl,,108-90-7,Chlorobenzene,112.55
+PASS,C6H13N,,108-91-8,Cyclohexylamine,99.17
+PASS,C6H6S,,108-98-5,Phenyl mercaptan,110.18
+PASS,C4H7ClO2,,109-61-5,Propyl chloroformate,122.55
+PASS,C3H2N2,,109-77-3,Malononitrile,66.06
+PASS,C3H5NO,,109-90-0,Ethyl isocyanate,71.08
+PASS,C4H4O,,110-00-9,Furan,68.07
+PASS,C6H14,,110-54-3,Hexane,86.18
+PASS,C5H11N,,110-89-4,Piperidine,85.15
+PASS,C5H9NO,,111-36-4,n-Butyl isocyanate,99.13
+PASS,C18H37Cl3Si,,112-04-9,Octadecyl trichlorosilane,387.9
+PASS,C2H5Cl3Si,,115-21-9,Ethyl trichlorosilane,163.5
+PASS,C2F4,,116-14-3,Tetrafluoroethylene,100.01
+PASS,C4H6O,,123-73-9,trans-Crotonaldehyde,70.09
+PASS,CH3ClO2S,,124-63-0,Methanesulfonyl chloride,114.55
+PASS,C3H6Cl2Si,,124-70-9,Methylvinyl dichlorosilane,141.07
+PASS,C4H5N,,126-98-7,Methacrylonitrile,67.09
+PASS,C3H7Cl3Si,,141-57-1,Propyl trichlorosilane,177.53
+PASS,C8H18S,,141-59-3,t-Octyl mercaptan,146.3
+PASS,CNNa,,143-33-9,Sodium cyanide,49.007
+PASS,CKN,,151-50-8,Potassium cyanide,65.116
+PASS,C2H5N,,151-56-4,Ethylenimine,43.07
+PASS,C2H2Cl2,,156-59-2,"cis-1,2-Dichloroethylene",96.94
+PASS,C2H2Cl2,,156-60-5,"cis- and trans-1,2-Dichloroethylene",96.94
+PASS,H4N2,,302-01-2,Hydrazine,32.046
+PASS,C7H14FO2P,,329-99-7,GF Agent,180.16
+ADVISORY,CF2O,F:2>1,353-50-4,Carbonyl fluoride,66.007
+PASS,C2N2,,460-19-5,Cyanogen,52.03
+PASS,C2H2O,,463-51-4,Ketene,42.04
+PASS,C8H7ClO2,,501-53-1,Benzyl chloroformate,170.59
+PASS,C4H8Cl2S,,505-60-2,Sulfur Mustard,159.08
+PASS,CN4O8,,509-14-8,Tetranitromethane,196.03
+PASS,C2H8N2,,540-73-8,"1,2-Dimethyl hydrazine",60.1
+PASS,C2H2AsCl3,,541-25-3,Lewisite 1,207.31
+PASS,C3H5ClO2,,541-41-3,Ethyl chloroformate,108.52
+ADVISORY,C2H4Cl2O,Cl:2>1,542-88-1,Bis-chloromethyl ether,114.96
+PASS,C5H9ClO2,,543-27-1,Isobutyl chloroformate,136.58
+PASS,C2H3NS,,556-61-6,Methyl isothiocyanate,73.12
+PASS,C9H6N2O2,,584-84-9,"2,4-Toluene Diisocyanate",174.16
+PASS,C2CaN2,,592-01-8,Calcium cyanide,92.11
+PASS,C5H9ClO2,,592-34-7,n-Butyl chloroformate,136.58
+ADVISORY,CCl4S,Cl:4>1,594-42-3,Perchloromethyl mercaptan,185.9
+PASS,C3H5BrO,,598-31-2,Bromoacetone,136.98
+PASS,C2H3NO,,624-83-9,Methyl isocyanate,57.05
+PASS,CO,,630-08-0,Carbon monoxide,28.01
+PASS,C4H4O2,,674-82-8,Diketene,84.07
+PASS,C4H12O4Si,,681-84-5,Tetramethoxy silane,152.22
+PASS,C3F6O,,684-16-2,Hexafluoroacetone,166.02
+EXEMPT,C2H2F4,,811-97-2,HFC 134A,102.03
+PASS,C6H13Cl3Si,,928-65-4,Hexyltrichlorosilane,219.6
+PASS,CH5ClSi,,993-00-0,Methyl chlorosilane,80.59
+PASS,C2H7ClSi,,1066-35-9,Dimethyl chlorosilane,94.61
+PASS,Ca3P2,,1305-99-3,Calcium phosphide,182.18
+PASS,P2Zn3,,1314-84-7,Zinc phosphide,258.1
+PASS,C2H5Cl2O2P,,1498-51-7,Ethylphosphorodichloridate,162.94
+PASS,CH2Cl4Si,,1558-25-4,Chloromethyl trichlorosilane,183.9
+EXEMPT,C2H3Cl2F,,1717-00-6,HCFC 141b,116.95
+PASS,C4H10Cl2Si,,1719-53-5,Diethyl dichlorosilane,157.11
+PASS,C7H5ClO2,,1885-14-9,Phenyl chloroformate,156.56
+PASS,C3H10O3Si,,2487-90-3,Trimethoxysilane,122.19
+PASS,C10H5ClN2,,2698-41-1,Tear Gas,188.61
+PASS,C4H5ClO2,,2937-50-0,Allyl chloroformate,120.53
+PASS,C3H5ClOS,,2941-64-2,Ethylchlorothioformate,124.59
+PASS,C7H11NO,,3173-53-3,Cyclohexyl isocyanate,125.17
+PASS,C5H9ClO,,3282-30-2,Trimethylacetyl chloride,120.58
+PASS,H2Cl2Si,,4109-96-0,Dichlorosilane,101.0
+PASS,C4H6O,,4170-30-3,cis-Crotonaldehyde,70.09
+PASS,C12H25Cl3Si,,4484-72-4,Dodecyl trichlorosilane,303.8
+PASS,C8H17Cl3Si,,5283-66-9,Octyl trichlorosilane,247.7
+PASS,C9H19Cl3Si,,5283-67-0,Nonyl trichlorosilane,261.7
+PASS,C3H6N2O6,,6423-43-4,Propylene Glycol Dinitrate (main component of Otto Fuel 106602-80-6),166.09
+PASS,C21H23NO3,,6581-06-2,BZ,337.4
+PASS,O2S,,7446-09-5,Sulfur Dioxide,64.07
+PASS,C4H9Cl3Si,,7521-80-4,Butyl trichlorosilane,191.55
+UNPARSEABLE,,,7616-94-6,Perchloryl fluoride,102.45
+PASS,BF3,,7637-07-2,Boron trifluoride,67.81
+PASS,HCl,,7647-01-0,Hydrogen chloride,36.46
+PASS,HF,,7664-39-3,Hydrogen fluoride,20.0064
+PASS,H3N,,7664-41-7,Ammonia,17.031
+PASS,HNO3,,7697-37-2,Nitric Acid,63.013
+PASS,Cl3P,,7719-12-2,Phosphorus Trichloride,137.33
+PASS,Br2,,7726-95-6,Bromine,159.81
+PASS,F2,,7782-41-4,Fluorine,37.99680632
+PASS,Cl2,,7782-50-5,Chlorine,70.9
+PASS,H2S,,7783-06-4,Hydrogen sulfide,34.08
+PASS,H2Se,,7783-07-5,Hydrogen selenide,80.99
+PASS,F2O,,7783-41-7,Oxygen difluoride,53.996
+PASS,F6Te,,7783-80-4,Tellurium hexafluoride,241.6
+PASS,F6U,,7783-81-5,Uranium hexafluoride,352.0193
+PASS,H3As,,7784-42-1,Arsine,77.946
+UNPARSEABLE,,,7787-71-5,Bromine trifluoride,136.9
+UNPARSEABLE,,,7789-30-2,Bromine pentafluoride,174.9
+UNPARSEABLE,,,7790-91-2,Chlorine trifluoride,92.45
+ADVISORY,Cl2O2S,Cl:2>1,7791-25-5,Sulfuryl chloride,134.97
+PASS,H3P,,7803-51-2,Phosphine,33.998
+PASS,HCl3Si,,10025-78-2,Trichlorosilane,135.45
+ADVISORY,Cl3OP,Cl:3>1,10025-87-3,Phosphorus oxychloride,153.33
+PASS,Cl4Si,,10026-04-7,Tetrachlorosilane,169.9
+PASS,HBr,,10035-10-6,Hydrogen Bromide,80.91
+PASS,ClO2,,10049-04-4,Chlorine dioxide,67.45
+PASS,NO2,,10102-44-0,Nitrogen dioxide,46.006
+PASS,BBr3,,10294-33-4,Boron tribromide,250.53
+PASS,N2O4,,10544-72-6,Nitrogen Tetroxide ppm,92.011
+PASS,Mg3P2,,12057-74-8,Magnesium phosphide,134.86
+PASS,Na3P,,12058-85-4,Sodium phosphide,99.9430698
+PASS,P2Sr3,,12504-13-1,Strontium phosphide,324.8
+PASS,C4NiO4,,13463-39-3,Nickel carbonyl,170.73
+PASS,C5FeO5,,13463-40-6,Iron pentacarbonyl,195.9
+UNPARSEABLE,,,13637-63-3,Chlorine pentafluoride,130.44
+PASS,BrCl,,13863-41-7,Bromine chloride,115.36
+PASS,C5H9ClO2,,17462-58-7,sec-Butyl chloroformate,136.58
+PASS,H6B2,,19287-45-7,Diborane,27.67
+FAIL,C14H14NO4PS,B,19624-22-7,Pentaborane,323.31
+PASS,H2K3P+2,,20770-41-6,Potassium phosphide,150.285
+PASS,AlP,,20859-73-8,Aluminum phosphide,57.9553
+PASS,C9H17ClO2,,24468-13-1,2-Ethylhexylchloroformate,192.68
+FAIL,C6H7Cl5Si,Cl:5>3 (다성분 레코드 — 환산 분자량 오류),27137-85-5,Trichlorophenylsilane,284.5
+PASS,C11H26NO2PS,,50782-69-9,Agent VX,267.37
+PASS,CH2O,,50-00-0,Formaldehyde,30.026
+PASS,C5H11Cl2N,,51-75-2,Nitrogen Mustard-2,156.05
+PASS,C10H14NO5PS,,56-38-2,Parathion,291.26
+PASS,CH4O,,67-56-1,Methanol,32.042
+PASS,C3H6O,,67-64-1,Acetone,58.08
+PASS,C6H6,,71-43-2,Benzene,78.11
+PASS,C2H3Cl3,,71-55-6,"1,1,1-Trichloroethane",133.4
+PASS,CH5N,,74-89-5,Methyl amine,31.057
+PASS,C2H7N,,75-04-7,Ethylamine,45.08
+PASS,C2H4O,,75-07-0,Acetaldehyde,44.05
+ADVISORY,CH2Cl2,Cl:2>1,75-09-2,Methylene chloride,84.93
+PASS,C3H9N,,75-50-3,Trimethyl amine,59.11
+ADVISORY,CCl3NO2,Cl:3>1,76-06-2,Chloropicrin,164.37
+PASS,C2H6O4S,,77-78-1,Dimethyl sulfate,126.13
+PASS,C4H6O,,78-94-4,Methyl vinyl ketone,70.09
+PASS,C2HCl3,,79-01-6,Trichloroethylene,131.38
+PASS,C2H2Cl2O,,79-04-9,Chloroacetyl chloride,112.94
+PASS,C3H4O2,,79-10-7,Acrylic acid,72.06
+PASS,C2HCl3O,,79-36-7,Dichloroacetyl Chloride,147.38
+PASS,C2ClF3,,79-38-9,Trifluorochloroethylene,116.47
+PASS,C4H6O2,,79-41-4,Methacrylic acid,86.09
+PASS,C5H8O2,,80-62-6,Methyl methacrylate,100.12
+PASS,C9H12,,98-82-8,Cumene,120.19
+PASS,C8H10,,100-41-4,Ethyl benzene,106.16
+PASS,C8H8,,100-42-5,Styrene,104.15
+PASS,C4H8O,,106-88-7,"1,2-Butylene oxide",72.11
+PASS,C2H4Br2,,106-93-4,"1,2-Dibromoethane",187.86
+PASS,C4H6,,106-99-0,"1,3-Butadiene",54.09
+PASS,C3H5Cl,,107-05-1,Allyl chloride,76.52
+PASS,C3F6,,116-15-4,Hexafluoropropylene,150.02
+PASS,C3H9O3P,,121-45-9,Trimethyl phosphite,124.08
+PASS,C10H19O6PS2,,121-75-5,Malathion,330.4
+PASS,C3H6O,,123-38-6,Propionaldehyde,58.08
+PASS,C4H8O2,,123-91-1,"1,4-Dioxane",88.11
+PASS,C2H7N,,124-40-3,Dimethylamine,45.08
+PASS,C2Cl4,,127-18-4,Tetrachloroethylene,165.8
+PASS,C5H8O2,,140-88-5,Ethyl acrylate,100.12
+PASS,C7H12O2,,141-32-2,n-Butyl acrylate,128.17
+PASS,C8H10NO5PS,,298-00-0,Methyl parathion,263.21
+PASS,C7H17O2PS3,,298-02-2,Phorate,260.4
+ADVISORY,C4F8,F:8>1,382-21-8,Perfluoroisobutylene,200.03
+PASS,COS,,463-58-1,Carbonyl sulfide,60.08
+PASS,C6H13Cl2N,,538-07-8,Nitrogen Mustard-1,170.08
+PASS,C6H12Cl3N,,555-77-1,Nitrogen Mustard-3,204.5
+PASS,C12H9AsClN,,578-94-9,Adamsite,277.58
+PASS,CH3AsCl2,,593-89-5,Methyldichloroarsine,160.86
+PASS,C2H5AsCl2,,598-14-1,Ethyldichloroarsine,174.89
+PASS,C6H5AsCl2,,696-28-6,Phenyl dichloroarsine,222.93
+PASS,C12H10AsCl,,712-48-1,Diphenylchloroarsine,264.58
+PASS,C2H7O3P,,868-85-9,Dimethyl phosphite,110.05
+PASS,As2O3,,1327-53-3,Arsenic trioxide,197.841
+PASS,C5H12O,,1634-04-4,Methyl-tertiary-butyl ether (MTBE),88.15
+PASS,CHCl2NO,,1794-86-1,Phosgene oxime,113.93
+ADVISORY,F2O2S,F:2>1,2699-79-8,Sulfuryl fluoride,102.06
+PASS,Hg,,7439-97-6,Mercury Vapor,200.59
+PASS,Cd,,7440-43-9,Cadmium,112.41
+PASS,O3S,,7446-11-9,Sulfur trioxide,80.07
+PASS,Cl4Ti,,7550-45-0,Titanium tetrachloride,189.7
+PASS,H2O4S,,7664-93-9,Sulfuric acid,98.08
+ADVISORY,Cl2OS,Cl:2>1,7719-09-7,Thionyl chloride,118.97
+PASS,H4Ge,,7782-65-2,Germane,76.66
+PASS,F3N,,7783-54-2,Nitrogen trifluoride,71.002
+PASS,F4Si,,7783-61-1,Silicon tetrafluoride,104.079
+PASS,F6Se,,7783-79-1,Selenium hexafluoride,192.96
+PASS,HClO3S,,7790-94-5,Chlorosulfonic acid,116.53
+PASS,H3Sb,,7803-52-3,Stibine,124.784
+PASS,H4Si,,7803-62-5,Silane,32.117
+PASS,H2O7S2,,8014-95-7,Oleum,178.15
+PASS,Cl2S2,,10025-67-9,Disulfur dichloride,135.0
+PASS,HI,,10034-85-2,Hydrogen Iodide,127.9124
+PASS,O4Os,,20816-12-0,Osmium tetroxide,254.2
+PASS,C4H7Cl2O4P,,62-73-7,Dichlorvos,220.97
+PASS,CH3I,,74-88-4,Methyl iodide,141.939
+PASS,C7H14N2O2S,,116-06-3,Aldicarb,190.27
+PASS,C8H16NO5P,,141-66-2,Dicrotophos,237.19
+PASS,C7H14NO5P,,6923-22-4,Monocrotophos,223.16
+PASS,P,,7723-14-0,Red Phosphorus,30.973762
+PASS,C2H8NO2PS,,10265-92-6,Methamidophos,141.13
+PASS,C10H19ClNO5P,,13171-21-6,Phosphamidon,299.69
+PASS,C5H10N2O2S,,16752-77-5,Methomyl,162.21
+PASS,C13H22NO3PS,,22224-92-6,Fenamiphos,303.36
+PASS,C7H13N3O3S,,23135-22-0,Oxamyl,219.26

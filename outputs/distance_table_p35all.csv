@@ -1,0 +1,34 @@
+condition,real_agent,nearest_simulant,d_simulant,nearest_interferent,d_interferent,interferent_closer
+A_rdkit,sarin (GB),DFP,3.742728652237169,dichlorvos,6.000452744515395,False
+A_rdkit,soman (GD),DFP,3.439225672518482,dichlorvos,5.622695634341743,False
+A_rdkit,tabun (GA),DCNP,6.151729980815069,dichlorvos,8.777539722332211,False
+A_rdkit,sulfur mustard (HD),CEES,1.8503335765368392,n-hexane,4.62809698732931,False
+A_rdkit,lewisite 1 (L),CEES,7.981973332414276,p-dichlorobenzene,7.43193544647271,True
+A_rdkit,hydrogen cyanide (AC),dichloromethane,6.050603683336057,acetonitrile,3.362121782772294,True
+A_rdkit,cyanogen chloride (CK),dichloromethane,5.382728875984486,acetonitrile,3.381333541370323,True
+A_rdkit,phosgene (CG),dichloromethane,5.699656825295733,ethyl acetate,3.9203530651352434,True
+A_rdkit,chloropicrin (PS),DCP,9.543042562780911,chloroform,8.620844110069447,True
+A_rdkit,cyclosarin (GF),DFP,4.054987734403726,dichlorvos,5.702777186788888,False
+A_rdkit,VX,DCP,8.858316450839768,malathion,7.871825961546187,True
+B_electronic,sarin (GB),DFP,0.27997193527039427,acetonitrile,1.219202621323509,False
+B_electronic,soman (GD),DFP,0.3834985603816309,acetonitrile,1.1779055226293556,False
+B_electronic,tabun (GA),DCNP,1.3355270032032034,dichlorvos,0.45761486836129955,True
+B_electronic,sulfur mustard (HD),CEES,0.7808482236920092,acetone,1.0268752953089837,False
+B_electronic,lewisite 1 (L),methyl salicylate,1.0113940723497739,p-dichlorobenzene,0.8469031716420856,True
+B_electronic,hydrogen cyanide (AC),dichloromethane,0.9343702560769025,chloroform,1.0518221460848356,False
+B_electronic,cyanogen chloride (CK),DCNP,1.1869389858139365,acetonitrile,1.3903777083119262,False
+B_electronic,phosgene (CG),dichloromethane,2.225260781334983,chloroform,1.465082107368784,True
+B_electronic,chloropicrin (PS),methyl salicylate,2.982724048734955,chloroform,3.1174794570062767,False
+B_electronic,cyclosarin (GF),DFP,0.6326387568129119,acetonitrile,1.169720347800073,False
+B_electronic,VX,CEES,1.4316964415748323,malathion,1.505502956683522,False
+C_merged,sarin (GB),DFP,3.7531855867803965,dichlorvos,6.410907225505158,False
+C_merged,soman (GD),DFP,3.460541051963549,dichlorvos,6.021268513993021,False
+C_merged,tabun (GA),DCNP,6.295030908037219,dichlorvos,8.789460446743313,False
+C_merged,sulfur mustard (HD),CEES,2.0083471544786717,n-hexane,5.881841053261769,False
+C_merged,lewisite 1 (L),CEES,8.26760182637946,p-dichlorobenzene,7.4800340549141175,True
+C_merged,hydrogen cyanide (AC),dichloromethane,6.12232412636256,acetonitrile,3.572830486275646,True
+C_merged,cyanogen chloride (CK),dichloromethane,5.617043510556834,acetonitrile,3.656031549339624,True
+C_merged,phosgene (CG),dichloromethane,6.11864964441402,ethyl acetate,4.541886236333937,True
+C_merged,chloropicrin (PS),DCP,10.455162384067847,chloroform,9.167204117667241,True
+C_merged,cyclosarin (GF),DFP,4.104041583949467,dichlorvos,6.076557761522718,False
+C_merged,VX,DCP,9.70304071307496,malathion,8.014498307533378,True

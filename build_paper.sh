@@ -11,15 +11,15 @@ set -e
 cd "$(dirname "$0")"
 
 if [ "$1" = "--figs" ]; then
-  for s in make_fig_main.py make_fig_panel.py make_fig_toxicity.py \
-           make_fig_qsar.py make_fig_h1.py make_fig_electronic.py; do
+  for s in make_fig_main.py make_fig_toxicity.py make_fig_h1.py \
+           make_fig_electronic.py make_fig_mde.py make_ga.py; do
     echo "[fig] $s"
     python3 "$s" > /dev/null
   done
 fi
 
-for f in Fig_main.png Fig_panel.png Fig_toxicity.png Fig_qsar_failure.png \
-         Fig_h1.png; do
+for f in Fig_main.png Fig_spaces.png Fig_toxicity.png Fig_plocal.png \
+         Fig_h1.png Fig_mde.png; do
   if [ -f "outputs/$f" ]; then
     cp -p "outputs/$f" "paper/$f"
   else

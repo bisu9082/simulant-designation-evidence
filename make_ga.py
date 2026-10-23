@@ -5,6 +5,8 @@ C   = 충실도 x 안전성 평면 (n=140, 실측 양축)"""
 import json
 import numpy as np
 import pandas as pd
+
+import fig_annot
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -19,6 +21,11 @@ plt.rcParams.update({'font.family': 'sans-serif', 'axes.facecolor': 'white',
 B = json.load(open('outputs/sanity_checks.json'))['sanity_baseline']
 H = json.load(open('outputs/h1_summary.json'))
 D = pd.read_csv('outputs/h1_candidates.csv')
+# 2026-10-22. 종전에는 패널 A 의 평결이 'beats chance' 라는 문자열 상수였다.
+# 그 0.028 은 명목값이고 18개 검정 보정 뒤에는 0.159 로, 본문 Table 1 이
+# 그렇게 적는다. 보정값을 산출물에서 읽어 평결과 함께 그린다.
+Q28 = json.load(open('outputs/stat_supplement.json'))['family'][
+    'panel28_incumbent3']['bh_all_min_q']
 
 fig = plt.figure(figsize=(17.5, 7.0))
 gs = fig.add_gridspec(1, 3, left=0.052, right=0.988, top=0.700, bottom=0.115,
@@ -35,7 +42,7 @@ def dress(a):
     a.tick_params(labelsize=FS_TK)
 
 
-def null_panel(a, cond, title, verdict, ok, tx):
+def null_panel(a, cond, title, verdict, ok, tx, note=None):
     null = np.load(f'outputs/_null_{cond}.npy')
     obs = B[cond]['observed_diff']
     p = B[cond]['p_exact']
@@ -61,11 +68,17 @@ def null_panel(a, cond, title, verdict, ok, tx):
            clip_on=False)
     a.text(0.62, 0.945, f'exact $p$ = {p:.3f}', transform=a.transAxes,
            fontsize=FS_N + 2, color=C_INK, ha='center', va='center')
+    if note:
+        a.text(0.62, 0.862, note, transform=a.transAxes, fontsize=FS_N - 4,
+               color='#666666', ha='center', va='center')
     dress(a)
 
 
 null_panel(ax, 'A_rdkit', 'judged in structural space',
-           'beats chance', True, 0.26)
+           'beats chance, uncorrected', True, 0.26,
+           note=fig_annot.record(
+               'graphical_abstract', 'panel_a',
+               f'corrected over the 18 tests: $q$ = {Q28:.3f}'))
 null_panel(bx, 'B_electronic', 'judged in electronic space',
            'no better than chance', False, 0.52)
 
@@ -91,7 +104,9 @@ cx.set_xlim(XMIN, XMAX)
 cx.set_ylim(YLO, YHI)
 cx.set_xticks([0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0])
 cx.invert_xaxis()
-cx.set_title('the two axes are independent', fontsize=FS_T, fontweight='bold',
+# 'independent' 는 본문이 철회한 주장이다. 신뢰구간은 선택을 제약할 만한
+# 상충을 배제할 뿐 독립을 보이지 않는다 (2026-10-22).
+cx.set_title('no monotonic association', fontsize=FS_T, fontweight='bold',
              color=C_INK, pad=44)
 cx.set_xlabel('fidelity: electronic distance to the nearest agent\n'
               r'$\longrightarrow$  more faithful', fontsize=FS_AX - 3, labelpad=8)
@@ -109,11 +124,12 @@ cx.scatter(_best.fidelity_dist, _best.y_tox, s=170, facecolors='none',
            label=f'clears the relaxed bar ({len(_best)})')
 
 cx.text(0.030, 0.715,
+        fig_annot.record('graphical_abstract', 'panel_c',
         f"Spearman $r$ = {H['spearman_r']:+.3f}   "
         f"95% CI [{H['spearman_ci'][0]:+.3f}, {H['spearman_ci'][1]:+.3f}]   "
         f"$n$ = {H['n_candidates']}\n"
         f"faithful + safe: {_strict} at the incumbent simulant's own bar,\n"
-        f"{len(_best)} one order of magnitude below it",
+        f"{len(_best)} one order of magnitude below it"),
         transform=cx.transAxes, fontsize=FS_N - 4, color=C_INK, ha='left',
         va='top', zorder=12,
         bbox=dict(fc='white', ec=C_INK, boxstyle='round,pad=0.40', alpha=1.0))
@@ -128,7 +144,7 @@ fig.text(0.5, 0.945,
          fontsize=28, fontweight='bold', color=C_INK, ha='center', va='center')
 fig.text(0.5, 0.865,
          'The same eleven agents and three designated simulants, scored two ways.  '
-         'Safety is a third, unlinked axis.',
+         'Safety is a third axis, and it does not track fidelity.',
          fontsize=17, color='#555555', ha='center', va='center')
 
 fig.savefig('outputs/graphical_abstract.png', dpi=190, bbox_inches='tight',

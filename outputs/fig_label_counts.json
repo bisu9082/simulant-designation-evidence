@@ -1,0 +1,22 @@
+{
+ "n_heldout": 20,
+ "n_labelled": 13,
+ "n_unlabelled": 7,
+ "n_from_panel": 10,
+ "n_other_labelled": 3,
+ "labelled_codes": [
+  "AC",
+  "CG",
+  "GA",
+  "GD",
+  "GB",
+  "GF",
+  "HD",
+  "L",
+  "VX",
+  "HN-2",
+  "PS",
+  "HN-1",
+  "HN-3"
+ ]
+}

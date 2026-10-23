@@ -1,0 +1,63 @@
+{
+ "panel": "panel35_incumbent3_plus_lit5_plus_pesticides2",
+ "n_simulants": 10,
+ "simulant_names": [
+  "CEES",
+  "DCNP",
+  "DCP",
+  "DFP",
+  "DMMP",
+  "DPGME",
+  "dichloromethane",
+  "dichlorvos",
+  "malathion",
+  "methyl salicylate"
+ ],
+ "spaces": {
+  "structural": {
+   "p": {
+    "mean_diff": 0.012819846057832329,
+    "median_diff": 6.169515861264415e-05,
+    "mean_logratio": 0.05454871776045554,
+    "mean_dsim": 0.2511145918737788,
+    "n_closer": 0.3175923999722627,
+    "n_valid": 0.26778656126482214
+   },
+   "n_perm": 1961256,
+   "nn_median": 3.2809742067224974,
+   "n_valid": 5,
+   "n_dims": 38
+  },
+  "electronic3": {
+   "p": {
+    "mean_diff": 0.0891749980624661,
+    "median_diff": 0.052617812259082956,
+    "mean_logratio": 0.05888522457037735,
+    "mean_dsim": 0.08556455659026664,
+    "n_closer": 0.0663758326297026,
+    "n_valid": 0.05495458012620484
+   },
+   "n_perm": 1961256,
+   "nn_median": 0.6253520176527663,
+   "n_valid": 7,
+   "n_dims": 3
+  },
+  "merged": {
+   "p": {
+    "mean_diff": 0.004891253360091696,
+    "median_diff": 6.985319611514254e-05,
+    "mean_logratio": 0.035055597025579525,
+    "mean_dsim": 0.16637450694860845,
+    "n_closer": 0.3175923999722627,
+    "n_valid": 0.26778656126482214
+   },
+   "n_perm": 1961256,
+   "nn_median": 3.4987592509640453,
+   "n_valid": 5,
+   "n_dims": 41
+  }
+ },
+ "min_p": 6.169515861264415e-05,
+ "bh_min_q": 0.0006286787650362828,
+ "n_sig_bh": 1
+}

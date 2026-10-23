@@ -185,7 +185,8 @@ def whitened_control(path, sim_classes, label):
             ps.append(float((col <= col[ti]).sum() / len(col)))
         ps = np.array(ps)
         qs = np.percentile(ps, [5, 25, 50, 75, 95])
-        out[tag] = dict(n_draws=N_RANDSUB, frac_below_05=float((ps < 0.05).mean()),
+        out[tag] = dict(n_draws=N_RANDSUB, p_values=[float(v) for v in ps],
+                        frac_below_05=float((ps < 0.05).mean()),
                         quantiles=dict(zip(['q05', 'q25', 'q50', 'q75', 'q95'],
                                            [float(v) for v in qs])),
                         mc_se_pct=float(100 * np.sqrt(
@@ -269,6 +270,20 @@ if __name__ == '__main__':
     print('\n  2000회 분포에서의 관측 백분위:')
     for k, v in res['percentiles_2000'].items():
         print(f'    {k:<14} {v:.1f}%')
+
+    # 2026-10-20. 종전에는 백분위만 남기고 2000개 p 를 버렸다. 본문 §3.2 의
+    # '관측값은 고를 수 있었던 부분공간 중 평범한 한 장' 이라는 주장을 그림으로
+    # 보이려면 분포 자체가 필요하다.
+    with open('outputs/subspace_pvalues.json', 'w') as fh:
+        json.dump({'n_draws': N_RANDSUB, 'seed': SEED,
+                   'raw': w28['raw']['p_values'],
+                   'whitened': w28['whitened']['p_values'],
+                   'observed': {'struct_full': 0.0279, 'struct_pc3': 0.0044,
+                                'electronic': 0.2750},
+                   'percentiles': res['percentiles_2000']}, fh)
+    print(f'  [subspace] outputs/subspace_pvalues.json 기록 '
+          f'(raw {len(w28["raw"]["p_values"])}, '
+          f'whitened {len(w28["whitened"]["p_values"])})')
 
     with open('outputs/dim_percentiles.json', 'w') as fh:
         json.dump(dict(struct_full=res['percentiles_2000']['struct_full'],

@@ -417,7 +417,7 @@ of the design, with sarin the one case where the two cannot be separated.
 
 \begin{figure}[!htb]
 \centering
-\includegraphics[width=0.86\textwidth]{Fig_mde.png}
+\includegraphics[width=\textwidth]{Fig_mde.png}
 \caption{What the permutation test could have detected. One-sided exact $p$ for
 the mean-difference statistic as the incumbent simulants are moved $\delta$
 typical nearest-neighbour separations closer to the eleven agents, with the rest
@@ -426,6 +426,20 @@ primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.22$. The shaded
 band spans that value and the median deficit the incumbent compounds actually
 carry, 0.46; the deficit falls below the detectable value only at sarin.}
 \label{fig:mde}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{Fig_plocal.png}
+\caption{Two quantities that sit outside every distance used in this work.
+(a) Local electrophilicity against Mulliken charge at phosphorus for the six
+phosphorus-bearing compounds (Section~\ref{res:plocal}). (b) The Parr
+electrophilicity index, an exact function of the orbital energies that enter the
+electronic space, which itself enters no distance anywhere in this work
+(Section~\ref{M-meth:spaces}) and on which the three nerve agents rank lowest of
+the eleven agents. The principal components of the two spaces are in
+Figure~\ref{M-fig:spaces}a and b.}
+\label{fig:plocal}
 \end{figure}
 
 \subsection{Local reactivity at phosphorus}
@@ -507,20 +521,6 @@ $\omega$ responds to the lowest $\pi^{*}$ orbital wherever it sits, the nitrile
 in tabun or the sulfur lone pair raising the HOMO in VX, and it has no particular
 connection to phosphorus. Global electrophilicity should not be used as a
 reactivity axis for this compound class.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{Fig_toxicity.png}
-\caption{The measured safety axis and its gaps. (a) EPA AEGL-3 at 10~min on a
-logarithmic scale for the nineteen compounds that have one. The incumbent
-simulant dichloromethane sits near the safe end but is not the safest: methanol
-and n-hexane both score higher. Five of the nineteen values come from the
-agency's own footnotes rather than from the table cell, because they exceed half
-the lower explosive limit. (b) The nine compounds with no regulator-grade acute
-inhalation value, with the reason for each. DMMP, which supplies every valid
-match in this study, is among them.}
-\label{fig:tox}
-\end{figure}
 
 \subsection{What the array actually measures}
 \label{res:arraydetail}
@@ -633,7 +633,7 @@ are written to that limit.
 \subsection{The measured safety axis, and the holes in it}
 
 Nineteen of the twenty-eight compounds have an AEGL-3 at 10~min
-(Fig.~\ref{fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
+(Fig.~\ref{M-fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
 sarin (0.367), cyclosarin (0.391), tabun (0.729), sulfur mustard (3.84),
 lewisite~1 (3.9), chloropicrin (13.4), phosgene (14.6), hydrogen cyanide (29.8),
 acetonitrile (403), chloroform (19\,530), benzene (30\,990), p-xylene (31\,264),
@@ -684,25 +684,11 @@ our conversion from the published parts-per-million value gives
 compound names rather than on registry numbers can miss it;
 Section~\ref{meth:aegl} describes the CAS-keyed procedure used here.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{Fig_qsar_failure.png}
-\caption{An AEGL-trained model cannot interpolate the missing values.
-(a) Out-of-fold predictions for the 230 training chemicals, with the twenty
-military agents held out of training overlaid; arrows run from the measured
-value to the prediction, and every agent lies above the diagonal, that is, is
-predicted safer than it is. (b) Prediction error against applicability-domain
-distance. Every one of the twenty is wrong by between 0.40 and 3.42 log units,
-and fourteen of them pass the domain check, the worst of those fourteen being
-wrong by 2.68 log units. The dotted line marks where DMMP sits.}
-\label{fig:qsar}
-\end{figure}
-
 \subsection{A QSAR cannot fill the gaps}
 \label{res:qsar}
 
 On the training distribution the model works. The random forest
-(Fig.~\ref{fig:qsar}) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
+(Fig.~\ref{M-fig:tox}c and d) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
 $\log_{10}$ units (95\% CI 0.830--1.020) against a training-mean baseline of
 1.271 (1.175--1.365) and a logP-plus-molecular-weight linear baseline of 1.225.
 The intervals for the model and the mean baseline do not overlap, and the

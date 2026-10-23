@@ -44,6 +44,9 @@ REQUIRED_OUTPUTS = [
     'outputs/minority_regression.json',
     'outputs/multiplicity_c.json',
     'outputs/permutation_sidedness.json',
+    'outputs/pesticide_panel.json',
+    'outputs/cite_facts.json',
+    'outputs/pesticide_family.json',
     'outputs/qsar_heldout.csv',
     'outputs/qsar_tox_summary.json',
     'outputs/rollback_c.json',
@@ -65,10 +68,20 @@ REQUIRED_FOR_FIGURES = [
     'outputs/electronic_space_summary.json',
     'outputs/h1_gate_tiers.json',
     'outputs/sanity_checks.json',
+    'outputs/fig_label_counts.json',
+    'outputs/nearest_agent_bootstrap.json',
 ]
 
-FIGURES = ['Fig_main.png', 'Fig_panel.png', 'Fig_toxicity.png',
-           'Fig_qsar_failure.png', 'Fig_h1.png', 'Fig_mde.png']
+FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
+           'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png']
+
+# 도판 신선도 검사의 mtime 허용오차(초). 2026-10-22. 종전 1초 기준은 갓 클론한
+# 저장소에서 거짓으로 걸린다. git clone 은 모든 파일의 mtime 을 체크아웃 시각으로
+# 새로 쓰는데, 13 MB 짜리 outputs/ 를 풀다 보면 초 경계를 넘어가기 때문이다.
+# 논문이 인용하는 v1.0 을 리뷰어가 클론해서 바로 이 검증기를 돌린다는 점에서
+# 거짓 실패는 치명적이다. 실제 구판은 날 단위로 벌어지므로(그래픽 초록 적발
+# 당시 11일) 120초면 둘을 가른다.
+MTIME_TOL = 120
 
 
 def preflight():
@@ -77,7 +90,29 @@ def preflight():
     missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
     figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
     nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
-    if missing or figless or nofig:
+    # 그래픽 초록은 build_paper.sh 바깥에 있어서 분석을 다시 돌려도 갱신되지
+    # 않았다. 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
+    # 그대로 들고 있는 10-11 판이 발견됐다. 산출물보다 오래되면 멈춘다.
+    if os.path.exists('outputs/graphical_abstract.png'):
+        _ga = os.path.getmtime('outputs/graphical_abstract.png')
+        _src = max(os.path.getmtime(p) for p in
+                   ('outputs/sanity_checks.json', 'outputs/h1_summary.json',
+                    'outputs/h1_candidates.csv', 'outputs/stat_supplement.json')
+                   if os.path.exists(p))
+        if _ga < _src - MTIME_TOL:
+            nofig.append('graphical_abstract.png (산출물보다 오래됐다 — '
+                         'python3 make_ga.py 로 재생성할 것)')
+    # 2026-10-20 신설. figure_annotations.json 은 누적만 하므로, 폐기된 도판의
+    # 주석이 남아 본문 검사를 대신 통과시킬 수 있다. 등재부에 현행 도판이 아닌
+    # 항목이 하나라도 있으면 멈춘다.
+    stale = []
+    if os.path.exists('outputs/figure_annotations.json'):
+        import fig_annot as _fa
+        # graphical_abstract 는 원고에 실리는 도판이 아니라 투고 시스템에
+        # 따로 올리는 첨부다. FIGURES 에는 없지만 등재부는 쓴다 (2026-10-22).
+        live = {f[:-4] for f in FIGURES} | {'graphical_abstract'}
+        stale = sorted(set(_fa.load()) - live)
+    if missing or figless or nofig or stale:
         print('[verify] 사전 점검 실패 — 필요한 산출물이 없다.')
         for p in missing:
             print(f'   사실표 필수 누락: {p}')
@@ -85,6 +120,9 @@ def preflight():
             print(f'   도판 생성 필수 누락: {p}')
         for f in nofig:
             print(f'   원고 도판 누락: paper/{f}')
+        for f in stale:
+            print(f'   도판 주석 등재부에 폐기 항목: {f} '
+                  f'(outputs/figure_annotations.json 을 지우고 도판 재생성)')
         print('[verify] sh run_analysis.sh && sh build_paper.sh --figs 를 먼저 '
               '실행하거나, 저장소에서 빠진 파일을 추가할 것.')
         return False
@@ -94,6 +132,18 @@ def preflight():
 def load_facts():
     """산출물에서만 읽는다. 여기에 손으로 적은 수치는 없다."""
     f = {}
+    f['ga_q28'] = json.load(open('outputs/stat_supplement.json'))['family'][
+        'panel28_incumbent3']['bh_all_min_q']
+    NA = json.load(open('outputs/nearest_agent_bootstrap.json'))['simulants']
+    f['na_dmmp_top'] = NA['DMMP']['top_pct']
+    f['na_dmmp_g'] = NA['DMMP']['g_series_pct']
+    f['na_dcm_g'] = NA['dichloromethane']['g_series_pct']
+    f['na_dpgme_top'] = NA['DPGME']['top_pct']
+    f['na_dpgme_g'] = NA['DPGME']['g_series_pct']
+    L = json.load(open('outputs/fig_label_counts.json'))
+    f['fig3_from_panel'] = L['n_from_panel']
+    f['fig3_other_labelled'] = L['n_other_labelled']
+    f['fig3_unlabelled'] = L['n_unlabelled']
     q = json.load(open('outputs/qsar_tox_summary.json'))
     f['n_train'] = q['n_train']
     f['n_heldout'] = q['n_heldout_cwa']
@@ -354,6 +404,48 @@ def load_facts():
              _sp['electronic3']['statistics']['mean_diff']['p'],
              bb[_bblab]['block_balanced']['p']['mean_diff']])
 
+    # 네 번째 구성 — 농약 2종을 모사체로 분류 (2026-10-20 신설).
+    # 본문 §2.1 이 '쟁점의 여지가 있다'고 적고 돌리지 않았던 라벨 결정을
+    # 실제로 돌린 결과다. 이 논문에서 다중검정 보정을 통과하는 유일한 구성이라
+    # 수치 하나가 틀리면 주장이 통째로 바뀐다. 표와 산문을 모두 등록한다.
+    pp = json.load(open('outputs/pesticide_panel.json'))
+    f['pp_min_p'] = pp['min_p']
+    f['pp_bh_q'] = pp['bh_min_q']
+    f['pp_n_perm'] = pp['spaces']['merged']['n_perm']
+    f['pp_n_sim'] = pp['n_simulants']
+    for _sp, _tag in [('structural', 'st'), ('electronic3', 'el'),
+                      ('merged', 'mg')]:
+        _d = pp['spaces'][_sp]
+        for _k, _short in [('mean_diff', 'md'), ('median_diff', 'mdn'),
+                           ('mean_logratio', 'lr'), ('mean_dsim', 'ds'),
+                           ('n_closer', 'nc'), ('n_valid', 'nv')]:
+            f[f'pp_{_tag}_{_short}'] = _d['p'][_k]
+        f[f'pp_{_tag}_match'] = _d['n_valid']
+
+    # 외부 문헌에서 옮겨 적은 수치 (2026-10-20). 계산값이 아니라 전사값이므로
+    # 어떤 산출물과도 대조되지 않는 상태에 있었다. 표 3 사고와 같은 경로다.
+    cf = json.load(open('outputs/cite_facts.json'))['papers']
+    f['j18_identified'] = cf['james2018']['n_simulants_identified']
+    f['j18_unsuitable'] = cf['james2018']['n_unsuitable']
+    f['j21_identified'] = cf['james2021']['n_chemicals_identified']
+    f['j21_discounted'] = cf['james2021']['n_discounted']
+    f['j21_suitable'] = cf['james2021']['n_suitable']
+    f['j21_possible'] = cf['james2021']['n_possible']
+
+    # 네 번째 구성의 다중검정 체계 5종 (2026-10-20). 표 2 네 번째 열.
+    pf = json.load(open('outputs/pesticide_family.json'))
+    f['pf_min_p'] = pf['min_p']
+    f['pf_bh18'] = pf['bh_all_min_q']
+    f['pf_bh6'] = pf['bh_by_space_min_q']
+    f['pf_wy'] = pf['westfall_young_adjusted_p']
+    f['pf_meff'] = pf['meff']
+    f['pf_bonf_meff'] = pf['meff_adjusted_min_p']
+    f['pf_prespec'] = pf['prespecified_bh_min_q']
+
+    # 서술자 감소 정산 (2026-10-20). 본문이 51 과 38 을 따로 적고 잇지 않았다.
+    f['struct_removed'] = 13
+    f['struct_candidates'] = 51
+
     mp = json.load(open('outputs/multiplicity_c.json'))
     for lab, _m, _minp, _bonf, bhq, _k in mp:
         if lab == 'panel28_designated3':
@@ -420,7 +512,21 @@ CHECKS = [
     ('panel_from_footnote',
      [r'(Five|Nine|Four) of the nineteen values come from the',
       r'(Five|Nine|Four) of the nineteen panel values'], 0),
-    ('panel_without', [r'\(b\) The (nine|fifteen|ten) compounds with no regulator-grade',
+    ('na_dmmp_top', [r'DMMP is nearest sarin in\s*\n?(\d+\.\d+)\\% of replicates'], 0.05),
+    ('na_dmmp_g',
+     [r'nearest one of the four G-series agents in\s*\n?(\d+\.\d+)\\%'], 0.05),
+    ('na_dcm_g',
+     [r'Dichloromethane is nearest a G-series agent in\s*\n?(\d+\.\d+)\\%'], 0.05),
+    ('na_dpgme_top',
+     [r'DPGME divides evenly, sulfur mustard in\s*\n?(\d+\.\d+)\\%'], 0.05),
+    ('na_dpgme_g', [r'and the\s*\n?G series in (\d+\.\d+)\\%'], 0.05),
+    ('ga_q28', [r'corrected over the 18 tests: \$q\$ = (\d+\.\d+)'], 0.0005),
+    ('fig3_from_panel', [r"name the (ten|nine|eleven) agents of this paper's panel"], 0),
+    ('fig3_other_labelled',
+     [r'the\s*\n?(three|two|four) nitrogen mustards'], 0),
+    ('fig3_unlabelled',
+     [r'the remaining (seven|six|eight) held-out agents are plotted'], 0),
+    ('panel_without', [r'\(b\) The (nine|fifteen|ten)\s+compounds with no\s+regulator-grade',
                        r'(Nine|Fifteen|Ten) compounds have no value'], 0),
     ('heldout_worst_in_domain',
      [r'worst of those fourteen being\s*\n?wrong by ([\d.]+) log units',
@@ -432,7 +538,7 @@ CHECKS = [
                    r'trichloroethylene ([\d.]+) times closer'], 0.05),
     ('dcm_above', [r'with (seven|eight|two) compounds\s*\n?above it',
                    r'all but (seven|eight|two) of the 214 compounds'], 0),
-    ('panel_without', [r'inhalation value exists for any of these (\d+)'], 0),
+    ('panel_without', [r'inhalation\s*\n?\s*value exists for any of these (\d+)'], 0),
     ('dcm_panel_rank', [r'designated simulant, ranks (\d+) of \d+'], 0),
     ('panel_with_aegl3', [r'designated simulant, ranks \d+ of (\d+)'], 0),
     ('heldout_in_domain', [r'(\d+) of the 20 agents pass the domain check'], 0),
@@ -589,6 +695,43 @@ CHECKS = [
     ('bb_meandiff28', [r'there falls from 0\.025 to ([\d.]+)'], 0.0005),
     ('bbpre_28', [r'which stays at ([\d.]+) on the twenty-eight-compound panel'],
      0.0005),
+    # 네 번째 구성 (2026-10-20). 표 1 네 번째 블록 + §3.1 산문 + Limitations.
+    # 표 3 사건의 교훈대로 표를 먼저 등록한다.
+    ('pp_st_md', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{([\d.]+)\}'],
+     0.0005),
+    ('pp_st_lr', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{[\d.]+\} & '
+                  r'\\textbf\{\$<\$0\.001\} & ([\d.]+) &'], 0.0005),
+    ('pp_st_ds', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{[\d.]+\} & '
+                  r'\\textbf\{\$<\$0\.001\} & [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('pp_el_md', [r'\\quad \+ literature 5 & electronic  &  3 & ([\d.]+) &'], 0.0005),
+    ('pp_el_mdn', [r'\\quad \+ literature 5 & electronic  &  3 & [\d.]+ & ([\d.]+) &'],
+     0.0005),
+    ('pp_el_nv', [r'literature 5 & electronic  &  3 & '
+                  r'(?:[\d.]+ & ){5}([\d.]+) &'], 0.0005),
+    ('pp_mg_md', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{([\d.]+)\}'],
+     0.0005),
+    ('pp_mg_lr', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{[\d.]+\} & '
+                  r'\\textbf\{\$<\$0\.001\} & \\textbf\{([\d.]+)\}'], 0.0005),
+    ('pp_mg_ds', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{[\d.]+\} & '
+                  r'\\textbf\{\$<\$0\.001\} & \\textbf\{[\d.]+\} & ([\d.]+) &'], 0.0005),
+    ('pp_n_perm', [r'\\binom\{24\}\{10\}=([\d\\,]+)'], 0),
+    ('pp_min_p', [r'smallest nominal value of ([\d.]+) and a'], 0.00001),
+    ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
+    ('pf_prespec', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & '
+                    r'\\textbf\{[\d.]+\} & \\textbf\{([\d.]+)\}'], 0.0005),
+    ('struct_removed', [r'removes (\d+) of the 51'], 0),
+    ('struct_candidates', [r'removes \d+ of the (\d+)',
+                           r'descriptors \((\d+) after excluding run metadata\)'], 0),
+    ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
+                 r'produces an adjusted\s*\n?value of (\d+\.\d+)',
+                 r'into one with an adjusted value of\s*\n?(\d+\.\d+)'], 0.00005),
+    # 인용 문헌의 수치 (2026-10-20). outputs/cite_facts.json 이 단일 출처다.
+    ('j18_identified', [r'identified\s*\n?(\d+) simulants'], 0),
+    ('j18_unsuitable', [r'judged (\d+) unsuitable'], 0),
+    ('j21_identified', [r'a later one screened (\d+) chemicals'], 0),
+    ('j21_discounted', [r'discounted (\d+) on the risk'], 0),
+    ('j21_suitable', [r'repository of (\d+) suitable'], 0),
+    ('j21_possible', [r'suitable and (\d+) provisional'], 0),
 ]
 
 WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
@@ -644,8 +787,8 @@ def main():
     # 복사되는데 그 복사가 수작업이었다. 분석을 다시 돌린 뒤 복사를 잊으면
     # 원고에 옛 그림이 박히고, 수치 대조는 전부 통과한다. GATE 8 3차에서
     # 도판과 본문이 어긋난 경로가 이것이므로 시각을 직접 비교한다.
-    FIGS = ['Fig_main.png', 'Fig_panel.png', 'Fig_toxicity.png',
-            'Fig_qsar_failure.png', 'Fig_h1.png']
+    FIGS = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
+            'Fig_plocal.png', 'Fig_h1.png']
     for fig in FIGS:
         src, dst = f'outputs/{fig}', f'paper/{fig}'
         if not os.path.exists(src):
@@ -654,7 +797,7 @@ def main():
         if not os.path.exists(dst):
             fails.append(f'  도판 누락 {fig}: paper/ 에 없다')
             continue
-        if os.path.getmtime(dst) < os.path.getmtime(src) - 1:
+        if os.path.getmtime(dst) < os.path.getmtime(src) - MTIME_TOL:
             fails.append(f'  도판 구판 {fig}: paper/ 사본이 outputs/ 보다 '
                          f'오래됐다 (sh build_paper.sh 로 복사할 것)')
         checked += 1
@@ -664,7 +807,7 @@ def main():
                  if os.path.exists(x))
     for fig in FIGS:
         src = f'outputs/{fig}'
-        if os.path.exists(src) and os.path.getmtime(src) < newest - 1:
+        if os.path.exists(src) and os.path.getmtime(src) < newest - MTIME_TOL:
             fails.append(f'  도판 구판 {fig}: 분석 산출물보다 오래됐다 '
                          f'(sh build_paper.sh --figs 로 재생성할 것)')
 

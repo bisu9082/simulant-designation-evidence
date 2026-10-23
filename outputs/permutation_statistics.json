@@ -1,0 +1,451 @@
+{
+ "panel28_designated": {
+  "A_rdkit": {
+   "n_kept": 38,
+   "nn_median": 3.442467587635293,
+   "n_perm": 680,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.05272550039865376,
+     "p_one_sided": 0.027941176470588237
+    },
+    "median_diff": {
+     "observed": 0.7524317928239395,
+     "p_one_sided": 0.17647058823529413
+    },
+    "mean_logratio": {
+     "observed": 0.04824129818355538,
+     "p_one_sided": 0.04411764705882353
+    },
+    "mean_dsim": {
+     "observed": 6.942623976389549,
+     "p_one_sided": 0.08529411764705883
+    },
+    "n_closer": {
+     "observed": -5.0,
+     "p_one_sided": 0.11029411764705882
+    },
+    "n_valid": {
+     "observed": -3.0,
+     "p_one_sided": 0.2161764705882353
+    }
+   }
+  },
+  "B_electronic": {
+   "n_kept": 3,
+   "nn_median": 0.652195622360424,
+   "n_perm": 680,
+   "statistics": {
+    "mean_diff": {
+     "observed": 0.4043810763636831,
+     "p_one_sided": 0.275
+    },
+    "median_diff": {
+     "observed": 0.24154326843786555,
+     "p_one_sided": 0.175
+    },
+    "mean_logratio": {
+     "observed": 0.30085593269284466,
+     "p_one_sided": 0.2926470588235294
+    },
+    "mean_dsim": {
+     "observed": 1.4704786068591984,
+     "p_one_sided": 0.23529411764705882
+    },
+    "n_closer": {
+     "observed": -1.0,
+     "p_one_sided": 0.7573529411764706
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p_one_sided": 0.7573529411764706
+    }
+   }
+  },
+  "C_merged": {
+   "n_kept": 41,
+   "nn_median": 3.8732143303217406,
+   "n_perm": 680,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.20624825796999396,
+     "p_one_sided": 0.025
+    },
+    "median_diff": {
+     "observed": 0.5426357518650562,
+     "p_one_sided": 0.12352941176470589
+    },
+    "mean_logratio": {
+     "observed": 0.017200800133033396,
+     "p_one_sided": 0.03235294117647059
+    },
+    "mean_dsim": {
+     "observed": 7.125715228543931,
+     "p_one_sided": 0.041176470588235294
+    },
+    "n_closer": {
+     "observed": -5.0,
+     "p_one_sided": 0.11029411764705882
+    },
+    "n_valid": {
+     "observed": -3.0,
+     "p_one_sided": 0.23529411764705882
+    }
+   }
+  }
+ },
+ "panel35_designated": {
+  "A_rdkit": {
+   "n_kept": 38,
+   "nn_median": 3.2809742067224974,
+   "n_perm": 2024,
+   "statistics": {
+    "mean_diff": {
+     "observed": 1.808290619726708,
+     "p_one_sided": 0.3255928853754941
+    },
+    "median_diff": {
+     "observed": 1.7793037601604897,
+     "p_one_sided": 0.3433794466403162
+    },
+    "mean_logratio": {
+     "observed": 0.37044862189613337,
+     "p_one_sided": 0.4041501976284585
+    },
+    "mean_dsim": {
+     "observed": 6.701692394624661,
+     "p_one_sided": 0.2366600790513834
+    },
+    "n_closer": {
+     "observed": 0.0,
+     "p_one_sided": 1.0
+    },
+    "n_valid": {
+     "observed": 0.0,
+     "p_one_sided": 1.0
+    }
+   }
+  },
+  "B_electronic": {
+   "n_kept": 3,
+   "nn_median": 0.6253520176527663,
+   "n_perm": 2024,
+   "statistics": {
+    "mean_diff": {
+     "observed": 0.652635486187222,
+     "p_one_sided": 0.3858695652173913
+    },
+    "median_diff": {
+     "observed": 0.5871204659230094,
+     "p_one_sided": 0.37351778656126483
+    },
+    "mean_logratio": {
+     "observed": 0.6305356287676227,
+     "p_one_sided": 0.4115612648221344
+    },
+    "mean_dsim": {
+     "observed": 1.4585453963244503,
+     "p_one_sided": 0.3438735177865613
+    },
+    "n_closer": {
+     "observed": -1.0,
+     "p_one_sided": 0.7233201581027668
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p_one_sided": 0.6640316205533597
+    }
+   }
+  },
+  "C_merged": {
+   "n_kept": 41,
+   "nn_median": 3.4987592509640453,
+   "n_perm": 2024,
+   "statistics": {
+    "mean_diff": {
+     "observed": 1.878193325302678,
+     "p_one_sided": 0.28310276679841895
+    },
+    "median_diff": {
+     "observed": 1.6182395851775442,
+     "p_one_sided": 0.15118577075098813
+    },
+    "mean_logratio": {
+     "observed": 0.36444679356661797,
+     "p_one_sided": 0.36561264822134387
+    },
+    "mean_dsim": {
+     "observed": 6.908333391613943,
+     "p_one_sided": 0.183300395256917
+    },
+    "n_closer": {
+     "observed": 0.0,
+     "p_one_sided": 1.0
+    },
+    "n_valid": {
+     "observed": 0.0,
+     "p_one_sided": 1.0
+    }
+   }
+  }
+ },
+ "panel35_all": {
+  "A_rdkit": {
+   "n_kept": 38,
+   "nn_median": 3.2809742067224974,
+   "n_perm": 735471,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.2331498941373851,
+     "p_one_sided": 0.0616421313688779
+    },
+    "median_diff": {
+     "observed": 0.550037885941566,
+     "p_one_sided": 0.3408591229293881
+    },
+    "mean_logratio": {
+     "observed": -0.07809112520722392,
+     "p_one_sided": 0.04962126310894651
+    },
+    "mean_dsim": {
+     "observed": 5.705029758832956,
+     "p_one_sided": 0.1579164916087786
+    },
+    "n_closer": {
+     "observed": -5.0,
+     "p_one_sided": 0.31909483854563947
+    },
+    "n_valid": {
+     "observed": -5.0,
+     "p_one_sided": 0.15942028985507245
+    }
+   }
+  },
+  "B_electronic": {
+   "n_kept": 3,
+   "nn_median": 0.6253520176527663,
+   "n_perm": 735471,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.00601078722835619,
+     "p_one_sided": 0.12145006397261075
+    },
+    "median_diff": {
+     "observed": -0.14383438557299966,
+     "p_one_sided": 0.08623725476599349
+    },
+    "mean_logratio": {
+     "observed": -0.09109540227634749,
+     "p_one_sided": 0.1231714098856379
+    },
+    "mean_dsim": {
+     "observed": 0.9834717982313769,
+     "p_one_sided": 0.12708590821392005
+    },
+    "n_closer": {
+     "observed": -6.0,
+     "p_one_sided": 0.16506021311513303
+    },
+    "n_valid": {
+     "observed": -6.0,
+     "p_one_sided": 0.07990661766405474
+    }
+   }
+  },
+  "C_merged": {
+   "n_kept": 41,
+   "nn_median": 3.4987592509640453,
+   "n_perm": 735471,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.28893002999638556,
+     "p_one_sided": 0.05261526287236343
+    },
+    "median_diff": {
+     "observed": 0.7455365757082983,
+     "p_one_sided": 0.3257640342039319
+    },
+    "mean_logratio": {
+     "observed": -0.09807788996080857,
+     "p_one_sided": 0.039280950574529794
+    },
+    "mean_dsim": {
+     "observed": 5.901151713356777,
+     "p_one_sided": 0.1279982487412828
+    },
+    "n_closer": {
+     "observed": -5.0,
+     "p_one_sided": 0.31909483854563947
+    },
+    "n_valid": {
+     "observed": -5.0,
+     "p_one_sided": 0.15942028985507245
+    }
+   }
+  }
+ },
+ "jackknife_panel35_all": {
+  "A_rdkit": {
+   "range": [
+    0.016949682584357507,
+    0.170183460666702
+   ],
+   "worst_agent": "tabun (GA)",
+   "worst_p": 0.170183460666702,
+   "all": [
+    {
+     "dropped": "sarin (GB)",
+     "p": 0.10806272443101088
+    },
+    {
+     "dropped": "soman (GD)",
+     "p": 0.10098426722467643
+    },
+    {
+     "dropped": "tabun (GA)",
+     "p": 0.170183460666702
+    },
+    {
+     "dropped": "sulfur mustard (HD)",
+     "p": 0.15726928730024706
+    },
+    {
+     "dropped": "lewisite 1 (L)",
+     "p": 0.058450979032483946
+    },
+    {
+     "dropped": "hydrogen cyanide (AC)",
+     "p": 0.016949682584357507
+    },
+    {
+     "dropped": "cyanogen chloride (CK)",
+     "p": 0.024305513065776895
+    },
+    {
+     "dropped": "phosgene (CG)",
+     "p": 0.04553952501186315
+    },
+    {
+     "dropped": "chloropicrin (PS)",
+     "p": 0.05589615362128486
+    },
+    {
+     "dropped": "cyclosarin (GF)",
+     "p": 0.08457437478840091
+    },
+    {
+     "dropped": "VX",
+     "p": 0.055315573285690395
+    }
+   ]
+  },
+  "B_electronic": {
+   "range": [
+    0.06575650161597126,
+    0.20632900549443825
+   ],
+   "worst_agent": "sarin (GB)",
+   "worst_p": 0.20632900549443825,
+   "all": [
+    {
+     "dropped": "sarin (GB)",
+     "p": 0.20632900549443825
+    },
+    {
+     "dropped": "soman (GD)",
+     "p": 0.18070732904492495
+    },
+    {
+     "dropped": "tabun (GA)",
+     "p": 0.07982775663486391
+    },
+    {
+     "dropped": "sulfur mustard (HD)",
+     "p": 0.1433027270959698
+    },
+    {
+     "dropped": "lewisite 1 (L)",
+     "p": 0.12274447258967383
+    },
+    {
+     "dropped": "hydrogen cyanide (AC)",
+     "p": 0.1336911992451096
+    },
+    {
+     "dropped": "cyanogen chloride (CK)",
+     "p": 0.15415291697429268
+    },
+    {
+     "dropped": "phosgene (CG)",
+     "p": 0.06575650161597126
+    },
+    {
+     "dropped": "chloropicrin (PS)",
+     "p": 0.08590277522839106
+    },
+    {
+     "dropped": "cyclosarin (GF)",
+     "p": 0.14758841613061563
+    },
+    {
+     "dropped": "VX",
+     "p": 0.13219963805506948
+    }
+   ]
+  },
+  "C_merged": {
+   "range": [
+    0.01740245366574617,
+    0.15663024102921802
+   ],
+   "worst_agent": "sulfur mustard (HD)",
+   "worst_p": 0.15663024102921802,
+   "all": [
+    {
+     "dropped": "sarin (GB)",
+     "p": 0.09699362721303763
+    },
+    {
+     "dropped": "soman (GD)",
+     "p": 0.08816119194366603
+    },
+    {
+     "dropped": "tabun (GA)",
+     "p": 0.13169655907574873
+    },
+    {
+     "dropped": "sulfur mustard (HD)",
+     "p": 0.15663024102921802
+    },
+    {
+     "dropped": "lewisite 1 (L)",
+     "p": 0.04827246757520011
+    },
+    {
+     "dropped": "hydrogen cyanide (AC)",
+     "p": 0.01740245366574617
+    },
+    {
+     "dropped": "cyanogen chloride (CK)",
+     "p": 0.02252026252564683
+    },
+    {
+     "dropped": "phosgene (CG)",
+     "p": 0.03961135109338098
+    },
+    {
+     "dropped": "chloropicrin (PS)",
+     "p": 0.046261511330834254
+    },
+    {
+     "dropped": "cyclosarin (GF)",
+     "p": 0.07547544362728102
+    },
+    {
+     "dropped": "VX",
+     "p": 0.04131638093140314
+    }
+   ]
+  }
+ }
+}
