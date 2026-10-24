@@ -79,6 +79,13 @@ low = [(r, r['name'].lower()) for r in recs]
 df = pd.read_csv('descriptor_cache_xtb.csv')
 MW = dict(zip(df.compound_name, df.MW))
 
+# EPA 'Holding AEGLs' 절 등재 물질 (sources/compiled_aegls_27jul2018.pdf).
+# 값표에는 없지만 심의 대상이고, 기관이 '현재 값을 개발하지 않는다'고 적은 것.
+# 2026-10-23 신설. 종전에는 값표에 없으면 전부 '미등재'로 적었는데, 보충자료는
+# 염화시안을 보류목록이라 쓰고 도판은 '미등재'를 찍어 1차 출처와 어긋났다.
+# 본 패널 9종을 CAS 로 직접 대조한 결과 보류목록은 염화시안 하나뿐이다.
+AEGL_HOLDING = {'506-77-4'}
+
 out, unmatched, conv_check, xcheck = [], [], [], []
 for _, row in df.iterrows():
     nm = row.compound_name
@@ -110,11 +117,13 @@ for _, row in df.iterrows():
 
     if hit is None:
         unmatched.append(nm)
+        note = ('[수집 불가: EPA AEGL 보류목록, 값 미개발]'
+                if want_cas in AEGL_HOLDING
+                else '[수집 불가: EPA AEGL 미등재]')
         out.append(dict(compound_name=nm, compound_class=row.compound_class,
                         aegl_cas='', aegl_name='', aegl_unit='',
                         AEGL3_10min_mgm3=None, AEGL2_10min_mgm3=None,
-                        AEGL3_provenance='',
-                        note='[수집 불가: EPA AEGL 미등재]'))
+                        AEGL3_provenance='', note=note))
         continue
     vals, prov = {}, {}
     for lvl in ('AEGL2', 'AEGL3'):

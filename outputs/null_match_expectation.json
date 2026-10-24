@@ -1,0 +1,35 @@
+{
+ "panel": "descriptor_cache_xtb_35.csv",
+ "dim": 41,
+ "nn_median": 3.4987592509640453,
+ "threshold": 2.0,
+ "n_agents": 11,
+ "n_non_agents": 24,
+ "sets": {
+  "incumbent3": {
+   "k": 3,
+   "observed": 0,
+   "null_mean": 1.0,
+   "null_sd": 1.234,
+   "deviation": -1.0,
+   "p_at_least_observed": 1.0,
+   "enumerated": true,
+   "n_designations": 2024,
+   "ceiling_11k_over_n": 1.375
+  },
+  "incumbent_plus_lit8": {
+   "k": 8,
+   "observed": 5,
+   "null_mean": 2.68,
+   "null_sd": 1.76,
+   "deviation": 2.32,
+   "p_at_least_observed": 0.1612,
+   "enumerated": false,
+   "n_designations": 20000,
+   "ceiling_11k_over_n": 3.667
+  }
+ },
+ "raw_gap": 5,
+ "null_gap": 1.68,
+ "deviation_gap": 3.32
+}

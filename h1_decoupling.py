@@ -3,7 +3,7 @@
 H1 결합해제 검정 — 충실도 축과 안전성 축이 직교하는가?
 
 후보 풀: EPA AEGL Final 중 구조·전자서술자·실측 AEGL-3 를 모두 가진 화합물.
-  충실도 = 전자공간(HOMO, LUMO, omega, dipole, z표준화)에서 진본 작용제까지 최단거리
+  충실도 = 전자공간(HOMO, LUMO, dipole, z표준화)에서 진본 작용제까지 최단거리
   안전성 = 실측 log10(AEGL-3 10분, mg/m3)  (클수록 안전)
 
 H1 기각(강한 음의 상관: 가까울수록 독하다) -> 충실+안전은 구조적으로 불가 -> RQ-3 폐기
@@ -13,6 +13,7 @@ H1 유지(무상관)                              -> '가깝고 안전한' 사�
 파마코포어)에 걸리는 후보는 상관과 무관하게 전량 제외한다 (걸러내기 전용, 서열화 아님).
 """
 import json
+import os
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -21,7 +22,11 @@ RDLogger.DisableLog('rdApp.*')
 
 SEED, N_BOOT = 42, 10000
 rng = np.random.default_rng(SEED)
-EL = ['E_HOMO_eV', 'E_LUMO_eV', 'electrophilicity_index_eV', 'dipole_moment_D']
+# 2026-10-23. 종전에는 omega 를 넣은 4차원이었다. 본문 2.3절은 omega 가 두
+# 궤도에너지의 정확한 함수라는 이유로 어떤 거리에도 넣지 않는다고 네 군데에서
+# 선언하는데, 이 축만 그 선언을 어기고 있었다. 외부 검토에서 두 명이 독립으로
+# 적발했다. 본문과 같은 3좌표로 맞춘다.
+EL = ['E_HOMO_eV', 'E_LUMO_eV', 'dipole_moment_D']
 
 # ---------------------------------------------- 구조 경보 (걸러내기 전용)
 # Tier A = 작용제 모티프 (무조건 배제) / Tier B = 주의 / Tier C = 기록만
@@ -86,13 +91,14 @@ if _nbad:
 A['is_cwa'] = A.cas.astype(str).isin(CWA_CAS_MAP)
 
 # 전자 서술자가 물리적으로 성립하지 않는 레코드 분리 (2026-10-11).
-# 친전자성 지수는 omega = mu^2 / 2*eta 이고 eta 는 HOMO-LUMO 간극의 절반이다.
-# 간극이 0 에 가까워지면 분모가 사라져 omega 가 발산한다. 이 풀에서
-# 시안화나트륨은 간극 0.097 eV 에서 omega = 545 eV 를 받는다. 다음으로 작은
-# 간극은 1.31 eV 이므로 이 한 건만 떨어져 있다. 간극이 이 수준이면 닫힌껍질
-# 단일참조 GFN2 기술 자체가 성립하지 않으므로, 값이 극단적이라기보다 의미가
-# 없다. 표준화된 거리를 쓰는 이상 한 건이 omega 축 전체를 압축한다
-# (풀 표준편차 5.67 -> 35.24, 6배).
+# 간극 하한의 사유는 2026-10-23 에 바뀌었다. 종전 사유는 omega = mu^2/2*eta 의
+# 발산이었다 (eta 는 HOMO-LUMO 간극의 절반이므로 간극 0 에서 분모가 사라진다).
+# omega 를 충실도 공간에서 뺀 뒤로 그 사유는 더 이상 성립하지 않는다. 남는
+# 사유는 간극 자체다. 간극이 0 에 가까우면 닫힌껍질 단일참조 GFN2 기술이
+# 성립하지 않으므로 HOMO/LUMO 값 자체의 의미가 없다. 이 풀에서 시안화나트륨은
+# 간극 0.097 eV 이고 다음으로 작은 간극은 1.31 eV 이므로 이 한 건만 떨어져 있다.
+# 걸러낸 레코드를 되살렸을 때 결론이 바뀌는지는 h1_screen_sensitivity.py 가
+# 실제로 재계산한다 (환경변수 H1_KEEP_UNPHYSICAL=1 경로).
 # 2026-10-12. 종전에는 간극 하한 하나만 두었고, 그 임계값은 적발된 한 건
 # (시안화나트륨)에 사후적으로 맞춘 규칙이었다. 리뷰어 C 지적에 따라 물리적
 # 타당성 심사 규칙을 사전에 선언하고 전부 적용한다. 네 규칙은 모두 "이 전자
@@ -109,8 +115,8 @@ def _screen(df):
     # R1 다성분 레코드: 조각 사이의 상대 배치가 임의이므로 쌍극자가 정의되지
     #    않고, 환산 분자량도 명명된 화합물의 것이 아닐 수 있다.
     r1 = smi.str.contains(r'\.', regex=True)
-    # R2 개각 화학종: omega = mu^2/2eta 가 이 형태로 정의되지 않고, 궤도 파싱이
-    #    alpha/beta 중 한쪽만 읽는다.
+    # R2 개각 화학종: 궤도 파싱이 alpha/beta 중 한쪽만 읽어 HOMO/LUMO 가
+    #    닫힌껍질과 같은 뜻을 갖지 않는다.
     r2 = pd.Series([bool(m) and any(a.GetNumRadicalElectrons() for a in m.GetAtoms())
                     for m in mols], index=df.index)
     # R3 단원자 화학종(수은 증기, 카드뮴, 적린 등): 결합이 없어 분자 서술자가
@@ -119,8 +125,9 @@ def _screen(df):
     r3 = pd.Series([bool(m) and m.GetNumHeavyAtoms() == 1
                     and sum(a.GetTotalNumHs() for a in m.GetAtoms()) == 0
                     for m in mols], index=df.index)
-    # R4 간극 하한: eta -> 0 에서 omega 가 발산하고 닫힌껍질 단일참조 기술이
-    #    성립하지 않는다.
+    # R4 간극 하한: 간극이 0 에 가까우면 닫힌껍질 단일참조 기술이 성립하지
+    #    않는다. 계산이 수렴에 실패했다는 신호이지 화학적 성질이 아니다.
+    #    (omega 발산은 더 이상 사유가 아니다. 2026-10-23 omega 제거.)
     r4 = df.gap_eV < GAP_MIN_EV
     return pd.DataFrame(dict(multicomponent=r1, open_shell=r2,
                              single_atom=r3, tiny_gap=r4), index=df.index)
@@ -129,6 +136,12 @@ def _screen(df):
 _S = _screen(A)
 SCREEN = {k: int(v.sum()) for k, v in _S.items()}
 _bad = _S.any(axis=1)
+# 민감도 경로. H1_KEEP_UNPHYSICAL=1 이면 네 규칙으로 걸러낼 레코드를 풀에 그대로
+# 두고 같은 검정을 돌린다. 정식 산출물은 쓰지 않고 민감도 파일만 쓴다.
+KEEP_UNPHYSICAL = os.environ.get('H1_KEEP_UNPHYSICAL') == '1'
+if KEEP_UNPHYSICAL:
+    _bad = pd.Series(False, index=A.index)
+    print('[pool] *** 민감도 경로: 물리적 타당성 심사 미적용 ***')
 print(f'[pool] 물리적 타당성 심사 — 사전 선언한 4규칙으로 {int(_bad.sum())}건 제외')
 for k, n in SCREEN.items():
     print(f'   {k:<16} {n:>3}건')
@@ -281,6 +294,17 @@ for key, bar, desc in TIERS:
 FS2 = Cand[(Cand.fidelity_dist <= fid_cut) & (Cand.y_tox >= tox_cut + 1.0)
            & ~Cand.alert_flag].sort_values('fidelity_dist')
 
+if KEEP_UNPHYSICAL:
+    json.dump(dict(n_candidates=int(len(Cand)),
+                   spearman_r=float(sr), spearman_p=float(sp),
+                   spearman_ci=[float(ci_s[0]), float(ci_s[1])],
+                   pearson_r=float(pr), pearson_p=float(pp),
+                   verdict=verdict),
+              open('outputs/h1_unphysical_kept_raw.json', 'w'),
+              indent=1, ensure_ascii=False)
+    print('[sens] outputs/h1_unphysical_kept_raw.json (정식 산출물은 쓰지 않았다)')
+    raise SystemExit(0)
+
 json.dump({r.label: r.tier for _, r in P[P.src == 'study28'].iterrows()},
           open('outputs/h1_gate_tiers.json', 'w'), indent=2, ensure_ascii=False)
 Cand.to_csv('outputs/h1_candidates.csv', index=False)
@@ -296,7 +320,7 @@ json.dump(dict(seed=SEED, bootstrap=N_BOOT, n_pool=int(len(P)),
                quadrants={k: int(v) for k, v in Cand.quadrant.value_counts().items()},
                n_faithful_safe_passing_alerts=int(len(FS)),
                safety_tiers=tier_out,
-               pool_screen=SCREEN,
+               pool_screen=SCREEN, n_screened_distinct=int(_bad.sum()),
                structural_alerts=ALERTS),
           open('outputs/h1_summary.json', 'w'), indent=2, ensure_ascii=False)
 print('\n[done] outputs/h1_candidates.csv, h1_summary.json')

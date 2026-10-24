@@ -18,7 +18,7 @@
 \title{Supplementary Material\\[4pt]
 \large Whether Chemical Warfare Agent Simulant Designations Look Supported
 Depends on Which Compounds Are in the Comparison}
-\author{Ku Kang \and Yoon Jeong Jang}
+\author{Ku Kang \and Jin Yoo \and Miae Kim \and Doo-Hee Lee \and Yoon Jeong Jang}
 \date{}
 
 \begin{document}
@@ -134,24 +134,24 @@ assigning it to a known class \cite{openset}.
 Candidates were the AEGL compounds for which structure, electronic descriptors
 and a measured AEGL-3 were all available, excluding the authentic agents
 themselves ($n=207$). Eight further records were set aside under four rules
-declared in advance, all of which ask the same question: are these four
-electronic descriptors defined for that species at all? A record is excluded if
+declared in advance, all of which ask the same question: are these electronic
+descriptors defined for that species at all? A record is excluded if
 its stored structure has more than one component, because the relative placement
 of the fragments is arbitrary and the dipole moment is therefore undefined
-(three records); if the species is open-shell, because
-$\omega=\mu^{2}/2\eta$ is not defined in this form for such a species and the
-orbital parse reads only one spin manifold (three); if it is a bare atom with no
+(three records); if the species is open-shell, because the orbital parse reads
+only one spin manifold, so that its HOMO and LUMO do not carry the
+closed-shell meaning (three); if it is a bare atom with no
 bonds, because molecular descriptors carry no meaning (three); or if the
-HOMO--LUMO gap is below 0.5~eV, because $\eta$ is half that gap and $\omega$
-diverges as it approaches zero (one). Some records fall under more than one
-rule. The gap rule is the one with a visible consequence: sodium cyanide returns
-a gap of 0.097~eV and an $\omega$ of 1091~eV where the next smallest gap in the
-pool is 1.31~eV, and because distances are computed on standardised descriptors
-that single record compresses the $\omega$ axis for every other compound,
-raising the pool standard deviation from 11.33 to 70.49. Retaining all eight
-records changes the Spearman coefficient from $+0.004$ to $-0.022$ and leaves
+HOMO--LUMO gap is below 0.5~eV, because a closed-shell single-reference
+description does not hold at that gap and the orbital energies themselves stop
+meaning anything (one). Some records fall under more than one
+rule. The gap rule bites on a single record: sodium cyanide returns
+a gap of 0.097~eV where the next smallest gap in the pool is 1.31~eV, so the
+0.5~eV bar separates that one record and no other. Retaining all eight
+records raises the candidate count to 215 and moves the Spearman coefficient
+from $+0.062$ to $+0.030$, leaving
 every conclusion in Section~\ref{res:h1} unchanged. Fidelity was defined as the standardised
-Euclidean distance in the four-dimensional electronic space to the nearest
+Euclidean distance in the three-coordinate electronic space to the nearest
 authentic agent; safety as the measured $\log_{10}$(AEGL-3). For the quadrant analysis, the safety bar
 was set at the measured AEGL-3 of dichloromethane, the incumbent
 simulant, read from the parsed table rather than entered by hand; a replacement
@@ -204,7 +204,7 @@ a difference between the two spaces is not by itself a difference between
 chemistries. We bounded the effect in two ways, both reported in
 Section~\ref{res:dimdetail}. The standardised structural space was truncated to its
 first three principal components and the permutation test rerun on that
-three-dimensional space. Separately, 500 random three-descriptor subsets of the
+three-dimensional space. Separately, 2000 random three-descriptor subsets of the
 structural space were drawn without replacement (seed \texttt{0xC0DE}) and the
 full exact permutation test run on each, giving the distribution of $p$ that an
 arbitrary three-dimensional slice of these descriptors produces. The observed
@@ -217,7 +217,7 @@ repeated it on ZCA-whitened coordinates, obtained by standardising the
 structural block, taking the eigendecomposition of its covariance, and applying
 $V\Lambda^{-1/2}V^{\top}$ over the non-null eigenvalues, so that the coordinates
 drawn from are uncorrelated by construction. Both the raw and the whitened rates
-are reported. Draws were raised from 500 to 2000, which carries a Monte Carlo
+are reported. That draw count carries a Monte Carlo
 standard error near one percentage point on a proportion and resolves a
 percentile to 0.05.
 
@@ -654,12 +654,13 @@ above it. Taking the incumbent as the bar a replacement must meet therefore sets
 a demanding bar, and the consequences are worked through in
 Section~\ref{res:h1}.
 
-Nine compounds have no value, all nine because they are absent from the AEGL
-list: DMMP, tetrahydrofuran, ethyl acetate, water, DPGME, ethanol, DMSO,
-p-dichlorobenzene and cyanogen chloride. Cyanogen chloride is the one military
-agent among them, and its absence is a recorded decision rather than an
-oversight: it appears in the compiled table's holding list, where the agency
-states that values are not being developed. DMMP's position is worth stating
+Nine compounds have no value. Eight are absent from the AEGL list altogether:
+DMMP, tetrahydrofuran, ethyl acetate, water, DPGME, ethanol, DMSO and
+p-dichlorobenzene. The ninth, cyanogen chloride, is the one military agent
+among them, and its absence is a recorded decision rather than an oversight: it
+appears in the compiled table's holding list, where the agency states that
+values are not being developed. Checked by CAS against the source document, it
+is the only one of the nine on that list. DMMP's position is worth stating
 precisely, because it is the compound
 that carries all three valid matches found above. EPA's provisional
 peer-reviewed assessment declined to derive an inhalation reference
@@ -751,7 +752,8 @@ carrying both axes; crosses are compounds excluded by the structural filter. The
 upper dashed line is the measured AEGL-3 of dichloromethane, the incumbent
 simulant; the dotted line is one order of magnitude below it, and the eight
 circled compounds are those that clear the lower bar while also falling in the
-most faithful quartile.
+most faithful quartile, numbered by fidelity and named at the top left. The
+shaded quadrant, faithful and safe at the incumbent's own bar, is empty.
 (b) The filter applied to the twenty-eight-compound set: nine of eleven
 authentic agents are Tier~A and phosgene Tier~B, there are no false alerts among
 the interferents, and DMMP is Tier~C.}
@@ -762,12 +764,12 @@ the interferents, and DMMP is Tier~C.}
 \label{res:h1}
 
 Across the 207 candidates carrying both measured axes (Fig.~\ref{fig:h1}a),
-fidelity and safety are uncorrelated: Spearman $r=+0.004$ (95\% CI $-0.132$ to
-$+0.143$), Pearson $r=-0.025$ (95\% CI $-0.177$ to $+0.133$, $p=0.73$), with
-fidelity accounting for 0.06\% of the variance in toxicity
+fidelity and safety are uncorrelated: Spearman $r=+0.062$ (95\% CI $-0.077$ to
+$+0.199$), Pearson $r=+0.072$ (95\% CI $-0.092$ to $+0.225$, $p=0.30$), with
+fidelity accounting for 0.5\% of the variance in toxicity
 (Table~\ref{tab:h1}). The Spearman interval rules out any monotone association
-stronger than $|r|=0.143$ and the Pearson interval any linear association
-stronger than $|r|=0.177$, so this is a bounded negative result rather than an
+stronger than $|r|=0.199$ and the Pearson interval any linear association
+stronger than $|r|=0.225$, so this is a bounded negative result rather than an
 underpowered one. Resembling an agent electronically does not require being as
 dangerous as one.
 
@@ -782,39 +784,41 @@ the nearest authentic agent; safety is the measured EPA AEGL-3 (10~min).}
 Quantity & Value \\
 \hline
 Candidates with both axes measured & 207 \\
-Spearman $r$ & $+0.004$ (95\% CI $-0.132$ to $+0.143$) \\
-Pearson $r$ & $-0.025$ (95\% CI $-0.177$ to $+0.133$), $p = 0.73$ \\
-Variance of toxicity explained by fidelity & 0.06\% \\
+Spearman $r$ & $+0.062$ (95\% CI $-0.077$ to $+0.199$) \\
+Pearson $r$ & $+0.072$ (95\% CI $-0.092$ to $+0.225$), $p = 0.30$ \\
+Variance of toxicity explained by fidelity & 0.5\% \\
 \hline
 Safety bar: dichloromethane, 41,685~mg~m$^{-3}$ & $\log_{10} = 4.62$ \\
-Faithful and safe at that bar & 1 (the incumbent itself) \\
+Faithful and safe at that bar & 0 \\
 Faithful and safe one order of magnitude below it & 8 \\
 \quad clearing the structural-alert gate & 8 \\
-\quad more faithful than dichloromethane itself & 7 \\
-Most faithful of them & Trichloroethylene (0.26 vs 0.81) \\
+\quad more faithful than dichloromethane itself & 8 \\
+Most faithful of them & Trichloroethylene (0.25 vs 0.78) \\
 \hline
 \end{tabular}
 \end{table}
 
 Setting the safety bar at the incumbent simulant's own measured value empties the
-faithful-and-safe quadrant of everything but the incumbent: of the 207, the only
-compound combining top-quartile fidelity with an AEGL-3 at or above
-dichloromethane's 41\,685~mg~m$^{-3}$ is dichloromethane. That is a statement
-about how safe dichloromethane is, not about how scarce candidates are. Seven
-compounds in the whole pool exceed it on the safety axis and not one of them is
-faithful.
+faithful-and-safe quadrant outright: of the 207, not one compound combines
+top-quartile fidelity with an AEGL-3 at or above dichloromethane's
+41\,685~mg~m$^{-3}$, and dichloromethane does not either, its own fidelity of
+0.78 falling outside the 0.71 quartile boundary. That is a statement
+about how safe dichloromethane is, not about how scarce candidates are. Eight
+compounds in the whole pool reach or exceed it on the safety axis, the incumbent
+among them, and not one of the eight is faithful.
 
 Lowering the bar by one order of magnitude, to 4168~mg~m$^{-3}$, changes the
 answer. Eight compounds then combine top-quartile fidelity with that level of
 measured acute inhalation safety, every one of them clears the structural-alert
 gate, and every one of them is more faithful than dichloromethane itself. In
-order of fidelity they are trichloroethylene (0.26), HCFC~141b (0.36),
-1,1,1-trichloroethane (0.54), trifluorochloroethylene (0.60),
-tetrachloroethylene (0.63), hexafluoropropylene (0.64) and methyl ethyl ketone
-(0.76), with dichloromethane itself (0.81) the eighth. The best of them,
+order of fidelity they are trichloroethylene (0.25), HCFC~141b (0.34),
+1,1,1-trichloroethane (0.54), trifluorochloroethylene (0.58),
+tetrachloroethylene (0.61), hexafluoropropylene (0.63), methyl ethyl ketone
+(0.66) and vinyl chloride (0.70), every one of them ahead of dichloromethane's
+own 0.78. The best of them,
 trichloroethylene, is 3.1 times closer to the nearest authentic agent in the
 electronic space while being only 1.3 times more acutely toxic by inhalation. At
-two orders of magnitude below the incumbent the count rises to sixteen, all of
+two orders of magnitude below the incumbent the count rises to fifteen, all of
 which clear the gate.
 
 \begin{sloppypar}
@@ -835,8 +839,8 @@ construction, which depresses the count at any bar. The seven compounds that
 exceed dichloromethane on the safety axis illustrate the point from the other
 side: two are hydrocarbon gases, one a refrigerant, one a monomer, and the three
 a laboratory might actually reach for sit far out on the unfaithful side of the
-electronic axis, well outside the top quartile that defines a faithful
-candidate.
+electronic axis, methanol at 2.00 against the 0.71 boundary, well outside the
+top quartile that defines a faithful candidate.
 
 \subsection{The structural filter}
 
@@ -858,7 +862,8 @@ pursuit of a simulant that is both faithful and safe is not a pursuit along a
 trade-off curve, and the screen bears that out. Against the incumbent's own
 safety value the quadrant is empty, which says more about dichloromethane than
 about the chemistry: it is safer than all but seven of the 207 compounds in the
-pool. One order of magnitude below that bar there are eight candidates, all of
+pool, and not itself faithful enough to fill the quadrant it empties. One order
+of magnitude below that bar there are eight candidates, all of
 them clearing the structural-alert gate and all of them more faithful than the
 incumbent, with trichloroethylene 3.1 times closer to the nearest agent in the
 electronic space at 1.3 times the acute inhalation toxicity.
