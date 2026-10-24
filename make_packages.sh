@@ -19,6 +19,11 @@ done
 rm -f "$OV" "$RP"
 ( cd paper && zip -q -X "../$OV" main.tex supplementary.tex cover_letter.tex \
     highlights.tex refs.bib $FIGS )
+# 컴파일 순서 안내. main 과 supplementary 가 xr 로 서로를 참조하므로 한 번씩만
+# 돌리면 양쪽에 ?? 가 남는다. 받는 사람이 그걸 모르면 투고본이 깨져 보인다.
+if [ -f README_overleaf.txt ]; then
+  zip -q -X "$OV" README_overleaf.txt
+fi
 printf '[pkg] %s\n' "$OV"
 unzip -l "$OV" | sed -n '4,$p' | head -20
 

@@ -13,6 +13,10 @@
    "null_sd": 1.234,
    "deviation": -1.0,
    "p_at_least_observed": 1.0,
+   "p_at_most_observed": 0.4788,
+   "p_two_sided": 0.9575,
+   "p_reportable": 0.4788,
+   "p_reportable_tail": "lower",
    "enumerated": true,
    "n_designations": 2024,
    "ceiling_11k_over_n": 1.375
@@ -24,10 +28,21 @@
    "null_sd": 1.76,
    "deviation": 2.32,
    "p_at_least_observed": 0.1612,
+   "p_at_most_observed": 0.93,
+   "p_two_sided": 0.3224,
+   "p_reportable": 0.1612,
+   "p_reportable_tail": "upper",
    "enumerated": false,
    "n_designations": 20000,
    "ceiling_11k_over_n": 3.667
   }
+ },
+ "nested_null_8": {
+  "description": "incumbent 3 held fixed, 5 drawn at random",
+  "n_draws": 20000,
+  "observed": 5,
+  "null_mean": 1.918,
+  "p_at_least_observed": 0.0682
  },
  "raw_gap": 5,
  "null_gap": 1.68,

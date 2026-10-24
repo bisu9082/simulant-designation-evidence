@@ -60,32 +60,32 @@
   }
  },
  "panel28_incumbent3": {
-  "n_struct": 38,
+  "n_struct": 36,
   "n_elec": 3,
   "equal_per_descriptor": {
    "p": {
     "mean_diff": 0.025,
     "median_diff": 0.12352941176470589,
-    "mean_logratio": 0.03235294117647059,
+    "mean_logratio": 0.039705882352941174,
     "mean_dsim": 0.041176470588235294,
     "n_closer": 0.11029411764705882,
-    "n_valid": 0.23529411764705882
+    "n_valid": 0.18088235294117647
    },
    "n_perm": 680,
-   "nn_median": 3.8732143303217406,
-   "n_valid": 3
+   "nn_median": 3.845182612464053,
+   "n_valid": 4
   },
   "block_balanced": {
    "p": {
-    "mean_diff": 0.014705882352941176,
-    "median_diff": 0.05,
-    "mean_logratio": 0.030882352941176472,
+    "mean_diff": 0.016176470588235296,
+    "median_diff": 0.07794117647058824,
+    "mean_logratio": 0.03823529411764706,
     "mean_dsim": 0.008823529411764706,
     "n_closer": 0.14852941176470588,
     "n_valid": 0.3044117647058823
    },
    "n_perm": 680,
-   "nn_median": 0.8699375321050145,
+   "nn_median": 0.8819125035623322,
    "n_valid": 3
   }
  }

@@ -47,9 +47,38 @@ MAP = {'DMMP': 'DMMP', 'GA': 'tabun (GA)', 'GB': 'sarin (GB)', 'GD': 'soman (GD)
        'L': 'lewisite 1 (L)', 'PS': 'chloropicrin (PS)'}
 
 
+# 2026-10-24. 중복 채널 축약. d2 의 자외선 피벗에서 Dye22~27 여섯 열이 35행
+# 전체에 걸쳐 비트 단위로 같은 값을 갖는다. 원본 RGB 까지 거슬러 올라가 확인한
+# 결과 파일명은 서로 다른데(B22AC10.jpg, B23AC10.jpg, ...) 읽힌 화소값이 같다.
+# 저자 확인 결과 이 여섯 염료는 자외선에서 형광을 내지 않아 ROI 가 플레이트
+# 배경을 읽었다. 즉 배경 1채널이 여섯 번 기록된 것이고, 단위 정규화한 패턴에서
+# 그 한 채널이 6배 가중을 갖는다. 하필 12셀 중 계수가 가장 큰 두 셀이 여기서
+# 나오므로, 접지 않으면 분석자 선택이 결과를 키우는 바로 그 구조가 된다.
+# 규칙은 사전 선언한 것 하나뿐이다: 전 행에서 완전히 같은 열은 한 번만 센다.
+CHANNEL_LOG = {}
+
+
+def collapse_duplicate_channels(D, dy, key):
+    keep, drop = [], {}
+    for c in dy:
+        v = D[c].to_numpy(float)
+        same = next((k for k in keep if np.array_equal(D[k].to_numpy(float), v)),
+                    None)
+        if same is None:
+            keep.append(c)
+        else:
+            drop.setdefault(same, []).append(c)
+    CHANNEL_LOG[key] = dict(n_declared=len(dy), n_effective=len(keep),
+                            collapsed={k: v for k, v in drop.items()},
+                            all_zero=[c for c in dy
+                                      if not D[c].to_numpy(float).any()])
+    return keep
+
+
 def load(tag, mode):
     D = pd.read_csv(f'deltaE/{tag}.{mode}_deltaE_pivot.csv')
     dy = [c for c in D.columns if c.lower().startswith('dye')]
+    dy = collapse_duplicate_channels(D, dy, f'{tag}.{mode}')
     return D, dy
 
 
@@ -59,7 +88,7 @@ def unit(v):
 
 
 def raw_patterns(D, dy):
-    """물질 -> 농도 -> 단위 정규화한 29차원 응답."""
+    """물질 -> 농도 -> 단위 정규화한 응답. 차원은 중복 축약 후의 유효 채널 수."""
     out = {}
     for a in sorted(D.Agent.unique()):
         g = D[D.Agent == a]

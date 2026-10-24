@@ -1,0 +1,50 @@
+{
+  "seed": 42,
+  "bootstrap": 10000,
+  "n_pool": 165,
+  "n_candidates": 140,
+  "pearson_r": -0.06849785421315964,
+  "pearson_p": 0.4213066984761351,
+  "pearson_ci": [
+    -0.2119894020295327,
+    0.022905686854258856
+  ],
+  "spearman_r": -0.0070805516620222695,
+  "spearman_p": 0.9338291615886803,
+  "spearman_ci": [
+    -0.15754292257644745,
+    0.14116431525865258
+  ],
+  "r_squared": 0.004691956031807272,
+  "shapiro_p": 0.00043772620568202354,
+  "verdict": "H1 유지 — 충실도와 안전성이 통계적으로 분리돼 있다. RQ-3 성립 가능",
+  "fidelity_cut": 0.7518066333112647,
+  "tox_cut": 1.619927710291468,
+  "quadrants": {
+    "safe_but_unfaithful": 66,
+    "neither": 39,
+    "faithful_and_safe": 19,
+    "faithful_but_toxic": 16
+  },
+  "n_faithful_safe_passing_alerts": 8,
+  "structural_alerts": {
+    "A_OP_leaving_F_CN": "[PX4](=[O,S])(~[#6,#7,#8])(~[#6,#7,#8])[F,$(C#N)]",
+    "A_OP_thiolate": "[PX4](=[O,S])(~[#6,#7,#8])(~[#6,#7,#8])[SX2][#6]",
+    "A_OP_nitroaryloxy": "[PX4](=[O,S])(~[#6,#7,#8])(~[#6,#7,#8])Oc1ccc([N+](=O)[O-])cc1",
+    "A_arsenical": "[As]",
+    "A_sulfur_mustard": "[SX2]([CH2][CH2][Cl,Br,I])[CH2][CH2][Cl,Br,I]",
+    "A_nitrogen_mustard": "[NX3]([CH2][CH2][Cl,Br,I])[CH2][CH2][Cl,Br,I]",
+    "A_cyanide_inorganic": "[#6-]#[#7]",
+    "A_cyanogen_halide": "[F,Cl,Br,I]C#N",
+    "A_hydrogen_cyanide": "[CX2H1]#[NX1]",
+    "B_alpha_halo_carbonyl": "[CX3](=O)[CX4][F,Cl,Br,I]",
+    "B_halo_oxime": "[CX3](=[NX2][OX2H])[F,Cl,Br,I]",
+    "B_chloroformate": "[OX2]([#6])[CX3](=O)[F,Cl,Br]",
+    "B_acyl_halide": "[CX3](=O)[F,Cl,Br]",
+    "B_carbonyl_dihalide": "[CX3](=O)([F,Cl,Br])[F,Cl,Br]",
+    "B_halosilane": "[Si][F,Cl,Br,I]",
+    "B_sulfonyl_halide": "[SX4](=O)(=O)[F,Cl,Br]",
+    "B_peroxy_acid": "[CX3](=O)[OX2][OX2H]",
+    "C_phosphoryl_ester": "[PX4](=[O,S])([OX2][#6])[OX2,CX4]"
+  }
+}

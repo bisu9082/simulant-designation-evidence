@@ -67,17 +67,46 @@ def main():
         counts = np.array([match_count(D, med, agents, list(c),
                                        [i for i in non if i not in c])
                            for c in combos])
+        # 2026-10-24. 종전에는 상단꼬리 P(X >= obs) 만 보고했다. 관측값이 0 인
+        # 경우 그 값은 어떤 자료에서도 1 이 되는 항등식인데, 본문과 초록이
+        # 그것을 '귀무와 부합'의 증거로 썼다. 하한에 붙은 관측에는 하단꼬리를
+        # 봐야 한다. 둘 다 내고, 어느 쪽을 인용할지는 관측 위치로 정한다.
         p = float((counts >= obs).mean())
+        p_lo = float((counts <= obs).mean())
+        p_two = float(min(1.0, 2 * min(p, p_lo)))
         out['sets'][lab] = {
             'k': k, 'observed': int(obs),
             'null_mean': round(float(counts.mean()), 3),
             'null_sd': round(float(counts.std(ddof=1)), 3),
             'deviation': round(float(obs - counts.mean()), 3),
             'p_at_least_observed': round(p, 4),
+            'p_at_most_observed': round(p_lo, 4),
+            'p_two_sided': round(p_two, 4),
+            'p_reportable': round(p_lo if obs <= counts.mean() else p, 4),
+            'p_reportable_tail': ('lower' if obs <= counts.mean() else 'upper'),
             'enumerated': bool(exhaustive), 'n_designations': len(combos),
             'ceiling_11k_over_n': round(len(agents) * k / len(non), 3)}
         print(f'  {lab:22s} k={k} 관측 {obs} | 귀무평균 '
-              f'{counts.mean():.3f} | 편차 {obs - counts.mean():+.3f} | p={p:.3f}')
+              f'{counts.mean():.3f} | 편차 {obs - counts.mean():+.3f} | '
+              f'상단 p={p:.3f} 하단 p={p_lo:.3f} 양측 p={p_two:.3f}')
+
+    # 관측 8종 집합은 기존 3종을 포함한다. 그 3종을 자유롭게 뽑는 귀무는
+    # 관측 집합이 도달할 수 없는 기댓값을 낸다. 3종을 고정하고 나머지 5종만
+    # 뽑는 조건부 귀무를 함께 보고한다 (2026-10-24 심사 지적).
+    inc3 = SETS['incumbent3']
+    pool5 = [i for i in non if i not in inc3]
+    obs8 = out['sets']['incumbent_plus_lit8']['observed']
+    nested = np.array([match_count(D, med, agents, inc3 + list(c),
+                                   [i for i in non if i not in inc3 and i not in c])
+                       for c in (tuple(rng.choice(pool5, 5, replace=False))
+                                 for _ in range(N_SAMPLE))])
+    out['nested_null_8'] = {
+        'description': 'incumbent 3 held fixed, 5 drawn at random',
+        'n_draws': int(N_SAMPLE), 'observed': int(obs8),
+        'null_mean': round(float(nested.mean()), 3),
+        'p_at_least_observed': round(float((nested >= obs8).mean()), 4)}
+    print(f"  중첩 조건부 귀무(3종 고정 + 5종 무작위): 평균 "
+          f"{nested.mean():.3f}, p={float((nested >= obs8).mean()):.3f}")
 
     a, b = out['sets']['incumbent3'], out['sets']['incumbent_plus_lit8']
     out['raw_gap'] = b['observed'] - a['observed']

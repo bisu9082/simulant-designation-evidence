@@ -1,0 +1,34 @@
+condition,real_agent,nearest_simulant,d_simulant,nearest_interferent,d_interferent,interferent_closer
+A_rdkit,sarin (GB),DMMP,4.404745857971931,ethyl acetate,6.981101022182165,False
+A_rdkit,soman (GD),DMMP,5.466595888370502,n-hexane,8.090399340763065,False
+A_rdkit,tabun (GA),DMMP,7.471366040891936,ethyl acetate,9.33699603281237,False
+A_rdkit,sulfur mustard (HD),dichloromethane,6.612031246220428,n-hexane,5.451747071501319,True
+A_rdkit,lewisite 1 (L),dichloromethane,8.207100141247944,p-dichlorobenzene,7.074227279033871,True
+A_rdkit,hydrogen cyanide (AC),dichloromethane,6.048157298105289,acetonitrile,3.152406588829215,True
+A_rdkit,cyanogen chloride (CK),dichloromethane,5.366623929928242,acetonitrile,3.147095173341763,True
+A_rdkit,phosgene (CG),dichloromethane,6.002536600673325,ethyl acetate,3.8555051835803473,True
+A_rdkit,chloropicrin (PS),DMMP,9.331994951414616,chloroform,8.687033281521394,True
+A_rdkit,cyclosarin (GF),DMMP,5.789659831417176,n-hexane,7.392983311675184,False
+A_rdkit,VX,DPGME,11.843066995184019,n-hexane,13.974169125579316,False
+B_electronic,sarin (GB),DMMP,0.9672906012629237,acetonitrile,1.1706645628007457,False
+B_electronic,soman (GD),DMMP,1.0094160419423008,acetonitrile,1.1219614229294246,False
+B_electronic,tabun (GA),dichloromethane,2.45575553818486,acetone,0.7392124799281302,True
+B_electronic,sulfur mustard (HD),dichloromethane,1.8046501246802487,acetone,1.0462213366772284,True
+B_electronic,lewisite 1 (L),dichloromethane,1.3862271098907846,p-dichlorobenzene,0.869086511763262,True
+B_electronic,hydrogen cyanide (AC),dichloromethane,0.9528299604259458,ethyl acetate,1.0832845471414683,False
+B_electronic,cyanogen chloride (CK),dichloromethane,1.644359502848491,acetonitrile,1.4097920045057792,True
+B_electronic,phosgene (CG),dichloromethane,2.1813951953059374,chloroform,1.4267565371191586,True
+B_electronic,chloropicrin (PS),dichloromethane,3.591823979266963,chloroform,3.042774619560453,True
+B_electronic,cyclosarin (GF),DMMP,0.9091985424677733,acetonitrile,1.117121687207491,False
+B_electronic,VX,DPGME,3.1498060952626967,DMSO,2.1148240479182028,True
+C_merged,sarin (GB),DMMP,4.50970477754503,ethyl acetate,7.237258156077514,False
+C_merged,soman (GD),DMMP,5.5590099255604635,ethyl acetate,8.412374983872997,False
+C_merged,tabun (GA),DMMP,8.002660261916963,ethyl acetate,9.515044718247193,False
+C_merged,sulfur mustard (HD),dichloromethane,6.853883517649224,n-hexane,6.5098593601087895,True
+C_merged,lewisite 1 (L),dichloromethane,8.323347783714686,p-dichlorobenzene,7.127412080156149,True
+C_merged,hydrogen cyanide (AC),dichloromethane,6.122751965914476,acetonitrile,3.3871555571608885,True
+C_merged,cyanogen chloride (CK),dichloromethane,5.612893245010685,acetonitrile,3.4484375485195384,True
+C_merged,phosgene (CG),dichloromethane,6.38662122256571,ethyl acetate,4.481347560785144,True
+C_merged,chloropicrin (PS),DMMP,10.480222475908418,chloroform,9.204511101612166,True
+C_merged,cyclosarin (GF),DMMP,5.860614554221349,n-hexane,8.014218862135168,False
+C_merged,VX,DPGME,12.254775162775164,p-dichlorobenzene,14.356311256354896,False

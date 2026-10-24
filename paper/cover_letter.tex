@@ -22,8 +22,9 @@ Dear Editors,
 %            JHM 은 주제별 복수 Editor-in-Chief 체제이므로 투고 시스템에서
 %            배정된 에디터를 확인하고 기입할 것.
 
-We submit \textit{Whether Chemical Warfare Agent Simulant Designations Look
-Supported Depends on Which Compounds Are in the Comparison} for consideration as
+We submit \textit{Simulants for Chemical Warfare Agent Detection Carry Designations
+Issued for Other Measurements, or None, and Descriptor Comparison Cannot
+Supply the Missing Validation} for consideration as
 a Research Paper.
 
 The manuscript tests a convention this journal recently reviewed. Webb, Coulon
@@ -31,9 +32,28 @@ and Temple (\textit{J.\ Hazard.\ Mater.} \textbf{492}, 138021, 2025) state the
 criterion by which low-toxicity chemical warfare agent simulants are chosen:
 align hydrophobicity, volatility and solubility with the agent, and the compounds
 so chosen present minimal toxicity risk. Both halves are testable against
-existing measurement. We tested them. The toxicity half gave a clear answer. The
-fidelity half gave an answer that depends on what the chosen compounds are
-compared against, and that is the paper.
+existing measurement. We tested them, and we first asked a prior question the
+criterion presupposes: which document designates these compounds, and for
+which measurement. The answer to that question is the paper's first result,
+and it decides how much the descriptor comparison can be asked to carry.
+
+\textbf{Two of the three incumbent simulants were designated for measurements
+that are not the one they now support, and the third was never designated at
+all.} We looked for the instrument that designates
+them. DMMP was identified as a filtration-breakthrough test simulant in a NIOSH
+respirator programme, in a document that also declines to recommend any
+simulant. DPGME appears as ``a preferred G agent simulant'' in a US Army patent,
+in a training composition carrying a fluorescent dye and justified on
+ion-mobility detectability. For dichloromethane we found no designating document
+at all; it is absent from the NIOSH document and from the Man-in-Simulant
+Test programme. The record separates into three grades, which the manuscript
+tabulates: a compound named for a stated measurement, a compound recorded only
+as having been used, and a compound with no document. The clearest designation
+belongs to none of the three: methyl salicylate is the Army's Man-in-Simulant
+Test simulant for sulfur mustard and the subject of a published ASTM test
+method. A simulant is validated against a
+measurement, not against an agent, and that validation does not travel with the
+compound into sensor development.
 
 \textbf{On a panel that contains the compounds the field itself uses as
 simulants, none of eleven agents has a valid match to an incumbent simulant.}
@@ -52,7 +72,8 @@ diisopropyl fluorophosphate at 1.07 from sarin, 0.99 from soman and 1.17 from
 cyclosarin, and 2-chloroethyl ethyl sulfide at 0.57 from sulfur mustard against
 dichloromethane's 1.67. Resampling the 41 descriptors 1000 times leaves this
 intact: the incumbent three match a median of zero agents (95\% interval zero to
-three) against five (four to six) for the eight compounds the field uses, and
+three) against five (four to six) for the eight literature-used simulants
+examined here, and
 the difference is positive in every replicate. A designation defended by a
 comparison that excludes the alternatives is not defended.
 
@@ -66,27 +87,12 @@ correlation of the permutation nulls, or under the Westfall-Young min-$P$
 procedure, which handles the dependence among the eighteen exactly because they
 share one enumeration of designations, nothing reaches 0.05 (the Westfall-Young
 value, 0.075, is the closest any correction brings it). Had the statistic
-been specified in advance, it would survive at $q=0.042$. We did not specify one.
+been specified in advance, it would survive at $q=0.046$. We did not specify one.
 That contrast is the paper's argument made with its own data. The observed value
 also sits at the 25.8th percentile of 2000 arbitrary three-descriptor subspaces
 of the same descriptor block.
 
-\textbf{The three incumbent simulants were designated for measurements that are
-not the one they now support.} We looked for the instrument that designates
-them. DMMP was identified as a filtration-breakthrough test simulant in a NIOSH
-respirator programme, in a document that also declines to recommend any
-simulant. DPGME appears as ``a preferred G agent simulant'' in a US Army patent,
-in a training composition carrying a fluorescent dye and justified on
-ion-mobility detectability. For dichloromethane we found no designating document
-at all; it is absent from the NIOSH candidate list and from the Man-in-Simulant
-Test programme. The compounds with the clearest designations are not these
-three: methyl salicylate is the Army's Man-in-Simulant Test simulant for sulfur
-mustard, and the NIOSH candidate list is DFP, DIMP, DEEP, TEP, dibutyl sulfide,
-CEES, malathion and methyl salicylate. A simulant is validated against a
-measurement, not against an agent, and that validation does not travel with the
-compound into sensor development.
-
-\textbf{Consistent with that, we cannot establish that the incumbent simulants
+\textbf{Taken together, we cannot establish that the incumbent simulants
 resemble the agents, and we cannot establish that they do not.} Three things are
 open to the analyst: the compound panel, the descriptor space, and the distance
 statistic. We fixed all three in every combination we could compute, which is
@@ -96,7 +102,8 @@ report the whole table rather than a cell from it.
 \textbf{One widely used descriptor turned out not to be a coordinate.} The Parr
 electrophilicity index $\omega = \mu^{2}/2\eta$ is an exact function of the two
 frontier orbital energies normally reported beside it; across our panel the
-deviation from the definition is at most $3.6\times10^{-15}$~eV. A correlation
+deviation from the definition reaches at most $1.3\times10^{-5}$~eV on the
+primary panel and $3.6\times10^{-15}$~eV on the twenty-eight-compound one. A correlation
 filter does not catch this, because $r(E_\mathrm{LUMO}, \omega) = -0.899$. We
 removed it, which cost the electronic space a dimension it never had, and we
 state the general form of the point in the Discussion because any descriptor set
@@ -106,23 +113,30 @@ $\omega$ as six quantities has two.
 \textbf{The measured array agrees that the question is unresolved, and corrects
 us on one point.} Twenty-nine-dye colorimetric response for twelve of the
 compounds, tested by Mantel permutation over compounds rather than over the
-pairs they generate, gives two nominally significant cells out of eight that
-favour different descriptor spaces, neither of which survives correction across
-the eight (smallest $q$ = 0.098). Two artifacts of this kind of array analysis are
-reported alongside, because our own first version contained both: dye-axis
-centring fixes the between-compound mean cosine at $-1/(n-1)$, and our observed
-means clear that floor by only 0.013 to 0.066, so a negative between-compound
-similarity is arithmetic rather than evidence; and the measured agent nearest to
-DMMP in the ultraviolet channel is tabun, not sarin, although tabun fails our own
-descriptor matching criterion.
+pairs they generate, gives three nominally significant cells out of twelve that
+do not agree on a descriptor space, none of which survives correction across
+the twelve (smallest $q$ = 0.112). Three artifacts of this kind of array analysis
+are reported alongside, because our own first version contained all three:
+dye-axis centring fixes the between-compound mean cosine at $-1/(n-1)$, and our
+observed means clear that floor by only 0.013 to 0.066, so a negative
+between-compound similarity is arithmetic rather than evidence; six dyes that do
+not fluoresce under ultraviolet illumination returned one background reading six
+times, which inflated the two strongest cells until we collapsed them; and the
+measured agent nearest to DMMP in the ultraviolet channel is tabun, not sarin,
+although tabun fails our own descriptor matching criterion. We also state
+there what the three nominal cells cannot carry: all three fall in the plate
+set that holds no simulant, so they compare agents with agents, while the six
+cells that bear on the premise are null and the design could only have
+registered a near-deterministic association. We would rather submit that
+sentence than a stronger one we cannot support.
 
-\textbf{On safety the two incumbents differ in evidence, not only in hazard.}
+\textbf{The two incumbents differ in safety evidence, not only in hazard.}
 Dichloromethane has a regulator-derived acute inhalation value and it is
 favourable on that axis: at 41\,685~mg~m$^{-3}$ it sits near the safe end of the
 nineteen panel compounds that carry one, though methanol and n-hexane score
-higher still. We are explicit in the manuscript that this is the acute axis only
-and says nothing about the chronic and carcinogenic classification that is
-actually displacing dichloromethane from solvent inventories. DMMP has no value
+higher still. The manuscript is explicit that this is the acute axis alone,
+and that it says nothing about the chronic and carcinogenic classification
+now displacing dichloromethane from solvent inventories. DMMP has no value
 at all, because EPA declined to derive an inhalation reference concentration for
 want of data. Reporting the two as one category of low-toxicity simulant
 obscures that difference, which matters because DMMP is also the compound against
@@ -182,7 +196,8 @@ reason the paper now says what it says. It found the functional dependence in th
 electronic descriptor set, the pairwise-distance pseudoreplication in the array
 analysis, the algebraic floor created by centring, the absence of any multiplicity
 correction across eighteen tests we had in fact computed, and the fact that we had
-never run the panel that includes the simulants the field uses. An earlier version
+never run the panel that includes the other compounds the literature treats as
+simulants. An earlier version
 of this manuscript reported $p=0.028$ as a result and built a thesis on it. None
 of those five problems is visible in that version, and together they remove the
 thesis. We have rewritten the paper around what the data support, and we report
@@ -200,7 +215,10 @@ nineteen panel values.
 the manuscript: detection-relevant fidelity is maximised while phosphorus
 electrophilicity, acetylcholinesterase reactivity, alkylating capacity and
 predicted mammalian toxicity are minimised. The structural filter excludes
-candidates and never orders them. We did not extend the toxicity model to the
+candidates and never orders them. The one ordering the paper publishes ranks
+compounds that have already cleared that filter by resemblance to the agents,
+and every compound in it is an industrial chemical in commerce carrying a
+published regulatory exposure value. We did not extend the toxicity model to the
 organophosphorus class, because a predictor of mammalian lethality evaluated over
 structures not yet made, inside a loop that proposes them, is the configuration
 this work is built to avoid. We cite the existing literature on organophosphorus
@@ -232,7 +250,7 @@ Yours sincerely,
 Doo-Hee Lee and Yoon Jeong Jang, corresponding authors\\
 on behalf of Ku Kang, Jin Yoo, Jeongyun Kim, Miae Kim, Doo-Hee Lee\\
 and Yoon Jeong Jang\\
-\texttt{dooheeleechem@gmail.com} \quad \texttt{yjjangchem@korea.kr}
+\texttt{dooheelee@korea.kr} \quad \texttt{yjjangchem@korea.kr}
 
 % 추천 심사위원: Ku 결정에 따라 제출 시스템에서 공란으로 둔다 (2026-10-15).
 

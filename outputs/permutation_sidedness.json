@@ -1,10 +1,10 @@
 {
  "A_rdkit": {
-  "n_kept": 38,
+  "n_kept": 36,
   "n_perm": 680,
-  "one_sided": 0.027941176470588237,
-  "two_sided_2min": 0.05588235294117647,
-  "two_sided_abs": 0.029411764705882353
+  "one_sided": 0.030882352941176472,
+  "two_sided_2min": 0.061764705882352944,
+  "two_sided_abs": 0.039705882352941174
  },
  "B_electronic": {
   "n_kept": 3,
@@ -14,10 +14,10 @@
   "two_sided_abs": 0.4823529411764706
  },
  "C_merged": {
-  "n_kept": 41,
+  "n_kept": 39,
   "n_perm": 680,
   "one_sided": 0.025,
   "two_sided_2min": 0.05,
-  "two_sided_abs": 0.025
+  "two_sided_abs": 0.027941176470588237
  }
 }

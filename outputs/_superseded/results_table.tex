@@ -1,0 +1,91 @@
+% simulant / Step 4 — 결과 표 (Step 5 본문에 직접 삽입)
+\begin{table}[t]
+\centering
+\caption{Descriptor-space ablation. Nearest-neighbour comparison for the eleven
+authentic agents, with the exact permutation test over all $\binom{17}{3}=680$ ways
+of designating three of the seventeen non-agents as simulants.}
+\label{tab:ablation}
+\begin{tabular}{lccccc}
+\hline
+Descriptor space & Kept & PC1 identity & PC1+PC2 & Interferent closer & Exact $p$ \\
+\hline
+Structural / physicochemical & 38 & molecular size & 48.4\% & 6 / 11 & 0.028 \\
+GFN2 electronic & 4 & global electrophilicity & 74.7\% & 7 / 11 & 0.297 \\
+Merged & 42 & molecular size & 45.9\% & 6 / 11 & 0.025 \\
+\hline
+\multicolumn{6}{l}{\footnotesize Null expectation for ``interferent closer'' is
+9.06 / 11, set by the 14:3 group-size asymmetry alone.}\\
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Nearest designated simulant for each authentic agent, expressed as a
+multiple of the typical nearest-neighbour distance of the same descriptor space
+(merged space shown). A match requires both a normalised distance $\le 2$ and a
+distance smaller than that to every interferent.}
+\label{tab:match}
+\begin{tabular}{llcc}
+\hline
+Authentic agent & Nearest simulant & Normalised distance & Valid match \\
+\hline
+GB & DMMP & 1.13 & yes \\
+GD & DMMP & 1.40 & yes \\
+CK & DCM & 1.44 & no \\
+GF & DMMP & 1.47 & yes \\
+AC & DCM & 1.57 & no \\
+CG & DCM & 1.64 & no \\
+HD & DCM & 1.75 & no \\
+GA & DMMP & 2.03 & no \\
+L & DCM & 2.12 & no \\
+PS & DMMP & 2.70 & no \\
+VX & DPGME & 3.13 & no \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{GFN2-xTB local reactivity at phosphorus for the six phosphorus-bearing
+compounds. $\omega$ is a global index and is reported for completeness only.}
+\label{tab:plocal}
+\begin{tabular}{lccccc}
+\hline
+Compound & $q_{\mathrm{P}}$ (e) & $q_{\mathrm{P=O}}$ (e) & $W_{\mathrm{P=O}}$ &
+$f^{+}(\mathrm{P})$ & $\omega$ (eV) \\
+\hline
+GB & 0.54044 & -0.42847 & 1.9527 & 0.66793 & 2.84 \\
+GD & 0.54460 & -0.43006 & 1.9507 & 0.63692 & 2.77 \\
+GF & 0.53868 & -0.42662 & 1.9546 & 0.63203 & 2.81 \\
+\textbf{DMMP} & 0.46630 & -0.44588 & 1.9246 & 0.55852 & 2.33 \\
+GA & 0.34433 & -0.38982 & 2.0146 & 0.42143 & 10.37 \\
+VX & 0.33196 & -0.40303 & 1.9863 & 0.20431 & 8.99 \\
+\hline
+\multicolumn{6}{l}{\footnotesize GB/GD/GF mean $f^{+}(\mathrm{P})$ = 0.6456 $\pm$ 0.0195;
+DMMP lies 4.47 SD below (84\% of sarin) and 2.73$\times$ above VX.}\\
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Decoupling test. Fidelity is the standardised electronic-space distance to
+the nearest authentic agent; safety is the measured EPA AEGL-3 (10~min).}
+\label{tab:h1}
+\begin{tabular}{lc}
+\hline
+Quantity & Value \\
+\hline
+Candidates with both axes measured & 214 \\
+Spearman $r$ & $-0.022$ (95\% CI $-0.156$ to $+0.111$) \\
+Pearson $r$ & $-0.022$ (95\% CI $-0.149$ to $+0.088$), $p = 0.75$ \\
+Variance of toxicity explained by fidelity & 0.0\% \\
+\hline
+Safety bar: dichloromethane, 41,685~mg~m$^{-3}$ & $\log_{10} = 4.62$ \\
+Faithful and safe at that bar & 0 \\
+Faithful and safe one order of magnitude below it & 8 \\
+\quad clearing the structural-alert gate & 8 \\
+\quad more faithful than dichloromethane itself & 8 \\
+Most faithful of them & Trichloroethylene (0.19 vs 0.69) \\
+\hline
+\end{tabular}
+\end{table}

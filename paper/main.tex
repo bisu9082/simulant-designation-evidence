@@ -20,18 +20,17 @@
 \bibliographystyle{elsarticle-num}
 \renewcommand{\arraystretch}{1.15}
 
-%% Highlights (각 85자 이하, 별도 파일 highlights.tex 와 동일)
-%%   No agent has a valid incumbent simulant once the field's own simulants are in
-%%   DFP displaces DMMP for sarin, soman and cyclosarin; CEES beats DCM for mustard
-%%   Median 0 of 11 matched vs 5 for the field's own set; gap positive in 1000/1000
-%%   Significance survives correction only when two pesticides are relabelled simulants
-%%   DMMP and DPGME were designated for filtration and training, not for sensing
+% Highlights 는 highlights.tex 한 곳에만 둔다. 2026-10-24 까지 이 자리에
+% %% 블록으로 사본이 있었고, 철회한 'DFP displaces DMMP ...' 문구가 거기
+% 남아 있었다. Elsevier 제작계가 %% 블록을 수집하므로 철회한 문구가 실릴 수
+% 있는 경로였다. 사본을 두지 않는다.
 
 \begin{document}
 \begin{frontmatter}
 
-\title{Whether Chemical Warfare Agent Simulant Designations Look Supported
-Depends on Which Compounds Are in the Comparison}
+\title{Simulants for Chemical Warfare Agent Detection Carry Designations
+Issued for Other Measurements, or None, and Descriptor Comparison Cannot
+Supply the Missing Validation}
 
 % elsarticle 는 \ead 를 전부 한 각주로 모아 '* Corresponding authors.' 바로
 % 아래에 붙인다. 비교신저자의 주소까지 실으면 여섯 명 모두가 교신인 것처럼
@@ -46,7 +45,7 @@ Depends on Which Compounds Are in the Comparison}
 \author[cbrn]{Jeongyun Kim}
 \author[cbrn]{Miae Kim}
 \author[kma]{Doo-Hee Lee\corref{cor1}}
-\ead{dooheeleechem@gmail.com}
+\ead{dooheelee@korea.kr}
 \author[cbrn]{Yoon Jeong Jang\corref{cor1}}
 \ead{yjjangchem@korea.kr}
 \fntext[eqc]{These authors contributed equally to this work.}
@@ -59,37 +58,39 @@ Korea Military Academy, Seoul 01805, Republic of Korea}
 %   Ku Kang          0000-0001-8739-218X
 %   Jin Yoo          0000-0002-7738-8424
 %   Jeongyun Kim     0009-0004-1377-8572
-%   Miae Kim         [확인 필요: ORCID]
+%   Miae Kim         없음 (2026-10-24 Ku 확인, 추적 종료)
 %   Doo-Hee Lee      0000-0002-5116-2064
 %   Yoon Jeong Jang  0000-0002-5625-2528
 
 \begin{abstract}
 \noindent
 Chemical warfare agent detection is developed almost entirely on simulants:
-compounds accepted as agent-like and safe to handle. We tested whether that
-acceptance has a measurable basis. For eleven authentic agents we computed
-structural and GFN2-xTB electronic descriptors and asked, by exact permutation
-over every designation, whether three incumbent simulants sit closer to
-the agents than the panel's other non-agents. On our primary thirty-five-compound
-panel, which includes five compounds the sensor literature also calls
-simulants, no agent has a valid match at any threshold and no test reaches
-significance. Resampling the descriptors gives the incumbent three a
-median of zero matched agents against five for the eight the field uses, in
-all 1000 replicates, against 1.0 and 2.7 agents expected by chance at those two
-set sizes. Distances do not move between panels; what changes is that something
-closer is present. A twenty-eight-compound panel
-omitting those five yields three matches and a nominal $p$ of 0.025 that no
-correction over the eighteen tests leaves significant. Moving two labels, so
-that two organophosphorus pesticides count as simulants, produces an adjusted
-value of 0.0006. Two of the three were
-designated for measurements that are not detection; the third was never
-designated. A defensible claim must name the originating measurement and
-fix panel, space, statistic and weighting in advance.
+compounds accepted as agent-like and safe to handle. We tested that
+acceptance. Searching the standard-setting and
+test-procedure record, we found two of the three incumbent simulants designated
+for measurements that are not detection and the third never designated at all.
+For eleven authentic agents we then computed structural and GFN2-xTB electronic
+descriptors and asked, by exact permutation over every designation, whether
+those three sit closer to the agents than the panel's other non-agents. On the
+primary thirty-five-compound panel, which adds five compounds the sensor
+literature also calls simulants, no agent has a valid match at any threshold and
+no test reaches significance. Resampling the descriptors gives the incumbent
+three a median of zero matched agents against five for a set of eight containing
+them, and neither count is unusual for its size: the zero sits at $p=0.48$
+against an expected 1.0, the five at $p=0.07$ against 1.92 once the null
+contains the incumbents as the observed set does. What the extended panel
+changes is the comparison rather than the chemistry, since diisopropyl
+fluorophosphate is nearer to three G agents than any incumbent is. A
+twenty-eight-compound panel omitting those five and the two pesticides yields
+four matches and a nominal $p$ of 0.025 that no correction over eighteen tests
+leaves significant, while relabelling two organophosphorus pesticides as
+simulants produces an adjusted 0.0006. A defensible claim must name the
+originating measurement and fix panel, space, statistic and weighting in
+advance.
 \end{abstract}
 \begin{keyword}
 chemical warfare agent simulant \sep descriptor space \sep {DMMP} \sep
-exact permutation test \sep multiplicity \sep acute exposure guideline level
-\sep dual-use
+exact permutation test \sep acute exposure guideline level \sep dual-use
 \end{keyword}
 
 \end{frontmatter}
@@ -191,8 +192,26 @@ result of this kind arises is part of what a reader of this literature needs.
 fidelity to the detection-relevant properties is to be maximised while
 phosphorus electrophilicity, acetylcholinesterase reactivity, alkylating
 capacity and predicted mammalian toxicity are to be minimised. No analysis here
-ranks compounds by potency. The structural filter in Section~\ref{sec:alerts}
-excludes candidates and never orders them, and we did not extend the toxicity
+ranks compounds by predicted mammalian toxicity. One analysis does order
+compounds on a reactivity surrogate: Supplementary Section~\ref{S-res:plocal}
+reports the condensed Fukui index at phosphorus for the six phosphorus-bearing
+compounds of the panel, which is defined with respect to attack on phosphorus
+and is therefore an acetylcholinesterase-relevant quantity. It covers only
+compounds whose structures and agent status are already public, it is used to
+show that the incumbent simulant sits closer to the agents on that axis than the
+fidelity argument assumes, and it is not extended to any novel structure. The
+structural filter in Section~\ref{sec:alerts} excludes candidates and never
+orders them. One ordering is published, in
+Supplementary Section~\ref{S-res:h1}, and it ranks compounds that have cleared
+that filter by resemblance to the agents in the electronic space. Every
+compound in it is an industrial chemical in commerce that already carries a
+published regulatory exposure value, which is how it entered the pool at all,
+and the selection that produced the list is a safety threshold rather than a
+reactivity one. The alert patterns themselves are the agent-class motifs of the
+published structural-alert literature cited in Section~\ref{sec:alerts}, and
+Section~\ref{sec:alerts} states in prose what each tier covers, so releasing the
+patterns with the code adds no structure-activity information that the text does
+not already give. We did not extend the toxicity
 model of Supplementary Section~\ref{S-sec:qsar} to the organophosphorus class,
 because a model predicting mammalian lethality for structures not yet made would
 invert the direction of the work. That a predictive model trained for safety can
@@ -212,55 +231,10 @@ cyanogen chloride CK, phosgene CG and chloropicrin PS. Three compounds are
 treated as the incumbent simulants: DMMP, dichloromethane and dipropylene glycol
 monomethyl ether (DPGME).
 
-We call these three incumbent rather than designated. Searching for an
-instrument designating them as chemical warfare agent simulants, we found that
-two carry a documented designation for a purpose other than the one they now
-serve, and the third carries none.
-
-DMMP was identified as a test simulant for canister and cartridge filtration
-against GB and HD in a NIOSH respirator programme \cite{niosh2002simulant}, a
-document that also states the simulant information it provides is not to be used
-as a recommendation of any simulant, and whose property at issue is adsorptive
-breakthrough rather than detection chemistry. DPGME appears as ``a preferred G
-agent simulant'' in a patent assigned to the United States Department of the Army
-\cite{seitzinger2006simulant}, in a training composition formulated with a
-fluorescent dye and justified on ion-mobility detectability, so the application
-is field training rather than sensor validation. For dichloromethane we found no
-designating document of any kind: it is absent from the NIOSH candidate list and
-from the Man-in-Simulant Test programme, and present in this role, as far as we
-can establish, only in the research literature, where it is run as a chemical
-agent simulant alongside DMMP and DPGME on metal-oxide gas sensors
-\cite{lee2011sno2}. That study puts a fourth compound in the same role,
-acetonitrile, which the panel used here classes as an interferent, so the
-literature usage does not resolve to a fixed set either.
-
-A negative claim about documents is only as good as its scope. We searched the
-standard-setting and test-procedure
-literature reachable without a subscription or a clearance: NIOSH and NPPTL
-respirator documents, US Army and DEVCOM reports indexed by the Defense
-Technical Information Center, United States patents assigned to the Department
-of the Army, National Academies assessments of Department of Defense test
-programmes, ASTM and NATO standards catalogues, and the peer-reviewed simulant
-literature cited here. Two Test Operations Procedures bearing on the question
-(TOP 08-2-196A and TOP 10-2-022B) we could not obtain, and national CBRN defence
-manuals are generally not public. A designation in one of those would change the
-paragraphs above but not the measurements below.
-
-Two observations follow. A designation is specific to a measurement: a compound
-chosen because it breaks through a carbon bed like sarin has been validated for
-adsorption and not for an optical or electrochemical response, and one chosen
-because it lights up an ion-mobility detector in a training lane has been
-validated for that detector. The sensor literature using these three is using
-designations issued for other
-purposes. The compounds with the clearest designations, in turn, are not these
-three: methyl salicylate is the simulant of the United States Army's
-Man-in-Simulant Test programme, chosen for sulfur mustard on 1994 penetration
-trials \cite{nrc1997mist}, and the NIOSH candidate list consists of DFP, DIMP,
-DEEP, TEP, dibutyl sulfide, CEES, malathion and methyl salicylate. Those
-compounds are in the second panel described below, not the first. A recent
-survey reaches the same conclusion in general form, that simulants have been
-selected largely on historical use and that no standard for chemical agent
-simulants exists \cite{lawrence2025simulants}.
+We call these three incumbent rather than designated.
+Section~\ref{res:docs} reports what searching for a designating instrument
+returned, since that search is a result of this work rather than a premise of
+it; the panel construction below uses its outcome.
 
 The two panels differ only in the non-agent pool, and the difference is the
 point. The twenty-eight-compound panel adds fourteen interferents and solvents
@@ -269,20 +243,27 @@ thirty-five-compound panel adds, to those, five further compounds used as
 simulants in the sensor, sorbent and decontamination literature (diisopropyl
 fluorophosphate DFP, diethyl chlorophosphate DCP, diethyl cyanophosphonate DCNP\cite{lee2021tabun,jang2014tabun},
 2-chloroethyl ethyl sulfide CEES and methyl salicylate), classified as simulants
-rather than as interferents, together with two organophosphorus pesticides,
+rather than as interferents. DCNP carries the clearest documentation of the
+five: it is the compound probe chemistries are developed against when the
+target is tabun, in a hydrogel sensor built on a self-propagating cascade
+\cite{lee2021tabun} and in a selective optical scheme for tabun mimics
+\cite{jang2014tabun}. The panel adds, alongside these five, two
+organophosphorus pesticides,
 dichlorvos and malathion. We class the pesticides as interferents because the
 sensor and decontamination literature we surveyed does not use them to stand in
-for an agent, and flag the decision as contestable on two counts: malathion is on
-the NIOSH respirator candidate list quoted above, and both pesticides carry the
+for an agent, and flag the decision as contestable on two counts: malathion
+appears in the NIOSH document's barrier-breakthrough tables, and both pesticides carry the
 phosphoryl motif that the structural filter of Section~\ref{meth:filter} treats
 as agent-class.
 Section~\ref{res:panels} reports how sensitive the result is to exactly this
 kind of decision.
 
 The thirty-five-compound panel is the primary one, and the five it adds are the
-ones with documentary standing: DFP and methyl salicylate appear in the NIOSH
-candidate list quoted above, methyl salicylate is the Man-in-Simulant Test
-simulant \cite{nrc1997mist}, and all five are in current use. A comparison asking
+ones the same documents name: methyl salicylate is the Man-in-Simulant Test
+simulant and the subject of a published test method \cite{nrc1997mist,
+astmf2588}, DFP is recorded in the NIOSH notes as having been used as a vapour
+simulant for GB, CEES appears in that document's barrier-breakthrough tables,
+and all five are in current use in the sensor literature. A comparison asking
 whether three compounds are close to the agents while excluding the obvious
 alternatives is not a test of those three. We report the twenty-eight-compound
 panel throughout with equal numerical detail, because what it shows beside the
@@ -293,15 +274,17 @@ Panel, space, statistic and descriptor weighting were not fixed before the
 analysis was run, and this paper's conclusion is that they should be. We state
 them here so that the standard we recommend can be applied to the work
 recommending it. The thirty-five-compound panel is primary because the five
-compounds it adds carry documentary standing the incumbent three do not. The
+compounds it adds appear in the same documents as the incumbents, and two of
+them under a stronger grade of standing than dichloromethane has. The
 merged space is reported alongside both component spaces throughout rather than
 selected among them. Six distance statistics were computed and none was
 nominated in advance, which Section~\ref{res:panels} reports the consequence of
-and Table~\ref{tab:family} prices. Equal weight per descriptor was the default
+and Supplementary Table~\ref{S-tab:family} prices. Equal weight per descriptor was the default
 we inherited rather than one we chose, and Supplementary
 Section~\ref{S-res:blockbalance} reports the alternative.
 
 \subsection{Descriptors}
+\label{meth:descriptors}
 Structural and physicochemical descriptors (51 after excluding run metadata)
 were computed with RDKit \cite{rdkit} from canonical SMILES, and include the
 Crippen atomic-contribution estimates of logP and molar refractivity
@@ -362,16 +345,17 @@ descriptor sets of this kind usually report. The fourth, the Parr electrophilici
 index $\omega = \mu^{2}/2\eta$ with $\mu = (E_{\mathrm{HOMO}} +
 E_{\mathrm{LUMO}})/2$ and $\eta = (E_{\mathrm{LUMO}} - E_{\mathrm{HOMO}})/2$
 \cite{parr1999}, is an exact function of the two orbital energies that accompany
-it. We confirmed this numerically: across the panel
+it. We confirmed this numerically: across the primary panel
 $|\omega - \mu^{2}/2\eta|$ reaches at most
-$3.6\times10^{-15}$~eV. The correlation filter
+$1.3\times10^{-5}$~eV, and $3.6\times10^{-15}$~eV on the
+twenty-eight-compound panel. The correlation filter
 described below does not remove it, because $r(E_{\mathrm{LUMO}}, \omega) =
 -0.899$ falls below the $|r|>0.95$ threshold; a filter built on linear
 correlation will pass a variable determined exactly by functional
 dependence. Three principal components of
 the standardised four-variable set account for 97.6\% of its variance, and
 removing $\omega$ leaves the rank order of pairwise distances almost unchanged
-(Spearman 0.932). We therefore take $E_{\mathrm{HOMO}}$, $E_{\mathrm{LUMO}}$ and
+(Spearman 0.934 on the primary panel, 0.932 on the smaller one). We therefore take $E_{\mathrm{HOMO}}$, $E_{\mathrm{LUMO}}$ and
 the dipole moment as the electronic space, and report $\omega$ and the condensed
 Fukui index in Supplementary Table~\ref{S-tab:plocal} without admitting them to
 any distance. The four reactivity descriptors localised at phosphorus
@@ -444,7 +428,7 @@ condition for all eleven agents, so the count there is zero at every threshold,
 including an unbounded one. We report the count at 1.5, 1.75, 2.0, 2.5 and 3.0
 in Section~\ref{res:match}, including the one setting at which it changes.
 
-\subsection{Descriptor bootstrap}
+\subsection{Descriptor-resampling sensitivity analysis}
 \label{meth:dboot}
 The conclusions of Section~\ref{res:panels} turn on differences that are small
 in absolute terms, 0.12 typical nearest-neighbour separations between DMMP and
@@ -454,8 +438,25 @@ descriptors with replacement 1000 times (seed \texttt{0xC0DE}), restandardised,
 recomputed the distance matrix and the median nearest-neighbour separation
 within each replicate, and recounted the matched agents. Resampling features
 rather than compounds is the relevant perturbation, because the compound set is
-fixed by the question and the descriptor set is not. The same replicates serve
+fixed by the question and the descriptor set is not. The descriptors are not
+sampled observations drawn from a defined population, so the replicates are
+read as a sensitivity analysis over descriptor choice and the reported
+intervals are percentile ranges across replicates rather than confidence
+% 2026-10-24. 귀무기댓값 절차가 초록에만 수치로 등장하고 방법 선언이 없었다.
+% 여섯 페르소나 전원이 같은 자리를 짚었다.
+intervals in the sampling sense. The same replicates serve
 both simulant definitions, so the difference is paired.
+
+Counts obtained from designated sets of different sizes are not directly
+comparable, because the second condition of the match criterion asks a
+designated compound to be nearer than every compound outside the designated
+set, and that condition is easier to meet as the set grows. We therefore
+computed, for each set size, the distribution of matched agents over
+designations of that many non-agents drawn from the same panel: exhaustively
+over all 2024 designations of three, and over 20,000 draws for eight, where
+735,471 designations exist. The observed counts are reported against the mean
+of that distribution and against the proportion of designations reaching at
+least the observed count.
 
 \subsection{Structural filter}
 \label{meth:filter}
@@ -486,27 +487,144 @@ figure scripts are in the repository cited under Data and code availability.
 
 \section{Results}
 
+\subsection{What the designating documents say, and for which measurement}
+\label{res:docs}
+
+Searching for an instrument that designates the three incumbent compounds as
+chemical warfare agent simulants, we found that two carry a documented
+designation for a purpose other than the one they now serve, and the third
+carries none. The record separates into three grades, set out in
+Table~\ref{tab:docs}: a compound named for a stated measurement, a compound
+recorded only as having been used, and a compound with no document at all.
+
+DMMP was identified as a test simulant for canister and cartridge filtration
+against GB and HD in a NIOSH respirator programme \cite{niosh2002simulant}, and
+appears again in the same document's candidate list for the GB and HD permeation
+study. That document also states the simulant information it provides is not to
+be used
+as a recommendation of any simulant, and the property at issue in both roles is
+breakthrough through a barrier rather than detection chemistry. DPGME appears as ``a preferred G
+agent simulant'' in a patent assigned to the United States Department of the Army
+\cite{seitzinger2006simulant}, in a training composition formulated with a
+fluorescent dye and justified on ion-mobility detectability, so the application
+is field training rather than sensor validation. For dichloromethane we found no
+designating document of any kind: it is absent from the NIOSH document and
+from the Man-in-Simulant Test programme, and present in this role, as far as we
+can establish, only in the research literature, where it is run as a chemical
+agent simulant alongside DMMP and DPGME on metal-oxide gas sensors
+\cite{lee2011sno2}. That study puts a fourth compound in the same role,
+acetonitrile, which the panel used here classes as an interferent, so the
+literature usage does not resolve to a fixed set either.
+
+\begin{table}[!htb]
+\centering
+\caption{The documentary record for the compounds this paper treats as
+simulants. Standing is graded by what the document does: \emph{designated}
+names the compound for a stated measurement, \emph{recorded} notes that it has
+been used without naming a measurement to validate it against, and
+\emph{none} means no instrument was found. The measurement each compound is
+used for now is detection by a sensor, in every row.}
+\label{tab:docs}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l l p{0.27\textwidth} p{0.30\textwidth}@{}}
+\hline
+Compound & Standing & Instrument & Measurement it was named for \\
+\hline
+\multicolumn{4}{@{}l}{\emph{Treated as incumbent simulants here}}\\
+DMMP & designated & NIOSH respirator programme
+\cite{niosh2002simulant}; also on that document's permeation candidate list
+     & canister and cartridge breakthrough against GB and HD \\[2pt]
+DPGME & designated & US Army patent \cite{seitzinger2006simulant}
+      & ion-mobility response in a training composition \\[2pt]
+dichloromethane & none & none found & none \\
+\hline
+\multicolumn{4}{@{}l}{\emph{Added to the primary panel}}\\
+methyl salicylate & designated & Man-in-Simulant Test
+\cite{nrc1997mist, astmf2588}
+                  & vapour penetration of a protective ensemble \\[2pt]
+DFP & recorded & NIOSH notes \cite{niosh2002simulant}
+    & none stated \\[2pt]
+CEES & recorded & NIOSH reference tables \cite{niosh2002simulant}
+     & barrier breakthrough against HD \\[2pt]
+DCP, DCNP & none & none found & none \\
+\hline
+\end{tabular}
+\end{table}
+
+A negative claim about documents is only as good as its scope. We searched the
+standard-setting and test-procedure
+literature reachable without a subscription or a clearance: NIOSH and NPPTL
+respirator documents, US Army and DEVCOM reports indexed by the Defense
+Technical Information Center, United States patents assigned to the Department
+of the Army, National Academies assessments of Department of Defense test
+programmes, ASTM and NATO standards catalogues, and the peer-reviewed simulant
+literature cited here. Two Test Operations Procedures bearing on the question
+(TOP 08-2-196A and TOP 10-2-022B) we could not obtain, and national CBRN defence
+manuals are generally not public. A designation in one of those would change the
+paragraphs above but not the measurements below.
+
+Two observations follow. A designation is specific to a measurement: a compound
+chosen because it breaks through a carbon bed like sarin has been validated for
+adsorption and not for an optical or electrochemical response, and one chosen
+because it lights up an ion-mobility detector in a training lane has been
+validated for that detector. The sensor literature using these three is using
+designations issued for other
+purposes. The compounds with the clearest designations, in turn, are not these
+three, and the clearest of them is not clear in the way we first read it.
+Methyl salicylate is the simulant of the United States Army's Man-in-Simulant
+Test programme, and it is carried into a published consensus standard that fixes
+the measurement as vapour penetration of a protective ensemble
+\cite{astmf2588}. The National Academies assessment of that programme, however,
+states that its selection ``was based on its historical use as an agent
+simulant'' rather than on a validation against the agents, asks ``whether MeS is
+a reliable simulant of chemical agents'', notes that the physicochemical
+properties of VX, sulfur mustard and methyl salicylate are very different, and
+records that the assumptions behind its use ``have not been tested''
+\cite{nrc1997mist}. So the compound with the strongest instrument behind it
+carries, in the same literature, an explicit statement that the instrument rests
+on prior use. That is the pattern of this section rather than an exception to
+it, and it is why Table~\ref{tab:docs} grades what a document does and not how
+authoritative it looks. The NIOSH document's candidate list for the permeation study
+names eleven compounds, among them DIMP, DEEP, TEP, di-n-butyl sulfide and DMMP
+itself. Diisopropyl fluorophosphate and methyl salicylate are not on that list;
+they appear in the same document's notes, each recorded as having been used as a
+vapour simulant rather than designated for a measurement. Malathion and
+2-chloroethyl ethyl sulfide appear in its reference tables of barrier
+breakthrough data. The compounds named in that document and in the
+Man-in-Simulant Test are in the thirty-five-compound panel of
+Section~\ref{meth:panels}, not the twenty-eight-compound one. A recent
+survey states the first half of this in general form, that simulants have
+generally been selected on the basis of their historical use
+\cite{lawrence2025simulants}. That survey records the absence of a development
+standard for \emph{explosive} simulants, not for chemical agent simulants, and
+we have found no source that states the latter; the absence we report here rests
+on our own search and not on a prior claim.
+
+
 \begin{figure}[tp]
 \centering
 \includegraphics[width=\textwidth]{Fig_main.png}
 \caption{What the comparison contains decides the answer. (a) For each agent,
 the distance to the nearest incumbent simulant (circles) and to the nearest
-candidate once the five compounds the field also uses as simulants are included
+candidate once the five further compounds treated as simulants in the
+literature are included
 (diamonds), as multiples of the typical nearest-neighbour separation of the
 merged space on the thirty-five-compound panel. A match requires a normalised
 distance below the dashed threshold \emph{and} a distance smaller than that to
 every compound not designated a simulant, so sarin, soman and cyclosarin fail on
 the primary panel despite lying inside the threshold. (b) Matched agents under
-1000 descriptor bootstrap replicates (Section~\ref{meth:dboot}) for the
-incumbent three and for the eight the field uses; circles are means, vertical
-rules medians, bars 95\% intervals. (c) On the twenty-eight-compound panel,
+1000 descriptor-resampling replicates (Section~\ref{meth:dboot}) for the
+incumbent three and for the eight literature-used simulants examined here;
+circles are means, vertical rules medians, bars the 2.5th to 97.5th
+percentiles across replicates. (c) On the twenty-eight-compound panel,
 which omits those five, the distance from each agent to its nearest incumbent
 simulant in each of the three spaces, normalised by the typical
 nearest-neighbour separation of that space; filled markers are valid matches.
 (d) Exact permutation null for that panel over all 680 ways of designating three
 of the seventeen non-agents as simulants, with the actual designation marked;
 the $p$ shown is the mean-difference statistic only, the other five and the
-adjusted values being in Table~\ref{tab:ablation}, where the
+adjusted values being in Supplementary Table~\ref{S-tab:ablation}, where the
 Benjamini-Hochberg value over its eighteen tests is 0.159.}
 \label{fig:main}
 \end{figure}
@@ -521,7 +639,9 @@ Benjamini-Hochberg value over its eighteen tests is 0.159.}
 worth once the choices behind it are counted. Red marks the authentic agents,
 blue the three incumbent simulants and orange the interferents and solvents;
 only agents and simulants are labelled. (a) Principal components of the
-structural space and (b) of the three-coordinate GFN2-xTB electronic space; the
+structural space and (b) of the three-coordinate GFN2-xTB electronic space,
+both on the twenty-eight-compound panel, so that the five literature simulants
+do not appear in them; the
 leading structural component is a size axis and the leading electronic component
 loads the two orbital energies against the dipole moment. (c) Smallest $p$ over
 the six statistics for 2000 random three-descriptor subspaces of the structural
@@ -529,7 +649,8 @@ space, before and after ZCA whitening, with the space used here marked: its
 0.028 is the 26th percentile of those draws, and 36\% of them fall below 0.05
 as measured, 17\% after whitening. (d) Smallest adjusted value over the
 eighteen tests of each configuration under the five accounting schemes of
-Table~\ref{tab:family}; on the twenty-eight-compound panel only the scheme that
+Supplementary Table~\ref{S-tab:family}; on the twenty-eight-compound panel only the
+scheme that
 fixes the statistic in advance falls below 0.05, and the fourth configuration
 falls below it under every scheme. Local reactivity at phosphorus and the rank
 of the Parr index are in Supplementary Figure~\ref{S-fig:plocal}.}
@@ -538,21 +659,27 @@ of the Parr index are in Supplementary Figure~\ref{S-fig:plocal}.}
 
 On the thirty-five-compound panel, no authentic agent has a valid match to an
 incumbent simulant. Figure~\ref{fig:main}a shows why, and the mechanism is not
-the one our earlier version reported. The distances from the agents
-to the incumbent simulants do not change when the panel is extended.
-Standardisation and the normalising separation are recomputed on each panel, so
-one distance is reported on two scales: sarin reads 1.14 against DMMP on the
-smaller panel and 1.19 on the larger, cyclosarin 1.48 and 1.58. Held on the
-thirty-five-compound basis throughout, every agent sits exactly as far from its
-nearest incumbent under either pool, because all three incumbents belong to
-both. The compounds did not become less faithful. What changed is that diisopropyl
+the one our earlier version reported. The two panels do not share a scale, and
+they do not quite share a space. Standardisation and the normalising separation
+are recomputed on each panel, and the correlation filter admits a different
+pair of columns on each, \texttt{kappa1} and one solvation surrogate on the
+twenty-eight-compound panel against two phosphorus counts on the primary one,
+so the thirty-eight structural coordinates are not the same thirty-eight.
+Distances across the two are therefore not directly comparable, and the
+comparison we rely on is made within the primary panel, where the compounds,
+the columns and the standardisation are fixed and only the labels move. Held on
+that single basis, every agent sits exactly as far from its nearest incumbent
+whether the designated set is the incumbent three or those three together with
+the five literature compounds, because all three incumbents belong to both
+sets. The compounds did not become less faithful: on that panel sarin stands
+1.19 from DMMP, soman 1.45 and cyclosarin 1.58. What changed is that diisopropyl
 fluorophosphate is present, at 1.07, 0.99 and 1.17 from the same three agents,
 and the match criterion requires a simulant to be nearer than every compound not
 designated one. The same holds across the panel, with 2-chloroethyl ethyl
 sulfide at 0.57 from sulfur mustard where dichloromethane stands at 1.67, and
 diethyl cyanophosphonate at 1.80 from tabun where DMMP stands at 2.58.
 Admitting the five as simulants gives five matched agents of eleven, against
-three on the twenty-eight-compound panel and zero on the primary one. The zero
+four on the twenty-eight-compound panel and zero on the primary one. The zero
 does not depend on the threshold: no incumbent simulant is the
 nearest non-agent compound to any of the eleven agents, so the count stays at
 zero however far the threshold is relaxed.
@@ -560,10 +687,26 @@ zero however far the threshold is relaxed.
 That count is sensitive to the descriptors, and the honest statement of it is
 the interval rather than the point. Resampling the 41 merged-space descriptors
 with replacement (Section~\ref{meth:dboot}) gives the incumbent three a median
-of zero matched agents with a 95\% interval of zero to three, and exactly zero
+of zero matched agents with a 2.5th to 97.5th percentile range of zero to
+three, and exactly zero
 in 58.8\% of replicates, against a median of five and an interval of four to six
-for the eight compounds the field uses. The comparison is what survives: the
-difference between the counts is positive in 1000 of 1000 replicates, median
+for that eight-compound set, which contains the incumbent three. Because the
+match criterion asks whether a designated compound is nearer than every
+compound outside the designated set, enlarging that set cannot lower the count,
+and part of the difference is set size alone: designating eight non-agents at
+random matches 2.68 agents on average against 1.00 for three, so the observed
+gap of five decomposes into 1.68 expected from size and 3.32 beyond it. Matching
+on size alone is not quite the right null, because the observed eight-compound
+set contains the incumbent three while a set drawn freely need not. Holding the
+three fixed and drawing the other five at random gives a mean of 1.92 rather
+than 2.68, and the observed five sits at $p=0.068$ against it. Neither observed
+count departs from a null built to resemble it: the three at $p=0.479$ over all
+2024 designations, and the eight at $p=0.068$ conditionally or $p=0.161$
+unconditionally. We report the lower tail for the three because the observed
+count is zero, which is the floor; the upper tail there is 1.000 by arithmetic
+and says nothing, and an earlier version of this paper quoted it as though it
+did. What the resampling adds is that the
+difference between the counts, unadjusted for size, is positive in 1000 of 1000 replicates, median
 four, interval one to six (Figure~\ref{fig:main}b). The per-agent reliabilities
 in the same replicates separate the firm results from the marginal ones. Sulfur
 mustard is matched by 2-chloroethyl ethyl sulfide in every replicate and tabun by
@@ -573,132 +716,53 @@ and cyclosarin in 12.7\%. The displacement of DMMP at the G agents is therefore
 the weakest part of the picture and the sulfur mustard result the strongest,
 reversing what the point estimates suggest.
 
-Figure~\ref{fig:spaces}a and b give the spaces. The leading structural component is a
-size axis carrying 36.5\% of the variance and the leading electronic component
+Figure~\ref{fig:spaces}a and b give the spaces on the twenty-eight-compound
+panel. The leading structural component is a
+size axis carrying 34.9\% of the variance and the leading electronic component
 loads on the two orbital energies against the dipole moment, the first two
-carrying 70.4\%. Merging them returns a size axis at lower cumulative variance
-(45.9\%) for a dimensional rather than a chemical reason: at equal
+carrying 70.4\%. The primary panel behaves the same way, at 34.8\% and 70.3\%.
+Merging the two blocks returns a size axis at lower cumulative variance over the
+first two components, 45.4\% on the smaller panel and 45.0\% on the primary one,
+for a dimensional rather than a chemical reason: at equal
 per-descriptor weighting thirty-eight structural descriptors outvote three
 electronic ones.
 
-Table~\ref{tab:ablation} gives every exact permutation test we can run across
-four panel and designation configurations, three spaces and six statistics, in full rather than selected from,
-because the pattern across the cells is the finding.
-
-\begin{table}[!htb]
-\centering
-\caption{Every exact permutation test available. One-sided $p$ for six distance
-statistics (Section~\ref{sec:perm}) in three spaces, over four designation
-configurations on two panels (Section~\ref{meth:panels}). $q$ is the smallest
-Benjamini-Hochberg value over the eighteen tests of that configuration. Bold
-marks nominal $p<0.05$. Only the fourth configuration, which relabels the two
-organophosphorus pesticides as simulants, reaches $q<0.05$.}
-\label{tab:ablation}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{llcccccccc}
-\hline
-Panel / simulant set & Space & Dim. & $\Delta\bar{d}$ & $\Delta\tilde{d}$ &
-$\overline{\ln r}$ & $\bar{d}_\mathrm{sim}$ & $n_\mathrm{closer}$ &
-$n_\mathrm{valid}$ & min $q$ \\
-\hline
-\textbf{35 cpd., incumbent 3} & structural  & 38 & 0.326 & 0.343 & 0.404 & 0.237 & 1.000 & 1.000 & \\
-\textbf{(primary)}   & electronic  &  3 & 0.386 & 0.374 & 0.412 & 0.344 & 0.723 & 0.664 & \\
-                     & merged      & 41 & 0.283 & 0.151 & 0.366 & 0.183 & 1.000 & 1.000 & 0.617 \\
-\hline
-35 cpd., incumbent   & structural  & 38 & 0.062 & 0.341 & \textbf{0.050} & 0.158 & 0.319 & 0.159 & \\
-\quad + literature 8 & electronic  &  3 & 0.121 & 0.086 & 0.123 & 0.127 & 0.165 & 0.080 & \\
-                     & merged      & 41 & \textbf{0.053} & 0.326 & \textbf{0.039} & 0.128 & 0.319 & 0.159 & 0.212 \\
-\hline
-28 cpd., incumbent 3 & structural  & 38 & \textbf{0.028} & 0.176 & \textbf{0.044} & 0.085 & 0.110 & 0.216 & \\
-\quad (omits the five) & electronic  &  3 & 0.275 & 0.175 & 0.293 & 0.235 & 0.757 & 0.757 & \\
-                     & merged      & 41 & \textbf{0.025} & 0.124 & \textbf{0.032} & \textbf{0.041} & 0.110 & 0.235 & 0.159 \\
-\hline
-35 cpd., incumbent 3 & structural  & 38 & \textbf{0.013} & \textbf{$<$0.001} & 0.055 & 0.251 & 0.318 & 0.268 & \\
-\quad + literature 5 & electronic  &  3 & 0.089 & 0.053 & 0.059 & 0.086 & 0.066 & 0.055 & \\
-\quad + pesticides 2 & merged      & 41 & \textbf{0.005} & \textbf{$<$0.001} & \textbf{0.035} & 0.166 & 0.318 & 0.268 & \textbf{$<$0.001} \\
-\hline
-\multicolumn{10}{l}{\footnotesize Statistics, in order: mean and median of
-$d_\mathrm{sim}-d_\mathrm{intf}$; mean $\ln(d_\mathrm{sim}/d_\mathrm{intf})$;
-mean $d_\mathrm{sim}$;}\\
-\multicolumn{10}{l}{\footnotesize count of agents with a simulant closer than
-any interferent; count of valid matches. Permutations:}\\
-\multicolumn{10}{l}{\footnotesize $\binom{17}{3}=680$, $\binom{24}{3}=2024$,
-$\binom{24}{8}=735\,471$, $\binom{24}{10}=1\,961\,256$, enumerated exhaustively
-in each case.}\\
-\end{tabular}
-\end{table}
-
-Three things hold across the table. On the primary panel no test reaches nominal
-significance: in no space and under no statistic are the incumbent simulants
-distinguishable from compounds drawn at random. Classing the five literature
-compounds as simulants recovers two nominal values below 0.05, both in spaces
-containing the structural descriptors, so the difficulty is not that the test
-cannot detect anything on this panel. On the twenty-eight-compound panel, which
-differs only in omitting those five and two organophosphorus pesticides, the
-incumbents beat random compounds under two of six statistics in the structural
-space and three of six in the merged space.
+Every exact permutation test we can run, across four panel and designation
+configurations, three spaces and six statistics, is in Supplementary
+Table~\ref{S-tab:ablation}, in full rather than selected from, because the
+pattern across the cells is the finding. Three things hold across it. On the
+primary panel no test reaches nominal significance: in no space and under no
+statistic are the incumbent simulants distinguishable from compounds drawn at
+random. Classing the five literature compounds as simulants recovers two
+nominal values below 0.05, both in spaces containing the structural
+descriptors, so the difficulty is not that the test cannot detect anything on
+this panel. On the twenty-eight-compound panel, which differs only in omitting
+those five and two organophosphorus pesticides, the incumbents beat random
+compounds under two of six statistics in the structural space and three of six
+in the merged space.
 
 Correcting for the number of times we looked removes almost all of it, and the
-exception is instructive. Table~\ref{tab:family} gives the five correction
-schemes of Section~\ref{sec:perm}. On the primary panel the question does not
-arise, since the smallest nominal value is already 0.151 under the
-per-descriptor standardisation used throughout. Weighting the 38 structural and
-3 electronic descriptors as two equal blocks instead lowers that value to 0.076,
-which still survives no correction and leaves every valid-match count unchanged
-(Supplementary Section~\ref{S-res:blockbalance}). The schemes matter
-only for the twenty-eight-compound panel. There the eighteen-test family gives a
-smallest adjusted value of 0.159, correcting the six statistics within each
-space gives 0.082, and the Westfall-Young min-$P$ procedure, which uses the
+exception is instructive. On the primary panel the question does not arise,
+since the smallest nominal value is already 0.151 under the per-descriptor
+standardisation used throughout. The five accounting schemes of Supplementary
+Section~\ref{S-meth:multiplicity}, applied in Supplementary
+Table~\ref{S-tab:family}, matter only for the twenty-eight-compound panel. There the eighteen-test family
+gives a smallest adjusted value of 0.185, correcting the six statistics within
+each space gives 0.082, and the Westfall-Young min-$P$ procedure, which uses the
 shared permutations and so accounts for the dependence between the tests exactly
 rather than approximating it, gives 0.075. That is the closest any correction
-brings the panel to the conventional threshold without crossing it. The Li-Ji
-approximation it replaces estimates 5.00 effective tests of eighteen and gives
-0.125, conservative here by a factor near 1.7. None of the first three
-configurations of Table~\ref{tab:ablation} reaches 0.05 under those four schemes.
-
-The fifth scheme behaves differently. Had the mean difference been specified in
-advance as the single statistic, three tests would have been run and the
-twenty-eight-compound structural and merged results would survive at $q=0.042$,
+brings the panel to the conventional threshold without crossing it. The fifth
+scheme behaves differently. Had the mean difference been specified in advance as
+the single statistic, three tests would have been run and the
+twenty-eight-compound structural and merged results would survive at $q=0.046$,
 while neither thirty-five-compound configuration would (0.386 and 0.092). We did
 not specify a statistic in advance; we computed six and chose among them after
 seeing them, which is the circumstance the correction is for. The comparison is
-the paper's own argument made with its own data: one analysis, one data set, five
-defensible ways of accounting for the search, and a result significant under one
-and not the other four. The declaration that would have made the
-difference is one nobody in this literature makes, and it has to be made before
-the data are seen.
-
-\begin{table}[!htb]
-\centering
-\caption{Five ways of accounting for the search, applied to the eighteen tests
-of each panel configuration. The Westfall-Young min-$P$ value
-\cite{westfall1993} is exact for the dependence among the tests, since all
-eighteen share one enumeration of designations; $m_{\mathrm{eff}}$ approximates
-that dependence from the eigenvalues of the correlation matrix of the eighteen
-nulls \cite{liji2005}, used as a Bonferroni divisor. On the primary panel no
-scheme returns anything below 0.05 and on the smaller panel only the
-pre-specified-statistic scheme does, while the fourth configuration, which
-differs from the second by two class labels, is below 0.05 under every scheme.}
-\label{tab:family}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccc}
-\hline
-Accounting scheme & 35 cpd., & 35 cpd., & 28 cpd., & 35 cpd., \\
-                  & incumbent 3 & + literature 8 & incumbent 3 & relabelled 10 \\
-                  & (primary) & & (omits the five) & (pesticides in) \\
-\hline
-Smallest nominal $p$ (18 tests)      & 0.151 & 0.039 & 0.025 & \textbf{$<$0.001} \\
-Benjamini-Hochberg over 18           & 0.617 & 0.212 & 0.159 & \textbf{$<$0.001} \\
-Benjamini-Hochberg over 6, per space & 0.548 & 0.153 & 0.082 & \textbf{$<$0.001} \\
-Westfall-Young min-$P$ over 18       & 0.402 & 0.113 & 0.075 & \textbf{$<$0.001} \\
-$m_{\mathrm{eff}}$ of 18 (Li-Ji)     & 6.00  & 5.00  & 5.00  & 5.00 \\
-Bonferroni at $m_{\mathrm{eff}}$     & 0.907 & 0.196 & 0.125 & \textbf{$<$0.001} \\
-Statistic specified in advance (3 tests) & 0.386 & 0.092 & \textbf{0.042} & \textbf{0.015} \\
-\hline
-\end{tabular}
-\end{table}
+the paper's own argument made with its own data: one analysis, one data set,
+five defensible ways of accounting for the search, and a result significant under
+one and not the other four. The declaration that would have made the difference
+is one nobody in this literature makes, and it has to be made before the data
+are seen.
 
 One label decision carries more than any of this. Section~\ref{meth:panels}
 classes dichlorvos and malathion as interferents and records that decision as
@@ -706,13 +770,22 @@ contestable. Classing them as simulants instead, which moves two labels and
 changes nothing else, gives a smallest nominal value of 0.00006 and a
 Benjamini-Hochberg value of 0.0006 over the same eighteen tests, and it is the
 only configuration in this work that survives every one of the five accounting
-schemes of Table~\ref{tab:family}. The direction is
+schemes of Supplementary Table~\ref{S-tab:family}. The direction is
 not surprising, since both pesticides carry the phosphoryl motif the agents
 carry, and that is the point: significance here is available to an analyst who
 moves two labels, and the practice records neither which labels were moved nor
-that any were. This is not a recommendation. Neither pesticide is used as a
-simulant by anyone we can cite, and what the comparison shows is that a
-designated set can be made to look supported by choosing what goes into it.
+that any were. This is not a recommendation, and the reason it is not is
+narrower than we first wrote. We described the two pesticides as compounds
+nobody uses as simulants. That is wrong for one of them: the NIOSH document
+cited throughout this section lists malathion in its GB simulant column and
+reports breakthrough times for it through protective clothing materials
+\cite{niosh2002simulant}. Dichlorvos we still find in no such role. So the
+relabelling that produces the only result surviving every accounting scheme is
+not an arbitrary one, which strengthens rather than weakens the point: a
+defensible label change, made by an analyst with a citation in hand, moves this
+analysis from nothing at $q=0.617$ to $q=0.0006$, and the practice records
+neither that a label was moved nor which one. What the comparison shows is that
+a designated set can be made to look supported by choosing what goes into it.
 
 One further observation bounds what the nominal values can mean. The count of
 agents for which a compound outside the designated set is nearer than any
@@ -722,50 +795,48 @@ and 6 of 11 in the three spaces of the smaller panel against 9.06, so the raw
 count carries no evidence without the permutation test and in one space runs the
 wrong way.
 
-\subsection{The difference between the spaces is not dimensional, and the
-nominal value is not informative}
-\label{res:dim}
-
-The structural space has 38 coordinates and the electronic space has 3, so a
-difference between them could be geometric rather than chemical. It is not.
+The difference between the two spaces is chemical rather than geometric.
 Truncating the standardised structural space to its first three principal
-components strengthens the result rather than weakening it, from $p=0.028$ to
-$p=0.0044$ on the twenty-eight-compound panel, which leaves the two spaces
-62-fold apart in $p$ at matched dimension. The second control is the one that
-matters. Of 2000 random three-descriptor subsets of the structural space,
-36.3\% reach $p<0.05$, and the observed 38-dimensional value of 0.028 sits at
-the 25.8th percentile of that distribution while the electronic value of 0.275
-sits at the 77.9th. Both are ordinary draws. The rate itself is inflated by
-correlation among the descriptors, falling to 16.9\% on whitened coordinates,
-but the argument rests on the percentile and that is unaffected. Both controls
-are reported in full in Supplementary Section~\ref{S-res:dimdetail}. The spaces
-do differ, and the difference is chemical rather than geometric; what the data
-do not support is that the difference says anything about the compounds that
-were designated.
+components strengthens the result rather than weakening it, from $p=0.031$ to
+$p=0.0029$ on the twenty-eight-compound panel, which leaves the two spaces
+94-fold apart in $p$ at matched dimension. What the nominal structural value is
+worth against the descriptors it was drawn from is a separate question, and
+there the answer is less comfortable. Of 2000 random three-descriptor subsets of
+that space, 36.3\% reach $p<0.05$, and the observed 38-dimensional value of
+0.031 sits at the 22.7th percentile of that distribution while the electronic
+value of 0.275 sits at the 74.2nd. Both are ordinary draws. Supplementary
+Section~\ref{S-res:dimdetail} reports both controls in full.
 
 \subsection{How many agents have a valid simulant depends on the panel}
 \label{res:match}
 
 Table~\ref{tab:match} lists, for each agent on the twenty-eight-compound panel,
 the nearest incumbent simulant in the merged space as a multiple of that space's
-typical nearest-neighbour separation. Sarin (1.140), soman (1.417) and
-cyclosarin (1.483) are matched, all three by DMMP; tabun at 2.003 and VX at
-3.131 are not. DPGME is nominally VX's nearest simulant in all three spaces, but
-at 3.131 typical separations in the merged space and 3.439 in the structural
-space that is not a match in any useful sense. Dichloromethane, used as a
-pulmonary-agent simulant, is not phosgene's nearest neighbour in any of the
-three spaces: acetone leads it in the structural space (1.14 typical separations
-against 1.75), ethyl acetate in the merged space (1.12 against 1.60) and
-chloroform in the electronic space (1.17 against 2.25).
+typical nearest-neighbour separation. Sarin (1.146), soman (1.424),
+cyclosarin (1.492) and tabun (1.989) are matched, all four by DMMP; VX at
+3.076 is not. Tabun clears the threshold of 2 by 0.011, and we flag that rather
+than report it as a result: an earlier version of this analysis, which retained
+a structural coordinate that is an exact function of two others
+(Section~\ref{meth:descriptors}), put tabun at 2.003 and counted three matches
+here instead of four. A count that moves when a redundant coordinate is removed
+is a count that should be read as marginal, which is the same lesson the rest of
+this paper draws about the panel. DPGME is nominally VX's nearest simulant in all three spaces, but
+at 3.076 typical separations in the merged space and 3.378 in the structural
+space that is not a match in any useful sense. Dichloromethane, which the
+sensor literature we surveyed runs against the whole panel rather than against a
+named agent \cite{lee2011sno2}, is not phosgene's nearest neighbour in any of the
+three spaces: ethyl acetate leads it in the structural space (1.137 typical
+separations against 1.749) and in the merged space (1.119 against 1.598), and
+chloroform in the electronic space (1.171 against 2.247).
 
 The direction of the comparison matters. Table~\ref{tab:match} gives, for each
 agent, its nearest simulant; the reverse question is which agent each simulant
-is nearest to, and over the same 1000 descriptor bootstrap replicates of
+is nearest to, and over the same 1000 descriptor-resampling replicates of
 Section~\ref{meth:dboot} the three incumbents separate. DMMP is nearest sarin in
-93.3\% of replicates and nearest one of the four G-series agents in 99.0\%.
-Dichloromethane is nearest a G-series agent in 1.4\%, sitting instead with the
-choking and blood agents. DPGME divides evenly, sulfur mustard in 47.0\% and the
-G series in 46.7\%. Being nearest is not being close, and DPGME carries no valid
+93.0\% of replicates and nearest one of the four G-series agents in 99.4\%.
+Dichloromethane is nearest a G-series agent in 4.4\%, sitting instead with the
+choking and blood agents. DPGME divides evenly, sulfur mustard in 42.3\% and the
+G series in 53.1\%. Being nearest is not being close, and DPGME carries no valid
 match in any space on this panel; but it is the one of the three whose
 designating document names a class, ``a preferred G agent simulant''
 \cite{seitzinger2006simulant}, and it is the one whose class these spaces do not
@@ -784,27 +855,29 @@ thirty-five-compound panel no agent has a match.}
 \hline
 Authentic agent & Nearest simulant & Normalised distance & Valid match \\
 \hline
-GB & DMMP & 1.140 & yes \\
-GD & DMMP & 1.417 & yes \\
-CK & DCM & 1.451 & no \\
-GF & DMMP & 1.483 & yes \\
-AC & DCM & 1.585 & no \\
-CG & DCM & 1.600 & no \\
-HD & DCM & 1.768 & no \\
-GA & DMMP & 2.003 & no \\
-L & DCM & 2.128 & no \\
-PS & DMMP & 2.530 & no \\
-VX & DPGME & 3.131 & no \\
+GB & DMMP & 1.146 & yes \\
+GD & DMMP & 1.424 & yes \\
+CK & DCM & 1.445 & no \\
+GF & DMMP & 1.492 & yes \\
+AC & DCM & 1.588 & no \\
+CG & DCM & 1.598 & no \\
+HD & DCM & 1.762 & no \\
+GA & DMMP & 1.989 & yes \\
+L & DCM & 2.136 & no \\
+PS & DMMP & 2.470 & no \\
+VX & DPGME & 3.076 & no \\
 \hline
 \end{tabular}
 \end{table}
 
-The count is stable but not invariant. At thresholds of 1.5, 1.75 and 2.0 the
-merged space returns \{GB, GD, GF\} and at 2.5 and 3.0 it returns four, tabun
-being admitted once the bar passes its value of 2.003; the structural space
-behaves identically above 1.5 and at 1.5 narrows to \{GB\} alone, soman at 1.567
-and cyclosarin at 1.648 falling outside. The three-agent figure is therefore a
-statement about the merged space at thresholds of 2.0 and below. The electronic
+The count is stable but not invariant, and the two spaces admit tabun at
+different bars. In the merged space the set is \{GB, GD, GF\} at thresholds of
+1.5 and 1.75 and \{GB, GD, GA, GF\} at 2.0, 2.5 and 3.0, tabun entering once the
+bar passes its value of 1.989. In the structural space it is \{GB\} alone at 1.5,
+with soman at 1.577 and cyclosarin at 1.660 outside, \{GB, GD, GF\} at 1.75 and
+2.0, and four only at 2.5. The four-agent figure is therefore a statement about
+the merged space at a threshold of exactly 2.0, and the three-agent figure the
+same space one notch lower. The electronic
 space is the exception, and it is the informative one: there the count is one at
 every threshold tested, hydrogen cyanide matched by dichloromethane at 1.407,
 because acetonitrile sits closer to sarin, soman and cyclosarin than DMMP does
@@ -846,20 +919,29 @@ sulfide at 2.35 (Supplementary Information).
 
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a vapour-phase sensor reports is tested in
-Supplementary Section~\ref{S-res:arraydetail} against measured 29-dye
-colorimetric response for twelve panel compounds. It does not resolve the
-question either way. Of eight panel-channel-space cells, two reach a nominal
-$p<0.05$ under Mantel permutation over compounds and they favour different
-spaces; corrected across the eight, the
-smallest adjusted value is 0.098 and no cell reaches $q<0.05$. With six
-compounds per plate set the design detects $|\rho| \ge 0.669$ at 80\% power, so
-these data exclude a strong association and nothing weaker. Two artifacts are
+Supplementary Section~\ref{S-res:arraydetail} against measured colorimetric
+response for twelve panel compounds over 29 dyes, of which 23 are independent
+channels in the one plate set where that matters. It does not resolve the
+question, and it is worth being exact about why. Of twelve
+panel-channel-space cells, three reach a nominal
+$p<0.05$ under Mantel permutation over compounds and they do not agree on a
+space; corrected across the twelve, the
+smallest adjusted value is 0.112 and no cell reaches $q<0.05$. All three of
+those cells lie in the plate set that contains no simulant, so they compare one
+agent with another and not a simulant with an agent. The six cells that bear on
+the premise are the six in the set that holds DMMP, and all six are null.
+Simulating the test actually run, the exact Mantel over all 720 relabellings of
+six compounds, the design detects $|\rho| \ge 0.67$ at 80\% power, so these data
+exclude a strong association and nothing weaker. The premise is therefore
+untested rather than supported, and every distance-based claim in this paper
+inherits that. Three artifacts are
 reported there because our own
-first version contained both: dye-axis centring fixes the between-compound mean
-cosine at $-1/(n-1)$, which the observed means clear by only 0.013 to 0.066, and
-the measured agent nearest to DMMP in the ultraviolet channel is tabun rather
-than sarin, which the descriptor criterion of Section~\ref{res:match}
-excludes.
+first version contained all three: dye-axis centring fixes the between-compound
+mean cosine at $-1/(n-1)$, which the observed means clear by only 0.013 to
+0.066; six dyes that do not fluoresce under ultraviolet illumination returned
+one background reading six times, which we now collapse; and the measured agent
+nearest to DMMP in the ultraviolet channel is tabun rather than sarin, which the
+descriptor criterion of Section~\ref{res:match} excludes.
 
 \subsection{The toxicity half of the criterion}
 \label{res:toxsummary}
@@ -874,8 +956,8 @@ not the safest, methanol and n-hexane both scoring higher.
 Five of the nineteen values come from the agency's own footnotes rather than
 from the table cell, because they exceed half the lower explosive limit.
 (b) The nine compounds with no regulator-grade acute inhalation value, with the
-reason for each; DMMP, which supplies every valid match in this study, is among
-them.
+reason for each; DMMP, which supplies every valid match on the
+twenty-eight-compound panel and zero on the primary one, is among them.
 (c) Out-of-fold predictions for the 230 training chemicals (orange) with the
 twenty military agents held out of training (red) overlaid; arrows run from the
 measured
@@ -941,15 +1023,18 @@ to the agents on one panel as on the other, and on a single standardisation
 basis they do not move at all (Section~\ref{res:panels}). What the larger panel supplies is
 diisopropyl fluorophosphate, nearer to sarin, soman and cyclosarin than DMMP is,
 so a criterion that asks a simulant to beat the alternatives returns nothing.
-Resampling the descriptors leaves that comparison intact in every replicate
-while separating the firm displacements from the marginal ones. A designation
+Resampling the descriptors leaves the aggregate comparison intact in every
+replicate, but not each displacement within it: sulfur mustard is matched by
+2-chloroethyl ethyl sulfide in all of them while the incumbent set recovers DMMP
+at sarin in 37.8\%, soman in 14.4\% and cyclosarin in 12.7\%, so the G-series
+displacement is the weakest part of this and the mustard result the strongest. A designation
 defended by a comparison that excludes the alternatives is not defended.
 
 An earlier version of this work reported the twenty-eight-compound structural
 cell, $p = 0.028$, as the finding and built a thesis on the contrast between it
 and the electronic space. Three things undo that reading, and each is a mistake
 another group could make the same way. The value does not survive the eighteen
-tests of its own family (Benjamini-Hochberg $q = 0.159$), although it would have
+tests of its own family (Benjamini-Hochberg $q = 0.185$), although it would have
 survived at $q = 0.042$ had the statistic been fixed in advance, which
 demonstrates the paper's argument rather than defending the value. It sits at the
 25.8th percentile of 2000 arbitrary three-descriptor slices of the same block.
@@ -959,7 +1044,7 @@ Two things we expected to dissolve the contrast between the spaces did not. The
 Parr electrophilicity index was an exact function of two of the other electronic
 descriptors, so the electronic space never had the dimension we reported;
 removing it moved that space's value only from 0.297 to 0.275. Matching the
-dimensions did not dissolve the contrast either (Section~\ref{res:dim}). The
+dimensions did not dissolve the contrast either (Section~\ref{res:panels}). The
 contrast is real; what fails is the inference from it, because the structural
 value anchoring it is an ordinary draw from the subspaces we could have chosen.
 
@@ -971,7 +1056,7 @@ comparison informative were not in it.
 
 The documentary record explains how that arose, and it is not a story about
 carelessness. Two of the three were designated carefully for measurements that
-are not the one they are now asked to support (Section~\ref{meth:panels}): DMMP
+are not the one they are now asked to support (Section~\ref{res:docs}): DMMP
 for adsorptive breakthrough on a filter bed \cite{niosh2002simulant}, DPGME for
 ion-mobility detectability in a training composition
 \cite{seitzinger2006simulant}. Each selection was fit for its own measurement.
@@ -1025,7 +1110,7 @@ outcome, and where to set that boundary is contested rather than settled
 \cite{cbrndisclose}.
 
 \paragraph{Limitations.} The documentary findings of
-Section~\ref{meth:panels} rest on public sources, and the scope of that search
+Section~\ref{res:docs} rest on public sources, and the scope of that search
 is stated there. The claim is that no public instrument designates these three
 compounds for the use the sensor literature makes of them, not that no
 instrument does. A null result invites the question whether the design could have seen an
@@ -1046,9 +1131,20 @@ build from compounds carrying complete descriptor data; measured toxicity values
 exist for a subset only, DMMP among the compounds without one, so the two axes do
 not run over the same compounds. A fourth configuration,
 classing dichlorvos and malathion as simulants, is reported in
-Table~\ref{tab:ablation} and Section~\ref{res:panels} because we flagged that
+Supplementary Table~\ref{S-tab:ablation} and Section~\ref{res:panels} because we
+flagged that
 label decision as contestable; the four configurations sample the configuration
-space rather than census it. The measured-array intervals describe variation across concentrations within
+space rather than census it. Accordingly, the present panels should be
+interpreted as demonstrations of panel dependence rather than as exhaustive
+representations of all compounds that have been used as chemical warfare agent
+simulants. One omission is worth naming because it is systematic. Probe
+chemistries for lewisite are developed against arsenic trichloride
+\cite{lee2016lewisite}, which is in neither panel, and the structural filter of
+Section~\ref{meth:filter} flags every arsenical, so a compound of that class
+could not have been admitted as a candidate in the toxicity screen either. The
+arsenical route to a lewisite simulant is therefore outside what is tested
+here, and lewisite's lack of a valid match in any space should be read against
+that. The measured-array intervals describe variation across concentrations within
 one plate set rather than agreement between preparations (Supplementary
 Section~\ref{S-res:arraydetail}). GFN2-xTB is
 semi-empirical, and the quantities used here are relative within a consistent
@@ -1065,16 +1161,18 @@ energy, and we make none.
 
 \section{Conclusions}
 
-Simulant validity is not a property of a compound. It is a property of a
-compound set against a comparison, and the practice of choosing chemical warfare
-agent simulants does not record what the comparison should contain. On a panel of
+Simulant validity cannot be treated as an intrinsic property of a compound. It
+depends on the measurement it is intended to reproduce and on the comparison
+against which that claim is evaluated, and the practice of choosing chemical
+warfare agent simulants records neither. On a panel of
 thirty-five compounds that includes the five the sensor, sorbent and
 decontamination literature also uses as simulants, not one of eleven authentic
 agents has a valid match to an incumbent simulant and not one of eighteen tests
 reaches nominal significance. The incumbents are no further from the agents on that
 panel than on the smaller one; diisopropyl fluorophosphate is simply nearer, and
 under descriptor resampling the incumbent three match a median of zero agents
-against five for the compounds the field uses, the difference positive in every
+against five for the eight literature-used simulants examined here, the
+difference positive in every
 one of 1000 replicates. Omitting those five restores three matches and a nominal
 structural $p$ of 0.028, a value at the 25.8th percentile of 2000 arbitrary
 three-descriptor subspaces of the same block which no correction over the

@@ -140,10 +140,10 @@ cx.grid(color='#DDDDDD', ls='--', lw=0.7)
 
 # ---------------- 머리글
 fig.text(0.5, 0.945,
-         'Simulant validity is a property of the descriptor space, not of the compound',
+         'Simulant validity is not intrinsic: it depends on the comparison',
          fontsize=28, fontweight='bold', color=C_INK, ha='center', va='center')
 fig.text(0.5, 0.865,
-         'The same eleven agents and three designated simulants, scored two ways.  '
+         'The same eleven agents and three incumbent simulants, scored two ways.  '
          'Safety is a third axis, and it does not track fidelity.',
          fontsize=17, color='#555555', ha='center', va='center')
 
