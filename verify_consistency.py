@@ -39,6 +39,7 @@ REQUIRED_OUTPUTS = [
     'outputs/figure_annotations.json',
     'outputs/h1_candidates.csv',
     'outputs/h1_summary.json',
+    'outputs/h1_screen_sensitivity.json',
     'outputs/match_by_panel.json',
     'outputs/mde.json',
     'outputs/minority_regression.json',
@@ -70,6 +71,7 @@ REQUIRED_FOR_FIGURES = [
     'outputs/sanity_checks.json',
     'outputs/fig_label_counts.json',
     'outputs/nearest_agent_bootstrap.json',
+    'outputs/null_match_expectation.json',
 ]
 
 FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
@@ -134,6 +136,9 @@ def load_facts():
     f = {}
     f['ga_q28'] = json.load(open('outputs/stat_supplement.json'))['family'][
         'panel28_incumbent3']['bh_all_min_q']
+    NE = json.load(open('outputs/null_match_expectation.json'))['sets']
+    f['nullexp_k3'] = NE['incumbent3']['null_mean']
+    f['nullexp_k8'] = NE['incumbent_plus_lit8']['null_mean']
     NA = json.load(open('outputs/nearest_agent_bootstrap.json'))['simulants']
     f['na_dmmp_top'] = NA['DMMP']['top_pct']
     f['na_dmmp_g'] = NA['DMMP']['g_series_pct']
@@ -172,7 +177,14 @@ def load_facts():
     f['n_relaxed_10'] = t['relaxed_10']['n']
     f['n_relaxed_100'] = t['relaxed_100']['n']
     f['n_incumbent'] = t['incumbent']['n']
+    f['n_more_faithful_10'] = t['relaxed_10']['n_more_faithful_than_dcm']
     f['relaxed_bar'] = t['relaxed_10']['bar_mgm3']
+    f['fid_cut'] = h['fidelity_cut']
+    f['n_screened_distinct'] = h['n_screened_distinct']
+
+    hs = json.load(open('outputs/h1_screen_sensitivity.json'))
+    f['sens_kept_n'] = hs['kept']['n_candidates']
+    f['sens_kept_rho'] = hs['kept']['spearman_r']
 
     m = json.load(open('outputs/minority_regression.json'))
     f['n_ache'] = m['n_ache']
@@ -344,6 +356,13 @@ def load_facts():
     for _code, _nm in _T3.items():
         f[f't3_{_code}'] = _p28[_nm]['d_norm']
 
+    # GFN2 가상궤도 에너지의 범위. 한계 절이 이 수치로 'Koopmans 로 읽지
+    # 말라'를 건다 (2026-10-23 신설).
+    _x35 = pd.read_csv('descriptor_cache_xtb_35.csv')
+    f['lumo_min'] = float(_x35.E_LUMO_eV.min())
+    f['lumo_max'] = float(_x35.E_LUMO_eV.max())
+    f['n_lumo_below4'] = int((_x35.E_LUMO_eV < -4).sum())
+
     # 공간별 정규화 거리와 포스겐의 최근접 경쟁자. 산문이 세 공간을 섞어
     # 적었던 자리이므로 공간을 키에 박아 둔다.
     _dt = pd.read_csv('outputs/distance_table_normalized.csv')
@@ -501,6 +520,20 @@ CHECKS = [
     ('n_relaxed_10', [r'(Eight|Seven|Nine) compounds then combine',
                       r'there are (eight|seven|nine) candidates'], 0),
     ('n_relaxed_100', [r'the count rises to (fifteen|seventeen|sixteen)'], 0),
+    ('n_incumbent', [r'Faithful and safe at that bar & (\d+) '], 0),
+    ('lumo_min', [r'they run from \$([-+][\d.]+)\$~eV for chloropicrin'], 0.005),
+    ('lumo_max', [r'to \$([-+][\d.]+)\$~eV for water'], 0.005),
+    ('n_lumo_below4', [r'and (twenty-four|twenty-three|twenty-five) of the\s*\n?'
+                       r'thirty-five fall below'], 0),
+    ('n_more_faithful_10', [r'more faithful than dichloromethane itself & (\d+) ',
+                            r'and all (eight|seven|nine) are more faithful than'], 0),
+    ('fid_cut', [r'own fidelity of\s*\n?0\.78 falling outside the ([\d.]+) quartile',
+                 r'methanol at 2\.00 against the ([\d.]+) boundary'], 0.005),
+    ('n_screened_distinct', [r'(Eight|Seven|Nine) further records were set aside',
+                             r'Retaining all (eight|seven|nine)\s*\n?records'], 0),
+    ('sens_kept_n', [r'raises the candidate count to (\d+) and'], 0),
+    ('sens_kept_rho', [r'moves the Spearman coefficient\s*\n?from \$\+0\.062\$ to '
+                       r'\$([-+][\d.]+)\$'], 0.0005),
     ('panel_with_aegl3', [r'(Nineteen|Thirteen|Fourteen|Eighteen) of the '
                           r'twenty-eight compounds have an AEGL-3',
                           r'the (nineteen|thirteen|fourteen) panel compounds',
@@ -512,6 +545,9 @@ CHECKS = [
     ('panel_from_footnote',
      [r'(Five|Nine|Four) of the nineteen values come from the',
       r'(Five|Nine|Four) of the nineteen panel values'], 0),
+    ('nullexp_k3',
+     [r'against (\d+\.\d+) and \d+\.\d+ agents expected by chance'], 0.05),
+    ('nullexp_k8', [r'against \d+\.\d+ and (\d+\.\d+) agents expected'], 0.05),
     ('na_dmmp_top', [r'DMMP is nearest sarin in\s*\n?(\d+\.\d+)\\% of replicates'], 0.05),
     ('na_dmmp_g',
      [r'nearest one of the four G-series agents in\s*\n?(\d+\.\d+)\\%'], 0.05),
@@ -600,7 +636,7 @@ CHECKS = [
     ('dfp_gb', [r'fluorophosphate is present, at ([\d.]+),'], 0.005),
     ('dfp_gd', [r'is present, at [\d.]+, ([\d.]+) and'], 0.005),
     ('dfp_gf', [r'is present, at [\d.]+, [\d.]+ and ([\d.]+) from'], 0.005),
-    ('dmmp_gb_35', [r'1.14 typical nearest-neighbour separations from DMMP on the\s*\n?smaller panel and\s*\n?([\d.]+) on the larger'], 0.005),
+    ('dmmp_gb_35', [r'sarin reads 1\.14 against DMMP on the\s*\n?smaller panel and (\d+\.\d+) on the larger'], 0.005),
     ('cees_hd', [r'sulfide at ([\d.]+) from sulfur mustard'], 0.005),
     # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
     ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
@@ -737,7 +773,8 @@ CHECKS = [
 WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
-         'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20}
+         'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
+         'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25}
 
 
 def tonum(s):

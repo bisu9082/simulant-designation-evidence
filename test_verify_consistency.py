@@ -21,7 +21,7 @@ CASES = [
      'association across the 207',
      'association across the 218'),
     ('초록이 Results 와 다른 Spearman 을 싣는다',
-     '(Spearman $r=+0.004$',
+     '(Spearman $r=+0.062$',
      'independent (Spearman $r=-0.022$'),
     # --- 롤백 C 헤드라인 (2026-10-13 추가). 이 수치들이 주장을 떠받친다.
     ('BH 보정값 오기 (0.159 대 0.059)',
@@ -191,8 +191,8 @@ CASES = [
 SIDECAR = 'paper/cover_letter.tex'
 SIDECAR_CASES = [
     ('커버레터가 본문과 다른 Spearman 을 싣는다',
-     '$r = +0.004$ (95\\% CI $-0.132$ to $+0.143$)',
-     '$r = -0.022$ (95\\% CI $-0.156$ to $+0.111$)'),
+     '$r = +0.062$ (95\\% CI $-0.077$ to\n$+0.199$)',
+     '$r = -0.022$ (95\\% CI $-0.156$ to\n$+0.111$)'),
 ]
 
 # 도판 주석 결함은 outputs/figure_annotations.json 에 주입한다.

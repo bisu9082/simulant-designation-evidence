@@ -134,6 +134,8 @@ SHORT_B = {'cyanogen chloride (CK)': 'CK', 'p-dichlorobenzene': 'p-DCB',
 bx.set_yticks(y2[::-1])
 bx.set_yticklabels([SHORT_B.get(n, n) for n in M.compound_name][::-1])
 REASON = {'[수집 불가: EPA AEGL 미등재]': 'not on the AEGL list at all',
+          '[수집 불가: EPA AEGL 보류목록, 값 미개발]':
+              'on the holding list; values\nnot being developed',
           '[수집 불가: AEGL-3 = NR]': 'listed, but AEGL-3 = "not recommended,\n'
                                       'insufficient data"'}
 for yy, r in zip(y2, M.itertuples()):

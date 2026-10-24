@@ -36,6 +36,7 @@
 #                        원고가 보고한 제외 레코드이므로 비정상 종료를 허용한다.
 #   qsar_tox             랜덤포레스트 + 적용영역 -> qsar_tox_summary.json, qsar_oof
 #   h1_decoupling        충실도-안전 탈동조 -> h1_summary.json, h1_candidates
+#   h1_screen_sensitivity 타당성심사 민감도 -> h1_screen_sensitivity.json
 #   minority_regression  꼬리 회귀 진단 (qsar_oof 를 읽는다)
 #   validate_aegl_parse  이중 판독 대조
 #
@@ -64,7 +65,7 @@ run_strict() {
 run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
            deltaE_premise.py deltaE_power.py rollback_c.py match_by_panel.py \
-           mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py
+           mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py
 
 # 독성축. parse -> trainset -> 동일성검사 -> QSAR 순서를 지켜야 한다.
 run_strict parse_aegl.py build_tox_trainset.py cite_facts.py
@@ -80,8 +81,8 @@ else
 fi
 [ -f outputs/identity_validation.json ] || { echo '  identity_validation.json 생성 실패'; exit 1; }
 
-run_strict qsar_tox.py h1_decoupling.py minority_regression.py \
-           validate_aegl_parse.py
+run_strict qsar_tox.py h1_decoupling.py h1_screen_sensitivity.py \
+           minority_regression.py validate_aegl_parse.py
 
 # 다중검정 보정은 rollback_c 의 결과에서 파생된다.
 python3 - <<'PY'

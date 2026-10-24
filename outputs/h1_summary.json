@@ -3,31 +3,30 @@
   "bootstrap": 10000,
   "n_pool": 237,
   "n_candidates": 207,
-  "pearson_r": -0.024606297978308697,
-  "pearson_p": 0.7248888904403514,
+  "pearson_r": 0.07171866227537618,
+  "pearson_p": 0.30445506506762465,
   "pearson_ci": [
-    -0.1765099885911505,
-    0.13341276281118725
+    -0.09209698564901553,
+    0.22516411299259853
   ],
-  "spearman_r": 0.00428275809351514,
-  "spearman_p": 0.9511638447392985,
+  "spearman_r": 0.06170729908898399,
+  "spearman_p": 0.3770853386805044,
   "spearman_ci": [
-    -0.13179374177688238,
-    0.1427158450393871
+    -0.07748800677365837,
+    0.19945271546515908
   ],
-  "r_squared": 0.0006054699001973187,
+  "r_squared": 0.0051435665185694665,
   "shapiro_p": 0.028528748507305805,
   "verdict": "H1 유지 — 충실도와 안전성이 통계적으로 분리돼 있다. RQ-3 성립 가능",
-  "fidelity_cut": 0.8091723294311894,
+  "fidelity_cut": 0.7112516615840443,
   "tox_cut": 4.619978847075851,
   "dcm_aegl3_mgm3": 41684.90797546012,
   "quadrants": {
-    "neither": 148,
-    "faithful_but_toxic": 51,
-    "safe_but_unfaithful": 7,
-    "faithful_and_safe": 1
+    "neither": 147,
+    "faithful_but_toxic": 52,
+    "safe_but_unfaithful": 8
   },
-  "n_faithful_safe_passing_alerts": 1,
+  "n_faithful_safe_passing_alerts": 0,
   "safety_tiers": {
     "ten_times_safer": {
       "bar_log10": 5.62,
@@ -41,18 +40,16 @@
       "bar_log10": 4.62,
       "bar_mgm3": 41684.9,
       "description": "DCM 와 동등 이상 안전",
-      "n": 1,
+      "n": 0,
       "n_more_faithful_than_dcm": 0,
-      "labels": [
-        "dichloromethane"
-      ]
+      "labels": []
     },
     "relaxed_10": {
       "bar_log10": 3.62,
       "bar_mgm3": 4168.5,
       "description": "DCM 의 1/10 (10배 독성)까지 허용",
       "n": 8,
-      "n_more_faithful_than_dcm": 7,
+      "n_more_faithful_than_dcm": 8,
       "labels": [
         "Trichloroethylene",
         "HCFC 141b",
@@ -61,32 +58,31 @@
         "Tetrachloroethylene",
         "Hexafluoropropylene",
         "Methyl ethyl ketone",
-        "dichloromethane"
+        "Vinyl chloride"
       ]
     },
     "relaxed_100": {
       "bar_log10": 2.62,
       "bar_mgm3": 416.8,
       "description": "DCM 의 1/100 (100배 독성)까지 허용",
-      "n": 16,
+      "n": 15,
       "n_more_faithful_than_dcm": 15,
       "labels": [
         "Trichloroethylene",
-        "HCFC 141b",
         "Ethyl mercaptan",
+        "HCFC 141b",
         "1,1,1-Trichloroethane",
         "Acrylic acid",
         "Trifluorochloroethylene",
+        "Carbon monoxide",
         "Tetrachloroethylene",
-        "Hexafluoropropylene",
-        "Methacrylic acid",
         "1,2-Dibromoethane",
-        "Carbonyl sulfide",
-        "Aniline",
-        "Boron tribromide",
+        "Hexafluoropropylene",
+        "Carbon disulfide",
         "Methyl ethyl ketone",
-        "Methyl methacrylate",
-        "dichloromethane"
+        "Methacrylic acid",
+        "Vinyl chloride",
+        "Carbonyl sulfide"
       ]
     }
   },
@@ -96,6 +92,7 @@
     "single_atom": 3,
     "tiny_gap": 1
   },
+  "n_screened_distinct": 8,
   "structural_alerts": {
     "A_OP_leaving_F_CN": "[PX4](=[O,S])(~[#6,#7,#8])(~[#6,#7,#8])[F,$(C#N)]",
     "A_OP_thiolate": "[PX4](=[O,S])(~[#6,#7,#8])(~[#6,#7,#8])[SX2][#6]",

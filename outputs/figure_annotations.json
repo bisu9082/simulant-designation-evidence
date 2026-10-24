@@ -19,8 +19,8 @@
   "panel_d": "14 of the 20 agents pass the domain check, and all 20 are wrong by 0.40 to 3.42 log (a factor of 2.5 to 2,600), always in the unsafe direction. The worst inside the domain is wrong by 2.68 log."
  },
  "Fig_h1": {
-  "spearman": "Spearman r = +0.004, 95% CI -0.132 to +0.143, n = 207; no monotonic association.",
-  "quadrant": "faithful and safe at the incumbent bar: 1; one order of magnitude below it: 8."
+  "spearman": "Spearman r = +0.062, 95% CI -0.077 to +0.199, n = 207; no monotonic association.",
+  "quadrant": "faithful and safe at the incumbent bar: 0; one order of magnitude below it: 8."
  },
  "Fig_mde": {
   "mde_delta35": "0.22",
@@ -31,6 +31,6 @@
  },
  "graphical_abstract": {
   "panel_a": "corrected over the 18 tests: $q$ = 0.159",
-  "panel_c": "Spearman $r$ = +0.004   95% CI [-0.132, +0.143]   $n$ = 207\nfaithful + safe: 1 at the incumbent simulant's own bar,\n8 one order of magnitude below it"
+  "panel_c": "Spearman $r$ = +0.062   95% CI [-0.077, +0.199]   $n$ = 207\nfaithful + safe: 0 at the incumbent simulant's own bar,\n8 one order of magnitude below it"
  }
 }

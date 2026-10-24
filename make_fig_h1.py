@@ -68,21 +68,57 @@ best = clean[(clean.fidelity_dist <= fid) & (clean.y_tox >= RELAX)] \
 ax.scatter(best.fidelity_dist, best.y_tox, s=56, facecolors='none',
            edgecolors='#4E7A3A', lw=1.7, zorder=5,
            label=f'clears the relaxed bar ({len(best)})')
-t += [ax.text(r.fidelity_dist, r.y_tox, r.label.split('(')[0].strip()[:26],
-              fontsize=FS_ANNOT - 2, color='#3C5E2E', fontweight='bold', zorder=7)
-      for r in best.itertuples()]
+# 2026-10-23. 종전에는 여덟 후보의 이름을 산점도 위에 직접 썼다. omega 를 뺀
+# 좌표에서 여덟 점이 x 0.25~0.70, y 3.8~4.5 의 좁은 영역에 모이면서 굵은 글씨
+# 여덟 개가 서로 포개졌다(테트라클로로에틸렌과 헥사플루오로프로필렌은 완전히
+# 겹쳤다). 점 옆에는 번호만 붙이고 이름은 아래 상자에 순서대로 싣는다.
+KEY = [(i + 1, r.label.split('(')[0].strip(), r.fidelity_dist)
+       for i, r in enumerate(best.itertuples())]
+# 번호 위치는 adjustText 에 맡기지 않고 점마다 고정 오프셋으로 둔다. 여덟 점이
+# x 0.25~0.70 에 모여 있어 자동 배치는 지시선이 판을 가로지르거나 번호가
+# 서로 겹친다 (5 와 6 은 y 가 같고 x 가 0.021 밖에 차이나지 않는다).
+NUMOFF = {1: (0, 12), 2: (0, -14), 3: (-13, 4), 4: (0, -14),
+          5: (-14, 3), 6: (5, -15), 7: (-5, 13), 8: (14, -3)}
+for (i, _, _), r in zip(KEY, best.itertuples()):
+    ax.annotate(str(i), xy=(r.fidelity_dist, r.y_tox),
+                xytext=NUMOFF[i], textcoords='offset points',
+                fontsize=FS_ANNOT - 1, color='#3C5E2E', fontweight='bold',
+                ha='center', va='center', zorder=8)
 XMAX = float(np.percentile(D.fidelity_dist, 97)) * 1.12      # 이상치 클립
 n_clip = int((D.fidelity_dist > XMAX).sum())
+YMAX = float(D.y_tox.max())
 ax.set_xlim(-0.12, XMAX)
-ax.set_ylim(float(D.y_tox.min()) - 0.45, float(D.y_tox.max()) + 2.0)
-adjust_text(t, x=D.fidelity_dist.to_numpy(), y=D.y_tox.to_numpy(), ax=ax,
+# adjustText 는 축 바깥으로 라벨을 내보내지 않는다. 그 성질을 써서 배치하는
+# 동안에는 위쪽 여백을 막아 둔다. 자리를 잡은 뒤 여백을 열어 범례·제목·기준선
+# 라벨을 그 띠에 놓는다. 종전에는 여백을 먼저 열어 라벨이 범례 글자를 덮었다
+# (2026-10-23 적발).
+ax.set_ylim(float(D.y_tox.min()) - 0.45, YMAX + 0.15)
+# 가상 점으로 막는 두 구역. (i) 오른쪽 끝 기준선 라벨 두 줄.
+_bx = np.linspace(XMAX * 0.58, XMAX, 11)
+_by = np.array([tox + 0.20, RELAX + 0.20])
+_B1 = [a.ravel() for a in np.meshgrid(_bx, _by)]
+# (ii) 충실+안전 사분면. 이 판의 요지가 '여기가 비어 있다' 이므로 다른 화합물
+#      이름이 이 안에 주차되면 안 된다 (클로로포름·아세톤 적발, 2026-10-23).
+_q = [a.ravel() for a in np.meshgrid(np.linspace(-0.10, fid, 9),
+                                     np.linspace(tox + 0.05, YMAX + 0.10, 5))]
+_BX = np.r_[_B1[0], _q[0]]
+_BY = np.r_[_B1[1], _q[1]]
+adjust_text(t, x=np.r_[D.fidelity_dist.to_numpy(), _BX],
+            y=np.r_[D.y_tox.to_numpy(), _BY], ax=ax,
             only_move={'text': 'xy'}, expand=(1.9, 2.2), force_text=(1.0, 1.4),
             force_static=(1.1, 1.5), max_move=90, iter_lim=900,
             arrowprops=dict(arrowstyle='-', color='#999999', lw=0.6))
-YTOP = float(D.y_tox.max()) + 2.0
+ax.set_ylim(float(D.y_tox.min()) - 0.45, YMAX + 2.3)
+YTOP = YMAX + 2.3
 n_strict = int(((clean.fidelity_dist <= fid) & (clean.y_tox >= tox)).sum())
-ax.text(fid * 0.5, YTOP - 0.22, 'FAITHFUL  +  SAFE', fontsize=FS_ANNOT + 2,
+ax.text(fid * 0.5, YMAX + 0.30, 'FAITHFUL  +  SAFE', fontsize=FS_ANNOT + 2,
         fontweight='bold', color=C_REF, ha='center', va='center')
+# 비워 둔 위쪽 띠의 왼쪽 절반에 번호 범례를 둘로 나누어 싣는다.
+for col, a in enumerate((0, 4)):
+    ax.text(0.012 + col * 0.262, 0.995,
+            '\n'.join(f'{i}  {nm[:23]}' for i, nm, _ in KEY[a:a + 4]),
+            transform=ax.transAxes, fontsize=FS_ANNOT - 2, color='#3C5E2E',
+            ha='left', va='top', linespacing=1.45, zorder=9)
 # 기준선 라벨은 데이터가 비어 있는 오른쪽 끝에 둔다
 ax.text(0.995, tox + 0.07, 'dichloromethane, the incumbent simulant',
         transform=ax.get_yaxis_transform(), fontsize=FS_ANNOT - 2, color=C_INK,

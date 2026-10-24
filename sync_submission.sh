@@ -28,11 +28,11 @@ for f in *.py *.sh; do
 done
 cp -p descriptor_cache*.csv submission/code/ 2>/dev/null || true
 
-# 산출물: 본문이 인용하는 수치의 출처
-for f in experiment_summary.json permutation_sidedness.json rollback_c.json \
-         multiplicity_c.json match_by_panel.json deltaE_premise.json \
-         figure_annotations.json sanity_checks.json; do
-  [ -f "outputs/$f" ] && cp -p "outputs/$f" submission/outputs/
+# 산출물: 본문이 인용하는 수치의 출처. 2026-10-23 이전에는 여덟 개만 손으로
+# 골라 복사했고, 그 목록이 갱신되지 않아 h1_summary.json 을 비롯해 헤드라인
+# 수치의 출처 열세 개가 패키지에서 빠져 있었다. 전량 복사로 바꾼다.
+for f in outputs/*.json; do
+  [ -f "$f" ] && cp -p "$f" submission/outputs/
 done
 for f in outputs/*.csv; do
   [ -f "$f" ] && cp -p "$f" submission/outputs/
@@ -41,3 +41,16 @@ done
 n_code=$(ls submission/code | wc -l)
 n_out=$(ls submission/outputs | wc -l)
 printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
+
+# 패키지 자기 정합성. 이 절은 이 스크립트의 머리말이 처음부터 약속했으나
+# 실제로는 없었다 (2026-10-23 적발). 복사된 코드 사본으로 검증기를 돌려
+# 패키지 안의 원고와 산출물이 서로 맞는지 확인한다.
+( cd submission/code \
+  && ln -sfn ../../outputs outputs 2>/dev/null \
+  && mkdir -p paper \
+  && cp -p ../main.tex ../supplementary.tex ../cover_letter.tex \
+           ../highlights.tex paper/ \
+  && cp -p ../Fig_*.png paper/ \
+  && python3 verify_consistency.py ) || {
+  echo '[sync] 패키지 자기검증 실패'; exit 1; }
+rm -rf submission/code/paper submission/code/outputs

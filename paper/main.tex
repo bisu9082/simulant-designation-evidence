@@ -33,15 +33,26 @@
 \title{Whether Chemical Warfare Agent Simulant Designations Look Supported
 Depends on Which Compounds Are in the Comparison}
 
-\author[cbrn]{Ku Kang}
+\author[cbrn]{Ku Kang\fnref{eqc}}
 \ead{bisu9082@mnd.go.kr}
+\author[cbrn]{Jin Yoo\fnref{eqc}}
+\ead{tysonyj@snu.ac.kr}
+\author[cbrn]{Miae Kim}
+\author[kma]{Doo-Hee Lee\corref{cor1}}
+\ead{dooheeleechem@gmail.com}
 \author[cbrn]{Yoon Jeong Jang\corref{cor1}}
 \ead{yjjangchem@korea.kr}
-\cortext[cor1]{Corresponding author.}
+\fntext[eqc]{These authors contributed equally to this work.}
+\cortext[cor1]{Corresponding authors.}
 \address[cbrn]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
 Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\address[kma]{Department of Civil Engineering and Environmental Sciences,
+Korea Military Academy, Seoul 01805, Republic of Korea}
 % ORCID (제출 시스템 입력용):
 %   Ku Kang          0000-0001-8739-218X
+%   Jin Yoo          0000-0002-7738-8424
+%   Miae Kim         [확인 필요: ORCID, 기관 이메일]
+%   Doo-Hee Lee      0000-0002-5116-2064
 %   Yoon Jeong Jang  0000-0002-5625-2528
 
 \begin{abstract}
@@ -51,13 +62,14 @@ compounds accepted as agent-like and safe to handle. We tested whether that
 acceptance has a measurable basis. For eleven authentic agents we computed
 structural and GFN2-xTB electronic descriptors and asked, by exact permutation
 over every designation, whether three incumbent simulants sit closer to
-the agents than random compounds. On our primary thirty-five-compound
+the agents than the panel's other non-agents. On our primary thirty-five-compound
 panel, which includes five compounds the sensor literature also calls
 simulants, no agent has a valid match at any threshold and no test reaches
 significance. Resampling the descriptors gives the incumbent three a
 median of zero matched agents against five for the eight the field uses, in
-all 1000 replicates. Distances barely move between panels; what
-changes is that something closer is present. A twenty-eight-compound panel
+all 1000 replicates, against 1.0 and 2.7 agents expected by chance at those two
+set sizes. Distances do not move between panels; what changes is that something
+closer is present. A twenty-eight-compound panel
 omitting those five yields three matches and a nominal $p$ of 0.025 that no
 correction over the eighteen tests leaves significant. Moving two labels, so
 that two organophosphorus pesticides count as simulants, produces an adjusted
@@ -208,7 +220,11 @@ fluorescent dye and justified on ion-mobility detectability, so the application
 is field training rather than sensor validation. For dichloromethane we found no
 designating document of any kind: it is absent from the NIOSH candidate list and
 from the Man-in-Simulant Test programme, and present in this role, as far as we
-can establish, only in the research literature.
+can establish, only in the research literature, where it is run as a chemical
+agent simulant alongside DMMP and DPGME on metal-oxide gas sensors
+\cite{lee2011sno2}. That study puts a fourth compound in the same role,
+acetonitrile, which the panel used here classes as an interferent, so the
+literature usage does not resolve to a fixed set either.
 
 A negative claim about documents is only as good as its scope. We searched the
 standard-setting and test-procedure
@@ -364,7 +380,12 @@ correlation filter at $|r| = 1.00$ in every space. The attrition is the same on
 both panels: no structural descriptor has zero variance, the correlation filter
 removes 13 of the 51, and the 38 that remain are the structural coordinates used
 throughout. Remaining descriptors were
-standardised and distances taken as Euclidean. Two shape indices, $\kappa_2$ and
+standardised and distances taken as Euclidean. Standardisation, and the median
+nearest-neighbour separation that normalises the distances, are computed over
+the compounds of the panel in hand. A normalised distance is therefore
+comparable within a panel and not between panels, which matters wherever the
+two panels are set side by side; where that comparison is made below it is made
+on the thirty-five-compound basis. Two shape indices, $\kappa_2$ and
 $\kappa_3$, go negative for the smallest molecules (water,
 $\kappa_3=-104.0$); repeating every analysis without them returns the
 permutation values of Section~\ref{sec:perm} to three decimal places (0.028,
@@ -510,10 +531,13 @@ of the Parr index are in Supplementary Figure~\ref{S-fig:plocal}.}
 On the thirty-five-compound panel, no authentic agent has a valid match to an
 incumbent simulant. Figure~\ref{fig:main}a shows why, and the mechanism is not
 the one our earlier version reported. The distances from the agents
-to the incumbent simulants hardly move when the panel is extended: sarin sits at
-1.14 typical nearest-neighbour separations from DMMP on the smaller panel and
-1.19 on the larger, soman at 1.42 and 1.45, cyclosarin at 1.48 and 1.58. The
-compounds did not become less faithful. What changed is that diisopropyl
+to the incumbent simulants do not change when the panel is extended.
+Standardisation and the normalising separation are recomputed on each panel, so
+one distance is reported on two scales: sarin reads 1.14 against DMMP on the
+smaller panel and 1.19 on the larger, cyclosarin 1.48 and 1.58. Held on the
+thirty-five-compound basis throughout, every agent sits exactly as far from its
+nearest incumbent under either pool, because all three incumbents belong to
+both. The compounds did not become less faithful. What changed is that diisopropyl
 fluorophosphate is present, at 1.07, 0.99 and 1.17 from the same three agents,
 and the match criterion requires a simulant to be nearer than every compound not
 designated one. The same holds across the panel, with 2-chloroethyl ethyl
@@ -876,8 +900,8 @@ pharmacophore and one is more acutely toxic than sarin. It is tail regression, a
 the response space that an input-space domain check cannot see.
 
 Fidelity and acute toxicity show no monotonic association across the 207
-compounds carrying both measured axes (Spearman $r=+0.004$, 95\% CI $-0.132$ to
-$+0.143$). The interval excludes a trade-off strong enough to constrain
+compounds carrying both measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to
+$+0.199$). The interval excludes a trade-off strong enough to constrain
 selection, which is weaker than independence and is what the data support, so
 the two can be improved separately
 (Supplementary Section~\ref{S-res:h1}). We draw no candidate recommendation from
@@ -895,8 +919,8 @@ agent and no test reaches nominal significance; on a panel omitting them, three
 agents are matched and the smallest nominal value is 0.025.
 
 The mechanism is not a story about fidelity. The incumbents sit almost as close
-to the agents on one panel as on the other, moving by 0.03 to 0.10 typical
-separations (Section~\ref{res:panels}). What the larger panel supplies is
+to the agents on one panel as on the other, and on a single standardisation
+basis they do not move at all (Section~\ref{res:panels}). What the larger panel supplies is
 diisopropyl fluorophosphate, nearer to sarin, soman and cyclosarin than DMMP is,
 so a criterion that asks a simulant to beat the alternatives returns nothing.
 Resampling the descriptors leaves that comparison intact in every replicate
@@ -1010,7 +1034,16 @@ space rather than census it. The measured-array intervals describe variation acr
 one plate set rather than agreement between preparations (Supplementary
 Section~\ref{S-res:arraydetail}). GFN2-xTB is
 semi-empirical, and the quantities used here are relative within a consistent
-protocol rather than absolute.
+protocol rather than absolute. The virtual orbital energies make that concrete.
+Across the thirty-five-compound panel they run from $-9.64$~eV for chloropicrin
+to $+2.23$~eV for water, and twenty-four of the thirty-five fall below
+$-4$~eV. Read as electron affinities in the Koopmans sense those values are not
+attainable, chlorine being the most electron-avid element at 3.6~eV, so the
+method's virtual eigenvalues are coordinates and not affinity estimates. Every
+distance reported here is computed on descriptors standardised within the panel,
+which leaves a shift and a scale applied to a whole axis without effect. What
+such an axis cannot carry is a claim about any one compound's absolute frontier
+energy, and we make none.
 
 \section{Conclusions}
 
@@ -1068,8 +1101,13 @@ public, commercial, or not-for-profit sectors.
 \section*{CRediT authorship contribution statement}
 \textbf{Ku Kang:} conceptualisation, methodology, software, formal analysis,
 investigation, data curation, visualisation, writing -- original draft.
-\textbf{Yoon Jeong Jang:} validation, writing -- review and editing,
-supervision, project administration.
+\textbf{Jin Yoo:} methodology, investigation, validation, writing -- original
+draft. \textbf{Miae Kim:} [TO BE CONFIRMED: contribution roles].
+\textbf{Doo-Hee Lee:} validation, resources, writing -- review and
+editing, supervision. \textbf{Yoon Jeong Jang:} validation, writing -- review
+and editing, supervision, project administration. Ku Kang and Jin Yoo
+contributed equally. Doo-Hee Lee and Yoon Jeong Jang are joint corresponding
+authors.
 
 \section*{Declaration of competing interest}
 The authors declare no competing financial interest.
