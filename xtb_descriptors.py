@@ -151,7 +151,15 @@ def one_molecule(name, smi, nproc, keep=None):
                             cwd=d, capture_output=True, text=True, env=env,
                             timeout=3600)
         opt = os.path.join(d, 'xtbopt.xyz')
-        geom = 'xtbopt.xyz' if os.path.exists(opt) else 'in.xyz'
+        # 최적화 실패 시 ETKDG 기하로 조용히 넘어가면 안 된다.
+        # MMFF 에는 비소 파라미터가 없어 루이사이트의 ETKDG 기하는
+        # 거의 평면(As 결합각 합 354.9도)이고, 그대로 단일점을 찍으면
+        # 잘못된 기하에서 전자 서술자가 나오는데 아무 신호도 남지 않는다.
+        if not os.path.exists(opt):
+            raise RuntimeError(
+                f'{name}: xtb --opt 실패, xtbopt.xyz 없음. '
+                'ETKDG 기하로 폴백하지 않고 중단한다.')
+        geom = 'xtbopt.xyz'
         # 중성 단일점 — 궤도·쌍극자·전하·WBO 는 전부 여기서만 읽는다.
         # (--vfukui 런은 N+1 / N-1 전자 SCF 를 함께 돌려 궤도표가 오염된다)
         rsp = subprocess.run(['xtb', geom, '--gfn', '2', '--chrg', '0', '--uhf', '0'],

@@ -16,7 +16,7 @@
  "Fig_toxicity": {
   "panel_a": "dichloromethane, a designated simulant, ranks 3 of 19\non this axis: methanol and n-hexane score higher.\nIt is 1,411,800$\\times$ less acutely toxic than VX\nand 1,397$\\times$ less than hydrogen cyanide.",
   "panel_b_header": "no regulator-grade acute inhalation\nvalue exists for any of these 9",
-  "panel_d": "14 of the 20 agents pass the domain check, and all 20 are wrong by 0.40 to 3.42 log (a factor of 2.5 to 2,600), always in the unsafe direction. The worst inside the domain is wrong by 2.68 log."
+  "panel_d": "14 of the 20 agents pass the domain check, and all 20 are wrong by 0.39 to 3.42 log (a factor of 2.5 to 2,600), always in the unsafe direction. The worst inside the domain is wrong by 2.68 log."
  },
  "Fig_h1": {
   "spearman": "Spearman r = +0.062, 95% CI -0.077 to +0.199, n = 207; no monotonic association.",
