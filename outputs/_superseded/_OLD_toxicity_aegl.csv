@@ -1,0 +1,29 @@
+compound_name,compound_class,aegl_cas,aegl_name,aegl_unit,AEGL3_10min_mgm3,AEGL2_10min_mgm3,note
+DMMP,simulant,,,,,,[수집 불가: EPA AEGL 미등재]
+acetone,interferent,67-64-1,Acetone,ppm,,21.37914110429448,[수집 불가: AEGL-3 = NR]
+methanol,interferent,67-56-1,Methanol,ppm,,14.41562372188139,[수집 불가: AEGL-3 = NR]
+acetonitrile,interferent,75-05-8,Acetonitrile,ppm,402.9742331288343,134.32474437627812,
+chloroform,interferent,67-66-3,Chloroform,ppm,19.530143149284253,585.9042944785276,
+n-hexane,interferent,110-54-3,Hexane,ppm,,14.098650306748466,[수집 불가: AEGL-3 = NR]
+THF,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+ethyl acetate,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+benzene,interferent,71-43-2,Benzene,ppm,,6.389693251533742,[수집 불가: AEGL-3 = NR]
+water,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+dichloromethane,simulant,75-09-2,Methylene chloride,ppm,41.68490797546012,5905.361963190183,
+DPGME,simulant,,,,,,[수집 불가: EPA AEGL 미등재]
+ethanol,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+toluene,interferent,108-88-3,Toluene,ppm,37.68548057259714,3.768548057259714,
+DMSO,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+p-dichlorobenzene,interferent,,,,,,[수집 불가: EPA AEGL 미등재]
+p-xylene,interferent,1330-20-7,Xylenes,ppm,,8.684498977505113,[수집 불가: AEGL-3 = NR]
+sarin (GB),real_agent,107-44-8,Agent GB (Sarin),ppm,0.3667082208588957,0.08594723926380368,
+soman (GD),real_agent,96-64-0,Agent GD (Soman),ppm,0.3650950920245398,0.042470245398773004,
+tabun (GA),real_agent,77-81-6,Agent GA (Tabun),ppm,0.7294147239263804,0.08620355828220859,
+sulfur mustard (HD),real_agent,505-60-2,Sulfur Mustard,ppm,3.8387644171779147,0.5855742331288344,
+lewisite 1 (L),real_agent,541-25-3,Lewisite 1,mg/m3,3.9,1.3,
+hydrogen cyanide (AC),real_agent,74-90-8,Hydrogen cyanide,ppm,29.844662576687117,18.79108384458078,
+cyanogen chloride (CK),real_agent,,,,,,[수집 불가: EPA AEGL 미등재]
+phosgene (CG),real_agent,75-44-5,Phosgene,ppm,14.564319018404909,2.4273865030674844,
+chloropicrin (PS),real_agent,76-06-2,Chloropicrin,ppm,13.445807770961148,1.0084355828220861,
+cyclosarin (GF),real_agent,,,,,,[수집 불가: EPA AEGL 미등재]
+VX,real_agent,50782-69-9,Agent VX,ppm,0.029526073619631905,0.007108128834355828,

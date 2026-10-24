@@ -1,0 +1,55 @@
+{
+ "seed": 49374,
+ "n_compounds": 6,
+ "n_perm": 720,
+ "n_rep": 2000,
+ "alpha": 0.05,
+ "grid": [
+  {
+   "noise": 1.5,
+   "mean_abs_rho": 0.5321910714285714,
+   "power": 0.529
+  },
+  {
+   "noise": 1.1,
+   "mean_abs_rho": 0.6527607142857142,
+   "power": 0.7775
+  },
+  {
+   "noise": 0.85,
+   "mean_abs_rho": 0.7414642857142858,
+   "power": 0.9245
+  },
+  {
+   "noise": 0.65,
+   "mean_abs_rho": 0.8175,
+   "power": 0.9825
+  },
+  {
+   "noise": 0.5,
+   "mean_abs_rho": 0.8760089285714284,
+   "power": 0.998
+  },
+  {
+   "noise": 0.4,
+   "mean_abs_rho": 0.9073446428571429,
+   "power": 0.999
+  },
+  {
+   "noise": 0.3,
+   "mean_abs_rho": 0.9389624999999999,
+   "power": 1.0
+  },
+  {
+   "noise": 0.2,
+   "mean_abs_rho": 0.9657982142857142,
+   "power": 1.0
+  },
+  {
+   "noise": 0.1,
+   "mean_abs_rho": 0.9858625,
+   "power": 1.0
+  }
+ ],
+ "mde_rho_mantel": 0.666
+}

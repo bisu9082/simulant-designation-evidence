@@ -21,7 +21,7 @@
    "n_tests": 18,
    "observed_min_p": 0.025,
    "which_test": "merged:mean_diff",
-   "wy_adjusted_p": 0.075
+   "wy_adjusted_p": 0.07941176470588235
   }
  },
  "distance_bootstrap": {

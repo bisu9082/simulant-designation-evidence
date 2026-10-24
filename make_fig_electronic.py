@@ -57,7 +57,7 @@ for k in ['interferent', 'simulant', 'real_agent']:
     m = (df.klass == k).to_numpy()
     ax.scatter(Y[m, 0], Y[m, 1], s=190, c=CMAP[k], edgecolors='white',
                linewidths=1.6, zorder=3,
-               label={'real_agent': 'authentic agent', 'simulant': 'designated simulant',
+               label={'real_agent': 'authentic agent', 'simulant': 'incumbent simulant',
                       'interferent': 'interferent / solvent'}[k])
 txt = [ax.text(Y[i, 0], Y[i, 1], short(df.name[i]), fontsize=FS_ANNOT - 1,
                color='#333333', zorder=4) for i in range(len(df))]
@@ -81,7 +81,7 @@ for y, r in zip(yy, T.itertuples()):
     bx.plot([r.d_simulant, r.d_interferent], [y, y], color='#BBBBBB',
             lw=2.2, zorder=1, solid_capstyle='round')
 bx.scatter(T.d_simulant, yy, s=200, c=C_SIM, edgecolors='white', lw=1.6,
-           zorder=3, label='nearest designated simulant')
+           zorder=3, label='nearest incumbent simulant')
 bx.scatter(T.d_interferent, yy, s=200, c=C_INTF, edgecolors='white', lw=1.6,
            zorder=3, label='nearest interferent')
 bx.set_yticks(yy); bx.set_yticklabels([short(n) for n in T.real_agent])
@@ -99,7 +99,7 @@ for y, r in zip(yy, T.itertuples()):
 bx.legend(loc='upper right', frameon=False,
           bbox_to_anchor=(1.0, 1.0))
 bx.text(xmax * 0.02, -1.08,
-        '✕  an interferent lies closer than any designated simulant '
+        '✕  an interferent lies closer than any incumbent simulant '
         f'({int(T.interferent_closer.sum())} of {len(T)} authentic agents)',
         fontsize=FS_ANNOT, color=C_REF, va='center', ha='left')
 dress(bx); panel_label(bx, 'b')
@@ -166,7 +166,7 @@ dx.text(wmax * 1.16, (lo + hi) / 2,
 dx.set_xlabel(r'global electrophilicity index,  $\omega = \mu^{2}/2\eta$  (eV)')
 dx.legend(handles=[Line2D([], [], marker='s', ls='', ms=12, mfc=c, mec='white',
                           label=l) for c, l in
-                   [(C_REAL, 'authentic agent'), (C_SIM, 'designated simulant'),
+                   [(C_REAL, 'authentic agent'), (C_SIM, 'incumbent simulant'),
                     (C_INTF, 'interferent / solvent')]],
           loc='lower right', frameon=False, bbox_to_anchor=(1.0, 0.02))
 dress(dx); panel_label(dx, 'd')

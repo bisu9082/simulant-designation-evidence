@@ -13,6 +13,12 @@
   "trainset_mismatch": 0,
   "panel_checked": 19,
   "panel_mismatch": 0,
-  "comma_rows_source": 25,
-  "comma_rows_checked": 25
+  "comma_rows_source": 34,
+  "comma_rows_cell_path": 25,
+  "comma_rows_footnote_path": 9,
+  "comma_rows_checked": 33,
+  "cross_reader_pairs": 250,
+  "cross_reader_mismatch": 0,
+  "cross_reader_primary_only": 0,
+  "cross_reader_validator_only": 9
 }

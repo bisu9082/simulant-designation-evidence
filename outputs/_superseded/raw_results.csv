@@ -1,0 +1,226 @@
+block,condition,item,metric,value,unit,note
+descriptor_space,A_rdkit,-,n_descriptors_kept,38,,
+descriptor_space,A_rdkit,-,PC1_variance_explained,0.3648,,
+descriptor_space,A_rdkit,-,PC1_PC2_cumulative,0.4841,,
+descriptor_space,A_rdkit,kappa1,PC1_loading,0.2633,,
+descriptor_space,A_rdkit,PMI1,PC1_loading,0.2488,,
+descriptor_space,A_rdkit,MW,PC1_loading,0.2482,,
+descriptor_space,A_rdkit,MR_crippen,PC1_loading,0.2459,,
+descriptor_space,A_rdkit,chi1v,PC1_loading,0.2435,,
+descriptor_space,A_rdkit,chi3v,PC1_loading,0.2435,,
+descriptor_space,A_rdkit,-,n_interferent_closer,6,of 11,
+descriptor_space,B_electronic,-,n_descriptors_kept,4,,
+descriptor_space,B_electronic,-,PC1_variance_explained,0.4846,,
+descriptor_space,B_electronic,-,PC1_PC2_cumulative,0.7468,,
+descriptor_space,B_electronic,electrophilicity_index_eV,PC1_loading,0.6978,,
+descriptor_space,B_electronic,E_LUMO_eV,PC1_loading,-0.6884,,
+descriptor_space,B_electronic,E_HOMO_eV,PC1_loading,-0.1911,,
+descriptor_space,B_electronic,dipole_moment_D,PC1_loading,-0.0527,,
+descriptor_space,B_electronic,-,n_interferent_closer,7,of 11,
+descriptor_space,C_merged,-,n_descriptors_kept,42,,
+descriptor_space,C_merged,-,PC1_variance_explained,0.338,,
+descriptor_space,C_merged,-,PC1_PC2_cumulative,0.4591,,
+descriptor_space,C_merged,kappa1,PC1_loading,0.2598,,
+descriptor_space,C_merged,PMI1,PC1_loading,0.2466,,
+descriptor_space,C_merged,MW,PC1_loading,0.2447,,
+descriptor_space,C_merged,MR_crippen,PC1_loading,0.2433,,
+descriptor_space,C_merged,chi3v,PC1_loading,0.2409,,
+descriptor_space,C_merged,chi1v,PC1_loading,0.2403,,
+descriptor_space,C_merged,-,n_interferent_closer,6,of 11,
+nearest_neighbour,A_rdkit,sarin (GB),d_nearest_simulant,4.3099,z-dist,DMMP
+nearest_neighbour,A_rdkit,sarin (GB),d_nearest_interferent,6.8713,z-dist,ethyl acetate
+nearest_neighbour,A_rdkit,sarin (GB),d_simulant_normalised,1.252,x typical NN,valid match
+nearest_neighbour,A_rdkit,soman (GD),d_nearest_simulant,5.3946,z-dist,DMMP
+nearest_neighbour,A_rdkit,soman (GD),d_nearest_interferent,7.9268,z-dist,n-hexane
+nearest_neighbour,A_rdkit,soman (GD),d_simulant_normalised,1.5671,x typical NN,valid match
+nearest_neighbour,A_rdkit,tabun (GA),d_nearest_simulant,7.4291,z-dist,DMMP
+nearest_neighbour,A_rdkit,tabun (GA),d_nearest_interferent,9.3056,z-dist,ethyl acetate
+nearest_neighbour,A_rdkit,tabun (GA),d_simulant_normalised,2.1581,x typical NN,
+nearest_neighbour,A_rdkit,sulfur mustard (HD),d_nearest_simulant,6.6196,z-dist,dichloromethane
+nearest_neighbour,A_rdkit,sulfur mustard (HD),d_nearest_interferent,5.4385,z-dist,n-hexane
+nearest_neighbour,A_rdkit,sulfur mustard (HD),d_simulant_normalised,1.9229,x typical NN,
+nearest_neighbour,A_rdkit,lewisite 1 (L),d_nearest_simulant,8.1895,z-dist,dichloromethane
+nearest_neighbour,A_rdkit,lewisite 1 (L),d_nearest_interferent,7.1085,z-dist,p-dichlorobenzene
+nearest_neighbour,A_rdkit,lewisite 1 (L),d_simulant_normalised,2.3789,x typical NN,
+nearest_neighbour,A_rdkit,hydrogen cyanide (AC),d_nearest_simulant,6.0685,z-dist,dichloromethane
+nearest_neighbour,A_rdkit,hydrogen cyanide (AC),d_nearest_interferent,3.1705,z-dist,acetonitrile
+nearest_neighbour,A_rdkit,hydrogen cyanide (AC),d_simulant_normalised,1.7628,x typical NN,
+nearest_neighbour,A_rdkit,cyanogen chloride (CK),d_nearest_simulant,5.3822,z-dist,dichloromethane
+nearest_neighbour,A_rdkit,cyanogen chloride (CK),d_nearest_interferent,3.1601,z-dist,acetonitrile
+nearest_neighbour,A_rdkit,cyanogen chloride (CK),d_simulant_normalised,1.5635,x typical NN,
+nearest_neighbour,A_rdkit,phosgene (CG),d_nearest_simulant,6.0219,z-dist,dichloromethane
+nearest_neighbour,A_rdkit,phosgene (CG),d_nearest_interferent,3.9125,z-dist,acetone
+nearest_neighbour,A_rdkit,phosgene (CG),d_simulant_normalised,1.7493,x typical NN,
+nearest_neighbour,A_rdkit,chloropicrin (PS),d_nearest_simulant,9.444,z-dist,DMMP
+nearest_neighbour,A_rdkit,chloropicrin (PS),d_nearest_interferent,8.6916,z-dist,chloroform
+nearest_neighbour,A_rdkit,chloropicrin (PS),d_simulant_normalised,2.7434,x typical NN,
+nearest_neighbour,A_rdkit,cyclosarin (GF),d_nearest_simulant,5.6722,z-dist,DMMP
+nearest_neighbour,A_rdkit,cyclosarin (GF),d_nearest_interferent,7.3349,z-dist,n-hexane
+nearest_neighbour,A_rdkit,cyclosarin (GF),d_simulant_normalised,1.6477,x typical NN,valid match
+nearest_neighbour,A_rdkit,VX,d_nearest_simulant,11.8374,z-dist,DPGME
+nearest_neighbour,A_rdkit,VX,d_nearest_interferent,14.0286,z-dist,n-hexane
+nearest_neighbour,A_rdkit,VX,d_simulant_normalised,3.4386,x typical NN,
+nearest_neighbour,B_electronic,sarin (GB),d_nearest_simulant,0.9673,z-dist,DMMP
+nearest_neighbour,B_electronic,sarin (GB),d_nearest_interferent,1.1707,z-dist,acetonitrile
+nearest_neighbour,B_electronic,sarin (GB),d_simulant_normalised,1.3553,x typical NN,valid match
+nearest_neighbour,B_electronic,soman (GD),d_nearest_simulant,1.0094,z-dist,DMMP
+nearest_neighbour,B_electronic,soman (GD),d_nearest_interferent,1.122,z-dist,acetonitrile
+nearest_neighbour,B_electronic,soman (GD),d_simulant_normalised,1.4143,x typical NN,valid match
+nearest_neighbour,B_electronic,tabun (GA),d_nearest_simulant,2.4558,z-dist,dichloromethane
+nearest_neighbour,B_electronic,tabun (GA),d_nearest_interferent,0.7392,z-dist,acetone
+nearest_neighbour,B_electronic,tabun (GA),d_simulant_normalised,3.4409,x typical NN,
+nearest_neighbour,B_electronic,sulfur mustard (HD),d_nearest_simulant,1.8046,z-dist,dichloromethane
+nearest_neighbour,B_electronic,sulfur mustard (HD),d_nearest_interferent,1.0462,z-dist,acetone
+nearest_neighbour,B_electronic,sulfur mustard (HD),d_simulant_normalised,2.5286,x typical NN,
+nearest_neighbour,B_electronic,lewisite 1 (L),d_nearest_simulant,1.3862,z-dist,dichloromethane
+nearest_neighbour,B_electronic,lewisite 1 (L),d_nearest_interferent,0.8691,z-dist,p-dichlorobenzene
+nearest_neighbour,B_electronic,lewisite 1 (L),d_simulant_normalised,1.9423,x typical NN,
+nearest_neighbour,B_electronic,hydrogen cyanide (AC),d_nearest_simulant,0.9528,z-dist,dichloromethane
+nearest_neighbour,B_electronic,hydrogen cyanide (AC),d_nearest_interferent,1.0833,z-dist,ethyl acetate
+nearest_neighbour,B_electronic,hydrogen cyanide (AC),d_simulant_normalised,1.3351,x typical NN,valid match
+nearest_neighbour,B_electronic,cyanogen chloride (CK),d_nearest_simulant,1.6444,z-dist,dichloromethane
+nearest_neighbour,B_electronic,cyanogen chloride (CK),d_nearest_interferent,1.4098,z-dist,acetonitrile
+nearest_neighbour,B_electronic,cyanogen chloride (CK),d_simulant_normalised,2.304,x typical NN,
+nearest_neighbour,B_electronic,phosgene (CG),d_nearest_simulant,2.1814,z-dist,dichloromethane
+nearest_neighbour,B_electronic,phosgene (CG),d_nearest_interferent,1.4268,z-dist,chloroform
+nearest_neighbour,B_electronic,phosgene (CG),d_simulant_normalised,3.0565,x typical NN,
+nearest_neighbour,B_electronic,chloropicrin (PS),d_nearest_simulant,3.5918,z-dist,dichloromethane
+nearest_neighbour,B_electronic,chloropicrin (PS),d_nearest_interferent,3.0428,z-dist,chloroform
+nearest_neighbour,B_electronic,chloropicrin (PS),d_simulant_normalised,5.0327,x typical NN,
+nearest_neighbour,B_electronic,cyclosarin (GF),d_nearest_simulant,0.9092,z-dist,DMMP
+nearest_neighbour,B_electronic,cyclosarin (GF),d_nearest_interferent,1.1171,z-dist,acetonitrile
+nearest_neighbour,B_electronic,cyclosarin (GF),d_simulant_normalised,1.2739,x typical NN,valid match
+nearest_neighbour,B_electronic,VX,d_nearest_simulant,3.1498,z-dist,DPGME
+nearest_neighbour,B_electronic,VX,d_nearest_interferent,2.1148,z-dist,DMSO
+nearest_neighbour,B_electronic,VX,d_simulant_normalised,4.4134,x typical NN,
+nearest_neighbour,C_merged,sarin (GB),d_nearest_simulant,4.4171,z-dist,DMMP
+nearest_neighbour,C_merged,sarin (GB),d_nearest_interferent,7.1314,z-dist,ethyl acetate
+nearest_neighbour,C_merged,sarin (GB),d_simulant_normalised,1.1286,x typical NN,valid match
+nearest_neighbour,C_merged,soman (GD),d_nearest_simulant,5.4882,z-dist,DMMP
+nearest_neighbour,C_merged,soman (GD),d_nearest_interferent,8.3115,z-dist,ethyl acetate
+nearest_neighbour,C_merged,soman (GD),d_simulant_normalised,1.4023,x typical NN,valid match
+nearest_neighbour,C_merged,tabun (GA),d_nearest_simulant,7.9633,z-dist,DMMP
+nearest_neighbour,C_merged,tabun (GA),d_nearest_interferent,9.4842,z-dist,ethyl acetate
+nearest_neighbour,C_merged,tabun (GA),d_simulant_normalised,2.0347,x typical NN,
+nearest_neighbour,C_merged,sulfur mustard (HD),d_nearest_simulant,6.8612,z-dist,dichloromethane
+nearest_neighbour,C_merged,sulfur mustard (HD),d_nearest_interferent,6.4988,z-dist,n-hexane
+nearest_neighbour,C_merged,sulfur mustard (HD),d_simulant_normalised,1.7531,x typical NN,
+nearest_neighbour,C_merged,lewisite 1 (L),d_nearest_simulant,8.306,z-dist,dichloromethane
+nearest_neighbour,C_merged,lewisite 1 (L),d_nearest_interferent,7.1615,z-dist,p-dichlorobenzene
+nearest_neighbour,C_merged,lewisite 1 (L),d_simulant_normalised,2.1222,x typical NN,
+nearest_neighbour,C_merged,hydrogen cyanide (AC),d_nearest_simulant,6.1428,z-dist,dichloromethane
+nearest_neighbour,C_merged,hydrogen cyanide (AC),d_nearest_interferent,3.404,z-dist,acetonitrile
+nearest_neighbour,C_merged,hydrogen cyanide (AC),d_simulant_normalised,1.5695,x typical NN,
+nearest_neighbour,C_merged,cyanogen chloride (CK),d_nearest_simulant,5.6277,z-dist,dichloromethane
+nearest_neighbour,C_merged,cyanogen chloride (CK),d_nearest_interferent,3.4603,z-dist,acetonitrile
+nearest_neighbour,C_merged,cyanogen chloride (CK),d_simulant_normalised,1.4379,x typical NN,
+nearest_neighbour,C_merged,phosgene (CG),d_nearest_simulant,6.4048,z-dist,dichloromethane
+nearest_neighbour,C_merged,phosgene (CG),d_nearest_interferent,4.5504,z-dist,ethyl acetate
+nearest_neighbour,C_merged,phosgene (CG),d_simulant_normalised,1.6365,x typical NN,
+nearest_neighbour,C_merged,chloropicrin (PS),d_nearest_simulant,10.5801,z-dist,DMMP
+nearest_neighbour,C_merged,chloropicrin (PS),d_nearest_interferent,9.2088,z-dist,chloroform
+nearest_neighbour,C_merged,chloropicrin (PS),d_simulant_normalised,2.7033,x typical NN,
+nearest_neighbour,C_merged,cyclosarin (GF),d_nearest_simulant,5.7447,z-dist,DMMP
+nearest_neighbour,C_merged,cyclosarin (GF),d_nearest_interferent,7.9606,z-dist,n-hexane
+nearest_neighbour,C_merged,cyclosarin (GF),d_simulant_normalised,1.4678,x typical NN,valid match
+nearest_neighbour,C_merged,VX,d_nearest_simulant,12.2493,z-dist,DPGME
+nearest_neighbour,C_merged,VX,d_nearest_interferent,14.4835,z-dist,p-dichlorobenzene
+nearest_neighbour,C_merged,VX,d_simulant_normalised,3.1298,x typical NN,
+sanity_monotonicity,C_merged,k=4,mean_pairwise_distance,2.5331,,
+sanity_monotonicity,C_merged,k=8,mean_pairwise_distance,3.66,,
+sanity_monotonicity,C_merged,k=12,mean_pairwise_distance,4.5686,,
+sanity_monotonicity,C_merged,k=16,mean_pairwise_distance,5.2213,,
+sanity_monotonicity,C_merged,k=20,mean_pairwise_distance,5.8088,,
+sanity_monotonicity,C_merged,k=24,mean_pairwise_distance,6.3637,,
+sanity_monotonicity,C_merged,k=28,mean_pairwise_distance,7.0409,,
+sanity_monotonicity,C_merged,k=32,mean_pairwise_distance,7.5542,,
+sanity_monotonicity,C_merged,k=36,mean_pairwise_distance,8.0251,,
+sanity_monotonicity,C_merged,k=40,mean_pairwise_distance,8.5052,,
+sanity_monotonicity,C_merged,-,passed,1,,
+sanity_baseline,A_rdkit,-,null_mean_count,9.059,of 11,"C(17,3)=680 전수"
+sanity_baseline,A_rdkit,-,observed_count,6.0,of 11,
+sanity_baseline,A_rdkit,-,observed_mean_diff,-0.0527,,
+sanity_baseline,A_rdkit,-,exact_p,0.0279,,
+sanity_baseline,B_electronic,-,null_mean_count,9.059,of 11,"C(17,3)=680 전수"
+sanity_baseline,B_electronic,-,observed_count,7.0,of 11,
+sanity_baseline,B_electronic,-,observed_mean_diff,0.4465,,
+sanity_baseline,B_electronic,-,exact_p,0.2971,,
+sanity_baseline,C_merged,-,null_mean_count,9.059,of 11,"C(17,3)=680 전수"
+sanity_baseline,C_merged,-,observed_count,6.0,of 11,
+sanity_baseline,C_merged,-,observed_mean_diff,-0.17,,
+sanity_baseline,C_merged,-,exact_p,0.025,,
+xtb_protocol,fast_vs_precise,E_HOMO_eV,pearson_r,0.9968,,n=28
+xtb_protocol,fast_vs_precise,E_HOMO_eV,mean_abs_diff,0.0287,,
+xtb_protocol,fast_vs_precise,E_LUMO_eV,pearson_r,0.9995,,n=28
+xtb_protocol,fast_vs_precise,E_LUMO_eV,mean_abs_diff,0.0515,,
+xtb_protocol,fast_vs_precise,electrophilicity_index_eV,pearson_r,0.9992,,n=28
+xtb_protocol,fast_vs_precise,electrophilicity_index_eV,mean_abs_diff,0.0752,,
+xtb_protocol,fast_vs_precise,dipole_moment_D,pearson_r,0.9857,,n=28
+xtb_protocol,fast_vs_precise,dipole_moment_D,mean_abs_diff,0.1089,,
+p_local,-,sarin (GB),q_P,0.54044,,
+p_local,-,sarin (GB),q_phosphoryl_O,-0.42847,,
+p_local,-,sarin (GB),wiberg_PO,1.95274,,
+p_local,-,sarin (GB),fukui_f_plus_P,0.66793,,
+p_local,-,soman (GD),q_P,0.5446,,
+p_local,-,soman (GD),q_phosphoryl_O,-0.43006,,
+p_local,-,soman (GD),wiberg_PO,1.95068,,
+p_local,-,soman (GD),fukui_f_plus_P,0.63692,,
+p_local,-,cyclosarin (GF),q_P,0.53868,,
+p_local,-,cyclosarin (GF),q_phosphoryl_O,-0.42662,,
+p_local,-,cyclosarin (GF),wiberg_PO,1.95465,,
+p_local,-,cyclosarin (GF),fukui_f_plus_P,0.63203,,
+p_local,-,DMMP,q_P,0.4663,,
+p_local,-,DMMP,q_phosphoryl_O,-0.44588,,
+p_local,-,DMMP,wiberg_PO,1.92461,,
+p_local,-,DMMP,fukui_f_plus_P,0.55852,,
+p_local,-,tabun (GA),q_P,0.34433,,
+p_local,-,tabun (GA),q_phosphoryl_O,-0.38982,,
+p_local,-,tabun (GA),wiberg_PO,2.01462,,
+p_local,-,tabun (GA),fukui_f_plus_P,0.42143,,
+p_local,-,VX,q_P,0.33196,,
+p_local,-,VX,q_phosphoryl_O,-0.40303,,
+p_local,-,VX,wiberg_PO,1.98628,,
+p_local,-,VX,fukui_f_plus_P,0.20431,,
+toxicity_measured,-,DMMP,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,acetone,AEGL3_10min,38007.362,mg/m3,
+toxicity_measured,-,methanol,AEGL3_10min,52420.4499,mg/m3,
+toxicity_measured,-,acetonitrile,AEGL3_10min,402.9742,mg/m3,
+toxicity_measured,-,chloroform,AEGL3_10min,19530.1431,mg/m3,
+toxicity_measured,-,n-hexane,AEGL3_10min,42295.9509,mg/m3,
+toxicity_measured,-,THF,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,ethyl acetate,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,benzene,AEGL3_10min,30990.0123,mg/m3,
+toxicity_measured,-,water,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,dichloromethane,AEGL3_10min,41684.908,mg/m3,
+toxicity_measured,-,DPGME,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,ethanol,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,toluene,AEGL3_10min,37685.4806,mg/m3,
+toxicity_measured,-,DMSO,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,p-dichlorobenzene,AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,p-xylene,AEGL3_10min,31264.1963,mg/m3,
+toxicity_measured,-,sarin (GB),AEGL3_10min,0.3667,mg/m3,
+toxicity_measured,-,soman (GD),AEGL3_10min,0.3651,mg/m3,
+toxicity_measured,-,tabun (GA),AEGL3_10min,0.7294,mg/m3,
+toxicity_measured,-,sulfur mustard (HD),AEGL3_10min,3.8388,mg/m3,
+toxicity_measured,-,lewisite 1 (L),AEGL3_10min,3.9,mg/m3,
+toxicity_measured,-,hydrogen cyanide (AC),AEGL3_10min,29.8447,mg/m3,
+toxicity_measured,-,cyanogen chloride (CK),AEGL3_10min,,mg/m3,[수집 불가: EPA AEGL 미등재]
+toxicity_measured,-,phosgene (CG),AEGL3_10min,14.5643,mg/m3,
+toxicity_measured,-,chloropicrin (PS),AEGL3_10min,13.4458,mg/m3,
+toxicity_measured,-,cyclosarin (GF),AEGL3_10min,0.3905,mg/m3,
+toxicity_measured,-,VX,AEGL3_10min,0.0295,mg/m3,
+qsar_tox,baseline-1 평균예측,-,R2,0.0,,"sd 0.0000, seeds 5"
+qsar_tox,baseline-1 평균예측,-,RMSE_log10,1.2709,,"95% CI [1.175, 1.365]"
+qsar_tox,baseline-2 logP+MW 선형,-,R2,0.0709,,"sd 0.0457, seeds 5"
+qsar_tox,baseline-2 logP+MW 선형,-,RMSE_log10,1.2247,,"95% CI [1.121, 1.315]"
+qsar_tox,RandomForest (전체 서술자),-,R2,0.4583,,"sd 0.0139, seeds 5"
+qsar_tox,RandomForest (전체 서술자),-,RMSE_log10,0.9353,,"95% CI [0.830, 1.020]"
+h1_decoupling,-,-,spearman_r,-0.02172,,"95% CI [-0.156, 0.111]"
+h1_decoupling,-,-,spearman_p,0.75211,,
+h1_decoupling,-,-,pearson_r,-0.0215,,
+h1_decoupling,-,-,pearson_p,0.75448,,
+h1_decoupling,-,-,r_squared,0.00046,,
+h1_decoupling,-,-,n_candidates,214,,
+rq2_quadrant,-,neither,n_compounds,152,,
+rq2_quadrant,-,faithful_but_toxic,n_compounds,54,,
+rq2_quadrant,-,safe_but_unfaithful,n_compounds,8,,

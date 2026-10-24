@@ -188,23 +188,19 @@ def dimensionality_control(elec_p):
         # 백색화 전후 둘 다 수행한다 (2026-10-14, 리뷰어 2 R2-2/R2-3).
         # 같은 양을 두 스크립트가 다른 난수로 산출하면 본문이 어느 쪽을 쓰는지
         # 모호해지므로 여기서는 계산하지 않는다.
-        ps = np.array([np.nan])
-        q = np.full(5, np.nan)
         print(f'\n  ### {tag}  (구조 {len(keep)}차원)')
         print(f'    구조 전차원        mean_diff p = {full["mean_diff"]["p"]:.4f}')
         print(f'    구조 주성분 3개    mean_diff p = {pc3["mean_diff"]["p"]:.4f}')
-        print(f'    구조 무작위 3종 {N_RANDSUB}회  p 중위 {q[2]:.3f}, '
-              f'5-95% [{q[0]:.3f}, {q[4]:.3f}], p<0.05 비율 '
-              f'{float((ps < 0.05).mean()):.3f}')
-        # 관측값들이 그 분포의 몇 번째 백분위인지. 본문이 이 수치를 쓴다.
+        print('    구조 무작위 3좌표   stat_supplement.py 참조 (여기서 미수행)')
+        # 2026-10-24. 종전에는 미수행 경로가 random3_p_quantiles 를 전부 NaN,
+        # random3_frac_below_05 를 0.000 으로, n_random_subsets 를 500 으로
+        # 적어 기탁 JSON 에 내보냈다. 돌리지 않은 500회를 돌린 것처럼 읽히고,
+        # 본문이 쓰는 값(2000회, 36.3%)과도 다르다. 키 자체를 내보내지 않고
+        # 어디서 산출되는지만 남긴다.
         out[tag] = dict(n_structural_dims=len(keep),
                         full_p=full['mean_diff']['p'],
                         pc3_p=pc3['mean_diff']['p'],
-                        random3_p_quantiles=dict(
-                            zip(['q05', 'q25', 'q50', 'q75', 'q95'],
-                                [float(v) for v in q])),
-                        random3_frac_below_05=float((ps < 0.05).mean()),
-                        n_random_subsets=N_RANDSUB)
+                        random3_subspace_control='stat_supplement.py')
     return out
 
 
@@ -218,8 +214,14 @@ def deltaE_corrected():
     df = pd.read_csv('descriptor_cache_xtb.csv')
     num = [c for c in df.select_dtypes('number').columns
            if df[c].notna().sum() == 28 and c not in META_NUM]
-    SPACES = {'structural': [c for c in num if c not in ELECTRONIC_28],
-              'electronic3': [c for c in num if c in ELEC3]}
+    # 2026-10-24. 종전에는 구조·전자3 두 공간만 돌았다. 본문의 1차 공간인
+    # 병합이 빠져 있었고, 빠진 셀 중 하나(d2 uv merged)가 계수 최대다.
+    # 사후에 family 를 좁힌 꼴이고 좁힌 방향이 결과를 완화하는 쪽이었다.
+    # 패널·공간·통계량을 사전 고정하라고 결론내는 논문에서 자기모순이다.
+    _struct = [c for c in num if c not in ELECTRONIC_28]
+    _elec3 = [c for c in num if c in ELEC3]
+    SPACES = {'structural': _struct, 'electronic3': _elec3,
+              'merged': _struct + _elec3}
     idx = {nm: i for i, nm in enumerate(df.compound_name)}
     DIST = {sp: zdist(df, cols)[0] for sp, cols in SPACES.items()}
     rng = np.random.default_rng(SEED)
@@ -273,8 +275,9 @@ def deltaE_corrected():
                 print(f'  {tag} {mode:<7} {sp:<12} rho {r:+.3f}   '
                       f'Mantel p = {pm_:.4f}   '
                       f'(쌍독립가정 p = {p_naive:.4f})')
-    # 8셀은 하나의 family 다. 순열검정 18건을 보정하면서 이쪽을 보정하지 않으면
-    # 논문이 스스로 비판하는 오류를 범하게 된다. 2026-10-14 추가.
+    # 12셀은 하나의 family 다. 순열검정 18건을 보정하면서 이쪽을 보정하지 않으면
+    # 논문이 스스로 비판하는 오류를 범하게 된다. 2026-10-14 추가,
+    # 2026-10-24 에 병합공간 4셀을 되돌려 8셀 -> 12셀.
     pv = np.array([x['p_mantel'] for x in mantel])
     k = len(pv)
     o = np.sort(pv)
@@ -289,7 +292,10 @@ def deltaE_corrected():
               f'관측 {f["observed_mean_cosine"]:+.3f}  '
               f'바닥 {f["algebraic_floor"]:+.3f}  '
               f'여유 {f["gap"]:+.3f}')
-    return dict(mantel=mantel, centring_floor=floor, mantel_bh=mantel_bh)
+    # 2026-10-24. 중복 채널 축약 기록을 기탁 산출물에 싣는다. SI 가 유효
+    # 채널 수를 인용하므로 그 근거가 저장소 안에 있어야 한다.
+    return dict(mantel=mantel, centring_floor=floor, mantel_bh=mantel_bh,
+                channels=m.CHANNEL_LOG)
 
 
 # ------------------------------------------------------------ P5 GA 전체 순위

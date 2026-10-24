@@ -37,24 +37,24 @@
  "panels": {
   "panel28_designated3": {
    "structural": {
-    "n_descriptors": 38,
+    "n_descriptors": 36,
     "n_perm": 680,
     "statistics": {
      "mean_diff": {
-      "observed": -0.05272550039865376,
-      "p": 0.027941176470588237
+      "observed": 0.14297984909764103,
+      "p": 0.030882352941176472
      },
      "median_diff": {
-      "observed": 0.7524317928239395,
+      "observed": 0.728398986444244,
       "p": 0.17647058823529413
      },
      "mean_logratio": {
-      "observed": 0.04824129818355538,
-      "p": 0.04411764705882353
+      "observed": 0.07223339959626238,
+      "p": 0.08823529411764706
      },
      "mean_dsim": {
-      "observed": 6.942623976389549,
-      "p": 0.08529411764705883
+      "observed": 6.849399101792801,
+      "p": 0.075
      },
      "n_closer": {
       "observed": -5.0,
@@ -97,23 +97,23 @@
     }
    },
    "merged": {
-    "n_descriptors": 41,
+    "n_descriptors": 39,
     "n_perm": 680,
     "statistics": {
      "mean_diff": {
-      "observed": -0.20624825796999396,
+      "observed": -0.03822506141830149,
       "p": 0.025
      },
      "median_diff": {
-      "observed": 0.5426357518650562,
+      "observed": 0.4812560599636315,
       "p": 0.12352941176470589
      },
      "mean_logratio": {
-      "observed": 0.017200800133033396,
-      "p": 0.03235294117647059
+      "observed": 0.03702654895625917,
+      "p": 0.039705882352941174
      },
      "mean_dsim": {
-      "observed": 7.125715228543931,
+      "observed": 7.0354381591702175,
       "p": 0.041176470588235294
      },
      "n_closer": {
@@ -121,8 +121,8 @@
       "p": 0.11029411764705882
      },
      "n_valid": {
-      "observed": -3.0,
-      "p": 0.23529411764705882
+      "observed": -4.0,
+      "p": 0.18088235294117647
      }
     }
    }
@@ -314,32 +314,16 @@
  },
  "dimensionality_control": {
   "panel28": {
-   "n_structural_dims": 38,
-   "full_p": 0.027941176470588237,
-   "pc3_p": 0.004411764705882353,
-   "random3_p_quantiles": {
-    "q05": NaN,
-    "q25": NaN,
-    "q50": NaN,
-    "q75": NaN,
-    "q95": NaN
-   },
-   "random3_frac_below_05": 0.0,
-   "n_random_subsets": 500
+   "n_structural_dims": 36,
+   "full_p": 0.030882352941176472,
+   "pc3_p": 0.0029411764705882353,
+   "random3_subspace_control": "stat_supplement.py"
   },
   "panel35": {
    "n_structural_dims": 38,
    "full_p": 0.3255928853754941,
    "pc3_p": 0.41798418972332013,
-   "random3_p_quantiles": {
-    "q05": NaN,
-    "q25": NaN,
-    "q50": NaN,
-    "q75": NaN,
-    "q95": NaN
-   },
-   "random3_frac_below_05": 0.0,
-   "n_random_subsets": 500
+   "random3_subspace_control": "stat_supplement.py"
   }
  },
  "deltaE": {
@@ -350,9 +334,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.05357142857142857,
-    "p_mantel": 0.8246175382461753,
-    "p_pairs_as_independent": 0.8496099367776072
+    "spearman": 0.07857142857142857,
+    "p_mantel": 0.7639236076392361,
+    "p_pairs_as_independent": 0.7807545523090464
    },
    {
     "dataset": "d1",
@@ -366,13 +350,23 @@
    },
    {
     "dataset": "d1",
+    "mode": "uv",
+    "space": "merged",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "spearman": 0.06071428571428571,
+    "p_mantel": 0.8101189881011899,
+    "p_pairs_as_independent": 0.8298120954425187
+   },
+   {
+    "dataset": "d1",
     "mode": "normal",
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.075,
-    "p_mantel": 0.6786321367863214,
-    "p_pairs_as_independent": 0.7905107941552679
+    "spearman": 0.06785714285714285,
+    "p_mantel": 0.7374262573742626,
+    "p_pairs_as_independent": 0.8101088187105132
    },
    {
     "dataset": "d1",
@@ -381,8 +375,18 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.028571428571428564,
-    "p_mantel": 0.93000699930007,
+    "p_mantel": 0.9253074692530747,
     "p_pairs_as_independent": 0.9194899083821858
+   },
+   {
+    "dataset": "d1",
+    "mode": "normal",
+    "space": "merged",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "spearman": 0.06071428571428571,
+    "p_mantel": 0.7427257274272573,
+    "p_pairs_as_independent": 0.8298120954425187
    },
    {
     "dataset": "d2",
@@ -390,9 +394,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.5392857142857141,
-    "p_mantel": 0.012198780121987801,
-    "p_pairs_as_independent": 0.03802165626355803
+    "spearman": 0.5107142857142856,
+    "p_mantel": 0.018598140185981403,
+    "p_pairs_as_independent": 0.051725498368269354
    },
    {
     "dataset": "d2",
@@ -400,9 +404,19 @@
     "space": "electronic3",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.007142857142857141,
-    "p_mantel": 0.9776022397760225,
-    "p_pairs_as_independent": 0.9798442277615982
+    "spearman": 0.014285714285714282,
+    "p_mantel": 0.9535046495350465,
+    "p_pairs_as_independent": 0.9596997645989476
+   },
+   {
+    "dataset": "d2",
+    "mode": "uv",
+    "space": "merged",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "spearman": 0.5178571428571428,
+    "p_mantel": 0.010298970102989701,
+    "p_pairs_as_independent": 0.04800407736655831
    },
    {
     "dataset": "d2",
@@ -410,9 +424,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.2571428571428571,
-    "p_mantel": 0.44015598440155984,
-    "p_pairs_as_independent": 0.3548603636506092
+    "spearman": 0.2964285714285714,
+    "p_mantel": 0.3421657834216578,
+    "p_pairs_as_independent": 0.28335542843426303
    },
    {
     "dataset": "d2",
@@ -421,8 +435,18 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.5714285714285713,
-    "p_mantel": 0.0466953304669533,
+    "p_mantel": 0.044295570442955706,
     "p_pairs_as_independent": 0.026063193376362856
+   },
+   {
+    "dataset": "d2",
+    "mode": "normal",
+    "space": "merged",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "spearman": 0.3107142857142856,
+    "p_mantel": 0.3046695330466953,
+    "p_pairs_as_independent": 0.25966739733721816
    }
   ],
   "centring_floor": [
@@ -446,9 +470,9 @@
     "dataset": "d2",
     "mode": "uv",
     "n_compounds": 7,
-    "observed_mean_cosine": -0.10071089060528594,
+    "observed_mean_cosine": -0.10263459059463759,
     "algebraic_floor": -0.16666666666666666,
-    "gap": 0.06595577606138071
+    "gap": 0.06403207607202907
    },
    {
     "dataset": "d2",
@@ -460,9 +484,74 @@
    }
   ],
   "mantel_bh": {
-   "n_tests": 8,
-   "min_q": 0.09759024097590241,
+   "n_tests": 12,
+   "min_q": 0.11158884111588842,
    "n_sig_q": 0
+  },
+  "channels": {
+   "d1.uv": {
+    "n_declared": 29,
+    "n_effective": 29,
+    "collapsed": {},
+    "all_zero": []
+   },
+   "d1.normal": {
+    "n_declared": 29,
+    "n_effective": 29,
+    "collapsed": {},
+    "all_zero": []
+   },
+   "d2.uv": {
+    "n_declared": 29,
+    "n_effective": 23,
+    "collapsed": {
+     "Dye8": [
+      "Dye14"
+     ],
+     "Dye22": [
+      "Dye23",
+      "Dye24",
+      "Dye25",
+      "Dye26",
+      "Dye27"
+     ]
+    },
+    "all_zero": [
+     "Dye8",
+     "Dye14"
+    ]
+   },
+   "d2.normal": {
+    "n_declared": 29,
+    "n_effective": 29,
+    "collapsed": {},
+    "all_zero": []
+   },
+   "d3.uv": {
+    "n_declared": 29,
+    "n_effective": 25,
+    "collapsed": {
+     "Dye4": [
+      "Dye6",
+      "Dye8",
+      "Dye26",
+      "Dye29"
+     ]
+    },
+    "all_zero": [
+     "Dye4",
+     "Dye6",
+     "Dye8",
+     "Dye26",
+     "Dye29"
+    ]
+   },
+   "d3.normal": {
+    "n_declared": 29,
+    "n_effective": 29,
+    "collapsed": {},
+    "all_zero": []
+   }
   }
  },
  "dmmp_ranking": [

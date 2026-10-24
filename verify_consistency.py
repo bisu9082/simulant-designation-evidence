@@ -16,7 +16,9 @@ GATE 8 3차에서 전부 지적됐다.
       가까우면서 같지는 않은 것. 반올림 분기(84.93 대 84.933)를 잡는다.
 """
 import json
+import os
 import re
+import numpy as _np
 import sys
 
 import pandas as pd
@@ -40,6 +42,7 @@ REQUIRED_OUTPUTS = [
     'outputs/h1_candidates.csv',
     'outputs/h1_summary.json',
     'outputs/h1_screen_sensitivity.json',
+    'outputs/pca_facts.json',
     'outputs/match_by_panel.json',
     'outputs/mde.json',
     'outputs/minority_regression.json',
@@ -197,7 +200,8 @@ def load_facts():
     f['malathion_fold'] = m['least_toxic_ache']['fold_too_toxic']
 
     v = json.load(open('outputs/aegl_parse_validation.json'))
-    f['source_with_aegl3'] = v['source_with_aegl3']
+    f['xreader_pairs'] = v['cross_reader_pairs']
+    f['xreader_mismatch'] = v['cross_reader_mismatch']
     f['trainset_checked'] = v['trainset_checked']
     f['panel_checked'] = v['panel_checked']
     f['comma_rows'] = v['comma_rows_source']
@@ -264,11 +268,57 @@ def load_facts():
             f['mantel_d2uv_struct'] = m['p_mantel']
             f['mantel_d2uv_struct_rho'] = m['spearman']
             f['naive_d2uv_struct'] = m['p_pairs_as_independent']
+        if m['dataset'] == 'd2' and m['mode'] == 'uv' and m['space'] == 'merged':
+            f['mantel_d2uv_merged'] = m['p_mantel']
+            f['mantel_d2uv_merged_rho'] = m['spearman']
         if m['dataset'] == 'd2' and m['mode'] == 'normal' and \
                 m['space'] == 'electronic3':
             f['mantel_d2nor_elec'] = m['p_mantel']
             f['mantel_d2nor_elec_rho'] = m['spearman']
             f['naive_d2nor_elec'] = m['p_pairs_as_independent']
+    # 2026-10-24 신설. 중복 채널 축약은 본문이 '23 effective channels' 라고
+    # 쓰는 새 수치다. 손으로 적은 숫자가 아니라 산출물에서 온 것임을 묶는다.
+    # 화합물 단위 검정력. deltaE_power.py 와 같은 식을 쓴다.
+    from scipy import stats as _st
+    from scipy.optimize import brentq as _bq
+    def _pw(r, n, a=0.05):
+        z = _np.arctanh(r) * _np.sqrt(n - 3)
+        zc = _st.norm.ppf(1 - a / 2)
+        return _st.norm.cdf(z - zc) + _st.norm.cdf(-z - zc)
+    # 2026-10-24 2차 교정. Fisher z 근사(0.924)는 실제로 돌린 정확 Mantel 의
+    # 검정력을 과소평가한다. 시뮬레이션 값(mantel_power.py)이 정본이다.
+    f['mde_rho_compound'] = float(_bq(lambda r: _pw(r, 6) - 0.8, .01, .999))
+    import os as _os
+    if _os.path.exists('outputs/mantel_power.json'):
+        _mp = json.load(open('outputs/mantel_power.json'))
+        f['mde_rho_mantel'] = _mp['mde_rho_mantel']
+        f['mantel_power_perm'] = _mp['n_perm']
+    # 2026-10-24. 다른 세션이 올린 AsCl3 민감도 표(SI)가 검증기에 등록돼 있지
+    # 않았다. 그 표의 28종 행은 이번 정확종속 규칙으로 3/11 에서 4/11 로
+    # 움직였고, 등록돼 있었다면 기계가 잡았을 자리다.
+    if _os.path.exists('outputs/match_by_panel_ascl3.json'):
+        _ac = json.load(open('outputs/match_by_panel_ascl3.json'))
+        _AC = {'panel28_incumbent3': 'a28', 'panel35_incumbent3': 'a35',
+               'panel35_incumbent_plus_lit8': 'a35l',
+               'panel36_incumbent3': 'a36', 'panel36_incumbent_plus_lit': 'a36l'}
+        for _k, _t in _AC.items():
+            if _k in _ac:
+                f[f'ascl3_{_t}_match'] = _ac[_k]['n_match']
+                _L = [x for x in _ac[_k]['agents'] if 'lewisite' in x['agent']]
+                if _L:
+                    f[f'ascl3_{_t}_dist'] = _L[0]['d_norm']
+
+    # 2026-10-24 신설. 하단꼬리와 중첩 조건부 귀무는 초록까지 올라간 새 수치다.
+    _nm = json.load(open('outputs/null_match_expectation.json'))
+    f['null3_lower'] = _nm['sets']['incumbent3']['p_at_most_observed']
+    f['null8_nested_mean'] = _nm['nested_null_8']['null_mean']
+    f['null8_nested_p'] = _nm['nested_null_8']['p_at_least_observed']
+    _ch = rb['deltaE'].get('channels', {})
+    if 'd2.uv' in _ch:
+        f['n_eff_d2uv'] = _ch['d2.uv']['n_effective']
+        f['n_declared_dyes'] = _ch['d2.uv']['n_declared']
+    if 'd3.uv' in _ch:
+        f['n_eff_d3uv'] = _ch['d3.uv']['n_effective']
     for fl in rb['deltaE']['centring_floor']:
         if fl['dataset'] == 'd1' and fl['mode'] == 'uv':
             f['floor_d1uv_obs'] = fl['observed_mean_cosine']
@@ -286,6 +336,9 @@ def load_facts():
     f['p_merged_fig'] = f['p_merged']
 
     f['mantel_minq'] = rb['deltaE']['mantel_bh']['min_q']
+    f['mantel_cells'] = rb['deltaE']['mantel_bh']['n_tests']
+    f['mantel_nominal'] = sum(1 for _m in rb['deltaE']['mantel']
+                              if _m['p_mantel'] < 0.05)
 
     ss = json.load(open('outputs/stat_supplement.json'))
     w = ss['whitening']['panel28']
@@ -341,6 +394,8 @@ def load_facts():
     f['dfp_gd'] = _lit['soman (GD)']['d_norm']
     f['dfp_gf'] = _lit['cyclosarin (GF)']['d_norm']
     f['dmmp_gb_35'] = _inc['sarin (GB)']['d_norm']
+    f['dmmp_gd_35'] = _inc['soman (GD)']['d_norm']
+    f['dmmp_gf_35'] = _inc['cyclosarin (GF)']['d_norm']
     f['cees_hd'] = _lit['sulfur mustard (HD)']['d_norm']
 
     # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
@@ -355,6 +410,16 @@ def load_facts():
            'L': 'lewisite 1 (L)', 'PS': 'chloropicrin (PS)', 'VX': 'VX'}
     for _code, _nm in _T3.items():
         f[f't3_{_code}'] = _p28[_nm]['d_norm']
+
+    # 공간별 주성분 분산. 본문 4.1절 수치가 파이프라인 밖 폐기본에서 오던 것을
+    # 2026-10-24 에 끊었다. 검증기가 이 값을 들고 있지 않아 못 잡았다.
+    _pf = json.load(open('outputs/pca_facts.json'))
+    f['pc1_struct28'] = round(100 * _pf['panel28']['A_rdkit']['pc1'], 2)
+    f['pc12_elec28'] = round(100 * _pf['panel28']['B_electronic']['pc1_pc2'], 2)
+    f['pc1_struct35'] = round(100 * _pf['panel35']['A_rdkit']['pc1'], 2)
+    f['pc12_elec35'] = round(100 * _pf['panel35']['B_electronic']['pc1_pc2'], 2)
+    f['pc12_merged28'] = round(100 * _pf['panel28']['C_merged']['pc1_pc2'], 2)
+    f['pc12_merged35'] = round(100 * _pf['panel35']['C_merged']['pc1_pc2'], 2)
 
     # GFN2 가상궤도 에너지의 범위. 한계 절이 이 수치로 'Koopmans 로 읽지
     # 말라'를 건다 (2026-10-23 신설).
@@ -486,6 +551,22 @@ def nums_in(s):
 
 # (사실표 키, 본문에서 그 양을 가리키는 문맥 정규식, 허용 오차)
 # 문맥 정규식의 첫 캡처 그룹이 검사할 수치다.
+# 2026-10-24 신설. 표 S1 의 칸 검사는 지금까지 열 간격을 글자 그대로 박아
+# 두었다 ('& 38 &', 'structural  &'). 표를 산출물에서 다시 생성하자 간격이
+# 달라져 12건이 한꺼번에 '문맥 미발견'으로 꺼졌다. 꺼진 검사는 통과처럼
+# 보이므로 가장 위험하다. 행 이름·공간·열 번호로 패턴을 만든다.
+def row_pat(label, space, col):
+    """표 S1 의 (행, 공간, col 번째 통계) 칸을 잡는 정규식."""
+    skip = r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*'
+    cap = r'(?:\\textbf\{)?([\d.]+)\}?'
+    return (re.escape(label) + r'\s*&\s*' + space
+            + r'\s*&\s*\d+\s*&\s*' + skip * col + cap)
+
+
+# 본문에 인용하지 않기로 한 사실. 키마다 이유를 적는다. 비워 두는 것이 정상이고,
+# 여기 들어오는 항목은 '검사를 끈다'는 선언이므로 심사 대상이다.
+UNQUOTED = {}
+
 CHECKS = [
     ('n_train', [r'(\d[\d,]*) training (?:chemicals|compounds)',
                  r'leaving (\d[\d,]*) for\s*\n?training',
@@ -521,6 +602,12 @@ CHECKS = [
                       r'there are (eight|seven|nine) candidates'], 0),
     ('n_relaxed_100', [r'the count rises to (fifteen|seventeen|sixteen)'], 0),
     ('n_incumbent', [r'Faithful and safe at that bar & (\d+) '], 0),
+    ('pc1_struct28', [r'size axis carrying ([\d.]+)\\% of the variance'], 0.06),
+    ('pc12_elec28', [r'the first two\s*\n?carrying ([\d.]+)\\%'], 0.06),
+    ('pc1_struct35', [r'The primary panel behaves the same way, at ([\d.]+)\\%'], 0.06),
+    ('pc12_elec35', [r'the same way, at [\d.]+\\% and ([\d.]+)\\%'], 0.06),
+    ('pc12_merged28', [r'([\d.]+)\\% on the smaller panel'], 0.06),
+    ('pc12_merged35', [r'and ([\d.]+)\\% on the primary one'], 0.06),
     ('lumo_min', [r'they run from \$([-+][\d.]+)\$~eV for chloropicrin'], 0.005),
     ('lumo_max', [r'to \$([-+][\d.]+)\$~eV for water'], 0.005),
     ('n_lumo_below4', [r'and (twenty-four|twenty-three|twenty-five) of the\s*\n?'
@@ -538,16 +625,16 @@ CHECKS = [
                           r'twenty-eight compounds have an AEGL-3',
                           r'the (nineteen|thirteen|fourteen) panel compounds',
                           r'(nineteen|thirteen|fourteen) compounds that have one'], 0),
-    ('source_with_aegl3', [r'agree on all (\d[\d,]*) entries',
-                           r'which leaves (\d[\d,]*) \(250 from a table cell'], 0),
+    ('xreader_pairs', [r'agree on all (\d[\d,]*) entries for which both'], 0),
     ('trainset_checked', [r'on all (\d[\d,]*) of\s*\n?those that resolved to a structure'], 0),
-    ('comma_rows', [r'covers all (\d[\d,]*) values at or above'], 0),
+    ('comma_rows', [r'(\w+[-\w]*) values reach 1000 or more'], 0),
     ('panel_from_footnote',
      [r'(Five|Nine|Four) of the nineteen values come from the',
       r'(Five|Nine|Four) of the nineteen panel values'], 0),
     ('nullexp_k3',
-     [r'against (\d+\.\d+) and \d+\.\d+ agents expected by chance'], 0.05),
-    ('nullexp_k8', [r'against \d+\.\d+ and (\d+\.\d+) agents expected'], 0.05),
+     [r'designating three\s*\n?non-agents at random matches (\d+\.\d+) agents',
+      r'random matches 2\.68 agents on average against (\d+\.\d+) for three'], 0.05),
+    ('nullexp_k8', [r'designating eight non-agents at\s*\n?random matches (\d+\.\d+) agents'], 0.05),
     ('na_dmmp_top', [r'DMMP is nearest sarin in\s*\n?(\d+\.\d+)\\% of replicates'], 0.05),
     ('na_dmmp_g',
      [r'nearest one of the four G-series agents in\s*\n?(\d+\.\d+)\\%'], 0.05),
@@ -575,43 +662,78 @@ CHECKS = [
     ('dcm_above', [r'with (seven|eight|two) compounds\s*\n?above it',
                    r'all but (seven|eight|two) of the 214 compounds'], 0),
     ('panel_without', [r'inhalation\s*\n?\s*value exists for any of these (\d+)'], 0),
-    ('dcm_panel_rank', [r'designated simulant, ranks (\d+) of \d+'], 0),
-    ('panel_with_aegl3', [r'designated simulant, ranks \d+ of (\d+)'], 0),
+    ('dcm_panel_rank', [r'no designating\s*\n?document, ranks (\d+) of \d+'], 0),
+    ('panel_with_aegl3', [r'no designating\s*\n?document, ranks \d+ of (\d+)'], 0),
     ('heldout_in_domain', [r'(\d+) of the 20 agents pass the domain check'], 0),
     ('heldout_n', [r'and all (\d+) are wrong by'], 0),
     ('heldout_worst_in_domain',
      [r'worst inside the domain is wrong by ([\d.]+) log'], 0.005),
     ('spearman_r', [r'Spearman \$?r\$? ?[&=] ?\$?([-+][\d.]+)\$?',
                     r'Spearman \$r=([-+][\d.]+)\$'], 0.0006),
-    ('spearman_lo', [r'Spearman[^\n]*?95\\% CI \$?([-+][\d.]+)\$? to'], 0.001),
-    ('spearman_hi', [r'Spearman[^\n]*?95\\% CI [^\n]*?to\s*\n?\$?([-+][\d.]+)\$?'], 0.001),
+    ('spearman_lo', [r'Spearman.{0,60}?95\\% CI \$?([-+][\d.]+)\$? to'], 0.001),
+    ('spearman_hi', [r'Spearman.{0,60}?95\\% CI .{0,20}?to\s*\n?\$?([-+][\d.]+)\$?'], 0.001),
     ('pearson_r', [r'Pearson \$?r\$? ?[&=] ?\$?([-+][\d.]+)\$?'], 0.0006),
     # 2026-10-13: 본문이 재집필되어 종전 정규식의 문맥이 사라졌다. kappa 민감도
     # 문장과 Table 1 의 '28종 패널' 블록을 동시에 대조한다. 표에는 패널 3구성이
     # 들어 있으므로 '28 cpd.' 행에 앵커를 걸어야 한다. 앵커 없이 쓰면 35종 행의
     # 값까지 물어와 거짓 불일치가 난다.
     ('p_struct', [r'condition \(structural \$p=([\d.]+)\$',
-                  r'28 cpd\., incumbent 3 & structural\s+& 38 & \\textbf\{([\d.]+)\}'],
-     0.0005),
+                  row_pat('28 cpd., incumbent 3', 'structural', 0)], 0.0005),
     ('p_elec', [r'electronic \$p=([\d.]+)\$',
-                r'28 cpd\.[^\n]*\n[^\n]*& electronic\s+&\s+3 & ([\d.]+) &'], 0.0005),
+                row_pat('(omits the five)', 'electronic', 0)], 0.0005),
+    # 각 블록의 세 번째 행은 행 이름 칸이 비어 있다. 앞 행을 닻으로 쓴다.
     ('p_merged', [r'merged \$p=([\d.]+)\$',
-                  r'28 cpd\.[^\n]*\n[^\n]*\n[^\n]*& merged\s+& 41 & \\textbf\{([\d.]+)\}'],
-     0.0005),
-    ('pc3_p28', [r'from \$p=0.028\$ to\s*\n?\$p=([\d.]+)\$'], 0.0005),
+                  r'\(omits the five\)[^\n]*\n\s*&\s*merged\s*&\s*\d+\s*&\s*'
+                  r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0005),
+    ('pc3_p28', [r'from \$p=[\d.]+\$ to\s*\n?\$p=([\d.]+)\$'], 0.0005),
     ('rand3_frac28', [r'and ([\d.]+)\\% of the subspaces reach'], 0.05),
     ('rand3_med28', [r'panel the median \$p\$ is ([\d.]+)'], 0.0005),
     ('r_lumo_omega', [r'r\(E_\{\\mathrm\{LUMO\}\}, \\omega\) =\s*\n?([-+][\d.]+)'],
      0.0005),
-    ('omega_distrank', [r'\(Spearman ([\d.]+)\)'], 0.0005),
+    ('omega_distrank', [r'0\.934 on the primary panel, ([\d.]+) on the smaller one'], 0.0005),
     ('omega_pc3_var', [r'account for ([\d.]+)\\% of its variance'], 0.05),
     ('bh_q28', [r'smallest adjusted value of ([\d.]+)',
                 r'Benjamini-Hochberg \$q =\s*\n?([\d.]+)\$'], 0.0005),
     ('bh_q35', [r'Benjamini-Hochberg over 18\s+& ([\d.]+) &'], 0.0005),
     ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & ([\d.]+) &'], 0.0005),
-    ('mantel_d2uv_struct', [r'\\rho = \+0.539\$, Mantel \$p = ([\d.]+)\$'], 0.0005),
+    ('mantel_cells', [r'Of (twelve|eight|ten) panel-channel-space cells',
+                      r'(twelve|eight|ten) cells are one\s*\n?family'], 0),
+    ('mantel_nominal', [r'(three|two|four|five) of the twelve panel-channel-space cells reach'], 0),
+    # rho 를 패턴에 박아 두면 rho 가 바뀔 때마다 검사가 조용히 빠진다
+    # (2026-10-24 에 두 번 겪었다). 셀을 가리키는 문구로 건다.
+    ('mantel_d2uv_struct',
+     [r'that same set and channel \(\$\\rho = [-+][\d.]+\$, Mantel\s*\n?'
+      r'\$p = ([\d.]+)\$'], 0.0005),
+    ('ascl3_a28_match', [r'Twenty-eight, incumbent three & (\d+)/11 & dichloromethane'], 0),
+    ('ascl3_a28_dist', [r'Twenty-eight, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
+    ('ascl3_a35_match', [r'Thirty-five, incumbent three & (\d+)/11 & dichloromethane'], 0),
+    ('ascl3_a35_dist', [r'Thirty-five, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
+    ('ascl3_a35l_dist', [r'Thirty-five, plus literature eight & \d+/11 & CEES & ([\d.]+)'], 0.006),
+    ('ascl3_a36_match', [r'Thirty-six, incumbent three & (\d+)/11 & dichloromethane'], 0),
+    ('ascl3_a36_dist', [r'Thirty-six, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
+    ('ascl3_a36l_match', [r'Thirty-six, plus literature & (\d+)/11 & AsCl'], 0),
+    ('null3_lower', [r'the three at \$p=([\d.]+)\$ over all',
+                     r'zero sits at \$p=([\d.]+)\$ against an expected'], 0.006),
+    ('null8_nested_mean', [r'gives a mean of ([\d.]+) rather',
+                           r'against\s*\n?an expected ([\d.]+) once the null'], 0.006),
+    ('null8_nested_p', [r'observed five sits at \$p=([\d.]+)\$ against it',
+                        r'the five at \$p=([\d.]+)\$ against'], 0.006),
+    ('n_eff_d2uv', [r'leaves (\d+) effective channels',
+                    r'of which (\d+) are independent'], 0),
+    ('n_eff_d3uv', [r'effective channels in the second\s*\n?set'
+                    r"'s ultraviolet data and (\d+) in the third"], 0),
+    ('mde_rho_compound', [r'as the unit, which is the unit the Mantel test uses,\s*\n?'
+                          r'returns \$([\d.]+)\$'], 0.0015),
+    ('mde_rho_mantel', [r'80\\% power is reached at \$\|\\rho\| = ([\d.]+)\$',
+                        r'design detects \$\|\\rho\| \\ge ([\d.]+)\$ at 80\\% power'], 0.006),
+    ('mantel_power_perm', [r'all \$6! = (\d+)\$ relabellings',
+                           r'exact Mantel over all (\d+) relabellings'], 0),
     ('mantel_d2nor_elec', [r'\$\\rho = \+0\.571\$,\s*\n?Mantel \$p = ([\d.]+)\$'], 0.0005),
-    ('mantel_d2uv_struct_rho', [r'ultraviolet channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
+    ('mantel_d2uv_merged_rho',
+     [r"merged space in the\s*\n?second compound set's ultraviolet channel "
+      r"\(\$\\rho = ([-+][\d.]+)\$"], 0.0015),
+    ('mantel_d2uv_merged', [r'\\rho = \+0\.518\$, Mantel \$p = ([\d.]+)\$'], 0.0005),
+    ('mantel_d2uv_struct_rho', [r'that same set and channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
     ('floor_d1uv_obs', [r'The observed means clear that floor by 0.013 to\s*\n?0.066: \$([-+][\d.]+)\$'], 0.0015),
     ('dmmp_ga_uv', [r'tabun, at \$\+?([\d.]+)\$ against sarin'], 0.0015),
     ('dmmp_gb_uv', [r'against sarin\'s \$\+?([\d.]+)\$'], 0.0015),
@@ -619,12 +741,12 @@ CHECKS = [
     ('p_struct_fig', [r'A_rdkit[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_elec_fig', [r'B_electronic[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_merged_fig', [r'C_merged[^\n]*exact p = ([\d.]+)'], 0.0005),
-    ('pct_struct', [r'value of 0.028 sits at the ([\d.]+)(?:nd|th|st|rd) percentile'], 0.06),  # 2000회 분해능 0.05
-    ('pct_elec', [r'electronic value of 0.275 at the ([\d.]+)th'], 0.06),  # 2000회 분해능 0.05
-    ('pct_pc3', [r'value of 0\.0044 sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),  # 2000회 분해능 0.05
+    ('pct_struct', [r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
+    ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
+    ('pct_pc3', [r'three-principal-component value of [\d.]+ sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),
     ('mantel_minq', [r'smallest adjusted value is\s*\n?([\d.]+) and no cell',
                      r'smallest \$q\$ = ([\d.]+)\)'], 0.0005),
-    ('white_frac28', [r'from 36.3\\% to ([\d.]+)\\%'], 0.05),
+    ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.05),
     ('white_med28', [r'from 0.094 to ([\d.]+)\.'], 0.0005),
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('q_prespec28', [r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
@@ -636,7 +758,9 @@ CHECKS = [
     ('dfp_gb', [r'fluorophosphate is present, at ([\d.]+),'], 0.005),
     ('dfp_gd', [r'is present, at [\d.]+, ([\d.]+) and'], 0.005),
     ('dfp_gf', [r'is present, at [\d.]+, [\d.]+ and ([\d.]+) from'], 0.005),
-    ('dmmp_gb_35', [r'sarin reads 1\.14 against DMMP on the\s*\n?smaller panel and (\d+\.\d+) on the larger'], 0.005),
+    ('dmmp_gb_35', [r'on that panel sarin stands\s*\n?([\d.]+) from DMMP'], 0.005),
+    ('dmmp_gd_35', [r'from DMMP, soman ([\d.]+) and'], 0.005),
+    ('dmmp_gf_35', [r'soman [\d.]+ and cyclosarin ([\d.]+)\.'], 0.005),
     ('cees_hd', [r'sulfide at ([\d.]+) from sulfur mustard'], 0.005),
     # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
     ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
@@ -679,14 +803,14 @@ CHECKS = [
                r'merged space \([\d.]+ against ([\d.]+)\)'], 0.0005),
     ('t3_HD', [r'HD & DCM & ([\d.]+) &'], 0.0005),
     ('t3_GA', [r'GA & DMMP & ([\d.]+) &', r'tabun at ([\d.]+) and VX',
-               r'passes its value of ([\d.]+)'], 0.0005),
+               r'passes its value of (\d+\.\d+)'], 0.0005),
     ('t3_L', [r'L & DCM & ([\d.]+) &'], 0.0005),
     ('t3_PS', [r'PS & DMMP & ([\d.]+) &'], 0.0005),
     ('t3_VX', [r'VX & DPGME & ([\d.]+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
     # res:match 산문의 공간별 수치. 종전 산문은 세 공간의 원거리와 정규화
     # 거리를 섞어 적었고 어느 값도 산출물과 대조되지 않았다.
     ('struct_GD', [r'soman at ([\d.]+)\s*\n?and cyclosarin at'], 0.0005),
-    ('struct_GF', [r'cyclosarin at ([\d.]+) falling outside'], 0.0005),
+    ('struct_GF', [r'cyclosarin at ([\d.]+) (?:falling )?outside'], 0.0005),
     ('struct_VX', [r'and ([\d.]+) in the structural\s*\n?space that is not a match'],
      0.0005),
     ('merged_VX', [r'at ([\d.]+) typical separations in the merged space'], 0.0005),
@@ -702,7 +826,7 @@ CHECKS = [
      0.0005),
     ('elec_CG', [r'electronic space \([\d.]+ against ([\d.]+)\)'], 0.005),
     ('struct_CG_rival', [r'structural space \(([\d.]+) typical separations'], 0.005),
-    ('merged_CG_rival', [r'ethyl acetate in the merged space \(([\d.]+) against'], 0.005),
+    ('merged_CG_rival', [r'and in the merged space \(([\d.]+) against'], 0.005),
     ('elec_CG_rival', [r'chloroform in the electronic space \(([\d.]+) against'], 0.005),
     # 블록 가중 민감도 (2026-10-17). SI 표 + SI 산문 + 본문 한 문장 3경로.
     ('bb_nstruct', [r'Weighting the (\d+) structural', r'\$n_\{s\}=(\d+)\$',
@@ -710,46 +834,44 @@ CHECKS = [
     ('bb_nelec', [r'and (\d+) electronic descriptors as two equal blocks',
                   r'\$n_\{e\}=(\d+)\$'], 0),
     ('bb_minp35', [r'lowers that value to ([\d.]+)',
-                   r'Thirty-five, incumbent three & \d+/11 & [\d.]+ & ([\d.]+) &',
+                   r'nominal value from 0\.151 to ([\d.]+)',
+                   r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &',
                    r'0\.151 with equal weight per descriptor and ([\d.]+) with'],
      0.0005),
     ('bb_minp35lit',
-     [r'Thirty-five, plus literature eight & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
     ('bb_minp28',
-     [r'Twenty-eight, incumbent three & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
-    ('bbq_35', [r'Thirty-five, incumbent three & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('bbq_35', [r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
     ('bbq_35lit',
-     [r'Thirty-five, plus literature eight & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
     ('bbq_28',
-     [r'Twenty-eight, incumbent three & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
-    ('bb_match35', [r'Thirty-five, incumbent three & (\d+)/11'], 0),
-    ('bb_match35lit', [r'Thirty-five, plus literature eight & (\d+)/11'], 0),
-    ('bb_match28', [r'Twenty-eight, incumbent three & (\d+)/11'], 0),
+    # 2026-10-24. 유효매칭 열을 per descriptor / per block 두 칸으로 쪼갰다.
+    # 둘 다 걸지 않으면 한쪽을 망가뜨리는 주입이 통과한다 (실제로 통과했다).
+    ('bb_cur_match35', [r'Thirty-five, incumbent three & (\d+)/11'], 0),
+    ('bb_cur_match35lit', [r'Thirty-five, plus literature 8 & (\d+)/11'], 0),
+    ('bb_cur_match28', [r'Twenty-eight, incumbent three & (\d+)/11'], 0),
+    ('bb_match35', [r'Thirty-five, incumbent three & \d+/11 & (\d+)/11'], 0),
+    ('bb_match35lit', [r'Thirty-five, plus literature 8 & \d+/11 & (\d+)/11'], 0),
+    ('bb_match28', [r'Twenty-eight, incumbent three & \d+/11 & (\d+)/11'], 0),
     ('bb_meandiff28', [r'there falls from 0\.025 to ([\d.]+)'], 0.0005),
     ('bbpre_28', [r'which stays at ([\d.]+) on the twenty-eight-compound panel'],
      0.0005),
     # 네 번째 구성 (2026-10-20). 표 1 네 번째 블록 + §3.1 산문 + Limitations.
     # 표 3 사건의 교훈대로 표를 먼저 등록한다.
-    ('pp_st_md', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{([\d.]+)\}'],
-     0.0005),
-    ('pp_st_lr', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{[\d.]+\} & '
-                  r'\\textbf\{\$<\$0\.001\} & ([\d.]+) &'], 0.0005),
-    ('pp_st_ds', [r'35 cpd\., incumbent 3 & structural  & 38 & \\textbf\{[\d.]+\} & '
-                  r'\\textbf\{\$<\$0\.001\} & [\d.]+ & ([\d.]+) &'], 0.0005),
-    ('pp_el_md', [r'\\quad \+ literature 5 & electronic  &  3 & ([\d.]+) &'], 0.0005),
-    ('pp_el_mdn', [r'\\quad \+ literature 5 & electronic  &  3 & [\d.]+ & ([\d.]+) &'],
-     0.0005),
-    ('pp_el_nv', [r'literature 5 & electronic  &  3 & '
-                  r'(?:[\d.]+ & ){5}([\d.]+) &'], 0.0005),
-    ('pp_mg_md', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{([\d.]+)\}'],
-     0.0005),
-    ('pp_mg_lr', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{[\d.]+\} & '
-                  r'\\textbf\{\$<\$0\.001\} & \\textbf\{([\d.]+)\}'], 0.0005),
-    ('pp_mg_ds', [r'\\quad \+ pesticides 2 & merged      & 41 & \\textbf\{[\d.]+\} & '
-                  r'\\textbf\{\$<\$0\.001\} & \\textbf\{[\d.]+\} & ([\d.]+) &'], 0.0005),
+    ('pp_st_md', [row_pat('35 cpd., incumbent 3', 'structural', 0)], 0.0005),
+    ('pp_st_lr', [row_pat('35 cpd., incumbent 3', 'structural', 2)], 0.0005),
+    ('pp_st_ds', [row_pat('35 cpd., incumbent 3', 'structural', 3)], 0.0005),
+    ('pp_el_md', [row_pat('\\quad + literature 5', 'electronic', 0)], 0.0005),
+    ('pp_el_mdn', [row_pat('\\quad + literature 5', 'electronic', 1)], 0.0005),
+    ('pp_el_nv', [row_pat('\\quad + literature 5', 'electronic', 5)], 0.0005),
+    ('pp_mg_md', [row_pat('\\quad + pesticides 2', 'merged', 0)], 0.0005),
+    ('pp_mg_lr', [row_pat('\\quad + pesticides 2', 'merged', 2)], 0.0005),
+    ('pp_mg_ds', [row_pat('\\quad + pesticides 2', 'merged', 3)], 0.0005),
     ('pp_n_perm', [r'\\binom\{24\}\{10\}=([\d\\,]+)'], 0),
     ('pp_min_p', [r'smallest nominal value of ([\d.]+) and a'], 0.00001),
     ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
@@ -759,7 +881,7 @@ CHECKS = [
     ('struct_candidates', [r'removes \d+ of the (\d+)',
                            r'descriptors \((\d+) after excluding run metadata\)'], 0),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
-                 r'produces an adjusted\s*\n?value of (\d+\.\d+)',
+                 r'produces an adjusted\s*\n?(?:value of )?(\d+\.\d+)',
                  r'into one with an adjusted value of\s*\n?(\d+\.\d+)'], 0.00005),
     # 인용 문헌의 수치 (2026-10-20). outputs/cite_facts.json 이 단일 출처다.
     ('j18_identified', [r'identified\s*\n?(\d+) simulants'], 0),
@@ -774,7 +896,8 @@ WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
          'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
-         'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25}
+         'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
+         'thirty-three': 33, 'thirty-four': 34}
 
 
 def tonum(s):
@@ -805,7 +928,6 @@ def main():
     # 2026-10-13. 종전에는 main.tex 만 읽었다. 그래서 커버레터와 하이라이트가
     # 본문과 다른 Spearman·후보수를 싣고도 PASS 가 나왔다. 투고 패키지에 들어가는
     # 글은 전부 같은 산출물과 대조한다.
-    import os
     for extra in ('paper/cover_letter.tex', 'paper/highlights.tex',
                   'paper/supplementary.tex'):
         if os.path.exists(extra):
@@ -818,6 +940,18 @@ def main():
         print('[verify] 경고: outputs/figure_annotations.json 이 비어 있다. '
               '도판 스크립트를 먼저 실행해야 주석이 검사된다.')
     body = body + '\n' + annot
+    # 공백 정규화본. 문서와 도판 주석 레코드 사이에는 \x00 을 넣는다. 패턴의
+    # \s 는 이 문자를 먹지 않으므로 경계를 넘는 오탐이 생기지 않는다. 넣지
+    # 않았더니 주석 두 레코드에 걸친 문자열이 한 칸으로 읽혀 세 건이 잘못
+    # 걸렸다 (2026-10-24).
+    _segs = [re.sub(r'\s+', ' ', seg) for seg in
+             ([tex] + [strip_comments(open(x).read()) for x in
+                       ('paper/cover_letter.tex', 'paper/highlights.tex',
+                        'paper/supplementary.tex') if os.path.exists(x)]
+              )]
+    # 도판 주석은 레코드가 이미 한 줄이라 줄바꿈 문제가 없다. 정규화본에
+    # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
+    body_flat = '\x00'.join(_segs)
     fails, checked, unseen = [], 0, []
 
     # (D) 도판 신선도. 2026-10-13 신설. 도판은 outputs/ 에 생성되고 paper/ 로
@@ -857,6 +991,22 @@ def main():
         for pat in pats:
             for m in re.finditer(pat, body):
                 found.append((tonum(m.group(1)), m.group(0)[:62].replace('\n', ' ')))
+        # 2026-10-24. 패턴이 리터럴 공백 하나를 요구하는데 그 자리에서 TeX 줄이
+        # 바뀌면 문맥을 놓친다. 처음에는 '못 찾았을 때만' 공백을 눌러 다시
+        # 보게 했는데, 그러면 같은 수치가 두 군데 적혀 있고 한쪽만 줄바꿈에
+        # 걸린 경우 그 한쪽이 검사되지 않는다. 실제로 본문의 백분위 두 개가
+        # 그 경로로 구판인 채 통과했다. 항상 둘 다 훑고 중복만 걷어낸다.
+        for pat in pats:
+            for m in re.finditer(pat, body_flat):
+                found.append((tonum(m.group(1)), m.group(0)[:62]))
+        seen, uniq = set(), []
+        for val, ctx in found:
+            k = (round(val, 12), ' '.join(ctx.split()))
+            if k in seen:
+                continue
+            seen.add(k)
+            uniq.append((val, ctx))
+        found = uniq
         if not found:
             unseen.append(f'{key}: 본문에서 문맥을 찾지 못함 (값 {want:g})')
             continue
@@ -926,10 +1076,21 @@ def main():
     near = sorted(set(near))
 
     print(f'[verify] 문맥 대조 {checked}건')
+    # 2026-10-24. 종전에는 '문맥 미발견' 이 경고였고 판정은 PASS 였다. 그래서
+    # 본문을 다시 쓰거나 표를 다시 생성해 정규식이 안 맞게 되면 검사가 조용히
+    # 꺼지고 화면에는 통과가 찍혔다. 이 세션에서만 그 경로로 세 번 빠뜨렸다.
+    # 꺼진 검사는 없는 검사보다 나쁘다. 실패로 올린다. 본문에 싣지 않기로
+    # 한 사실은 UNQUOTED 에 이유와 함께 적어 명시적으로 면제한다.
+    unexpected = [u for u in unseen
+                  if u.split(':')[0] not in UNQUOTED and '도판' not in u]
     if unseen:
         print(f'[verify] 문맥 미발견 {len(unseen)}건 (검사 누락 — 정규식 보강 필요)')
         for u in unseen:
             print('  ', u)
+    if unexpected:
+        fails.append(f'  검사 누락 {len(unexpected)}건: '
+                     + ', '.join(u.split(':')[0] for u in unexpected)
+                     + ' — 정규식을 고치거나 UNQUOTED 에 면제 사유를 적을 것')
     if fails:
         print(f'[verify] 불일치 {len(fails)}건')
         print('\n'.join(fails))

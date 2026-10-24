@@ -64,8 +64,9 @@ run_strict() {
 # 패널·순열 축
 run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
-           deltaE_premise.py deltaE_power.py rollback_c.py match_by_panel.py \
-           mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py
+           deltaE_premise.py mantel_power.py deltaE_power.py rollback_c.py match_by_panel.py \
+           mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py \
+           perm_nopatho.py match_by_panel_ascl3.py
 
 # 독성축. parse -> trainset -> 동일성검사 -> QSAR 순서를 지켜야 한다.
 run_strict parse_aegl.py build_tox_trainset.py cite_facts.py
@@ -81,7 +82,7 @@ else
 fi
 [ -f outputs/identity_validation.json ] || { echo '  identity_validation.json 생성 실패'; exit 1; }
 
-run_strict qsar_tox.py h1_decoupling.py h1_screen_sensitivity.py \
+run_strict pca_facts.py qsar_tox.py h1_decoupling.py h1_screen_sensitivity.py \
            minority_regression.py validate_aegl_parse.py
 
 # 다중검정 보정은 rollback_c 의 결과에서 파생된다.

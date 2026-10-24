@@ -31,8 +31,71 @@ PROTECTED = ['MR_crippen', 'logP_crippen', 'TPSA', 'HBA', 'lser_B_proxy',
 R_CUT = 0.95
 
 
+_DEP_CACHE = {}
+
+DEP_TOL = 1e-10          # 정확 종속 판정 허용오차
+DEP_MAX_TERMS = 2        # 몇 개 좌표의 조합까지 볼 것인가
+
+# 종속관계가 발견되면 그 관계에 묶인 좌표 중 어느 것을 버릴지 정해야 한다.
+# omega 선례를 그대로 따른다. 파생 합성량을 버리고 원시량을 남긴다. 그러지
+# 않으면 MR_crippen(몰굴절) 같은 해석 가능한 원시 서술자가 빠지고 그것으로부터
+# 만들어진 lser_S_proxy 가 남는다. 아래 열들을 먼저 검사해 먼저 떨어뜨린다.
+DERIVED_FIRST = ('lser_A_proxy', 'lser_B_proxy', 'lser_S_proxy', 'lser_L_proxy',
+                 'is_organophosphorus', 'n_P', 'n_PdO', 'heavy_atoms')
+
+
+def exact_dependents(df, cols, tol=DEP_TOL, max_terms=DEP_MAX_TERMS):
+    """다른 좌표 max_terms 개의 정확한 아핀함수인 좌표를 찾는다.
+
+    2026-10-24 신설. 본 논문은 Parr omega 가 두 궤도에너지의 정확한 함수인데
+    |r|>0.95 상관필터가 못 잡는다는 것을 방법론적 기여로 내세운다. 그 교훈을
+    선언만 하고 omega 한 열에만 손으로 적용하고 있었다. 심사에서 구조공간의
+    lser_S_proxy = (TPSA + MR_crippen)/100 이 같은 결함으로 남아 있다는 지적이
+    나왔고, 28종 패널에서 실제로 유지되고 있었다(35종에서는 상관필터가 우연히
+    걸러낸다). 규칙으로 만든다.
+
+    상관필터가 못 잡는 것은 두 열 이상의 조합인 경우다. 한 열과의 정확한
+    비례관계는 |r| = 1 이므로 상관필터가 먼저 떨어뜨린다. 그래서 이 검사는
+    상관필터 뒤에 돌리며, 남는 것은 다중 좌표 조합뿐이다.
+
+    omega 처럼 비선형인 종속은 이 선형 검사로 잡히지 않는다. 그쪽은 정의식으로
+    따로 확인했고 ELECTRONIC_DIST 가 제외한다. 두 경로를 모두 유지한다.
+    """
+    import itertools
+    import numpy as np
+    n = len(df)
+    # pick() 은 루프 안에서 여러 번 불린다. 이 검사는 열 수의 세제곱에 비례해
+    # lstsq 를 돌려 한 번에 7초가 걸리므로, 캐시가 없으면 파이프라인이 몇십 분
+    # 느려진다 (2026-10-24 측정).
+    key = (tuple(cols), n,
+           float(np.nansum(df[list(cols)].to_numpy(float))) if len(cols) else 0.0)
+    if key in _DEP_CACHE:
+        return _DEP_CACHE[key]
+    keep, dropped = list(cols), []
+    order = ([c for c in DERIVED_FIRST if c in cols]
+             + [c for c in cols if c not in DERIVED_FIRST])
+    for t in order:
+        others = [c for c in keep if c != t]
+        y = df[t].to_numpy(float)
+        hit = None
+        for k in range(1, max_terms + 1):
+            if hit:
+                break
+            for combo in itertools.combinations(others, k):
+                X = np.c_[df[list(combo)].to_numpy(float), np.ones(n)]
+                coef, *_ = np.linalg.lstsq(X, y, rcond=None)
+                if np.abs(X @ coef - y).max() < tol:
+                    hit = combo
+                    break
+        if hit:
+            keep.remove(t)
+            dropped.append((t, tuple(hit)))
+    _DEP_CACHE[key] = (keep, dropped)
+    return keep, dropped
+
+
 def pick(df, cols, protected):
-    """분산 0 제거 → |r|>R_CUT 쌍에서 비보호 열을 떨어뜨린다."""
+    """분산 0 제거 → |r|>R_CUT 쌍에서 비보호 열 제거 → 정확 종속 좌표 제거."""
     cols = [c for c in cols if df[c].std(ddof=1) > 1e-12]
     C = df[cols].corr().abs().to_numpy()
     keep, dropped = list(cols), []
@@ -46,4 +109,6 @@ def pick(df, cols, protected):
                 drop = b                                   # 둘 다 보호면 뒤를 버림
             keep.remove(drop); dropped.append((drop, a if drop == b else b,
                                                float(C[i, j])))
+    keep, dep = exact_dependents(df, keep)
+    dropped.extend(dep)
     return keep, dropped

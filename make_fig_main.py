@@ -316,15 +316,17 @@ gx.legend(handles=[
     Line2D([], [], marker='o', ls='', ms=8, mfc=C_SIM, mec='white', mew=1.0,
            label='nearest of the three incumbent simulants'),
     Line2D([], [], marker='D', ls='', ms=7.5, mfc=C_REAL, mec='white', mew=1.0,
-           label="nearest once the field's other five simulants are in")],
+           label="nearest once the other five literature simulants are in")],
     loc='upper right', frameon=False, bbox_to_anchor=(1.0, 1.0),
     fontsize=FS_LEG - 1, handletextpad=0.4, labelspacing=0.3, borderaxespad=0.3)
 dress(gx); panel_label(gx, 'a')
 
-# ---- Fig 1 (b) 서술자 부트스트랩: 유효매칭 수 분포
+# ---- Fig 1 (b) 서술자 재표집: 유효매칭 수 분포
+# 2026-10-24 공저자 지적. 서술자는 모집단에서 뽑은 관측치가 아니므로 이 구간을
+# 95% CI 로 부르면 표본분포 의미를 끌어온다. 백분위 범위로 표기한다.
 BT = B['distance_bootstrap']
 KK = [('incumbent3', 'the three incumbent\nsimulants', C_SIM),
-      ('incumbent_plus_lit8', "the field's eight\nsimulants", C_REAL)]
+      ('incumbent_plus_lit8', "the eight simulants\nused in the literature", C_REAL)]
 _pos = np.arange(len(KK))[::-1]
 for pos, (key, lab, col) in zip(_pos, KK):
     o = BT[key]; lo, hi = o['ci']
@@ -333,16 +335,16 @@ for pos, (key, lab, col) in zip(_pos, KK):
     hx.scatter([o['mean']], [pos], s=110, c=col, edgecolors='white', lw=1.2,
                zorder=4)
     hx.scatter([o['median']], [pos], s=90, marker='|', c=C_INK, lw=2.0, zorder=5)
-    hx.text(hi + 0.22, pos, f"median {o['median']}, 95% CI {lo} to {hi}",
+    hx.text(hi + 0.22, pos, f"median {o['median']}, 2.5-97.5 pct {lo} to {hi}",
             fontsize=FS_ANNOT, va='center', ha='left', color=col)
 hx.set_yticks(_pos); hx.set_yticklabels([l for _, l, _ in KK])
 hx.set_xlim(-0.5, 13.6); hx.set_ylim(-1.05, len(KK) - 0.40)
 hx.set_xlabel('agents of eleven with a valid match, over 1000 descriptor '
-              'bootstrap replicates')
+              'resampling replicates')
 _d = BT['difference']
 hx.text(5.4, -0.76,
         f"difference positive in {100*_d['frac_positive']:.0f}% of replicates "
-        f"(median {_d['median']}, 95% CI {_d['ci'][0]} to {_d['ci'][1]})",
+        f"(median {_d['median']}, 2.5-97.5 pct {_d['ci'][0]} to {_d['ci'][1]})",
         fontsize=FS_ANNOT, va='center', ha='left', color=C_REF,
         bbox=dict(fc='white', ec=C_REF, boxstyle='round,pad=0.32', alpha=0.95))
 dress(hx); panel_label(hx, 'b')
@@ -423,10 +425,10 @@ fig_annot.record('Fig_main', 'panel_a',
 fig_annot.record('Fig_main', 'panel_b',
                  f"incumbent three match a median of "
                  f"{BT['incumbent3']['median']} of 11 agents "
-                 f"(95% CI {BT['incumbent3']['ci'][0]} to "
-                 f"{BT['incumbent3']['ci'][1]}); the field's eight match a "
+                 f"(2.5-97.5 pct {BT['incumbent3']['ci'][0]} to "
+                 f"{BT['incumbent3']['ci'][1]}); the eight literature-used simulants match a "
                  f"median of {BT['incumbent_plus_lit8']['median']} "
-                 f"(95% CI {BT['incumbent_plus_lit8']['ci'][0]} to "
+                 f"(2.5-97.5 pct {BT['incumbent_plus_lit8']['ci'][0]} to "
                  f"{BT['incumbent_plus_lit8']['ci'][1]}).")
 fig_annot.record('Fig_spaces', 'panel_c',
                  f'the structural space used here gives p = {_obs:.3f}, the '

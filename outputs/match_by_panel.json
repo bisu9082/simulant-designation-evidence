@@ -1,73 +1,73 @@
 {
  "panel28_incumbent3": {
-  "n_dims": 41,
-  "nn_median": 3.873,
-  "n_match": 3,
+  "n_dims": 39,
+  "nn_median": 3.845,
+  "n_match": 4,
   "agents": [
    {
     "agent": "sarin (GB)",
     "nearest_simulant": "DMMP",
-    "d_norm": 1.14,
+    "d_norm": 1.146,
     "match": true
    },
    {
     "agent": "soman (GD)",
     "nearest_simulant": "DMMP",
-    "d_norm": 1.417,
+    "d_norm": 1.424,
     "match": true
    },
    {
     "agent": "tabun (GA)",
     "nearest_simulant": "DMMP",
-    "d_norm": 2.003,
-    "match": false
+    "d_norm": 1.989,
+    "match": true
    },
    {
     "agent": "sulfur mustard (HD)",
     "nearest_simulant": "dichloromethane",
-    "d_norm": 1.768,
+    "d_norm": 1.762,
     "match": false
    },
    {
     "agent": "lewisite 1 (L)",
     "nearest_simulant": "dichloromethane",
-    "d_norm": 2.128,
+    "d_norm": 2.136,
     "match": false
    },
    {
     "agent": "hydrogen cyanide (AC)",
     "nearest_simulant": "dichloromethane",
-    "d_norm": 1.585,
+    "d_norm": 1.588,
     "match": false
    },
    {
     "agent": "cyanogen chloride (CK)",
     "nearest_simulant": "dichloromethane",
-    "d_norm": 1.451,
+    "d_norm": 1.445,
     "match": false
    },
    {
     "agent": "phosgene (CG)",
     "nearest_simulant": "dichloromethane",
-    "d_norm": 1.6,
+    "d_norm": 1.598,
     "match": false
    },
    {
     "agent": "chloropicrin (PS)",
     "nearest_simulant": "DMMP",
-    "d_norm": 2.53,
+    "d_norm": 2.47,
     "match": false
    },
    {
     "agent": "cyclosarin (GF)",
     "nearest_simulant": "DMMP",
-    "d_norm": 1.483,
+    "d_norm": 1.492,
     "match": true
    },
    {
     "agent": "VX",
     "nearest_simulant": "DPGME",
-    "d_norm": 3.131,
+    "d_norm": 3.076,
     "match": false
    }
   ]

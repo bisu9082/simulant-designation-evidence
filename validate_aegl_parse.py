@@ -81,6 +81,14 @@ def collect():
     out, cur, span = {}, None, None
     for i, ln in enumerate(L):
         h = CAS_HDR.match(ln)
+        # 목차 줄은 점선 리더로 끝난다. 2026-10-24 까지 이 줄들도 레코드를
+        # 열었고, 목차 마지막 항목(Ricin)은 뒤이은 본문 표에 CAS 헤더가 없어
+        # 다음 화합물(Magnesium aluminum phosphide)의 AEGL-3 2.4 ppm 을
+        # 받아 갔다. 본문의 진짜 Ricin 헤더는 중복 회피 규칙에 걸려 영구히
+        # 건너뛰어졌다. 레코드 경계 혼입이며, 공저자 심사에서 적발됐다.
+        if h and '....' in ln:
+            cur, span = None, None      # 열린 레코드도 닫는다. 닫지 않으면
+            continue                    # 목차 항목이 본문 표까지 살아남는다.
         if h and 'AEGL' not in ln:
             cas = h.group('cas').strip()
             was = out.get(cas)
@@ -181,20 +189,52 @@ if __name__ == '__main__':
         print(f'   {r.compound_name:<24} 원전 {s["value"]:>10,.4g} {s["unit"]:6s} '
               f'({s["how"]:14s}) -> {exp:>12,.2f}  저장 {r.AEGL3_10min_mgm3:>12,.2f}{flag}')
 
-    comma = {c for c, r in have.items() if r['how'] == 'value'
-             and r['value'] >= 1000}
+    # 2026-10-24. 종전에는 how=='value'(표 칸 경로)로 한정했다. 천단위 쉼표가
+    # 실제로 산문 안에 박히는 것은 각주 경로이므로, 탐지하려는 실패 모드를
+    # 표본에서 제외하고 있었다. 경로와 무관하게 전수로 넓힌다.
+    comma = {c for c, r in have.items() if r['value'] >= 1000}
+    comma_cell = {c for c in comma if have[c]['how'] == 'value'}
     cov = sum(1 for r in T.itertuples() if r.cas in comma)
-    print(f'\n[검증] 천단위 쉼표 구간(>=1000) 원전 {len(comma)}건 중 '
+    print(f'\n[검증] 천단위 쉼표 구간(>=1000) 원전 {len(comma)}건 '
+          f'(표 칸 {len(comma_cell)}, 각주 {len(comma) - len(comma_cell)}) 중 '
           f'학습세트 대조 {cov}건')
 
-    ok = (mism == 0 and pmism == 0)
+    # 2026-10-24 신설. 종전에는 학습세트 257행을 단방향으로만 훑었고,
+    # 학습세트에 없는 레코드(구조 미해결 등)는 대조 대상에 아예 없었다.
+    # 그 결과 검증 파서 자신의 오류 한 건이 구조적으로 보이지 않았다.
+    import io as _io, contextlib as _cl
+    import aegl_extract as _E
+    with _cl.redirect_stdout(_io.StringIO()):
+        _recs, _ = _E.extract()
+    prim = {}
+    for _r in _recs:
+        _c = str(_r.get('cas') or '').strip()
+        _L = _r.get('levels', {}).get('AEGL3')
+        if _c and _L and _L[0] is not None:
+            prim[_c] = float(_L[0])
+    pair = set(prim) & set(have)
+    xmis = [(c, prim[c], have[c]['value']) for c in pair
+            if abs(prim[c] - have[c]['value']) > max(1e-6, 0.002 * abs(prim[c]))]
+    print(f'\n[검증] 두 리더 양방향 대조 — 양쪽이 표 칸에서 값을 얻은 {len(pair)}건, '
+          f'불일치 {len(xmis)}건 (1차만 {len(set(prim) - set(have))}, '
+          f'검증기만 {len(set(have) - set(prim))})')
+    for c, x, y in sorted(xmis):
+        print(f'   불일치 {c:14s} 1차 {x:>12,.4g}   검증기 {y:>12,.4g}')
+
+    ok = (mism == 0 and pmism == 0 and len(xmis) == 0)
     json.dump(dict(engine='pdftotext -layout', method='character column position',
                    source_items=len(src), source_with_aegl3=len(have),
                    by_provenance=byhow,
                    trainset_checked=checked, trainset_notfound=notfound,
                    trainset_mismatch=mism,
                    panel_checked=pchecked, panel_mismatch=pmism,
-                   comma_rows_source=len(comma), comma_rows_checked=cov),
+                   comma_rows_source=len(comma),
+                   comma_rows_cell_path=len(comma_cell),
+                   comma_rows_footnote_path=len(comma) - len(comma_cell),
+                   comma_rows_checked=cov,
+                   cross_reader_pairs=len(pair), cross_reader_mismatch=len(xmis),
+                   cross_reader_primary_only=len(set(prim) - set(have)),
+                   cross_reader_validator_only=len(set(have) - set(prim))),
               open('outputs/aegl_parse_validation.json', 'w'),
               indent=2, ensure_ascii=False)
     print(f'\n[검증] 판정: {"PASS" if ok else "FAIL"}')

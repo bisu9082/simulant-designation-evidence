@@ -1,0 +1,23 @@
+[
+ {
+  "bar": "DCM 동등",
+  "mgm3": 41684.90797546014,
+  "n": 0,
+  "n_clean": 0,
+  "n_more_faithful": 0
+ },
+ {
+  "bar": "DCM 의 1/10",
+  "mgm3": 4168.490797546015,
+  "n": 7,
+  "n_clean": 7,
+  "n_more_faithful": 7
+ },
+ {
+  "bar": "DCM 의 1/100",
+  "mgm3": 416.84907975460146,
+  "n": 17,
+  "n_clean": 13,
+  "n_more_faithful": 13
+ }
+]

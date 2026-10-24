@@ -100,11 +100,15 @@ _n = len(H)
 _safer = H[H.AEGL3_10min_mgm3 > dv].compound_name.tolist()
 _rank = int((H.AEGL3_10min_mgm3 > dv).sum()) + 1
 if _safer:
-    _lead = (f'dichloromethane, a designated simulant, ranks {_rank} of {_n}\n'
-             f'on this axis: {" and ".join(_safer)} score higher.\n')
+    # 2026-10-24. 'a designated simulant' 이라고 쓰고 있었다. 이 논문의 제1
+    # 결과는 dichloromethane 에 지정 문서가 하나도 없다는 것이고, Table 1 의
+    # standing 은 none 이다. 도판이 본문의 헤드라인을 정면으로 뒤집고 있었다.
+    _lead = (f'dichloromethane, an incumbent simulant with no designating\n'
+             f'document, ranks {_rank} of {_n} on this axis: '
+             f'{" and ".join(_safer)} score higher.\n')
 else:
-    _lead = (f'dichloromethane, a designated simulant, is the least\n'
-             f'acutely toxic of the {_n}.\n')
+    _lead = (f'dichloromethane, an incumbent simulant with no designating\n'
+             f'document, is the least acutely toxic of the {_n}.\n')
 # 상자는 막대가 없는 좌하단에 둔다. 간섭물 구간(>400 mg/m3)은 축의 오른쪽
 # 절반에서 시작하므로 아래쪽 행의 왼편이 비어 있다.
 _txt_a = fig_annot.record('Fig_toxicity', 'panel_a', _lead +
@@ -120,7 +124,7 @@ ax.set_xlabel('EPA AEGL-3, 10 min (mg m$^{-3}$, log scale)\n'
               'lower = lethal at lower airborne concentration')
 ax.legend(handles=[Line2D([], [], marker='s', ls='', ms=9.1, mfc=c, mec='white', label=l)
                    for c, l in [(C_REAL, 'authentic agent'),
-                                (C_SIM, 'designated simulant'),
+                                (C_SIM, 'incumbent simulant'),
                                 (C_INTF, 'interferent / solvent')]],
           loc='upper right', frameon=False, bbox_to_anchor=(1.0, 1.0))
 dress(ax); panel_label(ax, 'a')
@@ -145,11 +149,17 @@ bx.set_xlim(-0.06, 1.0); bx.set_ylim(-4.8, len(M) - 0.35 + 1.55)
 bx.spines['left'].set_bounds(0, len(M) - 1)
 bx.set_xticks([])
 bx.spines['bottom'].set_visible(False)
+# 2026-10-24. 종전 문구는 'the simulant carrying every valid match in this
+# study' 였다. 1차 패널에서 DMMP 의 유효매칭은 0 이고 다섯 건은 DFP·DCNP·
+# CEES 가 가져간다. 28종이 primary 이던 구판의 잔류물이다. 또 이 상자는
+# fig_annot 에 등록되지 않아 검증기가 한 번도 보지 못했다. 등록도 함께 건다.
 bx.text(-0.045, -2.75,
-        textwrap.fill('DMMP, the simulant carrying every valid match in this '
-                      'study, has no AEGL. EPA PPRTV (EPA/690/R-06/014F, 2006) '
+        textwrap.fill(fig_annot.record('Fig_toxicity', 'panel_b_dmmp',
+                      'DMMP, which carries every valid match on the '
+                      'twenty-eight-compound panel and zero on the primary '
+                      'one, has no AEGL. EPA PPRTV (EPA/690/R-06/014F, 2006) '
                       'declined to derive an inhalation RfC ("data are '
-                      'insufficient") and derived no inhalation unit risk.', 44),
+                      'insufficient") and derived no inhalation unit risk.'), 44),
         fontsize=FS_ANNOT - 2, color=C_REF, va='center', ha='left',
         bbox=dict(fc='white', ec=C_REF, boxstyle='round,pad=0.4', alpha=0.93))
 bx.text(-0.045, len(M) - 0.35 + 0.72,
