@@ -28,8 +28,8 @@
 \begin{document}
 \begin{frontmatter}
 
-\title{Simulants for Chemical Warfare Agent Detection Carry Designations
-Issued for Other Measurements, or None, and Descriptor Comparison Cannot
+\title{No Public Designation Names a Detection Measurement for the Simulants
+Chemical Warfare Agent Sensing Is Built On, and Descriptor Comparison Cannot
 Supply the Missing Validation}
 
 % elsarticle 는 \ead 를 전부 한 각주로 모아 '* Corresponding authors.' 바로
@@ -66,28 +66,29 @@ Korea Military Academy, Seoul 01805, Republic of Korea}
 \noindent
 Chemical warfare agent detection is developed almost entirely on simulants:
 compounds accepted as agent-like and safe to handle. We tested that
-acceptance. Searching the standard-setting and
-test-procedure record, we found two of the three incumbent simulants designated
-for measurements that are not detection and the third never designated at all.
+acceptance. In the public standard-setting record, two of the three incumbent
+simulants are designated for measurements that are not detection and the third
+nowhere we could reach; the Army procedure governing simulant selection is not
+public, so this bounds the claim.
 For eleven authentic agents we then computed structural and GFN2-xTB electronic
 descriptors and asked, by exact permutation over every designation, whether
 those three sit closer to the agents than the panel's other non-agents. On the
 primary thirty-five-compound panel, which adds five compounds the sensor
-literature also calls simulants, no agent has a valid match at any threshold and
-no test reaches significance. Resampling the descriptors gives the incumbent
+literature also calls simulants, no agent has a valid match and no test reaches
+significance. Resampling the descriptors gives the incumbent
 three a median of zero matched agents against five for a set of eight containing
 them, and neither count is unusual for its size: the zero sits at $p=0.48$
 against an expected 1.0, the five at $p=0.07$ against 1.92 once the null
-contains the incumbents as the observed set does. What the extended panel
-changes is the comparison rather than the chemistry, since diisopropyl
-fluorophosphate is nearer to three G agents than any incumbent is. A
-twenty-eight-compound panel omitting those five and the two pesticides yields
-four matches and a nominal $p$ of 0.025 that no correction over eighteen tests
-leaves significant, while relabelling two organophosphorus pesticides as
-simulants produces an adjusted 0.0006. A defensible claim must name the
-originating measurement and fix panel, space, statistic and weighting in
+contains the incumbents. What the extended panel changes is the comparison
+rather than the chemistry, since diisopropyl fluorophosphate is nearer to three
+G agents than any incumbent is. A
+twenty-eight-compound panel omitting those seven yields four matches and a
+nominal $p$ of 0.025 that no correction over eighteen tests leaves significant,
+while relabelling the two pesticides as simulants produces an adjusted 0.0006. A defensible claim must name the
+measurement it rests on and fix panel, space, statistic and weighting in
 advance.
 \end{abstract}
+
 \begin{keyword}
 chemical warfare agent simulant \sep descriptor space \sep {DMMP} \sep
 exact permutation test \sep acute exposure guideline level \sep dual-use
@@ -96,6 +97,28 @@ exact permutation test \sep acute exposure guideline level \sep dual-use
 \end{frontmatter}
 
 \linenumbers
+
+% JHM 은 Environmental Implication 문단을 요구한다. elsarticle 은 abstract 를
+% 하나만 찍으므로 초록 뒤 본문 머리에 둔다. 2026-10-24 기준 공식 Guide for
+% Authors 원문은 robots 로 막혀 양식과 분량 제한을 직접 확인하지 못했다.
+% 투고 전 저널 페이지에서 확인할 것.
+\section*{Environmental implication}
+
+Chemical warfare agents are
+among the most acutely toxic substances in commerce or in storage, and almost
+everything done to detect, contain or destroy them in the field is developed and
+qualified on substitutes. Decontamination efficiency is quantified against
+dimethyl methylphosphonate \cite{ebeam}, protective ensembles are qualified on
+vapour penetration by methyl salicylate \cite{nrc1997mist, astmf2588,
+top102022a}, and point detectors are tested against simulants chosen by a
+procedure that is not public \cite{top082188, top082196}. This work shows that
+the compounds carrying that weight in the sensing literature hold no public
+designation naming the measurement they are used for, that one of them has no
+regulator-derived acute inhalation value at all, and that a descriptor
+comparison of the kind the field uses to justify such choices does not settle
+the question either way. The practical consequence is for anyone who reads a
+simulant result as a statement about the agent: the measurement the compound was
+validated against, where one exists, is the limit of what that reading supports.
 
 \section{Introduction}
 
@@ -231,10 +254,16 @@ cyanogen chloride CK, phosgene CG and chloropicrin PS. Three compounds are
 treated as the incumbent simulants: DMMP, dichloromethane and dipropylene glycol
 monomethyl ether (DPGME).
 
-We call these three incumbent rather than designated.
-Section~\ref{res:docs} reports what searching for a designating instrument
-returned, since that search is a result of this work rather than a premise of
-it; the panel construction below uses its outcome.
+We call these three incumbent rather than designated, and the word is
+operational rather than evaluative: they are the compounds the chemical warfare
+agent sensing literature we surveyed runs its arrays and sorbents against, which
+is a statement about usage and not about standing. That usage is thin for two of
+them, resting on one metal-oxide sensor study for dichloromethane
+\cite{lee2011sno2} and on a training patent for DPGME
+\cite{seitzinger2006simulant}, and a different survey could reasonably return a
+different three. Section~\ref{res:docs} reports what searching for a designating
+instrument returned, since that search is a result of this work rather than a
+premise of it; the panel construction below uses its outcome.
 
 The two panels differ only in the non-agent pool, and the difference is the
 point. The twenty-eight-compound panel adds fourteen interferents and solvents
@@ -523,7 +552,10 @@ simulants. Standing is graded by what the document does: \emph{designated}
 names the compound for a stated measurement, \emph{recorded} notes that it has
 been used without naming a measurement to validate it against, and
 \emph{none} means no instrument was found. The measurement each compound is
-used for now is detection by a sensor, in every row.}
+used for now is detection by a sensor, except in the last block, which lists two
+compounds the same NIOSH document names for filtration and which neither panel
+carries; they are shown because the rule by which the primary panel was built
+would have admitted them.}
 \label{tab:docs}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -549,6 +581,12 @@ CEES & recorded & NIOSH reference tables \cite{niosh2002simulant}
      & barrier breakthrough against HD \\[2pt]
 DCP, DCNP & none & none found & none \\
 \hline
+\multicolumn{4}{@{}l}{\emph{Named by the same document, not in either panel}}\\
+carbon tetrachloride, & designated & NIOSH respirator programme
+\cite{niosh2002simulant}
+                      & filtration against GB and HD \\
+\quad cyclohexane &&& \\
+\hline
 \end{tabular}
 \end{table}
 
@@ -559,10 +597,30 @@ respirator documents, US Army and DEVCOM reports indexed by the Defense
 Technical Information Center, United States patents assigned to the Department
 of the Army, National Academies assessments of Department of Defense test
 programmes, ASTM and NATO standards catalogues, and the peer-reviewed simulant
-literature cited here. Two Test Operations Procedures bearing on the question
-(TOP 08-2-196A and TOP 10-2-022B) we could not obtain, and national CBRN defence
-manuals are generally not public. A designation in one of those would change the
-paragraphs above but not the measurements below.
+literature cited here, together with the US Army Test Operations Procedures
+reachable through the same index. That search has a hole in it, and the hole is
+the most important document of all. TOP 08-2-196, \emph{Simulant Selection for
+Laboratory, Chamber, and Field Testing} \cite{top082196}, is the Army's
+procedure for exactly the question this section asks, and we could not obtain
+it. We know its title and its role only because a public procedure cites it:
+TOP 08-2-188 CN1, which governs chemical point detector vapour testing, defers
+simulant selection to it \cite{top082188}. The same public procedure states a
+criterion that is about detection rather than about barriers, that the simulant
+``should produce a signature signal similar to the one from the threat
+analyte'', so the field does have at least one written statement of what a
+detection simulant is for, and we did not find it where we first looked. TOP
+10-2-022A is public as well and names methyl salicylate for the suit-level
+vapour challenge \cite{top102022a}. National CBRN defence manuals are generally
+not public.
+
+What follows from this is a limit on the claim rather than a retraction of it.
+We can say that the three compounds the sensor literature runs on carry no
+public designation naming a detection measurement, and that the designations we
+did find name other measurements. We cannot say that no such instrument exists,
+and TOP 08-2-196 is where one would be. A reader with access to it should treat
+this section as a question put to that document rather than as an answer about
+it. The measurements in the rest of the paper do not depend on how that question
+comes out.
 
 Two observations follow. A designation is specific to a measurement: a compound
 chosen because it breaks through a carbon bed like sarin has been validated for
