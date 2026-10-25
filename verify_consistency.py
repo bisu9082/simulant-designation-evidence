@@ -293,6 +293,34 @@ def load_facts():
         _mp = json.load(open('outputs/mantel_power.json'))
         f['mde_rho_mantel'] = _mp['mde_rho_mantel']
         f['mantel_power_perm'] = _mp['n_perm']
+    # 2026-10-25 신설. DFT 대조 수치가 SI 에 들어갔다. GFN2 의 omega 축에서
+    # 끌어낸 순서가 방법 종속임을 보이는 값들이므로 산출물에 묶는다.
+    if _os.path.exists('outputs/dft_vs_gfn2.csv'):
+        import pandas as _pd
+        _dv = _pd.read_csv('outputs/dft_vs_gfn2.csv')
+        _ag = _dv[_dv.compound_class == 'real_agent']
+        _it = _dv[_dv.compound_class == 'interferent']
+        _gb = float(_ag[_ag.name.str.startswith('sarin')].omega_eV.iloc[0])
+        _dm = float(_dv[_dv.name == 'DMMP'].omega_eV.iloc[0])
+        f['dft_omega_min'] = float(_dv.omega_eV.min())
+        f['dft_omega_max'] = float(_dv.omega_eV.max())
+        f['gfn2_omega_min'] = float(_dv.gfn2_w.min())
+        f['gfn2_omega_max'] = float(_dv.gfn2_w.max())
+        f['dft_ps'] = float(_dv[_dv.name.str.startswith('chloropicrin')].omega_eV.iloc[0])
+        f['dft_cg'] = float(_dv[_dv.name.str.startswith('phosgene')].omega_eV.iloc[0])
+        f['dft_gb'] = _gb
+        f['dft_dmmp'] = _dm
+        f['dft_itf_above_gb'] = int((_it.omega_eV > _gb).sum())
+        f['dft_n_dft'] = int(len(_dv))
+        _lo = _ag.sort_values('omega_eV').head(3)
+        f['dft_lo1'] = float(_lo.omega_eV.iloc[0])
+        f['dft_lo2'] = float(_lo.omega_eV.iloc[1])
+        f['dft_lo3'] = float(_lo.omega_eV.iloc[2])
+        f['dft_rho_omega'] = float(_dv[['gfn2_w', 'omega_eV']]
+                                   .corr(method='spearman').iloc[0, 1])
+        f['dft_rho_lumo'] = float(_dv[['E_LUMO_eV', 'lumo_eV']]
+                                  .corr(method='spearman').iloc[0, 1])
+
     # 2026-10-24. 다른 세션이 올린 AsCl3 민감도 표(SI)가 검증기에 등록돼 있지
     # 않았다. 그 표의 28종 행은 이번 정확종속 규칙으로 3/11 에서 4/11 로
     # 움직였고, 등록돼 있었다면 기계가 잡았을 자리다.
@@ -704,6 +732,21 @@ CHECKS = [
     ('mantel_d2uv_struct',
      [r'that same set and channel \(\$\\rho = [-+][\d.]+\$, Mantel\s*\n?'
       r'\$p = ([\d.]+)\$'], 0.0005),
+    ('gfn2_omega_min', [r'they run from ([\d.]+) to\s*\n?[\d.]+~eV across this panel'], 0.006),
+    ('gfn2_omega_max', [r'they run from [\d.]+ to\s*\n?([\d.]+)~eV across this panel'], 0.006),
+    ('dft_omega_min', [r'range becomes ([\d.]+) to [\d.]+~eV'], 0.006),
+    ('dft_omega_max', [r'range becomes [\d.]+ to ([\d.]+)~eV'], 0.006),
+    ('dft_ps', [r'chloropicrin falling from [\d.]+ to ([\d.]+)'], 0.006),
+    ('dft_cg', [r'phosgene from [\d.]+ to ([\d.]+)'], 0.006),
+    ('dft_dmmp', [r'DMMP at ([\d.]+) against sarin'], 0.006),
+    ('dft_gb', [r'DMMP at [\d.]+ against sarin at ([\d.]+)'], 0.006),
+    ('dft_itf_above_gb', [r'(\w+) of the fourteen interferents still score above'], 0),
+    ('dft_lo1', [r'three lowest agents become VX\s*\n?\(([\d.]+)\)'], 0.006),
+    ('dft_lo2', [r'sulfur mustard \(([\d.]+)\) and cyclosarin'], 0.006),
+    ('dft_lo3', [r'and cyclosarin\s*\n?\(([\d.]+)\) rather than'], 0.006),
+    ('dft_rho_omega', [r'two sets of \$\\omega\$ values is ([\d.]+), against'], 0.006),
+    ('dft_rho_lumo', [r'is [\d.]+, against\s*\n?([\d.]+) for the underlying LUMO'], 0.006),
+    ('dft_n_dft', [r'recomputed the whole\s*\n?(\w+[-\w]*)-compound panel at'], 0),
     ('ascl3_a28_match', [r'Twenty-eight, incumbent three & (\d+)/11 & dichloromethane'], 0),
     ('ascl3_a28_dist', [r'Twenty-eight, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
     ('ascl3_a35_match', [r'Thirty-five, incumbent three & (\d+)/11 & dichloromethane'], 0),
@@ -896,6 +939,9 @@ WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
          'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
+         'twenty-one': 21, 'twenty-two': 22,
+         'twenty-six': 26, 'twenty-seven': 27, 'twenty-eight': 28,
+         'twenty-nine': 29, 'thirty': 30,
          'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
          'thirty-three': 33, 'thirty-four': 34}
 

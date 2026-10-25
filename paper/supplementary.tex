@@ -183,6 +183,39 @@ normality of the paired differences was assessed by the Shapiro--Wilk test
 in place of a paired $t$-test where normality was rejected; those paired tests
 are reported for completeness only, because, as Section~\ref{M-sec:perm} explains,
 they are confounded by group size and the exact permutation test supersedes them.
+\section{Density-functional check on the electrophilicity axis}
+\label{meth:dft}
+
+The electronic descriptors throughout this work are GFN2-xTB. That method is
+parameterised for geometries and energies rather than for virtual orbital
+energies, so any quantity built from its LUMO carries a question we cannot
+answer from inside the method. We therefore recomputed the frontier orbital
+energies of all twenty-eight compounds of the smaller panel at
+B3LYP/def2-SVPD, a basis chosen because it carries diffuse functions, which
+virtual orbitals need, and covers arsenic, which lewisite needs. From those we
+formed $\mu$, $\eta$ and $\omega = \mu^{2}/2\eta$ by the same definitions used
+throughout.
+
+The comparison is not clean, and we say so rather than letting it read as one.
+The GFN2 values in this paper sit on GFN2-optimised geometries, which we could
+not reproduce in the environment where the check was run; the density-functional
+values sit on RDKit ETKDG geometries relaxed with MMFF94, or with UFF for
+lewisite, whose arsenic MMFF does not parameterise. The difference between the
+two sets of $\omega$ therefore contains a geometry term as well as a method
+term, and we do not attempt to separate them. What the check can establish is
+whether an ordering drawn from the GFN2 $\omega$ axis is stable, and it is not
+(Section~\ref{res:plocal}). What it cannot establish is the size of the method
+term alone. All twenty-eight calculations converged; values are in the deposited
+\texttt{outputs/dft\_omega.csv}.
+
+We did not extend the check to the condensed Fukui index. A Mulliken population
+analysis on this basis returns a negative $f^{+}(\mathrm{P})$ for DMMP, which is
+an artefact of partitioning a diffuse basis rather than a chemical statement,
+and we had no population scheme available that we would trust at this level. The
+$f^{+}(\mathrm{P})$ values in Table~\ref{tab:plocal} are therefore GFN2 values
+with no independent check, and the ratio between DMMP and VX that the main text
+quotes should be read within that limit.
+
 \section{Multiplicity and the accounting schemes}
 \label{meth:multiplicity}
 Multiplicity is corrected within each panel configuration. The six distance
@@ -692,13 +725,43 @@ $\omega_k$. Values are GFN2-derived and relative within one protocol.}\\
 
 The Wiberg P=O bond order spans 1.9246--2.0146 across all six compounds and does
 not separate the G series from DMMP; it carries no useful discrimination here.
-The global electrophilicity index is actively misleading: GD (5.54), GF (5.62)
-and GB (5.69) are the three lowest values among the eleven authentic agents, and
-nine of the fourteen interferents score higher than sarin. The reason is that
-$\omega$ responds to the lowest $\pi^{*}$ orbital wherever it sits, the nitrile
-in tabun or the sulfur lone pair raising the HOMO in VX, and it has no particular
-connection to phosphorus. Global electrophilicity should not be used as a
-reactivity axis for this compound class.
+The global electrophilicity index does not order this panel in a way that
+tracks agent reactivity, and it does not order it reproducibly either. Under
+GFN2 the three lowest values among the eleven authentic agents are GD (5.54),
+GF (5.62) and GB (5.69), and nine of the fourteen interferents score higher
+than sarin. The reason $\omega$ behaves this way is that it responds to the
+lowest $\pi^{*}$ orbital wherever it sits, the nitrile in tabun or the sulfur
+lone pair raising the HOMO in VX, and it has no particular connection to
+phosphorus.
+
+That much is a statement about $\omega$. Whether it is also a statement about
+GFN2 is a separate question, and it has to be asked, because the GFN2 values
+themselves are not credible as electrophilicity indices: they run from 1.71 to
+40.34~eV across this panel, where a density-functional calculation on organic
+molecules of this kind returns single-digit values. We recomputed the whole
+twenty-eight-compound panel at B3LYP/def2-SVPD (Section~\ref{meth:dft}). The
+range becomes 1.43 to 7.92~eV, chloropicrin falling from 40.34 to 7.92 and
+phosgene from 26.60 to 5.07, and the inflation factor is not constant: it runs
+from 0.7 for water to 11.7 for VX.
+
+Two things follow, and they point in opposite directions for us. The qualitative
+reading survives. Under the density-functional values the simulant still does
+not sit above the agents it stands in for, DMMP at 1.90 against sarin at 2.08,
+and seven of the fourteen interferents still score above sarin, so $\omega$
+still fails to separate this panel in the way a reactivity axis would need to.
+The specific ordering does not survive. The three lowest agents become VX
+(1.54), sulfur mustard (1.73) and cyclosarin (1.90) rather than the G series,
+and two agents now fall below DMMP where under GFN2 all eleven stood above it.
+The rank correlation between the two sets of $\omega$ values is 0.628, against
+0.898 for the underlying LUMO energies, which is what one expects of a quantity
+that divides by a gap: the construction amplifies the disagreement rather than
+inheriting it.
+
+We therefore keep the conclusion and withdraw the ordering. Global
+electrophilicity should not be used as a reactivity axis for this compound
+class, and the sentence we would have written before this check, naming which
+three agents sit lowest, would have been a statement about the semi-empirical
+method rather than about the compounds.
 
 \section{What the array actually measures}
 \label{res:arraydetail}
