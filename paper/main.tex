@@ -396,11 +396,14 @@ pair correlated at $|r|>0.95$ was removed with preference for retaining a
 protected set (molar refractivity, logP, TPSA, hydrogen-bond acceptor count, four
 linear-solvation-energy surrogates and the electronic descriptors). The
 four surrogates are linear rescalings of quantities already in the set and are
-not Abraham solvation parameters; three of the four are removed by the
-correlation filter at $|r| = 1.00$ in every space. The attrition is the same on
-both panels: no structural descriptor has zero variance, the correlation filter
-removes 13 of the 51, and the 38 that remain are the structural coordinates used
-throughout. Remaining descriptors were
+not Abraham solvation parameters; all four are removed before any
+distance is taken, three of them by the correlation filter at $|r| = 1.00$ in
+every space and the fourth by the exact-dependence check on the
+twenty-eight-compound panel and by correlation at 0.95 on the primary one. No structural descriptor has zero
+variance. The correlation filter and the exact-dependence check of
+Section~\ref{meth:spaces} together remove 13 of the 51 on the primary panel and
+15 on the twenty-eight-compound panel, leaving 38 and 36 structural coordinates
+respectively; the attrition is therefore not the same on the two panels. Remaining descriptors were
 standardised and distances taken as Euclidean. Standardisation, and the median
 nearest-neighbour separation that normalises the distances, are computed over
 the compounds of the panel in hand. A normalised distance is therefore
@@ -409,7 +412,7 @@ two panels are set side by side; where that comparison is made below it is made
 on the thirty-five-compound basis. Two shape indices, $\kappa_2$ and
 $\kappa_3$, go negative for the smallest molecules (water,
 $\kappa_3=-104.0$); repeating every analysis without them returns the
-permutation values of Section~\ref{sec:perm} to three decimal places (0.028,
+permutation values of Section~\ref{sec:perm} to three decimal places (0.031,
 0.275 and 0.025), so no result below rests on the pathological indices.
 
 \subsection{Nearest-neighbour comparison and permutation test}
@@ -442,8 +445,9 @@ it being directional.
 
 \subsection{Match criterion}
 \label{meth:match}
-Nearest-neighbour rank alone is not sufficient: in a 38-dimensional space a
-``nearest'' simulant at a distance of 11.8 is not a match. We therefore
+Nearest-neighbour rank alone is not sufficient: in the 39-dimensional merged
+space of the twenty-eight-compound panel a ``nearest'' simulant at a distance of
+11.8 is not a match. We therefore
 normalised each distance by the median nearest-neighbour distance of the same
 space and define a valid match as a normalised distance $\le 2$ together with a
 distance smaller than that to every compound outside the designated set. The two
@@ -683,7 +687,7 @@ nearest-neighbour separation of that space; filled markers are valid matches.
 of the seventeen non-agents as simulants, with the actual designation marked;
 the $p$ shown is the mean-difference statistic only, the other five and the
 adjusted values being in Supplementary Table~\ref{S-tab:ablation}, where the
-Benjamini-Hochberg value over its eighteen tests is 0.159.}
+Benjamini-Hochberg value over its eighteen tests is 0.185.}
 \label{fig:main}
 \end{figure}
 
@@ -701,11 +705,10 @@ structural space and (b) of the three-coordinate GFN2-xTB electronic space,
 both on the twenty-eight-compound panel, so that the five literature simulants
 do not appear in them; the
 leading structural component is a size axis and the leading electronic component
-loads the two orbital energies against the dipole moment. (c) Smallest $p$ over
-the six statistics for 2000 random three-descriptor subspaces of the structural
-space, before and after ZCA whitening, with the space used here marked: its
-0.028 is the 26th percentile of those draws, and 36\% of them fall below 0.05
-as measured, 17\% after whitening. (d) Smallest adjusted value over the
+loads the two orbital energies against the dipole moment. (c) The mean-difference
+statistic for 2000 random three-descriptor subspaces of the structural space, before and after ZCA whitening, with the space used here marked: its
+0.031 is the 25th percentile of those draws, and 33\% of them fall below 0.05
+as measured, 19\% after whitening. (d) Smallest adjusted value over the
 eighteen tests of each configuration under the five accounting schemes of
 Supplementary Table~\ref{S-tab:family}; on the twenty-eight-compound panel only the
 scheme that
@@ -719,10 +722,10 @@ On the thirty-five-compound panel, no authentic agent has a valid match to an
 incumbent simulant. Figure~\ref{fig:main}a shows why, and the mechanism is not
 the one our earlier version reported. The two panels do not share a scale, and
 they do not quite share a space. Standardisation and the normalising separation
-are recomputed on each panel, and the correlation filter admits a different
-pair of columns on each, \texttt{kappa1} and one solvation surrogate on the
-twenty-eight-compound panel against two phosphorus counts on the primary one,
-so the thirty-eight structural coordinates are not the same thirty-eight.
+are recomputed on each panel, and the filters admit different columns on
+each, \texttt{kappa1} on the twenty-eight-compound panel against three
+phosphorus counts on the primary one, so the structural coordinates are neither
+the same set nor the same number, thirty-six against thirty-eight.
 Distances across the two are therefore not directly comparable, and the
 comparison we rely on is made within the primary panel, where the compounds,
 the columns and the standardisation are fixed and only the labels move. Held on
@@ -782,8 +785,8 @@ carrying 70.4\%. The primary panel behaves the same way, at 34.8\% and 70.3\%.
 Merging the two blocks returns a size axis at lower cumulative variance over the
 first two components, 45.4\% on the smaller panel and 45.0\% on the primary one,
 for a dimensional rather than a chemical reason: at equal
-per-descriptor weighting thirty-eight structural descriptors outvote three
-electronic ones.
+per-descriptor weighting the structural descriptors, thirty-six on the smaller
+panel and thirty-eight on the primary one, outvote three electronic ones.
 
 Every exact permutation test we can run, across four panel and designation
 configurations, three spaces and six statistics, is in Supplementary
@@ -796,7 +799,7 @@ nominal values below 0.05, both in spaces containing the structural
 descriptors, so the difficulty is not that the test cannot detect anything on
 this panel. On the twenty-eight-compound panel, which differs only in omitting
 those five and two organophosphorus pesticides, the incumbents beat random
-compounds under two of six statistics in the structural space and three of six
+compounds under one of six statistics in the structural space and three of six
 in the merged space.
 
 Correcting for the number of times we looked removes almost all of it, and the
@@ -808,7 +811,7 @@ Table~\ref{S-tab:family}, matter only for the twenty-eight-compound panel. There
 gives a smallest adjusted value of 0.185, correcting the six statistics within
 each space gives 0.082, and the Westfall-Young min-$P$ procedure, which uses the
 shared permutations and so accounts for the dependence between the tests exactly
-rather than approximating it, gives 0.075. That is the closest any correction
+rather than approximating it, gives 0.079. That is the closest any correction
 brings the panel to the conventional threshold without crossing it. The fifth
 scheme behaves differently. Had the mean difference been specified in advance as
 the single statistic, three tests would have been run and the
@@ -860,8 +863,8 @@ $p=0.0029$ on the twenty-eight-compound panel, which leaves the two spaces
 94-fold apart in $p$ at matched dimension. What the nominal structural value is
 worth against the descriptors it was drawn from is a separate question, and
 there the answer is less comfortable. Of 2000 random three-descriptor subsets of
-that space, 36.3\% reach $p<0.05$, and the observed 38-dimensional value of
-0.031 sits at the 22.7th percentile of that distribution while the electronic
+that space, 32.6\% reach $p<0.05$, and the observed 36-dimensional value of
+0.031 sits at the 25.4th percentile of that distribution while the electronic
 value of 0.275 sits at the 74.2nd. Both are ordinary draws. Supplementary
 Section~\ref{S-res:dimdetail} reports both controls in full.
 
@@ -1089,22 +1092,27 @@ displacement is the weakest part of this and the mustard result the strongest. A
 defended by a comparison that excludes the alternatives is not defended.
 
 An earlier version of this work reported the twenty-eight-compound structural
-cell, $p = 0.028$, as the finding and built a thesis on the contrast between it
+cell as the finding and built a thesis on the contrast between it
 and the electronic space. Three things undo that reading, and each is a mistake
 another group could make the same way. The value does not survive the eighteen
 tests of its own family (Benjamini-Hochberg $q = 0.185$), although it would have
-survived at $q = 0.042$ had the statistic been fixed in advance, which
+survived at $q = 0.046$ had the statistic been fixed in advance, which
 demonstrates the paper's argument rather than defending the value. It sits at the
-25.8th percentile of 2000 arbitrary three-descriptor slices of the same block.
+25.4th percentile of 2000 arbitrary three-descriptor slices of the same block.
 And it is specific to the panel that omits the five.
 
 Two things we expected to dissolve the contrast between the spaces did not. The
 Parr electrophilicity index was an exact function of two of the other electronic
 descriptors, so the electronic space never had the dimension we reported;
 removing it moved that space's value only from 0.297 to 0.275. Matching the
-dimensions did not dissolve the contrast either (Section~\ref{res:panels}). The
-contrast is real; what fails is the inference from it, because the structural
-value anchoring it is an ordinary draw from the subspaces we could have chosen.
+dimensions did not dissolve the contrast either (Section~\ref{res:panels}). What
+does weaken it is the choice of electronic-structure method. Rebuilding the
+electronic space from density-functional orbital energies moves it from 0.275 to
+0.128 and from one valid match to four, and the four are the pairings the sensor
+literature asserts (Section~\ref{S-meth:dft}). We therefore withdraw the
+contrast as something to build on: it is not a stable feature of the comparison,
+and the structural value anchoring it is in any case an ordinary draw from the
+subspaces we could have chosen.
 
 What remains is a claim about comparison rather than about chemistry. On the
 primary panel we cannot establish that the incumbent simulants are closer to the
@@ -1237,8 +1245,8 @@ panel than on the smaller one; diisopropyl fluorophosphate is simply nearer, and
 under descriptor resampling the incumbent three match a median of zero agents
 against five for the eight literature-used simulants examined here, the
 difference positive in every
-one of 1000 replicates. Omitting those five restores three matches and a nominal
-structural $p$ of 0.028, a value at the 25.8th percentile of 2000 arbitrary
+one of 1000 replicates. Omitting those five restores four matches and a nominal
+structural $p$ of 0.031, a value at the 25.4th percentile of 2000 arbitrary
 three-descriptor subspaces of the same block which no correction over the
 eighteen tests run leaves significant.
 
