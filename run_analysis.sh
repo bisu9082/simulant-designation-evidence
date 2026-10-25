@@ -66,7 +66,23 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
            deltaE_premise.py mantel_power.py deltaE_power.py rollback_c.py match_by_panel.py \
            mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py \
-           perm_nopatho.py match_by_panel_ascl3.py
+           match_by_panel_ascl3.py dft_electronic_space.py
+
+# 병리지수 제거 변종. 2026-10-25 까지 파이프라인에 없었다. 수동으로 한 번
+# 돌린 산출물이 omega 제거 뒤에도 그대로 남아, 본문이 구판 값을 '모든 분석을
+# 반복했다'며 인용했다. perm_nopatho.py 는 experiment_summary_nopatho.json 을
+# 읽으므로 그 파일을 만든 뒤에 돌아야 한다. 그래서 위 목록에서 빼고 여기서
+# 순서를 고정한다. 위 블록보다 앞에 두지 않는 이유는 analysis_main.py 본
+# 실행이 접미사 없는 산출물을 먼저 써야 하기 때문이다.
+run_strict_nopatho() {
+  if ! python3 analysis_main.py --drop-pathological; then
+    echo "[중단] analysis_main.py --drop-pathological 실패"; exit 1
+  fi
+  if ! python3 perm_nopatho.py; then
+    echo "[중단] perm_nopatho.py 재실행 실패"; exit 1
+  fi
+}
+run_strict_nopatho
 
 # 독성축. parse -> trainset -> 동일성검사 -> QSAR 순서를 지켜야 한다.
 run_strict parse_aegl.py build_tox_trainset.py cite_facts.py

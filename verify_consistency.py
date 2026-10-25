@@ -293,6 +293,28 @@ def load_facts():
         _mp = json.load(open('outputs/mantel_power.json'))
         f['mde_rho_mantel'] = _mp['mde_rho_mantel']
         f['mantel_power_perm'] = _mp['n_perm']
+    # 2026-10-25. 전자공간을 B3LYP 궤도에너지로 갈아끼운 대조. 심사
+    # 시늄레이션이 제기하고 재현으로 확인된 축이다. 기준 재현(GFN2)이 정본
+    # 0.275 와 1/11 을 내는 것까지 같은 파일에 들어 있다.
+    if _os.path.exists('outputs/dft_electronic_space.json'):
+        _es = json.load(open('outputs/dft_electronic_space.json'))
+        f['dft_es_gfn2_p'] = float(_es['gfn2']['p_one_sided'])
+        f['dft_es_gfn2_match'] = int(_es['gfn2']['n_match'])
+        f['dft_es_b3lyp_p'] = float(_es['b3lyp']['p_one_sided'])
+        f['dft_es_b3lyp_match'] = int(_es['b3lyp']['n_match'])
+
+    # 2026-10-25. 병리지수 제거 대조. 구판은 omega 가 아직 든 4좌표 전자공간에서
+    # 돌아간 산출물이었고 본문은 그 값을 '모든 분석을 반복했다'며 인용했다.
+    if _os.path.exists('outputs/permutation_nopatho.json'):
+        _nop = json.load(open('outputs/permutation_nopatho.json'))
+        if _nop['B_electronic']['n_kept'] != 3:
+            raise SystemExit('[verify] 중단: permutation_nopatho 의 전자공간이 '
+                             f"{_nop['B_electronic']['n_kept']}좌표다. omega 제거 "
+                             '이후 재실행되지 않은 산출물이다.')
+        f['nopatho_struct_p'] = float(_nop['A_rdkit']['p_one_sided'])
+        f['nopatho_elec_p'] = float(_nop['B_electronic']['p_one_sided'])
+        f['nopatho_merged_p'] = float(_nop['C_merged']['p_one_sided'])
+
     # 2026-10-25 신설. DFT 대조 수치가 SI 에 들어갔다. GFN2 의 omega 축에서
     # 끌어낸 순서가 방법 종속임을 보이는 값들이므로 산출물에 묶는다.
     if _os.path.exists('outputs/dft_vs_gfn2.csv'):
@@ -555,8 +577,19 @@ def load_facts():
     f['pf_prespec'] = pf['prespecified_bh_min_q']
 
     # 서술자 감소 정산 (2026-10-20). 본문이 51 과 38 을 따로 적고 잇지 않았다.
-    f['struct_removed'] = 13
-    f['struct_candidates'] = 51
+    # 2026-10-25. 종전에는 13 이 리터럴이었다. 재분석으로 28종이 36좌표가 된
+    # 뒤에도 그 리터럴이 남아 본문의 '두 패널에서 같다'는 서술을 받쳐 주었다.
+    # 두 패널을 따로 산출물에서 읽는다.
+    _c28 = json.load(open('outputs/experiment_summary.json'))['conditions'][0]
+    _c35 = json.load(open('outputs/experiment_summary_p35all.json'))['conditions'][0]
+    f['struct_candidates'] = int(_c35['n_in'])
+    f['struct_kept_35'] = int(_c35['n_kept'])
+    f['struct_kept_28'] = int(_c28['n_kept'])
+    f['struct_removed'] = int(_c35['n_in'] - _c35['n_kept'])
+    f['struct_removed_28'] = int(_c28['n_in'] - _c28['n_kept'])
+    if f['struct_removed'] == f['struct_removed_28']:
+        raise SystemExit('[verify] 중단: 두 패널의 서술자 감소가 같아졌다. '
+                         '본문 서술과 검사 설계를 함께 손봐야 한다.')
 
     mp = json.load(open('outputs/multiplicity_c.json'))
     for lab, _m, _minp, _bonf, bhq, _k in mp:
@@ -732,6 +765,16 @@ CHECKS = [
     ('mantel_d2uv_struct',
      [r'that same set and channel \(\$\\rho = [-+][\d.]+\$, Mantel\s*\n?'
       r'\$p = ([\d.]+)\$'], 0.0005),
+    ('dft_es_gfn2_p', [r'one-sided \$p\$ of (\d+\.\d+)',
+                       r'moves it from (\d+\.\d+) to \d+\.\d+'], 0.006),
+    ('dft_es_gfn2_match', [r'(\w+) valid match of eleven'], 0),
+    ('dft_es_b3lyp_p', [r'returns four valid matches\s*\n?and (\d+\.\d+)',
+                        r'moves it from \d+\.\d+ to (\d+\.\d+)'], 0.006),
+    ('dft_es_b3lyp_match', [r'returns (\w+) valid matches',
+                            r'from one valid match to (\w+)'], 0),
+    ('nopatho_struct_p', [r'to three decimal places \((\d+\.\d+),'], 0.006),
+    ('nopatho_elec_p', [r'three decimal places \(\d+\.\d+, (\d+\.\d+) and'], 0.006),
+    ('nopatho_merged_p', [r'three decimal places \(\d+\.\d+, \d+\.\d+ and (\d+\.\d+)\)'], 0.006),
     ('gfn2_omega_min', [r'they run from ([\d.]+) to\s*\n?[\d.]+~eV across this panel'], 0.006),
     ('gfn2_omega_max', [r'they run from [\d.]+ to\s*\n?([\d.]+)~eV across this panel'], 0.006),
     ('dft_omega_min', [r'range becomes ([\d.]+) to [\d.]+~eV'], 0.006),
@@ -920,7 +963,10 @@ CHECKS = [
     ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
     ('pf_prespec', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & '
                     r'\\textbf\{[\d.]+\} & \\textbf\{([\d.]+)\}'], 0.0005),
-    ('struct_removed', [r'removes (\d+) of the 51'], 0),
+    ('struct_removed', [r'remove (\d+) of the 51 on the primary panel'], 0),
+    ('struct_removed_28', [r'of the 51 on the primary panel and\s*(\d+) on the'], 0),
+    ('struct_kept_35', [r'leaving (\d+) and \d+ structural coordinates'], 0),
+    ('struct_kept_28', [r'leaving \d+ and (\d+) structural coordinates'], 0),
     ('struct_candidates', [r'removes \d+ of the (\d+)',
                            r'descriptors \((\d+) after excluding run metadata\)'], 0),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
@@ -935,7 +981,7 @@ CHECKS = [
     ('j21_possible', [r'suitable and (\d+) provisional'], 0),
 ]
 
-WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
          'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
@@ -944,6 +990,35 @@ WORDS = {'zero': 0, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'twenty-nine': 29, 'thirty': 30,
          'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
          'thirty-three': 33, 'thirty-four': 34}
+
+
+# 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
+# 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
+SUPERSEDED = [
+    ('28종 구조공간 명목 p (정본 0.031)', [r'0\.028\b'], [r'earlier version', r'superseded']),
+    ('부분공간 백분위 (정본 25.4)',
+     [r'25\.8th percentile', r'\b26th percentile', r'\b28th percentile',
+      r'22\.7th percentile', r'\b23rd percentile'], []),
+    ('도판2 캡션의 통계량 서술 (실제로는 평균차 하나)',
+     [r'Smallest \$p\$ over\s+the six statistics for 2000'], []),
+    ('부분공간 0.05 미만 비율 (정본 32.6)',
+     [r'36\.3\\?%', r'36\\% of them fall below', r'17\\% after whitening'], []),
+    ('사전지정 BH q (정본 0.046)', [r'0\.042\b'], []),
+    ('28종 BH over 18 (정본 0.185)',
+     [r'adjusted value is 0\.159', r'eighteen tests is 0\.159',
+      r'over 18\s+& [\d.]+ & [\d.]+ & 0\.159'], []),
+    ('28종 Westfall-Young (정본 0.079)', [r'approximating it, gives 0\.075'], []),
+    ('28종 매치 수 (정본 4)',
+     [r'restores three matches', r'counted three matches'],
+     [r'earlier version', r'superseded', r'descriptor set']),
+    ('28종 구조공간 유의 통계량 수 (정본 1)', [r'two of six statistics in the structural'], []),
+    ('28종 구조좌표 수 (정본 36)',
+     [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),
+    ('tabun 정규화거리 (정본 1.989)', [r'2\.003'],
+     [r'earlier', r'superseded', r'put tabun at']),
+    ('두 패널 감소가 같다는 서술 (정본: 13 대 15)',
+     [r'attrition is the same on\s+both panels'], []),
+]
 
 
 def tonum(s):
@@ -1061,6 +1136,35 @@ def main():
             if abs(got - want) > tol:
                 fails.append(f'  불일치 {key}: 본문 {got:g} vs 산출물 {want:g}'
                              f'   [{ctx}]')
+
+    # (B2) 폐기값 블랙리스트 (2026-10-25 신설).
+    #
+    # 왜 필요한가. (B) 의 검사는 어법 단위다. 'from $p=0.031$ to' 라는 패턴
+    # 하나가 어딘가에서 맞으면 통과하므로, 같은 양을 다른 문장으로 적은
+    # 자리에 구판 값이 남아 있어도 보이지 않는다. 2026-10-25 에 그 경로로
+    # 본문 수치 16건이 PASS 를 받은 채 남아 있었다. 여기서는 방향을 뒤집어,
+    # 폐기된 값이 원고 어디에든 나타나면 실패로 본다.
+    #
+    # 각 항목은 (사유, 금지 패턴들, 면제 패턴들)이다. 면제는 구판임을
+    # 명시하고 인용하는 문장을 위한 것이다. 금지 패턴이 맞은 자리 앞뒤
+    # 240자 안에서 면제 패턴이 맞으면 의도적 인용으로 본다.
+    superseded = []
+    for why, pats, exempt in SUPERSEDED:
+        hits = []
+        for src in (body, body_flat):
+            for pat in pats:
+                for m in re.finditer(pat, src):
+                    a, b = max(0, m.start() - 240), m.end() + 240
+                    win = src[a:b]
+                    if any(re.search(e, win, re.I) for e in exempt):
+                        continue
+                    hits.append(' '.join(m.group(0).split())[:64])
+        if hits:
+            uniq = sorted(set(hits))
+            superseded.append(f'  폐기값 잔존 {why}: ' + ' / '.join(uniq[:3]))
+    if superseded:
+        fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
+        fails.extend(superseded)
 
     # (C) 데이터가 반증하는 문구. 수치가 맞아도 주장이 틀릴 수 있다.
     # Figure 2 의 구판 주석은 숫자를 하나도 틀리지 않으면서

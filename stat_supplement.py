@@ -22,6 +22,7 @@ R2-3  500회는 백분위를 0.2 까지만 분해한다. 2000회로 올린다.
 """
 import itertools
 import json
+import os
 
 import numpy as np
 import pandas as pd
@@ -155,6 +156,26 @@ def family_sensitivity(path, sim_classes, label):
     return res
 
 
+def observed_for_percentiles():
+    """백분위 대조에 쓰는 관측 p 세 개를 정본 산출물에서 읽는다.
+
+    전부 평균차 통계량의 일측 p 다. 리터럴로 두면 재분석 때 조용히 구판이
+    된다. 파일이 없으면 리터럴로 넘어가지 않고 중단한다.
+    """
+    need = ('outputs/permutation_statistics.json', 'outputs/rollback_c.json')
+    for q in need:
+        if not os.path.exists(q):
+            raise SystemExit(f'[중단] {q} 가 없다. 백분위 관측값을 정본에서 '
+                             '읽을 수 없으므로 추정값으로 진행하지 않는다.')
+    ps = json.load(open(need[0]))['panel28_designated']
+    rb = json.load(open(need[1]))
+    return {
+        'struct_full': float(ps['A_rdkit']['statistics']['mean_diff']['p_one_sided']),
+        'struct_pc3': float(rb['dimensionality_control']['panel28']['pc3_p']),
+        'electronic': float(ps['B_electronic']['statistics']['mean_diff']['p_one_sided']),
+    }
+
+
 def whitened_control(path, sim_classes, label):
     """R2-2. 백색화 전후로 무작위 3좌표 부분공간의 p 분포를 비교한다."""
     df = pd.read_csv(path)
@@ -263,10 +284,16 @@ if __name__ == '__main__':
     w28, ps28 = whitened_control('descriptor_cache_xtb.csv', ['simulant'],
                                  'panel28')
     res['whitening'] = {'panel28': w28}
-    for lab, v in [('struct_full', 0.0279), ('struct_pc3', 0.0044),
-                   ('electronic', 0.2750)]:
+    # 2026-10-25. 종전에는 관측값 세 개가 리터럴로 박혀 있었다(0.0279, 0.0044,
+    # 0.2750). 재분석으로 구조공간 p 가 0.0309 로, PC3 절단값이 0.0029 로
+    # 바뀐 뒤에도 그 리터럴이 남아, 백분위 22.65 가 구판 값의 백분위였다.
+    # ps28 은 null_matrix 의 0번 열, 곧 평균차 통계량의 일측 p 이므로
+    # 관측값도 같은 통계량에서 가져온다.
+    _obs = observed_for_percentiles()
+    for lab, v in _obs.items():
         res.setdefault('percentiles_2000', {})[lab] = float(
             100 * (ps28 <= v).mean())
+    res['percentile_observed'] = _obs
     print('\n  2000회 분포에서의 관측 백분위:')
     for k, v in res['percentiles_2000'].items():
         print(f'    {k:<14} {v:.1f}%')
@@ -278,8 +305,7 @@ if __name__ == '__main__':
         json.dump({'n_draws': N_RANDSUB, 'seed': SEED,
                    'raw': w28['raw']['p_values'],
                    'whitened': w28['whitened']['p_values'],
-                   'observed': {'struct_full': 0.0279, 'struct_pc3': 0.0044,
-                                'electronic': 0.2750},
+                   'observed': _obs,
                    'percentiles': res['percentiles_2000']}, fh)
     print(f'  [subspace] outputs/subspace_pvalues.json 기록 '
           f'(raw {len(w28["raw"]["p_values"])}, '

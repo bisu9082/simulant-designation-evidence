@@ -4093,8 +4093,13 @@
   }
  },
  "percentiles_2000": {
-  "struct_full": 22.650000000000002,
+  "struct_full": 25.35,
   "struct_pc3": 2.4,
   "electronic": 74.25
+ },
+ "percentile_observed": {
+  "struct_full": 0.030882352941176472,
+  "struct_pc3": 0.0029411764705882353,
+  "electronic": 0.275
  }
 }

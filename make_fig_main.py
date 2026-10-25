@@ -370,7 +370,10 @@ sx.annotate(f'the structural space\nused here gives $p$ = {_obs:.3f},\n'
             arrowprops=dict(arrowstyle='-', color=C_REAL, lw=0.9))
 sx.text(0.0565, 3, r'$\alpha$ = 0.05', color=C_REF, fontsize=FS_ANNOT - 1,
         rotation=90, va='bottom', ha='left')
-sx.set_xlabel('smallest $p$ of the six statistics,\n'
+# 2026-10-25. 종전 라벨은 'smallest p of the six statistics' 였다.
+# whitened_control 은 null_matrix 의 0번 열, 곧 평균차 통계량 하나만 쓴다.
+# 쓰지 않은 방법을 썼다고 적은 것이므로 라벨과 캡션을 함께 고쳤다.
+sx.set_xlabel('mean-difference $p$,\n'
               'random three-descriptor subspace')
 sx.set_ylabel('draws')
 sx.legend(loc='upper left', frameon=False, fontsize=FS_LEG - 2,

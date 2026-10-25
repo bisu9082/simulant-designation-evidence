@@ -208,6 +208,32 @@ whether an ordering drawn from the GFN2 $\omega$ axis is stable, and it is not
 term alone. All twenty-eight calculations converged; values are in the deposited
 \texttt{outputs/dft\_omega.csv}.
 
+The same recomputation answers a second question, and we report the answer
+although it does not favour the analysis. The electronic space that carries the
+results of Section~\ref{res:permfull} has three coordinates, two of which are
+the frontier orbital energies this check has just recomputed. We rebuilt that
+space with the density-functional orbital energies in place of the GFN2 ones,
+left the dipole moment as GFN2 because we have no density-functional value for
+it, and repeated the matching rule of Section~\ref{M-res:match} and the exact
+permutation over all 680 designations. The control reproduces what the main text
+reports, one valid match of eleven and a one-sided $p$ of 0.275. With the
+density-functional orbital energies the same space returns four valid matches
+and 0.128. The four are sarin, soman and cyclosarin matched to DMMP and sulfur
+mustard matched to DPGME, which are the pairings the sensor literature asserts,
+where the single match under GFN2 was hydrogen cyanide to dichloromethane.
+
+Three things have to be said about that. The permutation test is still not
+significant at any conventional level, so this is not evidence that the
+incumbents are close to the agents; what changes is which compounds the space
+calls matched. The confound of the preceding paragraph applies in full and the
+dipole coordinate is still GFN2, so the comparison is one point estimate and not
+a bound on the method term. And the direction of the change runs against the
+analysis rather than for it: the electronic space was where the incumbents did
+worst, and the choice of electronic-structure method moves it. The analyst
+freedoms this paper is about therefore include one we did not enumerate when we
+set the comparison up. Values are in the deposited
+\texttt{outputs/dft\_electronic\_space.json}.
+
 We did not extend the check to the condensed Fukui index. A Mulliken population
 analysis on this basis returns a negative $f^{+}(\mathrm{P})$ for DMMP, which is
 an artefact of partitioning a diffuse basis rather than a chemical statement,
@@ -415,12 +441,12 @@ Accounting scheme & 35 cpd., & 35 cpd., & 28 cpd., & 35 cpd., \\
                   & (primary) & & (omits the five) & (pesticides in) \\
 \hline
 Smallest nominal $p$ (18 tests)      & 0.151 & 0.039 & 0.025 & \textbf{$<$0.001} \\
-Benjamini-Hochberg over 18           & 0.617 & 0.212 & 0.159 & \textbf{$<$0.001} \\
+Benjamini-Hochberg over 18           & 0.617 & 0.212 & 0.185 & \textbf{$<$0.001} \\
 Benjamini-Hochberg over 6, per space & 0.548 & 0.153 & 0.082 & \textbf{$<$0.001} \\
 Westfall-Young min-$P$ over 18       & 0.402 & 0.113 & 0.079 & \textbf{$<$0.001} \\
 $m_{\mathrm{eff}}$ of 18 (Li-Ji)     & 6.00  & 5.00  & 5.00  & 5.00 \\
 Bonferroni at $m_{\mathrm{eff}}$     & 0.907 & 0.196 & 0.125 & \textbf{$<$0.001} \\
-Statistic specified in advance (3 tests) & 0.386 & 0.092 & \textbf{0.042} & \textbf{0.015} \\
+Statistic specified in advance (3 tests) & 0.386 & 0.092 & \textbf{0.046} & \textbf{0.015} \\
 \hline
 \end{tabular}
 \end{table}
@@ -443,11 +469,13 @@ coordinates than the other, and we say so because the opposite is the natural
 suspicion and because an earlier draft of this paper entertained it.
 
 The second control is the informative one. We drew 2000 random three-descriptor
-subsets of the structural space and ran the full exact permutation test on each.
+subsets of the structural space and ran the full exact permutation test on each,
+taking the mean-difference statistic throughout, so that the draws and the
+observed value are the same quantity.
 On the twenty-eight-compound panel the median $p$ is 0.115, the 5th to 95th
 percentile range is 0.006 to 0.710, and 32.6\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
-36-dimensional value of 0.031 sits at the 22.7th percentile of that
+36-dimensional value of 0.031 sits at the 25.4th percentile of that
 distribution, and the electronic value of 0.275 at the 74.2nd. Both are ordinary
 draws. The three-principal-component value of 0.0029 sits at the 2.4th
 percentile, which is what the leading components of a space should do and is not
@@ -468,8 +496,8 @@ chosen.
 So the structural and electronic spaces do differ, and the difference is
 chemical rather than geometric; what the data do not support is that the
 difference says anything about the compounds that were designated. A value at
-the 28th percentile of the subspaces one could have chosen, in a family of
-eighteen tests whose smallest adjusted value is 0.159, on the smaller of two
+the 25th percentile of the subspaces one could have chosen, in a family of
+eighteen tests whose smallest adjusted value is 0.185, on the smaller of two
 defensible panels, is not an argument. Picking a space, a panel and a statistic
 fixes the answer, and the practice this paper examines has never written down
 which to pick.
@@ -814,19 +842,21 @@ anticipate, and we give the whole ranking rather than the comparison we set out
 to make. In the ultraviolet channel the agent nearest to DMMP is not sarin but
 tabun, at $+0.764$ against sarin's $+0.645$, with soman, VX and cyclosarin
 following at $-0.492$, $-0.702$ and $-0.721$. In reflectance sarin leads at
-$+0.569$ and tabun falls to $-0.112$. Tabun is not a match to DMMP under the
-descriptor criterion of Section~\ref{M-res:match}: its normalised distance is
-2.003,
-outside the threshold of 2. So the one measured channel in which the ordering is
-clearest puts at the top an agent the descriptor analysis excludes, and the
-agreement between the two channels on tabun is the worst of any agent in the set.
+$+0.569$ and tabun falls to $-0.112$. Tabun is a match to DMMP under the
+descriptor criterion of Section~\ref{M-res:match}, but the weakest of the four
+the criterion admits: its normalised distance is 1.989 against a threshold of 2,
+where sarin sits at 1.146. The two therefore do not disagree about whether tabun
+is matched. They disagree about the order. The measured channel in which the
+ordering is clearest puts tabun first, the descriptor table puts it last of the
+four, and the agreement between the two channels on tabun is the worst of any
+agent in the set.
 We report this as a disagreement between the descriptor table and the measurement
 and not as a correction to either, because two channels on one plate set cannot
 settle which is right.
 
-The descriptor analysis assigns GB, GD and GF to DMMP. The array places sarin
-first in one channel and tabun first in the other, and does not place GD or GF
-closer to DMMP than VX in either. A sensor chemistry calibrated on DMMP is
+The descriptor analysis assigns GB, GD, GF and GA to DMMP. The array places
+sarin first in one channel and tabun first in the other, and does not place GD
+or GF closer to DMMP than VX in either. A sensor chemistry calibrated on DMMP is
 therefore being shown something that behaves like one G agent at a time, not like
 the G series, and the descriptor match for the other two does not survive contact
 with the measured response.

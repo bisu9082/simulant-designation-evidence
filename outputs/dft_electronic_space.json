@@ -1,0 +1,160 @@
+{
+ "panel": "descriptor_cache_xtb.csv",
+ "cols": [
+  "dipole_moment_D",
+  "E_LUMO_eV",
+  "E_HOMO_eV"
+ ],
+ "threshold": 2.0,
+ "gfn2": {
+  "label": "GFN2",
+  "nn_median": 0.652195622360424,
+  "n_match": 1,
+  "observed_diff": 0.4043810763636831,
+  "p_one_sided": 0.275,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.473,
+    "match": false
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.54,
+    "match": false
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 3.428,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.696,
+    "match": false
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.449,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.407,
+    "match": true
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.488,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.247,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.644,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.384,
+    "match": false
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 4.046,
+    "match": false
+   }
+  ]
+ },
+ "b3lyp": {
+  "label": "B3LYP",
+  "nn_median": 0.6293876989258278,
+  "n_match": 4,
+  "observed_diff": 0.2307999266205523,
+  "p_one_sided": 0.12794117647058822,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.404,
+    "match": true
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.602,
+    "match": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 2.644,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "DPGME",
+    "d_norm": 1.064,
+    "match": true
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.677,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.605,
+    "match": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.447,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.012,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "dichloromethane",
+    "d_norm": 4.937,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.372,
+    "match": true
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 1.964,
+    "match": false
+   }
+  ]
+ },
+ "caveat": "쌍극자는 GFN2 유지. B3LYP 기하는 RDKit ETKDG+MMFF94 이고 GFN2 기하가 아니다. 차이에 방법과 기하가 함께 들어 있다."
+}
