@@ -1,0 +1,11 @@
+{
+ "xc": "b3lyp",
+ "basis": "def2-svpd",
+ "geometry": "RDKit ETKDG + MMFF94/UFF",
+ "seed": 49374,
+ "n_total": 28,
+ "n_converged": 28,
+ "note": "GFN2 기하를 재현할 수 없어 기하가 다르다. GFN2 와의 차이에는 방법과 기하가 함께 들어 있다.",
+ "omega_min": 1.4343675653602537,
+ "omega_max": 7.918421168409628
+}

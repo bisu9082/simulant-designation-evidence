@@ -264,6 +264,37 @@ SUPP_CASES = [
      'Thirty-five, incumbent three & 0/11',
      'Thirty-five, incumbent three & 2/11'),
 ]
+SUPP_CASES_DFT = [
+    # 2026-10-25 신설. DFT 대조 수치는 산출물(outputs/dft_vs_gfn2.csv)에 묶여
+    # 있다. 원고가 그 값에서 벗어나면 잡혀야 한다. 특히 omega 축의 '결론은
+    # 유지, 순서는 철회' 서술은 세 숫자(1.90, 2.08, 7)에 전부 걸려 있다.
+    ('DFT omega 상한 오기 (7.92 대 9.92)',
+     'range becomes 1.43 to 7.92~eV',
+     'range becomes 1.43 to 9.92~eV'),
+    ('GFN2 omega 하한 오기 (1.71 대 2.71)',
+     'they run from 1.71 to',
+     'they run from 2.71 to'),
+    ('DMMP 가 사린보다 높아지도록 뒤집음 (1.90 대 2.90)',
+     'DMMP at 1.90 against sarin at 2.08',
+     'DMMP at 2.90 against sarin at 2.08'),
+    ('사린 omega 오기 (2.08 대 2.80)',
+     'DMMP at 1.90 against sarin at 2.08',
+     'DMMP at 1.90 against sarin at 2.80'),
+    ('사린 상위 간섭물 수 오기 (seven 대 nine)',
+     'and seven of the fourteen interferents still score above sarin',
+     'and nine of the fourteen interferents still score above sarin'),
+    ('최저 작용제 VX 값 오기 (1.54 대 1.24)',
+     '(1.54), sulfur mustard (1.73)',
+     '(1.24), sulfur mustard (1.73)'),
+    ('omega 순위상관 오기 (0.628 대 0.828)',
+     'values is 0.628, against',
+     'values is 0.828, against'),
+    ('LUMO 순위상관 오기 (0.898 대 0.698)',
+     '0.898 for the underlying LUMO energies',
+     '0.698 for the underlying LUMO energies'),
+]
+
+SUPP_CASES += SUPP_CASES_DFT
 SUPP_CASES += SUPP_CASES_EXTRA
 
 
