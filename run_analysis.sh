@@ -61,6 +61,12 @@ run_strict() {
   done
 }
 
+# 서술자 재현 관문 (2026-10-25 신설). 3D 서술자가 코드에서 재생성되지 않으면
+# 그 아래 모든 거리가 배포 CSV 에만 존재하는 값이 된다. 여기서 막는다.
+if ! python3 build_descriptors.py --verify; then
+  echo "[중단] 서술자 재현 관문 미통과"; exit 1
+fi
+
 # 패널·순열 축
 run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
