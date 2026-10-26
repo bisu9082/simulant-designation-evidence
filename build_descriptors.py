@@ -76,6 +76,52 @@ def embed(m, seed=0xf00d, nmax=20):
     return mh, cids, ff
 
 
+D3_NAMES = ['RadiusOfGyration', 'Asphericity', 'Eccentricity',
+            'InertialShapeFactor', 'NPR1', 'NPR2', 'PMI1', 'PMI2', 'PMI3',
+            'SpherocityIndex']
+
+# 298.15 K 에서의 RT. MMFF/UFF 에너지가 kcal/mol 이므로 같은 단위를 쓴다.
+RT_KCAL = 0.5922
+
+
+def conf_energies(mh, ff):
+    if ff == 'MMFF94' and AllChem.MMFFHasAllMoleculeParams(mh):
+        props = AllChem.MMFFGetMoleculeProperties(mh)
+        return np.array([
+            AllChem.MMFFGetMoleculeForceField(mh, props, confId=c).CalcEnergy()
+            for c in range(mh.GetNumConformers())], float)
+    return np.array([
+        AllChem.UFFGetMoleculeForceField(mh, confId=c).CalcEnergy()
+        for c in range(mh.GetNumConformers())], float)
+
+
+def ensemble_3d(mh, ff):
+    """3D 서술자를 형태이성질체 앙상블의 Boltzmann 가중 평균으로 낸다.
+
+    2026-10-25 변경. 종전에는 best_conf() 로 MMFF 최저에너지 형태이성질체
+    하나를 골라 거기서 읽었다. 그 값은 ETKDG 시드에 의존하며, --verify 가
+    52개 수치열 중 11개를 재현 불가로 판정하는 원인이었다. 그중 9개가 본문
+    구조공간에 들어가고, 28종 패널의 네 번째 유효매칭(tabun)이 그 자유도
+    위에서 역치를 넘나들었다 (시드 6개 중 1개에서만 성립).
+
+    앙상블 평균은 단일 선택을 없애므로 시드 의존을 크게 줄인다. 완전히
+    없애지는 않는다. 앙상블 자체가 시드의 함수이기 때문이다. 남은 폭은
+    conformer_sensitivity.py 가 잰다.
+    """
+    e = conf_energies(mh, ff)
+    w = np.exp(-(e - e.min()) / RT_KCAL)
+    w = w / w.sum()
+    out = {}
+    for fn in D3_NAMES:
+        v = np.array([getattr(Descriptors3D, fn)(mh, confId=c)
+                      for c in range(mh.GetNumConformers())], float)
+        out[fn] = float((w * v).sum())
+    # 앙상블이 한 형태이성질체에 몰리면 평균이 단일 선택과 같아진다.
+    # 보고용으로 최대 가중치를 남긴다.
+    out['_w_max'] = float(w.max())
+    return out
+
+
 def best_conf(mh, ff):
     if ff == 'MMFF94' and AllChem.MMFFHasAllMoleculeParams(mh):
         props = AllChem.MMFFGetMoleculeProperties(mh)
@@ -122,12 +168,26 @@ def descriptors(name, smiles, klass='', series=''):
     mh, cids, ff = embed(m)
     d['conformer_forcefield'] = ff
     d['n_conformers'] = mh.GetNumConformers()
-    c = best_conf(mh, ff)
-    for fn in ['RadiusOfGyration', 'Asphericity', 'Eccentricity',
-               'InertialShapeFactor', 'NPR1', 'NPR2', 'PMI1', 'PMI2', 'PMI3',
-               'SpherocityIndex']:
-        d[fn] = getattr(Descriptors3D, fn)(mh, confId=c)
+    ens = ensemble_3d(mh, ff)
+    d['conformer_w_max'] = ens.pop('_w_max')
+    d.update(ens)
     return d
+
+
+def gate_verify():
+    """재현 검사를 실제 관문으로 쓴다 (2026-10-25).
+
+    종전에는 sys.exit(0 if not verify() else 0) 이라 어느 쪽이든 0 을
+    반환했다. 그래서 52열 중 11열이 재현되지 않는 상태로 파이프라인이
+    계속 돌았고, 그 열 9개가 본문의 모든 거리에 들어가 있었다.
+    """
+    bad = verify()
+    if bad:
+        print(f'\n[중단] 재현되지 않는 열 {len(bad)}개. 거리 계산에 들어가는 '
+              '열이 코드에서 재생성되지 않으면 분석을 신뢰할 수 없다.')
+        return 1
+    print('\n[gate] 전 수치열 재현. 통과.')
+    return 0
 
 
 def verify(ref_path='descriptor_cache.csv'):
@@ -159,7 +219,7 @@ if __name__ == '__main__':
     ap.add_argument('--out', default='')
     a = ap.parse_args()
     if a.verify:
-        sys.exit(0 if not verify() else 0)
+        sys.exit(gate_verify())
     if a.new:
         NEW = pd.read_csv(a.new)
         rows = [descriptors(r.compound_name, r.input_smiles,

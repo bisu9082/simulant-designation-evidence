@@ -262,6 +262,22 @@ def load_facts():
         'dist_rank_correlation_4d_vs_3d']
     f['omega_pc3_var'] = 100.0 * rb['omega_dependence']['panel28'][
         'pc3_cumulative_variance']
+    # 2026-10-25. Mantel 다중성 값이 등록돼 있지 않아, SI 가 한 절 안에서
+    # 0.112 와 '0.177 에서 0.124 로' 를 동시에 적고도 통과했다. 12셀은
+    # 산출물에서, 8셀(병합 제외 구판 가족)은 같은 p 에서 다시 계산한다.
+    _mc = rb['deltaE']['mantel']
+    f['mantel_bh12'] = float(rb['deltaE']['mantel_bh']['min_q'])
+
+    def _bh_min(ps):
+        _p = _np.asarray(sorted(ps), float)
+        _m = len(_p)
+        _q = _np.minimum.accumulate(
+            (_p * _m / _np.arange(1, _m + 1))[::-1])[::-1]
+        return float(min(_np.minimum(_q, 1.0)))
+
+    f['mantel_bh8'] = _bh_min([c['p_mantel'] for c in _mc
+                               if c['space'] != 'merged'])
+
     for m in rb['deltaE']['mantel']:
         if m['dataset'] == 'd2' and m['mode'] == 'uv' and \
                 m['space'] == 'structural':
@@ -293,6 +309,51 @@ def load_facts():
         _mp = json.load(open('outputs/mantel_power.json'))
         f['mde_rho_mantel'] = _mp['mde_rho_mantel']
         f['mantel_power_perm'] = _mp['n_perm']
+    # 2026-10-26. 다중성 표(tab:family) 28칸을 전부 등록한다. 종전에는 몇 칸만
+    # 걸려 있어 BH 0.185, meff 5.00, 사전지정 0.046 이 구판인 채 통과했다.
+    _fam = json.load(open('outputs/stat_supplement.json'))['family']
+    _wy = json.load(open('outputs/stat_supplement2.json'))['westfall_young']
+    _pf = json.load(open('outputs/pesticide_family.json'))
+    _cols = ['p35', 'p35lit', 'p28']
+    _keys = ['panel35_incumbent3', 'panel35_incumbent_plus_lit8',
+             'panel28_incumbent3']
+    for _lab, _k in (('minp', 'min_p'), ('bh18', 'bh_all_min_q'),
+                     ('bh6', 'bh_by_space_min_q'), ('meff', 'meff'),
+                     ('bonf', 'meff_adjusted_min_p'),
+                     ('pre', 'prespecified_bh_min_q')):
+        for _c, _kk in zip(_cols, _keys):
+            f[f'fam_{_lab}_{_c}'] = float(_fam[_kk][_k])
+        f[f'fam_{_lab}_pest'] = float(_pf[_k])
+    for _c, _kk in zip(_cols, _keys):
+        f[f'fam_wy_{_c}'] = float(_wy[_kk]['wy_adjusted_p'])
+    f['fam_wy_pest'] = float(_pf['westfall_young_adjusted_p'])
+
+    # 2026-10-26. 형태이성질체 민감도. 3D 서술자 9개가 모든 거리에 들어가므로
+    # 임베딩 시드에 대한 폭을 원고가 싣는다. 두 처리(앙상블/단일)를 모두 건다.
+    _cs = {}
+    for _m in ('ensemble', 'single'):
+        _fp = f'outputs/conformer_sensitivity_{_m}.json'
+        if not _os.path.exists(_fp):
+            continue
+        _d = json.load(open(_fp))
+        _tab = [r['panel28']['d_norm']['tabun (GA)'] for r in _d['runs']]
+        _nm = {r['panel28']['n_match'] for r in _d['runs']}
+        _n35 = {r['panel35']['n_match'] for r in _d['runs']}
+        _pp = [r['panel28']['perm_p_merged'] for r in _d['runs']]
+        _cs[_m] = dict(lo=min(_tab), hi=max(_tab), seeds=len(_d['runs']),
+                       nm=_nm, n35=_n35, plo=min(_pp), phi=max(_pp))
+    if 'ensemble' in _cs and 'single' in _cs:
+        _e, _s1 = _cs['ensemble'], _cs['single']
+        if _e['nm'] != {4} or _s1['nm'] != {4} or _e['n35'] != {0} or _s1['n35'] != {0}:
+            raise SystemExit('[verify] 중단: 형태이성질체 민감도에서 매칭 수가 '
+                             '흔들린다. 원고의 서술을 먼저 고쳐야 한다.')
+        f['conf_seeds'] = _e['seeds']
+        f['conf_ens_lo'] = _e['lo']
+        f['conf_ens_hi'] = _e['hi']
+        f['conf_sgl_lo'] = _s1['lo']
+        f['conf_sgl_hi'] = _s1['hi']
+        f['conf_p_hi'] = _s1['phi']
+
     # 2026-10-25. 전자공간을 B3LYP 궤도에너지로 갈아끼운 대조. 심사
     # 시늄레이션이 제기하고 재현으로 확인된 축이다. 기준 재현(GFN2)이 정본
     # 0.275 와 1/11 을 내는 것까지 같은 파일에 들어 있다.
@@ -494,6 +555,7 @@ def load_facts():
 
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
+    f['pct_struct_caption'] = pc['struct_full']
     f['pct_elec'] = pc['electronic']
     f['pct_pc3'] = pc['struct_pc3']
 
@@ -580,13 +642,16 @@ def load_facts():
     # 2026-10-25. 종전에는 13 이 리터럴이었다. 재분석으로 28종이 36좌표가 된
     # 뒤에도 그 리터럴이 남아 본문의 '두 패널에서 같다'는 서술을 받쳐 주었다.
     # 두 패널을 따로 산출물에서 읽는다.
+    # 2026-10-26. 종전에는 35종 값을 experiment_summary_p35all.json 에서
+    # 읽었다. 그 파일은 파이프라인이 만들지 않는 고아였고 전자공간에 omega 가
+    # 아직 들어 있었다. 두 패널 모두 rollback_c.json 의 panels 에서 읽는다.
     _c28 = json.load(open('outputs/experiment_summary.json'))['conditions'][0]
-    _c35 = json.load(open('outputs/experiment_summary_p35all.json'))['conditions'][0]
-    f['struct_candidates'] = int(_c35['n_in'])
-    f['struct_kept_35'] = int(_c35['n_kept'])
-    f['struct_kept_28'] = int(_c28['n_kept'])
-    f['struct_removed'] = int(_c35['n_in'] - _c35['n_kept'])
-    f['struct_removed_28'] = int(_c28['n_in'] - _c28['n_kept'])
+    _pan = rb['panels']
+    f['struct_candidates'] = int(_c28['n_in'])
+    f['struct_kept_35'] = int(_pan['panel35_designated3']['structural']['n_descriptors'])
+    f['struct_kept_28'] = int(_pan['panel28_designated3']['structural']['n_descriptors'])
+    f['struct_removed'] = f['struct_candidates'] - f['struct_kept_35']
+    f['struct_removed_28'] = f['struct_candidates'] - f['struct_kept_28']
     if f['struct_removed'] == f['struct_removed_28']:
         raise SystemExit('[verify] 중단: 두 패널의 서술자 감소가 같아졌다. '
                          '본문 서술과 검사 설계를 함께 손봐야 한다.')
@@ -765,6 +830,36 @@ CHECKS = [
     ('mantel_d2uv_struct',
      [r'that same set and channel \(\$\\rho = [-+][\d.]+\$, Mantel\s*\n?'
       r'\$p = ([\d.]+)\$'], 0.0005),
+    ('fam_minp_p35', [r'Smallest nominal \$p\$ \(18 tests\)\s*& ([\d.]+) &'], 0.0006),
+    ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bh18_p35', [r'Benjamini-Hochberg over 18\s*& ([\d.]+) &'], 0.0006),
+    ('fam_bh18_p35lit', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bh18_p28', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bh6_p35', [r'Benjamini-Hochberg over 6, per space & ([\d.]+) &'], 0.0006),
+    ('fam_bh6_p35lit', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bh6_p28', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_wy_p35', [r'Westfall-Young min-\$P\$ over 18\s*& ([\d.]+) &'], 0.0006),
+    ('fam_wy_p35lit', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_wy_p28', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_meff_p35', [r'of 18 \(Li-Ji\)\s*& ([\d.]+)\s*&'], 0.006),
+    ('fam_meff_p35lit', [r'of 18 \(Li-Ji\)\s*& [\d.]+\s*& ([\d.]+)\s*&'], 0.006),
+    ('fam_meff_p28', [r'of 18 \(Li-Ji\)\s*& [\d.]+\s*& [\d.]+\s*& ([\d.]+)\s*&'], 0.006),
+    ('fam_bonf_p35', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& ([\d.]+) &'], 0.0006),
+    ('fam_bonf_p35lit', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bonf_p28', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_pre_p35', [r'Statistic specified in advance \(3 tests\) & ([\d.]+) &'], 0.0006),
+    ('fam_pre_p35lit', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_pre_p28', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & \\textbf\{([\d.]+)\}'], 0.0006),
+    ('conf_ens_lo', [r'sits between (\d+\.\d+) and \d+\.\d+ across the ensemble'], 0.0006),
+    ('conf_ens_hi', [r'sits between \d+\.\d+ and (\d+\.\d+) across the ensemble'], 0.0006),
+    ('conf_sgl_lo', [r'between (\d+\.\d+) and \d+\.\d+ across the\s*\n?single-conformer'], 0.0006),
+    ('conf_sgl_hi', [r'between \d+\.\d+ and (\d+\.\d+) across the\s*\n?single-conformer'], 0.0006),
+    ('conf_p_hi', [r'0\.025 and (\d+\.\d+)\s*\n?in the single-conformer runs'], 0.0006),
+    ('conf_seeds', [r'under (\w+) seeds and rebuilding'], 0),
+    ('mantel_bh12', [r'smallest adjusted value is\s*(\d+\.\d+) and no cell',
+                     r'adjusted value from \d+\.\d+ to\s*(\d+\.\d+)\.'], 0.0006),
+    ('mantel_bh8', [r'adjusted value from (\d+\.\d+) to'], 0.0006),
     ('dft_es_gfn2_p', [r'one-sided \$p\$ of (\d+\.\d+)',
                        r'moves it from (\d+\.\d+) to \d+\.\d+'], 0.006),
     ('dft_es_gfn2_match', [r'(\w+) valid match of eleven'], 0),
@@ -827,6 +922,7 @@ CHECKS = [
     ('p_struct_fig', [r'A_rdkit[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_elec_fig', [r'B_electronic[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_merged_fig', [r'C_merged[^\n]*exact p = ([\d.]+)'], 0.0005),
+    ('pct_struct_caption', [r'is the (\d+)th percentile of those draws'], 1.0),
     ('pct_struct', [r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
     ('pct_pc3', [r'three-principal-component value of [\d.]+ sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),
@@ -963,8 +1059,8 @@ CHECKS = [
     ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
     ('pf_prespec', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & '
                     r'\\textbf\{[\d.]+\} & \\textbf\{([\d.]+)\}'], 0.0005),
-    ('struct_removed', [r'remove (\d+) of the 51 on the primary panel'], 0),
-    ('struct_removed_28', [r'of the 51 on the primary panel and\s*(\d+) on the'], 0),
+    ('struct_removed', [r'remove (\d+) of the 52 on the primary panel'], 0),
+    ('struct_removed_28', [r'of the 52 on the primary panel and\s*(\d+) on the'], 0),
     ('struct_kept_35', [r'leaving (\d+) and \d+ structural coordinates'], 0),
     ('struct_kept_28', [r'leaving \d+ and (\d+) structural coordinates'], 0),
     ('struct_candidates', [r'removes \d+ of the (\d+)',
@@ -995,23 +1091,40 @@ WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six':
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
-    ('28종 구조공간 명목 p (정본 0.031)', [r'0\.028\b'], [r'earlier version', r'superseded']),
-    ('부분공간 백분위 (정본 25.4)',
-     [r'25\.8th percentile', r'\b26th percentile', r'\b28th percentile',
-      r'22\.7th percentile', r'\b23rd percentile'], []),
+    ('28종 구조공간 명목 p, 구판 (정본 0.027)',
+     [r'structural[\s\S]{0,60}0\.028\b', r'0\.028[\s\S]{0,60}percentile'],
+     [r'earlier version', r'superseded', r'single-conformer']),
+    ('부분공간 백분위 (정본 25.9)',
+     [r'25\.8th percentile', r'25\.4th percentile', r'\b28th percentile',
+      r'22\.7th percentile', r'\b23rd percentile', r'\b25th percentile'], []),
+    ('28종 구조공간 명목 p, 앙상블 이전 (정본 0.027)', [r'0\.031'], []),
+    ('28종 구조좌표 수, 앙상블 이전 (정본 37)',
+     [r'36-dimensional', r'Weighting the 36 structural',
+      r'leaving \d+ and 36 structural'], []),
+    ('전자공간 백분위 (정본 76.9)', [r'74\.2nd'], []),
+    ('Li-Ji 유효검정수 (정본 6.00)', [r'5\.00 effective tests'], []),
     ('도판2 캡션의 통계량 서술 (실제로는 평균차 하나)',
      [r'Smallest \$p\$ over\s+the six statistics for 2000'], []),
-    ('부분공간 0.05 미만 비율 (정본 32.6)',
-     [r'36\.3\\?%', r'36\\% of them fall below', r'17\\% after whitening'], []),
+    ('부분공간 0.05 미만 비율 (정본 36.0 / 백색화 16.5)',
+     [r'36\.3\\?%', r'32\.6\\?%', r'33\\% of them fall below',
+      r'19\\% after whitening', r'18\.9\\?%'], []),
     ('사전지정 BH q (정본 0.046)', [r'0\.042\b'], []),
     ('28종 BH over 18 (정본 0.185)',
      [r'adjusted value is 0\.159', r'eighteen tests is 0\.159',
       r'over 18\s+& [\d.]+ & [\d.]+ & 0\.159'], []),
-    ('28종 Westfall-Young (정본 0.079)', [r'approximating it, gives 0\.075'], []),
+    ('28종 Westfall-Young (정본 0.079)',
+     [r'approximating it, gives 0\.075',
+      r'Westfall[\s\S]{0,160}0\.075', r'0\.075[\s\S]{0,160}Westfall'], []),
     ('28종 매치 수 (정본 4)',
-     [r'restores three matches', r'counted three matches'],
+     [r'restores three matches', r'counted three matches',
+      r'three agents are matched', r'supplies all three'],
      [r'earlier version', r'superseded', r'descriptor set']),
-    ('28종 구조공간 유의 통계량 수 (정본 1)', [r'two of six statistics in the structural'], []),
+    ('Mantel 다중성 (정본 12셀 0.112 / 8셀 0.149)',
+     [r'0\.177', r'adjusted value from [\s\S]{0,30}to\s*0\.124'], []),
+    ('B3LYP 매칭 4건을 전부 문헌 주장 짝이라고 서술',
+     [r'the four are the pairings the sensor',
+      r'to DPGME, which are the pairings'], []),
+    ('28종 구조공간 유의 통계량 수 (정본 2)', [r'one of six statistics in the structural'], []),
     ('28종 구조좌표 수 (정본 36)',
      [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),
     ('tabun 정규화거리 (정본 1.989)', [r'2\.003'],
