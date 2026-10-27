@@ -369,10 +369,54 @@ SUPP_CASES_CONF = [
      '7.00 effective tests of eighteen'),
 ]
 
+SUPP_CASES_DIPOLE = [
+    # 2026-10-27 신설. 쌍극자까지 B3LYP 로 바꾼 3좌표 배치와 병합공간 대조.
+    # 종전 원고는 쌍극자를 GFN2 로 남긴 채 '어떤 통상 수준에서도 유의하지
+    # 않다'고 적었고, 그 문장은 세 좌표를 다 바꾸면 거짓이 된다. 이 숫자
+    # 다섯 개가 그 교정을 떠받친다.
+    ('3좌표 B3LYP p 오기 (0.0368 대 0.1368)',
+     'Replacing all three gives\nfive valid matches and 0.0368',
+     'Replacing all three gives\nfive valid matches and 0.1368'),
+    ('3좌표 B3LYP 매칭 수 오기 (five 대 four)',
+     'Replacing all three gives\nfive valid matches',
+     'Replacing all three gives\nfour valid matches'),
+    ('비유의 주장 복원 (정본 p=0.0368)',
+     'return 0.0368. We do not promote',
+     'return 0.0368. The permutation test is still not\nsignificant at any '
+     'conventional level. We do not promote'),
+    ('병합공간 B3LYP p 오기 (0.0221 대 0.1221)',
+     'a one-sided $p$ of 0.0221, against four and',
+     'a one-sided $p$ of 0.1221, against four and'),
+    ('병합공간 B3LYP 매칭 수 오기 (three 대 five)',
+     'analysis and returns three valid matches and\na one-sided',
+     'analysis and returns five valid matches and\na one-sided'),
+    ('병합공간 GFN2 대조값 오기 (0.0250 대 0.0350)',
+     'against four and 0.0250 for the GFN2 control',
+     'against four and 0.0350 for the GFN2 control'),
+    ('5건 전부 기록 지지 짝이라고 서술 (정본 4/5)',
+     'Four of those five are sarin',
+     'The five are pairings the designation record supports. Those five '
+     'are sarin'),
+]
+
 CASES += SUPP_CASES_CONF
 CASES += SUPP_CASES_STALE
+CASES += [
+    # 2026-10-27. 본문도 같은 세 숫자를 싣는다. SI 만 검사하면 본문이 조용히
+    # 구판으로 남는 경로가 열린다. 이번 세션에 네 번 겪은 실패 양상이다.
+    ('본문 3좌표 B3LYP p 오기 (0.0368 대 0.128)',
+     'it from 0.275 to 0.0368 and from one valid match to five',
+     'it from 0.275 to 0.128 and from one valid match to five'),
+    ('본문 3좌표 B3LYP 매칭 수 오기 (five 대 four)',
+     'it from 0.275 to 0.0368 and from one valid match to five',
+     'it from 0.275 to 0.0368 and from one valid match to four'),
+    ('본문 병합공간 값 오기 (0.0221 대 0.0321)',
+     'rebuilt the same way, holds\nat 0.0221',
+     'rebuilt the same way, holds\nat 0.0321'),
+]
 SUPP_CASES += SUPP_CASES_DFT
 SUPP_CASES += SUPP_CASES_EXTRA
+SUPP_CASES += SUPP_CASES_DIPOLE
 
 
 def run():

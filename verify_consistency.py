@@ -387,6 +387,23 @@ def load_facts():
         f['dft_es_gfn2_match'] = int(_es['gfn2']['n_match'])
         f['dft_es_b3lyp_p'] = float(_es['b3lyp']['p_one_sided'])
         f['dft_es_b3lyp_match'] = int(_es['b3lyp']['n_match'])
+        # 2026-10-27. 쌍극자까지 B3LYP 로 바꾼 3좌표 배치. 종전에는 쌍극자를
+        # GFN2 로 남겨 두고 "어떤 통상 수준에서도 유의하지 않다"고 적었는데,
+        # mf.dip_moment() 는 이미 수렴한 SCF 에서 공짜로 나오므로 남길 이유가
+        # 없었다. 세 좌표 전부 바꾸면 p = 0.0368 이고 그 서술은 거짓이다.
+        f['dft_es_full_p'] = float(_es['b3lyp_full']['p_one_sided'])
+        f['dft_es_full_match'] = int(_es['b3lyp_full']['n_match'])
+        # 병합공간 대조. GFN2 쪽이 정본(39좌표, 4/11, 0.0250)을 재현하는 것이
+        # 이 비교의 관문이다.
+        f['dft_mg_gfn2_p'] = float(_es['merged_gfn2']['p_one_sided'])
+        f['dft_mg_b3lyp_p'] = float(_es['merged_b3lyp']['p_one_sided'])
+        f['dft_mg_b3lyp_match'] = int(_es['merged_b3lyp']['n_match'])
+        if _es['merged_gfn2']['n_coords'] != 39 or \
+                _es['merged_gfn2']['n_match'] != 4:
+            raise SystemExit(
+                '[중단] 병합공간 GFN2 대조가 정본(39좌표, 4/11)을 재현하지 '
+                f"못한다: {_es['merged_gfn2']['n_coords']}좌표, "
+                f"{_es['merged_gfn2']['n_match']}/11")
 
     # 2026-10-25. 병리지수 제거 대조. 구판은 omega 가 아직 든 4좌표 전자공간에서
     # 돌아간 산출물이었고 본문은 그 값을 '모든 분석을 반복했다'며 인용했다.
@@ -902,13 +919,31 @@ CHECKS = [
     ('mantel_bh12', [r'smallest adjusted value is\s*(\d+\.\d+) and no cell',
                      r'adjusted value from \d+\.\d+ to\s*(\d+\.\d+)\.'], 0.0006),
     ('mantel_bh8', [r'adjusted value from (\d+\.\d+) to'], 0.0006),
-    ('dft_es_gfn2_p', [r'one-sided \$p\$ of (\d+\.\d+)',
-                       r'moves it from (\d+\.\d+) to \d+\.\d+'], 0.006),
+    # 2026-10-27. 종전 패턴은 'one-sided $p$ of (\d+\.\d+)' 였다. 병합공간
+    # 대조 문장이 같은 어구를 쓰므로 0.0221 을 GFN2 값으로 읽었다. 앞 절을
+    # 붙여 한 문장으로 묶는다.
+    ('dft_es_gfn2_p',
+     [r'one valid match of eleven and\s+a one-sided \$p\$ of (\d+\.\d+)',
+      r'moves\s+it from (\d+\.\d+) to \d+\.\d+'], 0.006),
     ('dft_es_gfn2_match', [r'(\w+) valid match of eleven'], 0),
-    ('dft_es_b3lyp_p', [r'returns four valid matches\s*\n?and (\d+\.\d+)',
-                        r'moves it from \d+\.\d+ to (\d+\.\d+)'], 0.006),
-    ('dft_es_b3lyp_match', [r'returns (\w+) valid matches',
-                            r'from one valid match to (\w+)'], 0),
+    ('dft_es_b3lyp_p',
+     [r'dipole at GFN2 gives four valid matches and (\d+\.\d+)'], 0.006),
+    ('dft_es_b3lyp_match',
+     [r'dipole at GFN2 gives (\w+) valid matches'], 0),
+    ('dft_es_full_p',
+     [r'Replacing all three gives\s+five valid matches and (\d+\.\d+)',
+      r'moves\s+it from \d+\.\d+ to (\d+\.\d+)',
+      r'return (\d+\.\d+)\.\s+We do not promote'], 0.0006),
+    ('dft_es_full_match',
+     [r'Replacing all three gives\s+(\w+) valid matches',
+      r'from one valid match to (\w+)'], 0),
+    ('dft_mg_b3lyp_p',
+     [r'a one-sided \$p\$ of (\d+\.\d+), against four and',
+      r'holds\s+at (\d+\.\d+)'], 0.0006),
+    ('dft_mg_b3lyp_match',
+     [r'analysis and returns (\w+) valid matches and\s+a one-sided'], 0),
+    ('dft_mg_gfn2_p',
+     [r'against four and (\d+\.\d+) for the GFN2 control'], 0.0006),
     ('nopatho_struct_p', [r'to three decimal places \((\d+\.\d+),'], 0.006),
     ('nopatho_elec_p', [r'three decimal places \(\d+\.\d+, (\d+\.\d+) and'], 0.006),
     ('nopatho_merged_p', [r'three decimal places \(\d+\.\d+, \d+\.\d+ and (\d+\.\d+)\)'], 0.006),
@@ -1171,6 +1206,15 @@ SUPERSEDED = [
     ('B3LYP 매칭 4건을 전부 문헌 주장 짝이라고 서술',
      [r'the four are the pairings the sensor',
       r'to DPGME, which are the pairings'], []),
+    # 2026-10-27. 쌍극자를 GFN2 로 남겼을 때의 비유의 서술. 세 좌표 전부
+    # B3LYP 이면 p = 0.0368 이므로 이 문장은 데이터와 반대다.
+    ('B3LYP 전자공간 비유의 주장 (정본 p=0.0368)',
+     [r'permutation test is still not\s+significant at any conventional',
+      r'not significant at any conventional level',
+      r'not evidence that the\s+incumbents are close to the agents'], []),
+    ('B3LYP 3좌표 매칭 5건을 전부 기록 지지 짝이라고 서술 (정본 4/5)',
+     [r'[Tt]he five are pairings the designation',
+      r'all five are pairings', r'five of them pairings the designation'], []),
     ('28종 구조공간 유의 통계량 수 (정본 2)', [r'one of six statistics in the structural'], []),
     ('28종 구조좌표 수 (정본 36)',
      [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),

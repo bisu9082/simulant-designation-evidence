@@ -68,6 +68,19 @@ def frontier(mf):
     return h, l, mu, eta, (mu * mu / (2 * eta) if eta > 0 else float('nan'))
 
 
+def dipole_D(mf):
+    """쌍극자 크기 (Debye). 2026-10-27 추가.
+
+    종전에는 궤도에너지만 꺼내고 쌍극자는 GFN2 값을 그대로 썼다. 그런데
+    결론을 나르는 3좌표 전자공간의 세 번째 좌표가 쌍극자다. 수렴한 SCF
+    에서 한 줄로 나오므로 추가 비용이 없다. pyscf 의 dip_moment() 는
+    Debye 단위의 3성분 벡터를 돌려준다.
+    """
+    v = mf.dip_moment(unit='Debye', verbose=0)
+    v = np.asarray(v, float)
+    return float(np.linalg.norm(v)), [float(x) for x in v]
+
+
 def mulliken_on(mf, mol, idx):
     """Mulliken 전하. f+ 를 쓰기 위한 것이므로 규약을 명시해 둔다."""
     pop, chg = mf.mulliken_pop(verbose=0)
@@ -80,6 +93,8 @@ def main():
     ap.add_argument('--fukui', action='store_true',
                     help='인 함유 화합물에 대해 N+1 계산으로 f+(P) 도 낸다')
     ap.add_argument('--limit', type=int, default=0)
+    ap.add_argument('--out', default='outputs/dft_omega',
+                    help='출력 접두사. 정본을 덮지 않고 재현 대조하려면 바꾼다')
     a = ap.parse_args()
 
     df = pd.read_csv(a.panel)
@@ -100,9 +115,12 @@ def main():
             if not mf.converged:
                 raise RuntimeError('SCF 미수렴')
             h, l, mu, eta, om = frontier(mf)
+            dmag, dvec = dipole_D(mf)
             rec = dict(name=name, klass=r['compound_class'], n_atoms=mol.natm,
                        forcefield=ff, homo_eV=h, lumo_eV=l, mu_eV=mu,
-                       eta_eV=eta, omega_eV=om, converged=True)
+                       eta_eV=eta, omega_eV=om, dipole_D=dmag,
+                       dipole_x_D=dvec[0], dipole_y_D=dvec[1],
+                       dipole_z_D=dvec[2], converged=True)
             if a.fukui and pidx:
                 qN = mulliken_on(mf, mol, pidx[0])
                 an = gto.M(atom=at, basis=BASIS, charge=-1, spin=1, verbose=0)
@@ -120,7 +138,7 @@ def main():
                 extra = f"  f+(P) {rec['f_plus_P_mulliken']:+.4f}"
             print(f'  [{i:2d}/{len(rows)}] {name:26s} {ff:6s} n={mol.natm:3d} '
                   f'{time.time()-t0:6.1f}s  HOMO {h:8.3f} LUMO {l:8.3f} '
-                  f'omega {om:7.3f}{extra}', flush=True)
+                  f'omega {om:7.3f} mu {dmag:6.3f}D{extra}', flush=True)
         except Exception as e:
             out.append(dict(name=name, klass=r['compound_class'],
                             converged=False, error=f'{type(e).__name__}: {e}'))
@@ -128,7 +146,7 @@ def main():
                   flush=True)
 
     d = pd.DataFrame(out)
-    d.to_csv('outputs/dft_omega.csv', index=False)
+    d.to_csv(f'{a.out}.csv', index=False)
     ok = d[d.converged == True] if 'converged' in d else d
     meta = dict(xc=XC, basis=BASIS, geometry='RDKit ETKDG + MMFF94/UFF',
                 seed=SEED, n_total=len(d), n_converged=int(len(ok)),
@@ -136,10 +154,10 @@ def main():
                       '방법과 기하가 함께 들어 있다.'),
                 omega_min=float(ok.omega_eV.min()) if len(ok) else None,
                 omega_max=float(ok.omega_eV.max()) if len(ok) else None)
-    json.dump(meta, open('outputs/dft_omega.json', 'w'), indent=1,
+    json.dump(meta, open(f'{a.out}.json', 'w'), indent=1,
               ensure_ascii=False)
     print(f'\n[dft] 완료 {len(ok)}/{len(d)}  총 {time.time()-t_all:.0f}s')
-    print('[done] outputs/dft_omega.csv, outputs/dft_omega.json')
+    print(f'[done] {a.out}.csv, {a.out}.json')
     return 0
 
 
