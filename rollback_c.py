@@ -22,6 +22,8 @@ GATE 8 3차에서 4인 중 3인이 치명으로 지목한 두 지점을 분석 �
 import itertools
 import json
 
+from itertools import permutations as _permutations
+
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -258,14 +260,18 @@ def deltaE_corrected():
                 d = np.array([M[i, j] for i, j in pr])
                 r = float(stats.spearmanr(d, dis).statistic)
                 # Mantel: 화합물 라벨을 순열한다. 쌍을 순열하지 않는다.
+                # 2026-10-27. 종전에는 1만회 표집에 (cnt+1)/(N+1) 이었는데
+                # 원고는 "all 720 relabellings" 라고 적고 있었다. 6종이면
+                # 6! = 720 이라 전수가 표집보다 싸다. 전수로 바꿔 원고의
+                # 서술과 일치시킨다. mantel_power.py 는 이미 전수였다.
                 cnt = 0
-                for _ in range(N_MANTEL):
-                    pm = rng.permutation(k)
+                perms = list(_permutations(range(k)))
+                for pm in perms:
                     dp = np.array([M[pm[i], pm[j]] for i, j in pr])
                     rp = stats.spearmanr(dp, dis).statistic
                     if rp == rp and abs(rp) >= abs(r):
                         cnt += 1
-                pm_ = (cnt + 1) / (N_MANTEL + 1)
+                pm_ = cnt / len(perms)
                 # 종전(쌍 독립 가정) p 를 나란히 둔다
                 p_naive = float(stats.spearmanr(d, dis).pvalue)
                 mantel.append(dict(dataset=tag, mode=mode, space=sp,
@@ -325,7 +331,7 @@ def dmmp_full_ranking():
 
 
 if __name__ == '__main__':
-    res = dict(seed=SEED, n_mantel=N_MANTEL, n_random_subsets=N_RANDSUB,
+    res = dict(seed=SEED, n_mantel=720, n_random_subsets=N_RANDSUB,
                omega_excluded_from_distance=OMEGA,
                electronic_coordinates=ELEC3)
     res['omega_dependence'] = omega_dependence()

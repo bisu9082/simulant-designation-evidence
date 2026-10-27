@@ -394,7 +394,7 @@ E_{\mathrm{LUMO}})/2$ and $\eta = (E_{\mathrm{LUMO}} - E_{\mathrm{HOMO}})/2$
 \cite{parr1999}, is an exact function of the two orbital energies that accompany
 it. We confirmed this numerically: across the primary panel
 $|\omega - \mu^{2}/2\eta|$ reaches at most
-$1.3\times10^{-5}$~eV, and $3.6\times10^{-15}$~eV on the
+$1.3\times10^{-5}$~eV, and $7.1\times10^{-15}$~eV on the
 twenty-eight-compound panel. The correlation filter
 described below does not remove it, because $r(E_{\mathrm{LUMO}}, \omega) =
 -0.899$ falls below the $|r|>0.95$ threshold; a filter built on linear
@@ -453,8 +453,8 @@ reported $p$ is therefore one-sided, the fraction of designations whose mean
 $d(\text{nearest simulant}) - d(\text{nearest interferent})$ is at least as
 negative as the actual one's. The choice is consequential and we give all three
 conventions: scored two-sided as distance from the null mean the same statistic
-gives 0.029, 0.482 and 0.025 for the structural, electronic and merged spaces,
-and at twice the smaller tail 0.056, 0.550 and 0.050, so whether the structural
+gives 0.035, 0.482 and 0.028 for the structural, electronic and merged spaces,
+and at twice the smaller tail 0.053, 0.550 and 0.050, so whether the structural
 value sits inside a conventional threshold depends on a choice a reader may make
 differently. This
 is the first of the analyst choices catalogued in Section~\ref{res:panels} and
@@ -463,7 +463,7 @@ it being directional.
 
 \subsection{Match criterion}
 \label{meth:match}
-Nearest-neighbour rank alone is not sufficient: in the 39-dimensional merged
+Nearest-neighbour rank alone is not sufficient: in the 40-dimensional merged
 space of the twenty-eight-compound panel a ``nearest'' simulant at a distance of
 11.8 is not a match. We therefore
 normalised each distance by the median nearest-neighbour distance of the same
@@ -484,7 +484,7 @@ in Section~\ref{res:match}, including the one setting at which it changes.
 The conclusions of Section~\ref{res:panels} turn on differences that are small
 in absolute terms, 0.12 typical nearest-neighbour separations between DMMP and
 diisopropyl fluorophosphate at sarin, and a reader is entitled to ask how much
-of that the descriptor choice carries. We resampled the 41 merged-space
+of that the descriptor choice carries. We resampled the 42 merged-space
 descriptors with replacement 1000 times (seed \texttt{0xC0DE}), restandardised,
 recomputed the distance matrix and the median nearest-neighbour separation
 within each replicate, and recounted the matched agents. Resampling features
@@ -743,7 +743,7 @@ they do not quite share a space. Standardisation and the normalising separation
 are recomputed on each panel, and the filters admit different columns on
 each, \texttt{kappa1} on the twenty-eight-compound panel against three
 phosphorus counts on the primary one, so the structural coordinates are neither
-the same set nor the same number, thirty-six against thirty-eight.
+the same set nor the same number, thirty-seven against thirty-nine.
 Distances across the two are therefore not directly comparable, and the
 comparison we rely on is made within the primary panel, where the compounds,
 the columns and the standardisation are fixed and only the labels move. Held on
@@ -756,7 +756,7 @@ fluorophosphate is present, at 1.06, 0.99 and 1.11 from the same three agents,
 and the match criterion requires a simulant to be nearer than every compound not
 designated one. The same holds across the panel, with 2-chloroethyl ethyl
 sulfide at 0.57 from sulfur mustard where dichloromethane stands at 1.67, and
-diethyl cyanophosphonate at 1.80 from tabun where DMMP stands at 2.58.
+diethyl cyanophosphonate at 1.77 from tabun where DMMP stands at 2.52.
 Admitting the five as simulants gives five matched agents of eleven, against
 four on the twenty-eight-compound panel and zero on the primary one. The zero
 does not depend on the threshold: no incumbent simulant is the
@@ -764,7 +764,7 @@ nearest non-agent compound to any of the eleven agents, so the count stays at
 zero however far the threshold is relaxed.
 
 That count is sensitive to the descriptors, and the honest statement of it is
-the interval rather than the point. Resampling the 41 merged-space descriptors
+the interval rather than the point. Resampling the 42 merged-space descriptors
 with replacement (Section~\ref{meth:dboot}) gives the incumbent three a median
 of zero matched agents with a 2.5th to 97.5th percentile range of zero to
 three, and exactly zero
@@ -784,9 +784,13 @@ count departs from a null built to resemble it: the three at $p=0.479$ over all
 unconditionally. We report the lower tail for the three because the observed
 count is zero, which is the floor; the upper tail there is 1.000 by arithmetic
 and says nothing, and an earlier version of this paper quoted it as though it
-did. What the resampling adds is that the
+did. The lower tail carries its own limit, and it belongs here rather than in a
+footnote: because zero is the smallest count attainable, $p=0.479$ is the
+smallest lower-tail value this comparison can ever return. It does not report a
+result that failed to reach significance. It reports a comparison that cannot
+reach significance at any conventional level, whatever the data. What the resampling adds is that the
 difference between the counts, unadjusted for size, is positive in 1000 of 1000 replicates, median
-four, interval one to six (Figure~\ref{fig:main}b). The per-agent reliabilities
+four, interval one to five (Figure~\ref{fig:main}b). The per-agent reliabilities
 in the same replicates separate the firm results from the marginal ones. Sulfur
 mustard is matched by 2-chloroethyl ethyl sulfide in every replicate and tabun by
 diethyl cyanophosphonate in 52.3\%, while under the incumbent set alone sarin
@@ -803,8 +807,8 @@ carrying 70.4\%. The primary panel behaves the same way, at 35.4\% and 70.3\%.
 Merging the two blocks returns a size axis at lower cumulative variance over the
 first two components, 45.8\% on the smaller panel and 45.5\% on the primary one,
 for a dimensional rather than a chemical reason: at equal
-per-descriptor weighting the structural descriptors, thirty-six on the smaller
-panel and thirty-eight on the primary one, outvote three electronic ones.
+per-descriptor weighting the structural descriptors, thirty-seven on the smaller
+panel and thirty-nine on the primary one, outvote three electronic ones.
 
 Every exact permutation test we can run, across four panel and designation
 configurations, three spaces and six statistics, is in Supplementary
@@ -822,14 +826,14 @@ in the merged space.
 
 Correcting for the number of times we looked removes almost all of it, and the
 exception is instructive. On the primary panel the question does not arise,
-since the smallest nominal value is already 0.151 under the per-descriptor
+since the smallest nominal value is already 0.156 under the per-descriptor
 standardisation used throughout. The five accounting schemes of Supplementary
 Section~\ref{S-meth:multiplicity}, applied in Supplementary
 Table~\ref{S-tab:family}, matter only for the twenty-eight-compound panel. There the eighteen-test family
 gives a smallest adjusted value of 0.165, correcting the six statistics within
-each space gives 0.082, and the Westfall-Young min-$P$ procedure, which uses the
+each space gives 0.074, and the Westfall-Young min-$P$ procedure, which uses the
 shared permutations and so accounts for the dependence between the tests exactly
-rather than approximating it, gives 0.079. That is the closest any correction
+rather than approximating it, gives 0.078. That is the closest any correction
 brings the panel to the conventional threshold without crossing it. The fifth
 scheme behaves differently. Had the mean difference been specified in advance as
 the single statistic, three tests would have been run and the
@@ -862,7 +866,7 @@ reports breakthrough times for it through protective clothing materials
 relabelling that produces the only result surviving every accounting scheme is
 not an arbitrary one, which strengthens rather than weakens the point: a
 defensible label change, made by an analyst with a citation in hand, moves this
-analysis from nothing at $q=0.617$ to $q=0.0006$, and the practice records
+analysis from nothing at $q=0.617$ to $q=0.0012$, and the practice records
 neither that a label was moved nor which one. What the comparison shows is that
 a designated set can be made to look supported by choosing what goes into it.
 
@@ -880,11 +884,34 @@ components strengthens the result rather than weakening it, from $p=0.027$ to
 $p=0.0029$ on the twenty-eight-compound panel, which leaves the two spaces
 94-fold apart in $p$ at matched dimension. What the nominal structural value is
 worth against the descriptors it was drawn from is a separate question, and
-there the answer is less comfortable. Of 2000 random three-descriptor subsets of
-that space, 36.0\% reach $p<0.05$, and the observed 37-dimensional value of
-0.027 sits at the 25.9th percentile of that distribution while the electronic
-value of 0.275 sits at the 76.9th. Both are ordinary draws. Supplementary
-Section~\ref{S-res:dimdetail} reports both controls in full.
+there the answer has two parts that point in opposite directions, and an earlier
+version of this paper reported only the first. Of 2000 random three-descriptor
+subsets of that space, the observed 37-dimensional value of 0.027 sits at the
+25.9th percentile of the resulting distribution while the electronic value of
+0.275 sits at the 76.9th: the full-space value is an ordinary draw among the
+descriptor subsets we could have used instead, which is a statement about
+descriptor choice and is the one we rely on.
+
+The second part is that 36.0\% of those subsets reach $p<0.05$, and we first
+read that as showing the same thing. It does not. In a fixed subspace the
+permutation $p$ is the rank of the designated set among all 680 designations, so
+if the designation were arbitrary the expected share below 0.05 would be 0.05.
+We therefore recomputed the share for every one of the 680 designations over the
+same subspaces (Section~\ref{S-res:subspacenull}). The mean is 4.7\%, as it
+should be; the incumbent designation's 36.0\% ranks fifth of 680, $p=0.0074$.
+The structural block therefore does carry something that distinguishes the
+incumbents from an arbitrary triple, and we withdraw the claim that this control
+shows otherwise.
+
+What it carries is narrower than it sounds, and the sign of the statistic says
+so. The observed mean difference in the structural space is $+0.155$: the
+designated simulants are on average \emph{further} from the agents than the
+nearest compound outside the designated set. What the test detects is that they
+are less far than a triple drawn at random from a pool assembled out of
+interferents and solvents, which were chosen for this panel because they are not
+like the agents. Against that reference class a single organophosphorus compound
+is close to sufficient. Supplementary Section~\ref{S-res:dimdetail} reports
+both controls in full.
 
 \subsection{How many agents have a valid simulant depends on the panel}
 \label{res:match}
@@ -892,8 +919,8 @@ Section~\ref{S-res:dimdetail} reports both controls in full.
 Table~\ref{tab:match} lists, for each agent on the twenty-eight-compound panel,
 the nearest incumbent simulant in the merged space as a multiple of that space's
 typical nearest-neighbour separation. Sarin (1.124), soman (1.395),
-cyclosarin (1.492) and tabun (1.989) are matched, all four by DMMP; VX at
-3.076 is not. Tabun clears the threshold of 2 by 0.011, and we flag that rather
+cyclosarin (1.449) and tabun (1.905) are matched, all four by DMMP; VX at
+2.922 is not. Tabun clears the threshold of 2 by 0.095, and we flag that rather
 than report it as a result: an earlier version of this analysis, which retained
 a structural coordinate that is an exact function of two others
 (Section~\ref{meth:descriptors}), put tabun at 2.003 and counted three matches
@@ -969,8 +996,8 @@ simulants and the five literature compounds in the comparison pool, the merged
 space returns no valid match for any of the eleven agents: DMMP loses GB, GD and
 GF to diisopropyl fluorophosphate, which is nearer to all three. Admitting the
 five as simulants gives five matches of eleven, more than the incumbent set
-achieves on either panel, with DFP taking sarin, soman and cyclosarin at 1.07,
-0.99 and 1.17, diethyl cyanophosphonate taking tabun at 1.80, and
+achieves on either panel, with DFP taking sarin, soman and cyclosarin at 1.06,
+0.99 and 1.11, diethyl cyanophosphonate taking tabun at 1.77, and
 2-chloroethyl ethyl sulfide taking sulfur mustard at 0.57, the closest
 agent-simulant pair anywhere in this work. VX remains unmatched in every panel
 and space we examined.
@@ -1005,7 +1032,7 @@ question, and it is worth being exact about why. Of twelve
 panel-channel-space cells, three reach a nominal
 $p<0.05$ under Mantel permutation over compounds and they do not agree on a
 space; corrected across the twelve, the
-smallest adjusted value is 0.123 and no cell reaches $q<0.05$. All three of
+smallest adjusted value is 0.117 and no cell reaches $q<0.05$. All three of
 those cells lie in the plate set that contains no simulant, so they compare one
 agent with another and not a simulant with an agent. The six cells that bear on
 the premise are the six in the set that holds DMMP, and all six are null.
@@ -1017,7 +1044,7 @@ inherits that. Three artifacts are
 reported there because our own
 first version contained all three: dye-axis centring fixes the between-compound
 mean cosine at $-1/(n-1)$, which the observed means clear by only 0.013 to
-0.066; six dyes that do not fluoresce under ultraviolet illumination returned
+0.064; six dyes that do not fluoresce under ultraviolet illumination returned
 one background reading six times, which we now collapse; and the measured agent
 nearest to DMMP in the ultraviolet channel is tabun rather than sarin, which the
 descriptor criterion of Section~\ref{res:match} excludes.
@@ -1105,7 +1132,7 @@ so a criterion that asks a simulant to beat the alternatives returns nothing.
 Resampling the descriptors leaves the aggregate comparison intact in every
 replicate, but not each displacement within it: sulfur mustard is matched by
 2-chloroethyl ethyl sulfide in all of them while the incumbent set recovers DMMP
-at sarin in 37.8\%, soman in 14.4\% and cyclosarin in 12.0\%, so the G-series
+at sarin in 41.0\%, soman in 14.4\% and cyclosarin in 12.0\%, so the G-series
 displacement is the weakest part of this and the mustard result the strongest. A designation
 defended by a comparison that excludes the alternatives is not defended.
 
@@ -1114,10 +1141,14 @@ cell as the finding and built a thesis on the contrast between it
 and the electronic space. Three things undo that reading, and each is a mistake
 another group could make the same way. The value does not survive the eighteen
 tests of its own family (Benjamini-Hochberg $q = 0.165$), although it would have
-survived at $q = 0.046$ had the statistic been fixed in advance, which
+survived at $q = 0.040$ had the statistic been fixed in advance, which
 demonstrates the paper's argument rather than defending the value. It sits at the
-25.9th percentile of 2000 arbitrary three-descriptor slices of the same block.
-And it is specific to the panel that omits the five.
+25.9th percentile of 2000 arbitrary three-descriptor slices of the same block,
+so the particular space we used is not what produced it. And it is specific to
+the panel that omits the five. What does not undo the reading, and what we
+reported as though it did, is the share of those slices reaching $p<0.05$:
+corrected against the 680 designations that share generates, the incumbent
+designation ranks fifth (Section~\ref{res:panels}).
 
 Two things we expected to dissolve the contrast between the spaces did not. The
 Parr electrophilicity index was an exact function of two of the other electronic
@@ -1212,7 +1243,7 @@ closer to the agents, while the deficit they actually carry has a median of
 smaller than the one at issue. The
 agent set is eleven compounds and the nearest-neighbour statistics inherit that:
 on the larger panel with eight simulants, leaving out one agent at a time moves
-the structural $p$ between 0.017 and 0.170, the worst case being removal of
+the structural $p$ between 0.020 and 0.186, the worst case being removal of
 tabun, so a result one of eleven agents can carry across the 0.05 line is not a
 property of the panel. The
 permutation test is directional and reported one-sided, with both two-sided
