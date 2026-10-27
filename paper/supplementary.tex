@@ -489,14 +489,28 @@ Westfall-Young min-$P$ over 18       & 0.403 & 0.112 & 0.078 & \textbf{$<$0.001}
 $m_{\mathrm{eff}}$ of 18 (Li-Ji)     & 7.00  & 5.00  & 6.00  & 5.00  \\
 Bonferroni at $m_{\mathrm{eff}}$     & 1.000 & 0.185 & 0.150 & \textbf{$<$0.001} \\
 Statistic specified in advance (3 tests) & 0.386 & 0.106 & \textbf{0.040} & \textbf{0.017} \\
+Benjamini-Hochberg over all 72          & 0.318 & 0.249 & 0.249 & \textbf{0.005} \\
 \hline
 \end{tabular}
 \end{table}
 
+The sixth row was added after a reading of an earlier draft pointed out that
+the first five all correct within one panel configuration, while the paper's own
+argument is that the configuration is itself a choice. We therefore pooled the
+four configurations into one family of 72 tests and corrected across all of
+them. The smallest adjusted value on the twenty-eight-compound panel rises from
+0.165 to 0.249 and the two thirty-five-compound configurations rise to 0.318 and
+0.249, while the relabelled configuration stays significant at 0.005. Nothing in
+the paper's conclusions changes, and the scheme that most nearly reaches
+significance is still the one that fixes the statistic in advance. We report it
+because leaving it out would have exempted our own accounting from the standard
+the paper asks of others. Values are in the deposited
+\texttt{multiplicity\_across\_panels.json} under \texttt{outputs/}.
+
 \section{Dimensionality and the value of the nominal result}
 \label{res:dimdetail}
 
-The structural space has 38 coordinates and the electronic space has 3. Euclidean
+The structural space has 39 coordinates and the electronic space has 3. Euclidean
 distance behaves differently in the two, so a difference between them could be
 geometric rather than chemical. We tested that, and it is not. We also tested
 what the nominal structural value is worth against the descriptors it was drawn
@@ -518,10 +532,46 @@ On the twenty-eight-compound panel the median $p$ is 0.097, the 5th to 95th
 percentile range is 0.006 to 0.710, and 36.0\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
 37-dimensional value of 0.027 sits at the 25.9th percentile of that
-distribution, and the electronic value of 0.275 at the 76.9nd. Both are ordinary
-draws. The three-principal-component value of 0.0029 sits at the 2.3th
-percentile, which is what the leading components of a space should do and is not
-independent evidence.
+distribution, and the electronic value of 0.275 at the 76.9th. The
+three-principal-component value of 0.0029 sits at the 2.3rd percentile, which is
+what the leading components of a space should do and is not independent
+evidence.
+
+\section{The subspace share needs a null, and we did not give it one}
+\label{res:subspacenull}
+
+An earlier version of this paper reported the 36.0\% alongside the percentile
+and read both as showing that the twenty-eight-compound structural result is an
+ordinary draw. The percentile supports that reading. The share does not, and the
+reason is that we never asked what the share would be if the designation carried
+nothing.
+
+In a fixed three-descriptor subspace the permutation $p$ of a designated set is
+its rank among all 680 ways of designating three of the seventeen non-agents. If
+the designation were arbitrary that rank is uniform, so the expected share of
+subspaces reaching $p<0.05$ is 0.05. The observed 36.0\% is seven times that.
+
+One enumeration of a subspace yields the statistic for all 680 designations at
+once, so the null costs nothing beyond the run already made. Over 500 subspaces
+drawn the same way, the share below 0.05 averages 4.7\% across the 680
+designations, with a median of 2.0\%, a 95th percentile of 17.8\% and a maximum
+of 52.8\%. The incumbent designation's 36.0\% ranks fifth of 680, $p=0.0074$.
+Values are in the deposited \texttt{subspace\_null.json} under
+\texttt{outputs/}.
+
+We therefore withdraw the use of this share as evidence against the
+twenty-eight-compound structural cell. The structural block does separate the
+incumbent triple from an arbitrary one. Two things bound what that means. The
+observed mean difference is $+0.155$, so the designated simulants are on average
+further from the agents than the nearest compound outside the designated set;
+the test says they are less far than an arbitrary triple, not that they are
+near. And the arbitrary triple is drawn from fourteen interferents and solvents
+that entered this panel because the sensing literature treats them as the things
+a detector must not confuse with an agent. Being less unlike the agents than
+that reference class is a low bar for one organophosphorus compound to clear.
+The result that does not depend on the reference class is the
+thirty-five-compound one, where compounds the literature itself calls simulants
+are in the pool and nothing reaches significance at all.
 
 That rate is partly an artifact of the descriptors themselves, and we report the
 correction because it is larger than we expected. Three descriptors drawn from a
@@ -568,7 +618,8 @@ the same three configurations, with the same six statistics.
 \begin{table}[!htb]
 \centering
 \caption{Equal weight per descriptor against equal weight per block, in the
-merged space. Valid-match counts are identical under the two weightings. The
+merged space. Valid-match counts are identical on the primary panel and differ
+on the twenty-eight-compound one, four against three. The
 smallest $p$ is taken over the eighteen-test family of three spaces by six
 statistics, and $q$ is the Benjamini--Hochberg adjusted value of that family.}
 \label{tab:blockbalance}
@@ -588,9 +639,12 @@ Twenty-eight, incumbent three & 4/11 & 3/11 & 0.025 & 0.009 & 0.185 & 0.132 \\
 \end{table}
 
 Two things follow, and they point in opposite directions. The valid-match counts
-do not move at all: zero of eleven on the primary panel, five with the literature
-eight admitted, three on the twenty-eight-compound panel, exactly as reported in
-the main text. The paper's headline is therefore invariant to the weighting, and
+on the primary panel do not move: zero of eleven with the incumbent three and
+five with the literature eight admitted, under either weighting, exactly as
+reported in the main text. On the twenty-eight-compound panel the count does
+move, from four under equal per-descriptor weighting to three under block
+balance, and the agent it loses is tabun, the match nearest the threshold in the
+main analysis. The paper's headline is therefore invariant to the weighting, and
 so is the pre-specified-statistic counterfactual of Table~\ref{tab:family},
 which stays at 0.040 on the twenty-eight-compound panel: the merged nominal value
 there falls from 0.025 to 0.015, but the value that binds after correction is the
@@ -692,7 +746,7 @@ between the nearest incumbent simulant and the nearest other compound has a
 median of 0.450, more than twice the detectable value. Only at sarin, where it
 is 0.116, does it fall below what the test can resolve, and that is the agent at
 which the descriptor resampling of Section~\ref{M-res:panels} is also weakest,
-recovering DMMP as nearest in 37.8\% of replicates. The null on the primary
+recovering DMMP as nearest in 41.0\% of replicates. The null on the primary
 panel is therefore a statement about the data rather than about the sensitivity
 of the design, with sarin the one case where the two cannot be separated.
 
@@ -886,8 +940,8 @@ tabun, at $+0.764$ against sarin's $+0.645$, with soman, VX and cyclosarin
 following at $-0.492$, $-0.702$ and $-0.721$. In reflectance sarin leads at
 $+0.569$ and tabun falls to $-0.112$. Tabun is a match to DMMP under the
 descriptor criterion of Section~\ref{M-res:match}, but the weakest of the four
-the criterion admits: its normalised distance is 1.989 against a threshold of 2,
-where sarin sits at 1.146. The two therefore do not disagree about whether tabun
+the criterion admits: its normalised distance is 1.905 against a threshold of 2,
+where sarin sits at 1.124. The two therefore do not disagree about whether tabun
 is matched. They disagree about the order. The measured channel in which the
 ordering is clearest puts tabun first, the descriptor table puts it last of the
 four, and the agreement between the two channels on tabun is the worst of any
@@ -909,9 +963,9 @@ gives the same inconsistent picture as the permutation tests of
 Section~\ref{M-res:panels}. Tested by Mantel permutation over compounds
 (Section~\ref{meth:deltaE}), three of the twelve panel-channel-space cells reach a
 nominal $p<0.05$, and they do not agree on a space: the merged space in the
-second compound set's ultraviolet channel ($\rho = +0.518$, Mantel $p = 0.010$),
+second compound set's ultraviolet channel ($\rho = +0.518$, Mantel $p = 0.011$),
 the structural space in that same set and channel ($\rho = +0.500$, Mantel
-$p = 0.020$),
+$p = 0.019$),
 and the electronic space in the same set's reflectance channel ($\rho = +0.571$,
 Mantel $p = 0.044$). The first compound set gives nothing in any space or
 channel ($|\rho| \le 0.225$, Mantel $p \ge 0.22$).
@@ -931,15 +985,15 @@ six compounds, at a resolution that would have needed a near-deterministic
 association to register. The twelve cells are one
 family, and we correct them as we correct the permutation tests of
 Section~\ref{M-res:panels}: under Benjamini-Hochberg the smallest adjusted value is
-0.123 and no cell reaches $q<0.05$. We state the nominal values as well because
+0.117 and no cell reaches $q<0.05$. We state the nominal values as well because
 cells pointing at different descriptor spaces is itself the pattern worth
 seeing, but no cell is a result. An earlier version of this analysis ran the
 Mantel test in the structural and electronic spaces only and corrected over the
 resulting eight cells. The merged space is the one the rest of this paper leads
 with, and the cell it contributes is the strongest of the twelve, so omitting it
 narrowed the family after the fact and in the direction that weakened the
-association. Restoring it moves the smallest adjusted value from 0.164 to
-0.123.
+association. Restoring it moves the smallest adjusted value from 0.156 to
+0.117.
 
 Not every declared channel is a separate measurement, and in one plate set six of
 them are not. In the second set's ultraviolet channel, dyes 22 to 27 return

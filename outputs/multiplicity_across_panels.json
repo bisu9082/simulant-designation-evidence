@@ -1,0 +1,30 @@
+{
+ "n_tests": 72,
+ "n_configs": 4,
+ "min_q_by_config": {
+  "panel28_designated3": {
+   "q": 0.24939624523924522,
+   "space": "structural",
+   "statistic": "mean_diff",
+   "p": 0.026470588235294117
+  },
+  "panel35_designated3": {
+   "q": 0.3176470588235294,
+   "space": "merged",
+   "statistic": "median_diff",
+   "p": 0.15612648221343872
+  },
+  "panel35_designated_plus_literature8": {
+   "q": 0.24939624523924522,
+   "space": "structural",
+   "statistic": "mean_logratio",
+   "p": 0.05280833642658922
+  },
+  "pesticide10": {
+   "q": 0.0046439628482972135,
+   "space": "structural",
+   "statistic": "median_diff",
+   "p": 0.00012899896800825592
+  }
+ }
+}

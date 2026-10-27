@@ -1,6 +1,6 @@
 {
  "seed": 49374,
- "n_mantel": 10000,
+ "n_mantel": 720,
  "n_random_subsets": 500,
  "omega_excluded_from_distance": "electrophilicity_index_eV",
  "electronic_coordinates": [
@@ -335,7 +335,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.07857142857142857,
-    "p_mantel": 0.7639236076392361,
+    "p_mantel": 0.7583333333333333,
     "p_pairs_as_independent": 0.7807545523090464
    },
    {
@@ -345,7 +345,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": -0.22499999999999998,
-    "p_mantel": 0.22457754224577542,
+    "p_mantel": 0.22916666666666666,
     "p_pairs_as_independent": 0.42010468690763497
    },
    {
@@ -355,7 +355,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.0857142857142857,
-    "p_mantel": 0.7298270172982702,
+    "p_mantel": 0.7347222222222223,
     "p_pairs_as_independent": 0.7613341261907667
    },
    {
@@ -365,7 +365,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.06785714285714285,
-    "p_mantel": 0.7374262573742626,
+    "p_mantel": 0.7305555555555555,
     "p_pairs_as_independent": 0.8101088187105132
    },
    {
@@ -375,7 +375,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.028571428571428564,
-    "p_mantel": 0.9253074692530747,
+    "p_mantel": 0.9277777777777778,
     "p_pairs_as_independent": 0.9194899083821858
    },
    {
@@ -385,7 +385,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.07857142857142857,
-    "p_mantel": 0.6927307269273073,
+    "p_mantel": 0.6930555555555555,
     "p_pairs_as_independent": 0.7807545523090464
    },
    {
@@ -395,7 +395,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.5,
-    "p_mantel": 0.020497950204979503,
+    "p_mantel": 0.019444444444444445,
     "p_pairs_as_independent": 0.05769884126895998
    },
    {
@@ -405,7 +405,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.014285714285714282,
-    "p_mantel": 0.9535046495350465,
+    "p_mantel": 0.95,
     "p_pairs_as_independent": 0.9596997645989476
    },
    {
@@ -415,7 +415,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.5178571428571428,
-    "p_mantel": 0.010298970102989701,
+    "p_mantel": 0.011111111111111112,
     "p_pairs_as_independent": 0.04800407736655831
    },
    {
@@ -425,7 +425,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.28571428571428564,
-    "p_mantel": 0.36546345365463456,
+    "p_mantel": 0.3680555555555556,
     "p_pairs_as_independent": 0.30193635132254926
    },
    {
@@ -435,7 +435,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.5714285714285713,
-    "p_mantel": 0.044295570442955706,
+    "p_mantel": 0.044444444444444446,
     "p_pairs_as_independent": 0.026063193376362856
    },
    {
@@ -445,7 +445,7 @@
     "n_compounds": 6,
     "n_pairs": 15,
     "spearman": 0.3107142857142856,
-    "p_mantel": 0.3046695330466953,
+    "p_mantel": 0.30277777777777776,
     "p_pairs_as_independent": 0.25966739733721816
    }
   ],
@@ -485,7 +485,7 @@
   ],
   "mantel_bh": {
    "n_tests": 12,
-   "min_q": 0.12298770122987701,
+   "min_q": 0.11666666666666667,
    "n_sig_q": 0
   },
   "channels": {

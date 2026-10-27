@@ -15,6 +15,7 @@ GATE 8 3차에서 전부 지적됐다.
   (B) 근사 불일치: 본문의 수치 중 사실표의 어떤 값과 0.5% 안쪽으로
       가까우면서 같지는 않은 것. 반올림 분기(84.93 대 84.933)를 잡는다.
 """
+import glob
 import json
 import os
 import re
@@ -327,6 +328,29 @@ def load_facts():
     for _c, _kk in zip(_cols, _keys):
         f[f'fam_wy_{_c}'] = float(_wy[_kk]['wy_adjusted_p'])
     f['fam_wy_pest'] = float(_pf['westfall_young_adjusted_p'])
+
+    # 2026-10-27. 패널 축까지 포함한 72검정 통합 BH.
+    if os.path.exists('outputs/multiplicity_across_panels.json'):
+        _ap = json.load(open('outputs/multiplicity_across_panels.json'))
+        f['ap_ntests'] = _ap['n_tests']
+        _m = _ap['min_q_by_config']
+        f['ap_p28'] = _m['panel28_designated3']['q']
+        f['ap_p35'] = _m['panel35_designated3']['q']
+        f['ap_p35lit'] = _m['panel35_designated_plus_literature8']['q']
+        f['ap_pest'] = _m['pesticide10']['q']
+
+    # 2026-10-27. 부분공간 대조의 귀무 보정. 본문이 36.0% 를 '평범한 draw' 로
+    # 읽었던 자리를 뒤집는 수치이므로 전부 건다.
+    if os.path.exists('outputs/subspace_null.json'):
+        _sn = json.load(open('outputs/subspace_null.json'))
+        f['sn_actual'] = 100 * _sn['actual_designation_frac']
+        f['sn_mean'] = 100 * _sn['null_mean_frac']
+        f['sn_median'] = 100 * _sn['null_median_frac']
+        f['sn_p95'] = 100 * _sn['null_p95_frac']
+        f['sn_max'] = 100 * _sn['null_max_frac']
+        f['sn_rank'] = _sn['rank_of_actual']
+        f['sn_p'] = _sn['p_of_actual']
+        f['sn_nsub'] = _sn['n_subspaces']
 
     # 2026-10-26. 형태이성질체 민감도. 3D 서술자 9개가 모든 거리에 들어가므로
     # 임베딩 시드에 대한 폭을 원고가 싣는다. 두 처리(앙상블/단일)를 모두 건다.
@@ -820,8 +844,8 @@ CHECKS = [
     ('omega_pc3_var', [r'account for ([\d.]+)\\% of its variance'], 0.05),
     ('bh_q28', [r'smallest adjusted value of ([\d.]+)',
                 r'Benjamini-Hochberg \$q =\s*\n?([\d.]+)\$'], 0.0005),
-    ('bh_q35', [r'Benjamini-Hochberg over 18\s+& ([\d.]+) &'], 0.0005),
-    ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('bh_q35', [r'Benjamini-Hochberg over 18\s+& (\d+\.\d+) &'], 0.0005),
+    ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('mantel_cells', [r'Of (twelve|eight|ten) panel-channel-space cells',
                       r'(twelve|eight|ten) cells are one\s*\n?family'], 0),
     ('mantel_nominal', [r'(three|two|four|five) of the twelve panel-channel-space cells reach'], 0),
@@ -830,26 +854,39 @@ CHECKS = [
     ('mantel_d2uv_struct',
      [r'that same set and channel \(\$\\rho = [-+][\d.]+\$, Mantel\s*\n?'
       r'\$p = ([\d.]+)\$'], 0.0005),
-    ('fam_minp_p35', [r'Smallest nominal \$p\$ \(18 tests\)\s*& ([\d.]+) &'], 0.0006),
-    ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_bh18_p35', [r'Benjamini-Hochberg over 18\s*& ([\d.]+) &'], 0.0006),
-    ('fam_bh18_p35lit', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_bh18_p28', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_bh6_p35', [r'Benjamini-Hochberg over 6, per space & ([\d.]+) &'], 0.0006),
-    ('fam_bh6_p35lit', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_bh6_p28', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_wy_p35', [r'Westfall-Young min-\$P\$ over 18\s*& ([\d.]+) &'], 0.0006),
-    ('fam_wy_p35lit', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_wy_p28', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('ap_ntests', [r'one family of (\d+) tests'], 0),
+    ('ap_p35', [r'Benjamini-Hochberg over all 72\s*& (\d+\.\d+) &'], 0.0006),
+    ('ap_p35lit', [r'Benjamini-Hochberg over all 72\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('ap_p28', [r'Benjamini-Hochberg over all 72\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &',
+                r'panel rises from 0\.165 to (\d+\.\d+)'], 0.0006),
+    ('ap_pest', [r'configuration stays significant at (\d+\.\d+)'], 0.0006),
+    ('sn_mean', [r'averages (\d+\.\d+)\\% across the 680'], 0.06),
+    ('sn_median', [r'with a median of (\d+\.\d+)\\%'], 0.06),
+    ('sn_p95', [r'95th percentile of (\d+\.\d+)\\%'], 0.06),
+    ('sn_max', [r'a maximum\s*\n?of (\d+\.\d+)\\%'], 0.06),
+    ('sn_p', [r'ranks fifth of 680, \$p=(\d+\.\d+)\$'], 0.0006),
+    ('sn_nsub', [r'Over (\d+) subspaces'], 0),
+    ('sn_actual', [r"incumbent designation's (\d+\.\d+)\\% ranks fifth"], 0.06),
+    ('fam_minp_p35', [r'Smallest nominal \$p\$ \(18 tests\)\s*& (\d+\.\d+) &'], 0.0006),
+    ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_bh18_p35', [r'Benjamini-Hochberg over 18\s*& (\d+\.\d+) &'], 0.0006),
+    ('fam_bh18_p35lit', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_bh18_p28', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_bh6_p35', [r'Benjamini-Hochberg over 6, per space & (\d+\.\d+) &'], 0.0006),
+    ('fam_bh6_p35lit', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_bh6_p28', [r'Benjamini-Hochberg over 6, per space & [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_wy_p35', [r'Westfall-Young min-\$P\$ over 18\s*& (\d+\.\d+) &'], 0.0006),
+    ('fam_wy_p35lit', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_wy_p28', [r'Westfall-Young min-\$P\$ over 18\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
     ('fam_meff_p35', [r'of 18 \(Li-Ji\)\s*& ([\d.]+)\s*&'], 0.006),
     ('fam_meff_p35lit', [r'of 18 \(Li-Ji\)\s*& [\d.]+\s*& ([\d.]+)\s*&'], 0.006),
     ('fam_meff_p28', [r'of 18 \(Li-Ji\)\s*& [\d.]+\s*& [\d.]+\s*& ([\d.]+)\s*&'], 0.006),
-    ('fam_bonf_p35', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& ([\d.]+) &'], 0.0006),
-    ('fam_bonf_p35lit', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_bonf_p28', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & [\d.]+ & ([\d.]+) &'], 0.0006),
-    ('fam_pre_p35', [r'Statistic specified in advance \(3 tests\) & ([\d.]+) &'], 0.0006),
-    ('fam_pre_p35lit', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & ([\d.]+) &'], 0.0006),
+    ('fam_bonf_p35', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& (\d+\.\d+) &'], 0.0006),
+    ('fam_bonf_p35lit', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_bonf_p28', [r'Bonferroni at \$m_\{\\mathrm\{eff\}\}\$\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_pre_p35', [r'Statistic specified in advance \(3 tests\) & (\d+\.\d+) &'], 0.0006),
+    ('fam_pre_p35lit', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & (\d+\.\d+) &'], 0.0006),
     ('fam_pre_p28', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & \\textbf\{([\d.]+)\}'], 0.0006),
     ('conf_ens_lo', [r'sits between (\d+\.\d+) and \d+\.\d+ across the ensemble'], 0.0006),
     ('conf_ens_hi', [r'sits between \d+\.\d+ and (\d+\.\d+) across the ensemble'], 0.0006),
@@ -961,9 +998,9 @@ CHECKS = [
     # 9.625 의 소수 둘째자리 반올림 경계이므로 허용오차를 0.006 으로 둔다
     ('null_exp35', [r'expectation of ([\d.]+) set by the 21:3'], 0.006),
     ('null_exp28', [r'smaller panel against ([\d.]+)'], 0.005),
-    ('wy35', [r'Westfall-Young min-\$P\$ over 18\s+& ([\d.]+) &'], 0.0005),
+    ('wy35', [r'Westfall-Young min-\$P\$ over 18\s+& (\d+\.\d+) &'], 0.0005),
     ('wy28', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
-    ('wy35lit', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & ([\d.]+) &'], 0.0005),
+    ('wy35lit', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('boot_inc_zero', [r'exactly zero\s*\n?in ([\d.]+)\\% of replicates'], 0.05),
     ('boot_diff_pos', [r'positive in (\d+) of 1000'], 0),
     ('ret_gb3', [r'as its nearest compound in ([\d.]+)\\% of replicates'], 0.05),
@@ -974,21 +1011,21 @@ CHECKS = [
     ('malathion_fold', [r'is predicted (\d[\d,]*) times too toxic'], 1),
     # 표 3 (tab:match) 전수 대조. 2026-10-17 신설. 이 표는 그때까지 검증기에
     # 등록되지 않아 11행 중 9행이 구판 값인 채로 144건 검사를 통과했다.
-    ('t3_GB', [r'GB & DMMP & ([\d.]+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
-    ('t3_GD', [r'GD & DMMP & ([\d.]+) &',
+    ('t3_GB', [r'GB & DMMP & (\d+\.\d+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
+    ('t3_GD', [r'GD & DMMP & (\d+\.\d+) &',
                r'Sarin \([\d.]+\), soman \(([\d.]+)\)'], 0.0005),
-    ('t3_CK', [r'CK & DCM & ([\d.]+) &'], 0.0005),
-    ('t3_GF', [r'GF & DMMP & ([\d.]+) &',
+    ('t3_CK', [r'CK & DCM & (\d+\.\d+) &'], 0.0005),
+    ('t3_GF', [r'GF & DMMP & (\d+\.\d+) &',
                r'cyclosarin \(([\d.]+)\) are matched'], 0.0005),
-    ('t3_AC', [r'AC & DCM & ([\d.]+) &'], 0.0005),
-    ('t3_CG', [r'CG & DCM & ([\d.]+) &',
+    ('t3_AC', [r'AC & DCM & (\d+\.\d+) &'], 0.0005),
+    ('t3_CG', [r'CG & DCM & (\d+\.\d+) &',
                r'merged space \([\d.]+ against ([\d.]+)\)'], 0.0005),
-    ('t3_HD', [r'HD & DCM & ([\d.]+) &'], 0.0005),
-    ('t3_GA', [r'GA & DMMP & ([\d.]+) &', r'tabun at ([\d.]+) and VX',
+    ('t3_HD', [r'HD & DCM & (\d+\.\d+) &'], 0.0005),
+    ('t3_GA', [r'GA & DMMP & (\d+\.\d+) &', r'tabun at ([\d.]+) and VX',
                r'passes its value of (\d+\.\d+)'], 0.0005),
-    ('t3_L', [r'L & DCM & ([\d.]+) &'], 0.0005),
-    ('t3_PS', [r'PS & DMMP & ([\d.]+) &'], 0.0005),
-    ('t3_VX', [r'VX & DPGME & ([\d.]+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
+    ('t3_L', [r'L & DCM & (\d+\.\d+) &'], 0.0005),
+    ('t3_PS', [r'PS & DMMP & (\d+\.\d+) &'], 0.0005),
+    ('t3_VX', [r'VX & DPGME & (\d+\.\d+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
     # res:match 산문의 공간별 수치. 종전 산문은 세 공간의 원거리와 정규화
     # 거리를 섞어 적었고 어느 값도 산출물과 대조되지 않았다.
     ('struct_GD', [r'soman at ([\d.]+)\s*\n?and cyclosarin at'], 0.0005),
@@ -999,10 +1036,10 @@ CHECKS = [
     ('elec_AC', [r'dichloromethane at ([\d.]+),\s*\n?because acetonitrile'], 0.0005),
     ('struct_CG', [r'structural space \([\d.]+ typical separations\s*\n?against ([\d.]+)\)'],
      0.005),
-    ('minp35', [r'Smallest nominal \$p\$ \(18 tests\)\s+& ([\d.]+) &',
+    ('minp35', [r'Smallest nominal \$p\$ \(18 tests\)\s+& (\d+\.\d+) &',
                 r'eighteen-test family there is ([\d.]+)\s*\n?with equal weight per'],
      0.0005),
-    ('minp35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & ([\d.]+) &'],
+    ('minp35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & (\d+\.\d+) &'],
      0.0005),
     ('minp28', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
@@ -1017,13 +1054,13 @@ CHECKS = [
                   r'\$n_\{e\}=(\d+)\$'], 0),
     ('bb_minp35', [r'lowers that value to ([\d.]+)',
                    r'nominal value from 0\.151 to ([\d.]+)',
-                   r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &',
+                   r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &',
                    r'0\.151 with equal weight per descriptor and ([\d.]+) with'],
      0.0005),
     ('bb_minp35lit',
-     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('bb_minp28',
-     [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & ([\d.]+) &'], 0.0005),
+     [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('bbq_35', [r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
     ('bbq_35lit',
@@ -1278,6 +1315,75 @@ def main():
     if superseded:
         fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
         fails.extend(superseded)
+
+    # (B3) 작용제 거리 전수 훑기 (2026-10-27 신설).
+    #
+    # 왜. (B) 는 등록된 어법만 본다. 2026-10-27 에 res:match 산문이
+    # "cyclosarin (1.492) and tabun (1.989) ... VX at 3.076" 으로 구판을 싣고도
+    # 332건 PASS 를 받았다. 같은 문장의 sarin·soman 은 전파됐는데 세 개가
+    # 남았고, 그 어법을 덮는 패턴이 없었다. 같은 계열 실패가 이 세션에서
+    # 네 번째다.
+    #
+    # 여기서는 어법을 세지 않는다. 작용제 이름 가까이에 있는 소수를 전부 모아,
+    # 그 작용제가 보고된 어느 패널에서도 갖지 않는 값이면 실패로 본다.
+    AGENT_ALIASES = {
+        'sarin': 'sarin (GB)', 'soman': 'soman (GD)',
+        'cyclosarin': 'cyclosarin (GF)', 'tabun': 'tabun (GA)',
+        'sulfur mustard': 'sulfur mustard (HD)', 'lewisite': 'lewisite 1 (L)',
+        'hydrogen cyanide': 'hydrogen cyanide (AC)',
+        'cyanogen chloride': 'cyanogen chloride (CK)',
+        'phosgene': 'phosgene (CG)', 'chloropicrin': 'chloropicrin (PS)',
+        'VX': 'VX',
+    }
+    allowed = {}
+    for _src in ('outputs/match_by_panel.json', 'outputs/match_by_panel_ascl3.json'):
+        if not os.path.exists(_src):
+            continue
+        for _pan in json.load(open(_src)).values():
+            if not isinstance(_pan, dict) or 'agents' not in _pan:
+                continue
+            for _a in _pan['agents']:
+                allowed.setdefault(_a['agent'], set()).add(round(_a['d_norm'], 3))
+    # 병합공간 말고 구조·전자 공간의 정규화거리도 본문에 나온다.
+    for _dt in glob.glob('outputs/distance_table_normalized*.csv'):
+        _d = pd.read_csv(_dt)
+        for _r in _d.itertuples():
+            allowed.setdefault(_r.real_agent, set()).add(round(_r.d_sim_norm, 3))
+    # 거리로 읽힐 수 있는 꼴만 본다. 괄호 안의 수와 'at N' 꼴.
+    NEAR = re.compile(
+        r'\b(' + '|'.join(sorted(AGENT_ALIASES, key=len, reverse=True)) +
+        r')\b[^.\n]{0,24}?(?:\((\d\.\d{2,3})\)|at (\d\.\d{2,3})\b)')
+    # 같은 꼴로 omega(eV)와 Fukui 지수도 적히므로, 거리 어휘가 가까이 있는
+    # 자리만 본다. 없으면 거리 진술이 아니라고 보고 넘긴다.
+    DIST_CUE = re.compile(
+        r'distance|normalis|separation|nearest|match|threshold|stands at|sits at',
+        re.I)
+    stray = []
+    for m in NEAR.finditer(body_flat):
+        name = AGENT_ALIASES[m.group(1)]
+        val = float(m.group(2) or m.group(3))
+        ok = allowed.get(name, set())
+        if not ok:
+            continue
+        win = body_flat[max(0, m.start() - 160):m.end() + 160]
+        if not DIST_CUE.search(win):
+            continue
+        # '2-chloroethyl ethyl sulfide, a sulfur mustard simulant, at 2.35'
+        # 처럼 작용제 이름이 모사체의 역할을 설명하는 자리는 그 작용제의
+        # 거리가 아니다.
+        if re.match(r'\s*simulant', body_flat[m.end(1):m.end(1) + 12]):
+            continue
+        # 구판임을 밝히고 인용하는 문장은 면제한다.
+        if re.search(r'earlier version|earlier analysis|superseded|put tabun at',
+                     win, re.I):
+            continue
+        if not any(abs(val - v) <= 0.006 for v in ok):
+            stray.append(f'{name} = {val:g}  [{" ".join(m.group(0).split())[:58]}]')
+    if stray:
+        fails.append(f'작용제 거리 전수 훑기 (검사 B3): 어느 패널 산출물과도 '
+                     f'맞지 않는 값 {len(stray)}건')
+        for _t in sorted(set(stray))[:8]:
+            fails.append('  ' + _t)
 
     # (C) 데이터가 반증하는 문구. 수치가 맞아도 주장이 틀릴 수 있다.
     # Figure 2 의 구판 주석은 숫자를 하나도 틀리지 않으면서
