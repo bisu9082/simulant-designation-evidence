@@ -16,6 +16,7 @@
 명칭이 오해를 부르므로 본문에서도 그렇게 서술해야 한다 (리뷰어 C Minor 2).
 """
 import argparse
+import os as _os
 import sys
 
 import numpy as np
@@ -181,7 +182,18 @@ def gate_verify():
     반환했다. 그래서 52열 중 11열이 재현되지 않는 상태로 파이프라인이
     계속 돌았고, 그 열 9개가 본문의 모든 거리에 들어가 있었다.
     """
-    bad = verify()
+    import sys as _s
+    refs = ['descriptor_cache.csv', 'descriptor_cache_35.csv',
+            'descriptor_cache_ascl3.csv']
+    for _a in _s.argv[1:]:
+        if _a.startswith('--ref='):
+            refs = [_a.split('=', 1)[1]]
+    bad = []
+    for _r in refs:
+        if not _os.path.exists(_r):
+            continue
+        print(f'\n[gate] {_r}')
+        bad += [f'{_r}:{c}' for c in verify(_r)]
     if bad:
         print(f'\n[중단] 재현되지 않는 열 {len(bad)}개. 거리 계산에 들어가는 '
               '열이 코드에서 재생성되지 않으면 분석을 신뢰할 수 없다.')

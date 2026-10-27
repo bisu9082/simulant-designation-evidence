@@ -23,7 +23,11 @@ ELECTRONIC_DIST = [c for c in ELECTRONIC_28 if c != OMEGA_DERIVED]
 # 인 국소 서술자. 비인 화합물에서 정의되지 않으므로 전 패널 거리에 쓸 수 없다.
 P_LOCAL = ['q_P', 'q_phosphoryl_O', 'wiberg_PO', 'fukui_f_plus_P']
 
-META_NUM = ['n_conformers', '_n_conf_xtb']           # 실행 메타데이터, 화학 아님
+# 2026-10-27. conformer_w_max 가 빠져 있었다. 2026-10-25 에 앙상블 평균을
+# 도입하면서 보고용으로 남긴 최대 Boltzmann 가중치인데, META_NUM 을 갱신하지
+# 않아 모든 거리에 좌표로 들어갔다. 본문은 '실행 메타데이터 제외'라고
+# 선언하고 있었다. 화학량이 아니고 임베딩 시드의 함수이기도 하다.
+META_NUM = ['n_conformers', '_n_conf_xtb', 'conformer_w_max']  # 실행 메타데이터
 
 PROTECTED = ['MR_crippen', 'logP_crippen', 'TPSA', 'HBA', 'lser_B_proxy',
              'lser_S_proxy'] + ELECTRONIC_28

@@ -5,16 +5,16 @@
   "panel35_incumbent3": {
    "n_perm": 2024,
    "n_tests": 18,
-   "observed_min_p": 0.15612648221343872,
+   "observed_min_p": 0.16946640316205533,
    "which_test": "merged:median_diff",
-   "wy_adjusted_p": 0.4031620553359684
+   "wy_adjusted_p": 0.4150197628458498
   },
   "panel35_incumbent_plus_lit8": {
    "n_perm": 735471,
    "n_tests": 18,
-   "observed_min_p": 0.03705516600926481,
+   "observed_min_p": 0.03811027219292127,
    "which_test": "merged:mean_logratio",
-   "wy_adjusted_p": 0.1121798140239384
+   "wy_adjusted_p": 0.10955292594813391
   },
   "panel28_incumbent3": {
    "n_perm": 680,
@@ -28,102 +28,101 @@
   "n_boot": 1000,
   "incumbent3": {
    "median": 0,
-   "mean": 0.72,
+   "mean": 0.694,
    "ci": [
     0,
     3
    ],
-   "frac_zero": 0.568,
-   "frac_le1": 0.839,
-   "unbounded_median": 0,
+   "frac_zero": 0.586,
+   "frac_le1": 0.837,
+   "unbounded_median": 1,
    "retention": {
-    "sarin (GB)": 0.41,
-    "soman (GD)": 0.144,
-    "lewisite 1 (L)": 0.012,
+    "sarin (GB)": 0.38,
+    "soman (GD)": 0.149,
+    "lewisite 1 (L)": 0.006,
     "hydrogen cyanide (AC)": 0.003,
-    "cyanogen chloride (CK)": 0.013,
+    "cyanogen chloride (CK)": 0.022,
     "phosgene (CG)": 0.009,
-    "chloropicrin (PS)": 0.008,
-    "cyclosarin (GF)": 0.12,
-    "VX": 0.001
+    "chloropicrin (PS)": 0.011,
+    "cyclosarin (GF)": 0.114
    }
   },
   "incumbent_plus_lit8": {
    "median": 5,
-   "mean": 4.609,
+   "mean": 4.587,
    "ci": [
     4,
     6
    ],
    "frac_zero": 0.0,
-   "frac_le1": 0.001,
+   "frac_le1": 0.003,
    "unbounded_median": 5,
    "retention": {
-    "sarin (GB)": 0.996,
-    "soman (GD)": 0.993,
-    "tabun (GA)": 0.523,
+    "sarin (GB)": 0.994,
+    "soman (GD)": 0.99,
+    "tabun (GA)": 0.512,
     "sulfur mustard (HD)": 1.0,
-    "lewisite 1 (L)": 0.041,
+    "lewisite 1 (L)": 0.047,
     "hydrogen cyanide (AC)": 0.003,
-    "cyanogen chloride (CK)": 0.013,
-    "phosgene (CG)": 0.044,
-    "chloropicrin (PS)": 0.013,
-    "cyclosarin (GF)": 0.981,
-    "VX": 0.002
+    "cyanogen chloride (CK)": 0.022,
+    "phosgene (CG)": 0.028,
+    "chloropicrin (PS)": 0.017,
+    "cyclosarin (GF)": 0.97,
+    "VX": 0.004
    }
   },
   "difference": {
    "median": 4,
-   "mean": 3.889,
+   "mean": 3.893,
    "ci": [
     1,
-    5
+    6
    ],
    "frac_positive": 1.0
   },
   "per_agent_gap": [
    {
     "agent": "sarin (GB)",
-    "gap_median": 0.10000995713149682,
+    "gap_median": 0.11494247837464819,
     "gap_ci": [
      0.0,
-     1.0630509858045294
+     1.2145317358433922
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "soman (GD)",
-    "gap_median": 0.5238595677647377,
+    "gap_median": 0.5574616921615326,
     "gap_ci": [
      0.0,
-     1.5022565395669278
+     1.6288675771143022
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "tabun (GA)",
-    "gap_median": 0.9212333615250541,
+    "gap_median": 0.9254219036150413,
     "gap_ci": [
-     0.20659634899471738,
-     2.545433804356482
+     0.1660241370873259,
+     2.59443796379438
     ],
     "gap_excludes_zero": true
    },
    {
     "agent": "sulfur mustard (HD)",
-    "gap_median": 1.1243633379832025,
+    "gap_median": 1.151885472881051,
     "gap_ci": [
-     0.5016191834938173,
-     2.023381120791264
+     0.5388202446146257,
+     2.1116558807342907
     ],
     "gap_excludes_zero": true
    },
    {
     "agent": "lewisite 1 (L)",
-    "gap_median": 0.0026368765670356066,
+    "gap_median": 0.07355711624590242,
     "gap_ci": [
      0.0,
-     0.46943989526024876
+     0.5349685688811923
     ],
     "gap_excludes_zero": false
    },
@@ -132,7 +131,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.1650392777864273
+     0.20458557541730552
     ],
     "gap_excludes_zero": false
    },
@@ -141,7 +140,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.13182941099208165
+     0.20389501816839575
     ],
     "gap_excludes_zero": false
    },
@@ -150,7 +149,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.7948659207812923
+     0.7522325238888217
     ],
     "gap_excludes_zero": false
    },
@@ -159,25 +158,25 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.3342531185590039
+     0.3577959064186916
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "cyclosarin (GF)",
-    "gap_median": 0.4963208449074871,
+    "gap_median": 0.5460751476098387,
     "gap_ci": [
      0.0,
-     1.4276592509059904
+     1.542245410539408
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "VX",
-    "gap_median": 0.26365227677158976,
+    "gap_median": 0.2967726276719975,
     "gap_ci": [
      0.0,
-     0.7544407833175285
+     0.800726305556473
     ],
     "gap_excludes_zero": false
    }

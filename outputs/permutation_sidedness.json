@@ -1,6 +1,6 @@
 {
  "A_rdkit": {
-  "n_kept": 37,
+  "n_kept": 36,
   "n_perm": 680,
   "one_sided": 0.026470588235294117,
   "two_sided_2min": 0.052941176470588235,
@@ -14,7 +14,7 @@
   "two_sided_abs": 0.4823529411764706
  },
  "C_merged": {
-  "n_kept": 40,
+  "n_kept": 39,
   "n_perm": 680,
   "one_sided": 0.025,
   "two_sided_2min": 0.05,

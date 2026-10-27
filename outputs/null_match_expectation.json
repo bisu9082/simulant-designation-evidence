@@ -1,7 +1,7 @@
 {
  "panel": "descriptor_cache_xtb_35.csv",
- "dim": 42,
- "nn_median": 3.5609838937676903,
+ "dim": 41,
+ "nn_median": 3.525834567456926,
  "threshold": 2.0,
  "n_agents": 11,
  "n_non_agents": 24,

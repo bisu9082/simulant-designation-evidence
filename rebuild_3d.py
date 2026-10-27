@@ -20,8 +20,13 @@ import build_descriptors as B
 
 RDLogger.DisableLog('rdApp.*')
 
+# 2026-10-27. 종전에는 네 개만 담았다. AsCl3 절이 쓰는 _xtb_36 과
+# _xtb_ascl3, 그리고 _ascl3 이 빠져 있어, 그 절만 구판 단일 형태이성질체
+# 값 위에서 계산되고 있었다. 전 캐시를 담는다.
 CACHES = ['descriptor_cache.csv', 'descriptor_cache_35.csv',
-          'descriptor_cache_xtb.csv', 'descriptor_cache_xtb_35.csv']
+          'descriptor_cache_ascl3.csv',
+          'descriptor_cache_xtb.csv', 'descriptor_cache_xtb_35.csv',
+          'descriptor_cache_xtb_36.csv', 'descriptor_cache_xtb_ascl3.csv']
 
 
 def main():
