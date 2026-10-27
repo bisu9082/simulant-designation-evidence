@@ -231,7 +231,8 @@ energies of all twenty-eight compounds of the smaller panel at
 B3LYP/def2-SVPD, a basis chosen because it carries diffuse functions, which
 virtual orbitals need, and covers arsenic, which lewisite needs. From those we
 formed $\mu$, $\eta$ and $\omega = \mu^{2}/2\eta$ by the same definitions used
-throughout.
+throughout. The same converged calculations also give the dipole moment, which
+the third paragraph of this section uses.
 
 The comparison is not clean, and we say so rather than letting it read as one.
 The GFN2 values in this paper sit on GFN2-optimised geometries, which we could
@@ -243,36 +244,48 @@ term, and we do not attempt to separate them. What the check can establish is
 whether an ordering drawn from the GFN2 $\omega$ axis is stable, and it is not
 (Section~\ref{res:plocal}). What it cannot establish is the size of the method
 term alone. All twenty-eight calculations converged; values are in the deposited
-\texttt{outputs/dft\_omega.csv}.
+\texttt{outputs/dft\_omega.csv}. The dipole moments were obtained in a second
+pass over the same twenty-eight molecules, which reproduced both orbital
+energies of every compound to within $10^{-6}$~eV before the dipoles were read;
+that pass is deposited separately as \texttt{outputs/dft\_dipole.csv} so the
+reproduction can be checked rather than taken on assertion.
 
 The same recomputation answers a second question, and we report the answer
 although it does not favour the analysis. The electronic space that carries the
-results of Section~\ref{res:permfull} has three coordinates, two of which are
-the frontier orbital energies this check has just recomputed. We rebuilt that
-space with the density-functional orbital energies in place of the GFN2 ones,
-left the dipole moment as GFN2 because we have no density-functional value for
-it, and repeated the matching rule of Section~\ref{M-res:match} and the exact
-permutation over all 680 designations. The control reproduces what the main text
-reports, one valid match of eleven and a one-sided $p$ of 0.275. With the
-density-functional orbital energies the same space returns four valid matches
-and 0.128. Three of the four are sarin, soman and cyclosarin matched to DMMP, which
-are the pairings the sensor literature asserts. The fourth is sulfur mustard
-matched to DPGME, which the designation record does not support, since the
-patent that names DPGME calls it a preferred G agent simulant
+results of Section~\ref{res:permfull} has three coordinates: the two frontier
+orbital energies this check has just recomputed, and the dipole moment. The
+dipole follows from the same converged self-consistent field at no further cost,
+so there is no reason to leave it semiempirical, and we took all three
+coordinates from the density functional. We then repeated the matching rule of
+Section~\ref{M-res:match} and the exact permutation over all 680 designations.
+The control reproduces what the main text reports, one valid match of eleven and
+a one-sided $p$ of 0.275. Replacing the two orbital energies and leaving the
+dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
+five valid matches and 0.0368. Four of those five are sarin, soman and tabun
+matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
+supports. The fifth is sulfur mustard matched to DPGME, which it does not,
+since the patent that names DPGME calls it a preferred G agent simulant
 (Section~\ref{M-res:docs}). The single match under GFN2 was hydrogen cyanide to
 dichloromethane.
 
-Three things have to be said about that. The permutation test is still not
-significant at any conventional level, so this is not evidence that the
-incumbents are close to the agents; what changes is which compounds the space
-calls matched. The confound of the preceding paragraph applies in full and the
-dipole coordinate is still GFN2, so the comparison is one point estimate and not
-a bound on the method term. And the direction of the change runs against the
-analysis rather than for it: the electronic space was where the incumbents did
-worst, and the choice of electronic-structure method moves it. The analyst
-freedoms this paper is about therefore include one we did not enumerate when we
-set the comparison up. Values are in the deposited
-\texttt{outputs/dft\_electronic\_space.json}.
+Three things have to be said about that. The first is that the sign of the
+conclusion in this one space depends on the electronic-structure method. Under
+GFN2 the electronic space was where the incumbents did worst and nothing in it
+came near significance; under the density functional the same space, the same
+matching rule and the same exact permutation return 0.0368. We do not promote
+that value to a positive finding. It is a single uncorrected statistic in one
+space, reached by changing a method after seeing the first answer, and the
+geometry confound of the preceding paragraph applies to it in full. We report it
+because the alternative is to leave standing a negative claim that our own check
+does not support. The second is that the merged space does not move the same
+way. Rebuilt from the same three density-functional coordinates it retains the
+thirty-nine coordinates of the main analysis and returns three valid matches and
+a one-sided $p$ of 0.0221, against four and 0.0250 for the GFN2 control, so the
+value the main text carries is not an artefact of the semiempirical method. The
+third is that the analyst freedoms this paper is about therefore include one we
+did not enumerate when we set the comparison up, and it is the freedom that
+moved the electronic space furthest of any we examined. Values are in the
+deposited \texttt{outputs/dft\_electronic\_space.json}.
 
 We did not extend the check to the condensed Fukui index. The only population
 scheme available to us at this level is a Mulliken partition, and on a diffuse

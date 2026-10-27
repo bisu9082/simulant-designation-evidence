@@ -74,6 +74,15 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py \
            match_by_panel_ascl3.py dft_electronic_space.py
 
+# dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
+# 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로
+# 이 파이프라인에 넣지 않고 저장소에 커밋해 둔다. 재생성 명령을 여기 적는 것은
+# 2026-10-25 에 겪은 고아 파일 사고를 되풀이하지 않기 위해서다.
+#   python3 dft_omega.py                                 # -> outputs/dft_omega.*
+#   python3 dft_omega.py --out outputs/dft_dipole        # -> 쌍극자 포함
+# dft_electronic_space.py 는 두 파일의 궤도에너지가 1e-6 eV 안에서 일치하는지를
+# 관문으로 검사하므로, 한쪽만 갱신하면 그 자리에서 멈춘다.
+
 # 병리지수 제거 변종. 2026-10-25 까지 파이프라인에 없었다. 수동으로 한 번
 # 돌린 산출물이 omega 제거 뒤에도 그대로 남아, 본문이 구판 값을 '모든 분석을
 # 반복했다'며 인용했다. perm_nopatho.py 는 experiment_summary_nopatho.json 을
