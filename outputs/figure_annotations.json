@@ -10,7 +10,7 @@
   "panel_a": "DMMP's P centre is more susceptible\nto nucleophilic attack than VX's\nby $2.7\\times$"
  },
  "Fig_spaces": {
-  "panel_c": "the structural space used here gives p = 0.026, the 25.9th percentile of 2000 random three-descriptor subspaces; 36% of those draws fall below 0.05 as measured and 16% after whitening.",
+  "panel_c": "the structural space used here gives p = 0.026, the 24.3th percentile of 2000 random three-descriptor subspaces; 34% of those draws fall below 0.05 as measured and 18% after whitening.",
   "panel_d": "on the primary panel no scheme falls below 0.05; on the 28-compound panel only the pre-specified-statistic scheme does; the fourth configuration, which relabels the two pesticides as simulants, falls below 0.05 under every scheme."
  },
  "Fig_toxicity": {
@@ -25,13 +25,13 @@
  },
  "Fig_mde": {
   "mde_delta35": "0.22",
-  "gap_median35": "0.450",
-  "gap_min35": "0.116",
-  "p_at_zero35": "0.2796",
+  "gap_median35": "0.445",
+  "gap_min35": "0.110",
+  "p_at_zero35": "0.2856",
   "p_at_zero28": "0.0250"
  },
  "graphical_abstract": {
-  "panel_a": "corrected over the 18 tests: $q$ = 0.165",
+  "panel_a": "corrected over the 18 tests: $q$ = 0.181",
   "panel_c": "Spearman $r$ = +0.062   95% CI [-0.077, +0.199]   $n$ = 207\nfaithful + safe: 0 at the incumbent simulant's own bar,\n8 one order of magnitude below it"
  }
 }

@@ -1,9 +1,9 @@
 {
  "A_rdkit": {
-  "n_kept": 35,
-  "observed_diff": 0.16271204990602747,
-  "p_one_sided": 0.026470588235294117,
-  "p_two_sided_abs": 0.03235294117647059,
+  "n_kept": 34,
+  "observed_diff": 0.1574860210080062,
+  "p_one_sided": 0.027941176470588237,
+  "p_two_sided_abs": 0.03529411764705882,
   "observed_count": 6.0,
   "null_mean_count": 9.058823529411764
  },
@@ -16,8 +16,8 @@
   "null_mean_count": 9.058823529411764
  },
  "C_merged": {
-  "n_kept": 38,
-  "observed_diff": -0.031037026710139415,
+  "n_kept": 37,
+  "observed_diff": -0.005553893369755708,
   "p_one_sided": 0.025,
   "p_two_sided_abs": 0.027941176470588237,
   "observed_count": 6.0,

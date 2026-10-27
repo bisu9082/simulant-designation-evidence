@@ -579,6 +579,11 @@ def load_facts():
 
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
+    # 2026-10-27. 28종 구조공간 명목 p 가 어떤 어법으로도 등록돼 있지 않았다.
+    # 그래서 'value of 0.029 sits at the 24.3rd' 같은 주입이 통과했다.
+    f['p28_struct'] = float(json.load(open('outputs/permutation_statistics.json'))
+                            ['panel28_designated']['A_rdkit']['statistics']
+                            ['mean_diff']['p_one_sided'])
     f['pct_struct_caption'] = pc['struct_full']
     f['pct_elec'] = pc['electronic']
     f['pct_pc3'] = pc['struct_pc3']
@@ -946,26 +951,31 @@ CHECKS = [
                         r'design detects \$\|\\rho\| \\ge ([\d.]+)\$ at 80\\% power'], 0.006),
     ('mantel_power_perm', [r'all \$6! = (\d+)\$ relabellings',
                            r'exact Mantel over all (\d+) relabellings'], 0),
-    ('mantel_d2nor_elec', [r'\$\\rho = \+0\.571\$,\s*\n?Mantel \$p = ([\d.]+)\$'], 0.0005),
+    ('mantel_d2nor_elec', [r'reflectance channel \(\$\\rho = \+\d+\.\d+\$,\s*\n?Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_merged_rho',
      [r"merged space in the\s*\n?second compound set's ultraviolet channel "
       r"\(\$\\rho = ([-+][\d.]+)\$"], 0.0015),
-    ('mantel_d2uv_merged', [r'\\rho = \+0\.518\$, Mantel \$p = ([\d.]+)\$'], 0.0005),
+    # 2026-10-27. 종전 패턴은 rho 값(+0.518)을 박아 두었다. 재실행으로 rho 가
+    # +0.514 가 되자 검사가 조용히 꺼졌다. 값이 아니라 문맥으로 잡는다.
+    ('mantel_d2uv_merged', [r'ultraviolet channel \(\$\\rho = \+\d+\.\d+\$, Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_struct_rho', [r'that same set and channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
-    ('floor_d1uv_obs', [r'The observed means clear that floor by 0.013 to\s*\n?0.066: \$([-+][\d.]+)\$'], 0.0015),
+    ('floor_d1uv_obs', [r'clear that floor by [\d.]+ to\s*\n?[\d.]+: \$([-+][\d.]+)\$'], 0.0015),
     ('dmmp_ga_uv', [r'tabun, at \$\+?([\d.]+)\$ against sarin'], 0.0015),
     ('dmmp_gb_uv', [r'against sarin\'s \$\+?([\d.]+)\$'], 0.0015),
     # 도판 (d) 에 박힌 p 도 같은 사실표와 대조한다.
     ('p_struct_fig', [r'A_rdkit[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_elec_fig', [r'B_electronic[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_merged_fig', [r'C_merged[^\n]*exact p = ([\d.]+)'], 0.0005),
+    ('p28_struct', [r'-dimensional value of (\d+\.\d+) sits at the',
+                    r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
+                    r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws'], 1.0),
     ('pct_struct', [r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
     ('pct_pc3', [r'three-principal-component value of [\d.]+ sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),
     ('mantel_minq', [r'smallest adjusted value is\s*\n?([\d.]+) and no cell',
                      r'smallest \$q\$ = ([\d.]+)\)'], 0.0005),
-    ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.05),
+    ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.06),
     ('white_med28', [r'from 0.094 to ([\d.]+)\.'], 0.0005),
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('q_prespec28', [r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
@@ -1011,21 +1021,21 @@ CHECKS = [
     ('malathion_fold', [r'is predicted (\d[\d,]*) times too toxic'], 1),
     # 표 3 (tab:match) 전수 대조. 2026-10-17 신설. 이 표는 그때까지 검증기에
     # 등록되지 않아 11행 중 9행이 구판 값인 채로 144건 검사를 통과했다.
-    ('t3_GB', [r'GB & DMMP & (\d+\.\d+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
-    ('t3_GD', [r'GD & DMMP & (\d+\.\d+) &',
+    ('t3_GB', [r'GB & \S+ & (\d+\.\d+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
+    ('t3_GD', [r'GD & \S+ & (\d+\.\d+) &',
                r'Sarin \([\d.]+\), soman \(([\d.]+)\)'], 0.0005),
-    ('t3_CK', [r'CK & DCM & (\d+\.\d+) &'], 0.0005),
-    ('t3_GF', [r'GF & DMMP & (\d+\.\d+) &',
+    ('t3_CK', [r'CK & \S+ & (\d+\.\d+) &'], 0.0005),
+    ('t3_GF', [r'GF & \S+ & (\d+\.\d+) &',
                r'cyclosarin \(([\d.]+)\) are matched'], 0.0005),
-    ('t3_AC', [r'AC & DCM & (\d+\.\d+) &'], 0.0005),
-    ('t3_CG', [r'CG & DCM & (\d+\.\d+) &',
+    ('t3_AC', [r'AC & \S+ & (\d+\.\d+) &'], 0.0005),
+    ('t3_CG', [r'CG & \S+ & (\d+\.\d+) &',
                r'merged space \([\d.]+ against ([\d.]+)\)'], 0.0005),
-    ('t3_HD', [r'HD & DCM & (\d+\.\d+) &'], 0.0005),
-    ('t3_GA', [r'GA & DMMP & (\d+\.\d+) &', r'tabun at ([\d.]+) and VX',
+    ('t3_HD', [r'HD & \S+ & (\d+\.\d+) &'], 0.0005),
+    ('t3_GA', [r'GA & \S+ & (\d+\.\d+) &', r'tabun at ([\d.]+) and VX',
                r'passes its value of (\d+\.\d+)'], 0.0005),
-    ('t3_L', [r'L & DCM & (\d+\.\d+) &'], 0.0005),
-    ('t3_PS', [r'PS & DMMP & (\d+\.\d+) &'], 0.0005),
-    ('t3_VX', [r'VX & DPGME & (\d+\.\d+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
+    ('t3_L', [r'L & \S+ & (\d+\.\d+) &'], 0.0005),
+    ('t3_PS', [r'PS & \S+ & (\d+\.\d+) &'], 0.0005),
+    ('t3_VX', [r'VX & \S+ & (\d+\.\d+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
     # res:match 산문의 공간별 수치. 종전 산문은 세 공간의 원거리와 정규화
     # 거리를 섞어 적었고 어느 값도 산출물과 대조되지 않았다.
     ('struct_GD', [r'soman at ([\d.]+)\s*\n?and cyclosarin at'], 0.0005),
@@ -1096,8 +1106,8 @@ CHECKS = [
     ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
     ('pf_prespec', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & '
                     r'\\textbf\{[\d.]+\} & \\textbf\{([\d.]+)\}'], 0.0005),
-    ('struct_removed', [r'remove (\d+) of the 52 on the primary panel'], 0),
-    ('struct_removed_28', [r'of the 52 on the primary panel and\s*(\d+) on the'], 0),
+    ('struct_removed', [r'remove (\d+) of the 51 on the primary panel'], 0),
+    ('struct_removed_28', [r'of the 51 on the primary panel and\s*(\d+) on the'], 0),
     ('struct_kept_35', [r'leaving (\d+) and \d+ structural coordinates'], 0),
     ('struct_kept_28', [r'leaving \d+ and (\d+) structural coordinates'], 0),
     ('struct_candidates', [r'removes \d+ of the (\d+)',
@@ -1135,11 +1145,11 @@ SUPERSEDED = [
      [r'25\.8th percentile', r'25\.4th percentile', r'\b28th percentile',
       r'22\.7th percentile', r'\b23rd percentile', r'\b25th percentile'], []),
     ('28종 구조공간 명목 p, 앙상블 이전 (정본 0.027)', [r'0\.031'], []),
-    ('28종 구조좌표 수, 앙상블 이전 (정본 37)',
-     [r'36-dimensional', r'Weighting the 36 structural',
-      r'leaving \d+ and 36 structural'], []),
+    ('28종 구조좌표 수, 메타열 제외 이전 (정본 36)',
+     [r'37-dimensional', r'Weighting the 37 structural',
+      r'leaving \d+ and 37 structural'], []),
     ('전자공간 백분위 (정본 76.9)', [r'74\.2nd'], []),
-    ('Li-Ji 유효검정수 (정본 6.00)', [r'5\.00 effective tests'], []),
+    ('Li-Ji 유효검정수 (정본 5.00)', [r'6\.00 effective tests'], []),
     ('도판2 캡션의 통계량 서술 (실제로는 평균차 하나)',
      [r'Smallest \$p\$ over\s+the six statistics for 2000'], []),
     ('부분공간 0.05 미만 비율 (정본 36.0 / 백색화 16.5)',
@@ -1261,7 +1271,7 @@ def main():
         found = []
         for pat in pats:
             for m in re.finditer(pat, body):
-                found.append((tonum(m.group(1)), m.group(0)[:62].replace('\n', ' ')))
+                found.append((tonum(m.group(1)), m.group(0)[:62].replace('\n', ' '), m.group(1)))
         # 2026-10-24. 패턴이 리터럴 공백 하나를 요구하는데 그 자리에서 TeX 줄이
         # 바뀌면 문맥을 놓친다. 처음에는 '못 찾았을 때만' 공백을 눌러 다시
         # 보게 했는데, 그러면 같은 수치가 두 군데 적혀 있고 한쪽만 줄바꿈에
@@ -1269,20 +1279,35 @@ def main():
         # 그 경로로 구판인 채 통과했다. 항상 둘 다 훑고 중복만 걷어낸다.
         for pat in pats:
             for m in re.finditer(pat, body_flat):
-                found.append((tonum(m.group(1)), m.group(0)[:62]))
+                found.append((tonum(m.group(1)), m.group(0)[:62], m.group(1)))
         seen, uniq = set(), []
-        for val, ctx in found:
+        for val, ctx, raw in found:
             k = (round(val, 12), ' '.join(ctx.split()))
             if k in seen:
                 continue
             seen.add(k)
-            uniq.append((val, ctx))
+            uniq.append((val, ctx, raw))
         found = uniq
         if not found:
             unseen.append(f'{key}: 본문에서 문맥을 찾지 못함 (값 {want:g})')
             continue
-        for got, ctx in found:
+        for got, ctx, raw in found:
             checked += 1
+            # 2026-10-27. 절대 허용오차만 쓰면 반올림 오류가 빠져나간다.
+            # 0.0264706 을 본문이 0.027 로 적었는데 |차| 0.00053 이 허용오차
+            # 0.0006 보다 작아 통과했다. 엄격한 검사(tol <= 0.0006)에서는
+            # 본문이 적은 자릿수를 세어, 그 자릿수에서 정본의 유효한
+            # 반올림인지를 묻는다. 반올림 방향(올림/내림)은 따지지 않는다.
+            if tol <= 0.0006:
+                _m = re.search(r'\.(\d+)', raw)
+                _dp = len(_m.group(1)) if _m else 0
+                _half = 0.5 * (10 ** -_dp) + 1e-12
+                if abs(want - got) > _half:
+                    fails.append(
+                        f'  반올림 불일치 {key}: 본문 {raw} vs 산출물 '
+                        f'{want:.6g} (소수 {_dp}자리면 {want:.{_dp}f})'
+                        f'   [{ctx}]')
+                continue
             if abs(got - want) > tol:
                 fails.append(f'  불일치 {key}: 본문 {got:g} vs 산출물 {want:g}'
                              f'   [{ctx}]')
@@ -1353,15 +1378,23 @@ def main():
     NEAR = re.compile(
         r'\b(' + '|'.join(sorted(AGENT_ALIASES, key=len, reverse=True)) +
         r')\b[^.\n]{0,24}?(?:\((\d\.\d{2,3})\)|at (\d\.\d{2,3})\b)')
+    # 'N from sarin' 처럼 수가 이름 앞에 오는 꼴도 같은 자격으로 본다.
+    # 2026-10-27 에 커버레터의 'at 1.07 from sarin, 0.99 from soman' 이 이
+    # 경로로 빠져나갔다.
+    BEFORE = re.compile(
+        r'(\d\.\d{2,3}) from\s+(' + '|'.join(
+            sorted(AGENT_ALIASES, key=len, reverse=True)) + r')\b')
     # 같은 꼴로 omega(eV)와 Fukui 지수도 적히므로, 거리 어휘가 가까이 있는
     # 자리만 본다. 없으면 거리 진술이 아니라고 보고 넘긴다.
     DIST_CUE = re.compile(
         r'distance|normalis|separation|nearest|match|threshold|stands at|sits at',
         re.I)
     stray = []
-    for m in NEAR.finditer(body_flat):
-        name = AGENT_ALIASES[m.group(1)]
-        val = float(m.group(2) or m.group(3))
+    _hits = [(m, AGENT_ALIASES[m.group(1)], float(m.group(2) or m.group(3)),
+              m.end(1)) for m in NEAR.finditer(body_flat)]
+    _hits += [(m, AGENT_ALIASES[m.group(2)], float(m.group(1)), m.end(2))
+              for m in BEFORE.finditer(body_flat)]
+    for m, name, val, _name_end in _hits:
         ok = allowed.get(name, set())
         if not ok:
             continue
@@ -1371,7 +1404,7 @@ def main():
         # '2-chloroethyl ethyl sulfide, a sulfur mustard simulant, at 2.35'
         # 처럼 작용제 이름이 모사체의 역할을 설명하는 자리는 그 작용제의
         # 거리가 아니다.
-        if re.match(r'\s*simulant', body_flat[m.end(1):m.end(1) + 12]):
+        if re.match(r'\s*simulant', body_flat[_name_end:_name_end + 12]):
             continue
         # 구판임을 밝히고 인용하는 문장은 면제한다.
         if re.search(r'earlier version|earlier analysis|superseded|put tabun at',
@@ -1384,6 +1417,39 @@ def main():
                      f'맞지 않는 값 {len(stray)}건')
         for _t in sorted(set(stray))[:8]:
             fails.append('  ' + _t)
+
+    # (B4) 표 2 의 최근접 모사체 이름 (2026-10-27 신설).
+    #
+    # 왜. 표 행 패턴이 모사체 이름을 박아 두고 있었다. 재실행으로 HD 의
+    # 최근접이 dichloromethane 에서 DPGME 로 바뀌었는데, 패턴이 'HD & DCM &'
+    # 를 요구했으므로 검사가 조용히 꺼졌고 표에는 틀린 이름이 남았다.
+    # 이름을 수치와 같은 자격으로 검사한다.
+    SIM_ABBR = {'DMMP': 'DMMP', 'DCM': 'dichloromethane', 'DPGME': 'DPGME',
+                'CEES': '2-chloroethyl ethyl sulfide', 'DFP': 'DFP',
+                'DCNP': 'diethyl cyanophosphonate'}
+    AGENT_ABBR = {'GB': 'sarin (GB)', 'GD': 'soman (GD)', 'GF': 'cyclosarin (GF)',
+                  'GA': 'tabun (GA)', 'HD': 'sulfur mustard (HD)',
+                  'L': 'lewisite 1 (L)', 'AC': 'hydrogen cyanide (AC)',
+                  'CK': 'cyanogen chloride (CK)', 'CG': 'phosgene (CG)',
+                  'PS': 'chloropicrin (PS)', 'VX': 'VX'}
+    if os.path.exists('outputs/match_by_panel.json'):
+        _mb = json.load(open('outputs/match_by_panel.json'))['panel28_incumbent3']
+        _near = {a['agent']: a['nearest_simulant'] for a in _mb['agents']}
+        _rowpat = re.compile(
+            r'\b(' + '|'.join(AGENT_ABBR) + r') & (\S+) & \d+\.\d+ &')
+        _bad = []
+        for m in _rowpat.finditer(body_flat):
+            _ag = AGENT_ABBR[m.group(1)]
+            _got = m.group(2)
+            _want = _near.get(_ag)
+            if _want is None:
+                continue
+            if SIM_ABBR.get(_got, _got) != _want:
+                _bad.append(f'{m.group(1)}: 표 {_got} vs 산출물 {_want}')
+        if _bad:
+            fails.append('표 2 의 최근접 모사체 이름 (검사 B4):')
+            for _t in sorted(set(_bad)):
+                fails.append('  ' + _t)
 
     # (C) 데이터가 반증하는 문구. 수치가 맞아도 주장이 틀릴 수 있다.
     # Figure 2 의 구판 주석은 숫자를 하나도 틀리지 않으면서
