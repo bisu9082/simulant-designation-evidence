@@ -189,16 +189,100 @@ carry the property they are relied upon for.
 % 예산 2,800단어.
 
 \subsection{The array separates the agents}
-% 예산 400단어. 전제 검정 6셀, p 4.6e-8 ~ 0.025.
-% 중심화 항등식 한계도 여기서 밝힌다 (물질간 평균 코사인이 대수적 바닥
-% -1/(n-1) 에서 0.013~0.066 여유밖에 없다).
-% 도판: Fig 1(a).
+% 예산 400단어. 현재 약 400단어.
+
+A comparison between descriptor space and response space is worth making
+only if the response measurement resolves the compounds at all. We checked
+that first. Each exposure gives a 29-dye $\Delta E$ vector, which we centred
+dye-wise at each concentration and normalised to unit length, so that the
+comparison is between response patterns rather than response magnitudes.
+Agreement was then measured as the cosine between patterns, within
+replicates of one compound and between different compounds.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=\textwidth]{Fig_talk_response.png}
+  \caption{Response-space tests on authentic agents. (a) Mean cosine
+  between response patterns, within replicates of the same compound and
+  between different compounds, for three runs in two optical channels.
+  (b) Adjusted $p$ for every test of descriptor distance against response
+  distance: twelve exact Mantel cells and six Fisher combinations of the
+  independent runs. (c) Cosine between the response pattern of DMMP and
+  those of the four G agents and VX, by concentration, in the ultraviolet
+  channel.}
+  \label{fig:response}
+\end{figure}
+
+The array resolves the compounds in every run and channel
+(Figure~\ref{fig:response}a). Replicates of one compound correlate at
+$+0.345$ to $+0.542$, different compounds anti-correlate at $-0.103$ to
+$-0.330$, and the separation holds in all six run-channel cells, with $p$
+from $4.6\times10^{-8}$ to 0.025.
+
+Two limits on that statement belong here rather than in the Supporting
+Information. The first is that dye-wise centring forces the mean
+between-compound cosine towards an algebraic floor of $-1/(n-1)$, and the
+observed means clear that floor by only 0.013 to 0.064 across the four
+cells where it could be evaluated. Most of the apparent separation is
+therefore a property of the centring, and what the test establishes is the
+weaker statement that replicate agreement exceeds between-compound
+agreement. The second is that six dye columns in the ultraviolet pivot of
+the second run were bit-identical across every row. Tracing them to the
+source images showed that those dyes do not fluoresce under ultraviolet
+excitation and the regions of interest had read plate background, so one
+channel had been recorded six times. Columns identical across all rows are
+counted once, which leaves 23 effective channels in that cell and 25 in the
+ultraviolet pivot of the third run.
 
 \subsection{Descriptor distance does not predict response distance}
-% 예산 700단어. Mantel 전수 12셀 BH q_min 0.10,
-% d1+d2 Fisher 6셀 q_min 0.204. 런 간 가교 화합물 부재로 교차런 풀링이
-% 막힌 것도 여기서 (15 / 21 / 6 쌍이 전력 천장).
-% 도판: Fig 1(b).
+% 예산 700단어. 현재 약 650단어.
+
+Simulant selection rests on an implicit transfer: that a compound close to
+an agent in descriptor space will be close to it in whatever the detector
+measures. We tested the transfer directly, as the agreement between two
+distance matrices over the same compounds, one built from descriptors and
+one from response patterns. Agreement was measured by Mantel correlation
+and referred to a null built by enumerating every relabelling of the
+compounds, so the test is exact rather than sampled.
+
+The test is run within each run and never across runs. The three runs share
+no compound, so the dye-wise sensitivity of one plate cannot be calibrated
+against another, and pooling responses across them would require a
+commutability assumption we cannot support. That restriction sets the
+power. Six compounds in the first run and six in the second carry both a
+response pattern and a descriptor vector, giving fifteen pairs in each,
+and the third run drops out because the A-series compounds are not in the
+descriptor panel. Nitrogen mustard drops out of the second run for the same
+reason.
+
+Across the twelve cells, three spaces by two channels by two runs, nothing
+survives correction (Figure~\ref{fig:response}b). Three cells reach a
+nominal $p$ below 0.05, all of them in the second run: the merged space in
+the ultraviolet channel at 0.0153, the structural space in the same channel
+at 0.0167, and the electronic space in the reflectance channel at 0.0444.
+Benjamini--Hochberg correction over the twelve leaves a smallest adjusted
+value of 0.10. The pattern of the three is itself uninformative about
+transfer, because the two ultraviolet cells implicate the structural and
+merged spaces while the reflectance cell implicates the electronic space,
+and the same space does not reproduce across channels of the same plate.
+
+Combining runs does not change the answer. The first and second runs share
+neither compounds nor plates, so their exact Mantel $p$ values are
+independent and can be combined by Fisher's method. We report all six
+combinations of three spaces and two channels rather than selecting one,
+which would reintroduce the analyst freedom the test is meant to remove.
+The smallest adjusted value over the six is 0.204, and none reaches 0.05.
+
+What this does not license is the claim that no transfer exists. Fifteen
+pairs is a weak test, and the pooled rank correlations are correspondingly
+imprecise: the structural space in the ultraviolet channel gives
+$\rho=+0.31$ with a 95\% interval from $-0.45$ to $+0.81$, which excludes
+neither zero nor a strong association. The defensible statement is that the
+transfer on which simulant selection depends has not been established, in
+the one body of authentic-agent response data where it could be tested, and
+that the experiment which would settle it is a run containing a compound
+already measured in an existing run. Such a bridge would fix the plate
+correction and open the 136 cross-run pairs that are closed today.
 
 \subsection{The standard G-agent simulant against the G agents}
 % 예산 700단어. DMMP 코사인 GA +0.76 GB +0.65 GD -0.49 GF -0.72 VX -0.70.
