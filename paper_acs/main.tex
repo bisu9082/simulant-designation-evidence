@@ -355,14 +355,112 @@ in response space at all. The permutation null that the descriptor analysis
 of the next section relies on is, in response space, empty.
 
 \subsection{Descriptor space cannot supply the missing validation}
-% 예산 600단어. 35종 0/11 전 검정 비유의, 28종 4/11 명목 0.0250,
-% BH-18 0.181, 부분공간 백분위 24.3, 지정 순위 5/680 p 0.0074.
-% 도판: Fig 3.
+% 예산 600단어. 현재 약 590단어.
+
+If response space cannot establish the transfer, the question becomes
+whether descriptor space can at least establish the premise it is used for,
+that the incumbents sit closer to the agents than other compounds do. This
+can be asked exactly. Designating three compounds out of the non-agents in
+a panel is a choice among a finite set, so the incumbent designation can be
+referred to every alternative designation rather than to a sampled null.
+The primary panel of thirty-five compounds gives 2024 designations and the
+reduced panel of twenty-eight gives 680.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=\textwidth]{Fig_main.png}
+  \caption{Descriptor-space tests. (a) Distance from each agent to its
+  nearest candidate, for the three incumbents and for the eight compounds
+  the sensing literature also calls simulants. (b) Valid matches over 1000
+  descriptor resampling replicates. (c) Distance to the nearest incumbent
+  by space. (d) Observed mean difference against the exact null over all
+  680 designations of three compounds from seventeen.}
+  \label{fig:descriptor}
+\end{figure}
+
+On the primary panel the answer is flat (Figure~\ref{fig:descriptor}).
+No agent of the eleven has a valid match, the smallest nominal $p$ over
+the eighteen tests is 0.1695, and the Benjamini--Hochberg adjusted value is
+0.6173. Nothing in that panel supports the designation.
+
+The reduced panel, which omits five compounds the literature also calls
+simulants, reads differently. Four agents acquire a valid match, and the
+merged space returns a nominal one-sided $p$ of 0.0250 with the structural
+space at 0.0265. Whether that survives depends on which correction is
+applied. Benjamini--Hochberg over the eighteen tests gives 0.1809,
+correcting within each space gives 0.0824, and the Westfall--Young
+single-step procedure, which uses the shared permutations and so handles
+the dependence between tests exactly, gives 0.0779. Only the scheme that
+fixes one statistic in advance returns a value below 0.05, at 0.0397.
+Significance here is a property of one correction scheme on one panel
+construction, and we report all four rather than the one that passes.
+
+The surviving structural value is also an ordinary draw from the choices
+available to an analyst. Drawing three descriptors at random from the
+structural block 2000 times and repeating the whole procedure places the
+observed value at the 24.3rd percentile of that distribution. A value at
+the quarter mark of what random descriptor choices produce is not evidence
+about chemistry.
+
+One quantity in this family does separate the incumbents from the
+alternatives, and it is worth stating precisely because it is easy to
+over-read. Across 500 random three-descriptor subspaces, the incumbent
+designation reaches $p<0.05$ in 36.0\% of them. Referred to the same
+quantity computed for all 680 designations, where the mean is 4.7\% and
+the median 2.0\%, the incumbent designation ranks fifth of 680
+($p=0.0074$). The incumbents are therefore unusual in how often a lucky
+choice of three descriptors can be found for them. That is a statement
+about the flexibility of the comparison, not about proximity to the agents.
+
+What decides the answer is panel composition. Adding back the five
+compounds the sensing literature also treats as simulants moves the count
+from four valid matches to zero, because diisopropyl fluorophosphate is
+nearer to three G agents than any incumbent is, and 2-chloroethyl ethyl
+sulfide is nearer to sulfur mustard than dichloromethane is. The incumbents
+do not move. What moves is whether anything closer is allowed into the
+comparison.
 
 \subsection{Neither the designation record nor a toxicity model fills the gap}
-% 예산 400단어. NIOSH 여과재 파과(자체 면책 문구 포함), DPGME 훈련용 IMS,
-% DCM 전거 없음. AEGL 1/3, QSAR 20/20 일방 실패, 적용영역 안 최악 482배.
-% 도판: Fig 4.
+% 예산 400단어. 현재 약 390단어.
+
+Two places remain where the missing evidence might be found, and both are
+empty for the same compounds.
+
+The first is the standard-setting record. We traced each incumbent to the
+document that designates it. DMMP is identified in a NIOSH programme for
+respirator materials resistance testing, where the measurement is filter
+breakthrough and the same document states that the simulant information is
+not to be used as a recommendation of any simulant.\cite{niosh2002simulant}
+DPGME appears in a US Army patent for a training composition, where the
+property required of it is detectability by ion mobility
+spectrometry.\cite{seitzinger2006simulant} For dichloromethane we found no
+designating document in the public record. Each of the two traceable
+designations is a validation against a measurement, and neither of those
+measurements is detection. A simulant is validated for a purpose, and that
+validation does not travel with the compound to a different purpose.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=\textwidth]{Fig_talk_tox.png}
+  \caption{The toxicity axis. (a) Measured EPA AEGL-3 10-minute values for
+  the panel compounds that carry one. (b) Prediction error of a random
+  forest trained on 230 AEGL chemicals, for twenty military agents held out
+  of training, against distance to the training set.}
+  \label{fig:tox}
+\end{figure}
+
+The second is regulatory toxicity (Figure~\ref{fig:tox}). One of the three
+incumbents carries a regulator-derived acute inhalation value. DMMP, the
+compound against which decontamination efficiency is quantified, carries
+none of any kind. A model cannot fill that gap. A random forest trained on
+230 AEGL chemicals reaches $R^{2}=0.458$ in cross-validation, with an
+out-of-fold bias of $+0.001$ log units, so nothing in its internal
+statistics warns a user off. Applied to twenty military agents held out of
+training it is wrong in one direction without exception, by 0.40 to 3.42
+log units. Its applicability-domain check certifies fourteen of the twenty
+as inside the domain, and the worst of those fourteen is wrong by 2.68 log
+units, a factor of 482. The mean error over the twenty is $+1.68$ log units
+with Cohen's $d_{z}=+1.96$.
 
 % ===========================================================================
 \section{Conclusions}

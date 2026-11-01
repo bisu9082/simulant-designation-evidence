@@ -354,6 +354,7 @@ def load_facts():
         f['sn_rank'] = _sn['rank_of_actual']
         f['sn_p'] = _sn['p_of_actual']
         f['sn_nsub'] = _sn['n_subspaces']
+        f['sn_ndesig'] = _sn['n_designations']
 
     # 2026-10-26. 형태이성질체 민감도. 3D 서술자 9개가 모든 거리에 들어가므로
     # 임베딩 시드에 대한 폭을 원고가 싣는다. 두 처리(앙상블/단일)를 모두 건다.
@@ -788,7 +789,8 @@ def row_pat(label, space, col):
 UNQUOTED = {}
 
 CHECKS = [
-    ('n_train', [r'(\d[\d,]*) training (?:chemicals|compounds)',
+    ('n_train', [r'random forest trained on (\d+) AEGL chemicals',
+     r'(\d[\d,]*) training (?:chemicals|compounds)',
                  r'leaving (\d[\d,]*) for\s*\n?training',
                  r'trained on (\d[\d,]*) AEGL'], 0),
     ('n_heldout', [r'(?:the|all) (twenty|seventeen|nineteen|eighteen) '
@@ -811,7 +813,8 @@ CHECKS = [
     ('aegl3_acetone', [r'acetone \((\d[\d,\\]*)\)'], 1.0),
     ('aegl3_benzene', [r'benzene \((\d[\d,\\]*)\)'], 1.0),
     ('aegl3_pxylene', [r'p-xylene \((\d[\d,\\]*)\)'], 1.0),
-    ('rf_r2', [r'R\^\{2\}=([\d.]+) \\pm'], 0.001),
+    ('rf_r2', [r'reaches \$R\^\{2\}=([\d.]+)\$ in cross-validation',
+     r'R\^\{2\}=([\d.]+) \\pm'], 0.001),
     ('rf_r2_sd', [r'R\^\{2\}=[\d.]+ \\pm ([\d.]+)'], 0.001),
     ('rf_rmse', [r'RMSE \$?([\d.]+)\$? in'], 0.001),
     ('b1_rmse', [r'training-mean baseline of\s*\n?([\d.]+) \('], 0.001),
@@ -872,10 +875,12 @@ CHECKS = [
     ('panel_without', [r'\(b\) The (nine|fifteen|ten)\s+compounds with no\s+regulator-grade',
                        r'(Nine|Fifteen|Ten) compounds have no value'], 0),
     ('heldout_worst_in_domain',
-     [r'worst of those fourteen being\s*\n?wrong by ([\d.]+) log units',
+     [r'worst of those fourteen is wrong by ([\d.]+) log',
+     r'worst of those fourteen being\s*\n?wrong by ([\d.]+) log units',
       r'is still wrong\s*\n?by ([\d.]+) log units'], 0.005),
     ('heldout_in_domain',
-     [r'(Fourteen|Thirteen|Fifteen) of the twenty lie inside',
+     [r'certifies (\w+) of the twenty\s+as inside the domain',
+     r'(Fourteen|Thirteen|Fifteen) of the twenty lie inside',
       r'(fourteen|thirteen|fifteen) of them pass the domain check'], 0),
     ('tce_ratio', [r'trichloroethylene[, ]+is ([\d.]+) times closer',
                    r'trichloroethylene ([\d.]+) times closer'], 0.05),
@@ -885,7 +890,8 @@ CHECKS = [
     ('dcm_panel_rank', [r'no designating\s*\n?document, ranks (\d+) of \d+'], 0),
     ('panel_with_aegl3', [r'no designating\s*\n?document, ranks \d+ of (\d+)'], 0),
     ('heldout_in_domain', [r'(\d+) of the 20 agents pass the domain check'], 0),
-    ('heldout_n', [r'and all (\d+) are wrong by'], 0),
+    ('heldout_n', [r'Applied to (\w+) military agents held out',
+     r'and all (\d+) are wrong by'], 0),
     ('heldout_worst_in_domain',
      [r'worst inside the domain is wrong by ([\d.]+) log'], 0.005),
     ('spearman_r', [r'Spearman \$?r\$? ?[&=] ?\$?([-+][\d.]+)\$?',
@@ -897,12 +903,14 @@ CHECKS = [
     # 문장과 Table 1 의 '28종 패널' 블록을 동시에 대조한다. 표에는 패널 3구성이
     # 들어 있으므로 '28 cpd.' 행에 앵커를 걸어야 한다. 앵커 없이 쓰면 35종 행의
     # 값까지 물어와 거짓 불일치가 난다.
-    ('p_struct', [r'condition \(structural \$p=([\d.]+)\$',
+    ('p_struct', [r'with the structural\s+space at ([\d.]+)',
+     r'condition \(structural \$p=([\d.]+)\$',
                   row_pat('28 cpd., incumbent 3', 'structural', 0)], 0.0005),
     ('p_elec', [r'electronic \$p=([\d.]+)\$',
                 row_pat('(omits the five)', 'electronic', 0)], 0.0005),
     # 각 블록의 세 번째 행은 행 이름 칸이 비어 있다. 앞 행을 닻으로 쓴다.
-    ('p_merged', [r'merged \$p=([\d.]+)\$',
+    ('p_merged', [r'merged space returns a nominal one-sided \$p\$ of\s+([\d.]+)',
+     r'merged \$p=([\d.]+)\$',
                   r'\(omits the five\)[^\n]*\n\s*&\s*merged\s*&\s*\d+\s*&\s*'
                   r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0005),
     ('pc3_p28', [r'from \$p=[\d.]+\$ to\s*\n?\$p=([\d.]+)\$'], 0.0005),
@@ -912,10 +920,12 @@ CHECKS = [
      0.0005),
     ('omega_distrank', [r'0\.934 on the primary panel, ([\d.]+) on the smaller one'], 0.0005),
     ('omega_pc3_var', [r'account for ([\d.]+)\\% of its variance'], 0.05),
-    ('bh_q28', [r'eighteen-test family\s*\n?gives a smallest adjusted value '
+    ('bh_q28', [r'over the eighteen tests gives ([\d.]+),\s+correcting within',
+     r'eighteen-test family\s*\n?gives a smallest adjusted value '
                 r'of ([\d.]+), correcting',
                 r'Benjamini-Hochberg \$q =\s*\n?([\d.]+)\$'], 0.0005),
-    ('bh_q35', [r'Benjamini-Hochberg over 18\s+& (\d+\.\d+) &'], 0.0005),
+    ('bh_q35', [r'Benjamini--Hochberg adjusted value is\s+([\d.]+)',
+     r'Benjamini-Hochberg over 18\s+& (\d+\.\d+) &'], 0.0005),
     ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
     # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
@@ -962,13 +972,24 @@ CHECKS = [
     ('ap_p28', [r'Benjamini-Hochberg over all 72\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &',
                 r'panel rises from 0\.165 to (\d+\.\d+)'], 0.0006),
     ('ap_pest', [r'configuration stays significant at (\d+\.\d+)'], 0.0006),
-    ('sn_mean', [r'averages (\d+\.\d+)\\% across the 680'], 0.06),
-    ('sn_median', [r'with a median of (\d+\.\d+)\\%'], 0.06),
+    ('sn_mean', [r'where the mean is ([\d.]+)\\% and',
+     r'averages (\d+\.\d+)\\% across the 680'], 0.06),
+    ('sn_median', [r'and the median ([\d.]+)\\%',
+     r'with a median of (\d+\.\d+)\\%'], 0.06),
     ('sn_p95', [r'95th percentile of (\d+\.\d+)\\%'], 0.06),
     ('sn_max', [r'a maximum\s*\n?of (\d+\.\d+)\\%'], 0.06),
-    ('sn_p', [r'ranks fifth of 680, \$p=(\d+\.\d+)\$'], 0.0006),
-    ('sn_nsub', [r'Over (\d+) subspaces'], 0),
-    ('sn_actual', [r"incumbent designation's (\d+\.\d+)\\% ranks fifth"], 0.06),
+    ('sn_p', [r'ranks fifth of \d+\s+\(\$p=([\d.]+)\$\)',
+     r'ranks fifth of 680, \$p=(\d+\.\d+)\$'], 0.0006),
+    ('sn_nsub', [r'Across (\d+) random three-descriptor subspaces',
+     r'Over (\d+) subspaces'], 0),
+    # 2026-11-01 신설. 사실로는 적재되는데 검사 항목이 없던 셋.
+    ('sn_ndesig', [r'ranks fifth of (\d+)'], 0),
+    ('heldout_err_min',
+     [r'without exception, by ([\d.]+) to [\d.]+\s+log units'], 0.0006),
+    ('heldout_err_max',
+     [r'without exception, by [\d.]+ to ([\d.]+)\s+log units'], 0.0006),
+    ('sn_actual', [r'reaches \$p<0\.05\$ in ([\d.]+)\\% of them',
+     r"incumbent designation's (\d+\.\d+)\\% ranks fifth"], 0.06),
     ('fam_minp_p35', [r'Smallest nominal \$p\$ \(18 tests\)\s*& (\d+\.\d+) &'], 0.0006),
     ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
     ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
@@ -1087,7 +1108,8 @@ CHECKS = [
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws'], 1.0),
-    ('pct_struct', [r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
+    ('pct_struct', [r'observed value at the ([\d.]+)(?:st|nd|rd|th) percentile of that',
+     r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
     ('pct_pc3', [r'three-principal-component value of [\d.]+ sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),
     ('mantel_minq', [r'smallest adjusted value is\s*\n?([\d.]+) and no cell',
@@ -1096,7 +1118,8 @@ CHECKS = [
     ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.06),
     ('white_med28', [r'from 0.094 to ([\d.]+)\.'], 0.0005),
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
-    ('q_prespec28', [r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
+    ('q_prespec28', [r'returns a value below 0\.05, at ([\d.]+)',
+     r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
     ('meff28', [r'estimates ([\d.]+) effective tests'], 0.005),
     ('meff_p28', [r'and gives\s*\n?([\d.]+), conservative here by a factor'], 0.0005),
     ('match35_inc', [r'twenty-eight-compound panel and (\w+) on the primary one'], 0),
@@ -1127,7 +1150,8 @@ CHECKS = [
     ('null_exp35', [r'expectation of ([\d.]+) set by the 21:3'], 0.006),
     ('null_exp28', [r'smaller panel against ([\d.]+)'], 0.005),
     ('wy35', [r'Westfall-Young min-\$P\$ over 18\s+& (\d+\.\d+) &'], 0.0005),
-    ('wy28', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
+    ('wy28', [r'handles the dependence between tests exactly,\s+gives ([\d.]+)',
+     r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('wy35lit', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('boot_inc_zero', [r'exactly zero\s*\n?in ([\d.]+)\\% of replicates'], 0.05),
     ('boot_diff_pos', [r'positive in (\d+) of 1000'], 0),
