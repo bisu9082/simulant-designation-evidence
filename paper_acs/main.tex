@@ -4,8 +4,16 @@
 % 왜 새 디렉터리인가. paper/ 는 elsarticle·JHM 판본이고 11,141단어다.
 % ACS Sensors 는 Article 권장 8쇄면, 1,000단어/쇄면, 단단 그림 250·양단 500
 % 환산이다. 참고문헌 50건이 약 1,300, 도판 4장이 1,500 을 먹으므로 본문
-% 예산은 약 5,000단어다. 다듬기로는 안 되고 재집필이라 판본을 분리한다.
+% 예산은 약 5,000단어다. 다듬기가 아니라 재집필이라 판본을 분리한다.
 % paper/ 는 그대로 두어 수치 정본과 verify_consistency 의 대조 대상을 유지한다.
+%
+% 골격은 Ku 제공 ACS 템플릿(phthalate 판본)의 관례를 따른다.
+%
+% journal 코드 주의. ACS Sensors 의 CODEN 은 ascefj 인데 achemso.cls 의
+% 저널 목록에 없다. ascefj 를 넣으면 클래스가 알 수 없는 저널로 처리해
+% '(Sub)section ... ignored' 경고를 내며 절 제목을 전부 삼킨다 (2026-11-01
+% 적발). 그래서 템플릿과 동일하게 jacsat 을 쓴다. 조판 편의용일 뿐이고
+% 투고 대상은 ACS Sensors 다.
 %
 % 분량 예산 (총 8쇄면 = 8,000 환산)
 %   Introduction            700
@@ -21,43 +29,82 @@
 %
 % 컴파일: pdflatex -> bibtex -> pdflatex x2
 % ---------------------------------------------------------------------------
-\documentclass[journal=ascefj,manuscript=article,layout=traditional]{achemso}
+\documentclass[journal=jacsat,manuscript=article,margin=1in]{achemso}
 
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{float, graphicx, caption, xcolor}
+\usepackage{subcaption}
+\captionsetup[sub]{labelformat=parens, labelsep=none, font=bf, position=top}
 \usepackage{booktabs}
+\usepackage{textcomp}
+\usepackage{url}
+\usepackage[per-mode=symbol]{siunitx}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Meta-data block
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2026-11-01 Ku 확정. 종전(2026-10-24)과 다른 점은 공동1저자 해제(Ku 단독)와
+% Doo-Hee Lee 의 교신 해제 둘뿐이고, 인원과 소속은 10-24 판 그대로다.
+% Jeongyun Kim 은 이 원고 한정으로 CBRN 소속 표기 (Ku 지시).
 \author{Ku Kang}
-\affiliation{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
-Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN)
+Defense Research Institute, Ministry of National Defense, Seoul, Republic of
+Korea}
+
 \author{Jeongyun Kim}
-\affiliation{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
-Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN)
+Defense Research Institute, Ministry of National Defense, Seoul, Republic of
+Korea}
+
 \author{Miae Kim}
-\affiliation{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
-Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN)
+Defense Research Institute, Ministry of National Defense, Seoul, Republic of
+Korea}
+
 \author{Doo-Hee Lee}
-\affiliation{Department of Civil Engineering and Environmental Sciences,
+\affiliation[KMA]{Department of Civil Engineering and Environmental Sciences,
 Korea Military Academy, Seoul 01805, Republic of Korea}
+
 \author{Jin Yoo}
-\affiliation{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
-Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN)
+Defense Research Institute, Ministry of National Defense, Seoul, Republic of
+Korea}
+
 \author{Yoon Jeong Jang}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN)
+Defense Research Institute, Ministry of National Defense, Seoul, Republic of
+Korea}
 \email{yjjangchem@korea.kr}
-\affiliation{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
-Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
-% ORCID (ACS Paragon Plus 제출 시 입력):
-%   Ku Kang          0000-0001-8739-218X
-%   Jeongyun Kim     0009-0004-1377-8572
-%   Miae Kim         없음
-%   Doo-Hee Lee      0000-0002-5116-2064
-%   Jin Yoo          0000-0002-7738-8424
-%   Yoon Jeong Jang  0000-0002-5625-2528
+
+% ORCID (ACS Paragon Plus 제출 시 입력. 본문에는 넣지 않는다):
+%   Ku Kang          0000-0001-8739-218X   bisu9082@mnd.go.kr
+%   Jeongyun Kim     0009-0004-1377-8572   kimjy3022@snu.ac.kr
+%   Miae Kim         없음                  kma9292@daum.net
+%   Doo-Hee Lee      0000-0002-5116-2064   dooheelee@korea.kr
+%   Jin Yoo          0000-0002-7738-8424   tysonyj@snu.ac.kr
+%   Yoon Jeong Jang  0000-0002-5625-2528   yjjangchem@korea.kr
 
 \title{Descriptor Similarity Does Not Predict Array Response: Chemical
 Warfare Agent Simulants Tested Against Seventeen Authentic Agents}
 
+\keywords{chemical warfare agents, simulants, colorimetric sensor array,
+surrogate validation, permutation test, applicability domain}
+
 \begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TOC graphic. 길이 환산에서 제외된다.
+%% TODO 현재 것은 JHM 프레임(서술자공간 중심)으로 그린 구판이다.
+%% 응답공간 헤드라인에 맞춰 다시 그려야 한다.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tocentry}
+  \centering
+  % ACS TOC 규격은 최대 8.25 x 4.45 cm. 현재 도판 비율 2.40 이므로
+  % 8.25cm 폭에서 높이 3.44cm, 규격 안에 든다.
+  \includegraphics[width=8.25cm]{graphical_abstract.png}
+\end{tocentry}
 
 % --- Abstract: ACS Sensors 는 80~250 단어. 목적 1문장, 방법 2~3문장,
 %     결과 2~3문장 구조를 요구한다. 현재 228단어.
@@ -84,14 +131,11 @@ agents measured, exactly one designated simulant has ever been measured
 beside them.
 \end{abstract}
 
-% --- TOC graphic 은 길이 환산에서 제외된다 (저자지침). 별도 제작 필요.
-
 \section{Introduction}
-% 예산 700단어. 현재 약 690단어.
+% 예산 700단어. 현재 411단어.
 % 이 절이 하는 일 둘. (1) 센서 개발자의 언어로 공백을 세운다.
 % (2) 거부 조항 "deals with known sensing concepts and does not offer a
 % significant, original application of the method" 를 선제 차단한다.
-% 기여를 '어레이의 새 응용' 이 아니라 '대리물 타당성의 측정' 으로 선언한다.
 
 Nearly every chemical warfare agent detector in the literature is developed,
 optimised and qualified on compounds that are not chemical warfare
@@ -145,20 +189,22 @@ carry the property they are relied upon for.
 % 예산 2,800단어.
 
 \subsection{The array separates the agents}
-% 예산 400단어. 전제 검정 6셀. 중심화 항등식 한계도 여기서 밝힌다
-% (물질간 평균 코사인이 대수적 바닥 -1/(n-1) 에서 0.013~0.066 여유).
+% 예산 400단어. 전제 검정 6셀, p 4.6e-8 ~ 0.025.
+% 중심화 항등식 한계도 여기서 밝힌다 (물질간 평균 코사인이 대수적 바닥
+% -1/(n-1) 에서 0.013~0.066 여유밖에 없다).
 % 도판: Fig 1(a).
 
 \subsection{Descriptor distance does not predict response distance}
-% 예산 700단어. Mantel 전수 12셀 BH q_min 0.10, d1+d2 Fisher 6셀 q_min 0.204.
-% 런 간 가교 화합물 부재로 교차런 풀링이 막힌 것도 여기서.
+% 예산 700단어. Mantel 전수 12셀 BH q_min 0.10,
+% d1+d2 Fisher 6셀 q_min 0.204. 런 간 가교 화합물 부재로 교차런 풀링이
+% 막힌 것도 여기서 (15 / 21 / 6 쌍이 전력 천장).
 % 도판: Fig 1(b).
 
 \subsection{The standard G-agent simulant against the G agents}
 % 예산 700단어. DMMP 코사인 GA +0.76 GB +0.65 GD -0.49 GF -0.72 VX -0.70.
 % 농도 의존(GB 0.363 -> 0.771), 4! 전수 p 하한 0.083, BH 10건 q_min 0.28.
-% 귀무 대조 둘을 여기서 전부 보고한다: 순위 1위 2/10 대 기대 2.0 (이항 p 0.624),
-% 염료 집중도가 작용제-작용제 쌍·치환 귀무와 같음.
+% 귀무 대조 둘을 여기서 전부 보고한다: 순위 1위 2/10 대 기대 2.0
+% (이항 p 0.624), 염료 집중도가 작용제-작용제 쌍·치환 귀무와 같음.
 % 도판: Fig 2.
 
 \subsection{Descriptor space cannot supply the missing validation}
