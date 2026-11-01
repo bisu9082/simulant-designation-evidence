@@ -25,6 +25,9 @@ import sys
 import pandas as pd
 
 TEX = 'paper/main.tex'
+# 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
+EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
+             'paper/supplementary.tex', 'paper_acs/main.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -483,6 +486,51 @@ def load_facts():
                 if e['agent'] == 'GB':
                     f['dmmp_gb_uv'] = e['cosine']
 
+    # 2026-11-01. ACS 판본(paper_acs/main.tex)이 싣는 응답공간 수치를 등록한다.
+    # 종전에는 elsarticle 판 문구에만 패턴이 걸려 있어, 같은 양을 다르게 쓴
+    # ACS 문장이 무검사로 자랐다. 이 원고에서 반복해 터진 '문구별 검사' 결함이다.
+    _pre = json.load(open('outputs/deltaE_premise.json'))
+    for _d in _pre['dmmp']:
+        if _d['mode'] == 'uv':
+            f['dmmp_gd_uv'] = _d['cos_GD']
+            f['dmmp_gf_uv'] = _d['cos_GF']
+            f['dmmp_vx_uv'] = _d['cos_VX']
+            f['dmmp_gmean_uv'] = _d['g_series_mean']
+            f['gvx_uv'] = _d['g_minus_vx']
+            f['gvx_uv_lo'] = _d['ci_lo']
+            f['gvx_uv_hi'] = _d['ci_hi']
+        else:
+            f['dmmp_gmean_nor'] = _d['g_series_mean']
+            f['gvx_nor'] = _d['g_minus_vx']
+            f['gvx_nor_lo'] = _d['ci_lo']
+            f['gvx_nor_hi'] = _d['ci_hi']
+    _ext = json.load(open('outputs/deltaE_extended.json'))
+    for _r in _ext['concentration']:
+        if _r['mode'] == 'uv' and _r['agent'] == 'GB':
+            f['conc_gb_lo'] = _r['cosines'][0]
+            f['conc_gb_hi'] = _r['cosines'][-1]
+        if _r['mode'] == 'uv' and _r['agent'] == 'GF':
+            f['conc_gf_lo'] = abs(_r['cosines'][0])
+            f['conc_gf_hi'] = abs(_r['cosines'][-1])
+    # 추세 10건의 BH 최소 q. 리터럴로 두면 재분석 때 조용히 구판이 된다.
+    _tp = sorted(x['trend_p_exact'] for x in _ext['concentration']
+                 if 'trend_p_exact' in x)
+    _m = len(_tp)
+    _q = [min(1.0, pv * _m / (i + 1)) for i, pv in enumerate(_tp)]
+    for _i in range(_m - 2, -1, -1):
+        _q[_i] = min(_q[_i], _q[_i + 1])
+    f['trend_bh_q'] = round(min(_q), 3)
+    f['trend_monotone'] = sum(1 for x in _ext['concentration']
+                              if abs(x.get('trend_rho', 0)) == 1.0)
+    _M = _ext['matching']
+    f['rank_obs'] = _M['n_rank1_observed']
+    f['rank_exp'] = _M['n_rank1_expected']
+    f['rank_p'] = _M['p_binom_one_sided']
+    for _c in _ext['dyes']['controls']:
+        f['dye_null_' + _c['mode']] = _c['null_half_mean']
+    f['fisher_minq'] = _ext['combined']['min_q']
+    f['fisher_cells'] = _ext['combined']['n_tests']
+
     f['p_struct_fig'] = f['p_struct']
     f['p_elec_fig'] = f['p_elec']
     f['p_merged_fig'] = f['p_merged']
@@ -864,10 +912,42 @@ CHECKS = [
      0.0005),
     ('omega_distrank', [r'0\.934 on the primary panel, ([\d.]+) on the smaller one'], 0.0005),
     ('omega_pc3_var', [r'account for ([\d.]+)\\% of its variance'], 0.05),
-    ('bh_q28', [r'smallest adjusted value of ([\d.]+)',
+    ('bh_q28', [r'eighteen-test family\s*\n?gives a smallest adjusted value '
+                r'of ([\d.]+), correcting',
                 r'Benjamini-Hochberg \$q =\s*\n?([\d.]+)\$'], 0.0005),
     ('bh_q35', [r'Benjamini-Hochberg over 18\s+& (\d+\.\d+) &'], 0.0005),
     ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
+    # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
+    ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
+    ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
+    ('dmmp_vx_uv', [r'and VX at \$([-][\d.]+)\$'], 0.0015),
+    ('dmmp_gmean_uv',
+     [r'negative in both channels, \$([-][\d.]+)\$ and'], 0.0015),
+    ('dmmp_gmean_nor',
+     [r'negative in both channels, \$[-][\d.]+\$ and\s+\$([-][\d.]+)\$'], 0.0015),
+    ('gvx_uv', [r'that contrast is \$\+([\d.]+)\$ with a'], 0.0015),
+    ('gvx_uv_lo', [r'95\\% interval from\s+\$\+([\d.]+)\$ to'], 0.0015),
+    ('gvx_uv_hi', [r'95\\% interval from\s+\$\+[\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
+    ('gvx_nor', [r'same contrast is \$\+([\d.]+)\$'], 0.0015),
+    ('gvx_nor_lo', [r'an interval from\s+\$([-][\d.]+)\$ to'], 0.0015),
+    ('gvx_nor_hi',
+     [r'an interval from\s+\$[-][\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
+    ('conc_gb_lo', [r'rises\s+monotonically from \$\+([\d.]+)\$ at 10~ppm'], 0.0015),
+    ('conc_gb_hi', [r'to \$\+([\d.]+)\$ at 500~ppm'], 0.0015),
+    ('conc_gf_lo', [r'falls monotonically from \$-([\d.]+)\$'], 0.0015),
+    ('conc_gf_hi', [r'falls monotonically from \$-[\d.]+\$ to \$-([\d.]+)\$'], 0.0015),
+    ('trend_monotone',
+     [r'Monotonicity is perfect in (\w+) of the ten'], 0),
+    ('trend_bh_q',
+     [r'over the ten leaves a smallest adjusted\s+value of ([\d.]+)'], 0.0015),
+    ('rank_obs', [r'the observed number is (\w+), with a'], 0),
+    ('rank_exp',
+     [r'over ten\s+agent-channel cells is ([\d.]+), and'], 0.0015),
+    ('rank_p', [r'one-sided binomial \$p\$ of ([\d.]+)'], 0.005),
+    ('dye_null_uv', [r'gives a mean of ([\d.]+) and [\d.]+\.'], 0.0015),
+    ('dye_null_normal', [r'gives a mean of [\d.]+ and ([\d.]+)\.'], 0.0015),
+    ('fisher_minq',
+     [r'smallest adjusted value over the six is ([\d.]+)'], 0.0015),
     ('mantel_cells', [r'Of (twelve|eight|ten) panel-channel-space cells',
                       r'(twelve|eight|ten) cells are one\s*\n?family'], 0),
     ('mantel_nominal', [r'(three|two|four|five) of the twelve panel-channel-space cells reach'], 0),
@@ -995,8 +1075,10 @@ CHECKS = [
     ('mantel_d2uv_merged', [r'ultraviolet channel \(\$\\rho = \+\d+\.\d+\$, Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_struct_rho', [r'that same set and channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
     ('floor_d1uv_obs', [r'clear that floor by [\d.]+ to\s*\n?[\d.]+: \$([-+][\d.]+)\$'], 0.0015),
-    ('dmmp_ga_uv', [r'tabun, at \$\+?([\d.]+)\$ against sarin'], 0.0015),
-    ('dmmp_gb_uv', [r'against sarin\'s \$\+?([\d.]+)\$'], 0.0015),
+    ('dmmp_ga_uv', [r'tabun, at \$\+?([\d.]+)\$ against sarin',
+                    r'correlates with tabun at \$\+([\d.]+)\$'], 0.0015),
+    ('dmmp_gb_uv', [r'against sarin\'s \$\+?([\d.]+)\$',
+                    r'and with\s+sarin at \$\+([\d.]+)\$'], 0.0015),
     # 도판 (d) 에 박힌 p 도 같은 사실표와 대조한다.
     ('p_struct_fig', [r'A_rdkit[^\n]*exact p = ([\d.]+)'], 0.0005),
     ('p_elec_fig', [r'B_electronic[^\n]*exact p = ([\d.]+)'], 0.0005),
@@ -1009,6 +1091,7 @@ CHECKS = [
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
     ('pct_pc3', [r'three-principal-component value of [\d.]+ sits at the ([\d.]+)(?:st|nd|rd|th)\s*\n?percentile'], 0.06),
     ('mantel_minq', [r'smallest adjusted value is\s*\n?([\d.]+) and no cell',
+                     r'over the twelve leaves a smallest adjusted\s+value of ([\d.]+)',
                      r'smallest \$q\$ = ([\d.]+)\)'], 0.0005),
     ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.06),
     ('white_med28', [r'from 0.094 to ([\d.]+)\.'], 0.0005),
@@ -1231,6 +1314,9 @@ def tonum(s):
         return float(WORDS[s.lower()])
     # LaTeX 천단위 구분자(\,)와 쉼표를 모두 제거한다. 순서를 뒤집으면
     # '41\\,685' 가 '41\\685' 로 남아 파싱이 깨진다.
+    # 2026-11-01. 캡처가 문장 끝 마침표를 함께 먹으면 ValueError 로 검증기
+    # 전체가 죽었다. 숫자 뒤 마침표 하나는 문장부호로 보고 떼어낸다.
+    s = re.sub(r'(?<=\d)\.$', '', s)
     return float(s.replace('\\,', '').replace(',', ''))
 
 
@@ -1253,8 +1339,12 @@ def main():
     # 2026-10-13. 종전에는 main.tex 만 읽었다. 그래서 커버레터와 하이라이트가
     # 본문과 다른 Spearman·후보수를 싣고도 PASS 가 나왔다. 투고 패키지에 들어가는
     # 글은 전부 같은 산출물과 대조한다.
-    for extra in ('paper/cover_letter.tex', 'paper/highlights.tex',
-                  'paper/supplementary.tex'):
+    # 2026-11-01. 목록이 아래 정규화본 쪽에도 똑같이 적혀 있어 한쪽만 고치면
+    # 조용히 어긋났다. 상수 하나로 묶는다. paper_acs/main.tex 를 넣는 이유는
+    # ACS Sensors 재집필본이 지금부터 커지는데, 검증기가 elsarticle 판만 보면
+    # 새 원고가 무검사 상태로 자라기 때문이다. 이 세션에서 반복해 겪은
+    # '한쪽 문서만 구판' 사고를 미리 막는다.
+    for extra in EXTRA_TEX:
         if os.path.exists(extra):
             body += '\n' + strip_comments(open(extra).read())
     # 도판 주석도 같은 규칙으로 검사한다. 본문만 보던 설계 때문에 Figure 2 의
@@ -1270,9 +1360,8 @@ def main():
     # 않았더니 주석 두 레코드에 걸친 문자열이 한 칸으로 읽혀 세 건이 잘못
     # 걸렸다 (2026-10-24).
     _segs = [re.sub(r'\s+', ' ', seg) for seg in
-             ([tex] + [strip_comments(open(x).read()) for x in
-                       ('paper/cover_letter.tex', 'paper/highlights.tex',
-                        'paper/supplementary.tex') if os.path.exists(x)]
+             ([tex] + [strip_comments(open(x).read()) for x in EXTRA_TEX
+                       if os.path.exists(x)]
               )]
     # 도판 주석은 레코드가 이미 한 줄이라 줄바꿈 문제가 없다. 정규화본에
     # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
