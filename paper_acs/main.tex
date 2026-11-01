@@ -285,11 +285,74 @@ already measured in an existing run. Such a bridge would fix the plate
 correction and open the 136 cross-run pairs that are closed today.
 
 \subsection{The standard G-agent simulant against the G agents}
-% 예산 700단어. DMMP 코사인 GA +0.76 GB +0.65 GD -0.49 GF -0.72 VX -0.70.
-% 농도 의존(GB 0.363 -> 0.771), 4! 전수 p 하한 0.083, BH 10건 q_min 0.28.
-% 귀무 대조 둘을 여기서 전부 보고한다: 순위 1위 2/10 대 기대 2.0
-% (이항 p 0.624), 염료 집중도가 작용제-작용제 쌍·치환 귀무와 같음.
-% 도판: Fig 2.
+% 예산 700단어. 현재 약 690단어.
+% 귀무 대조에서 죽은 소견 둘을 여기서 전부 보고한다. 삭제하지 말 것.
+
+The transfer test above treats all compounds alike. One compound deserves
+to be named, because the field treats it as the G-agent surrogate and
+because decontamination efficiency is quantified against it. The first run
+contains DMMP together with the four G agents and VX, so its response can
+be set against theirs directly.
+
+In the ultraviolet channel DMMP correlates with tabun at $+0.764$ and with
+sarin at $+0.645$, and anti-correlates with soman at $-0.492$, cyclosarin
+at $-0.721$ and VX at $-0.702$. In the reflectance channel the same
+comparison gives $-0.112$, $+0.569$, $-0.479$, $-0.495$ and $-0.273$. The
+mean over the four G agents is negative in both channels, $-0.189$ and
+$-0.135$. The compound used in place of the G agents does not, on this
+measurement, resemble the G agents as a class.
+
+A weaker claim survives in one channel. If DMMP is G-like at all it should
+sit closer to the G series than to VX, and that contrast is $+0.513$ with a
+95\% interval from $+0.131$ to $+0.722$ in the ultraviolet channel, which
+excludes zero. In the reflectance channel the same contrast is $+0.137$
+with an interval from $-0.144$ to $+0.290$, which does not. One optical
+channel supports the ordering and the other does not resolve it.
+
+Concentration changes the picture in the direction that matters for a
+detector (Figure~\ref{fig:response}c). The DMMP-to-sarin cosine rises
+monotonically from $+0.363$ at 10~ppm to $+0.771$ at 500~ppm, and the
+DMMP-to-cyclosarin cosine falls monotonically from $-0.462$ to $-0.700$
+over the same range. Monotonicity is perfect in three of the ten
+agent-channel series. It is also the strongest result the design can give:
+with four concentrations the two-sided exact permutation has a floor of
+$p=0.083$, three series reach exactly that floor, and
+Benjamini--Hochberg correction over the ten leaves a smallest adjusted
+value of 0.278. We therefore report the direction and not a significance
+claim. The direction is that the resemblance to sarin is weakest at the
+low end of the range, which is the end at which point detectors are
+expected to alarm.
+
+Two further readings suggested themselves to us and did not survive their
+own controls. We report both, because the alternative is to present
+artefacts as results.
+
+The first was a ranking. DMMP is the nearest of the five candidates to
+tabun in the ultraviolet channel and to sarin in the reflectance channel,
+and it is nearest to nothing else, and the two channels never agree on
+which agent it is nearest to. That reads as evidence that the choice of
+optical channel decides which agent the standard simulant stands in for.
+It is not. With five candidates the probability of rank one is $1/5$ under
+random assignment, the expected number of first places over ten
+agent-channel cells is 2.0, and the observed number is two, with a
+one-sided binomial $p$ of 0.62. The ranking carries no information.
+
+The second was a channel decomposition. The cosine is a sum over dye
+channels, and the DMMP-to-tabun value of $+0.764$ turns out to rest on two
+of the 29 channels, with the largest single channel carrying 44\% of the
+positive mass. Read alone, that makes the resemblance look fragile. Two
+controls show it is not a property of DMMP. Agent-to-agent pairs in the
+same run concentrate identically, with median two channels in the
+ultraviolet and one in the reflectance channel, and a null built by
+permuting the dye labels of the DMMP vector gives a mean of 2.00 and 2.26.
+Concentration of this kind is what the product of two centred unit vectors
+in 29 dimensions does, and it says nothing about this compound.
+
+What remains after both controls is the set of measured values themselves,
+and one structural fact. The first run contains no candidate simulant other
+than DMMP, so the designation cannot be contrasted against an alternative
+in response space at all. The permutation null that the descriptor analysis
+of the next section relies on is, in response space, empty.
 
 \subsection{Descriptor space cannot supply the missing validation}
 % 예산 600단어. 35종 0/11 전 검정 비유의, 28종 4/11 명목 0.0250,
