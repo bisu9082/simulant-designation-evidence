@@ -269,6 +269,14 @@ ACS_CASES = [
     ('문헌값 d3 검출한계 오기 (정본 10 µM)',
      'with a detection limit near 10~$\\mu$M',
      'with a detection limit near 1~$\\mu$M'),
+    # 2026-11-02. Conclusions 가 2.4·2.5 의 수치를 다시 센다. 두 자리가
+    # 어긋나면(한쪽만 갱신되면) 잡혀야 한다. 과거 실패 계열이 바로 이것이다.
+    ('결론부 BH 보정값이 2.4 와 어긋남 (정본 0.6173)',
+     'an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.6173',
+     'an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.1695'),
+    ('결론부 AEGL 훈련 화합물 수 오기 (정본 230)',
+     'random forest trained on 230 AEGL chemicals is wrong in one direction',
+     'random forest trained on 320 AEGL chemicals is wrong in one direction'),
 ]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
 # 그 문장들이 다시 틀어지면 잡히도록 건다.

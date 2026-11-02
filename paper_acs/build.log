@@ -66,18 +66,18 @@ nary-english.trsl) (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd) [1{/var/lib/texmf/fo
 nts/map/pdftex/updmap/pdftex.map}] [2] [3] [4 <./Fig_talk_response.png>]
-[5] [6] [7] [8] [9] [10] [11] [12] [13]
-Overfull \hbox (6.76541pt too wide) in paragraph at lines 608--612
+[5] [6] [7] [8] [9] [10] [11] [12] [13] [14]
+Overfull \hbox (6.76541pt too wide) in paragraph at lines 649--653
 \T1/cmr/m/n/12 NumPy 2.5.3, SciPy 1.18.1, pan-das 3.0.5, scikit-learn 1.9.1, Ma
 t-plotlib 3.11.2, RD-Kit 2026.03.6
-(./main.bbl (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd) [14])
+(./main.bbl (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd) [15])
 
 Package caption Warning: Unused \captionsetup[sub] on input line 39.
 See the caption package documentation for explanation.
 
-[15]
-Underfull \vbox (badness 10000) detected at line 623
-[16 <./graphical_abstract.png>] [17 <./Fig_main.png>] [18 <./Fig_talk_tox.png>]
+[16]
+Underfull \vbox (badness 10000) detected at line 664
+[17 <./graphical_abstract.png>] [18 <./Fig_main.png>] [19 <./Fig_talk_tox.png>]
 (./main.aux) )
 (see the transcript file for additional information) </root/.texlive2023/texmf-
 var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk> </root/.texlive2023/texmf-var/f
@@ -101,5 +101,5 @@ blic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 8.pfb>
-Output written on main.pdf (18 pages, 1428797 bytes).
+Output written on main.pdf (19 pages, 1431206 bytes).
 Transcript written on main.log.
