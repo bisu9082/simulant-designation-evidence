@@ -469,6 +469,31 @@ the median 2.0\%, the incumbent designation ranks fifth of 680
 choice of three descriptors can be found for them. That is a statement
 about the flexibility of the comparison, not about proximity to the agents.
 
+% 2026-11-02 (GATE 8 7차). 이 문단 신설. SI 는 전자공간 역전을 처음부터
+% 보고하고 있었는데 본문은 그것을 올리지 않았고, Experimental 은 오히려
+% 반대로 적고 있었다. 이 논문의 논지가 "분석자 선택이 답을 정한다" 이므로
+% 전자구조 방법 선택은 가장 큰 사례이지 숨길 것이 아니다. 수치는
+% outputs/dft_electronic_space.json 실측.
+One analyst freedom we did not enumerate when we set the comparison up
+moved the answer further than any we did. The electronic descriptors
+throughout are GFN2-xTB, a method parameterised for geometries and energies
+rather than for virtual orbital energies. Recomputing all three coordinates
+of the electronic space at B3LYP/def2-SVPD moves it from one valid match of
+eleven and a one-sided $p$ of 0.275 to five matches and 0.0368. Four of
+those five are pairings the designation record supports: sarin, soman and
+tabun matched to DMMP, and cyclosarin matched to DPGME. We do not promote
+that value to a positive finding. It is a single uncorrected statistic in
+one space, reached by changing a method after seeing the first answer, and
+the two sets of calculations sit on different geometries, so the difference
+carries a geometry term we cannot separate from the method term. What it
+establishes is narrower and bears directly on this paper's argument: the
+space in which the incumbents did worst is the space whose answer the choice
+of electronic-structure method decides. The merged space does not move the
+same way, returning three matches and 0.0221 against four and 0.0250 under
+GFN2, so the value reported above is not an artefact of the semiempirical
+method. Supporting Information Section~\ref{S-meth:dft} gives the full
+comparison and the limits on it.
+
 What decides the answer is panel composition. Adding back the five
 compounds the sensing literature also treats as simulants moves the count
 from four valid matches to zero, because diisopropyl fluorophosphate is
@@ -645,8 +670,16 @@ filter built on linear correlation does not detect that. It and the
 condensed Fukui index at phosphorus, which exists only for the six
 phosphorus-bearing compounds, are reported in Supporting Information
 Section~\ref{S-res:plocal} and admitted to no distance. Dipole moments were
-recomputed at B3LYP/def2-SVPD to confirm that the reported result does not
-depend on the semiempirical method (Supporting Information
+% 2026-11-02 (GATE 8 7차). 종전 문장은 B3LYP 재계산이 "the reported result
+% does not depend on the semiempirical method" 임을 확인했다고 적었다.
+% 산출물은 그 반대를 보인다: 전자공간에서 1/11, p=0.275 가 5/11, p=0.0368 로
+% 뒤집힌다. 참인 것은 병합공간뿐인데 문장이 범위를 한정하지 않았다. SI 는
+% 처음부터 정직하게 보고하고 있었고 본문만 틀렸다. 범위를 명시해 다시 쓴다.
+recomputed at B3LYP/def2-SVPD, together with the two frontier orbital
+energies. The merged space, which carries the result reported above, is
+unchanged by that substitution. The three-coordinate electronic space is
+not, and we report what it does in Section~\ref{res:panels} rather than
+leaving the check described as a confirmation (Supporting Information
 Section~\ref{S-meth:dft}). Identifiers and formulae were resolved
 against PubChem, and no property value was taken from a prediction service.
 

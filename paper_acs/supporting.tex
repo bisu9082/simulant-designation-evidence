@@ -301,6 +301,23 @@ energies of every compound to within $10^{-6}$~eV before the dipoles were read;
 that pass is deposited separately as \texttt{outputs/dft\_dipole.csv} so the
 reproduction can be checked rather than taken on assertion.
 
+% 2026-11-02 (GATE 8 7차). 이 절이 쌍극자 재계산을 설명하면서 두 방법의
+% 일치도를 한 번도 수치로 내놓지 않았다. 가장 큰 편차가 이 논문의 주인공
+% 화합물에서 난다는 사실이 특히 보고되어야 한다.
+The two sets of dipole moments agree at a Pearson $r$ of 0.9195 over the
+twenty-eight compounds, with a mean absolute difference of 0.328~D. The
+agreement is not uniform, and the largest single disagreement falls on the
+compound this paper is most concerned with. DMMP is 2.523~D under GFN2 and
+4.883~D under the density functional, a difference of 2.359~D, which is
+almost the size of the semiempirical value itself. Lewisite follows at
+0.795~D against 2.108~D, consistent with the arsenic trichloride case noted
+below and with the force field used for that molecule, which is UFF because
+MMFF does not parameterise arsenic. Sarin is third at 3.640~D against
+4.286~D. No other compound differs by more than 0.52~D. A reader weighing
+the electronic-space result of Section~\ref{M-res:panels} should know that
+the coordinate most likely to move under a change of method is the one on
+which DMMP sits furthest from where the semiempirical method places it.
+
 The same recomputation answers a second question, and we report the answer
 although it does not favour the analysis. The electronic space that carries the
 results of Section~\ref{res:permfull} has three coordinates: the two frontier
