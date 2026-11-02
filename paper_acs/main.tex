@@ -92,7 +92,7 @@ Korea}
 %   Yoon Jeong Jang  0000-0002-5625-2528   yjjangchem@korea.kr
 
 \title{Descriptor Similarity Does Not Predict Array Response: Chemical
-Warfare Agent Simulants Tested Against Seventeen Authentic Agents}
+Warfare Agent Simulants Tested Against Sixteen Authentic Agents}
 
 \keywords{chemical warfare agents, simulants, colorimetric sensor array,
 surrogate validation, permutation test, applicability domain}
@@ -121,8 +121,9 @@ surrogate validation, permutation test, applicability domain}
 Chemical warfare agent detection is developed and qualified on simulants,
 and we asked what measurement establishes that a simulant reproduces the
 agent it stands in for. A 29-dye colorimetric array was used to measure
-seventeen authentic agents, spanning nerve, blood, choking, vesicant and
-A-series compounds, at five concentrations in two optical channels, and the
+sixteen authentic agents, spanning nerve, blood, choking, vesicant and
+A-series compounds, at four exposure concentrations against a
+zero-concentration baseline in two optical channels, and the
 resulting response patterns were compared with the molecular-descriptor
 distances on which simulant selection in practice rests. Agreement was
 tested by exact Mantel permutation within each run, by exact enumeration of
@@ -136,7 +137,7 @@ leave nothing below $q=0.05$. Dimethyl methylphosphonate, the standard
 G-agent simulant and the benchmark compound for decontamination efficiency,
 is anti-correlated with soman and cyclosarin in the ultraviolet channel, and
 its correlation with sarin falls from $+0.77$ at 500~$\mu$M to $+0.36$ at
-10~$\mu$M, the end at which point detectors operate. Across the seventeen
+10~$\mu$M, the end at which point detectors operate. Across the sixteen
 agents measured, exactly one designated simulant has ever been measured
 beside them.
 \end{abstract}
@@ -177,8 +178,8 @@ laboratory, which identifies and assays authentic agents under an accredited
 procedure, so the comparison can be made on the agents themselves.
 
 This work reports that measurement. A 29-dye colorimetric array was used to
-record the responses of seventeen authentic agents at five concentrations in
-two optical channels, and those responses were compared against the
+record the responses of sixteen authentic agents at four exposure
+concentrations in two optical channels, and those responses were compared against the
 molecular-descriptor distances that simulant selection relies on. The array
 separates compounds in every run and channel, so the measurement is sound.
 Descriptor distance nonetheless carries no detectable information about
@@ -534,7 +535,7 @@ measurement, and the practice of designating chemical warfare agent
 simulants records neither the measurement a compound was validated against
 nor the comparison in which its validity was tested.
 
-Three counts fix where the evidence stands. Across the seventeen authentic
+Three counts fix where the evidence stands. Across the sixteen authentic
 agents measured here, exactly one designated simulant has ever been
 measured beside them, and that single co-measurement sits in one run of one
 array. Twelve exact Mantel tests and six combinations of them leave no
@@ -664,8 +665,20 @@ therefore enumerated every way of designating three of the non-agents as
 simulants and report the rank of the actual designation as an exact
 $p$-value: $\binom{24}{3} = 2024$ designations on the primary panel and
 $\binom{17}{3} = 680$ on the twenty-eight-compound panel. The hypothesis is
-directional, so the reported $p$ is one-sided; the two-sided conventions are
-given alongside it. A valid match requires a normalised distance of 2 or less
+% 2026-11-02 (GATE 8 7차). 종전 문장은 "the two-sided conventions are given
+% alongside it" 이라고 선언해 놓고 그 값을 어디에도 싣지 않았다. 값이
+% 결론을 뒤집는 방향(0.025 -> 0.050)이므로 생략은 선택적 보고였다.
+% 수치는 outputs/permutation_sidedness.json 실측.
+directional, so the reported $p$ is one-sided. We give the two-sided values
+here rather than only the convention, because on the twenty-eight-compound
+panel they decide the answer: the structural space moves from 0.0265
+one-sided to 0.0529 at twice the smaller tail and 0.0353 scored as distance
+from the null mean, and the merged space from 0.0250 to 0.0500 and 0.0279.
+Under the first of the two-sided conventions neither space reaches 0.05, and
+the one correction scheme that returns a value below 0.05 does so only on the
+one-sided reading. The Mantel tests of Section~\ref{res:mantel} are
+two-sided throughout, since the direction of a matrix correlation is not
+fixed in advance by the hypothesis. A valid match requires a normalised distance of 2 or less
 together with a distance smaller than that to every compound outside the
 designated set. Sensitivity to descriptor choice was assessed by resampling
 the merged-space descriptors with replacement 1000 times under a fixed seed,
@@ -684,8 +697,14 @@ them.
 \subsection{Software}
 NumPy 2.5.3, SciPy 1.18.1, pandas 3.0.5, scikit-learn 1.9.1, Matplotlib
 3.11.2, RDKit 2026.03.6 and PySCF 2.14.0. All analyses are deterministic given
-the seed, and the permutation tests are exhaustive rather than sampled. Code,
-descriptor tables and figure scripts are in the repository cited below.
+the seed, and the permutation tests are exhaustive rather than sampled.
+% 2026-11-02 (GATE 8 7차). 종전에는 "the repository cited below" 라고 적고
+% 참고문헌에 그 저장소가 없었다. 커버레터도 "cited in the manuscript" 라고
+% 단언했다. 원고에 없는 것을 있다고 말한 자리라 항목을 신설해 인용한다.
+Analysis code, descriptor tables, the parsed regulatory values with their
+sources and every figure script are deposited in a public
+repository\cite{simulantrepo}, from which every number reported here can be
+regenerated.
 
 % 2026-11-02 작성. 자금은 JHM 판본과 같다 (특정 지원 없음). 측정 데이터는
 % 이 연구소의 선행 세 편에서 왔으므로 그 사실을 명시한다. 기여 진술은
