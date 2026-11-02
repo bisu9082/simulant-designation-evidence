@@ -1,0 +1,118 @@
+\providecommand{\latin}[1]{#1}
+\makeatletter
+\providecommand{\doi}
+  {\begingroup\let\do\@makeother\dospecials
+  \catcode`\{=1 \catcode`\}=2 \doi@aux}
+\providecommand{\doi@aux}[1]{\endgroup\texttt{#1}}
+\makeatother
+\providecommand*\mcitethebibliography{\thebibliography}
+\csname @ifundefined\endcsname{endmcitethebibliography}
+  {\let\endmcitethebibliography\endthebibliography}{}
+\begin{mcitethebibliography}{11}
+\providecommand*\natexlab[1]{#1}
+\providecommand*\mciteSetBstSublistMode[1]{}
+\providecommand*\mciteSetBstMaxWidthForm[2]{}
+\providecommand*\mciteBstWouldAddEndPuncttrue
+  {\def\EndOfBibitem{\unskip.}}
+\providecommand*\mciteBstWouldAddEndPunctfalse
+  {\let\EndOfBibitem\relax}
+\providecommand*\mciteSetBstMidEndSepPunct[3]{}
+\providecommand*\mciteSetBstSublistLabelBeginEnd[3]{}
+\providecommand*\EndOfBibitem{}
+\mciteSetBstSublistMode{f}
+\mciteSetBstMaxWidthForm{subitem}{(\alph{mcitesubitemcount})}
+\mciteSetBstSublistLabelBeginEnd
+  {\mcitemaxwidthsubitemform\space}
+  {\relax}
+  {\relax}
+
+\bibitem[Askim \latin{et~al.}(2013)Askim, Mahmoudi, and Suslick]{askim2013}
+Askim,~J.~R.; Mahmoudi,~M.; Suslick,~K.~S. Optical sensor arrays for chemical
+  sensing: the optoelectronic nose. \emph{Chemical Society Reviews}
+  \textbf{2013}, \emph{42}, 8649\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rakow and Suslick(2000)Rakow, and Suslick]{rakow2000}
+Rakow,~N.~A.; Suslick,~K.~S. A colorimetric sensor array for odour
+  visualization. \emph{Nature} \textbf{2000}, \emph{406}, 710--713\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Institute for Occupational Safety and
+  Health}(2002)]{niosh2002simulant}
+{National Institute for Occupational Safety and Health} \emph{Chemical Warfare
+  Agent {(CWA)} Simulant Program for Respirator Materials Resistance Testing};
+  2002; Dated 31 July 2002\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Seitzinger and Genovese(2006)Seitzinger, and
+  Genovese]{seitzinger2006simulant}
+Seitzinger,~A.~T.; Genovese,~J.~A. Chemical Agent Simulant Training
+  Composition. 2006; \url{https://patents.google.com/patent/US7129094B1/en},
+  {U.S. Patent US 7,129,094 B1}, assigned to the United States Department of
+  the Army. Filed 16 May 2003; granted 31 October 2006\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Research Council}(1997)]{nrc1997mist}
+{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
+  Test Program}; The National Academies Press: Washington, DC, 1997\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{ASTM International}(2020)]{astmf2588}
+{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
+  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
+  reapproved 2020\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lawrence and Van~Houten(2025)Lawrence, and
+  Van~Houten]{lawrence2025simulants}
+Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
+  Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025},
+  \emph{37}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2025)Kim, Yoo, Kang, Kim, Shin, Cha, Churchill,
+  Kim, and Lee]{multiplexref}
+Kim,~S.; Yoo,~J.; Kang,~K.; Kim,~J.; Shin,~M.; Cha,~Y.~K.; Churchill,~D.~G.;
+  Kim,~M.-K.; Lee,~D.-H. A multiplex chromogenic--fluorogenic sensor array for
+  comprehensive optical discrimination of chemical warfare agents.
+  \emph{Discover Sensors} \textbf{2025}, \emph{1}, 29\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2026)Kim, Kang, Shin, Kim, Yoo, Kim, Lee, and
+  Lee]{hazref}
+Kim,~J.; Kang,~K.; Shin,~M.; Kim,~S.; Yoo,~J.; Kim,~M.-K.; Lee,~W.~B.;
+  Lee,~D.-H. Machine learning-enhanced colorimetric sensor array for rapid
+  detection of nerve agents. \emph{Journal of Hazardous Materials}
+  \textbf{2026}, \emph{501}, 140703\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Shin \latin{et~al.}(2026)Shin, Kang, Kim, Kim, Yoo, Jang, Kim, Anslyn,
+  and Lee]{group3ref}
+Shin,~M.; Kang,~K.; Kim,~J.; Kim,~S.; Yoo,~J.; Jang,~Y.~J.; Kim,~M.-K.;
+  Anslyn,~E.~V.; Lee,~D.-H. Portable machine learning--integrated optical
+  sensor array for rapid and selective detection of authentic {Novichok} nerve
+  agents. \emph{Sensors and Actuators B: Chemical} \textbf{2026}, \emph{457},
+  139706\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\end{mcitethebibliography}

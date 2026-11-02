@@ -125,8 +125,8 @@ response distance: twelve exact Mantel tests and six combinations of them
 leave nothing below $q=0.05$. Dimethyl methylphosphonate, the standard
 G-agent simulant and the benchmark compound for decontamination efficiency,
 is anti-correlated with soman and cyclosarin in the ultraviolet channel, and
-its correlation with sarin falls from $+0.77$ at 500~ppm to $+0.36$ at
-10~ppm, the end at which point detectors operate. Across the seventeen
+its correlation with sarin falls from $+0.77$ at 500~$\mu$M to $+0.36$ at
+10~$\mu$M, the end at which point detectors operate. Across the seventeen
 agents measured, exactly one designated simulant has ever been measured
 beside them.
 \end{abstract}
@@ -196,15 +196,22 @@ only if the response measurement resolves the compounds at all. We checked
 that first. Each exposure gives a 29-dye $\Delta E$ vector, which we centred
 dye-wise at each concentration and normalised to unit length, so that the
 comparison is between response patterns rather than response magnitudes.
-Agreement was then measured as the cosine between patterns, within
-replicates of one compound and between different compounds.
+Agreement was then measured as the cosine between patterns, within one
+compound across concentrations and between different compounds. The
+tables analysed here hold one value per compound, concentration, dye and
+channel, so the within-compound term is agreement of a compound with
+itself at a different dose, not agreement between repeated measurements.
+Repeated measurements were reported in the source work for selected
+dye-analyte combinations of the second run only\cite{multiplexref} and
+are not part of these tables, so no repeatability estimate enters any
+analysis below.
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\textwidth]{Fig_talk_response.png}
   \caption{Response-space tests on authentic agents. (a) Mean cosine
-  between response patterns, within replicates of the same compound and
-  between different compounds, for three runs in two optical channels.
+  between response patterns, within one compound across concentrations
+  and between different compounds, for three runs in two optical channels.
   (b) Adjusted $p$ for every test of descriptor distance against response
   distance: twelve exact Mantel cells and six Fisher combinations of the
   independent runs. (c) Cosine between the response pattern of DMMP and
@@ -214,7 +221,8 @@ replicates of one compound and between different compounds.
 \end{figure}
 
 The array resolves the compounds in every run and channel
-(Figure~\ref{fig:response}a). Replicates of one compound correlate at
+(Figure~\ref{fig:response}a). One compound's patterns at two
+concentrations correlate at
 $+0.345$ to $+0.542$, different compounds anti-correlate at $-0.103$ to
 $-0.330$, and the separation holds in all six run-channel cells, with $p$
 from $4.6\times10^{-8}$ to 0.025.
@@ -225,8 +233,8 @@ between-compound cosine towards an algebraic floor of $-1/(n-1)$, and the
 observed means clear that floor by only 0.013 to 0.064 across the four
 cells where it could be evaluated. Most of the apparent separation is
 therefore a property of the centring, and what the test establishes is the
-weaker statement that replicate agreement exceeds between-compound
-agreement. The second is that six dye columns in the ultraviolet pivot of
+weaker statement that a compound agrees with itself across concentrations
+more than it agrees with other compounds. The second is that six dye columns in the ultraviolet pivot of
 the second run were bit-identical across every row. Tracing them to the
 source images showed that those dyes do not fluoresce under ultraviolet
 excitation and the regions of interest had read plate background, so one
@@ -311,7 +319,7 @@ channel supports the ordering and the other does not resolve it.
 
 Concentration changes the picture in the direction that matters for a
 detector (Figure~\ref{fig:response}c). The DMMP-to-sarin cosine rises
-monotonically from $+0.363$ at 10~ppm to $+0.771$ at 500~ppm, and the
+monotonically from $+0.363$ at 10~$\mu$M to $+0.771$ at 500~$\mu$M, and the
 DMMP-to-cyclosarin cosine falls monotonically from $-0.462$ to $-0.700$
 over the same range. Monotonicity is perfect in three of the ten
 agent-channel series. It is also the strongest result the design can give:
@@ -470,6 +478,110 @@ with Cohen's $d_{z}=+1.96$.
 % ===========================================================================
 \section{Experimental Section}
 % 예산 1,100단어. 어레이 측정 / 서술자 계산 / 통계. 상세는 SI.
+% 2026-11-02. 세 원논문(hazref, multiplexref, group3ref)의 Methods 를 직접
+% 읽고 채웠다. 농도 단위는 ppm 이 아니라 µM 이다. 반복측정은 없다.
+
+\subsection{Array measurements}
+The response data are the colorimetric tables of three published runs of one
+array, reanalysed here and not remeasured. The first covers tabun, sarin,
+soman, cyclosarin, VX and dimethyl methylphosphonate\cite{hazref}; the second
+hydrogen cyanide, cyanogen chloride, phosgene, chloropicrin, sulfur mustard,
+nitrogen mustard and lewisite\cite{multiplexref}; the third the Novichok
+agents A-230, A-232, A-234 and A-242\cite{group3ref}. All agents were produced
+and handled at the CBRN Defense Research Institute, Seoul, an
+Organisation for the Prohibition of Chemical Weapons designated laboratory,
+under Chemical Weapons Convention procedures. Purity was confirmed by
+GC--MS and exceeded 95\% for every compound of the second run except
+lewisite, at 67\%.
+
+The array is the same 29 commercial chromogenic and fluorogenic dyes in the
+same order in all three runs, commercially sourced and used as
+received. Stock solutions at 100~mM were prepared in ethanol, methanol,
+dimethyl sulfoxide, water, tetrahydrofuran or toluene and sonicated to
+dissolution, then diluted into acetonitrile to a working concentration of
+100~$\mu$M, which holds the residual stock solvent below 0.1\% (v/v) and
+places every dye in one solvent environment. Each analyte was delivered in
+acetonitrile by serial dilution to final concentrations of 0, 10, 50, 100 and
+500~$\mu$M in a 2.0~mL dye solution. Samples were mixed without
+incubation and imaged at once, under visible light and under ultraviolet
+excitation at 365~nm, with a smartphone camera fixed in an enclosed imaging
+box at 22~$\pm$~3~$^\circ$C and 35~$\pm$~5\% relative humidity. Regions of
+interest were central 20~$\times$~10 pixel zones; RGB values were read at five
+positions within each region, averaged, converted to CIE $L^{*}a^{*}b^{*}$,
+and expressed as the CIEDE2000 colour difference $\Delta E_{00}$ against the
+0~$\mu$M image of the same dye in the same channel. The self-referencing
+removes illumination and device offsets common to an image pair.
+
+The three runs are different compounds measured on different plates and are
+not replicates of one another, so no $\Delta E_{00}$ value is compared across
+runs; every analysis below is run within a run and channel, and results are
+combined only at the level of correlation coefficients. The two channels are
+physically different measurements rather than repeats and are treated as
+independent modalities. The tables hold one value per compound,
+concentration, dye and channel.
+
+\subsection{Response patterns}
+Each exposure gives a 29-dye $\Delta E_{00}$ vector. Vectors were centred
+dye-wise within each concentration and normalised to unit length, so that
+agreement is measured between patterns and not between magnitudes, and
+agreement was taken as the cosine. Dye columns that are bit-identical across
+every row carry no information and were counted once, which leaves 23
+effective channels in the ultraviolet pivot of the second run and 25 in that
+of the third.
+
+\subsection{Descriptors}
+Structural and physicochemical descriptors, 51 after excluding run metadata,
+were computed with RDKit from canonical SMILES. Ten are read from a
+three-dimensional structure and are taken as Boltzmann-weighted means over an
+ETKDGv3 conformer ensemble at 298~K with MMFF94 energies, or UFF for
+lewisite~1, the one compound without MMFF parameters, so that no result
+depends on an undeclared choice of conformer. Electronic descriptors were
+computed with GFN2-xTB in the gas phase, Boltzmann averaged over up to five
+conformers at 298.15~K. The electronic space carries $E_\mathrm{HOMO}$,
+$E_\mathrm{LUMO}$ and the dipole moment. The Parr electrophilicity index
+$\omega = \mu^{2}/2\eta$ is reported but admitted to no distance, because it
+is an exact function of the two orbital energies that accompany it and a
+filter built on linear correlation does not detect that. Dipole moments were
+recomputed at B3LYP/def2-SVPD to confirm that the reported result does not
+depend on the semiempirical method. Identifiers and formulae were resolved
+against PubChem, and no property value was taken from a prediction service.
+
+\subsection{Distances and tests}
+Within each space, descriptors of zero variance were removed, then one of each
+pair correlated at $|r| > 0.95$, retaining a protected set. Remaining
+descriptors were standardised and distances taken as Euclidean, normalised by
+the median nearest-neighbour separation of the same space, which makes a
+normalised distance comparable within a panel and not between panels.
+
+A paired comparison of the distance to the nearest incumbent simulant against
+the distance to the nearest interferent is confounded by group size, since the
+minimum of many draws is smaller than the minimum of few by construction. We
+therefore enumerated every way of designating three of the non-agents as
+simulants and report the rank of the actual designation as an exact
+$p$-value: $\binom{24}{3} = 2024$ designations on the primary panel and
+$\binom{17}{3} = 680$ on the twenty-eight-compound panel. The hypothesis is
+directional, so the reported $p$ is one-sided; the two-sided conventions are
+given alongside it. A valid match requires a normalised distance of 2 or less
+together with a distance smaller than that to every compound outside the
+designated set. Sensitivity to descriptor choice was assessed by resampling
+the merged-space descriptors with replacement 1000 times under a fixed seed,
+restandardising and recomputing within each replicate; the intervals so
+obtained are percentile ranges over descriptor choice and not confidence
+intervals in the sampling sense.
+
+Agreement between descriptor distance and response distance was tested by
+Mantel correlation with exact enumeration of relabellings in each run-channel
+cell, with the independent runs combined by Fisher's method and the family of
+tests corrected by the Benjamini--Hochberg procedure. Six distance statistics
+and six multiplicity schemes were carried through in parallel so that the
+conclusion can be read against the analyst choices rather than from one of
+them.
+
+\subsection{Software}
+NumPy 2.5.3, SciPy 1.18.1, pandas 3.0.5, scikit-learn 1.9.1, Matplotlib
+3.11.2, RDKit 2026.03.6 and PySCF 2.14.0. All analyses are deterministic given
+the seed, and the permutation tests are exhaustive rather than sampled. Code,
+descriptor tables and figure scripts are in the repository cited below.
 
 \begin{acknowledgement}
 % TODO

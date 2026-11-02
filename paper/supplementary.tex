@@ -356,10 +356,16 @@ percentile to 0.05.
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
 Measured response was taken from a 29-dye colorimetric array reported in earlier
-work from this laboratory \cite{hazref,group3ref,ondeviceref}. Colour difference
-$\Delta E$ is given per dye for three compound sets at nominal vapour
-concentrations of 10, 50, 100 and 500 (arbitrary units as reported), in two
-imaging channels: ultraviolet-excited emission and reflectance. The sets are
+work from this laboratory \cite{hazref,multiplexref,group3ref}. Colour difference
+$\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
+the same dye in the same channel, given per dye for three compound sets at
+solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
+acetonitrile, in two imaging channels: ultraviolet-excited emission and
+reflectance. An earlier version of this section called these nominal vapour
+concentrations in arbitrary units, which was wrong on both counts; the source
+reports read as solution concentrations in micromolar, and the correction is
+recorded here because the concentration axis carries the trend reported in
+Section~\ref{res:arraydetail}. The sets are
 DMMP with GA, GB, GD, GF and VX; AC, CG, CK, HD, HN and L with PS; and four
 A-series agents. The first two sets supply the twelve compounds that are also in the descriptor
 panel: six of the six in the first set and six of the seven in the second, the

@@ -121,6 +121,33 @@ def preflight():
         # 따로 올리는 첨부다. FIGURES 에는 없지만 등재부는 쓴다 (2026-10-22).
         live = {f[:-4] for f in FIGURES} | {'graphical_abstract'}
         stale = sorted(set(_fa.load()) - live)
+    # 2026-11-02 신설. 원고가 '반복측정' 을 주장했는데 원자료에는 조합당
+    # 한 행뿐이었다. 주장을 자료에 걸어 둔다. 어느 피벗에든 (dye, agent,
+    # conc) 가 두 번 나오면 그때는 반복측정이 실제로 있는 것이므로, 위의
+    # SUPERSEDED 금지항목을 함께 풀어야 한다는 뜻이다.
+    dup = []
+    for _p in sorted(glob.glob('deltaE/*_deltaE_pivot.csv')):
+        try:
+            _d = pd.read_csv(_p)
+        except Exception as e:
+            dup.append(f'{_p}: 읽기 실패 {e}')
+            continue
+        # 피벗은 wide 다. 행은 (Agent, Concentration), 열이 Dye1..Dye29.
+        # 반복측정이 있었다면 같은 (작용제, 농도)가 두 행으로 나타난다.
+        _keys = [c for c in ('Agent', 'Concentration') if c in _d.columns]
+        if len(_keys) != 2:
+            dup.append(f'{_p}: 기대한 열(Agent, Concentration)이 없다 '
+                       f'— 자료 형식이 바뀌었으므로 이 검사가 무력하다')
+        elif _d.duplicated(_keys).any():
+            _n = int(_d.duplicated(_keys).sum())
+            dup.append(f'{_p}: (Agent, Concentration) 중복 {_n}행')
+    if dup:
+        print('[verify] 사전 점검 실패 — 원자료에 반복측정이 있다.')
+        for _m in dup:
+            print(f'   {_m}')
+        print('[verify] 원고의 "반복측정 없음" 서술과 SUPERSEDED 금지항목'
+              ' "어레이 반복측정 주장" 을 함께 재검토할 것.')
+        return False
     if missing or figless or nofig or stale:
         print('[verify] 사전 점검 실패 — 필요한 산출물이 없다.')
         for p in missing:
@@ -942,8 +969,11 @@ CHECKS = [
     ('gvx_nor_lo', [r'an interval from\s+\$([-][\d.]+)\$ to'], 0.0015),
     ('gvx_nor_hi',
      [r'an interval from\s+\$[-][\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
-    ('conc_gb_lo', [r'rises\s+monotonically from \$\+([\d.]+)\$ at 10~ppm'], 0.0015),
-    ('conc_gb_hi', [r'to \$\+([\d.]+)\$ at 500~ppm'], 0.0015),
+    # 2026-11-02. 원논문 Methods 를 직접 읽어 농도 단위를 ppm 에서 µM 으로
+    # 바로잡았다. 단위를 앵커에서 빼면 같은 실수를 다시 못 잡으므로 단위째
+    # 교정하고 남겨 둔다.
+    ('conc_gb_lo', [r'rises\s+monotonically from \$\+([\d.]+)\$ at 10~\$\\mu\$M'], 0.0015),
+    ('conc_gb_hi', [r'to \$\+([\d.]+)\$ at 500~\$\\mu\$M'], 0.0015),
     ('conc_gf_lo', [r'falls monotonically from \$-([\d.]+)\$'], 0.0015),
     ('conc_gf_hi', [r'falls monotonically from \$-[\d.]+\$ to \$-([\d.]+)\$'], 0.0015),
     ('trend_monotone',
@@ -1280,6 +1310,19 @@ WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six':
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-02 신설. 세 원논문의 Methods 를 직접 읽기 전에, 어레이 농도를
+    # ppm 으로, 같은 화합물의 서로 다른 농도를 '반복측정(replicate)' 으로
+    # 적었다. 둘 다 수행하지 않은 측정을 서술한 것이므로 [C-3] 위반이다.
+    # 정본: 농도는 아세토니트릴 용액 µM, 반복측정은 없다.
+    ('어레이 농도 단위, ppm 오기 (정본 µM)',
+     [r'(?:\b10|\b50|\b100|\b500)~?\\?,?\s*ppm\b'],
+     [r'AEGL', r'mg\\,m\^\{-3\}', r'converted using', r'thousands separator',
+      r'bracketed by the agency']),
+    ('어레이 반복측정 주장 (정본: 조합당 1행, 반복측정 없음)',
+     [r'[Rr]eplicates? of (?:one|the same) compound',
+      r'within replicates of',
+      r'replicate agreement exceeds'],
+     [r'descriptor[- ]resampling', r'resampl']),
     ('28종 구조공간 명목 p, 구판 (정본 0.027)',
      [r'structural[\s\S]{0,60}0\.028\b', r'0\.028[\s\S]{0,60}percentile'],
      [r'earlier version', r'superseded', r'single-conformer']),
