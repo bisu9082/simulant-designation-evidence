@@ -282,6 +282,23 @@ ACS_CASES = [
 # 2026-11-02. ACS SI (paper_acs/supporting.tex) 전용.
 # 이 파일은 paper/supplementary.tex 의 평행 사본이다. 한쪽만 고치면 조용히
 # 갈라지므로 ACS 쪽 단독 오기도 잡히는지 확인한다.
+ACS_CL = 'paper_acs/cover_letter.tex'
+
+# 2026-11-02. ACS 커버레터 전용. 커버레터가 본문 수치를 다시 세므로 한쪽만
+# 바뀌면 투고 패키지 안에서 모순이 난다. 처음 앵커를 달기 전에는 네 자리
+# 가운데 셋이 통과했다.
+ACS_CL_CASES = [
+    ('커버레터 d2 교차검증 정확도 오기 (정본 0.964)',
+     'cross-validated accuracy of 0.964 on',
+     'cross-validated accuracy of 0.984 on'),
+    ('커버레터 DMMP-GA 코사인 오기 (정본 +0.76)',
+     'correlates at $+0.76$ with tabun', 'correlates at $+0.86$ with tabun'),
+    ('커버레터 DMMP-GF 코사인 부호자리 오기 (정본 -0.72)',
+     '$-0.72$ with cyclosarin', '$-0.62$ with cyclosarin'),
+    ('커버레터 농도축 상단 오기 (정본 +0.77 at 500 uM)',
+     'concentration, from $+0.77$ at', 'concentration, from $+0.87$ at'),
+]
+
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
     ('ACS SI 단독으로 모델 성능 오기 (정본 R^2 0.458)',
@@ -526,7 +543,7 @@ def run():
 
 
 def main():
-    for _p in (TEX, SUPP, SIDECAR, ANNOT, ACS, ACS_SUPP):
+    for _p in (TEX, SUPP, SIDECAR, ANNOT, ACS, ACS_SUPP, ACS_CL):
         _guard(_p)
     good = open(TEX).read()
     backup = tempfile.NamedTemporaryFile('w', suffix='.tex', delete=False)
@@ -578,6 +595,24 @@ def main():
 
         # 2026-11-02 신설. ACS 판본 전용. 세 원논문 Methods 를 읽기 전에
         # 적은 두 서술(ppm, 반복측정)이 모두 수행하지 않은 측정을 가리켰다.
+        # ACS 커버레터 점검 (2026-11-02).
+        cbak = open(ACS_CL).read()
+        try:
+            for desc, a, b in ACS_CL_CASES:
+                if a not in cbak:
+                    print(f'  SKIP {desc}: 커버레터 원문을 찾지 못함 ({a[:40]!r})')
+                    bad += 1
+                    continue
+                open(ACS_CL, 'w').write(cbak.replace(a, b, 1))
+                if run() == 0:
+                    print(f'  FAIL {desc}: 주입했는데 통과했다 (커버레터)')
+                    bad += 1
+                else:
+                    print(f'  ok   {desc}: 잡았다 (커버레터)')
+                open(ACS_CL, 'w').write(cbak)
+        finally:
+            open(ACS_CL, 'w').write(cbak)
+
         # ACS SI 평행 사본 점검 (2026-11-02).
         qbak = open(ACS_SUPP).read()
         try:
@@ -647,7 +682,8 @@ def main():
     finally:
         shutil.copyfile(backup.name, TEX)
     _n = (len(CASES) + len(SUPP_CASES) + len(ANNOT_CASES)
-          + len(SIDECAR_CASES) + len(ACS_CASES) + len(ACS_SUPP_CASES))
+          + len(SIDECAR_CASES) + len(ACS_CASES) + len(ACS_SUPP_CASES)
+          + len(ACS_CL_CASES))
     print(f'[test_verify] 시험 {_n}건, 실패 {bad}건')
     return 1 if bad else 0
 

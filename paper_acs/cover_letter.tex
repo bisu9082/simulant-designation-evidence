@@ -1,0 +1,124 @@
+% simulant — Cover letter (ACS Sensors), 2026-11-02 신설.
+%
+% JHM 판본(paper/cover_letter.tex, 2,417단어)을 줄여 쓴 것이 아니라 새로 쓴다.
+% 이유는 두 가지다.
+%
+% (1) 순서가 다르다. JHM 쪽은 지정문서 기록으로 열었다. ACS Sensors 독자에게
+%     헤드라인은 응답공간 결과이므로 그쪽으로 연다.
+% (2) 스코프 관문을 정면으로 답해야 한다. ACS Sensors 저자 안내(2026-10-08
+%     실측)는 복잡 시료에서의 센서 실증과 기존 분석법과의 상관을 요구하고,
+%     '알려진 센싱 개념'에 대한 심사없는 반려 조항을 둔다. 이 원고는 센서
+%     개발 논문이 아니므로 셋 다 해당하지 않는다. 숨기면 데스크 리젝이고,
+%     먼저 꺼내 왜 그래도 스코프 안인지 말하는 것이 유일한 길이다.
+%
+% em-dash 금지 / AI 문체 금지 규칙 적용.
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\pagestyle{empty}
+
+\begin{document}
+
+{\small
+Chemical, Biological, Radiological and Nuclear (CBRN) Defense Research
+Institute\\
+Ministry of National Defense, Seoul, Republic of Korea\\
+2 November 2026}
+
+\vspace{6pt}
+
+% [확인 필요] 투고 시스템에서 배정된 Associate Editor 성함을 확인하고
+%            "Dear Dr. <Name>," 로 교체할 것. ACS Sensors 는 복수
+%            Associate Editor 체제다.
+Dear Editors,
+
+We submit \textit{Descriptor Similarity Does Not Predict Array Response:
+Chemical Warfare Agent Simulants Tested Against Seventeen Authentic Agents}
+for consideration as an Article.
+
+\textbf{What the paper is about, and why we bring it here.} Chemical warfare
+agent detection is almost always developed and qualified on simulants, because
+the agents themselves are available to few laboratories. Every such
+qualification rests on one assumption: that a compound chosen to resemble an
+agent on molecular descriptors will resemble it in what the detector measures.
+We tested that assumption directly, against colorimetric response measured on
+seventeen authentic agents spanning nerve, blood, choking, vesicant and
+A-series compounds. This journal sets the standard for whether a detection
+claim has been demonstrated against the analyte it names. The question we ask
+is one step earlier and bears on every simulant-qualified device in the
+literature: whether the surrogate analyte was the right one to begin with.
+
+\textbf{Three counts state the result.} Across the seventeen agents, exactly
+one designated simulant has ever been measured beside them, and that single
+co-measurement sits in one run of one array. Twelve exact Mantel tests and six
+Fisher combinations of them leave no agreement between descriptor distance and
+response distance below $q = 0.05$. On the thirty-five-compound panel, no agent
+of eleven has a valid match to an incumbent simulant, at a
+Benjamini--Hochberg adjusted value of 0.6173. The array itself is not in
+question: it classifies these agents at a cross-validated accuracy of 0.964 on
+the seven-agent run and 1.000 on the Novichok run. What fails is the transfer
+from descriptor space to response space.
+
+\textbf{The specific case will interest sensor developers.} Dimethyl
+methylphosphonate is the standard G-agent simulant and the benchmark compound
+for decontamination efficiency. Measured beside the agents in the ultraviolet
+channel, its response pattern correlates at $+0.76$ with tabun and $+0.65$ with
+sarin but at $-0.49$ with soman, $-0.72$ with cyclosarin and $-0.70$ with VX.
+Its similarity to sarin also falls with concentration, from $+0.77$ at
+500~$\mu$M to $+0.36$ at 10~$\mu$M, which is the end at which a field detector
+operates. A surrogate that resembles the agent only at high dose is of limited
+use to the measurement it stands in for.
+
+\textbf{What this paper is not, stated plainly.} It reports no new sensor, no
+demonstration in a complex matrix, and no correlation against an established
+analytical method, and we recognise that your guidelines ask for those of a
+sensing paper. This is not a sensing paper. It is a measurement-science audit
+of the surrogate on which sensing papers are qualified, and the data it audits
+could not be produced any other way: the agents cannot be put into a complex
+environmental matrix outside a designated laboratory, and the comparison it
+makes is between two descriptions of the same compounds rather than between a
+sensor and a reference method. We would rather you weigh that against your
+scope now than have it surface in review.
+
+\textbf{Data provenance.} The colorimetric response data are reanalysed from
+three earlier studies by this group, in \textit{Journal of Hazardous
+Materials}, \textit{Discover Sensors} and \textit{Sensors and Actuators B},
+all cited in the manuscript. Those papers reported classification performance
+for three separate agent sets. None of them compared response to molecular
+descriptors, none placed the three sets in one analysis, and no figure, table
+or passage is reproduced here. The descriptor calculations, the permutation
+tests and every result in this manuscript are new.
+
+\textbf{What we propose instead of a replacement compound.} We propose none,
+because selecting one on descriptor similarity would repeat the error the
+paper is about. What the manuscript specifies is the measurement that would
+settle the question: a bridging run in which candidate simulants and the agents
+they stand in for are exposed on the same plate, in the same optical channels,
+at the same concentrations, within one session. That run yields a response-space
+distance between a simulant and its agent measured under identical conditions,
+which no amount of descriptor work can supply. It needs no new chemistry and
+no new instrument.
+
+\textbf{Reporting and availability.} All agents were produced and handled at an
+Organisation for the Prohibition of Chemical Weapons designated laboratory
+under Chemical Weapons Convention procedures. Analysis code, descriptor tables,
+parsed regulatory values with their sources and every figure script are
+deposited in a public repository cited in the manuscript, and all permutation
+tests are exhaustive rather than sampled, so every number reported can be
+reproduced from the deposit. The manuscript has not been published elsewhere
+and is not under consideration at another journal. The authors declare no
+competing financial interest.
+
+\vspace{6pt}
+
+Yours sincerely,
+
+\vspace{14pt}
+
+Ku Kang, on behalf of the authors\\
+{\small Corresponding author: Yoon Jeong Jang, yjjangchem@korea.kr}
+
+\end{document}

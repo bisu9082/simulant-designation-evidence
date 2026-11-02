@@ -31,7 +31,7 @@ TEX = 'paper/main.tex'
 # 갈라진다. 둘 다 같은 산출물에 대조하면 어느 쪽에 구판 값이 남아도 걸린다.
 EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
              'paper/supplementary.tex', 'paper_acs/main.tex',
-             'paper_acs/supporting.tex')
+             'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -1043,6 +1043,16 @@ CHECKS = [
     # ACS 판본 Conclusions 가 2.4 의 같은 값을 다시 센다. 자리별 전용 앵커.
     ('bh_q35_concl',
      [r'at a Benjamini--Hochberg adjusted value of\s+(\d+\.\d+)'], 0.0005),
+    # ACS 커버레터 전용 앵커 (2026-11-02). 본문과 같은 산출물에 건다.
+    ('cl_d2_acc', [r'cross-validated accuracy of (\d\.\d{3}) on'], 0.0005),
+    ('cl_d3_acc', [r'seven-agent run and (\d\.\d{3}) on the Novichok run'], 0.0005),
+    ('cl_dmmp_ga', [r'correlates at\s*\n?\$\+(\d\.\d{2})\$ with tabun'], 0.005),
+    ('cl_dmmp_gb', [r'\$\+(\d\.\d{2})\$ with\s*\n?sarin but at'], 0.005),
+    ('cl_dmmp_gd', [r'but at\s*\n?\$(-\d\.\d{2})\$ with soman'], 0.005),
+    ('cl_dmmp_gf', [r'\$(-\d\.\d{2})\$ with cyclosarin'], 0.005),
+    ('cl_dmmp_vx', [r'\$(-\d\.\d{2})\$ with VX'], 0.005),
+    ('cl_conc_hi', [r'with concentration, from\s*\n?\$\+(\d\.\d{2})\$ at\s*\n?500~\$\\mu\$M'], 0.005),
+    ('cl_conc_lo', [r'to \$\+(\d\.\d{2})\$ at 10~\$\\mu\$M, which is the end'], 0.005),
     # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
     ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
@@ -1496,7 +1506,19 @@ def main():
     # 맞추므로, 2.4 의 어법이 맞으면 Conclusions 의 다른 어법은 보이지
     # 않는다. 주입시험에서 실제로 Conclusions 의 BH 값만 바꿔도 통과했다.
     # 자리마다 키를 따로 두고 같은 산출물 값에 건다.
-    for _dst, _src_key in (('bh_q35_concl', 'bh_q35'),):
+    # 2026-11-02. 커버레터도 본문 수치를 다시 센다. 주입시험에서 0.964,
+    # +0.76, +0.77 세 자리가 전부 통과했다 (어법이 본문과 달라 (B) 검사가
+    # 본문 쪽에서 이미 맞고 끝났다). 자리마다 키를 따로 둔다.
+    for _dst, _src_key in (('bh_q35_concl', 'bh_q35'),
+                           ('cl_d2_acc', 'lit_d2_acc'),
+                           ('cl_d3_acc', 'lit_d3_acc'),
+                           ('cl_dmmp_ga', 'dmmp_ga_uv'),
+                           ('cl_dmmp_gb', 'dmmp_gb_uv'),
+                           ('cl_dmmp_gd', 'dmmp_gd_uv'),
+                           ('cl_dmmp_gf', 'dmmp_gf_uv'),
+                           ('cl_dmmp_vx', 'dmmp_vx_uv'),
+                           ('cl_conc_lo', 'conc_gb_lo'),
+                           ('cl_conc_hi', 'conc_gb_hi')):
         if _src_key in f:
             f[_dst] = f[_src_key]
     def strip_comments(s):
