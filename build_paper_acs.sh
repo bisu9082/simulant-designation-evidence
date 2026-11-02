@@ -7,7 +7,31 @@
 #
 # 쓰는 법:  sh build_paper_acs.sh
 set -e
-cd "$(dirname "$0")/paper_acs"
+cd "$(dirname "$0")"
+
+# 도판 동기화 (2026-11-02 신설). 이 단계가 없었다. build_paper.sh 는 JHM
+# 판본(paper/)에만 도판을 복사하므로, 파이프라인을 다시 돌려도 paper_acs/ 의
+# png 는 구판으로 남았다. verify_consistency 의 ACS 도판 시차 검사가 이것을
+# 잡아냈다. --figs 를 주면 생성기까지 다시 돌린다.
+if [ "$1" = '--figs' ]; then
+  for s in make_fig_main.py make_fig_h1.py make_fig_mde.py \
+           make_fig_plocal.py make_fig_talk_response.py make_toc_acs.py; do
+    [ -f "$s" ] || continue
+    printf '[fig] %-28s ' "$s"
+    if python3 "$s" >/dev/null 2>&1; then echo ok; else echo FAIL; exit 1; fi
+  done
+fi
+
+for f in Fig_main.png Fig_plocal.png Fig_h1.png Fig_mde.png \
+         Fig_talk_response.png Fig_talk_tox.png toc_acs.png toc_acs.pdf; do
+  if [ -f "outputs/$f" ]; then
+    cp -p "outputs/$f" "paper_acs/$f"
+  else
+    echo "[경고] outputs/$f 없음 — ACS 원고의 도판이 갱신되지 않는다" >&2
+  fi
+done
+
+cd paper_acs
 
 pass() {
     pdflatex -interaction=nonstopmode "$1" >/dev/null 2>&1 || true

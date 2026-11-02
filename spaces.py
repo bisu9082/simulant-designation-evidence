@@ -98,8 +98,13 @@ def exact_dependents(df, cols, tol=DEP_TOL, max_terms=DEP_MAX_TERMS):
     return keep, dropped
 
 
-def pick(df, cols, protected):
-    """분산 0 제거 → |r|>R_CUT 쌍에서 비보호 열 제거 → 정확 종속 좌표 제거."""
+def _pick_legacy(df, cols, protected):
+    """2026-11-02 이전 상관필터. 입력 열 순서의 함수다. 비교 목적으로만 남긴다.
+
+    쌍을 (i, j) 이중 루프로 훑으며 같은 상관군에서 '뒤쪽' 열을 버리므로,
+    어느 좌표가 살아남는지가 CSV 의 열 배치로 결정된다. GATE 8 7차 R4 지적.
+    order_invariance.py 가 이 함수와 pick() 의 분포를 나란히 보고한다.
+    """
     cols = [c for c in cols if df[c].std(ddof=1) > 1e-12]
     C = df[cols].corr().abs().to_numpy()
     keep, dropped = list(cols), []
@@ -113,6 +118,62 @@ def pick(df, cols, protected):
                 drop = b                                   # 둘 다 보호면 뒤를 버림
             keep.remove(drop); dropped.append((drop, a if drop == b else b,
                                                float(C[i, j])))
+    keep, dep = exact_dependents(df, keep)
+    dropped.extend(dep)
+    return keep, dropped
+
+
+def pick(df, cols, protected):
+    """분산 0 제거 → |r|>R_CUT 상관필터 → 정확 종속 좌표 제거.
+
+    상관필터는 2026-11-02 에 교체했다. 이전 판은 쌍을 입력 열 순서로 훑으며
+    뒤쪽을 버렸으므로 유지되는 좌표 집합이 CSV 의 열 배치의 함수였고, 그
+    배치를 바꾸면 28종 패널의 유효매칭이 4건과 3건 사이를 오갔다. 결과가
+    분석자가 고른 적 없는 변수의 함수이면 결과가 아니다.
+
+    교체한 규칙은 이 논문이 만든 것이 아니라 Kuhn 의 caret findCorrelation
+    규칙이다. |r| 이 가장 큰 쌍을 먼저 보고, 그 두 좌표 중 나머지 유지 좌표에
+    대한 평균 |r| 이 큰 쪽(더 중복인 쪽)을 버린다. 하나를 버리면 상관행렬을
+    다시 계산하고 역치 초과 쌍이 없을 때까지 반복한다.
+
+    결정성을 위해 세 가지를 고정한다.
+      (1) 입력 열을 이름순으로 정렬해 시작한다. 호출자가 어떤 순서로 넘겨도
+          같은 집합에서 출발한다.
+      (2) 보호 좌표(PROTECTED)가 한쪽에만 있으면 비보호 쪽을 버린다. 평균 |r|
+          비교보다 앞선다. 본문이 해석하는 좌표를 중복 때문에 잃지 않기 위한
+          것이고, 이전 판에도 있던 규칙이다.
+      (3) 평균 |r| 차가 1e-12 안이면 이름이 사전순 뒤인 쪽을 버린다. 완전
+          중복 열(|r| = 1)에서만 걸리는 경로다.
+
+    (1) 때문에 반환되는 keep 은 항상 이름순이며, 뒤에 붙는 exact_dependents
+    의 검사 순서도 그래서 결정적이 된다.
+    """
+    import numpy as np
+    cols = sorted(c for c in cols if df[c].std(ddof=1) > 1e-12)
+    keep, dropped = list(cols), []
+    while len(keep) > 1:
+        C = df[keep].corr().abs()
+        A = C.to_numpy(float).copy()
+        np.fill_diagonal(A, np.nan)
+        iu = np.triu_indices(len(keep), 1)
+        over = [(float(A[i, j]), keep[i], keep[j])
+                for i, j in zip(*iu) if A[i, j] > R_CUT]
+        if not over:
+            break
+        # 가장 강한 쌍. r 동률이면 이름으로 깨서 결정적으로 만든다.
+        r, a, b = max(over, key=lambda t: (t[0], t[1], t[2]))
+        pa, pb = a in protected, b in protected
+        if pa != pb:
+            drop = b if pa else a                      # 비보호 쪽을 버린다
+        else:
+            ma = float(np.nanmean(A[keep.index(a)]))
+            mb = float(np.nanmean(A[keep.index(b)]))
+            if abs(ma - mb) > 1e-12:
+                drop = a if ma > mb else b             # 더 중복인 쪽을 버린다
+            else:
+                drop = max(a, b)                       # 이름 사전순 뒤
+        keep.remove(drop)
+        dropped.append((drop, b if drop == a else a, r))
     keep, dep = exact_dependents(df, keep)
     dropped.extend(dep)
     return keep, dropped

@@ -238,21 +238,34 @@ def deltaE_corrected():
                 continue
             P = m.consensus(m.centred(m.raw_patterns(D, dy)))
             ags = [a for a in sorted(P) if a in m.MAP]
+
+            # C4. 중심화는 물질간 코사인 평균을 -1/(n-1) 에 고정한다.
+            #
+            # 2026-11-02 (T2-4). 이 블록은 아래 Mantel 관문(매핑된 작용제
+            # 4종 미만이면 건너뛴다) 뒤에 있었다. 그래서 d3 의 두 셀에서
+            # 바닥이 계산되지 않았고, 산출물에 여섯 셀 중 넷만 남아 있었다.
+            # 바닥은 서술자 공간과 무관하게 응답패턴만으로 정해지므로 Mantel
+            # 을 돌릴 수 없는 셀에서도 계산된다. 관문보다 앞으로 옮긴다.
+            # 중심화 바닥에 붙은 셀은 코사인이 데이터가 아니라 중심화의
+            # 산물이라는 뜻이므로, 빠뜨리면 가장 약한 셀이 보고되지 않는다.
+            allc = [float(np.dot(P[a], P[b]))
+                    for a, b in itertools.combinations(sorted(P), 2)]
+            nall = len(P)
+            floor.append(dict(dataset=tag, mode=mode, n_compounds=nall,
+                              n_mapped_agents=len(ags),
+                              mantel_evaluated=bool(len(ags) >= 4),
+                              observed_mean_cosine=float(np.mean(allc)),
+                              algebraic_floor=float(-1 / (nall - 1)),
+                              gap=float(np.mean(allc) + 1 / (nall - 1))))
+
             if len(ags) < 4:
+                print(f'  {tag} {mode:<7} Mantel 생략 — 매핑된 작용제 '
+                      f'{len(ags)}종 (4종 미만). 바닥은 계산했다.')
                 continue
             k = len(ags)
             pr = list(itertools.combinations(range(k), 2))
             dis = np.array([1 - float(np.dot(P[ags[i]], P[ags[j]]))
                             for i, j in pr])
-
-            # C4. 중심화는 물질간 코사인 평균을 -1/(n-1) 에 고정한다.
-            allc = [float(np.dot(P[a], P[b]))
-                    for a, b in itertools.combinations(sorted(P), 2)]
-            nall = len(P)
-            floor.append(dict(dataset=tag, mode=mode, n_compounds=nall,
-                              observed_mean_cosine=float(np.mean(allc)),
-                              algebraic_floor=float(-1 / (nall - 1)),
-                              gap=float(np.mean(allc) + 1 / (nall - 1))))
 
             for sp in SPACES:
                 M = np.array([[DIST[sp][idx[m.MAP[a]], idx[m.MAP[b]]]
@@ -295,9 +308,10 @@ def deltaE_corrected():
     print('  중심화 바닥 대조 (관측 평균 코사인 대 -1/(n-1)):')
     for f in floor:
         print(f'    {f["dataset"]} {f["mode"]:<7} n={f["n_compounds"]}  '
-              f'관측 {f["observed_mean_cosine"]:+.3f}  '
-              f'바닥 {f["algebraic_floor"]:+.3f}  '
-              f'여유 {f["gap"]:+.3f}')
+              f'관측 {f["observed_mean_cosine"]:+.4f}  '
+              f'바닥 {f["algebraic_floor"]:+.4f}  '
+              f'여유 {f["gap"]:+.4f}'
+              + ('' if f['mantel_evaluated'] else '   [Mantel 미평가]'))
     # 2026-10-24. 중복 채널 축약 기록을 기탁 산출물에 싣는다. SI 가 유효
     # 채널 수를 인용하므로 그 근거가 저장소 안에 있어야 한다.
     return dict(mantel=mantel, centring_floor=floor, mantel_bh=mantel_bh,

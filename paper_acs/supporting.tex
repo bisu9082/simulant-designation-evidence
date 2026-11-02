@@ -254,22 +254,91 @@ the code. The descriptor build script checks this under a
 \texttt{--verify} flag, and the analysis pipeline requires it before it will
 run.
 
-The results do not depend on which of the two treatments is used. Repeating the
+The seed moves one of the eleven agents and nothing else. Repeating the
 embedding under six seeds and rebuilding only the nine shape coordinates, the
-twenty-eight-compound panel returns four valid matches under all six seeds with
-either treatment, and the thirty-five-compound panel returns none under any of
-the twelve runs. Tabun, the match nearest the threshold, sits between 1.896 and
-1.905 across the ensemble runs and between 1.876 and 1.884 across the
-single-conformer runs, inside the threshold of 2 in all twelve. The merged-space
-permutation value is 0.025 in all six ensemble runs and between 0.025 and 0.028
-in the single-conformer runs. Values are in the two deposited files
+thirty-five-compound panel returns no valid match in any of the twelve runs and
+the retained merged space is thirty-eight coordinates in all twelve. On the
+twenty-eight-compound panel the count is three under all six single-conformer
+seeds, and three under three of the six ensemble seeds against four under the
+other three. The agent that moves is tabun in every case. Its normalised
+distance runs from 1.9943 to 2.0106 across the ensemble seeds and from 2.0172 to
+2.0273 across the single-conformer seeds, against a threshold of 2, so the whole
+spread lies within 0.03 of the threshold and straddles it. The merged-space
+permutation value runs from 0.0250 to 0.0279 under both treatments. Values are
+in the two deposited files
 \texttt{conformer\_sensitivity\_ensemble.json} and
 \texttt{conformer\_sensitivity\_single.json} under \texttt{outputs/}.
 
 We report this at length because the conformer is a choice of the same kind as
 the panel, the space and the statistic, and we had not counted it. It belongs in
-the list of Section~\ref{M-res:panels} even though, unlike the other four, it
-turns out not to move the answer.
+the list of Section~\ref{M-res:panels}, and unlike the other four it does not
+change what the panel says about any agent except tabun. What it establishes
+about tabun is that this analysis does not determine whether tabun has a valid
+match. The embedding seed decides it, and so does the order in which the
+correlation filter is handed its columns
+(Section~\ref{meth:orderinvariance}). We report tabun as a borderline case
+throughout rather than counting it on either side.
+
+\section{Column order in the correlation filter}
+\label{meth:orderinvariance}
+
+The descriptor spaces are built by dropping one coordinate from every pair whose
+absolute Pearson correlation exceeds 0.95, so that no retained pair sits above
+that cut. More than one retained set satisfies that constraint, and until this
+revision the set we used was chosen by the order in which the columns happened
+to sit in the descriptor file. The filter walked the pairs in that order and
+dropped the later member of each supra-threshold pair, which means the surviving
+coordinates were a function of a variable no analyst had selected.
+
+The cost is measurable. Permuting the input column order forty times under a
+fixed seed and rebuilding everything downstream, the old filter returned
+thirty-seven distinct retained sets on the twenty-eight-compound panel, with
+dimensions between 36 and 39, and a valid-match count of three in twenty-five
+of the forty orderings and four in the remaining fifteen. The value we had
+reported was the minority outcome. The thirty-five-compound panel behaved
+differently: thirty-six distinct retained sets and dimensions between 39 and 41,
+but a valid-match count of zero in all forty orderings. The headline negative
+result on the primary panel never depended on column order; the positive count
+on the reduced panel did.
+
+One concrete case shows how the old filter reached a set it should not have. It
+dropped \texttt{chi0v} against molecular weight at $|r| = 0.9532$, which removed
+the only partner \texttt{kappa1} had above the cut, so \texttt{kappa1} survived
+even though $|r|(\texttt{kappa1}, \texttt{chi0v}) = 0.9816$. The retained set
+therefore contained a coordinate correlated at 0.98 with one the filter had just
+discarded as redundant.
+
+We replaced the rule rather than fixing the order. The filter now follows the
+\texttt{findCorrelation} rule of Kuhn\cite{caretref}: take the pair with the
+largest $|r|$, drop whichever of its two members has the larger mean $|r|$
+against the other retained coordinates, recompute the correlation matrix, and
+repeat until no pair exceeds the cut. Three conventions make it deterministic.
+The input columns are sorted by name before the first pair is examined, so the
+caller's order cannot matter. Where exactly one member of a pair is a protected
+coordinate, the unprotected one is dropped, which takes precedence over the mean
+correlation and was a rule in the previous filter as well. Where the two mean
+correlations agree to within $10^{-12}$, the later name in lexicographic order
+is dropped, a path reached only by exactly duplicated columns.
+
+Under the new rule the same forty permutations return a single retained set on
+every panel: thirty-eight coordinates and three valid matches on the
+twenty-eight-compound panel, forty-one coordinates and no valid match on the
+thirty-five-compound panel, and forty-one coordinates with five valid matches
+when the eight literature simulants are admitted as candidates. The maximum
+retained $|r|$ is 0.9470, as it was before. The counts are in
+\texttt{order\_invariance.json} under \texttt{outputs/} and are regenerated by
+\texttt{order\_invariance.py}, which reports both rules side by side.
+
+The agent that moves between the two rules is tabun, and it moves because its
+normalised distance to dimethyl methylphosphonate crosses the threshold of 2:
+1.9948 under the old filter against 2.0038 under the new one. Section
+\ref{meth:conformer} shows the conformer embedding seed moving the same quantity
+across the same threshold. Taken together, tabun's normalised distance lies
+within 0.03 of the threshold under every treatment we have run, and whether it
+counts as a valid match is decided by implementation choices rather than by the
+data. We therefore report three valid matches on the twenty-eight-compound panel
+and name tabun as a borderline case wherever the count appears, rather than
+presenting either three or four as settled.
 
 \section{Density-functional check on the electrophilicity axis}
 \label{meth:dft}
@@ -348,7 +417,7 @@ because the alternative is to leave standing a negative claim that our own check
 does not support. The second is that the merged space does not move the same
 way. Rebuilt from the same three density-functional coordinates it retains the
 thirty-nine coordinates of the main analysis and returns three valid matches and
-a one-sided $p$ of 0.0221, against four and 0.0250 for the GFN2 control, so the
+a one-sided $p$ of 0.0250, against four and 0.0250 for the GFN2 control, so the
 value the main text carries is not an artefact of the semiempirical method. The
 third is that the analyst freedoms this paper is about therefore include one we
 did not enumerate when we set the comparison up, and it is the freedom that
@@ -516,13 +585,13 @@ $n_\mathrm{valid}$ & min $q$ \\
 \quad + literature 8   & electronic  &  3 & 0.121  & 0.0862  & 0.123  & 0.127  & 0.165  & 0.0799 &  \\
                        & merged      & 42 & 0.0569  & 0.301  & \textbf{0.0371}  & 0.123  & 0.319  & 0.159 & 0.212 \\
 \hline
-28 cpd., incumbent 3   & structural  & 37 & \textbf{0.0265}  & 0.178  & 0.0824  & \textbf{0.0485}  & 0.110  & 0.235 &  \\
+28 cpd., incumbent 3   & structural  & 37 & \textbf{0.0279}  & 0.178  & 0.0824  & \textbf{0.0485}  & 0.110  & 0.235 &  \\
 \quad (omits the five) & electronic  &  3 & 0.275  & 0.175  & 0.293  & 0.235  & 0.757  & 0.757 &  \\
                        & merged      & 40 & \textbf{0.025}  & 0.0691  & \textbf{0.0368}  & \textbf{0.0309}  & 0.110  & 0.181 & 0.165 \\
 \hline
-35 cpd., incumbent 3   & structural  & 39 & \textbf{0.0143}  & \textbf{$<$0.001}  & 0.0565  & 0.228  & 0.318  & 0.268 &  \\
+35 cpd., incumbent 3   & structural  & 39 & \textbf{0.0115}  & \textbf{$<$0.001}  & 0.0549  & 0.214  & 0.318  & 0.268 &  \\
 \quad + literature 5   & electronic  &  3 & 0.0892  & 0.0526  & 0.0589  & 0.0856  & 0.0664  & 0.055 &  \\
-\quad + pesticides 2   & merged      & 42 & \textbf{0.006}  & \textbf{$<$0.001}  & \textbf{0.0360}  & 0.152  & 0.318  & 0.268 & \textbf{0.001} \\
+\quad + pesticides 2   & merged      & 42 & \textbf{0.005}  & \textbf{$<$0.001}  & \textbf{0.0352}  & 0.143  & 0.318  & 0.268 & \textbf{0.001} \\
 \hline
 \hline
 \multicolumn{10}{l}{\footnotesize Statistics, in order: mean and median of
@@ -536,7 +605,7 @@ in each case.}\\
 \end{tabular}
 \end{table}
 
-Two further values belong with Table~\ref{tab:family}. Weighting the 36
+Two further values belong with Table~\ref{tab:family}. Weighting the 35
 structural and 3 electronic descriptors as two equal blocks, instead of the
 per-descriptor standardisation used throughout, lowers the primary panel's
 smallest nominal value from 0.151 to 0.061, which still survives no correction
@@ -569,13 +638,13 @@ Accounting scheme & 35 cpd., & 35 cpd., & 28 cpd., & 35 cpd., \\
                   & incumbent 3 & + literature 8 & incumbent 3 & relabelled 10 \\
                   & (primary) & & (omits the five) & (pesticides in) \\
 \hline
-Smallest nominal $p$ (18 tests)      & 0.169 & 0.038 & 0.025 & \textbf{$<$0.001} \\
-Benjamini-Hochberg over 18           & 0.617 & 0.212 & 0.181 & \textbf{0.001} \\
-Benjamini-Hochberg over 6, per space & 0.545 & 0.153 & 0.082 & \textbf{$<$0.001} \\
-Westfall-Young min-$P$ over 18       & 0.415 & 0.110 & 0.078 & \textbf{$<$0.001} \\
+Smallest nominal $p$ (18 tests)      & 0.192 & 0.039 & 0.025 & \textbf{$<$0.001} \\
+Benjamini-Hochberg over 18           & 0.630 & 0.212 & 0.163 & \textbf{0.001} \\
+Benjamini-Hochberg over 6, per space & 0.560 & 0.153 & 0.077 & \textbf{$<$0.001} \\
+Westfall-Young min-$P$ over 18       & 0.457 & 0.112 & 0.079 & \textbf{$<$0.001} \\
 $m_{\mathrm{eff}}$ of 18 (Li-Ji)     & 6.00  & 5.00  & 5.00  & 5.00  \\
-Bonferroni at $m_{\mathrm{eff}}$     & 1.000 & 0.191 & 0.125 & \textbf{$<$0.001} \\
-Statistic specified in advance (3 tests) & 0.386 & 0.096 & \textbf{0.040} & \textbf{0.017} \\
+Bonferroni at $m_{\mathrm{eff}}$     & 1.000 & 0.193 & 0.125 & \textbf{$<$0.001} \\
+Statistic specified in advance (3 tests) & 0.386 & 0.103 & \textbf{0.042} & \textbf{0.014} \\
 Benjamini-Hochberg over all 72          & 0.319 & 0.239 & 0.239 & \textbf{0.004} \\
 \hline
 \end{tabular}
@@ -610,7 +679,7 @@ what the nominal structural value is worth against the descriptors it was drawn
 from, and there the answer is less comfortable.
 
 Truncating the standardised structural space to its first three principal
-components does not weaken the result; it strengthens it, from $p=0.026$ to
+components does not weaken the result; it strengthens it, from $p=0.028$ to
 $p=0.0029$ on the twenty-eight-compound panel. At matched dimension the two
 spaces are still 94-fold apart in $p$ (0.0029 against 0.275). Whatever separates
 the structural from the electronic result, it is not that one space has more
@@ -621,12 +690,12 @@ The second control is the informative one. We drew 2000 random three-descriptor
 subsets of the structural space and ran the full exact permutation test on each,
 taking the mean-difference statistic throughout, so that the draws and the
 observed value are the same quantity.
-On the twenty-eight-compound panel the median $p$ is 0.112, the 5th to 95th
-percentile range is 0.006 to 0.710, and 33.7\% of the subspaces reach $p<0.05$
+On the twenty-eight-compound panel the median $p$ is 0.149, the 5th to 95th
+percentile range is 0.006 to 0.710, and 28.95\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
-36-dimensional value of 0.026 sits at the 24.3rd percentile of that
-distribution, and the electronic value of 0.275 at the 75.4th. The
-three-principal-component value of 0.0029 sits at the 2.3rd percentile, which is
+36-dimensional value of 0.028 sits at the 22.4rd percentile of that
+distribution, and the electronic value of 0.275 at the 68.8th. The
+three-principal-component value of 0.0029 sits at the 1.6rd percentile, which is
 what the leading components of a space should do and is not independent
 evidence.
 
@@ -670,8 +739,8 @@ That rate is partly an artifact of the descriptors themselves, and we report the
 correction because it is larger than we expected. Three descriptors drawn from a
 correlated pool do not carry three degrees of freedom. Repeating the control on
 ZCA-whitened coordinates (Section~\ref{meth:dimdetail}), where the coordinates are
-uncorrelated by construction, the rate falls from 33.7\% to 18.4\% and the
-median $p$ rises from 0.094 to 0.282. The correlation structure of the
+uncorrelated by construction, the rate falls from 33.7\% to 17.2\% and the
+median $p$ rises from 0.094 to 0.332. The correlation structure of the
 structural block therefore inflates the apparent ease of reaching nominal
 significance by more than a factor of two. The comparison that the argument
 rests on is the percentile rather than the rate, and that is unaffected: the
@@ -690,7 +759,7 @@ which to pick.
 \section{Weighting the two descriptor blocks equally}
 \label{res:blockbalance}
 
-The merged space puts 36 structural coordinates and 3 electronic ones into one
+The merged space puts 35 structural coordinates and 3 electronic ones into one
 Euclidean distance. Standardising each descriptor equalises the variance per
 coordinate, not per block, so the expected contribution is 38 against 3 and the
 merged distance is in practice a structural distance. The main text says so; this
@@ -704,7 +773,7 @@ contribution of the two blocks,
 d_{\mathrm{bal}}^{2}=\frac{1}{n_{s}}\sum_{i=1}^{n_{s}}(\Delta z_{s,i})^{2}
  +\frac{1}{n_{e}}\sum_{j=1}^{n_{e}}(\Delta z_{e,j})^{2},
 \end{equation}
-with $n_{s}=36$ and $n_{e}=3$, leaving the structural and electronic spaces
+with $n_{s}=35$ and $n_{e}=3$, leaving the structural and electronic spaces
 untouched since each is a single block. The same exact enumeration was used, over
 the same three configurations, with the same six statistics.
 
@@ -724,9 +793,9 @@ statistics, and $q$ is the Benjamini--Hochberg adjusted value of that family.}
 Configuration & per desc. & per block & per desc. & per block
  & per desc. & per block \\
 \hline
-Thirty-five, incumbent three & 0/11 & 0/11 & 0.151 & 0.061 & 0.617 & 0.617 \\
-Thirty-five, plus literature 8 & 5/11 & 5/11 & 0.039 & 0.021 & 0.212 & 0.222 \\
-Twenty-eight, incumbent three & 4/11 & 3/11 & 0.025 & 0.009 & 0.185 & 0.146 \\
+Thirty-five, incumbent three & 0/11 & 0/11 & 0.151 & 0.061 & 0.617 & 0.630 \\
+Thirty-five, plus literature 8 & 5/11 & 5/11 & 0.039 & 0.022 & 0.212 & 0.222 \\
+Twenty-eight, incumbent three & 3/11 & 3/11 & 0.025 & 0.009 & 0.185 & 0.146 \\
 \hline
 \end{tabular}
 \end{table}
@@ -739,14 +808,14 @@ move, from four under equal per-descriptor weighting to three under block
 balance, and the agent it loses is tabun, the match nearest the threshold in the
 main analysis. The paper's headline is therefore invariant to the weighting, and
 so is the pre-specified-statistic counterfactual of Table~\ref{tab:family},
-which stays at 0.040 on the twenty-eight-compound panel: the merged nominal value
+which stays at 0.042 on the twenty-eight-compound panel: the merged nominal value
 there falls from 0.025 to 0.016, but the value that binds after correction is the
 structural one, which the reweighting does not touch. No configuration has a
 Benjamini--Hochberg adjusted value below 0.05 under either weighting.
 
 Every nominal $p$ falls, however, and that is why the main text states the
 primary-panel result as a conclusion about significance rather than as a
-numerical floor. The smallest value of the eighteen-test family there is 0.169
+numerical floor. The smallest value of the eighteen-test family there is 0.192
 with equal weight per descriptor and 0.076 with equal weight per block, so a
 floor quoted from either weighting would not hold under the other. The direction
 is away from the designations: equalising the blocks makes the incumbent
@@ -785,10 +854,10 @@ non-simulant lies closer.}
  & Valid & Nearest simulant & Normalised \\
 Configuration & matches & to lewisite & distance \\
 \hline
-Twenty-eight, incumbent three & 4/11 & dichloromethane & 2.14 \\
-Thirty-five, incumbent three & 0/11 & dichloromethane & 2.36 \\
+Twenty-eight, incumbent three & 3/11 & dichloromethane & 2.14 \\
+Thirty-five, incumbent three & 0/11 & dichloromethane & 2.35 \\
 Thirty-five, plus literature eight & 5/11 & CEES & 2.34 \\
-Thirty-six, incumbent three & 0/11 & dichloromethane & 2.02 \\
+Thirty-six, incumbent three & 0/11 & dichloromethane & 2.04 \\
 Thirty-six, plus literature & 6/11 & AsCl$_3$ & 1.25 \\
 \hline
 \end{tabular}
@@ -829,15 +898,15 @@ typical nearest-neighbour separations of the same space, left the rest of the
 panel untouched, and read the shifted statistic against the null built from the
 unmodified distances. The reading is conditional: on this panel, with only the
 designated three made more faithful, the test returns $p<0.05$ at
-$\delta = 0.22$ (Figure~\ref{fig:mde}). At $\delta = 0$ it returns 0.2856 on
+$\delta = 0.23$ (Figure~\ref{fig:mde}). At $\delta = 0$ it returns 0.2979 on
 the primary panel and 0.0250 on the twenty-eight-compound panel, reproducing
 Table~\ref{tab:ablation}.
 
 The comparison that matters is between that value and the deficit the incumbent
 compounds actually carry. Across the eleven agents the normalised difference
 between the nearest incumbent simulant and the nearest other compound has a
-median of 0.445, more than twice the detectable value. Only at sarin, where it
-is 0.110, does it fall below what the test can resolve, and that is the agent at
+median of 0.493, more than twice the detectable value. Only at sarin, where it
+is 0.125, does it fall below what the test can resolve, and that is the agent at
 which the descriptor resampling of Section~\ref{M-res:panels} is also weakest,
 recovering DMMP as nearest in 41.0\% of replicates. The null on the primary
 panel is therefore a statement about the data rather than about the sensitivity
@@ -1031,11 +1100,15 @@ anticipate, and we give the whole ranking rather than the comparison we set out
 to make. In the ultraviolet channel the agent nearest to DMMP is not sarin but
 tabun, at $+0.764$ against sarin's $+0.645$, with soman, VX and cyclosarin
 following at $-0.492$, $-0.702$ and $-0.721$. In reflectance sarin leads at
-$+0.569$ and tabun falls to $-0.112$. Tabun is a match to DMMP under the
-descriptor criterion of Section~\ref{M-res:panels}, but the weakest of the four
-the criterion admits: its normalised distance is 1.995 against a threshold of 2,
-where sarin sits at 1.171. The two therefore do not disagree about whether tabun
-is matched. They disagree about the order. The measured channel in which the
+$+0.569$ and tabun falls to $-0.112$. Tabun sits on the descriptor criterion of
+Section~\ref{M-res:panels} rather than inside it: its normalised distance is
+2.0038 against a threshold of 2, where sarin sits at 1.187, and
+Section~\ref{meth:orderinvariance} shows that implementation choices carrying no
+chemical content move it to either side of that threshold. The descriptor table
+therefore does not count tabun among the matches, while the measured ultraviolet
+channel places it first of the five agents. The two do not disagree about a
+settled count. They disagree about the order, and they disagree most about the
+one agent the descriptor criterion cannot resolve. The measured channel in which the
 ordering is clearest puts tabun first, the descriptor table puts it last of the
 four, and the agreement between the two channels on tabun is the worst of any
 agent in the set.
@@ -1043,9 +1116,9 @@ We report this as a disagreement between the descriptor table and the measuremen
 and not as a correction to either, because two channels on one plate set cannot
 settle which is right.
 
-The descriptor analysis assigns GB, GD, GF and GA to DMMP. The array places
-sarin first in one channel and tabun first in the other, and does not place GD
-or GF closer to DMMP than VX in either. A sensor chemistry calibrated on DMMP is
+The descriptor analysis assigns GB, GD and GF to DMMP and leaves GA on the
+threshold. The array places sarin first in one channel and tabun first in the
+other, and does not place GD or GF closer to DMMP than VX in either. A sensor chemistry calibrated on DMMP is
 therefore being shown something that behaves like one G agent at a time, not like
 the G series, and the descriptor match for the other two does not survive contact
 with the measured response.
@@ -1056,7 +1129,7 @@ gives the same inconsistent picture as the permutation tests of
 Section~\ref{M-res:panels}. Tested by Mantel permutation over compounds
 (Section~\ref{meth:deltaE}), three of the twelve panel-channel-space cells reach a
 nominal $p<0.05$, and they do not agree on a space: the merged space in the
-second compound set's ultraviolet channel ($\rho = +0.514$, Mantel $p = 0.015$),
+second compound set's ultraviolet channel ($\rho = +0.500$, Mantel $p = 0.019$),
 the structural space in that same set and channel ($\rho = +0.511$, Mantel
 $p = 0.017$),
 and the electronic space in the same set's reflectance channel ($\rho = +0.571$,
@@ -1078,7 +1151,7 @@ six compounds, at a resolution that would have needed a near-deterministic
 association to register. The twelve cells are one
 family, and we correct them as we correct the permutation tests of
 Section~\ref{M-res:panels}: under Benjamini-Hochberg the smallest adjusted value is
-0.100 and no cell reaches $q<0.05$. We state the nominal values as well because
+0.117 and no cell reaches $q<0.05$. We state the nominal values as well because
 cells pointing at different descriptor spaces is itself the pattern worth
 seeing, but no cell is a result. An earlier version of this analysis ran the
 Mantel test in the structural and electronic spaces only and corrected over the
@@ -1086,7 +1159,7 @@ resulting eight cells. The merged space is the one the rest of this paper leads
 with, and the cell it contributes is the strongest of the twelve, so omitting it
 narrowed the family after the fact and in the direction that weakened the
 association. Restoring it moves the smallest adjusted value from 0.133 to
-0.100.
+0.117.
 
 Not every declared channel is a separate measurement, and in one plate set six of
 them are not. In the second set's ultraviolet channel, dyes 22 to 27 return
@@ -1426,9 +1499,6 @@ scale. And the panel's p-xylene is matched to the compiled table's
 \textit{Xylenes} entry (CAS 1330-20-7), which covers the mixed isomers rather
 than the para isomer specifically; p-xylene's descriptors are its own, but its
 safety-axis value is a class value.
-
-\bibliography{refs}
-
 
 \bibliography{refs}
 

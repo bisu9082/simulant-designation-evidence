@@ -125,31 +125,108 @@ def consensus(cen):
 
 
 def discrimination():
+    """변별력 게이트. 분석단위는 화합물이다 (2026-11-02, T2-3 에서 교체).
+
+    왜 교체하는가. 종전 판은 물질내 코사인 쌍 전부(d1 이면 6종 x C(4,2) = 36)와
+    물질간 합의패턴 쌍 전부(C(6,2) = 15)를 두 표본으로 보고 Mann-Whitney 를
+    돌렸다. 그 36 과 15 는 독립 관측이 아니다. 같은 화합물에서 나온 쌍 여섯
+    개가 한 화합물의 잡음을 공유하고, 물질간 쌍 15 개도 여섯 화합물을 돌려
+    쓴다. 게다가 두 집단이 같은 중심화 벡터에서 만들어지므로 서로 독립도
+    아니다. 그 결과 자유도가 실제보다 여섯 배 가까이 부풀어 p 가 10^-8 까지
+    내려갔다. 이 논문은 다른 곳에서 바로 이 오류(쌍을 단위로 세는 것)를
+    교정했으므로 여기에 남겨둘 수 없다.
+
+    교체한 설계. 화합물 a 마다 두 수를 만든다.
+      w_a = a 의 농도간 코사인 평균      (a 의 재현성)
+      b_a = a 의 합의패턴과 다른 화합물 합의패턴의 코사인 평균 (a 의 변별)
+    독립 단위는 화합물이므로 n 은 6, 7, 4 이고, d_a = w_a - b_a 에 대한
+    대응 검정을 한다. n 이 작으므로 정규성 검정으로 t 와 비모수를 고르는 대신
+    부호뒤집기 전수열거(2^n 가지)로 정확 p 를 낸다. n=6 이면 2^6 = 64 이므로
+    단측 최소 p 는 1/64 = 0.0156 이고, n=4 면 1/16 = 0.0625 다. 즉 d3 의 두
+    셀은 어떤 검정을 써도 0.05 밑으로 갈 수 없다. 그 사실을 숨기지 않는다.
+
+    종전 p 는 p_pooled_pairs_superseded 로 남긴다. 지웠다고 적는 대신 왜
+    쓰지 않는지 보이기 위한 것이다.
+    """
     print('=' * 78)
-    print('[게이트] 변별력 — 물질 간 패턴 유사도 대 물질 내 잡음 바닥 (중심화 후)')
+    print('[게이트] 변별력 — 분석단위 = 화합물. 부호뒤집기 전수열거 정확검정')
     print('=' * 78)
     rows = []
     for tag in ['d1', 'd2', 'd3']:
         for mode in ['uv', 'normal']:
             D, dy = load(tag, mode)
             cen = centred(raw_patterns(D, dy))
-            within = []
-            for a in cen:
-                ks = sorted(cen[a])
-                within += [float(np.dot(cen[a][i], cen[a][j]))
-                           for i, j in itertools.combinations(ks, 2)]
             P = consensus(cen)
-            between = [float(np.dot(P[a], P[b]))
-                       for a, b in itertools.combinations(sorted(P), 2)]
-            u = stats.mannwhitneyu(within, between, alternative='greater')
-            print(f'  {tag} {mode:<7} 물질내 {np.mean(within):+.3f} (n={len(within)})  '
-                  f'물질간 {np.mean(between):+.3f} (n={len(between)})  '
-                  f'차 {np.mean(within)-np.mean(between):+.3f}  p={u.pvalue:.3g}')
+            names = sorted(cen)
+
+            # 화합물 단위 요약
+            w, b, per = [], [], []
+            for a in names:
+                ks = sorted(cen[a])
+                wa = [float(np.dot(cen[a][i], cen[a][j]))
+                      for i, j in itertools.combinations(ks, 2)]
+                ba = [float(np.dot(P[a], P[o])) for o in names if o != a]
+                if not wa or not ba:
+                    continue
+                w.append(float(np.mean(wa))); b.append(float(np.mean(ba)))
+                per.append(dict(compound=a, n_concentrations=len(ks),
+                                within=float(np.mean(wa)),
+                                between=float(np.mean(ba)),
+                                diff=float(np.mean(wa) - np.mean(ba))))
+            w = np.array(w); b = np.array(b); d = w - b
+            n = len(d)
+
+            # 부호뒤집기 전수열거. 귀무: d 의 부호가 교환가능.
+            obs = float(d.mean())
+            cnt = 0
+            for signs in itertools.product([1, -1], repeat=n):
+                if float((np.array(signs) * d).mean()) >= obs - 1e-15:
+                    cnt += 1
+            p_exact = cnt / (2 ** n)
+
+            # 교차확인 두 가지와 효과크기
+            try:
+                p_wil = float(stats.wilcoxon(w, b, alternative='greater',
+                                             mode='exact').pvalue)
+            except Exception:
+                p_wil = float('nan')
+            sd = float(d.std(ddof=1)) if n > 1 else float('nan')
+            dz = obs / sd if sd and sd == sd and sd > 0 else float('nan')
+            # n 이 작아 t 분포 신뢰구간을 쓴다. 정확검정과 같은 가정을 쓰지
+            # 않는다는 점을 SI 에 적는다.
+            if n > 1 and sd > 0:
+                tcrit = float(stats.t.ppf(0.975, n - 1))
+                ci = [obs - tcrit * sd / np.sqrt(n), obs + tcrit * sd / np.sqrt(n)]
+            else:
+                ci = [float('nan'), float('nan')]
+
+            # 종전(쌍 독립 가정) p. 쓰지 않지만 기록으로 남긴다.
+            within_all, between_all = [], []
+            for a in names:
+                ks = sorted(cen[a])
+                within_all += [float(np.dot(cen[a][i], cen[a][j]))
+                               for i, j in itertools.combinations(ks, 2)]
+            between_all = [float(np.dot(P[a], P[o]))
+                           for a, o in itertools.combinations(names, 2)]
+            p_old = float(stats.mannwhitneyu(within_all, between_all,
+                                             alternative='greater').pvalue)
+
+            print(f'  {tag} {mode:<7} n={n}  물질내 {w.mean():+.3f}  '
+                  f'물질간 {b.mean():+.3f}  차 {obs:+.3f}  '
+                  f'정확p={p_exact:.4f}  (최소가능 {1/2**n:.4f})  '
+                  f'd_z={dz:+.2f}  [구판 쌍독립 p={p_old:.3g}]')
             rows.append(dict(dataset=tag, mode=mode,
-                             within=float(np.mean(within)),
-                             between=float(np.mean(between)),
-                             n_within=len(within), n_between=len(between),
-                             p=float(u.pvalue)))
+                             unit='compound', n_compounds=n,
+                             within=float(w.mean()), between=float(b.mean()),
+                             diff=obs, p=p_exact,
+                             p_exact_signflip=p_exact,
+                             p_min_attainable=1 / 2 ** n,
+                             p_wilcoxon_exact=p_wil,
+                             cohens_dz=dz, ci95_diff=ci,
+                             n_within_pairs=len(within_all),
+                             n_between_pairs=len(between_all),
+                             p_pooled_pairs_superseded=p_old,
+                             per_compound=per))
     return pd.DataFrame(rows)
 
 
@@ -247,7 +324,9 @@ if __name__ == '__main__':
                    dmmp=dm.to_dict('records'),
                    space_test=sp.to_dict('records')),
               open('outputs/deltaE_premise.json', 'w'), indent=1, ensure_ascii=False)
-    dis.to_csv('outputs/deltaE_discrimination.csv', index=False)
+    # per_compound 는 중첩 레코드이므로 CSV 에서 뺀다. JSON 에 그대로 있다.
+    dis.drop(columns=['per_compound']).to_csv(
+        'outputs/deltaE_discrimination.csv', index=False)
     sp.to_csv('outputs/deltaE_space_test.csv', index=False)
     print('\n[done] outputs/deltaE_premise.json, deltaE_discrimination.csv, '
           'deltaE_space_test.csv')

@@ -1,0 +1,447 @@
+{
+ "n_permutations": 40,
+ "seed": 20261102,
+ "threshold": 2.0,
+ "rules": [
+  "deterministic",
+  "legacy"
+ ],
+ "generator": "order_invariance.py --n 40 --rule both",
+ "cases": {
+  "legacy/panel28_incumbent3": {
+   "n_input_columns": 54,
+   "dims": {
+    "36": 1,
+    "37": 5,
+    "38": 5,
+    "39": 29
+   },
+   "n_distinct_kept_sets": 37,
+   "n_match": {
+    "3": 25,
+    "4": 15
+   },
+   "match_sets": {
+    "cyclosarin (GF)|sarin (GB)|soman (GD)": 25,
+    "cyclosarin (GF)|sarin (GB)|soman (GD)|tabun (GA)": 15
+   },
+   "invariant": false,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.1704,
+     "max": 1.1994,
+     "n_distinct": 14
+    },
+    "soman (GD)": {
+     "min": 1.4063,
+     "max": 1.4809,
+     "n_distinct": 17
+    },
+    "tabun (GA)": {
+     "min": 1.9911,
+     "max": 2.0263,
+     "n_distinct": 16
+    },
+    "sulfur mustard (HD)": {
+     "min": 1.6148,
+     "max": 1.7437,
+     "n_distinct": 17
+    },
+    "lewisite 1 (L)": {
+     "min": 2.0725,
+     "max": 2.1588,
+     "n_distinct": 17
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.5621,
+     "max": 1.5882,
+     "n_distinct": 15
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.445,
+     "max": 1.4705,
+     "n_distinct": 17
+    },
+    "phosgene (CG)": {
+     "min": 1.6002,
+     "max": 1.6328,
+     "n_distinct": 16
+    },
+    "chloropicrin (PS)": {
+     "min": 2.4183,
+     "max": 2.4734,
+     "n_distinct": 17
+    },
+    "cyclosarin (GF)": {
+     "min": 1.4799,
+     "max": 1.5964,
+     "n_distinct": 17
+    },
+    "VX": {
+     "min": 3.017,
+     "max": 3.1196,
+     "n_distinct": 17
+    }
+   }
+  },
+  "legacy/panel35_incumbent3": {
+   "n_input_columns": 54,
+   "dims": {
+    "39": 3,
+    "40": 16,
+    "41": 21
+   },
+   "n_distinct_kept_sets": 36,
+   "n_match": {
+    "0": 40
+   },
+   "match_sets": {
+    "(none)": 40
+   },
+   "invariant": false,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.1661,
+     "max": 1.1963,
+     "n_distinct": 20
+    },
+    "soman (GD)": {
+     "min": 1.4157,
+     "max": 1.4721,
+     "n_distinct": 19
+    },
+    "tabun (GA)": {
+     "min": 2.5205,
+     "max": 2.5905,
+     "n_distinct": 20
+    },
+    "sulfur mustard (HD)": {
+     "min": 1.5629,
+     "max": 1.6483,
+     "n_distinct": 20
+    },
+    "lewisite 1 (L)": {
+     "min": 2.2897,
+     "max": 2.3985,
+     "n_distinct": 19
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.7046,
+     "max": 1.7577,
+     "n_distinct": 20
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.5788,
+     "max": 1.6115,
+     "n_distinct": 20
+    },
+    "phosgene (CG)": {
+     "min": 1.6608,
+     "max": 1.6938,
+     "n_distinct": 20
+    },
+    "chloropicrin (PS)": {
+     "min": 2.7794,
+     "max": 2.857,
+     "n_distinct": 20
+    },
+    "cyclosarin (GF)": {
+     "min": 1.52,
+     "max": 1.6423,
+     "n_distinct": 20
+    },
+    "VX": {
+     "min": 2.8964,
+     "max": 3.0635,
+     "n_distinct": 20
+    }
+   }
+  },
+  "legacy/panel35_incumbent_plus_lit8": {
+   "n_input_columns": 54,
+   "dims": {
+    "39": 3,
+    "40": 13,
+    "41": 24
+   },
+   "n_distinct_kept_sets": 37,
+   "n_match": {
+    "5": 40
+   },
+   "match_sets": {
+    "cyclosarin (GF)|sarin (GB)|soman (GD)|sulfur mustard (HD)|tabun (GA)": 40
+   },
+   "invariant": false,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.0366,
+     "max": 1.0722,
+     "n_distinct": 22
+    },
+    "soman (GD)": {
+     "min": 0.9977,
+     "max": 1.0086,
+     "n_distinct": 9
+    },
+    "tabun (GA)": {
+     "min": 1.7686,
+     "max": 1.8028,
+     "n_distinct": 20
+    },
+    "sulfur mustard (HD)": {
+     "min": 0.515,
+     "max": 0.5497,
+     "n_distinct": 22
+    },
+    "lewisite 1 (L)": {
+     "min": 2.2897,
+     "max": 2.3708,
+     "n_distinct": 20
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.7046,
+     "max": 1.7577,
+     "n_distinct": 22
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.5788,
+     "max": 1.6115,
+     "n_distinct": 22
+    },
+    "phosgene (CG)": {
+     "min": 1.6608,
+     "max": 1.6938,
+     "n_distinct": 22
+    },
+    "chloropicrin (PS)": {
+     "min": 2.7208,
+     "max": 2.8028,
+     "n_distinct": 22
+    },
+    "cyclosarin (GF)": {
+     "min": 1.1039,
+     "max": 1.124,
+     "n_distinct": 20
+    },
+    "VX": {
+     "min": 2.6953,
+     "max": 2.7854,
+     "n_distinct": 22
+    }
+   }
+  },
+  "deterministic/panel28_incumbent3": {
+   "n_input_columns": 54,
+   "dims": {
+    "38": 40
+   },
+   "n_distinct_kept_sets": 1,
+   "n_match": {
+    "3": 40
+   },
+   "match_sets": {
+    "cyclosarin (GF)|sarin (GB)|soman (GD)": 40
+   },
+   "invariant": true,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.187,
+     "max": 1.187,
+     "n_distinct": 1
+    },
+    "soman (GD)": {
+     "min": 1.446,
+     "max": 1.446,
+     "n_distinct": 1
+    },
+    "tabun (GA)": {
+     "min": 2.0038,
+     "max": 2.0038,
+     "n_distinct": 1
+    },
+    "sulfur mustard (HD)": {
+     "min": 1.6953,
+     "max": 1.6953,
+     "n_distinct": 1
+    },
+    "lewisite 1 (L)": {
+     "min": 2.1366,
+     "max": 2.1366,
+     "n_distinct": 1
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.5855,
+     "max": 1.5855,
+     "n_distinct": 1
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.4507,
+     "max": 1.4507,
+     "n_distinct": 1
+    },
+    "phosgene (CG)": {
+     "min": 1.6056,
+     "max": 1.6056,
+     "n_distinct": 1
+    },
+    "chloropicrin (PS)": {
+     "min": 2.4291,
+     "max": 2.4291,
+     "n_distinct": 1
+    },
+    "cyclosarin (GF)": {
+     "min": 1.5944,
+     "max": 1.5944,
+     "n_distinct": 1
+    },
+    "VX": {
+     "min": 3.0566,
+     "max": 3.0566,
+     "n_distinct": 1
+    }
+   }
+  },
+  "deterministic/panel35_incumbent3": {
+   "n_input_columns": 54,
+   "dims": {
+    "41": 40
+   },
+   "n_distinct_kept_sets": 1,
+   "n_match": {
+    "0": 40
+   },
+   "match_sets": {
+    "(none)": 40
+   },
+   "invariant": true,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.1805,
+     "max": 1.1805,
+     "n_distinct": 1
+    },
+    "soman (GD)": {
+     "min": 1.4583,
+     "max": 1.4583,
+     "n_distinct": 1
+    },
+    "tabun (GA)": {
+     "min": 2.532,
+     "max": 2.532,
+     "n_distinct": 1
+    },
+    "sulfur mustard (HD)": {
+     "min": 1.5899,
+     "max": 1.5899,
+     "n_distinct": 1
+    },
+    "lewisite 1 (L)": {
+     "min": 2.3506,
+     "max": 2.3506,
+     "n_distinct": 1
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.7204,
+     "max": 1.7204,
+     "n_distinct": 1
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.5814,
+     "max": 1.5814,
+     "n_distinct": 1
+    },
+    "phosgene (CG)": {
+     "min": 1.6623,
+     "max": 1.6623,
+     "n_distinct": 1
+    },
+    "chloropicrin (PS)": {
+     "min": 2.7811,
+     "max": 2.7811,
+     "n_distinct": 1
+    },
+    "cyclosarin (GF)": {
+     "min": 1.6041,
+     "max": 1.6041,
+     "n_distinct": 1
+    },
+    "VX": {
+     "min": 3.0364,
+     "max": 3.0364,
+     "n_distinct": 1
+    }
+   }
+  },
+  "deterministic/panel35_incumbent_plus_lit8": {
+   "n_input_columns": 54,
+   "dims": {
+    "41": 40
+   },
+   "n_distinct_kept_sets": 1,
+   "n_match": {
+    "5": 40
+   },
+   "match_sets": {
+    "cyclosarin (GF)|sarin (GB)|soman (GD)|sulfur mustard (HD)|tabun (GA)": 40
+   },
+   "invariant": true,
+   "agent_dnorm_spread": {
+    "sarin (GB)": {
+     "min": 1.0558,
+     "max": 1.0558,
+     "n_distinct": 1
+    },
+    "soman (GD)": {
+     "min": 1.0051,
+     "max": 1.0051,
+     "n_distinct": 1
+    },
+    "tabun (GA)": {
+     "min": 1.7686,
+     "max": 1.7686,
+     "n_distinct": 1
+    },
+    "sulfur mustard (HD)": {
+     "min": 0.5338,
+     "max": 0.5338,
+     "n_distinct": 1
+    },
+    "lewisite 1 (L)": {
+     "min": 2.3449,
+     "max": 2.3449,
+     "n_distinct": 1
+    },
+    "hydrogen cyanide (AC)": {
+     "min": 1.7204,
+     "max": 1.7204,
+     "n_distinct": 1
+    },
+    "cyanogen chloride (CK)": {
+     "min": 1.5814,
+     "max": 1.5814,
+     "n_distinct": 1
+    },
+    "phosgene (CG)": {
+     "min": 1.6623,
+     "max": 1.6623,
+     "n_distinct": 1
+    },
+    "chloropicrin (PS)": {
+     "min": 2.7373,
+     "max": 2.7373,
+     "n_distinct": 1
+    },
+    "cyclosarin (GF)": {
+     "min": 1.1116,
+     "max": 1.1116,
+     "n_distinct": 1
+    },
+    "VX": {
+     "min": 2.7663,
+     "max": 2.7663,
+     "n_distinct": 1
+    }
+   }
+  }
+ }
+}

@@ -5,56 +5,378 @@
   {
    "dataset": "d1",
    "mode": "uv",
+   "unit": "compound",
+   "n_compounds": 6,
    "within": 0.541627355773119,
    "between": -0.1871794194774622,
-   "n_within": 36,
-   "n_between": 15,
-   "p": 8.073770787925441e-05
+   "diff": 0.7288067752505812,
+   "p": 0.015625,
+   "p_exact_signflip": 0.015625,
+   "p_min_attainable": 0.015625,
+   "p_wilcoxon_exact": 0.015625,
+   "cohens_dz": 4.119921269880253,
+   "ci95_diff": [
+    0.5431634693609391,
+    0.9144500811402234
+   ],
+   "n_within_pairs": 36,
+   "n_between_pairs": 15,
+   "p_pooled_pairs_superseded": 8.073770787925441e-05,
+   "per_compound": [
+    {
+     "compound": "DMMP",
+     "n_concentrations": 4,
+     "within": 0.7775090648667637,
+     "between": -0.10103872752388414,
+     "diff": 0.8785477923906478
+    },
+    {
+     "compound": "GA",
+     "n_concentrations": 4,
+     "within": 0.3524424102997192,
+     "between": -0.09105479863970259,
+     "diff": 0.4434972089394218
+    },
+    {
+     "compound": "GB",
+     "n_concentrations": 4,
+     "within": 0.652890329276354,
+     "between": -0.0989442779419594,
+     "diff": 0.7518346072183134
+    },
+    {
+     "compound": "GD",
+     "n_concentrations": 4,
+     "within": 0.5258639500694953,
+     "between": -0.2524828482911997,
+     "diff": 0.778346798360695
+    },
+    {
+     "compound": "GF",
+     "n_concentrations": 4,
+     "within": 0.3192331139779457,
+     "between": -0.28668495887447853,
+     "diff": 0.6059180728524243
+    },
+    {
+     "compound": "VX",
+     "n_concentrations": 4,
+     "within": 0.6218252661484361,
+     "between": -0.29287090559354884,
+     "diff": 0.914696171741985
+    }
+   ]
   },
   {
    "dataset": "d1",
    "mode": "normal",
-   "within": 0.5266061949925503,
-   "between": -0.16653878689416357,
-   "n_within": 36,
-   "n_between": 15,
-   "p": 1.1814205686015475e-05
+   "unit": "compound",
+   "n_compounds": 6,
+   "within": 0.5266061949925505,
+   "between": -0.16653878689416354,
+   "diff": 0.693144981886714,
+   "p": 0.015625,
+   "p_exact_signflip": 0.015625,
+   "p_min_attainable": 0.015625,
+   "p_wilcoxon_exact": 0.015625,
+   "cohens_dz": 3.049477013173746,
+   "ci95_diff": [
+    0.45460865435758124,
+    0.9316813094158468
+   ],
+   "n_within_pairs": 36,
+   "n_between_pairs": 15,
+   "p_pooled_pairs_superseded": 1.1814205686015475e-05,
+   "per_compound": [
+    {
+     "compound": "DMMP",
+     "n_concentrations": 4,
+     "within": 0.5581691578370822,
+     "between": -0.15794297502325133,
+     "diff": 0.7161121328603335
+    },
+    {
+     "compound": "GA",
+     "n_concentrations": 4,
+     "within": 0.3874224191899738,
+     "between": -0.03989789827499064,
+     "diff": 0.4273203174649644
+    },
+    {
+     "compound": "GB",
+     "n_concentrations": 4,
+     "within": 0.576561674863412,
+     "between": -0.1630272630642693,
+     "diff": 0.7395889379276813
+    },
+    {
+     "compound": "GD",
+     "n_concentrations": 4,
+     "within": 0.38891151120534934,
+     "between": -0.10959981636843877,
+     "diff": 0.49851132757378813
+    },
+    {
+     "compound": "GF",
+     "n_concentrations": 4,
+     "within": 0.5615260684406183,
+     "between": -0.1392102252425536,
+     "diff": 0.7007362936831718
+    },
+    {
+     "compound": "VX",
+     "n_concentrations": 4,
+     "within": 0.6870463384188671,
+     "between": -0.3895545433914776,
+     "diff": 1.0766008818103447
+    }
+   ]
   },
   {
    "dataset": "d2",
    "mode": "uv",
+   "unit": "compound",
+   "n_compounds": 7,
    "within": 0.45520869271648723,
-   "between": -0.10263459059463759,
-   "n_within": 42,
-   "n_between": 21,
-   "p": 2.7716674914468778e-05
+   "between": -0.1026345905946376,
+   "diff": 0.5578432833111249,
+   "p": 0.0078125,
+   "p_exact_signflip": 0.0078125,
+   "p_min_attainable": 0.0078125,
+   "p_wilcoxon_exact": 0.0078125,
+   "cohens_dz": 1.5422744941598883,
+   "ci95_diff": [
+    0.22332501775483365,
+    0.8923615488674161
+   ],
+   "n_within_pairs": 42,
+   "n_between_pairs": 21,
+   "p_pooled_pairs_superseded": 2.7716674914468778e-05,
+   "per_compound": [
+    {
+     "compound": "AC",
+     "n_concentrations": 4,
+     "within": 0.6634313229276586,
+     "between": 0.04792301658433967,
+     "diff": 0.6155083063433189
+    },
+    {
+     "compound": "CG",
+     "n_concentrations": 4,
+     "within": 0.17749987396518016,
+     "between": -0.030841040904188207,
+     "diff": 0.20834091486936837
+    },
+    {
+     "compound": "CK",
+     "n_concentrations": 4,
+     "within": 0.2849304868181374,
+     "between": 0.03874975958128268,
+     "diff": 0.2461807272368547
+    },
+    {
+     "compound": "HD",
+     "n_concentrations": 4,
+     "within": 0.6178050600385815,
+     "between": -0.051227926546868634,
+     "diff": 0.6690329865854501
+    },
+    {
+     "compound": "HN",
+     "n_concentrations": 4,
+     "within": 0.21883962580679484,
+     "between": 0.025748171783198232,
+     "diff": 0.1930914540235966
+    },
+    {
+     "compound": "L",
+     "n_concentrations": 4,
+     "within": 0.7325211409938973,
+     "between": -0.411449535859818,
+     "diff": 1.1439706768537152
+    },
+    {
+     "compound": "PS",
+     "n_concentrations": 4,
+     "within": 0.4914333384651612,
+     "between": -0.33734457880040886,
+     "diff": 0.82877791726557
+    }
+   ]
   },
   {
    "dataset": "d2",
    "mode": "normal",
+   "unit": "compound",
+   "n_compounds": 7,
    "within": 0.5021304354934577,
-   "between": -0.1165602086601764,
-   "n_within": 42,
-   "n_between": 21,
-   "p": 4.553952185405085e-08
+   "between": -0.11656020866017644,
+   "diff": 0.6186906441536342,
+   "p": 0.0078125,
+   "p_exact_signflip": 0.0078125,
+   "p_min_attainable": 0.0078125,
+   "p_wilcoxon_exact": 0.0078125,
+   "cohens_dz": 1.9720610576369721,
+   "ci95_diff": [
+    0.32854069694293614,
+    0.9088405913643323
+   ],
+   "n_within_pairs": 42,
+   "n_between_pairs": 21,
+   "p_pooled_pairs_superseded": 4.553952185405085e-08,
+   "per_compound": [
+    {
+     "compound": "AC",
+     "n_concentrations": 4,
+     "within": 0.47905130201841023,
+     "between": -0.019816345294782624,
+     "diff": 0.49886764731319283
+    },
+    {
+     "compound": "CG",
+     "n_concentrations": 4,
+     "within": 0.07769326736888846,
+     "between": -0.0090438106525872,
+     "diff": 0.08673707802147566
+    },
+    {
+     "compound": "CK",
+     "n_concentrations": 4,
+     "within": 0.5102706052088352,
+     "between": 0.019613722787159612,
+     "diff": 0.49065688242167554
+    },
+    {
+     "compound": "HD",
+     "n_concentrations": 4,
+     "within": 0.5758495062292711,
+     "between": -0.2009311280400531,
+     "diff": 0.7767806342693242
+    },
+    {
+     "compound": "HN",
+     "n_concentrations": 4,
+     "within": 0.7062350737185552,
+     "between": -0.1319295822676254,
+     "diff": 0.8381646559861806
+    },
+    {
+     "compound": "L",
+     "n_concentrations": 4,
+     "within": 0.6913722536338117,
+     "between": -0.3761956382898444,
+     "diff": 1.0675678919236562
+    },
+    {
+     "compound": "PS",
+     "n_concentrations": 4,
+     "within": 0.4744410402764319,
+     "between": -0.0976186788635018,
+     "diff": 0.5720597191399337
+    }
+   ]
   },
   {
    "dataset": "d3",
    "mode": "uv",
-   "within": 0.3911381362075825,
+   "unit": "compound",
+   "n_compounds": 4,
+   "within": 0.3911381362075824,
    "between": -0.17575382911496593,
-   "n_within": 24,
-   "n_between": 6,
-   "p": 0.025029682960717444
+   "diff": 0.5668919653225484,
+   "p": 0.0625,
+   "p_exact_signflip": 0.0625,
+   "p_min_attainable": 0.0625,
+   "p_wilcoxon_exact": 0.0625,
+   "cohens_dz": 0.9235802314280201,
+   "ci95_diff": [
+    -0.4097980823554416,
+    1.5435820130005382
+   ],
+   "n_within_pairs": 24,
+   "n_between_pairs": 6,
+   "p_pooled_pairs_superseded": 0.025029682960717444,
+   "per_compound": [
+    {
+     "compound": "A",
+     "n_concentrations": 4,
+     "within": 0.26956703230933565,
+     "between": 0.03900180402052486,
+     "diff": 0.2305652282888108
+    },
+    {
+     "compound": "B",
+     "n_concentrations": 4,
+     "within": 0.11258248118757334,
+     "between": 0.0926101054095116,
+     "diff": 0.01997237577806174
+    },
+    {
+     "compound": "C",
+     "n_concentrations": 4,
+     "within": 0.6632460412110834,
+     "between": -0.7502050506324139,
+     "diff": 1.4134510918434975
+    },
+    {
+     "compound": "D",
+     "n_concentrations": 4,
+     "within": 0.5191569901223373,
+     "between": -0.08442217525748615,
+     "diff": 0.6035791653798235
+    }
+   ]
   },
   {
    "dataset": "d3",
    "mode": "normal",
+   "unit": "compound",
+   "n_compounds": 4,
    "within": 0.34512841364265096,
    "between": -0.33017055119732286,
-   "n_within": 24,
-   "n_between": 6,
-   "p": 0.0045286514252031495
+   "diff": 0.6752989648399739,
+   "p": 0.0625,
+   "p_exact_signflip": 0.0625,
+   "p_min_attainable": 0.0625,
+   "p_wilcoxon_exact": 0.0625,
+   "cohens_dz": 5.117069528014604,
+   "ci95_diff": [
+    0.4653054633005559,
+    0.8852924663793919
+   ],
+   "n_within_pairs": 24,
+   "n_between_pairs": 6,
+   "p_pooled_pairs_superseded": 0.0045286514252031495,
+   "per_compound": [
+    {
+     "compound": "A",
+     "n_concentrations": 4,
+     "within": 0.38249409590177036,
+     "between": -0.32978987843167906,
+     "diff": 0.7122839743334495
+    },
+    {
+     "compound": "B",
+     "n_concentrations": 4,
+     "within": 0.27210629925171564,
+     "between": -0.2939010419679426,
+     "diff": 0.5660073412196582
+    },
+    {
+     "compound": "C",
+     "n_concentrations": 4,
+     "within": 0.47782981905721483,
+     "between": -0.3683842076542476,
+     "diff": 0.8462140267114624
+    },
+    {
+     "compound": "D",
+     "n_concentrations": 4,
+     "within": 0.24808344035990304,
+     "between": -0.3286070767354221,
+     "diff": 0.5766905170953252
+    }
+   ]
   }
  ],
  "dmmp": [
@@ -91,10 +413,10 @@
    "mode": "uv",
    "space": "structural",
    "n_pairs": 15,
-   "spearman": 0.07857142857142857,
-   "p": 0.7807545523090464,
-   "ci_lo": -0.43481047937569683,
-   "ci_hi": 0.5603623403623401
+   "spearman": 0.06785714285714285,
+   "p": 0.8101088187105132,
+   "ci_lo": -0.43854330642870265,
+   "ci_hi": 0.5535488077187231
   },
   {
    "dataset": "d1",
@@ -111,20 +433,20 @@
    "mode": "uv",
    "space": "merged",
    "n_pairs": 15,
-   "spearman": 0.05357142857142857,
-   "p": 0.8496099367776072,
-   "ci_lo": -0.45521023765996355,
-   "ci_hi": 0.5443037974683544
+   "spearman": 0.06785714285714285,
+   "p": 0.8101088187105132,
+   "ci_lo": -0.4270077924639968,
+   "ci_hi": 0.5555757575757574
   },
   {
    "dataset": "d1",
    "mode": "normal",
    "space": "structural",
    "n_pairs": 15,
-   "spearman": 0.06785714285714285,
-   "p": 0.8101088187105132,
-   "ci_lo": -0.5743177648040033,
-   "ci_hi": 0.7116796541066612
+   "spearman": 0.03214285714285714,
+   "p": 0.9094621170945906,
+   "ci_lo": -0.5732442027443889,
+   "ci_hi": 0.724289956367162
   },
   {
    "dataset": "d1",
@@ -141,10 +463,10 @@
    "mode": "normal",
    "space": "merged",
    "n_pairs": 15,
-   "spearman": 0.075,
-   "p": 0.7905107941552679,
-   "ci_lo": -0.569620253164557,
-   "ci_hi": 0.7221206581352835
+   "spearman": 0.03214285714285714,
+   "p": 0.9094621170945906,
+   "ci_lo": -0.5706422018348623,
+   "ci_hi": 0.7148016090391305
   },
   {
    "dataset": "d2",
@@ -153,8 +475,8 @@
    "n_pairs": 15,
    "spearman": 0.5107142857142856,
    "p": 0.051725498368269354,
-   "ci_lo": -0.14808043875685561,
-   "ci_hi": 0.9162112932604736
+   "ci_lo": -0.13769367588932807,
+   "ci_hi": 0.9097828841767336
   },
   {
    "dataset": "d2",
@@ -171,20 +493,20 @@
    "mode": "uv",
    "space": "merged",
    "n_pairs": 15,
-   "spearman": 0.5142857142857142,
-   "p": 0.0498392334714206,
-   "ci_lo": -0.14181818181818184,
-   "ci_hi": 0.9130434782608698
+   "spearman": 0.5,
+   "p": 0.05769884126895998,
+   "ci_lo": -0.17478496744920097,
+   "ci_hi": 0.9126991341991343
   },
   {
    "dataset": "d2",
    "mode": "normal",
    "space": "structural",
    "n_pairs": 15,
-   "spearman": 0.2964285714285714,
-   "p": 0.28335542843426303,
-   "ci_lo": -0.2789855072463769,
-   "ci_hi": 0.7153156441112645
+   "spearman": 0.24642857142857136,
+   "p": 0.37595051597380513,
+   "ci_lo": -0.3406223436551305,
+   "ci_hi": 0.6937674961521375
   },
   {
    "dataset": "d2",
@@ -201,10 +523,10 @@
    "mode": "normal",
    "space": "merged",
    "n_pairs": 15,
-   "spearman": 0.30357142857142855,
-   "p": 0.27135583600386837,
-   "ci_lo": -0.2909148446490219,
-   "ci_hi": 0.7142857142857141
+   "spearman": 0.28571428571428564,
+   "p": 0.30193635132254926,
+   "ci_lo": -0.31512087194107863,
+   "ci_hi": 0.7041263429836792
   }
  ]
 }

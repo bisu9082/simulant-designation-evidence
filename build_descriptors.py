@@ -208,7 +208,14 @@ def verify(ref_path='descriptor_cache.csv'):
                         r.compound_class, r.agent_series if r.agent_series == r.agent_series else '')
             for r in R.itertuples()]
     N = pd.DataFrame(rows)
-    num = [c for c in R.columns if R[c].dtype.kind in 'if' and c in N.columns]
+    # 2026-11-02. 종전에는 R 쪽 dtype 만 보았다. descriptor_cache_ascl3.csv 는
+    # 1행이고 agent_series 가 비어 있어 pandas 가 그 문자열 열을 float NaN 으로
+    # 읽는다. 그러면 num 에 들어가고, 새로 계산한 값은 '' 이므로 to_numpy(float)
+    # 가 ValueError 로 죽는다. 빈 outputs/ 로 클론해 돌리면 관문이 그 자리에서
+    # 멈춘다. 양쪽 모두에서 수치인 열만 대조한다.
+    num = [c for c in R.columns
+           if R[c].dtype.kind in 'if' and c in N.columns
+           and pd.to_numeric(N[c], errors='coerce').notna().any()]
     print(f'[verify] {len(R)}종, 수치열 {len(num)}개 대조')
     ok, bad = [], []
     for c in num:
