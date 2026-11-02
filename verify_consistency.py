@@ -995,6 +995,9 @@ CHECKS = [
     ('bh_q35', [r'Benjamini--Hochberg adjusted value is\s+([\d.]+)',
      r'Benjamini-Hochberg over 18\s+& (\d+\.\d+) &'], 0.0005),
     ('bh_q35lit', [r'Benjamini-Hochberg over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
+    # ACS 판본 Conclusions 가 2.4 의 같은 값을 다시 센다. 자리별 전용 앵커.
+    ('bh_q35_concl',
+     [r'at a Benjamini--Hochberg adjusted value of\s+(\d+\.\d+)'], 0.0005),
     # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
     ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
@@ -1444,6 +1447,13 @@ def main():
         if _k in f:
             raise SystemExit(f'[중단] 문헌 키 {_k} 가 산출물 키와 충돌한다')
         f[_k] = _v
+    # 2026-11-02. 같은 양을 두 군데서 센다. (B) 검사는 어법당 한 번만
+    # 맞추므로, 2.4 의 어법이 맞으면 Conclusions 의 다른 어법은 보이지
+    # 않는다. 주입시험에서 실제로 Conclusions 의 BH 값만 바꿔도 통과했다.
+    # 자리마다 키를 따로 두고 같은 산출물 값에 건다.
+    for _dst, _src_key in (('bh_q35_concl', 'bh_q35'),):
+        if _src_key in f:
+            f[_dst] = f[_src_key]
     def strip_comments(s):
         # LaTeX 주석은 PDF 에 들어가지 않는다. 주석을 읽으면 '보관용' 문구가
         # 검증 통과의 그림자 출처가 되므로 대조 전에 제거한다. \% 는 보존.
