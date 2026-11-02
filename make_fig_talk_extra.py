@@ -69,7 +69,8 @@ def fig_dmmp():
     ax.set_xticklabels(['10', '50', '100', '500'])
     ax.set_xlim(8.6, 1250)
     ax.set_ylim(-0.9, 1.0)
-    ax.set_xlabel('concentration (ppm)')
+    # 단위는 µM 이다 (2026-11-02 원논문 실측). ppm 은 철회.
+    ax.set_xlabel(r'concentration ($\mu$M)')
     ax.set_ylabel('cosine, DMMP response pattern vs agent')
     fig.tight_layout()
     fig.savefig('outputs/Fig_talk_dmmp.png', dpi=200,

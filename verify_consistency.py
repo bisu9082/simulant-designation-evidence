@@ -129,6 +129,96 @@ def preflight():
     # 한 행뿐이었다. 주장을 자료에 걸어 둔다. 어느 피벗에든 (dye, agent,
     # conc) 가 두 번 나오면 그때는 반복측정이 실제로 있는 것이므로, 위의
     # SUPERSEDED 금지항목을 함께 풀어야 한다는 뜻이다.
+    # 2026-11-02 신설 (GATE 8 7차). 인용된 예치물의 생성자 검사.
+    #
+    # 왜. outputs/multiplicity_across_panels.json 이 저장소에 예치되어 있고
+    # SI 가 이름을 대서 인용하는데, 그 파일을 만드는 코드가 없었다. 검증기만
+    # 읽고 있었다. 생성 코드 없는 예치물의 수치는 출처 불명이고, 실제로 그
+    # 값이 현행 산출물과 어긋나 있었다 (0.156 대 0.169).
+    #
+    # 범위. outputs/*.json 전부를 정적으로 훑어 '생성 vs 읽기' 를 가르려 했으나
+    # 파일명을 변수로 조립하는 스크립트가 많아 위양성이 쏟아졌다. 그래서
+    # 원고가 \texttt{} 로 이름을 대서 인용한 것만 본다. 독자가 찾아갈 수
+    # 있다고 원고가 약속한 파일이므로, 그 약속의 범위가 맞다.
+    #
+    # 새 파일을 인용하면 여기에 생성자를 등록해야 통과한다. 등록을 강제하는
+    # 것이 이 검사의 요점이다.
+    GENERATED_BY = {
+        'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',
+        'conformer_sensitivity_single.json': 'conformer_sensitivity.py',
+        'multiplicity_across_panels.json': 'multiplicity_panels.py',
+        'subspace_null.json': 'subspace_null.py',
+        'dft_dipole.csv': 'dft_omega.py',
+        'dft_electronic_space.json': 'dft_electronic_space.py',
+        'dft_omega.csv': 'dft_omega.py',
+    }
+    orphan = []
+    _cited = set()
+    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
+                 'paper/main.tex', 'paper/supplementary.tex'):
+        if not os.path.exists(_doc):
+            continue
+        _t = '\n'.join(l for l in open(_doc).read().split('\n')
+                        if not l.lstrip().startswith('%'))
+        for _m in re.finditer(r'\\texttt\{([^}]*\.(?:json|csv))\}', _t):
+            _cited.add(os.path.basename(_m.group(1).replace('\\_', '_')))
+    for _name in sorted(_cited):
+        _maker = GENERATED_BY.get(_name)
+        if _maker is None:
+            orphan.append(f'{_name} 를 원고가 인용하는데 GENERATED_BY 에 '
+                          f'생성 스크립트가 등록되지 않았다')
+        elif not os.path.exists(_maker):
+            orphan.append(f'{_name} 의 생성 스크립트 {_maker} 가 없다')
+        elif not glob.glob(f'outputs/{_name}'):
+            orphan.append(f'{_name} 를 원고가 인용하는데 outputs/ 에 없다')
+    if orphan:
+        print('[verify] 사전 점검 실패 — 인용된 예치물.')
+        for _m in orphan:
+            print(f'   {_m}')
+        return False
+
+    # 2026-11-02 신설 (GATE 8 7차). 작용제 수 서술 검사.
+    #
+    # 왜. 검증기가 417건 PASS 인 상태에서 제목이 작용제를 17종이라고 적고
+    # 있었다. 실제는 16종이고 17은 모사체 DMMP 를 포함한 화합물 수다.
+    # (B) 검사는 등록된 어법의 '숫자'만 보므로 영어 수사는 보이지 않는다.
+    #
+    # 범위를 좁힌 이유. 처음에는 모든 수사를 피벗 실측과 대조했는데, 원고에는
+    # 정당한 다른 수가 여럿 있다 ('eleven agents' = 서술자 패널의 작용제 수,
+    # 'seven-agent run' = 2차 런). 그래서 실제 실패 양식 하나만 잡는다:
+    # 측정 화합물 수(17)를 작용제 수로 적는 것. 'non-agents' 는 C(17,3) 의
+    # 비작용제 17종이므로 면제한다.
+    cnt = []
+    agents = set()
+    for _p in sorted(glob.glob('deltaE/d?.uv_deltaE_pivot.csv')):
+        try:
+            agents |= set(pd.read_csv(_p)['Agent'].astype(str))
+        except Exception as e:
+            cnt.append(f'{_p}: 읽기 실패 {e}')
+    SIMULANTS = {'DMMP', 'DPGME', 'DCM'}
+    n_cpd, n_agent = len(agents), len(agents - SIMULANTS)
+    if agents and n_cpd == 17 and n_agent == 16:
+        for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
+                     'paper_acs/cover_letter.tex'):
+            if not os.path.exists(_doc):
+                continue
+            body = '\n'.join(l for l in open(_doc).read().split('\n')
+                              if not l.lstrip().startswith('%'))
+            # 제목은 'Seventeen Authentic Agents' 처럼 대문자다. re.I 필수
+            # (2026-11-02 주입시험에서 이것 때문에 처음에 안 잡혔다).
+            for m in re.finditer(r'seventeen\s+(?:\w+\s+){0,2}?agents?\b',
+                                 body, re.I):
+                if 'non-agent' in m.group(0):
+                    continue
+                cnt.append(f'{_doc}: "{" ".join(m.group(0).split())}" '
+                           f'— 측정 화합물은 17종이지만 작용제는 {n_agent}종이다 '
+                           f'(DMMP 는 모사체). sixteen 으로 적을 것')
+    if cnt:
+        print('[verify] 사전 점검 실패 — 작용제 수 서술.')
+        for _m in cnt:
+            print(f'   {_m}')
+        return False
+
     # 2026-11-02 신설. ACS 판본 도판 점검. 검증기는 paper_acs/main.tex 를
     # 글로는 읽지만 그 도판이 실재하는지, 최신인지는 보지 않았다. TOC 도판은
     # outputs/deltaE_premise.json 에서 수치를 읽어 그리므로 그 산출물이
