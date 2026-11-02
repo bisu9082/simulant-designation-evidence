@@ -8,12 +8,50 @@
 
 여기 실린 여섯 건은 모두 GATE 8 심사에서 지적된 실제 사례다.
 """
+import atexit
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
 
 TEX = 'paper/main.tex'
+
+# 2026-11-02. 이 시험이 타임아웃으로 중단되었을 때 주입값(0.0221 자리에
+# 0.0321)이 paper/main.tex 에 그대로 남았다. finally 는 SIGTERM 을 막지
+# 못한다. 원본을 프로세스 수명에 걸어 두고, 어떤 경로로 죽든 되돌린다.
+_PRISTINE = {}
+
+
+def _guard(path):
+    """path 의 현재 내용을 원본으로 등록한다. 중복 등록은 무시한다."""
+    if path not in _PRISTINE:
+        _PRISTINE[path] = open(path).read()
+
+
+def _restore_all():
+    for path, text in _PRISTINE.items():
+        try:
+            if open(path).read() != text:
+                open(path, 'w').write(text)
+                print(f'  [복원] {path} 를 원본으로 되돌렸다', file=sys.stderr)
+        except OSError as e:
+            print(f'  [복원 실패] {path}: {e}', file=sys.stderr)
+
+
+atexit.register(_restore_all)
+
+
+def _on_signal(signum, frame):
+    _restore_all()
+    sys.exit(128 + signum)
+
+
+for _sig in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):
+    try:
+        signal.signal(_sig, _on_signal)
+    except (ValueError, AttributeError):
+        pass
 
 # (설명, 원문, 주입할 오류)
 CASES = [
@@ -189,6 +227,30 @@ CASES = [
 
 # 커버레터·하이라이트도 검사 대상이다 (2026-10-13 추가).
 SIDECAR = 'paper/cover_letter.tex'
+ACS = 'paper_acs/main.tex'
+
+# 2026-11-02. ACS 판본 전용 주입 사례. 둘 다 실제로 발생한 결함이다.
+# 세 원논문(hazref, multiplexref, group3ref)의 Methods 를 직접 읽기 전에,
+# 어레이 농도를 ppm 으로 적었고 (실제 µM), 같은 화합물의 서로 다른 농도를
+# '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
+# 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
+ACS_CASES = [
+    ('어레이 농도를 ppm 으로 되돌림 (정본 µM)',
+     'at 500~$\\mu$M to $+0.36$ at\n10~$\\mu$M',
+     'at 500~ppm to $+0.36$ at\n10~ppm'),
+    ('농도축 추세를 ppm 으로 되돌림 (정본 µM)',
+     'from $+0.363$ at 10~$\\mu$M to $+0.771$ at 500~$\\mu$M',
+     'from $+0.363$ at 10~ppm to $+0.771$ at 500~ppm'),
+    ('수행하지 않은 반복측정 주장 (본문)',
+     "One compound's patterns at two\nconcentrations correlate at",
+     'Replicates of one compound correlate at'),
+    ('수행하지 않은 반복측정 주장 (방법 문장)',
+     'within one\ncompound across concentrations and between different compounds',
+     'within\nreplicates of one compound and between different compounds'),
+    ('수행하지 않은 반복측정 주장 (도판 캡션)',
+     'within one compound across concentrations\n  and between different compounds',
+     'within replicates of the same compound and\n  between different compounds'),
+]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
 # 그 문장들이 다시 틀어지면 잡히도록 건다.
 SUPP_CASES_EXTRA = [
@@ -426,6 +488,8 @@ def run():
 
 
 def main():
+    for _p in (TEX, SUPP, SIDECAR, ANNOT):
+        _guard(_p)
     good = open(TEX).read()
     backup = tempfile.NamedTemporaryFile('w', suffix='.tex', delete=False)
     backup.write(good)
@@ -474,6 +538,25 @@ def main():
         finally:
             open(SUPP, 'w').write(pbak)
 
+        # 2026-11-02 신설. ACS 판본 전용. 세 원논문 Methods 를 읽기 전에
+        # 적은 두 서술(ppm, 반복측정)이 모두 수행하지 않은 측정을 가리켰다.
+        abak = open(ACS).read()
+        try:
+            for desc, a, b in ACS_CASES:
+                if a not in abak:
+                    print(f'  SKIP {desc}: ACS 원문을 찾지 못함 ({a[:40]!r})')
+                    bad += 1
+                    continue
+                open(ACS, 'w').write(abak.replace(a, b, 1))
+                if run() == 0:
+                    print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS)')
+                    bad += 1
+                else:
+                    print(f'  ok   {desc}: 잡았다 (ACS)')
+                open(ACS, 'w').write(abak)
+        finally:
+            open(ACS, 'w').write(abak)
+
         sbak = open(SIDECAR).read()
         try:
             for desc, a, b in SIDECAR_CASES:
@@ -507,7 +590,9 @@ def main():
             open(ANNOT, 'w').write(abak)
     finally:
         shutil.copyfile(backup.name, TEX)
-    print(f'[test_verify] 시험 {len(CASES)+len(SUPP_CASES)+len(ANNOT_CASES)+len(SIDECAR_CASES)}건, 실패 {bad}건')
+    _n = (len(CASES) + len(SUPP_CASES) + len(ANNOT_CASES)
+          + len(SIDECAR_CASES) + len(ACS_CASES))
+    print(f'[test_verify] 시험 {_n}건, 실패 {bad}건')
     return 1 if bad else 0
 
 
