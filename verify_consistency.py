@@ -564,6 +564,22 @@ def load_facts():
         f['dft_mg_gfn2_p'] = float(_es['merged_gfn2']['p_one_sided'])
         f['dft_mg_b3lyp_p'] = float(_es['merged_b3lyp']['p_one_sided'])
         f['dft_mg_b3lyp_match'] = int(_es['merged_b3lyp']['n_match'])
+    # 2026-11-02 (GATE 8 7차). SI 가 쌍극자 재계산을 설명하면서 두 방법의
+    # 일치도를 수치로 내놓지 않았다. 산출물에서 직접 센다.
+    if (os.path.exists('outputs/dft_dipole.csv')
+            and os.path.exists('descriptor_cache_xtb.csv')):
+        _dd = pd.read_csv('outputs/dft_dipole.csv').set_index('name')
+        _xx = pd.read_csv('descriptor_cache_xtb.csv').set_index('compound_name')
+        _g = _xx['dipole_moment_D'].reindex(_dd.index)
+        _b = _dd['dipole_D']
+        _ok = _g.notna() & _b.notna()
+        if _ok.sum() > 2:
+            f['dip_r'] = float(_g[_ok].corr(_b[_ok]))
+            f['dip_mae'] = float((_b[_ok] - _g[_ok]).abs().mean())
+            _dv = (_b[_ok] - _g[_ok]).abs()
+            f['dip_maxdev'] = float(_dv.max())
+            f['dip_dmmp_gfn2'] = float(_g['DMMP'])
+            f['dip_dmmp_b3lyp'] = float(_b['DMMP'])
         if _es['merged_gfn2']['n_coords'] != 39 or \
                 _es['merged_gfn2']['n_match'] != 4:
             raise SystemExit(
@@ -1269,6 +1285,26 @@ CHECKS = [
     ('nopatho_merged_p', [r'three decimal places \(\d+\.\d+, \d+\.\d+ and (\d+\.\d+)\)'], 0.006),
     ('gfn2_omega_min', [r'they run from ([\d.]+) to\s*\n?[\d.]+~eV across this panel'], 0.006),
     ('gfn2_omega_max', [r'they run from [\d.]+ to\s*\n?([\d.]+)~eV across this panel'], 0.006),
+    # SI 쌍극자 일치도 (2026-11-02 신설).
+    ('dip_r', [r'agree at a Pearson \$r\$ of (\d+\.\d+)'], 0.0002),
+    ('dip_mae', [r'mean absolute difference of (\d+\.\d+)~D'], 0.0006),
+    ('dip_dmmp_gfn2', [r'DMMP is (\d+\.\d+)~D under GFN2'], 0.0006),
+    ('dip_dmmp_b3lyp',
+     [r'under GFN2 and\s*\n?(\d+\.\d+)~D under the density functional'], 0.0006),
+    ('dip_maxdev', [r'a difference of (\d+\.\d+)~D, which is'], 0.0006),
+    # ACS 본문 §2.4 전용 (2026-11-02). SI 와 어법이 달라 자리를 따로 건다.
+    ('mt_dft_gfn2_p',
+     [r'eleven and a one-sided \$p\$ of (\d+\.\d+) to \w+ matches'], 0.0005),
+    ('mt_dft_full_p',
+     [r'of \d+\.\d+ to \w+ matches and (\d+\.\d+)\.'], 0.0005),
+    ('mt_dft_full_match',
+     [r'of \d+\.\d+ to (\w+) matches and \d+\.\d+\.'], 0),
+    ('mt_dft_mg_match',
+     [r'same way, returning (\w+) matches and'], 0),
+    ('mt_dft_mg_p',
+     [r'same way, returning \w+ matches and (\d+\.\d+)'], 0.0005),
+    ('mt_dft_mg_gfn2_p',
+     [r'against \w+ and (\d+\.\d+) under\s*\n?GFN2'], 0.0005),
     ('dft_omega_min', [r'range becomes ([\d.]+) to [\d.]+~eV'], 0.006),
     ('dft_omega_max', [r'range becomes [\d.]+ to ([\d.]+)~eV'], 0.006),
     ('dft_ps', [r'chloropicrin falling from [\d.]+ to ([\d.]+)'], 0.006),
@@ -1608,7 +1644,16 @@ def main():
                            ('cl_dmmp_gf', 'dmmp_gf_uv'),
                            ('cl_dmmp_vx', 'dmmp_vx_uv'),
                            ('cl_conc_lo', 'conc_gb_lo'),
-                           ('cl_conc_hi', 'conc_gb_hi')):
+                           ('cl_conc_hi', 'conc_gb_hi'),
+                           # 2026-11-02 (GATE 8 7차). ACS 본문 §2.4 가 SI 의
+                           # DFT 수치를 다시 센다. SI 어법에 앵커가 이미
+                           # 걸려 있어 본문 사본은 무검사로 남았다.
+                           ('mt_dft_gfn2_p', 'dft_es_gfn2_p'),
+                           ('mt_dft_full_p', 'dft_es_full_p'),
+                           ('mt_dft_full_match', 'dft_es_full_match'),
+                           ('mt_dft_mg_p', 'dft_mg_b3lyp_p'),
+                           ('mt_dft_mg_match', 'dft_mg_b3lyp_match'),
+                           ('mt_dft_mg_gfn2_p', 'dft_mg_gfn2_p')):
         if _src_key in f:
             f[_dst] = f[_src_key]
     def strip_comments(s):
