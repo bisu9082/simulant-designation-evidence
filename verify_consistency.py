@@ -26,8 +26,12 @@ import pandas as pd
 
 TEX = 'paper/main.tex'
 # 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
+# 2026-11-02. paper_acs/supporting.tex 를 넣는다. 내용이
+# paper/supplementary.tex 와 거의 같은 평행 사본이라, 한쪽만 고치면 조용히
+# 갈라진다. 둘 다 같은 산출물에 대조하면 어느 쪽에 구판 값이 남아도 걸린다.
 EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
-             'paper/supplementary.tex', 'paper_acs/main.tex')
+             'paper/supplementary.tex', 'paper_acs/main.tex',
+             'paper_acs/supporting.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -125,6 +129,47 @@ def preflight():
     # 한 행뿐이었다. 주장을 자료에 걸어 둔다. 어느 피벗에든 (dye, agent,
     # conc) 가 두 번 나오면 그때는 반복측정이 실제로 있는 것이므로, 위의
     # SUPERSEDED 금지항목을 함께 풀어야 한다는 뜻이다.
+    # 2026-11-02 신설. ACS 판본 도판 점검. 검증기는 paper_acs/main.tex 를
+    # 글로는 읽지만 그 도판이 실재하는지, 최신인지는 보지 않았다. TOC 도판은
+    # outputs/deltaE_premise.json 에서 수치를 읽어 그리므로 그 산출물이
+    # 바뀌면 조용히 구판이 된다. 또 ACS TOC 는 규격이 고정(3.25 x 1.75 in)
+    # 이라 실척으로 만들어 두었고, 픽셀 수가 바뀌면 규격이 깨진다.
+    acsbad = []
+    _acs_figs = []
+    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+        if os.path.exists(_doc):
+            _acs_figs += re.findall(
+                r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', open(_doc).read())
+    for _f in sorted(set(_acs_figs)):
+        if not os.path.exists(f'paper_acs/{_f}'):
+            acsbad.append(f'paper_acs/{_f} 없음')
+    # 투고 디렉터리에 쓰이지 않는 도판이 남아 있으면 알린다. 구판 TOC 가
+    # 남아 본문 도판처럼 보이던 일이 있었다 (2026-11-02).
+    for _p in sorted(glob.glob('paper_acs/*.png')):
+        if os.path.basename(_p) not in set(_acs_figs):
+            acsbad.append(f'{_p} 는 어느 문서도 쓰지 않는다 — 지우거나 쓸 것')
+    _toc, _TOCPX = 'paper_acs/toc_acs.png', (1950, 1050)
+    if os.path.exists(_toc):
+        try:
+            from PIL import Image as _Im
+            _sz = _Im.open(_toc).size
+            if _sz != _TOCPX:
+                acsbad.append(
+                    f'{_toc} 픽셀 {_sz} != 규격 {_TOCPX} '
+                    f'(3.25 x 1.75 in, 600 dpi) — make_toc_acs.py 재실행')
+        except ImportError:
+            pass
+        _srcs = [p for p in ('outputs/deltaE_premise.json',) if os.path.exists(p)]
+        if _srcs and os.path.getmtime(_toc) < max(
+                os.path.getmtime(p) for p in _srcs) - MTIME_TOL:
+            acsbad.append(f'{_toc} 가 산출물보다 오래됐다 — '
+                          f'python3 make_toc_acs.py 로 재생성할 것')
+    if acsbad:
+        print('[verify] 사전 점검 실패 — ACS 판본 도판.')
+        for _m in acsbad:
+            print(f'   {_m}')
+        return False
+
     dup = []
     for _p in sorted(glob.glob('deltaE/*_deltaE_pivot.csv')):
         try:

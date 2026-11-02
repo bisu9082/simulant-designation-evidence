@@ -40,6 +40,11 @@
 \usepackage{booktabs}
 \usepackage{textcomp}
 \usepackage{url}
+% 2026-11-02. 본문이 SI 를 가리킬 수 있게 한다. SI 쪽도 M- 로 본문을
+% 가리키므로 상호 의존이고, 두 문서를 각각 두 번씩 돌려야 번호가 안정된다.
+% build_paper_acs.sh 가 그 순서를 고정한다.
+\usepackage{xr}
+\externaldocument[S-]{supporting}
 \usepackage[per-mode=symbol]{siunitx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,14 +101,18 @@ surrogate validation, permutation test, applicability domain}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% TOC graphic. 길이 환산에서 제외된다.
-%% TODO 현재 것은 JHM 프레임(서술자공간 중심)으로 그린 구판이다.
-%% 응답공간 헤드라인에 맞춰 다시 그려야 한다.
+%% 2026-11-02 재작도 (make_toc_acs.py). 구판 graphical_abstract.png 은
+%% 17.5 in 폭에 JHM 프레임(구조공간 대 전자공간, 독성축)이었다. ACS 판본의
+%% 헤드라인은 "서술자 유사도가 어레이 응답을 예측하지 못한다" 이므로 내용과
+%% 규격을 모두 바꿨다.
+%% 규격은 ACS Sensors 저자 안내 실측: 8.25 x 4.45 cm (3.25 x 1.75 in),
+%% 컬러 300 dpi 이상, 최종 크기에서 글자 4.5 pt 이상. 도판을 실척으로
+%% 만들었으므로 (3.25 x 1.75 in, 600 dpi) width 를 지정해 확대·축소하면
+%% 글자 크기 보증이 깨진다. scale=1 로 원래 크기 그대로 싣는다.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{tocentry}
   \centering
-  % ACS TOC 규격은 최대 8.25 x 4.45 cm. 현재 도판 비율 2.40 이므로
-  % 8.25cm 폭에서 높이 3.44cm, 규격 안에 든다.
-  \includegraphics[width=8.25cm]{graphical_abstract.png}
+  \includegraphics[scale=1]{toc_acs.png}
 \end{tocentry}
 
 % --- Abstract: ACS Sensors 는 80~250 단어. 목적 1문장, 방법 2~3문장,
@@ -190,6 +199,7 @@ carry the property they are relied upon for.
 % 예산 2,800단어.
 
 \subsection{The array separates the agents}
+\label{res:premise}
 % 예산 400단어. 2026-11-02 재집필. 전제를 우리 코사인 검정 하나로 떠받치지
 % 않고 원논문 자신의 분류 성능으로 세운다. 수치는 세 원논문에서 실측.
 
@@ -267,9 +277,12 @@ source images showed that those dyes do not fluoresce under ultraviolet
 excitation and the regions of interest had read plate background, so one
 channel had been recorded six times. Columns identical across all rows are
 counted once, which leaves 23 effective channels in that cell and 25 in the
-ultraviolet pivot of the third run.
+ultraviolet pivot of the third run. Supporting Information
+Section~\ref{S-res:arraydetail} sets out what the array does and does not
+establish in more detail.
 
 \subsection{Descriptor distance does not predict response distance}
+\label{res:mantel}
 % 예산 700단어. 현재 약 650단어.
 
 Simulant selection rests on an implicit transfer: that a compound close to
@@ -307,6 +320,9 @@ independent and can be combined by Fisher's method. We report all six
 combinations of three spaces and two channels rather than selecting one,
 which would reintroduce the analyst freedom the test is meant to remove.
 The smallest adjusted value over the six is 0.204, and none reaches 0.05.
+Section~\ref{S-res:permfull} of the Supporting Information gives the full
+permutation family, and Section~\ref{S-meth:multiplicity} the six
+multiplicity schemes under which it was read.
 
 What this does not license is the claim that no transfer exists. Fifteen
 pairs is a weak test, and the pooled rank correlations are correspondingly
@@ -320,6 +336,7 @@ already measured in an existing run. Such a bridge would fix the plate
 correction and open the 136 cross-run pairs that are closed today.
 
 \subsection{The standard G-agent simulant against the G agents}
+\label{res:dmmp}
 % 예산 700단어. 현재 약 690단어.
 % 귀무 대조에서 죽은 소견 둘을 여기서 전부 보고한다. 삭제하지 말 것.
 
@@ -390,6 +407,7 @@ in response space at all. The permutation null that the descriptor analysis
 of the next section relies on is, in response space, empty.
 
 \subsection{Descriptor space cannot supply the missing validation}
+\label{res:panels}
 % 예산 600단어. 현재 약 590단어.
 
 If response space cannot establish the transfer, the question becomes
@@ -435,7 +453,10 @@ available to an analyst. Drawing three descriptors at random from the
 structural block 2000 times and repeating the whole procedure places the
 observed value at the 24.3rd percentile of that distribution. A value at
 the quarter mark of what random descriptor choices produce is not evidence
-about chemistry.
+about chemistry. The null for that percentile, the dimensionality controls
+and the effect of weighting the two descriptor blocks equally are in
+Supporting Information Sections~\ref{S-res:dimdetail},
+\ref{S-res:subspacenull} and~\ref{S-res:blockbalance}.
 
 One quantity in this family does separate the incumbents from the
 alternatives, and it is worth stating precisely because it is easy to
@@ -456,6 +477,7 @@ do not move. What moves is whether anything closer is allowed into the
 comparison.
 
 \subsection{Neither the designation record nor a toxicity model fills the gap}
+\label{res:docs}
 % 예산 400단어. 현재 약 390단어.
 
 Two places remain where the missing evidence might be found, and both are
@@ -495,7 +517,11 @@ training it is wrong in one direction without exception, by 0.40 to 3.42
 log units. Its applicability-domain check certifies fourteen of the twenty
 as inside the domain, and the worst of those fourteen is wrong by 2.68 log
 units, a factor of 482. The mean error over the twenty is $+1.68$ log units
-with Cohen's $d_{z}=+1.96$.
+with Cohen's $d_{z}=+1.96$. The measured axis and its gaps are tabulated in
+Supporting Information Section~\ref{S-res:qsar}, and the test of whether
+fidelity and acute toxicity are associated at all, which finds no monotonic
+relation across the compounds carrying both axes, is in
+Section~\ref{S-res:h1}.
 
 % ===========================================================================
 \section{Conclusions}
@@ -550,6 +576,7 @@ convention, and a convention should be declared as one.
 % 읽고 채웠다. 농도 단위는 ppm 이 아니라 µM 이다. 반복측정은 없다.
 
 \subsection{Array measurements}
+\label{meth:array}
 The response data are the colorimetric tables of three published runs of one
 array, reanalysed here and not remeasured. The first covers tabun, sarin,
 soman, cyclosarin, VX and dimethyl methylphosphonate\cite{hazref}; the second
@@ -589,6 +616,7 @@ independent modalities. The tables hold one value per compound,
 concentration, dye and channel.
 
 \subsection{Response patterns}
+\label{meth:patterns}
 Each exposure gives a 29-dye $\Delta E_{00}$ vector. Vectors were centred
 dye-wise within each concentration and normalised to unit length, so that
 agreement is measured between patterns and not between magnitudes, and
@@ -598,23 +626,31 @@ effective channels in the ultraviolet pivot of the second run and 25 in that
 of the third.
 
 \subsection{Descriptors}
+\label{meth:descriptors}
 Structural and physicochemical descriptors, 51 after excluding run metadata,
 were computed with RDKit from canonical SMILES. Ten are read from a
 three-dimensional structure and are taken as Boltzmann-weighted means over an
 ETKDGv3 conformer ensemble at 298~K with MMFF94 energies, or UFF for
 lewisite~1, the one compound without MMFF parameters, so that no result
-depends on an undeclared choice of conformer. Electronic descriptors were
+depends on an undeclared choice of conformer; Supporting Information
+Section~\ref{S-meth:conformer} reports what the two treatments do to the
+results. Electronic descriptors were
 computed with GFN2-xTB in the gas phase, Boltzmann averaged over up to five
 conformers at 298.15~K. The electronic space carries $E_\mathrm{HOMO}$,
 $E_\mathrm{LUMO}$ and the dipole moment. The Parr electrophilicity index
 $\omega = \mu^{2}/2\eta$ is reported but admitted to no distance, because it
 is an exact function of the two orbital energies that accompany it and a
-filter built on linear correlation does not detect that. Dipole moments were
+filter built on linear correlation does not detect that. It and the
+condensed Fukui index at phosphorus, which exists only for the six
+phosphorus-bearing compounds, are reported in Supporting Information
+Section~\ref{S-res:plocal} and admitted to no distance. Dipole moments were
 recomputed at B3LYP/def2-SVPD to confirm that the reported result does not
-depend on the semiempirical method. Identifiers and formulae were resolved
+depend on the semiempirical method (Supporting Information
+Section~\ref{S-meth:dft}). Identifiers and formulae were resolved
 against PubChem, and no property value was taken from a prediction service.
 
 \subsection{Distances and tests}
+\label{meth:spaces}
 Within each space, descriptors of zero variance were removed, then one of each
 pair correlated at $|r| > 0.95$, retaining a protected set. Remaining
 descriptors were standardised and distances taken as Euclidean, normalised by
@@ -651,12 +687,39 @@ NumPy 2.5.3, SciPy 1.18.1, pandas 3.0.5, scikit-learn 1.9.1, Matplotlib
 the seed, and the permutation tests are exhaustive rather than sampled. Code,
 descriptor tables and figure scripts are in the repository cited below.
 
+% 2026-11-02 작성. 자금은 JHM 판본과 같다 (특정 지원 없음). 측정 데이터는
+% 이 연구소의 선행 세 편에서 왔으므로 그 사실을 명시한다. 기여 진술은
+% JHM 판본의 CRediT 과 같은 내용을 ACS 관례의 산문으로 옮겼다.
 \begin{acknowledgement}
-% TODO
+The colorimetric response data reanalysed here were measured in three earlier
+studies from this laboratory\cite{hazref,multiplexref,group3ref}, and we thank
+the staff of the CBRN Defense Research Institute who performed those
+measurements under Chemical Weapons Convention procedures. K.K. carried out
+the conceptualisation, software, formal analysis and visualisation and wrote
+the original draft. J.K. and J.Y. contributed to the analysis and validation,
+J.Y. to the original draft, M.K. to the validation and to reviewing and
+editing, D.-H.L. to validation, resources and supervision, and Y.J.J. to
+validation, supervision and project administration. This research received no
+specific grant from any funding agency in the public, commercial or
+not-for-profit sectors. The authors declare no competing financial interest.
 \end{acknowledgement}
 
+% SI 목차 한 단락. ACS 는 파일별로 무엇이 들어 있는지 밝히기를 요구한다.
 \begin{suppinfo}
-% TODO: SI 목차 한 단락.
+The Supporting Information is available free of charge at
+\url{https://pubs.acs.org/doi/XX.XXXX/acssensors.XXXXXXX}.
+\begin{itemize}
+\item Acute inhalation toxicity of the panel compounds and the gaps in it;
+  predictive interpolation of that axis and why a model cannot fill the gaps;
+  the decoupling test between fidelity and acute toxicity; conformer
+  dependence of the shape descriptors and the reproduction gate; the
+  density-functional check on the electrophilicity axis and on the dipole;
+  the full permutation family under all six multiplicity schemes;
+  dimensionality, subspace and descriptor-block weighting controls, each with
+  its null; the measured colorimetric array response and what it does and does
+  not establish; phosphorus-local reactivity for the six phosphorus-bearing
+  compounds; and the structural filter (PDF)
+\end{itemize}
 \end{suppinfo}
 
 \bibliography{refs}

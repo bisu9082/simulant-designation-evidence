@@ -278,6 +278,17 @@ ACS_CASES = [
      'random forest trained on 230 AEGL chemicals is wrong in one direction',
      'random forest trained on 320 AEGL chemicals is wrong in one direction'),
 ]
+
+# 2026-11-02. ACS SI (paper_acs/supporting.tex) 전용.
+# 이 파일은 paper/supplementary.tex 의 평행 사본이다. 한쪽만 고치면 조용히
+# 갈라지므로 ACS 쪽 단독 오기도 잡히는지 확인한다.
+ACS_SUPP = 'paper_acs/supporting.tex'
+ACS_SUPP_CASES = [
+    ('ACS SI 단독으로 모델 성능 오기 (정본 R^2 0.458)',
+     r'R^{2}=0.458 \pm', r'R^{2}=0.389 \pm'),
+    ('ACS SI 단독으로 적용영역 거리 오기 (정본 3.28)',
+     "DMMP's domain distance, 3.28,", "DMMP's domain distance, 3.09,"),
+]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
 # 그 문장들이 다시 틀어지면 잡히도록 건다.
 SUPP_CASES_EXTRA = [
@@ -515,7 +526,7 @@ def run():
 
 
 def main():
-    for _p in (TEX, SUPP, SIDECAR, ANNOT):
+    for _p in (TEX, SUPP, SIDECAR, ANNOT, ACS, ACS_SUPP):
         _guard(_p)
     good = open(TEX).read()
     backup = tempfile.NamedTemporaryFile('w', suffix='.tex', delete=False)
@@ -567,6 +578,24 @@ def main():
 
         # 2026-11-02 신설. ACS 판본 전용. 세 원논문 Methods 를 읽기 전에
         # 적은 두 서술(ppm, 반복측정)이 모두 수행하지 않은 측정을 가리켰다.
+        # ACS SI 평행 사본 점검 (2026-11-02).
+        qbak = open(ACS_SUPP).read()
+        try:
+            for desc, a, b in ACS_SUPP_CASES:
+                if a not in qbak:
+                    print(f'  SKIP {desc}: ACS SI 원문을 찾지 못함 ({a[:40]!r})')
+                    bad += 1
+                    continue
+                open(ACS_SUPP, 'w').write(qbak.replace(a, b, 1))
+                if run() == 0:
+                    print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS SI)')
+                    bad += 1
+                else:
+                    print(f'  ok   {desc}: 잡았다 (ACS SI)')
+                open(ACS_SUPP, 'w').write(qbak)
+        finally:
+            open(ACS_SUPP, 'w').write(qbak)
+
         abak = open(ACS).read()
         try:
             for desc, a, b in ACS_CASES:
@@ -618,7 +647,7 @@ def main():
     finally:
         shutil.copyfile(backup.name, TEX)
     _n = (len(CASES) + len(SUPP_CASES) + len(ANNOT_CASES)
-          + len(SIDECAR_CASES) + len(ACS_CASES))
+          + len(SIDECAR_CASES) + len(ACS_CASES) + len(ACS_SUPP_CASES))
     print(f'[test_verify] 시험 {_n}건, 실패 {bad}건')
     return 1 if bad else 0
 
