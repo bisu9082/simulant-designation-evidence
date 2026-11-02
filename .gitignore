@@ -9,3 +9,11 @@ paper/*.bbl
 paper/*.blg
 paper/*.spl
 paper/*.synctex.gz
+paper_acs/*.aux
+paper_acs/*.log
+paper_acs/*.out
+paper_acs/*.bbl
+paper_acs/*.blg
+paper_acs/*.spl
+paper_acs/*.synctex.gz
+paper_acs/acs-*.bib
