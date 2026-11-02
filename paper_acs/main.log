@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  2 NOV 2026 08:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  2 NOV 2026 10:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -470,37 +470,36 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-<Fig_talk_response.png, id=30, 1025.14995pt x 308.23155pt>
+<Fig_talk_response.png, id=28, 1025.14995pt x 308.23155pt>
 File: Fig_talk_response.png Graphic file (type png)
 <use Fig_talk_response.png>
-Package pdftex.def Info: Fig_talk_response.png  used on input line 211.
+Package pdftex.def Info: Fig_talk_response.png  used on input line 228.
 (pdftex.def)             Requested size: 469.75539pt x 141.24265pt.
  [4 <./Fig_talk_response.png>]
-[5] [6] [7]
-<Fig_main.png, id=46, 900.4842pt x 881.33266pt>
+[5] [6] [7] [8]
+<Fig_main.png, id=49, 900.4842pt x 881.33266pt>
 File: Fig_main.png Graphic file (type png)
 <use Fig_main.png>
-Package pdftex.def Info: Fig_main.png  used on input line 379.
+Package pdftex.def Info: Fig_main.png  used on input line 406.
 (pdftex.def)             Requested size: 469.75539pt x 459.76146pt.
- [8] [9]
+ [9]
 <Fig_talk_tox.png, id=53, 1012.5027pt x 376.5267pt>
 File: Fig_talk_tox.png Graphic file (type png)
 <use Fig_talk_tox.png>
-Package pdftex.def Info: Fig_talk_tox.png  used on input line 452.
+Package pdftex.def Info: Fig_talk_tox.png  used on input line 479.
 (pdftex.def)             Requested size: 469.75539pt x 174.68668pt.
- [10] [11] [12]
-Overfull \hbox (6.76541pt too wide) in paragraph at lines 581--585
+ [10] [11] [12] [13]
+Overfull \hbox (6.76541pt too wide) in paragraph at lines 608--612
 \T1/cmr/m/n/12 NumPy 2.5.3, SciPy 1.18.1, pan-das 3.0.5, scikit-learn 1.9.1, Ma
 t-plotlib 3.11.2, RD-Kit 2026.03.6
  []
 
-(./main.bbl [13]
+(./main.bbl
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
 6.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-[14])
+) [14])
 
 Package caption Warning: Unused \captionsetup[sub] on input line 39.
 See the caption package documentation for explanation.
@@ -509,10 +508,10 @@ See the caption package documentation for explanation.
 <graphical_abstract.png, id=77, 1255.59616pt x 523.38695pt>
 File: graphical_abstract.png Graphic file (type png)
 <use graphical_abstract.png>
-Package pdftex.def Info: graphical_abstract.png  used on input line 596.
+Package pdftex.def Info: graphical_abstract.png  used on input line 623.
 (pdftex.def)             Requested size: 234.73523pt x 97.8473pt.
 
-Underfull \vbox (badness 10000) detected at line 596
+Underfull \vbox (badness 10000) detected at line 623
  []
 
 [16 <./graphical_abstract.png>] [17 <./Fig_main.png>] [18 <./Fig_talk_tox.png>]
@@ -525,7 +524,7 @@ L3 programming layer <2024-01-22>
 Here is how much of TeX's memory you used:
  11331 strings out of 476106
  236517 string characters out of 5793932
- 1931975 words of memory out of 5000000
+ 1930975 words of memory out of 5000000
  33207 multiletter control sequences out of 15000+600000
  580051 words of font info for 91 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -551,9 +550,9 @@ ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (18 pages, 1426918 bytes).
+Output written on main.pdf (18 pages, 1428797 bytes).
 PDF statistics:
- 518 PDF objects out of 1000 (max. 8388607)
+ 521 PDF objects out of 1000 (max. 8388607)
  121 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
