@@ -118,9 +118,10 @@ resulting response patterns were compared with the molecular-descriptor
 distances on which simulant selection in practice rests. Agreement was
 tested by exact Mantel permutation within each run, by exact enumeration of
 all 680 possible simulant designations in descriptor space, and against
-permutation nulls built for each comparison. The array separates compounds
-in all six run-channel cells, with $p$ from $4.6\times10^{-8}$ to 0.025, so
-the measurement is sound. Descriptor distance nonetheless fails to predict
+permutation nulls built for each comparison. The array itself resolves
+these agents, at a cross-validated classification accuracy of 0.964 on the
+seven-agent run and 1.000 on the Novichok run, so the measurement is
+sound. Descriptor distance nonetheless fails to predict
 response distance: twelve exact Mantel tests and six combinations of them
 leave nothing below $q=0.05$. Dimethyl methylphosphonate, the standard
 G-agent simulant and the benchmark compound for decontamination efficiency,
@@ -189,22 +190,38 @@ carry the property they are relied upon for.
 % 예산 2,800단어.
 
 \subsection{The array separates the agents}
-% 예산 400단어. 현재 약 400단어.
+% 예산 400단어. 2026-11-02 재집필. 전제를 우리 코사인 검정 하나로 떠받치지
+% 않고 원논문 자신의 분류 성능으로 세운다. 수치는 세 원논문에서 실측.
 
 A comparison between descriptor space and response space is worth making
-only if the response measurement resolves the compounds at all. We checked
-that first. Each exposure gives a 29-dye $\Delta E$ vector, which we centred
-dye-wise at each concentration and normalised to unit length, so that the
-comparison is between response patterns rather than response magnitudes.
-Agreement was then measured as the cosine between patterns, within one
-compound across concentrations and between different compounds. The
-tables analysed here hold one value per compound, concentration, dye and
-channel, so the within-compound term is agreement of a compound with
-itself at a different dose, not agreement between repeated measurements.
-Repeated measurements were reported in the source work for selected
-dye-analyte combinations of the second run only\cite{multiplexref} and
-are not part of these tables, so no repeatability estimate enters any
-analysis below.
+only if the response measurement resolves the compounds at all. That
+question is already answered in the reports these data come from, and the
+answer does not depend on anything we do here. On the first run a linear
+discriminant classifier built on a six-dye subset under dual illumination
+separated the four G agents, VX and dimethyl methylphosphonate at 100\%
+accuracy, against 87.5\% under visible illumination alone\cite{hazref}. On
+the second, a six-dye subset classified all seven agents at an accuracy of
+0.964 with a macro $F_1$ of 0.964 under five-fold stratified
+cross-validation\cite{multiplexref}. On the third, a four-dye subset
+separated the four Novichok agents at an accuracy of 1.000 and a macro
+$F_1$ of 1.000 under leave-one-out cross-validation, over a working range
+of 10 to 500~$\mu$M with a detection limit near 10~$\mu$M\cite{group3ref}.
+
+Two qualifications belong with those figures. Each is obtained on a dye
+subset chosen for that run, not on the 29-dye array we analyse, and the
+first run reports no held-out evaluation, so its 100\% is an apparent
+rather than a validated accuracy. The two cross-validated figures are
+therefore the ones that carry the premise, and they carry it: an array
+that reaches 0.964 under five-fold and 1.000 under leave-one-out is
+resolving these compounds.
+
+What our own check adds is narrower and is reported because the comparison
+that follows is made on patterns rather than on class labels. Each
+exposure gives a 29-dye $\Delta E_{00}$ vector, which we centred dye-wise
+at each concentration and normalised to unit length, so that agreement is
+measured between patterns and not between magnitudes, and took agreement
+as the cosine. The question it answers is whether a compound's pattern is
+stable enough across dose to be treated as that compound's pattern at all.
 
 \begin{figure}[htb]
   \centering
@@ -220,21 +237,31 @@ analysis below.
   \label{fig:response}
 \end{figure}
 
-The array resolves the compounds in every run and channel
-(Figure~\ref{fig:response}a). One compound's patterns at two
+It is stable enough (Figure~\ref{fig:response}a). One compound's patterns at two
 concentrations correlate at
 $+0.345$ to $+0.542$, different compounds anti-correlate at $-0.103$ to
-$-0.330$, and the separation holds in all six run-channel cells, with $p$
+$-0.330$, and the ordering holds in all six run-channel cells, with $p$
 from $4.6\times10^{-8}$ to 0.025.
 
-Two limits on that statement belong here rather than in the Supporting
+The tables analysed here hold one value per compound, concentration, dye
+and channel, so the within-compound term is agreement of a compound with
+itself at a different dose and not agreement between repeated
+measurements. Repeats were reported in the source work for the second and
+third runs, for selected dye-analyte combinations in the
+second\cite{multiplexref} and for all experiments in the
+third\cite{group3ref}, but the repeat-level values are not in these
+tables, so no repeatability estimate enters any analysis below.
+
+Two features of the measurement belong here rather than in the Supporting
 Information. The first is that dye-wise centring forces the mean
 between-compound cosine towards an algebraic floor of $-1/(n-1)$, and the
 observed means clear that floor by only 0.013 to 0.064 across the four
 cells where it could be evaluated. Most of the apparent separation is
-therefore a property of the centring, and what the test establishes is the
-weaker statement that a compound agrees with itself across concentrations
-more than it agrees with other compounds. The second is that six dye columns in the ultraviolet pivot of
+therefore a property of the centring, and what our test on its own
+establishes is the weaker statement that a compound agrees with itself
+across concentrations more than it agrees with other compounds; the
+classification results above, not this cosine, are what establish that the
+agents are separable. The second is that six dye columns in the ultraviolet pivot of
 the second run were bit-identical across every row. Tracing them to the
 source images showed that those dyes do not fluoresce under ultraviolet
 excitation and the regions of interest had read plate background, so one

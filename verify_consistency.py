@@ -815,7 +815,48 @@ def row_pat(label, space, col):
 # 여기 들어오는 항목은 '검사를 끈다'는 선언이므로 심사 대상이다.
 UNQUOTED = {}
 
+
+# 2026-11-02 신설. 문헌 인용 수치.
+#
+# load_facts() 는 산출물에서만 읽는다는 원칙을 지킨다. 그런데 ACS 2.1 은
+# 전제를 우리 계산이 아니라 세 원논문 자신의 분류 성능으로 세우므로, 그
+# 수치는 우리 산출물에 존재하지 않는다. 손으로 적되, 근거를 함께 적는다.
+#
+# 규칙: 값마다 (1) 어느 논문인지 (2) 그 논문의 원문 한 문장을 함께 둔다.
+# 원문이 없는 값은 여기 들어올 수 없다. 원문은 2026-11-02 에 Ku 가 올린
+# 세 PDF 에서 직접 추출했다.
+LITERATURE = {
+    # d1 = hazref, J. Hazard. Mater. 501 (2026) 140703
+    'lit_d1_acc': (100.0,
+                   'hazref',
+                   'our linear discriminant analysis classifier achieved '
+                   '100% classification accuracy'),
+    'lit_d1_vis': (87.5,
+                   'hazref',
+                   'elevating the classification performance from 87.5% to 100%'),
+    # d2 = multiplexref, Discover Sensors 1(1) (2025) 29
+    'lit_d2_acc': (0.964,
+                   'multiplexref',
+                   'The overall classification accuracy was 0.964, with a '
+                   'macro F1-score of 0.964'),
+    # d3 = group3ref, Sens. Actuators B 457 (2026) 139706
+    'lit_d3_acc': (1.000,
+                   'group3ref',
+                   'demonstrated perfect accuracy (accuracy = 1.000, '
+                   'macro F1 = 1.000) across all classifications'),
+    'lit_d3_lod': (10.0,
+                   'group3ref',
+                   'The analytical working range was 10-500 uM with an '
+                   'calculated limit of detection of ca. 10 uM'),
+}
+
 CHECKS = [
+    # 2026-11-02. ACS 2.1 전제를 떠받치는 문헌 수치. 값의 출처는 LITERATURE.
+    ('lit_d1_acc', [r'dimethyl methylphosphonate at (\d+)\\%\s*\n?accuracy'], 0),
+    ('lit_d1_vis', [r'against (\d+\.\d)\\% under visible illumination alone'], 0.001),
+    ('lit_d2_acc', [r'all seven agents at an accuracy of\s*\n?(\d\.\d{3})'], 0.0005),
+    ('lit_d3_acc', [r'four Novichok agents at an accuracy of (\d\.\d{3})'], 0.0005),
+    ('lit_d3_lod', [r'with a detection limit near (\d+)~\$\\mu\$M'], 0),
     ('n_train', [r'random forest trained on (\d+) AEGL chemicals',
      r'(\d[\d,]*) training (?:chemicals|compounds)',
                  r'leaving (\d[\d,]*) for\s*\n?training',
@@ -1321,8 +1362,14 @@ SUPERSEDED = [
     ('어레이 반복측정 주장 (정본: 조합당 1행, 반복측정 없음)',
      [r'[Rr]eplicates? of (?:one|the same) compound',
       r'within replicates of',
-      r'replicate agreement exceeds'],
-     [r'descriptor[- ]resampling', r'resampl']),
+      r'replicate agreement exceeds',
+      # 긍정 주장 꼴. 정본은 'not agreement between repeated measurements'
+      # 라는 부정문이므로 아래 면제 패턴으로 통과시킨다. 2026-11-02 에
+      # 주입시험이 이 꼴을 통과시켜 가드의 구멍이 드러났다.
+      r'between repeated\s+measurements'],
+     [r'descriptor[- ]resampling', r'resampl',
+      r'not agreement between repeated',
+      r'repeat-level values are not in these']),
     ('28종 구조공간 명목 p, 구판 (정본 0.027)',
      [r'structural[\s\S]{0,60}0\.028\b', r'0\.028[\s\S]{0,60}percentile'],
      [r'earlier version', r'superseded', r'single-conformer']),
@@ -1391,6 +1438,12 @@ def main():
     if not preflight():
         return 1
     f = load_facts()
+    # 문헌 인용 수치를 같은 사실표에 올린다. 키 충돌은 즉시 멈춘다 (산출물
+    # 값이 문헌값으로 조용히 덮이면 검사 전체가 무의미해진다).
+    for _k, (_v, _src, _quote) in LITERATURE.items():
+        if _k in f:
+            raise SystemExit(f'[중단] 문헌 키 {_k} 가 산출물 키와 충돌한다')
+        f[_k] = _v
     def strip_comments(s):
         # LaTeX 주석은 PDF 에 들어가지 않는다. 주석을 읽으면 '보관용' 문구가
         # 검증 통과의 그림자 출처가 되므로 대조 전에 제거한다. \% 는 보존.

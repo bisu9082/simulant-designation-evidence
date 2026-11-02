@@ -84,22 +84,22 @@ Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Kim \latin{et~al.}(2025)Kim, Yoo, Kang, Kim, Shin, Cha, Churchill,
-  Kim, and Lee]{multiplexref}
-Kim,~S.; Yoo,~J.; Kang,~K.; Kim,~J.; Shin,~M.; Cha,~Y.~K.; Churchill,~D.~G.;
-  Kim,~M.-K.; Lee,~D.-H. A multiplex chromogenic--fluorogenic sensor array for
-  comprehensive optical discrimination of chemical warfare agents.
-  \emph{Discover Sensors} \textbf{2025}, \emph{1}, 29\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Kim \latin{et~al.}(2026)Kim, Kang, Shin, Kim, Yoo, Kim, Lee, and
   Lee]{hazref}
 Kim,~J.; Kang,~K.; Shin,~M.; Kim,~S.; Yoo,~J.; Kim,~M.-K.; Lee,~W.~B.;
   Lee,~D.-H. Machine learning-enhanced colorimetric sensor array for rapid
   detection of nerve agents. \emph{Journal of Hazardous Materials}
   \textbf{2026}, \emph{501}, 140703\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2025)Kim, Yoo, Kang, Kim, Shin, Cha, Churchill,
+  Kim, and Lee]{multiplexref}
+Kim,~S.; Yoo,~J.; Kang,~K.; Kim,~J.; Shin,~M.; Cha,~Y.~K.; Churchill,~D.~G.;
+  Kim,~M.-K.; Lee,~D.-H. A multiplex chromogenic--fluorogenic sensor array for
+  comprehensive optical discrimination of chemical warfare agents.
+  \emph{Discover Sensors} \textbf{2025}, \emph{1}, 29\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

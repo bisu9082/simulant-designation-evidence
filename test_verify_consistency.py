@@ -244,12 +244,31 @@ ACS_CASES = [
     ('수행하지 않은 반복측정 주장 (본문)',
      "One compound's patterns at two\nconcentrations correlate at",
      'Replicates of one compound correlate at'),
-    ('수행하지 않은 반복측정 주장 (방법 문장)',
-     'within one\ncompound across concentrations and between different compounds',
-     'within\nreplicates of one compound and between different compounds'),
+    # 2026-11-02 재집필로 방법 문장이 2.1 에서 Experimental 로 옮겨갔다.
+    # 앵커를 현행 본문에 다시 건다.
+    ('수행하지 않은 반복측정 주장 (전제 문단)',
+     'itself at a different dose and not agreement between repeated\nmeasurements',
+     'itself at a different dose, that is between repeated\nmeasurements'),
     ('수행하지 않은 반복측정 주장 (도판 캡션)',
      'within one compound across concentrations\n  and between different compounds',
      'within replicates of the same compound and\n  between different compounds'),
+    # 2026-11-02. ACS 2.1 전제가 세 원논문의 분류 성능 위에 서 있다. 그
+    # 수치가 조용히 바뀌면 전제가 근거 없이 바뀌는 것이므로 잡아야 한다.
+    ('문헌값 d1 정확도 오기 (정본 100%)',
+     'dimethyl methylphosphonate at 100\\%\naccuracy',
+     'dimethyl methylphosphonate at 98\\%\naccuracy'),
+    ('문헌값 d1 가시광 단독 오기 (정본 87.5%)',
+     'against 87.5\\% under visible illumination alone',
+     'against 82.5\\% under visible illumination alone'),
+    ('문헌값 d2 교차검증 정확도 오기 (정본 0.964)',
+     'all seven agents at an accuracy of\n0.964',
+     'all seven agents at an accuracy of\n0.984'),
+    ('문헌값 d3 LOO 정확도 오기 (정본 1.000)',
+     'four Novichok agents at an accuracy of 1.000',
+     'four Novichok agents at an accuracy of 0.980'),
+    ('문헌값 d3 검출한계 오기 (정본 10 µM)',
+     'with a detection limit near 10~$\\mu$M',
+     'with a detection limit near 1~$\\mu$M'),
 ]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
 # 그 문장들이 다시 틀어지면 잡히도록 건다.
