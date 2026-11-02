@@ -4,28 +4,28 @@
   "n_elec": 3,
   "equal_per_descriptor": {
    "p": {
-    "mean_diff": 0.2855731225296443,
-    "median_diff": 0.16946640316205533,
-    "mean_logratio": 0.36462450592885376,
-    "mean_dsim": 0.18181818181818182,
+    "mean_diff": 0.29792490118577075,
+    "median_diff": 0.24654150197628458,
+    "mean_logratio": 0.37351778656126483,
+    "mean_dsim": 0.191699604743083,
     "n_closer": 1.0,
     "n_valid": 1.0
    },
    "n_perm": 2024,
-   "nn_median": 3.525834567456926,
+   "nn_median": 3.5594247868424618,
    "n_valid": 0
   },
   "block_balanced": {
    "p": {
-    "mean_diff": 0.18626482213438736,
+    "mean_diff": 0.20207509881422925,
     "median_diff": 0.060770750988142296,
-    "mean_logratio": 0.25938735177865613,
-    "mean_dsim": 0.08498023715415019,
+    "mean_logratio": 0.2643280632411067,
+    "mean_dsim": 0.09387351778656126,
     "n_closer": 1.0,
     "n_valid": 1.0
    },
    "n_perm": 2024,
-   "nn_median": 0.8089414896025909,
+   "nn_median": 0.8084905486640357,
    "n_valid": 0
   }
  },
@@ -34,58 +34,58 @@
   "n_elec": 3,
   "equal_per_descriptor": {
    "p": {
-    "mean_diff": 0.05456639350837762,
-    "median_diff": 0.28337215199511606,
-    "mean_logratio": 0.03811027219292127,
-    "mean_dsim": 0.12540671216132246,
+    "mean_diff": 0.0582619844970094,
+    "median_diff": 0.3064213272855082,
+    "mean_logratio": 0.038644623649334915,
+    "mean_dsim": 0.12763793541825577,
     "n_closer": 0.31909483854563947,
     "n_valid": 0.15942028985507245
    },
    "n_perm": 735471,
-   "nn_median": 3.525834567456926,
+   "nn_median": 3.5594247868424618,
    "n_valid": 5
   },
   "block_balanced": {
    "p": {
-    "mean_diff": 0.02954433281529795,
-    "median_diff": 0.20884168104520776,
-    "mean_logratio": 0.020676546050082192,
-    "mean_dsim": 0.05372475597270321,
+    "mean_diff": 0.03420393190214162,
+    "median_diff": 0.24002170037975665,
+    "mean_logratio": 0.0224182870568656,
+    "mean_dsim": 0.05634212633808811,
     "n_closer": 0.3242724730138918,
     "n_valid": 0.3242724730138918
    },
    "n_perm": 735471,
-   "nn_median": 0.8089414896025909,
+   "nn_median": 0.8084905486640357,
    "n_valid": 5
   }
  },
  "panel28_incumbent3": {
-  "n_struct": 36,
+  "n_struct": 35,
   "n_elec": 3,
   "equal_per_descriptor": {
    "p": {
     "mean_diff": 0.025,
-    "median_diff": 0.05588235294117647,
-    "mean_logratio": 0.041176470588235294,
+    "median_diff": 0.04264705882352941,
+    "mean_logratio": 0.051470588235294115,
     "mean_dsim": 0.033823529411764704,
     "n_closer": 0.11029411764705882,
-    "n_valid": 0.18088235294117647
+    "n_valid": 0.23529411764705882
    },
    "n_perm": 680,
-   "nn_median": 3.8438796797752053,
-   "n_valid": 4
+   "nn_median": 3.8289044949365705,
+   "n_valid": 3
   },
   "block_balanced": {
    "p": {
     "mean_diff": 0.016176470588235296,
-    "median_diff": 0.07941176470588235,
-    "mean_logratio": 0.03235294117647059,
+    "median_diff": 0.08529411764705883,
+    "mean_logratio": 0.03823529411764706,
     "mean_dsim": 0.008823529411764706,
     "n_closer": 0.14852941176470588,
     "n_valid": 0.3044117647058823
    },
    "n_perm": 680,
-   "nn_median": 0.8832145920552044,
+   "nn_median": 0.8882098603842836,
    "n_valid": 3
   }
  }

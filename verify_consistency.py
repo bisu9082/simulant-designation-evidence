@@ -151,6 +151,12 @@ def preflight():
         'dft_dipole.csv': 'dft_omega.py',
         'dft_electronic_space.json': 'dft_electronic_space.py',
         'dft_omega.csv': 'dft_omega.py',
+        # 2026-11-02 (T2). 새 예치물 넷.
+        'order_invariance.json': 'order_invariance.py',
+        'match_rule_audit.json': 'match_rule_audit.py',
+        'deltaE_noise.json': 'deltaE_noise.py',
+        'purity_sensitivity.json': 'purity_sensitivity.py',
+        'channel_classification.json': 'channel_classification.py',
     }
     orphan = []
     _cited = set()
@@ -534,15 +540,39 @@ def load_facts():
                        nm=_nm, n35=_n35, plo=min(_pp), phi=max(_pp))
     if 'ensemble' in _cs and 'single' in _cs:
         _e, _s1 = _cs['ensemble'], _cs['single']
-        if _e['nm'] != {4} or _s1['nm'] != {4} or _e['n35'] != {0} or _s1['n35'] != {0}:
-            raise SystemExit('[verify] 중단: 형태이성질체 민감도에서 매칭 수가 '
-                             '흔들린다. 원고의 서술을 먼저 고쳐야 한다.')
+        # 2026-11-02 (T2-8). 종전 관문은 두 처리 모두 매칭 4건이고 시드에
+        # 흔들리지 않는다는 것을 전제로 박아 두었다. 결정적 상관필터로
+        # 교체하자 그 전제가 거짓이 되었다. 앙상블은 시드 6개에서 3건과
+        # 4건으로 갈리고(타분 1.9943~2.0106), 단일은 6개 모두 3건이다
+        # (타분 2.0172~2.0273). 즉 타분은 역치 2 의 양쪽 0.03 안에 있고
+        # 매칭 여부가 임베딩 시드의 함수다. 관문이 제 몫을 했다.
+        #
+        # 고정해야 하는 것은 '4건' 이 아니라 주 패널의 0건이다. 그쪽이
+        # 흔들리면 멈추고, 28종의 분포는 사실표에 실어 원고가 실측 폭을
+        # 인용하게 한다. 28종 매칭 수가 {3,4} 밖으로 나가면 그것은 다른
+        # 변경이므로 역시 멈춘다.
+        if _e['n35'] != {0} or _s1['n35'] != {0}:
+            raise SystemExit('[verify] 중단: 형태이성질체 민감도에서 주 패널 '
+                             f"매칭 수가 0 이 아니다 (앙상블 {sorted(_e['n35'])}, "
+                             f"단일 {sorted(_s1['n35'])}). 원고의 헤드라인을 "
+                             '먼저 고쳐야 한다.')
+        if not (_e['nm'] | _s1['nm']) <= {3, 4}:
+            raise SystemExit('[verify] 중단: 형태이성질체 민감도의 28종 매칭 '
+                             f"수가 {sorted(_e['nm'] | _s1['nm'])} 로 "
+                             '{3,4} 를 벗어났다. 원고의 서술을 먼저 고칠 것.')
         f['conf_seeds'] = _e['seeds']
         f['conf_ens_lo'] = _e['lo']
         f['conf_ens_hi'] = _e['hi']
         f['conf_sgl_lo'] = _s1['lo']
         f['conf_sgl_hi'] = _s1['hi']
         f['conf_p_hi'] = _s1['phi']
+        f['conf_ens_match_lo'] = min(_e['nm'])
+        f['conf_ens_match_hi'] = max(_e['nm'])
+        f['conf_sgl_match'] = max(_s1['nm'])
+        f['conf_ens_n4'] = sum(
+            1 for r in json.load(
+                open('outputs/conformer_sensitivity_ensemble.json'))['runs']
+            if r['panel28']['n_match'] == 4)
 
     # 2026-10-25. 전자공간을 B3LYP 궤도에너지로 갈아끼운 대조. 심사
     # 시늄레이션이 제기하고 재현으로 확인된 축이다. 기준 재현(GFN2)이 정본
@@ -580,12 +610,21 @@ def load_facts():
             f['dip_maxdev'] = float(_dv.max())
             f['dip_dmmp_gfn2'] = float(_g['DMMP'])
             f['dip_dmmp_b3lyp'] = float(_b['DMMP'])
-        if _es['merged_gfn2']['n_coords'] != 39 or \
-                _es['merged_gfn2']['n_match'] != 4:
-            raise SystemExit(
-                '[중단] 병합공간 GFN2 대조가 정본(39좌표, 4/11)을 재현하지 '
-                f"못한다: {_es['merged_gfn2']['n_coords']}좌표, "
-                f"{_es['merged_gfn2']['n_match']}/11")
+        # 2026-11-02. 종전에는 정본 값 (39좌표, 4/11) 을 상수로 박아 두었다.
+        # T2-1 에서 상관필터를 결정적 규칙으로 교체해 정본이 (38, 3) 으로
+        # 바뀌자 이 관문이 멈췄다. 관문의 뜻은 'DFT 대조의 GFN2 팔이 정본
+        # 병합공간과 같은 공간인가' 이므로, 상수 대신 살아 있는 정본 산출물과
+        # 대조한다. 그래야 다음에 정본이 또 바뀌어도 관문이 뜻을 유지한다.
+        if _os.path.exists('outputs/match_by_panel.json'):
+            _mb = json.load(open('outputs/match_by_panel.json'))
+            _c = _mb['panel28_incumbent3']
+            if (_es['merged_gfn2']['n_coords'] != _c['n_dims']
+                    or _es['merged_gfn2']['n_match'] != _c['n_match_wide']):
+                raise SystemExit(
+                    '[중단] 병합공간 GFN2 대조가 정본'
+                    f"({_c['n_dims']}좌표, {_c['n_match_wide']}/11)을 재현하지 "
+                    f"못한다: {_es['merged_gfn2']['n_coords']}좌표, "
+                    f"{_es['merged_gfn2']['n_match']}/11")
 
     # 2026-10-25. 병리지수 제거 대조. 구판은 omega 가 아직 든 4좌표 전자공간에서
     # 돌아간 산출물이었고 본문은 그 값을 '모든 분석을 반복했다'며 인용했다.
@@ -1246,11 +1285,27 @@ CHECKS = [
     ('fam_pre_p35', [r'Statistic specified in advance \(3 tests\) & (\d+\.\d+) &'], 0.0006),
     ('fam_pre_p35lit', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & (\d+\.\d+) &'], 0.0006),
     ('fam_pre_p28', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & \\textbf\{([\d.]+)\}'], 0.0006),
-    ('conf_ens_lo', [r'sits between (\d+\.\d+) and \d+\.\d+ across the ensemble'], 0.0006),
-    ('conf_ens_hi', [r'sits between \d+\.\d+ and (\d+\.\d+) across the ensemble'], 0.0006),
-    ('conf_sgl_lo', [r'between (\d+\.\d+) and \d+\.\d+ across the\s*\n?single-conformer'], 0.0006),
-    ('conf_sgl_hi', [r'between \d+\.\d+ and (\d+\.\d+) across the\s*\n?single-conformer'], 0.0006),
-    ('conf_p_hi', [r'0\.025 and (\d+\.\d+)\s*\n?in the single-conformer runs'], 0.0006),
+    # 2026-11-02 (T2-8). SI 문단을 다시 썼다. 종전 문장은 두 처리가 같은
+    # 답을 낸다고 적었는데 앙상블 쪽이 3건과 4건으로 갈린다. 어법을 새
+    # 문장에 맞추고, 갈리는 수 자체도 사실표에 걸어 둔다.
+    ('conf_ens_lo',
+     [r'runs from (\d+\.\d+) to \d+\.\d+ across the ensemble seeds'], 0.0006),
+    ('conf_ens_hi',
+     [r'runs from \d+\.\d+ to (\d+\.\d+) across the ensemble seeds'], 0.0006),
+    ('conf_sgl_lo',
+     [r'and from (\d+\.\d+) to\s*\n?\d+\.\d+ across the single-conformer'], 0.0006),
+    ('conf_sgl_hi',
+     [r'and from \d+\.\d+ to\s*\n?(\d+\.\d+) across the single-conformer'], 0.0006),
+    ('conf_p_hi',
+     [r'permutation value runs from 0\.0250 to (\d+\.\d+) under both'], 0.0006),
+    # 'against four under the other three' 의 four 는 매칭 수이고 three 는
+    # 시드 수다. 두 앵커를 섞지 않는다.
+    ('conf_ens_match_hi',
+     [r'against (\w+) under the\s*\n?other \w+\.'], 0),
+    ('conf_ens_n4',
+     [r'against \w+ under the\s*\n?other (\w+)\.'], 0),
+    ('conf_sgl_match',
+     [r'the count is (\w+) under all six single-conformer'], 0),
     ('conf_seeds', [r'under (\w+) seeds and rebuilding'], 0),
     ('mantel_bh12', [r'smallest adjusted value is\s*(\d+\.\d+) and no cell',
                      r'adjusted value from \d+\.\d+ to\s*(\d+\.\d+)\.'], 0.0006),
@@ -1300,11 +1355,13 @@ CHECKS = [
     ('mt_dft_full_match',
      [r'of \d+\.\d+ to (\w+) matches and \d+\.\d+\.'], 0),
     ('mt_dft_mg_match',
-     [r'same way, returning (\w+) matches and'], 0),
+     [r'coordinates, (\w+) valid matches and a one-sided'], 0),
     ('mt_dft_mg_p',
-     [r'same way, returning \w+ matches and (\d+\.\d+)'], 0.0005),
+     [r'valid matches and a one-sided \$p\$ of\s*\n?(\d+\.\d+) under both'],
+     0.0005),
     ('mt_dft_mg_gfn2_p',
-     [r'against \w+ and (\d+\.\d+) under\s*\n?GFN2'], 0.0005),
+     [r'valid matches and a one-sided \$p\$ of\s*\n?(\d+\.\d+) under both'],
+     0.0005),
     ('dft_omega_min', [r'range becomes ([\d.]+) to [\d.]+~eV'], 0.006),
     ('dft_omega_max', [r'range becomes [\d.]+ to ([\d.]+)~eV'], 0.006),
     ('dft_ps', [r'chloropicrin falling from [\d.]+ to ([\d.]+)'], 0.006),
@@ -1554,13 +1611,25 @@ SUPERSEDED = [
      [r'descriptor[- ]resampling', r'resampl',
       r'not agreement between repeated',
       r'repeat-level values are not in these']),
-    ('28종 구조공간 명목 p, 구판 (정본 0.027)',
-     [r'structural[\s\S]{0,60}0\.028\b', r'0\.028[\s\S]{0,60}percentile'],
-     [r'earlier version', r'superseded', r'single-conformer']),
-    ('부분공간 백분위 (정본 25.9)',
+    # 2026-11-02 (T2-1). 이 항목은 구판 정본이 0.0265 (3자리로 0.027) 일 때
+    # 0.028 을 금지했다. 결정적 상관필터로 교체한 뒤 정본이 0.0279 (3자리로
+    # 0.028) 가 되었으므로, 이 항목을 그대로 두면 블랙리스트가 정본 값을
+    # 금지한다. 아래 _blacklist_staleness() 가 이 상황을 자동으로 잡는다.
+    # 금지 대상은 그 이전 판본인 0.0265 쪽으로 옮긴다.
+    ('28종 구조공간 명목 p, 결정적 필터 이전 (정본 0.028)',
+     [r'structural[\s\S]{0,60}0\.0265\b', r'0\.0265[\s\S]{0,60}percentile'],
+     [r'earlier version', r'superseded', r'single-conformer',
+      r'column order', r'input order']),
+    ('부분공간 백분위 (정본 22.4)',
      [r'25\.8th percentile', r'25\.4th percentile', r'\b28th percentile',
-      r'22\.7th percentile', r'\b23rd percentile', r'\b25th percentile'], []),
-    ('28종 구조공간 명목 p, 앙상블 이전 (정본 0.027)', [r'0\.031'], []),
+      r'22\.7th percentile', r'\b23rd percentile', r'\b25th percentile',
+      r'24\.3rd percentile', r'25\.9th percentile'], []),
+    # 2026-11-02. 종전 패턴은 벗은 0.031 이었다. 병리지수 제거 변종의 정본
+    # 구조공간 p 가 0.0309 이고 3자리로 0.031 이므로, 그 값을 적을 자리마다
+    # 실패가 났다. 28종 본 분석을 가리키는 어법으로 좁힌다.
+    ('28종 구조공간 명목 p, 앙상블 이전 (정본 0.028)',
+     [r'structural[\s\S]{0,60}0\.031\b', r'0\.031[\s\S]{0,40}one-sided'],
+     [r'pathological', r'without the two']),
     ('28종 구조좌표 수, 메타열 제외 이전 (정본 36)',
      [r'37-dimensional', r'Weighting the 37 structural',
       r'leaving \d+ and 37 structural'], []),
@@ -1571,19 +1640,28 @@ SUPERSEDED = [
     ('부분공간 0.05 미만 비율 (정본 36.0 / 백색화 16.5)',
      [r'36\.3\\?%', r'32\.6\\?%', r'33\\% of them fall below',
       r'19\\% after whitening', r'18\.9\\?%'], []),
-    ('사전지정 BH q (정본 0.046)', [r'0\.042\b'], []),
-    ('28종 BH over 18 (정본 0.185)',
+    # 2026-11-02. 정본이 0.0419 (3자리로 0.042) 가 되었으므로 0.042 를
+    # 금지할 수 없다. 금지 대상을 그 앞 두 판본으로 옮긴다.
+    ('사전지정 BH q, 결정적 필터 이전 (정본 0.042)',
+     [r'0\.046\b', r'0\.0397\b'], []),
+    ('28종 BH over 18, 결정적 필터 이전 (정본 0.163)',
      [r'adjusted value is 0\.159', r'eighteen tests is 0\.159',
-      r'over 18\s+& [\d.]+ & [\d.]+ & 0\.159'], []),
+      r'over 18\s+& [\d.]+ & [\d.]+ & 0\.159',
+      r'adjusted value is 0\.1809', r'gives 0\.1809'], []),
     ('28종 Westfall-Young (정본 0.079)',
      [r'approximating it, gives 0\.075',
       r'Westfall[\s\S]{0,160}0\.075', r'0\.075[\s\S]{0,160}Westfall'], []),
-    ('28종 매치 수 (정본 4)',
-     [r'restores three matches', r'counted three matches',
-      r'three agents are matched', r'supplies all three'],
-     [r'earlier version', r'superseded', r'descriptor set']),
-    ('Mantel 다중성 (정본 12셀 0.112 / 8셀 0.149)',
-     [r'0\.177', r'adjusted value from [\s\S]{0,30}to\s*0\.124'], []),
+    # 2026-11-02 (T2-1). 정본 매치 수가 4 에서 3 으로 내려갔다. 열 순서를
+    # 40회 치환하면 구판 필터가 3건 25회 / 4건 15회를 내므로 '4' 가 소수
+    # 결과였다. 이제 금지해야 하는 쪽은 '네 건' 서술이다.
+    ('28종 매치 수, 결정적 필터 이전 (정본 3)',
+     [r'restores four matches', r'counted four matches',
+      r'four agents are matched', r'supplies all four',
+      r'[Ff]our agents acquire a valid match'],
+     [r'earlier version', r'superseded', r'column order', r'input order']),
+    ('Mantel 다중성 (정본 12셀 0.117)',
+     [r'0\.177', r'adjusted value from [\s\S]{0,30}to\s*0\.124',
+      r'adjusted value is 0\.100\b'], []),
     ('B3LYP 매칭 4건을 전부 문헌 주장 짝이라고 서술',
      [r'the four are the pairings the sensor',
       r'to DPGME, which are the pairings'], []),
@@ -1599,8 +1677,17 @@ SUPERSEDED = [
     ('28종 구조공간 유의 통계량 수 (정본 2)', [r'one of six statistics in the structural'], []),
     ('28종 구조좌표 수 (정본 36)',
      [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),
-    ('tabun 정규화거리 (정본 1.989)', [r'2\.003'],
-     [r'earlier', r'superseded', r'put tabun at']),
+    # 2026-11-02 (T2-1). 종전 항목은 정본이 1.989 일 때 2.003 을 금지했다.
+    # 결정적 필터에서 정본이 2.0038 이 되었고, 금지 패턴 '2\.003' 이 그
+    # 부분문자열에 걸려 옳은 값이 실패를 냈다. B2a 의 반올림 대조로는
+    # 이 꼴(부분문자열 충돌)을 잡을 수 없으므로 여기에 기록해 둔다.
+    # 금지 대상은 그 이전 두 판본이다. 구판을 명시해 인용하는 자리는
+    # 면제한다. 열 순서 절이 1.9948 을 대조값으로 인용한다.
+    ('tabun 정규화거리, 결정적 필터 이전 (정본 2.0038)',
+     [r'\b1\.989\b', r'tabun[\s\S]{0,60}\b1\.995\b',
+      r'\b1\.995\b[\s\S]{0,60}threshold'],
+     [r'earlier', r'superseded', r'put tabun at', r'old filter',
+      r'previous filter', r'column order']),
     ('두 패널 감소가 같다는 서술 (정본: 13 대 15)',
      [r'attrition is the same on\s+both panels'], []),
 ]
@@ -1788,6 +1875,40 @@ def main():
     # 각 항목은 (사유, 금지 패턴들, 면제 패턴들)이다. 면제는 구판임을
     # 명시하고 인용하는 문장을 위한 것이다. 금지 패턴이 맞은 자리 앞뒤
     # 240자 안에서 면제 패턴이 맞으면 의도적 인용으로 본다.
+    # (B2a) 블랙리스트 자체의 신선도 (2026-11-02 신설, T2-1 에서 드러남).
+    #
+    # 왜 필요한가. SUPERSEDED 는 '이 값은 폐기됐다' 는 금지 목록이다. 정본이
+    # 바뀌면 어제 폐기값이던 수가 오늘 정본이 될 수 있다. 실제로 상관필터를
+    # 결정적 규칙으로 교체하자 28종 구조공간 명목 p 의 정본이 0.027 에서
+    # 0.028 로 올라갔는데, 블랙리스트는 0.028 을 금지하고 있었다. 그러면
+    # 원고가 옳은 값을 적을 때마다 검증기가 실패를 낸다. 더 나쁜 것은
+    # 분석자가 그 실패를 피하려고 틀린 값을 되돌려 적는 경로다.
+    #
+    # 그래서 금지 패턴 중 '벗은 소수 리터럴' 꼴인 것을 골라, 그 값이 현재
+    # 사실표의 어떤 값과 그 자릿수에서 일치하는지 본다. 일치하면 그 항목은
+    # 낡았다고 보고한다. 어법이 섞인 패턴은 판정하지 않는다.
+    _bare = re.compile(r'^(?:\\b)?(\d+\.\d+)(?:\\b)?$')
+    _stale = []
+    for why, pats, exempt in SUPERSEDED:
+        for pat in pats:
+            _m = _bare.match(pat.replace('\\.', '.'))
+            if not _m:
+                continue
+            _v = float(_m.group(1))
+            _dp = len(_m.group(1).split('.')[1])
+            for _k, _fv in f.items():
+                try:
+                    _fvf = float(_fv)
+                except (TypeError, ValueError):
+                    continue
+                if abs(round(_fvf, _dp) - _v) < 1e-12:
+                    _stale.append(f'  낡은 금지 항목 [{why}]: {pat} 가 현재 '
+                                  f'정본 {_k} = {_fvf:.6g} 의 {_dp}자리 '
+                                  f'반올림과 같다. 항목을 갱신할 것')
+    if _stale:
+        fails.append('블랙리스트가 정본 값을 금지한다 (검사 B2a):')
+        fails.extend(sorted(set(_stale)))
+
     superseded = []
     for why, pats, exempt in SUPERSEDED:
         hits = []
@@ -2005,5 +2126,99 @@ def main():
     return 0 if ok else 1
 
 
+def apply_number_fixes(dry=True):
+    """--fix. 불일치한 수치를 정본 값으로 원고에 되쓴다 (2026-11-02 신설).
+
+    왜 필요한가. 이 프로젝트의 반복 결함은 계산 오류가 아니라 전파 실패다.
+    T2-1 에서 상관필터 하나를 바꾸자 검증기가 원고 수치 138건의 불일치를
+    보고했다. 그만한 수를 손으로 옮기면 몇 건은 반드시 틀리고, 틀린 자리가
+    어디인지도 알 수 없다. 검증기는 이미 (어느 어법, 본문 값, 정본 값,
+    본문이 쓴 자릿수) 를 알고 있으므로, 같은 정보로 되쓸 수 있다.
+
+    보수적으로 짠다.
+      - 원문 파일에서 그대로 맞는 어법만 고친다. 주석 제거본이나 공백
+        정규화본에서만 맞은 자리는 고치지 않고 목록으로 보고한다. 그 자리는
+        줄바꿈이 끼어 있어 손으로 봐야 한다.
+      - 캡처가 순수한 숫자가 아니면(단어 수사 'seventeen', 천단위 '41\\,685')
+        건드리지 않는다.
+      - 본문이 쓴 소수 자릿수를 유지한다. 0.0265 -> 0.0279, 0.169 -> 0.192.
+      - 자릿수가 0 이면 정수로 쓴다.
+    고친 뒤에는 반드시 검증기를 다시 돌려 PASS 를 확인해야 한다. 이 함수는
+    판정을 내리지 않는다.
+    """
+    f = load_facts()
+    files = [TEX] + [x for x in EXTRA_TEX if os.path.exists(x)]
+    num_re = re.compile(r'^\d[\d.]*$')
+    total, skipped = 0, []
+    for path in files:
+        s = open(path).read()
+        edits = []                       # (a, b, old, new, key)
+        for key, pats, tol in CHECKS:
+            if key not in f:
+                continue
+            try:
+                want = float(f[key])
+            except (TypeError, ValueError):
+                continue
+            for pat in pats:
+                for m in re.finditer(pat, s):
+                    raw = m.group(1)
+                    if not num_re.match(raw.strip()):
+                        continue
+                    try:
+                        got = tonum(raw)
+                    except Exception:
+                        continue
+                    _dm = re.search(r'\.(\d+)', raw)
+                    _dp = len(_dm.group(1)) if _dm else 0
+                    if tol <= 0.0006:
+                        bad = abs(want - got) > 0.5 * (10 ** -_dp) + 1e-12
+                    else:
+                        bad = abs(got - want) > tol
+                    if not bad:
+                        continue
+                    new = f'{want:.{_dp}f}'
+                    if new == raw:
+                        continue
+                    a, b = m.span(1)
+                    edits.append((a, b, raw, new, key))
+        # 겹치는 편집은 뒤에서 앞으로 적용한다.
+        edits.sort(key=lambda t: -t[0])
+        done, seen = [], set()
+        for a, b, old, new, key in edits:
+            if any(a < pb and b > pa for pa, pb in seen):
+                skipped.append(f'{path}: {key} 편집 범위 중복 — 손으로 확인')
+                continue
+            seen.add((a, b))
+            s = s[:a] + new + s[b:]
+            done.append((key, old, new))
+        if done:
+            total += len(done)
+            print(f'  [{path}] {len(done)}건')
+            for key, old, new in sorted(done):
+                print(f'      {key:<22} {old} -> {new}')
+            if not dry:
+                open(path, 'w').write(s)
+    if skipped:
+        print('\n  손으로 봐야 하는 자리:')
+        for x in sorted(set(skipped)):
+            print(f'      {x}')
+    print(f'\n[fix] {"적용 예정" if dry else "적용"} {total}건'
+          + ('  (--dry-run: 파일을 쓰지 않았다)' if dry else ''))
+    print('[fix] 되쓰기는 어법이 걸린 자리만 고친다. 매칭 수·차원 수처럼 '
+          '문장을 고쳐야 하는 변경은 잡지 못한다. 반드시 검증기를 다시 '
+          '돌릴 것.')
+    return 0
+
+
 if __name__ == '__main__':
+    import argparse as _ap
+    _p = _ap.ArgumentParser()
+    _p.add_argument('--fix', action='store_true',
+                    help='불일치 수치를 정본 값으로 원고에 되쓴다')
+    _p.add_argument('--dry-run', action='store_true',
+                    help='--fix 와 함께. 무엇을 고칠지만 보고한다')
+    _a, _rest = _p.parse_known_args()
+    if _a.fix:
+        sys.exit(apply_number_fixes(dry=_a.dry_run))
     sys.exit(main())

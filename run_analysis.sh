@@ -74,6 +74,18 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py \
            match_by_panel_ascl3.py dft_electronic_space.py
 
+# 2026-11-02 (T2). 다섯 스크립트를 파이프라인에 넣는다. 전부 원고가 인용하는
+# 예치물을 만들며, 목록에 없으면 빈 outputs/ 로 클론했을 때 검증기의 G-D
+# 가드(인용된 예치물에 생성기가 있는가)에서 멈춘다.
+#   order_invariance       상관필터의 열 순서 의존성. 구판/신판 분포 대조
+#   match_rule_audit       매칭 둘째 조건의 두 판독 (넓은/좁은) 대조
+#   deltaE_noise           응답 크기, 잡음 바닥 가용성, 농도-SNR 교란
+#   purity_sensitivity     루이사이트 순도 67% 민감도
+#   channel_classification 선언 29채널 대 유효 23채널의 분류 성능
+# order_invariance 는 치환 40회 x 패널 3종 x 규칙 2종이라 약 20분 걸린다.
+run_strict order_invariance.py match_rule_audit.py deltaE_noise.py \
+           purity_sensitivity.py channel_classification.py
+
 # dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로
 # 이 파이프라인에 넣지 않고 저장소에 커밋해 둔다. 재생성 명령을 여기 적는 것은

@@ -5,75 +5,76 @@
   "panel35_incumbent3": {
    "n_perm": 2024,
    "n_tests": 18,
-   "observed_min_p": 0.16946640316205533,
-   "which_test": "merged:median_diff",
-   "wy_adjusted_p": 0.4150197628458498
+   "observed_min_p": 0.191699604743083,
+   "which_test": "merged:mean_dsim",
+   "wy_adjusted_p": 0.45652173913043476
   },
   "panel35_incumbent_plus_lit8": {
    "n_perm": 735471,
    "n_tests": 18,
-   "observed_min_p": 0.03811027219292127,
+   "observed_min_p": 0.038644623649334915,
    "which_test": "merged:mean_logratio",
-   "wy_adjusted_p": 0.10955292594813391
+   "wy_adjusted_p": 0.11242999384068168
   },
   "panel28_incumbent3": {
    "n_perm": 680,
    "n_tests": 18,
    "observed_min_p": 0.025,
    "which_test": "merged:mean_diff",
-   "wy_adjusted_p": 0.07794117647058824
+   "wy_adjusted_p": 0.07941176470588235
   }
  },
  "distance_bootstrap": {
   "n_boot": 1000,
   "incumbent3": {
    "median": 0,
-   "mean": 0.694,
+   "mean": 0.626,
    "ci": [
     0,
     3
    ],
-   "frac_zero": 0.586,
-   "frac_le1": 0.837,
-   "unbounded_median": 1,
+   "frac_zero": 0.612,
+   "frac_le1": 0.856,
+   "unbounded_median": 0,
    "retention": {
-    "sarin (GB)": 0.38,
-    "soman (GD)": 0.149,
-    "lewisite 1 (L)": 0.006,
-    "hydrogen cyanide (AC)": 0.003,
-    "cyanogen chloride (CK)": 0.022,
-    "phosgene (CG)": 0.009,
-    "chloropicrin (PS)": 0.011,
-    "cyclosarin (GF)": 0.114
+    "sarin (GB)": 0.362,
+    "soman (GD)": 0.126,
+    "sulfur mustard (HD)": 0.001,
+    "lewisite 1 (L)": 0.008,
+    "hydrogen cyanide (AC)": 0.002,
+    "cyanogen chloride (CK)": 0.014,
+    "phosgene (CG)": 0.005,
+    "chloropicrin (PS)": 0.016,
+    "cyclosarin (GF)": 0.092
    }
   },
   "incumbent_plus_lit8": {
    "median": 5,
-   "mean": 4.587,
+   "mean": 4.609,
    "ci": [
     4,
     6
    ],
    "frac_zero": 0.0,
-   "frac_le1": 0.003,
+   "frac_le1": 0.002,
    "unbounded_median": 5,
    "retention": {
-    "sarin (GB)": 0.994,
-    "soman (GD)": 0.99,
-    "tabun (GA)": 0.512,
-    "sulfur mustard (HD)": 1.0,
-    "lewisite 1 (L)": 0.047,
-    "hydrogen cyanide (AC)": 0.003,
-    "cyanogen chloride (CK)": 0.022,
-    "phosgene (CG)": 0.028,
-    "chloropicrin (PS)": 0.017,
-    "cyclosarin (GF)": 0.97,
-    "VX": 0.004
+    "sarin (GB)": 0.995,
+    "soman (GD)": 0.991,
+    "tabun (GA)": 0.516,
+    "sulfur mustard (HD)": 0.999,
+    "lewisite 1 (L)": 0.062,
+    "hydrogen cyanide (AC)": 0.002,
+    "cyanogen chloride (CK)": 0.014,
+    "phosgene (CG)": 0.036,
+    "chloropicrin (PS)": 0.025,
+    "cyclosarin (GF)": 0.966,
+    "VX": 0.003
    }
   },
   "difference": {
    "median": 4,
-   "mean": 3.893,
+   "mean": 3.983,
    "ci": [
     1,
     6
@@ -83,46 +84,46 @@
   "per_agent_gap": [
    {
     "agent": "sarin (GB)",
-    "gap_median": 0.11494247837464819,
+    "gap_median": 0.1506281739404085,
     "gap_ci": [
      0.0,
-     1.2145317358433922
+     1.126331738259879
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "soman (GD)",
-    "gap_median": 0.5574616921615326,
+    "gap_median": 0.5803227424334092,
     "gap_ci": [
      0.0,
-     1.6288675771143022
+     1.5401841478642808
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "tabun (GA)",
-    "gap_median": 0.9254219036150413,
+    "gap_median": 0.9494840270652773,
     "gap_ci": [
-     0.1660241370873259,
-     2.59443796379438
+     0.21236941035447082,
+     2.510830142770852
     ],
     "gap_excludes_zero": true
    },
    {
     "agent": "sulfur mustard (HD)",
-    "gap_median": 1.151885472881051,
+    "gap_median": 1.156567983686267,
     "gap_ci": [
-     0.5388202446146257,
-     2.1116558807342907
+     0.47569140098054236,
+     2.1339183292114057
     ],
     "gap_excludes_zero": true
    },
    {
     "agent": "lewisite 1 (L)",
-    "gap_median": 0.07355711624590242,
+    "gap_median": 0.07516679443430502,
     "gap_ci": [
      0.0,
-     0.5349685688811923
+     0.5354117216712185
     ],
     "gap_excludes_zero": false
    },
@@ -131,7 +132,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.20458557541730552
+     0.2502287009576676
     ],
     "gap_excludes_zero": false
    },
@@ -140,7 +141,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.20389501816839575
+     0.2316801775474018
     ],
     "gap_excludes_zero": false
    },
@@ -149,7 +150,7 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.7522325238888217
+     0.876895977557017
     ],
     "gap_excludes_zero": false
    },
@@ -158,25 +159,25 @@
     "gap_median": 0.0,
     "gap_ci": [
      0.0,
-     0.3577959064186916
+     0.3582104072785026
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "cyclosarin (GF)",
-    "gap_median": 0.5460751476098387,
+    "gap_median": 0.624466474474379,
     "gap_ci": [
      0.0,
-     1.542245410539408
+     1.5347878151475067
     ],
     "gap_excludes_zero": false
    },
    {
     "agent": "VX",
-    "gap_median": 0.2967726276719975,
+    "gap_median": 0.3433710703299926,
     "gap_ci": [
      0.0,
-     0.800726305556473
+     0.85706044412702
     ],
     "gap_excludes_zero": false
    }

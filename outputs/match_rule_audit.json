@@ -1,0 +1,1292 @@
+{
+ "panel28_incumbent3": {
+  "deterministic/wide": {
+   "n_dims": 38,
+   "nn_median": 3.8289,
+   "n_comparison": 14,
+   "n_match": 3,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.187,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.446,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.0038,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6953,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.1366,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5855,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4507,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6056,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.4291,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5944,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0566,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    }
+   ]
+  },
+  "deterministic/narrow": {
+   "n_dims": 38,
+   "nn_median": 3.8289,
+   "n_comparison": 14,
+   "n_match": 3,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.187,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.446,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.0038,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6953,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.1366,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5855,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4507,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6056,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.4291,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5944,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0566,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    }
+   ]
+  },
+  "legacy/wide": {
+   "n_dims": 39,
+   "nn_median": 3.8439,
+   "n_comparison": 14,
+   "n_match": 4,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1706,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4446,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.9948,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7404,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.1407,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5873,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4463,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6002,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.4326,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5167,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0597,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    }
+   ]
+  },
+  "legacy/narrow": {
+   "n_dims": 39,
+   "nn_median": 3.8439,
+   "n_comparison": 14,
+   "n_match": 4,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1706,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4446,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.9948,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7404,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.1407,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5873,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4463,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6002,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.4326,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5167,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0597,
+     "within_threshold": false,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": false
+    }
+   ]
+  }
+ },
+ "panel35_incumbent3": {
+  "deterministic/wide": {
+   "n_dims": 41,
+   "nn_median": 3.5594,
+   "n_comparison": 21,
+   "n_match": 0,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1805,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4583,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.532,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "DCNP",
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5899,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "CEES",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.3506,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7204,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5814,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6623,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.7811,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.6041,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0364,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "deterministic/narrow": {
+   "n_dims": 41,
+   "nn_median": 3.5594,
+   "n_comparison": 16,
+   "n_match": 3,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1805,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4583,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.532,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "dichlorvos",
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5899,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.3506,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7204,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5814,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6623,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.7811,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.6041,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0364,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "legacy/wide": {
+   "n_dims": 41,
+   "nn_median": 3.5258,
+   "n_comparison": 21,
+   "n_match": 0,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1803,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4416,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.5485,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "DCNP",
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6336,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "CEES",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.3591,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7409,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5976,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6783,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.8216,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5646,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "DFP",
+     "match": false
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.9714,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "legacy/narrow": {
+   "n_dims": 41,
+   "nn_median": 3.5258,
+   "n_comparison": 16,
+   "n_match": 3,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.1803,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4416,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.5485,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "dichlorvos",
+     "match": false
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6336,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane",
+     "match": false
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.3591,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7409,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5976,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6783,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.8216,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5646,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.9714,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  }
+ },
+ "panel35_incumbent_plus_lit8": {
+  "deterministic/wide": {
+   "n_dims": 41,
+   "nn_median": 3.5594,
+   "n_comparison": 16,
+   "n_match": 5,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0558,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0051,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DCNP",
+     "d_norm": 1.7686,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "CEES",
+     "d_norm": 0.5338,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "CEES",
+     "d_norm": 2.3449,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7204,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5814,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6623,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7373,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.1116,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DFP",
+     "d_norm": 2.7663,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "deterministic/narrow": {
+   "n_dims": 41,
+   "nn_median": 3.5594,
+   "n_comparison": 16,
+   "n_match": 5,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0558,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0051,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DCNP",
+     "d_norm": 1.7686,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "CEES",
+     "d_norm": 0.5338,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "CEES",
+     "d_norm": 2.3449,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7204,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5814,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6623,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7373,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.1116,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DFP",
+     "d_norm": 2.7663,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "legacy/wide": {
+   "n_dims": 41,
+   "nn_median": 3.5258,
+   "n_comparison": 16,
+   "n_match": 5,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0702,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DCNP",
+     "d_norm": 1.7851,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "CEES",
+     "d_norm": 0.542,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "CEES",
+     "d_norm": 2.3434,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7409,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5976,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6783,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7683,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.1199,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7456,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  },
+  "legacy/narrow": {
+   "n_dims": 41,
+   "nn_median": 3.5258,
+   "n_comparison": 16,
+   "n_match": 5,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0702,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "soman (GD)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.0,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "tabun (GA)",
+     "nearest_simulant": "DCNP",
+     "d_norm": 1.7851,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "nearest_simulant": "CEES",
+     "d_norm": 0.542,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "nearest_simulant": "CEES",
+     "d_norm": 2.3434,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene",
+     "match": false
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7409,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5976,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile",
+     "match": false
+    },
+    {
+     "agent": "phosgene (CG)",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6783,
+     "within_threshold": true,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate",
+     "match": false
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7683,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "chloroform",
+     "match": false
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "nearest_simulant": "DFP",
+     "d_norm": 1.1199,
+     "within_threshold": true,
+     "beats_comparison_set": true,
+     "blocker": null,
+     "match": true
+    },
+    {
+     "agent": "VX",
+     "nearest_simulant": "DCP",
+     "d_norm": 2.7456,
+     "within_threshold": false,
+     "beats_comparison_set": false,
+     "blocker": "malathion",
+     "match": false
+    }
+   ]
+  }
+ }
+}

@@ -21,74 +21,63 @@
     {
       "condition": "A_rdkit",
       "n_in": 51,
-      "n_kept": 36,
+      "n_kept": 35,
       "kept": [
-        "MW",
-        "logP_crippen",
-        "MR_crippen",
-        "TPSA",
-        "HBA",
-        "HBD",
-        "rot_bonds",
-        "n_arom_rings",
-        "fraction_csp3",
-        "n_heteroatoms",
-        "balaban_j",
-        "chi1v",
-        "chi3v",
-        "kappa1",
-        "kappa2",
-        "kappa3",
-        "n_P_F",
-        "n_P_S",
-        "n_P_CN",
-        "n_P_alkoxy",
-        "n_P_C",
-        "n_As",
-        "n_S_divalent",
-        "n_halogen",
-        "n_nitrile",
-        "n_nitro",
-        "n_carbonyl",
-        "RadiusOfGyration",
         "Asphericity",
         "Eccentricity",
+        "HBA",
+        "HBD",
         "InertialShapeFactor",
+        "MR_crippen",
+        "MW",
         "NPR1",
         "NPR2",
         "PMI1",
         "PMI2",
-        "SpherocityIndex"
+        "RadiusOfGyration",
+        "SpherocityIndex",
+        "TPSA",
+        "balaban_j",
+        "chi1v",
+        "chi4v",
+        "fraction_csp3",
+        "kappa2",
+        "kappa3",
+        "logP_crippen",
+        "n_As",
+        "n_P_C",
+        "n_P_CN",
+        "n_P_F",
+        "n_P_S",
+        "n_P_alkoxy",
+        "n_S_divalent",
+        "n_arom_rings",
+        "n_carbonyl",
+        "n_halogen",
+        "n_heteroatoms",
+        "n_nitrile",
+        "n_nitro",
+        "rot_bonds"
       ],
       "dropped": [
         [
-          "labute_asa",
-          "MW",
-          0.9581637241821443
+          "n_P_N",
+          "n_P_CN",
+          1.0
         ],
         [
-          "chi0v",
-          "MW",
-          0.9531910876552402
-        ],
-        [
-          "heavy_atoms",
-          "MR_crippen",
-          0.9717476518816224
-        ],
-        [
-          "lser_L_proxy",
-          "MR_crippen",
-          0.9999999999999998
-        ],
-        [
-          "lser_B_proxy",
-          "HBA",
+          "n_PdO",
+          "n_P",
           1.0
         ],
         [
           "n_OH",
-          "HBD",
+          "lser_A_proxy",
+          1.0
+        ],
+        [
+          "n_P",
+          "is_organophosphorus",
           1.0
         ],
         [
@@ -97,34 +86,49 @@
           1.0
         ],
         [
-          "chi2v",
-          "chi1v",
-          0.9796231786415271
-        ],
-        [
-          "chi4v",
-          "chi3v",
-          0.9518607261430984
-        ],
-        [
-          "n_PdO",
-          "n_P",
+          "lser_B_proxy",
+          "HBA",
           1.0
         ],
         [
-          "is_organophosphorus",
-          "n_P",
-          1.0
-        ],
-        [
-          "n_P_N",
-          "n_P_CN",
-          1.0
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
         ],
         [
           "PMI3",
           "PMI2",
           0.9980415323115968
+        ],
+        [
+          "labute_asa",
+          "MR_crippen",
+          0.9831694729522648
+        ],
+        [
+          "kappa1",
+          "chi0v",
+          0.9816289671962878
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi0v",
+          "MR_crippen",
+          0.9783799674974305
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "chi3v",
+          "chi4v",
+          0.9518607261430984
         ],
         [
           "lser_S_proxy",
@@ -134,150 +138,139 @@
           ]
         ],
         [
-          "n_P",
+          "is_organophosphorus",
           [
-            "n_P_CN",
-            "n_P_C"
+            "n_P_C",
+            "n_P_CN"
           ]
         ]
       ],
       "evr": [
-        0.34849041996278957,
-        0.1286359805200915,
-        0.09862751069555832,
-        0.06889118537428018,
-        0.06408546715854606
+        0.3284789452186022,
+        0.13395582165605155,
+        0.10135021829364184,
+        0.07101614549138646,
+        0.06582026843626215
       ],
-      "pc1_pc2": 0.4771264004828811,
+      "pc1_pc2": 0.4624347668746538,
       "pc1_loadings": {
-        "kappa1": 0.27718497077995524,
-        "MW": 0.2655522656335418,
-        "PMI1": 0.2651099718074827,
-        "MR_crippen": 0.2628416137156109,
-        "chi1v": 0.26002933167162257,
-        "chi3v": 0.25743069960024545
+        "MW": 0.2774817855238306,
+        "PMI1": 0.2762261708523076,
+        "MR_crippen": 0.274038964714135,
+        "chi1v": 0.272707597462516,
+        "PMI2": 0.2632505637909216,
+        "RadiusOfGyration": 0.26084482773518813
       },
       "n_interferent_closer": 6,
       "n_real": 11,
       "test_used": "t-test (paired)",
-      "statistic": 0.25390927120074525,
-      "p_value": 0.804710009463515,
-      "cohens_dz": 0.07655652576049675,
-      "mean_diff": 0.1413534492130516,
+      "statistic": 0.3688010380136392,
+      "p_value": 0.7199643315365044,
+      "cohens_dz": 0.11119769685316727,
+      "mean_diff": 0.19534354747424018,
       "ci_95": [
-        -0.899530859623219,
-        1.2044717862744283
+        -0.790392285960595,
+        1.2135762764683322
       ],
-      "shapiro_p": 0.12663050594564756
+      "shapiro_p": 0.22798297200096607
     },
     {
       "condition": "B_electronic",
       "n_in": 3,
       "n_kept": 3,
       "kept": [
-        "dipole_moment_D",
+        "E_HOMO_eV",
         "E_LUMO_eV",
-        "E_HOMO_eV"
+        "dipole_moment_D"
       ],
       "dropped": [],
       "evr": [
-        0.37035767538450065,
-        0.3338844114562583,
-        0.29575791315924105
+        0.3703576753845005,
+        0.3338844114562587,
+        0.2957579131592409
       ],
-      "pc1_pc2": 0.704242086840759,
+      "pc1_pc2": 0.7042420868407592,
       "pc1_loadings": {
-        "E_HOMO_eV": 0.7096856820167194,
-        "E_LUMO_eV": 0.6157947767508354,
-        "dipole_moment_D": -0.3422616333550294
+        "E_HOMO_eV": 0.7096856820167203,
+        "E_LUMO_eV": 0.615794776750833,
+        "dipole_moment_D": -0.34226163335503207
       },
       "n_interferent_closer": 10,
       "n_real": 11,
       "test_used": "t-test (paired)",
       "statistic": 2.7054880153376977,
       "p_value": 0.02210414777961365,
-      "cohens_dz": 0.8157353292434943,
+      "cohens_dz": 0.8157353292434945,
       "mean_diff": 0.4043810763636831,
       "ci_95": [
-        0.15778005858022406,
+        0.15778005858022404,
         0.7073795418997563
       ],
-      "shapiro_p": 0.10477177321179149
+      "shapiro_p": 0.1047717732117911
     },
     {
       "condition": "C_merged",
       "n_in": 54,
-      "n_kept": 39,
+      "n_kept": 38,
       "kept": [
-        "MW",
-        "logP_crippen",
-        "MR_crippen",
-        "TPSA",
+        "Asphericity",
+        "E_HOMO_eV",
+        "E_LUMO_eV",
+        "Eccentricity",
         "HBA",
         "HBD",
-        "rot_bonds",
-        "n_arom_rings",
-        "fraction_csp3",
-        "n_heteroatoms",
-        "balaban_j",
-        "chi1v",
-        "chi3v",
-        "kappa1",
-        "kappa2",
-        "kappa3",
-        "n_P_F",
-        "n_P_S",
-        "n_P_CN",
-        "n_P_alkoxy",
-        "n_P_C",
-        "n_As",
-        "n_S_divalent",
-        "n_halogen",
-        "n_nitrile",
-        "n_nitro",
-        "n_carbonyl",
-        "RadiusOfGyration",
-        "Asphericity",
-        "Eccentricity",
         "InertialShapeFactor",
+        "MR_crippen",
+        "MW",
         "NPR1",
         "NPR2",
         "PMI1",
         "PMI2",
+        "RadiusOfGyration",
         "SpherocityIndex",
+        "TPSA",
+        "balaban_j",
+        "chi1v",
+        "chi4v",
         "dipole_moment_D",
-        "E_LUMO_eV",
-        "E_HOMO_eV"
+        "fraction_csp3",
+        "kappa2",
+        "kappa3",
+        "logP_crippen",
+        "n_As",
+        "n_P_C",
+        "n_P_CN",
+        "n_P_F",
+        "n_P_S",
+        "n_P_alkoxy",
+        "n_S_divalent",
+        "n_arom_rings",
+        "n_carbonyl",
+        "n_halogen",
+        "n_heteroatoms",
+        "n_nitrile",
+        "n_nitro",
+        "rot_bonds"
       ],
       "dropped": [
         [
-          "labute_asa",
-          "MW",
-          0.9581637241821443
+          "n_P_N",
+          "n_P_CN",
+          1.0
         ],
         [
-          "chi0v",
-          "MW",
-          0.9531910876552402
-        ],
-        [
-          "heavy_atoms",
-          "MR_crippen",
-          0.9717476518816224
-        ],
-        [
-          "lser_L_proxy",
-          "MR_crippen",
-          0.9999999999999998
-        ],
-        [
-          "lser_B_proxy",
-          "HBA",
+          "n_PdO",
+          "n_P",
           1.0
         ],
         [
           "n_OH",
-          "HBD",
+          "lser_A_proxy",
+          1.0
+        ],
+        [
+          "n_P",
+          "is_organophosphorus",
           1.0
         ],
         [
@@ -286,34 +279,49 @@
           1.0
         ],
         [
-          "chi2v",
-          "chi1v",
-          0.9796231786415271
-        ],
-        [
-          "chi4v",
-          "chi3v",
-          0.9518607261430984
-        ],
-        [
-          "n_PdO",
-          "n_P",
+          "lser_B_proxy",
+          "HBA",
           1.0
         ],
         [
-          "is_organophosphorus",
-          "n_P",
-          1.0
-        ],
-        [
-          "n_P_N",
-          "n_P_CN",
-          1.0
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
         ],
         [
           "PMI3",
           "PMI2",
           0.9980415323115968
+        ],
+        [
+          "labute_asa",
+          "MR_crippen",
+          0.9831694729522648
+        ],
+        [
+          "kappa1",
+          "chi0v",
+          0.9816289671962878
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi0v",
+          "MR_crippen",
+          0.9783799674974305
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "chi3v",
+          "chi4v",
+          0.9518607261430984
         ],
         [
           "lser_S_proxy",
@@ -323,41 +331,41 @@
           ]
         ],
         [
-          "n_P",
+          "is_organophosphorus",
           [
-            "n_P_CN",
-            "n_P_C"
+            "n_P_C",
+            "n_P_CN"
           ]
         ]
       ],
       "evr": [
-        0.32955550051285837,
-        0.12768724497756503,
-        0.10760034744912601,
-        0.07507883764690237,
-        0.06285788812452782
+        0.3106937556600806,
+        0.1323647854252718,
+        0.11057303213388521,
+        0.07710603081178471,
+        0.06431387862718067
       ],
-      "pc1_pc2": 0.45724274549042343,
+      "pc1_pc2": 0.4430585410853524,
       "pc1_loadings": {
-        "kappa1": 0.27358600681539924,
-        "PMI1": 0.261672553252143,
-        "MW": 0.260914267889071,
-        "MR_crippen": 0.26048163721755374,
-        "chi1v": 0.25687580319624537,
-        "chi3v": 0.25530660656075793
+        "PMI1": 0.2722862980080255,
+        "MW": 0.27212095017325527,
+        "MR_crippen": 0.2713339691231514,
+        "chi1v": 0.2690047325712658,
+        "PMI2": 0.2608569554591688,
+        "RadiusOfGyration": 0.2575830145989857
       },
       "n_interferent_closer": 6,
       "n_real": 11,
       "test_used": "t-test (paired)",
-      "statistic": -0.05836906380957605,
-      "p_value": 0.954604568993645,
-      "cohens_dz": -0.017598934910970556,
-      "mean_diff": -0.033152874558963076,
+      "statistic": 0.04338750372581701,
+      "p_value": 0.966246765759124,
+      "cohens_dz": 0.013081824586243816,
+      "mean_diff": 0.02343700603521553,
       "ci_95": [
-        -1.0846879991051919,
-        1.0277161203211713
+        -0.9677200628190089,
+        1.033454048905266
       ],
-      "shapiro_p": 0.138384321248476
+      "shapiro_p": 0.18899166708624549
     }
   ],
   "p_local": {

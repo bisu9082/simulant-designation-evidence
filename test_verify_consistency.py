@@ -9,6 +9,7 @@
 여기 실린 여섯 건은 모두 GATE 8 심사에서 지적된 실제 사례다.
 """
 import atexit
+import re
 import shutil
 import signal
 import subprocess
@@ -16,6 +17,45 @@ import sys
 import tempfile
 
 TEX = 'paper/main.tex'
+
+_NUM = r'\d+(?:\.\d+)?'
+
+
+def resolve(a, b, src):
+    """주입 앵커 (a, b) 를 src 의 현재 글에 맞춘다 (2026-11-02 신설).
+
+    왜 필요한가. 상관필터를 결정적 규칙으로 교체하자 원고 수치 157건이
+    갱신되었고, 이 시험의 앵커 42개가 한꺼번에 글자 그대로 사라져 전부
+    SKIP 되었다. 가드 42개가 조용히 무력화된 것이고 그것은 가드가 없는
+    것과 같다. 같은 종류의 무력화가 이 프로젝트에서 반복됐다.
+
+    어법은 그대로 두고 숫자만 바뀌는 것이 정상 경로이므로, 앵커를 숫자에
+    묶지 않는다. a 를 글자 그대로 찾지 못하면 a 의 숫자를 느슨하게 풀어
+    같은 어법을 찾고, a 와 b 가 다른 숫자 자리를 그 찾은 글에 그대로
+    옮긴다. 어법이 유일하게 걸리지 않으면 손으로 보라고 넘긴다.
+
+    단어로 적힌 수(four, three)는 숫자가 아니므로 이 완화가 덮지 못한다.
+    그런 항목은 여전히 SKIP 으로 드러나며, 그래야 한다.
+    """
+    if a in src:
+        return a, b
+    pa = re.split(f'({_NUM})', a)
+    if len(pa) < 2:
+        return None, None
+    pat = ''.join(re.escape(t) if i % 2 == 0 else _NUM
+                  for i, t in enumerate(pa))
+    ms = list(re.finditer(pat, src))
+    if len(ms) != 1:
+        return None, None
+    found = ms[0].group(0)
+    na, nb = re.findall(_NUM, a), re.findall(_NUM, b)
+    if len(na) != len(nb) or na == nb:
+        return None, None            # 숫자 아닌 곳이 달라졌다. 손으로.
+    pf = re.split(f'({_NUM})', found)
+    for i, (x, y) in enumerate(zip(na, nb)):
+        if x != y:
+            pf[2 * i + 1] = y
+    return found, ''.join(pf)
 
 # 2026-11-02. 이 시험이 타임아웃으로 중단되었을 때 주입값(0.0221 자리에
 # 0.0321)이 paper/main.tex 에 그대로 남았다. finally 는 SIGTERM 을 막지
@@ -81,19 +121,19 @@ CASES = [
      'tabun, at $+0.764$ against sarin',
      'tabun, at $+0.564$ against sarin'),
     ('백분위 오기 — 구조 관측값을 더 특별해 보이게 (25.8 대 4.2)',
-     'value of 0.026 sits at the 24.3rd percentile',
+     'value of 0.028 sits at the\n22.4th percentile',
      'value of 0.026 sits at the 4.2nd percentile'),
     ('주성분3 백분위 오기 (2.1 대 0.4)',
-     'value of 0.026 sits at the 24.3rd',
+     'value of 0.028 sits at the\n22.4th',
      'value of 0.026 sits at the 0.4th'),
     ('주 패널 유효매칭 수 오기 (zero 대 three)',
      'twenty-eight-compound panel and zero on the primary one',
      'twenty-eight-compound panel and three on the primary one'),
     ('28종 유효매칭 수 오기 (three 대 five)',
-     'against\nfour on the twenty-eight-compound panel',
+     'against\nthree on the twenty-eight-compound panel',
      'against\nseven on the twenty-eight-compound panel'),
     ('WY 조정 p 오기 (0.075 대 0.045) — 유의/비유의가 뒤집힌다',
-     '& 0.169 & 0.038 & 0.025', '& 0.169 & 0.038 & 0.045'),
+     '& 0.192 & 0.039 & 0.025', '& 0.192 & 0.039 & 0.045'),
     ('부트스트랩 0건 비율 오기 (58.8 대 98.8)',
      'exactly zero\nin 58.6\\% of replicates',
      'exactly zero\nin 98.6\\% of replicates'),
@@ -122,7 +162,7 @@ CASES = [
      'fluorophosphate is present, at 1.07, 1.00 and 1.12',
      'fluorophosphate is present, at 2.07, 1.00 and 1.12'),
     ('사전지정 q 오기 (0.046 대 0.146) — 유의/비유의가 뒤집힌다',
-     'would survive at $q=0.040$',
+     'would survive at $q=0.042$',
      'would survive at $q=0.142$'),
     ('백색화 통제 수치 오기 (16.9 대 36.9)',
      'the rate falls from 33.7\\% to 18.4\\%',
@@ -136,8 +176,8 @@ CASES = [
     # --- 네 번째 구성 (2026-10-20). 이 논문에서 다중검정 보정을 통과하는
     # 유일한 구성이므로 수치 하나가 틀리면 주장이 통째로 바뀐다.
     ('표 1 네 번째 블록 구조공간 행이 틀림 (0.013 대 0.113)',
-     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.0265}',
-     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.1265}'),
+     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.0279}',
+     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.1279}'),
     ('표 1 네 번째 블록 병합공간 행이 틀림 (0.005 대 0.055)',
      '+ pesticides 2   & merged      & 42 & \\textbf{0.006}',
      '+ pesticides 2   & merged      & 42 & \\textbf{0.056}'),
@@ -417,17 +457,17 @@ SUPP_CASES_STALE = [
     # 여기서는 각 자리를 실제로 구판으로 되돌려 검사 B2 또는 (B) 가 잡는지
     # 확인한다. 구판 값은 커밋 aa1d01a 의 원고에서 가져왔다.
     ('28종 구조공간 p 를 구판으로 (0.031 대 0.028)',
-     '0.026 sits at the 24.3rd percentile',
+     '0.028 sits at the\n22.4th percentile',
      '0.028 sits at the 24.3rd percentile'),
     ('부분공간 백분위를 구판으로 (25.4 대 22.7)',
-     '0.026 sits at the 24.3rd percentile of that\ndistribution',
+     '0.028 sits at the\n22.4th percentile of the resulting distribution',
      '0.026 sits at the 21.3rd percentile of that\ndistribution'),
     ('도판2 캡션 백분위 오기 (26th 대 21st)',
      '0.026 is the 24th percentile of those draws',
      '0.026 is the 21th percentile of those draws'),
     ('28종 매치 수를 구판으로 (four 대 three)',
-     'Omitting those five restores four matches',
-     'Omitting those five restores three matches'),
+     'Omitting those five restores three matches',
+     'Omitting those five restores four matches'),
     ('구조공간 유의 통계량 수를 구판으로 (two 대 one)',
      'compounds under two of six statistics in the structural space',
      'compounds under one of six statistics in the structural space'),
@@ -435,8 +475,8 @@ SUPP_CASES_STALE = [
      'rather than approximating it, gives 0.078.',
      'rather than approximating it, gives 0.075.'),
     ('사전지정 q 를 구판으로 (0.046 대 0.042)',
-     'merged results would survive at $q=0.040$',
-     'merged results would survive at $q=0.042$'),
+     'merged results would survive at $q=0.042$',
+     'merged results would survive at $q=0.046$'),
     ('도판1 캡션 BH 를 구판으로 (0.185 대 0.159)',
      'value over its eighteen tests is 0.165.}',
      'value over its eighteen tests is 0.159.}'),
@@ -461,25 +501,25 @@ SUPP_CASES_CONF = [
     # 2026-10-26 신설. 형태이성질체 민감도 수치는 산출물에 묶여 있다.
     # 원고가 그 범위를 좁히거나 매칭 수를 바꾸면 잡혀야 한다.
     ('앙상블 tabun 하한 오기 (1.896 대 1.796)',
-     'sits between 1.896 and\n1.905 across the ensemble',
-     'sits between 1.796 and\n1.905 across the ensemble'),
+     'runs from 1.9943 to 2.0106 across the ensemble seeds',
+     'runs from 1.7943 to 2.0106 across the ensemble seeds'),
     ('앙상블 tabun 상한 오기 (1.905 대 1.805)',
-     'sits between 1.896 and\n1.905 across the ensemble',
-     'sits between 1.896 and\n1.805 across the ensemble'),
+     'runs from 1.9943 to 2.0106 across the ensemble seeds',
+     'runs from 1.9943 to 1.8106 across the ensemble seeds'),
     ('단일선택 tabun 범위 오기 (1.876 대 1.976)',
-     'between 1.876 and 1.884 across the',
-     'between 1.776 and 1.884 across the'),
+     'and from 2.0172 to\n2.0273 across the single-conformer',
+     'and from 1.7172 to\n2.0273 across the single-conformer'),
     ('단일선택 순열 p 상한 오기 (0.028 대 0.038)',
-     '0.025 and 0.028\nin the single-conformer runs',
-     '0.025 and 0.038\nin the single-conformer runs'),
+     'permutation value runs from 0.0250 to 0.0279 under both',
+     'permutation value runs from 0.0250 to 0.0379 under both'),
     ('시드 수 오기 (six 대 four)',
      'under six seeds and rebuilding',
      'under four seeds and rebuilding'),
     ('구조좌표 수를 메타열 포함 시절로 (36 대 37)',
-     'value of 0.026 sits at the 24.3rd',
+     'value of 0.028 sits at the\n22.4th',
      'value of 0.029 sits at the 24.3rd'),
     ('구조공간 명목 p 를 앙상블 이전으로 (0.026 대 0.031)',
-     '0.026 sits at the 24.3rd percentile',
+     '0.028 sits at the\n22.4th percentile',
      '0.031 sits at the 24.3rd percentile'),
     ('유효검정수를 구판으로 (5.00 대 7.00)',
      '5.00 effective tests of eighteen',
@@ -542,7 +582,34 @@ def run():
     return r.returncode
 
 
+def selfcheck():
+    """주입 자체가 무효인 케이스를 찾는다 (2026-11-02 신설).
+
+    왜 필요한가. 2026-11-02 에 원고 수치 157건을 갱신하면서 시험 앵커를
+    일괄 치환했고, 그 과정에서 두 케이스의 원문과 주입값이 같아졌다. 같은
+    글을 같은 글로 바꾸면 검증기는 당연히 통과하므로 시험은 'FAIL 주입했는데
+    통과했다' 를 보고하는데, 원인은 검증기가 아니라 시험이다. 그 구분을
+    사람이 매번 하게 두지 않는다.
+    """
+    bad = []
+    for name, cases in (('CASES', CASES), ('SUPP_CASES', SUPP_CASES),
+                        ('SIDECAR_CASES', SIDECAR_CASES),
+                        ('ACS_CASES', ACS_CASES),
+                        ('ACS_SUPP_CASES', ACS_SUPP_CASES),
+                        ('ACS_CL_CASES', ACS_CL_CASES)):
+        for desc, a, b in cases:
+            if a == b:
+                bad.append(f'  [시험 결함] {name}: {desc} — 원문과 주입값이 '
+                           '같다. 주입이 무효다')
+    return bad
+
+
 def main():
+    _self = selfcheck()
+    if _self:
+        print('\n'.join(_self))
+        print(f'[test_verify] 시험 자체의 결함 {len(_self)}건. 먼저 고칠 것')
+        return 1
     for _p in (TEX, SUPP, SIDECAR, ANNOT, ACS, ACS_SUPP, ACS_CL):
         _guard(_p)
     good = open(TEX).read()
@@ -559,15 +626,18 @@ def main():
         # 조용히 SKIP 되었다. 두 파일을 모두 뒤져 앵커가 있는 쪽에 주입한다.
         supp_good = open(SUPP).read()
         for desc, a, b in CASES:
-            if a in good:
+            ra, rb = resolve(a, b, good)
+            if ra:
                 tgt, src = TEX, good
-            elif a in supp_good:
-                tgt, src = SUPP, supp_good
             else:
-                print(f'  SKIP {desc}: 원문을 찾지 못함 ({a[:40]!r})')
-                bad += 1
-                continue
-            open(tgt, 'w').write(src.replace(a, b, 1))
+                ra, rb = resolve(a, b, supp_good)
+                if ra:
+                    tgt, src = SUPP, supp_good
+                else:
+                    print(f'  SKIP {desc}: 원문을 찾지 못함 ({a[:40]!r})')
+                    bad += 1
+                    continue
+            open(tgt, 'w').write(src.replace(ra, rb, 1))
             rc = run()
             open(tgt, 'w').write(src)
             where = '' if tgt == TEX else ' (SI)'
@@ -579,11 +649,12 @@ def main():
         pbak = open(SUPP).read()
         try:
             for desc, a, b in SUPP_CASES:
-                if a not in pbak:
+                ra, rb = resolve(a, b, pbak)
+                if not ra:
                     print(f'  SKIP {desc}: SI 원문을 찾지 못함 ({a[:40]!r})')
                     bad += 1
                     continue
-                open(SUPP, 'w').write(pbak.replace(a, b, 1))
+                open(SUPP, 'w').write(pbak.replace(ra, rb, 1))
                 if run() == 0:
                     print(f'  FAIL {desc}: 주입했는데 통과했다')
                     bad += 1
@@ -599,11 +670,12 @@ def main():
         cbak = open(ACS_CL).read()
         try:
             for desc, a, b in ACS_CL_CASES:
-                if a not in cbak:
+                ra, rb = resolve(a, b, cbak)
+                if not ra:
                     print(f'  SKIP {desc}: 커버레터 원문을 찾지 못함 ({a[:40]!r})')
                     bad += 1
                     continue
-                open(ACS_CL, 'w').write(cbak.replace(a, b, 1))
+                open(ACS_CL, 'w').write(cbak.replace(ra, rb, 1))
                 if run() == 0:
                     print(f'  FAIL {desc}: 주입했는데 통과했다 (커버레터)')
                     bad += 1
@@ -617,11 +689,12 @@ def main():
         qbak = open(ACS_SUPP).read()
         try:
             for desc, a, b in ACS_SUPP_CASES:
-                if a not in qbak:
+                ra, rb = resolve(a, b, qbak)
+                if not ra:
                     print(f'  SKIP {desc}: ACS SI 원문을 찾지 못함 ({a[:40]!r})')
                     bad += 1
                     continue
-                open(ACS_SUPP, 'w').write(qbak.replace(a, b, 1))
+                open(ACS_SUPP, 'w').write(qbak.replace(ra, rb, 1))
                 if run() == 0:
                     print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS SI)')
                     bad += 1
@@ -634,11 +707,12 @@ def main():
         abak = open(ACS).read()
         try:
             for desc, a, b in ACS_CASES:
-                if a not in abak:
+                ra, rb = resolve(a, b, abak)
+                if not ra:
                     print(f'  SKIP {desc}: ACS 원문을 찾지 못함 ({a[:40]!r})')
                     bad += 1
                     continue
-                open(ACS, 'w').write(abak.replace(a, b, 1))
+                open(ACS, 'w').write(abak.replace(ra, rb, 1))
                 if run() == 0:
                     print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS)')
                     bad += 1
@@ -651,11 +725,12 @@ def main():
         sbak = open(SIDECAR).read()
         try:
             for desc, a, b in SIDECAR_CASES:
-                if a not in sbak:
+                ra, rb = resolve(a, b, sbak)
+                if not ra:
                     print(f'  SKIP {desc}: 원문을 찾지 못함')
                     bad += 1
                     continue
-                open(SIDECAR, 'w').write(sbak.replace(a, b, 1))
+                open(SIDECAR, 'w').write(sbak.replace(ra, rb, 1))
                 if run() == 0:
                     print(f'  FAIL {desc}: 주입했는데 통과했다')
                     bad += 1

@@ -310,7 +310,7 @@ nominal $p$ below 0.05, all of them in the second run: the merged space in
 the ultraviolet channel at 0.0153, the structural space in the same channel
 at 0.0167, and the electronic space in the reflectance channel at 0.0444.
 Benjamini--Hochberg correction over the twelve leaves a smallest adjusted
-value of 0.10. The pattern of the three is itself uninformative about
+value of 0.12 The pattern of the three is itself uninformative about
 transfer, because the two ultraviolet cells implicate the structural and
 merged spaces while the reflectance cell implicates the electronic space,
 and the same space does not reproduce across channels of the same plate.
@@ -435,24 +435,24 @@ reduced panel of twenty-eight gives 680.
 On the primary panel the answer is flat (Figure~\ref{fig:descriptor}).
 No agent of the eleven has a valid match, the smallest nominal $p$ over
 the eighteen tests is 0.1695, and the Benjamini--Hochberg adjusted value is
-0.6173. Nothing in that panel supports the designation.
+0.6299 Nothing in that panel supports the designation.
 
 The reduced panel, which omits five compounds the literature also calls
-simulants, reads differently. Four agents acquire a valid match, and the
+simulants, reads differently. Three agents acquire a valid match, and the
 merged space returns a nominal one-sided $p$ of 0.0250 with the structural
-space at 0.0265. Whether that survives depends on which correction is
-applied. Benjamini--Hochberg over the eighteen tests gives 0.1809,
+space at 0.0279 Whether that survives depends on which correction is
+applied. Benjamini--Hochberg over the eighteen tests gives 0.1632,
 correcting within each space gives 0.0824, and the Westfall--Young
 single-step procedure, which uses the shared permutations and so handles
-the dependence between tests exactly, gives 0.0779. Only the scheme that
-fixes one statistic in advance returns a value below 0.05, at 0.0397.
+the dependence between tests exactly, gives 0.0794. Only the scheme that
+fixes one statistic in advance returns a value below 0.05, at 0.0419
 Significance here is a property of one correction scheme on one panel
 construction, and we report all four rather than the one that passes.
 
 The surviving structural value is also an ordinary draw from the choices
 available to an analyst. Drawing three descriptors at random from the
 structural block 2000 times and repeating the whole procedure places the
-observed value at the 24.3rd percentile of that distribution. A value at
+observed value at the 22.4rd percentile of that distribution. A value at
 the quarter mark of what random descriptor choices produce is not evidence
 about chemistry. The null for that percentile, the dimensionality controls
 and the effect of weighting the two descriptor blocks equally are in
@@ -488,15 +488,17 @@ the two sets of calculations sit on different geometries, so the difference
 carries a geometry term we cannot separate from the method term. What it
 establishes is narrower and bears directly on this paper's argument: the
 space in which the incumbents did worst is the space whose answer the choice
-of electronic-structure method decides. The merged space does not move the
-same way, returning three matches and 0.0221 against four and 0.0250 under
-GFN2, so the value reported above is not an artefact of the semiempirical
-method. Supporting Information Section~\ref{S-meth:dft} gives the full
-comparison and the limits on it.
+of electronic-structure method decides. The merged space does not move at
+all: thirty-eight coordinates, three valid matches and a one-sided $p$ of
+0.0250 under both methods, to the precision the exact enumeration of 680
+designations can report. The result we carry forward is therefore not an
+artefact of the semiempirical method, while the three-coordinate space is
+a function of it. Supporting Information Section~\ref{S-meth:dft} gives the
+full comparison and the limits on it.
 
 What decides the answer is panel composition. Adding back the five
 compounds the sensing literature also treats as simulants moves the count
-from four valid matches to zero, because diisopropyl fluorophosphate is
+from three valid matches to zero, because diisopropyl fluorophosphate is
 nearer to three G agents than any incumbent is, and 2-chloroethyl ethyl
 sulfide is nearer to sulfur mustard than dichloromethane is. The incumbents
 do not move. What moves is whether anything closer is allowed into the
@@ -566,7 +568,7 @@ measured beside them, and that single co-measurement sits in one run of one
 array. Twelve exact Mantel tests and six combinations of them leave no
 agreement between descriptor distance and response distance below
 $q=0.05$. On the primary panel no agent of the eleven has a valid match to
-an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.6173.
+an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.6299.
 
 The documentary record accounts for the first of those counts rather than
 contradicting it. DMMP was designated for respirator filter breakthrough
@@ -704,8 +706,8 @@ $\binom{17}{3} = 680$ on the twenty-eight-compound panel. The hypothesis is
 % 수치는 outputs/permutation_sidedness.json 실측.
 directional, so the reported $p$ is one-sided. We give the two-sided values
 here rather than only the convention, because on the twenty-eight-compound
-panel they decide the answer: the structural space moves from 0.0265
-one-sided to 0.0529 at twice the smaller tail and 0.0353 scored as distance
+panel they decide the answer: the structural space moves from 0.0279
+one-sided to 0.0559 at twice the smaller tail and 0.0441 scored as distance
 from the null mean, and the merged space from 0.0250 to 0.0500 and 0.0279.
 Under the first of the two-sided conventions neither space reaches 0.05, and
 the one correction scheme that returns a value below 0.05 does so only on the

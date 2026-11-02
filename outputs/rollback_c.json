@@ -37,24 +37,24 @@
  "panels": {
   "panel28_designated3": {
    "structural": {
-    "n_descriptors": 36,
+    "n_descriptors": 35,
     "n_perm": 680,
     "statistics": {
      "mean_diff": {
-      "observed": 0.1413534492130516,
-      "p": 0.026470588235294117
+      "observed": 0.19534354747424018,
+      "p": 0.027941176470588237
      },
      "median_diff": {
-      "observed": 0.5669323270831139,
-      "p": 0.17647058823529413
+      "observed": 0.5561170108620885,
+      "p": 0.11029411764705882
      },
      "mean_logratio": {
-      "observed": 0.07391381875453557,
-      "p": 0.1
+      "observed": 0.08113344780636339,
+      "p": 0.11323529411764706
      },
      "mean_dsim": {
-      "observed": 6.8491902775663505,
-      "p": 0.060294117647058824
+      "observed": 6.840795774667281,
+      "p": 0.054411764705882354
      },
      "n_closer": {
       "observed": -5.0,
@@ -75,7 +75,7 @@
       "p": 0.275
      },
      "median_diff": {
-      "observed": 0.24154326843786555,
+      "observed": 0.24154326843786533,
       "p": 0.175
      },
      "mean_logratio": {
@@ -97,23 +97,23 @@
     }
    },
    "merged": {
-    "n_descriptors": 39,
+    "n_descriptors": 38,
     "n_perm": 680,
     "statistics": {
      "mean_diff": {
-      "observed": -0.033152874558963076,
+      "observed": 0.02343700603521553,
       "p": 0.025
      },
      "median_diff": {
-      "observed": 0.43723916759246073,
-      "p": 0.05588235294117647
+      "observed": 0.2849302769049906,
+      "p": 0.04264705882352941
      },
      "mean_logratio": {
-      "observed": 0.039203416587048935,
-      "p": 0.041176470588235294
+      "observed": 0.04649879267802545,
+      "p": 0.051470588235294115
      },
      "mean_dsim": {
-      "observed": 7.035676322907801,
+      "observed": 7.028000073112003,
       "p": 0.033823529411764704
      },
      "n_closer": {
@@ -121,8 +121,8 @@
       "p": 0.11029411764705882
      },
      "n_valid": {
-      "observed": -4.0,
-      "p": 0.18088235294117647
+      "observed": -3.0,
+      "p": 0.23529411764705882
      }
     }
    }
@@ -133,20 +133,20 @@
     "n_perm": 2024,
     "statistics": {
      "mean_diff": {
-      "observed": 1.8133369404109663,
-      "p": 0.32954545454545453
+      "observed": 1.8734659312018977,
+      "p": 0.35079051383399207
      },
      "median_diff": {
-      "observed": 1.7119433690629702,
-      "p": 0.3211462450592885
+      "observed": 1.736668304426289,
+      "p": 0.32608695652173914
      },
      "mean_logratio": {
-      "observed": 0.3733074330188128,
-      "p": 0.4016798418972332
+      "observed": 0.38130151823491243,
+      "p": 0.4199604743083004
      },
      "mean_dsim": {
-      "observed": 6.696662524881378,
-      "p": 0.23567193675889328
+      "observed": 6.758894014308364,
+      "p": 0.25691699604743085
      },
      "n_closer": {
       "observed": 0.0,
@@ -167,7 +167,7 @@
       "p": 0.3858695652173913
      },
      "median_diff": {
-      "observed": 0.5871204659230094,
+      "observed": 0.5871204659230093,
       "p": 0.37351778656126483
      },
      "mean_logratio": {
@@ -193,20 +193,20 @@
     "n_perm": 2024,
     "statistics": {
      "mean_diff": {
-      "observed": 1.883512030518755,
-      "p": 0.2855731225296443
+      "observed": 1.9338575791109014,
+      "p": 0.29792490118577075
      },
      "median_diff": {
-      "observed": 1.5678874449585543,
-      "p": 0.16946640316205533
+      "observed": 1.7532176708310292,
+      "p": 0.24654150197628458
      },
      "mean_logratio": {
-      "observed": 0.36710077708959843,
-      "p": 0.36462450592885376
+      "observed": 0.37387062856406783,
+      "p": 0.37351778656126483
      },
      "mean_dsim": {
-      "observed": 6.90344821336376,
-      "p": 0.18181818181818182
+      "observed": 6.956076102660014,
+      "p": 0.191699604743083
      },
      "n_closer": {
       "observed": 0.0,
@@ -225,20 +225,20 @@
     "n_perm": 735471,
     "statistics": {
      "mean_diff": {
-      "observed": -0.23398350370326326,
-      "p": 0.06406370883420284
+      "observed": -0.20951350237398791,
+      "p": 0.06868523707936819
      },
      "median_diff": {
-      "observed": 0.5447624027208331,
-      "p": 0.3408591229293881
+      "observed": 0.5740854580090584,
+      "p": 0.2985909709560268
      },
      "mean_logratio": {
-      "observed": -0.08256519442068509,
-      "p": 0.04755456027498025
+      "observed": -0.0795870724175575,
+      "p": 0.049659333950624836
      },
      "mean_dsim": {
-      "observed": 5.698492309516615,
-      "p": 0.15367023308872818
+      "observed": 5.724172552914189,
+      "p": 0.15784170959833901
      },
      "n_closer": {
       "observed": -5.0,
@@ -255,15 +255,15 @@
     "n_perm": 735471,
     "statistics": {
      "mean_diff": {
-      "observed": -0.00601078722835619,
+      "observed": -0.0060107872283561995,
       "p": 0.12145006397261075
      },
      "median_diff": {
-      "observed": -0.14383438557299966,
+      "observed": -0.14383438557299977,
       "p": 0.08623725476599349
      },
      "mean_logratio": {
-      "observed": -0.09109540227634749,
+      "observed": -0.09109540227634748,
       "p": 0.1231714098856379
      },
      "mean_dsim": {
@@ -285,20 +285,20 @@
     "n_perm": 735471,
     "statistics": {
      "mean_diff": {
-      "observed": -0.2899141479482117,
-      "p": 0.05456639350837762
+      "observed": -0.2689782987299237,
+      "p": 0.0582619844970094
      },
      "median_diff": {
-      "observed": 0.7393970999160171,
-      "p": 0.28337215199511606
+      "observed": 0.7665655698370051,
+      "p": 0.3064213272855082
      },
      "mean_logratio": {
-      "observed": -0.10197403635955679,
-      "p": 0.03811027219292127
+      "observed": -0.09959042080351126,
+      "p": 0.038644623649334915
      },
      "mean_dsim": {
-      "observed": 5.894988199430375,
-      "p": 0.12540671216132246
+      "observed": 5.917521496588379,
+      "p": 0.12763793541825577
      },
      "n_closer": {
       "observed": -5.0,
@@ -314,15 +314,15 @@
  },
  "dimensionality_control": {
   "panel28": {
-   "n_structural_dims": 36,
-   "full_p": 0.026470588235294117,
+   "n_structural_dims": 35,
+   "full_p": 0.027941176470588237,
    "pc3_p": 0.0029411764705882353,
    "random3_subspace_control": "stat_supplement.py"
   },
   "panel35": {
    "n_structural_dims": 38,
-   "full_p": 0.32954545454545453,
-   "pc3_p": 0.35079051383399207,
+   "full_p": 0.35079051383399207,
+   "pc3_p": 0.3631422924901186,
    "random3_subspace_control": "stat_supplement.py"
   }
  },
@@ -334,9 +334,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.07857142857142857,
-    "p_mantel": 0.7583333333333333,
-    "p_pairs_as_independent": 0.7807545523090464
+    "spearman": 0.06785714285714285,
+    "p_mantel": 0.7847222222222222,
+    "p_pairs_as_independent": 0.8101088187105132
    },
    {
     "dataset": "d1",
@@ -354,9 +354,9 @@
     "space": "merged",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.05357142857142857,
-    "p_mantel": 0.8180555555555555,
-    "p_pairs_as_independent": 0.8496099367776072
+    "spearman": 0.06785714285714285,
+    "p_mantel": 0.7847222222222222,
+    "p_pairs_as_independent": 0.8101088187105132
    },
    {
     "dataset": "d1",
@@ -364,9 +364,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.06785714285714285,
-    "p_mantel": 0.7305555555555555,
-    "p_pairs_as_independent": 0.8101088187105132
+    "spearman": 0.03214285714285714,
+    "p_mantel": 0.8736111111111111,
+    "p_pairs_as_independent": 0.9094621170945906
    },
    {
     "dataset": "d1",
@@ -384,9 +384,9 @@
     "space": "merged",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.075,
-    "p_mantel": 0.6763888888888889,
-    "p_pairs_as_independent": 0.7905107941552679
+    "spearman": 0.03214285714285714,
+    "p_mantel": 0.8736111111111111,
+    "p_pairs_as_independent": 0.9094621170945906
    },
    {
     "dataset": "d2",
@@ -414,9 +414,9 @@
     "space": "merged",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.5142857142857142,
-    "p_mantel": 0.015277777777777777,
-    "p_pairs_as_independent": 0.0498392334714206
+    "spearman": 0.5,
+    "p_mantel": 0.019444444444444445,
+    "p_pairs_as_independent": 0.05769884126895998
    },
    {
     "dataset": "d2",
@@ -424,9 +424,9 @@
     "space": "structural",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.2964285714285714,
-    "p_mantel": 0.3416666666666667,
-    "p_pairs_as_independent": 0.28335542843426303
+    "spearman": 0.24642857142857136,
+    "p_mantel": 0.4638888888888889,
+    "p_pairs_as_independent": 0.37595051597380513
    },
    {
     "dataset": "d2",
@@ -444,9 +444,9 @@
     "space": "merged",
     "n_compounds": 6,
     "n_pairs": 15,
-    "spearman": 0.30357142857142855,
-    "p_mantel": 0.3277777777777778,
-    "p_pairs_as_independent": 0.27135583600386837
+    "spearman": 0.28571428571428564,
+    "p_mantel": 0.3680555555555556,
+    "p_pairs_as_independent": 0.30193635132254926
    }
   ],
   "centring_floor": [
@@ -454,6 +454,8 @@
     "dataset": "d1",
     "mode": "uv",
     "n_compounds": 6,
+    "n_mapped_agents": 6,
+    "mantel_evaluated": true,
     "observed_mean_cosine": -0.1871794194774622,
     "algebraic_floor": -0.2,
     "gap": 0.012820580522537817
@@ -462,6 +464,8 @@
     "dataset": "d1",
     "mode": "normal",
     "n_compounds": 6,
+    "n_mapped_agents": 6,
+    "mantel_evaluated": true,
     "observed_mean_cosine": -0.16653878689416357,
     "algebraic_floor": -0.2,
     "gap": 0.03346121310583644
@@ -470,6 +474,8 @@
     "dataset": "d2",
     "mode": "uv",
     "n_compounds": 7,
+    "n_mapped_agents": 6,
+    "mantel_evaluated": true,
     "observed_mean_cosine": -0.10263459059463759,
     "algebraic_floor": -0.16666666666666666,
     "gap": 0.06403207607202907
@@ -478,14 +484,36 @@
     "dataset": "d2",
     "mode": "normal",
     "n_compounds": 7,
+    "n_mapped_agents": 6,
+    "mantel_evaluated": true,
     "observed_mean_cosine": -0.1165602086601764,
     "algebraic_floor": -0.16666666666666666,
     "gap": 0.05010645800649026
+   },
+   {
+    "dataset": "d3",
+    "mode": "uv",
+    "n_compounds": 4,
+    "n_mapped_agents": 0,
+    "mantel_evaluated": false,
+    "observed_mean_cosine": -0.17575382911496593,
+    "algebraic_floor": -0.3333333333333333,
+    "gap": 0.1575795042183674
+   },
+   {
+    "dataset": "d3",
+    "mode": "normal",
+    "n_compounds": 4,
+    "n_mapped_agents": 0,
+    "mantel_evaluated": false,
+    "observed_mean_cosine": -0.33017055119732286,
+    "algebraic_floor": -0.3333333333333333,
+    "gap": 0.0031627821360104558
    }
   ],
   "mantel_bh": {
    "n_tests": 12,
-   "min_q": 0.1,
+   "min_q": 0.11666666666666667,
    "n_sig_q": 0
   },
   "channels": {

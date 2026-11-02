@@ -1,0 +1,125 @@
+{
+ "quoted": {
+  "second_run_accuracy": 0.964,
+  "second_run_macro_f1": 0.964,
+  "third_run_accuracy": 1.0,
+  "reproducible_from_deposit": false,
+  "note": "[수집 불가: 반복측정 수준 ΔE 가 예치물에 없다. 피벗은 (물질, 농도) 한 행이며 반복측정 평균이다. 원논문의 교차검증 설계를 복원할 수 없으므로 인용값을 재현하거나 대체하지 않는다.]"
+ },
+ "cells": {
+  "d1.uv": {
+   "n_samples": 24,
+   "n_classes": 6,
+   "n_declared_channels": 29,
+   "n_effective_channels": 29,
+   "dropped_channels": [],
+   "declared": {
+    "nearest_centroid_loo": 0.5417,
+    "lda_shrinkage_loo": 0.8333,
+    "lda_shrinkage_4fold": 0.875
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.5417,
+    "lda_shrinkage_loo": 0.8333,
+    "lda_shrinkage_4fold": 0.875
+   }
+  },
+  "d1.normal": {
+   "n_samples": 24,
+   "n_classes": 6,
+   "n_declared_channels": 29,
+   "n_effective_channels": 29,
+   "dropped_channels": [],
+   "declared": {
+    "nearest_centroid_loo": 0.4583,
+    "lda_shrinkage_loo": 0.5417,
+    "lda_shrinkage_4fold": 0.7083
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.4583,
+    "lda_shrinkage_loo": 0.5417,
+    "lda_shrinkage_4fold": 0.7083
+   }
+  },
+  "d2.uv": {
+   "n_samples": 28,
+   "n_classes": 7,
+   "n_declared_channels": 29,
+   "n_effective_channels": 23,
+   "dropped_channels": [
+    "Dye14",
+    "Dye23",
+    "Dye24",
+    "Dye25",
+    "Dye26",
+    "Dye27"
+   ],
+   "declared": {
+    "nearest_centroid_loo": 0.5357,
+    "lda_shrinkage_loo": 0.7143,
+    "lda_shrinkage_4fold": 0.6786
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.6429,
+    "lda_shrinkage_loo": 0.6786,
+    "lda_shrinkage_4fold": 0.6786
+   }
+  },
+  "d2.normal": {
+   "n_samples": 28,
+   "n_classes": 7,
+   "n_declared_channels": 29,
+   "n_effective_channels": 29,
+   "dropped_channels": [],
+   "declared": {
+    "nearest_centroid_loo": 0.6071,
+    "lda_shrinkage_loo": 0.7143,
+    "lda_shrinkage_4fold": 0.6786
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.6071,
+    "lda_shrinkage_loo": 0.7143,
+    "lda_shrinkage_4fold": 0.6786
+   }
+  },
+  "d3.uv": {
+   "n_samples": 16,
+   "n_classes": 4,
+   "n_declared_channels": 29,
+   "n_effective_channels": 25,
+   "dropped_channels": [
+    "Dye26",
+    "Dye29",
+    "Dye6",
+    "Dye8"
+   ],
+   "declared": {
+    "nearest_centroid_loo": 0.5,
+    "lda_shrinkage_loo": 0.5,
+    "lda_shrinkage_4fold": 0.5
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.5,
+    "lda_shrinkage_loo": 0.5,
+    "lda_shrinkage_4fold": 0.5
+   }
+  },
+  "d3.normal": {
+   "n_samples": 16,
+   "n_classes": 4,
+   "n_declared_channels": 29,
+   "n_effective_channels": 29,
+   "dropped_channels": [],
+   "declared": {
+    "nearest_centroid_loo": 0.625,
+    "lda_shrinkage_loo": 0.8125,
+    "lda_shrinkage_4fold": 0.6875
+   },
+   "effective": {
+    "nearest_centroid_loo": 0.625,
+    "lda_shrinkage_loo": 0.8125,
+    "lda_shrinkage_4fold": 0.6875
+   }
+  }
+ }
+}
