@@ -806,16 +806,25 @@ document at all.
 The second test asks whether volatility distance tracks response distance.
 Exact Mantel permutation in each run-channel cell with at least four mapped
 agents gives four evaluable cells, and the rank correlation is positive in all
-four, at $+0.043$, $+0.389$, $+0.254$ and $+0.546$. Fisher combination of the
-four exact $p$ values, fixed in advance as the single statistic for this test,
-gives $\chi^2 = 14.032$ and $p = 0.0809$. That does not clear 0.05, and it is
-closer to it than any descriptor space reached, where the smallest adjusted
-value on the primary panel was 0.354 and the smallest nominal value 0.192.
+four: $+0.043$ and $+0.254$ in the ultraviolet channel, $+0.389$ and $+0.546$
+in the reflectance channel. A single Fisher combination over all four cells was
+fixed in advance as the statistic for this test, and we withdraw it. The two
+optical channels of one plate are read from the same wells and are not
+independent, with a mean inter-channel cosine of 0.584 across the array, so the
+four $p$ values do not satisfy the assumption that combination requires. Runs
+do. We therefore combine across runs within each channel and correct across the
+two channels with Benjamini-Hochberg. The reflectance channel gives
+$p = 0.0215$ and $q = 0.0430$; the ultraviolet channel gives $p = 0.6389$ and
+$q = 0.6389$. One of the two channels clears 0.05, which no descriptor space
+reached on either panel, where the smallest adjusted value on the primary panel
+was 0.354 and the smallest nominal value 0.192. The withdrawn pooled statistic
+is recorded in \texttt{outputs/volatility\_space.json} for comparison.
 
 Taken together the two tests say something narrower and more useful than the
-descriptor result alone. The axis practitioners name first does carry weak
-directional signal, and the incumbent trio does beat chance on margin
-statistics, so the paper's null is not an artefact of leaving volatility out.
+descriptor result alone. The axis practitioners name first does carry
+directional signal, significant in the reflectance channel, and the incumbent
+trio does beat chance on margin statistics, so the paper's null is not an
+artefact of leaving volatility out.
 What the axis does not produce is a defensible valid match, and the one match
 it does produce rests on a gap its own source data cannot resolve. The conclusion of the paper is unchanged and its
 basis is wider.

@@ -327,15 +327,47 @@ def agreement():
                           'mode': mode, 'n_compounds': k,
                           'n_pairs': len(pr), 'n_relabellings': len(perms),
                           'spearman': r, 'p_mantel': cnt / len(perms)})
+    # 2026-11-03 (작업 A-3). 1차에서 4셀 = 2런 x 2채널을 한꺼번에 Fisher 로
+    # 묶었다. 그것은 논문 자신의 규칙을 깬다. 본문 res:mantel 은 "첫째·둘째
+    # 런은 화합물도 플레이트도 공유하지 않으므로 독립" 이라고 적고 런만
+    # 독립으로 본다. 같은 플레이트 두 채널의 평균 상호 코사인은 0.584 다.
+    # 채널 내에서 런을 합성하고, 두 채널을 BH 로 보정한다. 종전 4셀 값은
+    # 기록으로 남긴다.
     pv = [c['p_mantel'] for c in cells]
-    fisher = stats.combine_pvalues(pv, method='fisher') if pv else None
+    pooled4 = stats.combine_pvalues(pv, method='fisher') if pv else None
+    by_mode = {}
+    for md in ('uv', 'normal'):
+        q = [c['p_mantel'] for c in cells if c['mode'] == md]
+        if len(q) >= 2:
+            f = stats.combine_pvalues(q, method='fisher')
+            by_mode[md] = {'n_runs': len(q), 'p_inputs': q,
+                           'statistic': float(f.statistic),
+                           'p_value': float(f.pvalue)}
+        elif q:
+            by_mode[md] = {'n_runs': 1, 'p_inputs': q, 'statistic': None,
+                           'p_value': float(q[0])}
+    _ps = sorted(v['p_value'] for v in by_mode.values())
+    _m = len(_ps)
+    _q = [_ps[i] * _m / (i + 1) for i in range(_m)]
+    for i in range(_m - 2, -1, -1):
+        _q[i] = min(_q[i], _q[i + 1])
     return {'cells': cells, 'skipped': skipped,
-            'prespecified': {'method': 'Fisher combination of per-cell '
-                                       'exact Mantel p',
-                             'n_cells': len(cells),
-                             'statistic': float(fisher.statistic) if pv
-                             else None,
-                             'p_value': float(fisher.pvalue) if pv else None}}
+            'prespecified': {
+                'method': 'Fisher combination across runs within each '
+                          'optical channel, then Benjamini-Hochberg over '
+                          'the channels',
+                'by_channel': by_mode,
+                'n_channels': _m,
+                'min_q': float(_q[0]) if _q else None,
+                'n_sig_q': int(sum(1 for x in _q if x < 0.05)),
+                'rationale': 'The two channels of one plate are not '
+                             'independent (mean inter-channel cosine '
+                             '0.584), so they cannot enter one Fisher '
+                             'combination. Runs can.'},
+            'superseded_pooled_four_cells': {
+                'statistic': float(pooled4.statistic) if pv else None,
+                'p_value': float(pooled4.pvalue) if pv else None,
+                'why_withdrawn': 'pooled two channels of the same plate'}}
 
 
 def valid_match_detail():
@@ -505,8 +537,14 @@ def main():
     for s in v2['skipped']:
         print(f"  V2 {s['cell']:<10} 생략 — {s['reason']}")
     ps = v2['prespecified']
-    print(f"     사전지정 Fisher ({ps['n_cells']} 셀): "
-          f"X2 = {ps['statistic']:.3f}, p = {ps['p_value']:.4f}")
+    for md, r in ps['by_channel'].items():
+        print(f"     사전지정 {md:<7} 런간 Fisher ({r['n_runs']}런): "
+              f"p = {r['p_value']:.4f}")
+    print(f"     채널 {ps['n_channels']}개 BH 최소 q = {ps['min_q']:.4f}  "
+          f"유의 {ps['n_sig_q']}건")
+    sp = v2['superseded_pooled_four_cells']
+    print(f"     (철회) 4셀 일괄 Fisher p = {sp['p_value']:.4f} — "
+          f"같은 플레이트 두 채널을 묶었다")
     pt = pairing_table()
     vm = valid_match_detail()
     print()

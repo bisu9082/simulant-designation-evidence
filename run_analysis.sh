@@ -87,6 +87,10 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #                          2026-11-03: T0-6 에서 스크립트만 만들고 이 목록에
 #                          넣지 않아, T2-1 의 필터 교체가 이 예치물에
 #                          전파되지 않았다. 리뷰어가 구판 p 를 찾아냈다.
+#   shape_reduction        관성텐서 파생 좌표 축소 민감도 (작업 A-1).
+#                          omega 선례를 형태 블록에 적용. 정본 불변.
+#   premise_null           전제검정 귀무를 농도내 라벨순열로 교체
+#                          (작업 A-2/A-5). 중심화 경계 논증 대체.
 #   volatility_fetch       PubChem 에서 증기압 후보값 수집. 판정 안 함.
 #   volatility_space       휘발성 1차원 축 보조 분석. 본문 72검정
 #                          가족과 분리된 사전지정 2검정 (V1/V2).
@@ -98,7 +102,8 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 run_strict order_invariance.py match_rule_audit.py deltaE_noise.py \
            purity_sensitivity.py channel_classification.py \
            sparse_indicators.py multiplicity_panels.py \
-           volatility_fetch.py volatility_space.py make_si_tables.py
+           volatility_fetch.py volatility_space.py \
+           shape_reduction.py premise_null.py make_si_tables.py
 
 # dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로

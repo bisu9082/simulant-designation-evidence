@@ -108,10 +108,34 @@ def run(label, path, sim_cls):
     gap = (ds0 - di0) / nn_med
     print(f'    실제 격차(정규화): 중위 {np.median(gap):+.3f}, '
           f'최소 {gap.min():+.3f} ({name[i_real[int(np.argmin(gap))]]})')
+    # 2026-11-03 (작업 A-4). 종전에는 alpha=0.05 에서의 delta 만 냈다.
+    # 그런데 논문의 결론은 18검정 BH 보정 뒤에 선다. 보정 역치에서의
+    # delta 를 함께 내지 않으면 '귀무는 설계가 아니라 데이터에 관한
+    # 진술' 이라는 문장이 쓰는 역치와 다른 역치의 수치로 뒷받침된다.
+    # 리뷰어 3 이 집었고 재계산으로 확인했다(0.23 -> 0.43, 중위 결손
+    # 0.4926 대비 1.15배. 종전 서술은 '두 배 넘는다' 였다).
+    BH18 = ALPHA / 18.0            # 18검정 BH 가 요구하는 최소 p 의 상한
+    mde_bh = next((float(r['delta']) for r in rows if r['p'] <= BH18), None)
+    _med = float(np.median(gap))
+    thresholds = {
+        'alpha': {'level': ALPHA, 'mde_delta': mde,
+                  'ratio_median_gap_to_mde':
+                      (_med / mde) if mde else None},
+        'bh18': {'level': BH18, 'mde_delta': mde_bh,
+                 'ratio_median_gap_to_mde':
+                     (_med / mde_bh) if mde_bh else None,
+                 'note': 'BH over the 18 tests of one panel construction. '
+                         'This is the threshold the conclusions use.'}}
+    if mde_bh:
+        print(f'  BH18 역치({BH18:.5f})에서의 최소검출효과: '
+              f'delta = {mde_bh:.2f}  '
+              f'(중위 격차 {_med:.3f} 대비 {_med / mde_bh:.2f}배)')
     return dict(label=label, n_dims=nk, n_perm=len(null), nn_median=nn_med,
                 p_at_zero=p0, mde_delta=mde, alpha=ALPHA,
+                mde_delta_bh18=mde_bh, bh18_level=BH18,
+                thresholds=thresholds,
                 observed_at_zero=float(null[ti]),
-                gap_median=float(np.median(gap)), gap_min=float(gap.min()),
+                gap_median=_med, gap_min=float(gap.min()),
                 curve=rows)
 
 
