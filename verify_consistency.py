@@ -309,6 +309,24 @@ def _label_scope_guards():
                        f'{len(sampled)}건 존재 ({", ".join(sampled[:3])} 등). '
                        '전수인 검정과 표집인 검정을 문장에서 구분할 것')
 
+    # (B0) 내부 문서가 공개 예치물에 들어가면 멈춘다 (2026-11-03 신설).
+    #      리뷰어 4 가 outputs/HO-7.json 을 읽었다. 그 파일에는 타깃 저널이
+    #      JHM 으로, 자기인용 비율 축소 여부가 'Ku 판단' 으로, 교신저자
+    #      이메일 문제와 A계열 동정 미검증이 적혀 있었다. 원고가 저장소를
+    #      예치물로 인용하므로 심사자가 저자의 내부 심의를 읽게 된다.
+    INTERNAL = ('handoff_id', 'docx_report', '확인 필요', '자기인용',
+                'elsarticle', 'Hazardous Materials 투고')
+    for fn in sorted(_o.listdir('outputs')):
+        if not fn.endswith('.json'):
+            continue
+        txt = open(f'outputs/{fn}').read()
+        hit = [w for w in INTERNAL if w in txt]
+        # 인용 메타데이터는 저널명을 정당하게 담는다. 핸드오프 카드만 잡는다.
+        if 'handoff_id' in hit or 'docx_report' in hit or (
+                '자기인용' in hit and 'journal' not in txt[:200]):
+            bad.append(f'  내부 문서가 예치물에 있다 [outputs/{fn}]: '
+                       f'{hit} — 공개 저장소에서 제거할 것')
+
     # (B) tier 주장 대 출처 문자열. #8 이 이 경로였다.
     vp = 'outputs/volatility_space.json'
     if _o.path.exists(vp):
