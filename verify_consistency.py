@@ -82,6 +82,9 @@ REQUIRED_OUTPUTS = [
 # build_paper.sh --figs 가 깨지고, 그러면 원고에 구판 그림이 남는다.
 REQUIRED_FOR_FIGURES = [
     'outputs/_electronic_with_gap.csv',
+    # 2026-11-03. 휘발성 축 보조 분석 (volatility_space.py).
+    'outputs/volatility_candidates.json',
+    'outputs/volatility_space.json',
     'outputs/_pca_scores.npy',
     'outputs/_null_A_rdkit.npy',
     'outputs/_null_B_electronic.npy',

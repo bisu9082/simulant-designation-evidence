@@ -1,0 +1,557 @@
+{
+ "generated_by": "volatility_space.py",
+ "note": "본문 72검정 가족과 분리된 보조 분석. 사전지정 2검정.",
+ "prespecified_tests": {
+  "V1": "1차원 휘발성 공간의 지정 검정, 통계량 mean_diff, 28종 패널, 전수열거",
+  "V2": "휘발성 거리 대 ΔE00 응답거리 Mantel 6셀 Fisher 합성"
+ },
+ "adoption_rule": {
+  "T1": "25 °C 증기압 전용 측정·편람값",
+  "T2": "T1 없을 때 정부 편람 25 °C 값",
+  "T3": "25 °C 값이 없으면 최근접 온도 + flag"
+ },
+ "vapour_pressure_mmHg": {
+  "DMMP": {
+   "value": 0.962,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances | 0.962 mm Hg at 25 °C",
+   "adjudication": "NTP 1992 는 같은 25 °C 에 1.2 를 준다. 증기압 전용 편람을 앞에 둔다"
+  },
+  "acetone": {
+   "value": 231.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "PMID:7676461 | 231 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "methanol": {
+   "value": 127.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Boublik/Fried/Hala | 127 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "acetonitrile": {
+   "value": 88.8,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Boublik/Fried/Hala | 88.8 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "chloroform": {
+   "value": 197.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Boublik/Fried/Hala | 197 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "n-hexane": {
+   "value": 153.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 153 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "THF": {
+   "value": 162.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 1.62X10+2 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "ethyl acetate": {
+   "value": 93.2,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert TE, Danner RP | 93.2 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "benzene": {
+   "value": 94.8,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 94.8 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "water": {
+   "value": 23.75,
+   "temperature_C": 25,
+   "tier": "T2",
+   "source": "Haz-Map, Information on Hazardous Chemicals | 23.75 [mmHg]",
+   "adjudication": "T1 에 25 °C 항목이 없었다. CRC 항목은 삼중점만 돌아온다"
+  },
+  "dichloromethane": {
+   "value": 435.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Boublik/Fried/Hala | 435 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "DPGME": {
+   "value": 0.4,
+   "temperature_C": 26,
+   "tier": "T3",
+   "source": "Browning, E. Toxicity and Metabolism of Industrial Solvents | 0.4 MM HG @ 26 °C",
+   "adjudication": "25 °C 값이 없다. 26 °C 를 쓰고 온도를 적는다"
+  },
+  "ethanol": {
+   "value": 59.3,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 59.3 mm Hg at 25 °C /Extrapolated/",
+   "adjudication": "출처가 /Extrapolated/ 로 표시한 값이다. 그대로 적고 flag 를 센다"
+  },
+  "toluene": {
+   "value": 28.4,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 28.4 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "DMSO": {
+   "value": 0.6,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert TE, Danner RP | 0.60 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "p-dichlorobenzene": {
+   "value": 1.74,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 1.74 mm Hg at 25 °C",
+   "adjudication": "같은 출처가 1.36~2.2 범위도 준다. 점값을 쓴다"
+  },
+  "p-xylene": {
+   "value": 8.84,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Chao J et al; J Phys Chem Ref Data 12: 1033 | 8.84 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "sarin (GB)": {
+   "value": 2.86,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Epstein J; J Amer Water Works Assoc Jan: 31-7 (1974) | 2.86 mm Hg at 25 °C",
+   "adjudication": "EPA 1998 은 2.9. 1차 문헌을 앞에 둔다"
+  },
+  "soman (GD)": {
+   "value": 0.41,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Balboa A et al; Vapor Pressure of GD, ECBC-TR | 0.41 mm Hg at 25 °C",
+   "adjudication": "ECBC 증기압 전용 측정보고서"
+  },
+  "tabun (GA)": {
+   "value": 0.07,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Munro NB et al; Environ Health Perspectives | 0.07 mm Hg at 25 °C; 0.037 mm Hg at 20 °C",
+   "adjudication": ""
+  },
+  "sulfur mustard (HD)": {
+   "value": 0.11,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "PMID:10585900 | 0.11 mm Hg at 25 °C",
+   "adjudication": "EPA 1998 은 0.09 @30 °C. 25 °C 값을 쓴다"
+  },
+  "lewisite 1 (L)": {
+   "value": 0.58,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Munro NB et al; Environ Health Perspectives | 0.58 mm Hg at 25 °C",
+   "adjudication": "PMID:2692088 은 이성질체별로 trans 0.4 / cis 1.562 (25 °C). 공업품은 혼합물이므로 혼합물 값을 쓰고 이성질체 분리값을 민감도로 돌린다"
+  },
+  "hydrogen cyanide (AC)": {
+   "value": 742.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 742 mm Hg at 25 °C",
+   "adjudication": "NIOSH 는 630. 증기압 편람을 앞에 둔다"
+  },
+  "cyanogen chloride (CK)": {
+   "value": 1230.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 1.23X10+3 mm Hg at 25 C",
+   "adjudication": ""
+  },
+  "phosgene (CG)": {
+   "value": 1420.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | 1420 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "chloropicrin (PS)": {
+   "value": 24.0,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Tomlin CDS, ed. Chloropicrin (76-06-2) | 3.2 kPa (24 mm Hg) at 25 °C",
+   "adjudication": ""
+  },
+  "cyclosarin (GF)": {
+   "value": 0.044,
+   "temperature_C": 20,
+   "tier": "T3",
+   "source": "Augerson W; A Review of the Scientific Literature | 0.044 mm Hg at 20 °C",
+   "adjudication": "25 °C 값이 공개 DB 에 없다. 20 °C 를 쓰고 온도를 적는다"
+  },
+  "VX": {
+   "value": 0.000878,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Buchanan JH et al; Vapor Pressure of VX, ECBC-TR | 8.78X10-4 mm Hg at 25 °C",
+   "adjudication": "EPA 1998 은 7.0e-4. ECBC 증기압 전용 측정보고서를 앞에 둔다"
+  },
+  "DFP": {
+   "value": 0.58,
+   "temperature_C": 25,
+   "tier": "T2",
+   "source": "PAC Chemical Database, U.S. Department of Energy | 0.58 [mm Hg] @25 °C",
+   "adjudication": "Merck Index 는 0.579 @20 °C. 25 °C 값을 앞에 둔다"
+  },
+  "CEES": {
+   "value": 3.4,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Bennett SR et al; Environmental Hazards of Chemical Agent Simulants | 3.4 mm Hg @ 25 °C",
+   "adjudication": ""
+  },
+  "methyl salicylate": {
+   "value": 0.0343,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner | Vapor pressure = 0.0343 mm Hg @ 25 °C",
+   "adjudication": ""
+  },
+  "dichlorvos": {
+   "value": 0.0158,
+   "temperature_C": 25,
+   "tier": "T1",
+   "source": "MacBean C, ed; e-Pesticide Manual 15th ed. | 1.58X10-2 mm Hg at 25 °C",
+   "adjudication": ""
+  },
+  "malathion": {
+   "value": 3.97e-05,
+   "temperature_C": 30,
+   "tier": "T3",
+   "source": "MacBean C, ed; e-Pesticide Manual 15th ed. | 3.97X10-5 mm Hg at 30 °C",
+   "adjudication": "25 °C 값이 없다. 30 °C 를 쓰고 온도를 적는다"
+  }
+ },
+ "unavailable": {
+  "DCP": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CAS 814-49-3, CID 13139)]",
+  "DCNP": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CAS 2942-58-7, CID 76257)]"
+ },
+ "designation": [
+  {
+   "label": "panel28_incumbent3",
+   "skipped": false,
+   "n_compounds": 28,
+   "n_permutations": 680,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.0015058125934016967,
+     "p": 0.020588235294117647,
+     "rank": 14
+    },
+    "median_diff": {
+     "observed": -0.11265517137432257,
+     "p": 0.04264705882352941,
+     "rank": 29
+    },
+    "mean_logratio": {
+     "observed": 0.333240704421986,
+     "p": 0.07647058823529412,
+     "rank": 52
+    },
+    "mean_dsim": {
+     "observed": 0.46734020833864987,
+     "p": 0.023529411764705882,
+     "rank": 16
+    },
+    "n_closer": {
+     "observed": -8.0,
+     "p": 0.022058823529411766,
+     "rank": 15
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p": 0.4647058823529412,
+     "rank": 316
+    },
+    "_log_divergent_pairs": 0
+   },
+   "prespecified": {
+    "statistic": "mean_diff",
+    "observed": -0.0015058125934016967,
+    "p": 0.020588235294117647,
+    "rank": 14
+   },
+   "sanity": {
+    "lowest": "VX",
+    "highest": "phosgene (CG)",
+    "monotonicity_ok": true,
+    "log10_range": 6.208793828476954,
+    "range_ok": true,
+    "off_25C": {
+     "DPGME": 26,
+     "cyclosarin (GF)": 20
+    },
+    "n_off_25C": 2,
+    "tiers": {
+     "T1": 25,
+     "T2": 1,
+     "T3": 2
+    }
+   },
+   "log10_vp": {
+    "DMMP": -0.016824927962187056,
+    "acetone": 2.3636119798921444,
+    "methanol": 2.103803720955957,
+    "acetonitrile": 1.948412965778601,
+    "chloroform": 2.294466226161593,
+    "n-hexane": 2.184691430817599,
+    "THF": 2.2095150145426308,
+    "ethyl acetate": 1.9694159123539814,
+    "benzene": 1.9768083373380663,
+    "water": 1.3756636139608853,
+    "dichloromethane": 2.6384892569546374,
+    "DPGME": -0.3979400086720376,
+    "ethanol": 1.7730546933642626,
+    "toluene": 1.4533183400470377,
+    "DMSO": -0.2218487496163564,
+    "p-dichlorobenzene": 0.24054924828259971,
+    "p-xylene": 0.9464522650130731,
+    "sarin (GB)": 0.456366033129043,
+    "soman (GD)": -0.38721614328026455,
+    "tabun (GA)": -1.154901959985743,
+    "sulfur mustard (HD)": -0.958607314841775,
+    "lewisite 1 (L)": -0.23657200643706275,
+    "hydrogen cyanide (AC)": 2.870403905279027,
+    "cyanogen chloride (CK)": 3.089905111439398,
+    "phosgene (CG)": 3.1522883443830563,
+    "chloropicrin (PS)": 1.380211241711606,
+    "cyclosarin (GF)": -1.3565473235138126,
+    "VX": -3.0565054840938974
+   }
+  },
+  {
+   "label": "panel35_incumbent3",
+   "skipped": true,
+   "reason": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CAS 814-49-3, CID 13139)]; [수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CAS 2942-58-7, CID 76257)]",
+   "missing": [
+    "DCP",
+    "DCNP"
+   ]
+  }
+ ],
+ "agreement": {
+  "cells": [
+   {
+    "cell": "d1_uv",
+    "dataset": "d1",
+    "mode": "uv",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "n_relabellings": 720,
+    "spearman": 0.04285714285714285,
+    "p_mantel": 0.875
+   },
+   {
+    "cell": "d1_normal",
+    "dataset": "d1",
+    "mode": "normal",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "n_relabellings": 720,
+    "spearman": 0.38928571428571423,
+    "p_mantel": 0.06944444444444445
+   },
+   {
+    "cell": "d2_uv",
+    "dataset": "d2",
+    "mode": "uv",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "n_relabellings": 720,
+    "spearman": 0.25357142857142856,
+    "p_mantel": 0.32222222222222224
+   },
+   {
+    "cell": "d2_normal",
+    "dataset": "d2",
+    "mode": "normal",
+    "n_compounds": 6,
+    "n_pairs": 15,
+    "n_relabellings": 720,
+    "spearman": 0.5464285714285714,
+    "p_mantel": 0.04583333333333333
+   }
+  ],
+  "skipped": [
+   {
+    "cell": "d3_uv",
+    "n_mapped_agents": 0,
+    "reason": "매핑된 작용제 4종 미만 — Mantel 불가"
+   },
+   {
+    "cell": "d3_normal",
+    "n_mapped_agents": 0,
+    "reason": "매핑된 작용제 4종 미만 — Mantel 불가"
+   }
+  ],
+  "prespecified": {
+   "method": "Fisher combination of per-cell exact Mantel p",
+   "n_cells": 4,
+   "statistic": 14.032034180187779,
+   "p_value": 0.08093426888268307
+  }
+ },
+ "pairing_table": {
+  "rows": [
+   {
+    "agent": "phosgene (CG)",
+    "series": "choking",
+    "log10_vp": 3.1522883443830563,
+    "nearest_simulant": "dichloromethane",
+    "gap_to_nearest_simulant": 0.5137990874284188,
+    "nearest_pool_compound": "dichloromethane",
+    "gap_to_nearest_pool": 0.5137990874284188,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "series": "blood",
+    "log10_vp": 3.089905111439398,
+    "nearest_simulant": "dichloromethane",
+    "gap_to_nearest_simulant": 0.4514158544847606,
+    "nearest_pool_compound": "dichloromethane",
+    "gap_to_nearest_pool": 0.4514158544847606,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "series": "blood",
+    "log10_vp": 2.870403905279027,
+    "nearest_simulant": "dichloromethane",
+    "gap_to_nearest_simulant": 0.23191464832438946,
+    "nearest_pool_compound": "dichloromethane",
+    "gap_to_nearest_pool": 0.23191464832438946,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "series": "vomit/irritant",
+    "log10_vp": 1.380211241711606,
+    "nearest_simulant": "dichloromethane",
+    "gap_to_nearest_simulant": 1.2582780152430315,
+    "nearest_pool_compound": "water",
+    "gap_to_nearest_pool": 0.004547627750720595,
+    "nearest_is_interferent": true
+   },
+   {
+    "agent": "sarin (GB)",
+    "series": "G",
+    "log10_vp": 0.456366033129043,
+    "nearest_simulant": "DMMP",
+    "gap_to_nearest_simulant": 0.47319096109123004,
+    "nearest_pool_compound": "p-dichlorobenzene",
+    "gap_to_nearest_pool": 0.2158167848464433,
+    "nearest_is_interferent": true
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "series": "L",
+    "log10_vp": -0.23657200643706275,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 0.16136800223497486,
+    "nearest_pool_compound": "DMSO",
+    "gap_to_nearest_pool": 0.014723256820706354,
+    "nearest_is_interferent": true
+   },
+   {
+    "agent": "soman (GD)",
+    "series": "G",
+    "log10_vp": -0.38721614328026455,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 0.010723865391773058,
+    "nearest_pool_compound": "DPGME",
+    "gap_to_nearest_pool": 0.010723865391773058,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "series": "H",
+    "log10_vp": -0.958607314841775,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 0.5606673061697374,
+    "nearest_pool_compound": "DPGME",
+    "gap_to_nearest_pool": 0.5606673061697374,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "tabun (GA)",
+    "series": "G",
+    "log10_vp": -1.154901959985743,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 0.7569619513137055,
+    "nearest_pool_compound": "DPGME",
+    "gap_to_nearest_pool": 0.7569619513137055,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "series": "G",
+    "log10_vp": -1.3565473235138126,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 0.958607314841775,
+    "nearest_pool_compound": "DPGME",
+    "gap_to_nearest_pool": 0.958607314841775,
+    "nearest_is_interferent": false
+   },
+   {
+    "agent": "VX",
+    "series": "V",
+    "log10_vp": -3.0565054840938974,
+    "nearest_simulant": "DPGME",
+    "gap_to_nearest_simulant": 2.65856547542186,
+    "nearest_pool_compound": "DPGME",
+    "gap_to_nearest_pool": 2.65856547542186,
+    "nearest_is_interferent": false
+   }
+  ],
+  "simulant_log10_vp": {
+   "DMMP": -0.016824927962187056,
+   "dichloromethane": 2.6384892569546374,
+   "DPGME": -0.3979400086720376
+  },
+  "simulant_designated_series": {
+   "DMMP": "",
+   "dichloromethane": "pulmonary",
+   "DPGME": "blister"
+  },
+  "n_agents_whose_nearest_is_interferent": 3,
+  "max_gap": 2.65856547542186,
+  "max_gap_agent": "VX",
+  "temperature_caveat": "DPGME 0.4 mmHg @26 C vs soman 0.41 mmHg @25 C — the 0.011 log-unit gap is within the temperature mismatch and is not evidence of a match"
+ },
+ "lewisite_isomer_sensitivity": {
+  "trans": {
+   "vp_mmHg": 0.4,
+   "observed": -0.020209975722969342,
+   "p": 0.020588235294117647,
+   "rank": 14
+  },
+  "cis": {
+   "vp_mmHg": 1.562,
+   "observed": -0.0005210963574264961,
+   "p": 0.010294117647058823,
+   "rank": 7
+  }
+ }
+}
