@@ -275,12 +275,15 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # 2026-11-03. 종전 앵커는 표지서신의 농도 추세 문장이었고 그 주장을
+    # 뺐으므로 자리가 없어졌다. 단위가 틀리면 가장 치명적인 자리, 즉
+    # 실험절의 노출 농도 목록으로 옮긴다.
     ('어레이 농도를 ppm 으로 되돌림 (정본 µM)',
-     'at 500~$\\mu$M to $+0.36$ at\n10~$\\mu$M',
-     'at 500~ppm to $+0.36$ at\n10~ppm'),
+     'final concentrations of 0, 10, 50, 100 and\n500~$\\mu$M',
+     'final concentrations of 0, 10, 50, 100 and\n500~ppm'),
     ('농도축 추세를 ppm 으로 되돌림 (정본 µM)',
-     'from $+0.363$ at 10~$\\mu$M to $+0.771$ at 500~$\\mu$M',
-     'from $+0.363$ at 10~ppm to $+0.771$ at 500~ppm'),
+     'from $+0.363$ at 10~$\\mu$M to\n$+0.771$ at 500~$\\mu$M',
+     'from $+0.363$ at 10~ppm to\n$+0.771$ at 500~ppm'),
     ('수행하지 않은 반복측정 주장 (본문)',
      "One compound's patterns at two\nconcentrations correlate at",
      'Replicates of one compound correlate at'),
@@ -311,9 +314,9 @@ ACS_CASES = [
      'with a detection limit near 1~$\\mu$M'),
     # 2026-11-02. Conclusions 가 2.4·2.5 의 수치를 다시 센다. 두 자리가
     # 어긋나면(한쪽만 갱신되면) 잡혀야 한다. 과거 실패 계열이 바로 이것이다.
-    ('결론부 BH 보정값이 2.4 와 어긋남 (정본 0.6173)',
-     'an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.6173',
-     'an incumbent simulant, at a Benjamini--Hochberg adjusted value of 0.1695'),
+    ('결론부 BH 보정값이 2.4 와 어긋남 (정본 0.6299)',
+     'an incumbent simulant, at a\nBenjamini--Hochberg adjusted value of 0.6299',
+     'an incumbent simulant, at a\nBenjamini--Hochberg adjusted value of 0.1695'),
     ('결론부 AEGL 훈련 화합물 수 오기 (정본 230)',
      'random forest trained on 230 AEGL chemicals is wrong in one direction',
      'random forest trained on 320 AEGL chemicals is wrong in one direction'),
@@ -328,15 +331,20 @@ ACS_CL = 'paper_acs/cover_letter.tex'
 # 바뀌면 투고 패키지 안에서 모순이 난다. 처음 앵커를 달기 전에는 네 자리
 # 가운데 셋이 통과했다.
 ACS_CL_CASES = [
-    ('커버레터 d2 교차검증 정확도 오기 (정본 0.964)',
-     'cross-validated accuracy of 0.964 on',
-     'cross-validated accuracy of 0.984 on'),
+    # 2026-11-03 (T1-10). 표지서신에서 분류 정확도 주장을 뺐으므로 그
+    # 케이스는 주입할 자리가 없다. 가드 수가 조용히 줄지 않도록, 표지서신이
+    # 지금 싣는 주장으로 교체한다.
+    ('커버레터 MDE 오기 (정본 0.67)',
+     'resolves a rank correlation of 0.67 at 80',
+     'resolves a rank correlation of 0.37 at 80'),
     ('커버레터 DMMP-GA 코사인 오기 (정본 +0.76)',
      'correlates at $+0.76$ with tabun', 'correlates at $+0.86$ with tabun'),
     ('커버레터 DMMP-GF 코사인 부호자리 오기 (정본 -0.72)',
      '$-0.72$ with cyclosarin', '$-0.62$ with cyclosarin'),
-    ('커버레터 농도축 상단 오기 (정본 +0.77 at 500 uM)',
-     'concentration, from $+0.77$ at', 'concentration, from $+0.87$ at'),
+    # 2026-11-03 (T1-9). 농도 추세 주장도 표지서신에서 뺐다. 같은 이유로
+    # 최대 관측 rho 주장으로 교체한다.
+    ('커버레터 최대 관측 rho 오기 (정본 0.57)',
+     'where the largest\nobserved is 0.57', 'where the largest\nobserved is 0.87'),
 ]
 
 ACS_SUPP = 'paper_acs/supporting.tex'
@@ -486,9 +494,9 @@ SUPP_CASES_STALE = [
     ('두 패널 보존 좌표를 같게 (38/36 대 38/38)',
      'leaving 38 and 36 structural coordinates',
      'leaving 38 and 38 structural coordinates'),
-    ('SI tabun 거리를 구판으로 (1.989 대 2.003)',
-     'its normalised distance is 1.995 against a threshold of 2',
-     'its normalised distance is 2.003 against a threshold of 2'),
+    ('SI tabun 거리를 구판으로 (2.0038 대 1.9948)',
+     'its normalised distance is\n2.0038 against a threshold of 2',
+     'its normalised distance is\n1.9948 against a threshold of 2'),
     ('SI 서술 BH 를 구판으로 (0.185 대 0.159)',
      'eighteen tests whose smallest adjusted value is 0.185',
      'eighteen tests whose smallest adjusted value is 0.159'),

@@ -83,8 +83,11 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #   purity_sensitivity     루이사이트 순도 67% 민감도
 #   channel_classification 선언 29채널 대 유효 23채널의 분류 성능
 # order_invariance 는 치환 40회 x 패널 3종 x 규칙 2종이라 약 20분 걸린다.
+#   sparse_indicators      희소 지시자 인코딩 민감도 + 논지 안정성 대조
+# sparse_indicators 는 Mantel 전수열거를 세 변종에 돌리므로 약 10분 걸린다.
 run_strict order_invariance.py match_rule_audit.py deltaE_noise.py \
-           purity_sensitivity.py channel_classification.py
+           purity_sensitivity.py channel_classification.py \
+           sparse_indicators.py
 
 # dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로

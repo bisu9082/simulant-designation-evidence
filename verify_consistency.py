@@ -97,6 +97,52 @@ FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
 MTIME_TOL = 120
 
 
+def _dropped_periods():
+    """되쓰기가 문장 끝 마침표를 먹은 자리를 찾는다 (2026-11-03 신설).
+
+    왜 필요한가. --fix 가 수치 157건을 되쓸 때, 캡처가 ([\\d.]+) 꼴이어서
+    문장 끝 마침표까지 먹은 자리 네 곳에서 마침표가 사라졌다. tonum 이
+    그 마침표를 떼어내고 비교하므로 검사 쪽은 통과했고, 결함은 조판된
+    PDF 를 읽어야 보이는 상태로 남았다. --fix 쪽은 고쳤지만, 같은 꼴이
+    손 편집으로도 생기므로 가드를 둔다.
+
+    본문(주석 제거)에서 숫자 바로 뒤에 공백과 대문자로 시작하는 단어,
+    빈 줄, 또는 환경·절 명령이 오는 자리를 찾는다. 날짜 뒤 줄바꿈 같은
+    정상 꼴은 면제한다.
+    """
+    import os as _o
+    import re as _r
+    pats = [(_r.compile(r'\d\n[ \t]*\n'), '숫자 뒤 빈 줄'),
+            (_r.compile(r'\d\s+\\(?:begin|section|subsection|bibliography)'),
+             '숫자 뒤 환경/절 명령'),
+            (_r.compile(r'\d\s+[A-Z][a-z]'), '숫자 뒤 대문자 단어')]
+    # 날짜 블록과 저자 블록은 숫자로 끝나고 다음 줄이 대문자로 시작한다.
+    exempt = _r.compile(r'(?:January|February|March|April|May|June|July|'
+                        r'August|September|October|November|December)\s+\d{4}|'
+                        r'vspace|\\author|\\affiliation|\\email|'
+                        r'Republic of Korea')
+    out = []
+    for f in (TEX,) + EXTRA_TEX:
+        if not _o.path.exists(f):
+            continue
+        raw = open(f).read()
+        lines = []
+        for ln in raw.split('\n'):
+            if ln.lstrip().startswith('%'):
+                lines.append('')
+            else:
+                lines.append(_r.sub(r'(?<!\\)%.*$', '', ln))
+        body = '\n'.join(lines)
+        for pat, why in pats:
+            for m in pat.finditer(body):
+                win = body[max(0, m.start() - 120):m.end() + 60]
+                if exempt.search(win):
+                    continue
+                ctx = ' '.join(body[max(0, m.start() - 60):m.end() + 30].split())
+                out.append(f'  마침표 누락 의심 [{f}] {why}: {ctx}')
+    return sorted(set(out))
+
+
 def preflight():
     """산출물·도판 존재를 먼저 전수 확인한다. 없으면 전부 나열하고 멈춘다."""
     import os
@@ -157,6 +203,8 @@ def preflight():
         'deltaE_noise.json': 'deltaE_noise.py',
         'purity_sensitivity.json': 'purity_sensitivity.py',
         'channel_classification.json': 'channel_classification.py',
+        # 2026-11-03 (T1-14). 희소 지시자 인코딩 민감도.
+        'sparse_indicators.json': 'sparse_indicators.py',
     }
     orphan = []
     _cited = set()
@@ -573,6 +621,90 @@ def load_facts():
             1 for r in json.load(
                 open('outputs/conformer_sensitivity_ensemble.json'))['runs']
             if r['panel28']['n_match'] == 4)
+
+    # 2026-11-03 (T1-14). 희소 지시자 인코딩. 본문 2.4 와 SI 가 인용한다.
+    if _os.path.exists('outputs/sparse_indicators.json'):
+        _sp = json.load(open('outputs/sparse_indicators.json'))
+        _V = {v['variant']: v for v in _sp['variants']}
+        f['sp_n_singleton'] = len(_sp['singleton_indicators'])
+        f['sp_pedestal'] = _sp['pedestal_per_singleton']
+        f['sp_base_dims'] = _sp['baseline_dims']
+        f['sp_tabun_share'] = 100.0 * _sp['share_singletons'][
+            'tabun (GA) -> DMMP']['share']
+        f['sp_tabun_base'] = _V['baseline']['tabun_d_norm']
+        f['sp_tabun_drop1'] = _V['drop_binary_nonzero_le_1']['tabun_d_norm']
+        f['sp_match_base'] = _V['baseline']['n_match']
+        f['sp_match_drop1'] = _V['drop_binary_nonzero_le_1']['n_match']
+        f['sp_match_drop3'] = _V['drop_binary_nonzero_le_3']['n_match']
+        f['sp_match_lowcard'] = _V['drop_cardinality_le_5']['n_match']
+        f['sp_p_base'] = _V['baseline']['p_one_sided']
+        f['sp_p_lowcard'] = _V['drop_cardinality_le_5']['p_one_sided']
+        _ms = {r['variant']: r for r in _sp['mantel_stability']}
+        f['sp_mantel_q_base'] = _ms['baseline']['min_q']
+        f['sp_mantel_q_drop1'] = _ms['drop_binary_nonzero_le_1']['min_q']
+        f['sp_mantel_q_drop3'] = _ms['drop_binary_nonzero_le_3']['min_q']
+
+    # 전제 검정의 쌍별 위반. 초록이 '평균' 표현을 쓰는 근거이자 그 한계.
+    if _os.path.exists('outputs/deltaE_premise.json'):
+        _pm = json.load(open('outputs/deltaE_premise.json'))['discrimination']
+        f['prem_pairwise_viol'] = sum(r['n_pairwise_violations'] for r in _pm)
+        f['prem_n_compound_cells'] = sum(r['n_compounds'] for r in _pm)
+        f['prem_p_lo'] = min(r['p_exact_signflip'] for r in _pm)
+        f['prem_p_hi'] = max(r['p_exact_signflip'] for r in _pm)
+        f['prem_dz_lo'] = min(r['cohens_dz'] for r in _pm)
+        f['prem_dz_hi'] = max(r['cohens_dz'] for r in _pm)
+
+    # 타분 정규화거리. 신판 정본과 구판 대조값 양쪽을 사실표에 둔다.
+    if _os.path.exists('outputs/match_by_panel.json'):
+        _mbp = json.load(open('outputs/match_by_panel.json'))
+        for _a in _mbp['panel28_incumbent3']['agents']:
+            if _a['agent'] == 'tabun (GA)':
+                f['t3_GA_full'] = _a['d_norm_full']
+    # 구판 필터의 '원래 열 순서' 결과. order_invariance 는 분포만 담으므로
+    # (최대값은 치환으로 나온 다른 값이다) match_rule_audit 의 legacy 팔에서
+    # 읽는다. 이 값은 SI 열순서 절이 대조값으로 인용한다.
+    if _os.path.exists('outputs/match_rule_audit.json'):
+        _mra = json.load(open('outputs/match_rule_audit.json'))
+        for _a in _mra['panel28_incumbent3']['legacy/wide']['agents']:
+            if _a['agent'] == 'tabun (GA)':
+                f['t3_GA_legacy'] = _a['d_norm']
+
+    # 2026-11-03. 위 앵커들이 읽는 사실. 전부 산출물에서만 뽑는다.
+    if _os.path.exists('outputs/rollback_c.json'):
+        _rc = json.load(open('outputs/rollback_c.json'))['deltaE']
+        f['mantel_bh12_main'] = _rc['mantel_bh']['min_q']
+        for _m in _rc['mantel']:
+            if _m['dataset'] == 'd2' and _m['mode'] == 'uv' \
+                    and _m['space'] == 'structural':
+                f['mantel_d2uv_struct_p'] = _m['p_mantel']
+            if _m['dataset'] == 'd2' and _m['mode'] == 'normal' \
+                    and _m['space'] == 'electronic3':
+                f['mantel_d2nor_elec_p'] = _m['p_mantel']
+        f['mantel_rho_max_abs'] = max(abs(x['spearman'])
+                                      for x in _rc['mantel'])
+        _d1 = [x for x in _rc['mantel'] if x['dataset'] == 'd1']
+        if _d1:
+            f['d1_rho_max_abs'] = max(abs(x['spearman']) for x in _d1)
+            f['d1_p_min'] = min(x['p_mantel'] for x in _d1)
+    # 농도와 응답크기의 순위상관. 모든 셀에서 같은 값이어야 한다.
+    if _os.path.exists('outputs/deltaE_noise.json'):
+        _dn = json.load(open('outputs/deltaE_noise.json'))[
+            'concentration_vs_magnitude']
+        _rs = {round(r['rho_conc_vs_norm'], 6) for r in _dn}
+        if len(_rs) == 1:
+            f['conc_norm_rho'] = _rs.pop()
+
+    # 중심화 바닥 여섯 셀. T1-13 이 본문·SI 양쪽에 싣는다.
+    if _os.path.exists('outputs/rollback_c.json'):
+        _cf = json.load(open('outputs/rollback_c.json'))['deltaE'][
+            'centring_floor']
+        f['floor_gap_lo'] = min(x['gap'] for x in _cf)
+        f['floor_gap_hi'] = max(x['gap'] for x in _cf)
+        _d3n = [x for x in _cf if x['dataset'] == 'd3'
+                and x['mode'] == 'normal']
+        if _d3n:
+            f['floor_d3normal_obs'] = _d3n[0]['observed_mean_cosine']
+            f['floor_d3normal_gap'] = _d3n[0]['gap']
 
     # 2026-10-25. 전자공간을 B3LYP 궤도에너지로 갈아끼운 대조. 심사
     # 시늄레이션이 제기하고 재현으로 확인된 축이다. 기준 재현(GFN2)이 정본
@@ -1189,15 +1321,21 @@ CHECKS = [
     ('bh_q35_concl',
      [r'at a Benjamini--Hochberg adjusted value of\s+(\d+\.\d+)'], 0.0005),
     # ACS 커버레터 전용 앵커 (2026-11-02). 본문과 같은 산출물에 건다.
-    ('cl_d2_acc', [r'cross-validated accuracy of (\d\.\d{3}) on'], 0.0005),
-    ('cl_d3_acc', [r'seven-agent run and (\d\.\d{3}) on the Novichok run'], 0.0005),
+    # 2026-11-03 (T1-10). 표지서신에서 분류 정확도 주장을 뺐다. 그 수치는
+    # 본문 2.1 에 남아 있고 lit_d2_acc / lit_d3_acc 가 검사한다. 자리별
+    # 별칭을 은퇴시킨다. 표지서신이 그 주장을 다시 실으면 아래를 되살릴 것.
+    #   ('cl_d2_acc', [r'cross-validated accuracy of (\d\.\d{3}) on'], 0.0005),
+    #   ('cl_d3_acc', [r'seven-agent run and (\d\.\d{3}) on the Novichok'], 0.0005),
     ('cl_dmmp_ga', [r'correlates at\s*\n?\$\+(\d\.\d{2})\$ with tabun'], 0.005),
     ('cl_dmmp_gb', [r'\$\+(\d\.\d{2})\$ with\s*\n?sarin but at'], 0.005),
     ('cl_dmmp_gd', [r'but at\s*\n?\$(-\d\.\d{2})\$ with soman'], 0.005),
     ('cl_dmmp_gf', [r'\$(-\d\.\d{2})\$ with cyclosarin'], 0.005),
     ('cl_dmmp_vx', [r'\$(-\d\.\d{2})\$ with VX'], 0.005),
-    ('cl_conc_hi', [r'with concentration, from\s*\n?\$\+(\d\.\d{2})\$ at\s*\n?500~\$\\mu\$M'], 0.005),
-    ('cl_conc_lo', [r'to \$\+(\d\.\d{2})\$ at 10~\$\\mu\$M, which is the end'], 0.005),
+    # 2026-11-03 (T1-9). 표지서신에서 농도 추세 주장을 뺐다. 정확 p 가
+    # 0.083 밑으로 갈 수 없고 SNR 교란을 분리할 수 없으므로 표지서신에
+    # 실을 수 없다. 본문 쪽은 conc_gb_lo / conc_gb_hi 가 검사한다.
+    #   ('cl_conc_hi', [...], 0.005),
+    #   ('cl_conc_lo', [...], 0.005),
     # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
     ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
@@ -1300,6 +1438,62 @@ CHECKS = [
      [r'permutation value runs from 0\.0250 to (\d+\.\d+) under both'], 0.0006),
     # 'against four under the other three' 의 four 는 매칭 수이고 three 는
     # 시드 수다. 두 앵커를 섞지 않는다.
+    # 2026-11-03 (T1-14). 본문 2.4 의 인코딩 단락과 안정성 단락.
+    ('sp_n_singleton',
+     [r'(\w+) of the thirty-eight retained coordinates are'], 0),
+    ('sp_pedestal', [r'here (\d+), to the squared distance'], 0),
+    ('sp_tabun_share', [r'for tabun it is ([\d.]+)\\% of the'], 0.05),
+    ('sp_tabun_base', [r'moves tabun from\s*\n?([\d.]+) to [\d.]+ and the count'],
+     0.0005),
+    ('sp_tabun_drop1', [r'moves tabun from\s*\n?[\d.]+ to ([\d.]+) and the count'],
+     0.0005),
+    ('sp_match_drop1', [r'from three valid matches to (\w+)\. Dropping'], 0),
+    ('sp_match_drop3', [r'three compounds or fewer gives (\w+), and'], 0),
+    ('sp_match_lowcard', [r'five or fewer distinct values gives (\w+),'], 0),
+    ('sp_p_base', [r'one-sided \$p\$ falling from ([\d.]+) to [\d.]+'], 0.0005),
+    ('sp_p_lowcard', [r'one-sided \$p\$ falling from [\d.]+ to ([\d.]+)'], 0.0005),
+    ('sp_mantel_q_base',
+     [r'smallest Benjamini--Hochberg value at\s*\n?([\d.]+), [\d.]+ and [\d.]+'],
+     0.0005),
+    ('sp_mantel_q_drop1',
+     [r'smallest Benjamini--Hochberg value at\s*\n?[\d.]+, ([\d.]+) and [\d.]+'],
+     0.0005),
+    ('sp_mantel_q_drop3',
+     [r'smallest Benjamini--Hochberg value at\s*\n?[\d.]+, [\d.]+ and ([\d.]+)'],
+     0.0005),
+    # 2026-11-03. 신설 문장들의 수치. 자리별 맹점을 만들지 않기 위해
+    # 새로 쓴 모든 수치에 앵커를 붙인다.
+    ('mantel_bh12_main',
+     [r'over the twelve leaves a smallest adjusted\s*\n?value of ([\d.]+)\.'],
+     0.0005),
+    ('mantel_d2uv_struct_p',
+     [r'structural space\s*\n?in the ultraviolet channel at ([\d.]+)'], 0.0005),
+    ('mantel_d2uv_merged',
+     [r'merged space in the same channel\s*\n?at ([\d.]+)'], 0.0005),
+    ('mantel_d2nor_elec_p',
+     [r'electronic space in the reflectance channel at ([\d.]+)\.'], 0.0005),
+    ('d1_rho_max_abs',
+     [r'in any space or channel, with \$\|\\rho\| \\le ([\d.]+)\$'], 0.0015),
+    ('d1_p_min',
+     [r'every \$p\$ at or above ([\d.]+)\.'], 0.0015),
+    # 2026-11-03. 주입시험이 SI 의 타분 거리에 앵커가 없다는 것을 드러냈다.
+    # 2.0038 은 세 군데(본문 2.4, SI 열순서 절, SI 응답공간 절)에 적혀 있다.
+    ('t3_GA_full',
+     [r'its normalised distance is\s*\n?([\d.]+) against a threshold of 2',
+      r'crosses the threshold of 2:\s*\n?[\d.]+ under the old filter against '
+      r'([\d.]+) under the new'], 0.00005),
+    ('t3_GA_legacy',
+     [r'crosses the threshold of 2:\s*\n?([\d.]+) under the old filter'],
+     0.00005),
+    ('mantel_rho_max_abs',
+     [r'at 80\\% power where the largest\s*\n?observed is ([\d.]+)',
+      r'at 80\\% power\s*\n?where the largest observed is ([\d.]+)'], 0.005),
+    ('conc_norm_rho',
+     [r'at a Spearman correlation of exactly\s*\n?\$\+([\d.]+)\$ in every '
+      r'run-channel cell'], 0.0005),
+    # 초록의 MDE 와 최대 관측 rho.
+    ('mde_rho_mantel', [r'resolves a rank correlation\s*\n?of ([\d.]+) at 80'],
+     0.005),
     ('conf_ens_match_hi',
      [r'against (\w+) under the\s*\n?other \w+\.'], 0),
     ('conf_ens_n4',
@@ -1407,7 +1601,21 @@ CHECKS = [
     # +0.514 가 되자 검사가 조용히 꺼졌다. 값이 아니라 문맥으로 잡는다.
     ('mantel_d2uv_merged', [r'ultraviolet channel \(\$\\rho = \+\d+\.\d+\$, Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_struct_rho', [r'that same set and channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
-    ('floor_d1uv_obs', [r'clear that floor by [\d.]+ to\s*\n?[\d.]+: \$([-+][\d.]+)\$'], 0.0015),
+    # 2026-11-03 (T1-13). SI 문장을 여섯 셀로 늘리면서 어법이 바뀌었다.
+    ('floor_d1uv_obs',
+     [r'floor by [\d.]+ to [\d.]+ over all six cells: \$([-+][\d.]+)\$'],
+     0.0015),
+    ('floor_gap_lo', [r'clear that\s*\n?floor by ([\d.]+) to [\d.]+ over all six'],
+     0.00015),
+    ('floor_gap_hi', [r'clear that\s*\n?floor by [\d.]+ to ([\d.]+) over all six'],
+     0.00015),
+    ('floor_d3normal_obs',
+     [r'and \$([-+][\d.]+)\$ for the\s*\n?third against'], 0.00015),
+    ('floor_d3normal_gap',
+     [r'observed mean sits \$([\d.]+)\$ above the floor'], 0.00015),
+    ('prem_pairwise_viol',
+     [r'in (\d+) of the 34\s*\n?compound-and-cell instances',
+      r'in (\d+) of the 34 compound-and-cell instances'], 0),
     ('dmmp_ga_uv', [r'tabun, at \$\+?([\d.]+)\$ against sarin',
                     r'correlates with tabun at \$\+([\d.]+)\$'], 0.0015),
     ('dmmp_gb_uv', [r'against sarin\'s \$\+?([\d.]+)\$',
@@ -1723,15 +1931,11 @@ def main():
     # +0.76, +0.77 세 자리가 전부 통과했다 (어법이 본문과 달라 (B) 검사가
     # 본문 쪽에서 이미 맞고 끝났다). 자리마다 키를 따로 둔다.
     for _dst, _src_key in (('bh_q35_concl', 'bh_q35'),
-                           ('cl_d2_acc', 'lit_d2_acc'),
-                           ('cl_d3_acc', 'lit_d3_acc'),
                            ('cl_dmmp_ga', 'dmmp_ga_uv'),
                            ('cl_dmmp_gb', 'dmmp_gb_uv'),
                            ('cl_dmmp_gd', 'dmmp_gd_uv'),
                            ('cl_dmmp_gf', 'dmmp_gf_uv'),
                            ('cl_dmmp_vx', 'dmmp_vx_uv'),
-                           ('cl_conc_lo', 'conc_gb_lo'),
-                           ('cl_conc_hi', 'conc_gb_hi'),
                            # 2026-11-02 (GATE 8 7차). ACS 본문 §2.4 가 SI 의
                            # DFT 수치를 다시 센다. SI 어법에 앵커가 이미
                            # 걸려 있어 본문 사본은 무검사로 남았다.
@@ -1786,6 +1990,10 @@ def main():
     # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
     body_flat = '\x00'.join(_segs)
     fails, checked, unseen = [], 0, []
+    _dp_hits = _dropped_periods()
+    if _dp_hits:
+        fails.append('문장 끝 마침표가 빠진 자리 (되쓰기 사고 가드):')
+        fails.extend(_dp_hits)
 
     # (D) 도판 신선도. 2026-10-13 신설. 도판은 outputs/ 에 생성되고 paper/ 로
     # 복사되는데 그 복사가 수작업이었다. 분석을 다시 돌린 뒤 복사를 잊으면
@@ -2169,7 +2377,8 @@ def apply_number_fixes(dry=True):
                         got = tonum(raw)
                     except Exception:
                         continue
-                    _dm = re.search(r'\.(\d+)', raw)
+                    _core = raw[:-1] if raw.endswith('.') else raw
+                    _dm = re.search(r'\.(\d+)', _core)
                     _dp = len(_dm.group(1)) if _dm else 0
                     if tol <= 0.0006:
                         bad = abs(want - got) > 0.5 * (10 ** -_dp) + 1e-12
@@ -2177,7 +2386,14 @@ def apply_number_fixes(dry=True):
                         bad = abs(got - want) > tol
                     if not bad:
                         continue
-                    new = f'{want:.{_dp}f}'
+                    # 2026-11-03. 종전에는 캡처 전체를 새 수치로 덮었다.
+                    # 패턴 다수가 ([\d.]+) 이므로 캡처가 문장 끝 마침표를
+                    # 함께 먹는데(tonum 이 그 마침표를 떼어내므로 검사는
+                    # 통과한다), 되쓸 때 마침표가 사라졌다. ACS 본문 네
+                    # 자리에서 문장이 붙어 버렸다. 캡처의 꼬리 마침표를
+                    # 보존한다.
+                    _tail = '.' if raw.endswith('.') else ''
+                    new = f'{want:.{_dp}f}' + _tail
                     if new == raw:
                         continue
                     a, b = m.span(1)
