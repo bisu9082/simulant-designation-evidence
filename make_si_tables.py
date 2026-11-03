@@ -376,6 +376,31 @@ def vpairing():
             + '\n' + r'\end{tabular}')
 
 
+def premisenull():
+    """전제검정 라벨순열 귀무. outputs/premise_null.json 에서 생성."""
+    d = json.load(open('outputs/premise_null.json'))
+    SET = {'d1': 'First', 'd2': 'Second', 'd3': 'Third'}
+    CH = {'uv': 'ultraviolet', 'normal': 'reflectance'}
+    lines = []
+    for c in d['cells']:
+        src = (f"{c['n_null']:,} enumerated" if c['enumerated']
+               else f"{c['n_null']:,} sampled")
+        lines.append(f"{SET[c['dataset']]} & {CH[c['mode']]} & "
+                     f"${c['observed']:+.4f}$ & ${c['null_mean']:+.4f}$ & "
+                     f"{c['null_sd']:.4f} & {c['p_one_sided']:.4f} & "
+                     f"{src} \\\\")
+    head = (r'\begin{tabular}{llrrrrl}' '\n' r'\hline' '\n'
+            r'Set & Channel & Observed & Null mean & Null s.d. & $p$'
+            r' & Null built from \\' '\n' r'\hline' '\n')
+    foot = (r'\multicolumn{7}{l}{\footnotesize Adjusted values are '
+            r'Benjamini--Hochberg over the six cells; the smallest is }\\'
+            '\n'
+            r'\multicolumn{7}{l}{\footnotesize '
+            + f"{d['bh']['min_q']:.4f}" + r' and all six clear $q=0.05$.}\\')
+    return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
+            + '\n' + r'\end{tabular}')
+
+
 def main():
     rc, mq, pf, pp, mc = load()
     body = ablation(rc, mq, pf, pp, mc)
@@ -427,6 +452,8 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_volatility.tex')
     open('outputs/tab_vpairing.tex', 'w').write(hdr + vpairing() + '\n')
     print('-> outputs/tab_vpairing.tex')
+    open('outputs/tab_premisenull.tex', 'w').write(hdr + premisenull() + '\n')
+    print('-> outputs/tab_premisenull.tex')
     for i, (a, b, c, key) in enumerate(ROWS):
         if key == 'pesticide':
             dims = {s: pp[s]['n_dims'] for s in pp}

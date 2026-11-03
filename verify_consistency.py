@@ -45,7 +45,10 @@ EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
              # 2026-11-03. 휘발성 보조 분석의 두 표.
              'paper_acs/tab_volatility.tex',
              'paper/tab_volatility.tex',
-             'paper_acs/tab_vpairing.tex', 'paper/tab_vpairing.tex')
+             'paper_acs/tab_vpairing.tex', 'paper/tab_vpairing.tex',
+             # 2026-11-03 (작업 C). 전제검정 라벨순열 귀무 표.
+             'paper_acs/tab_premisenull.tex',
+             'paper/tab_premisenull.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -237,7 +240,7 @@ def _generated_table_sync():
     bad = []
     for name in ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
                  'tab_sparse.tex', 'tab_plocal.tex', 'tab_volatility.tex',
-                 'tab_vpairing.tex'):
+                 'tab_vpairing.tex', 'tab_premisenull.tex'):
         src = f'outputs/{name}'
         if not _o.path.exists(src):
             bad.append(f'  생성 표 없음 [{src}]: make_si_tables.py 를 돌릴 것')
@@ -1449,6 +1452,21 @@ def load_facts():
     f['pn_cells'] = _pn['bh']['n_cells']
     f['pn_min_q'] = _pn['bh']['min_q']
     f['pn_n_sig'] = _pn['bh']['n_sig_q']
+    # 2026-11-03 (작업 C). 바닥 논증을 대체한 문단이 쓰는 범위 전부.
+    _pc = _pn['cells']
+    f['pn_null_min'] = min(c['null_mean'] for c in _pc)
+    f['pn_null_max'] = max(c['null_mean'] for c in _pc)
+    f['pn_obs_min'] = min(c['observed'] for c in _pc)
+    f['pn_obs_max'] = max(c['observed'] for c in _pc)
+    f['pn_within_min'] = min(c['mean_within'] for c in _pc)
+    f['pn_within_max'] = max(c['mean_within'] for c in _pc)
+    f['pn_between_hi'] = max(c['mean_between'] for c in _pc)
+    f['pn_between_lo'] = min(c['mean_between'] for c in _pc)
+    f['pn_exact_n'] = max(c['n_null'] for c in _pc if c['enumerated'])
+    _zs = [v for v in _pn['zero_sum_residual'].values() if 'error' not in v]
+    f['pn_zs_min'] = min(v['after_renorm_max'] for v in _zs)
+    f['pn_zs_max'] = max(v['after_renorm_max'] for v in _zs)
+    f['pn_zs_before'] = max(v['before_renorm_max'] for v in _zs)
 
     _md = json.load(open('outputs/mde.json'))
     f['mde_bh18_35'] = _md['panel35_incumbent3']['thresholds']['bh18']['mde_delta']
@@ -1992,17 +2010,9 @@ CHECKS = [
     ('mantel_d2uv_merged', [r'ultraviolet channel \(\$\\rho = \+\d+\.\d+\$, Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_struct_rho', [r'that same set and channel \(\$\\rho = ([-+][\d.]+)\$'], 0.0015),
     # 2026-11-03 (T1-13). SI 문장을 여섯 셀로 늘리면서 어법이 바뀌었다.
-    ('floor_d1uv_obs',
-     [r'floor by [\d.]+ to [\d.]+ over all six cells: \$([-+][\d.]+)\$'],
-     0.0015),
-    ('floor_gap_lo', [r'clear that\s*\n?floor by ([\d.]+) to [\d.]+ over all six'],
-     0.00015),
-    ('floor_gap_hi', [r'clear that\s*\n?floor by [\d.]+ to ([\d.]+) over all six'],
-     0.00015),
-    ('floor_d3normal_obs',
-     [r'and \$([-+][\d.]+)\$ for the\s*\n?third against'], 0.00015),
-    ('floor_d3normal_gap',
-     [r'observed mean sits \$([\d.]+)\$ above the floor'], 0.00015),
+    # 2026-11-03 (작업 C) 폐기. 중심화 '바닥' 논증을 두 본문 모두에서
+    # 철회했으므로 바닥 여유 앵커 5건은 가리킬 문장이 없다. 사실표의
+    # floor_* 값은 비교용으로 남겨 두되 본문 대조는 하지 않는다.
     ('prem_pairwise_viol',
      [r'in (\d+) of the 34\s*\n?compound-and-cell instances',
       r'in (\d+) of the 34 compound-and-cell instances'], 0),
@@ -2231,6 +2241,27 @@ CHECKS = [
     ('sr_mantel_q_red', [r'shape coordinates raises it to (0\.\d+)'], 0.00005),
     # 전제검정 라벨순열 귀무 (초록).
     ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a null'], 0),
+    # 2026-11-03 (작업 C). 바닥 논증 대체 문단.
+    ('pn_null_max', [r'difference of \$\+[\d.]+\$ to\s*\n?\$\+(0\.\d+)\$',
+                     r'between \$\+[\d.]+\$ and\s*\n?\$\+(0\.\d+)\$'],
+     0.00005),
+    ('pn_null_min', [r'difference of \$\+(0\.\d+)\$ to',
+                     r'between \$\+(0\.\d+)\$ and'], 0.00005),
+    ('pn_obs_min', [r'observed differences of \$\+(0\.\d+)\$',
+                    r'observed values of \$\+(0\.\d+)\$'], 0.00005),
+    ('pn_obs_max', [r'observed differences of \$\+[\d.]+\$ to\s*\n?'
+                    r'\$\+(0\.\d+)\$',
+                    r'observed values of \$\+[\d.]+\$ to \$\+(0\.\d+)\$'],
+     0.00005),
+    ('pn_exact_n', [r'exact enumeration of all ([\d,]+) relabellings'], 0),
+    ('pn_within_min', [r'separates them, to \$\+(0\.\d+)\$'], 0.00005),
+    ('pn_within_max', [r'to \$\+[\d.]+\$ to\s*\n?\$\+(0\.\d+)\$ within'],
+     0.00005),
+    ('pn_between_hi', [r'within compounds against \$(-0\.\d+)\$'], 0.00005),
+    ('pn_between_lo', [r'against \$-[\d.]+\$ to\s*\n?\$(-0\.\d+)\$\s*\n?'
+                       r'between them'], 0.00005),
+    ('pn_zs_min', [r'between (0\.\d+) and 0\.\d+ after the'], 0.00005),
+    ('pn_zs_max', [r'between 0\.\d+ and (0\.\d+) after the'], 0.00005),
     # MDE 의 BH18 문턱.
     ('mde_bh18_35', [r'moves the threshold to\s*\n?\$\\delta = (0\.\d+)\$'],
      0.005),
@@ -2356,6 +2387,30 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-03 (작업 C). 중심화 '바닥' 논증 전량 철회.
+    #
+    # 두 가지가 겹쳐 있었다. (1) centred() 가 unit(v-mu) 로 재정규화하므로
+    # Sum u = 0 이 깨진다. 실측: 평균을 뺀 직후 7.2e-16, 정규화 후 0.1292
+    # ~0.7430 (premise_null.py zero_sum_residual). 항등식의 전제가 없다.
+    # (2) 영합 벡터에서도 -1/(n-1) 은 노름가중 평균 코사인의 상한이고
+    # 등노름에서만 등호다. '바닥' 이라는 이름부터 방향이 반대였다.
+    # 대체: 농도 내 라벨 순열 귀무. 여섯 셀 전부 유의, BH 최소 q 0.0001.
+    ('중심화 바닥 논증 (항등식 전제 붕괴 + 부등호 방향 반대)',
+     [r'algebraic floor',
+      r'clear that floor by',
+      r'clears? that floor',
+      r'mean cosine of at least',
+      r'fixes the mean cosine between',
+      r'floor its compound count\s+allows',
+      r'above the floor, which is close enough'],
+     []),
+    # 부호뒤집기 전수열거는 여섯 셀 전부에서 자기 설계 바닥을 돌려준다.
+    # p 가 데이터가 아니라 설계의 함수이므로 유효한 검정으로 쓰지 않는다.
+    ('부호뒤집기 검정을 증거로 사용 (설계 바닥을 돌려준다)',
+     [r'cannot reach 0\.05 under any test',
+      r'and not\s+a loss of evidence',
+      r'every cell returns the smallest value its compound count allows:'],
+     []),
     # 2026-11-03 (작업 B). 분석선택 수와 매칭 범위가 구판으로 되돌아가는 것을
     # 막는다. 형태 블록이 다섯째 선택이고 그 선택에서 28종 패널 매칭이 0 이
     # 되므로 범위 하단이 셋에서 영으로 내려갔다. 검증기 사실이 아니라
