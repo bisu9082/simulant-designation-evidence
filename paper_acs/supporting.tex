@@ -698,6 +698,129 @@ because leaving it out would have exempted our own accounting from the standard
 the paper asks of others. Values are in the deposited
 \texttt{multiplicity\_across\_panels.json} under \texttt{outputs/}.
 
+% 2026-11-03 신설. 리뷰어 1 지적: 서론은 휘발성을 모사체 선정 기준의 첫
+% 번째로 들면서 서술자 패널에는 휘발성이 없다. 그러면 본문의 귀무가
+% '하필 휘발성을 뺀 서술자가 실패했다'로 읽히고, 그 반론은 개정으로
+% 닫히지 않는다. 축을 사전지정 2검정으로만 메우고 72검정 가족과 분리한다.
+% 수치 정본은 outputs/volatility_space.json (volatility_space.py).
+\section{The volatility axis}
+\label{res:volatility}
+
+The opening of this paper names volatility as the first property a simulant is
+chosen to reproduce, and the descriptor panel does not contain it. That is a
+gap in the analysis and not a point we can argue away, because a reader is
+entitled to ask whether the null we report is a property of simulant selection
+or a property of the particular descriptors we happened to compute. This
+section closes it with two tests fixed before the numbers were seen. Both are
+reported outside the family of seventy-two, and we say so here rather than
+fold them in, because folding them in would recompute every adjusted value in
+the paper in exchange for a question that one test each can answer.
+
+Vapour pressures were taken from measurements, not predictions. The adoption
+rule was fixed before any value was chosen: a vapour-pressure measurement or
+compilation at 25~$^{\circ}$C first, a government compendium at
+25~$^{\circ}$C where no such value exists, and the nearest available
+temperature otherwise, recorded with its temperature. On the
+twenty-eight-compound panel all twenty-eight compounds have a measured value,
+twenty-five of them at tier one, one at tier two and two at tier three. The
+two tier-three entries are dipropylene glycol monomethyl ether at
+26~$^{\circ}$C and cyclosarin at 20~$^{\circ}$C, for which no 25~$^{\circ}$C
+measurement is in the public record we searched. We did not convert between
+temperatures, because conversion needs Antoine coefficients and fitting them
+would replace a measurement with an estimate. On the thirty-five-compound
+panel two compounds have no measured vapour pressure at all, diethyl
+chlorophosphate (CAS 814-49-3) and diethyl cyanophosphonate (CAS 2942-58-7),
+so the volatility tests run on the twenty-eight-compound panel only.
+Table~\ref{tab:volatility} lists the adopted values with their tier and
+source; every candidate value returned, including the ones not adopted, is in
+the deposited \texttt{volatility\_candidates.json}.
+
+The space is one axis, $\log_{10}(P/\mathrm{mmHg})$ standardised to unit
+variance, and distance is the absolute difference. One axis has a consequence
+worth stating: three of the four analyst freedoms this paper measures
+elsewhere, the descriptor encoding, the correlation filter and the conformer
+seed, have nothing to act on. The panel spans 6.209 decades, from VX at the
+low end to phosgene at the high end.
+
+The first test asks whether the three incumbent simulants sit closer to the
+agents on this axis than a trio drawn from the seventeen non-agents would.
+Under exact enumeration of all 680 designations, the pre-specified statistic
+gives a one-sided $p$ of 0.0206, ranking the incumbent trio fourteenth of 680.
+That is not a null, and we report it as the one place in this paper where the
+incumbent choices beat chance. Two things bound what it means. The margin
+itself is 0.0015 in standardised units, which is not a separation anyone could
+use. And the count of valid matches, the criterion this paper argues a
+designation has to meet, returns one match with a $p$ of 0.4647, ranking 316th
+of 680 and therefore indistinguishable from chance.
+
+That single match is dipropylene glycol monomethyl ether to soman, and it
+rests on a gap of 0.0107 decades between a measurement at 26~$^{\circ}$C and a
+measurement at 25~$^{\circ}$C. The gap is smaller than the temperature
+mismatch that produced it. Putting both compounds at a common temperature can
+only widen it, because vapour pressure increases with temperature and the
+26~$^{\circ}$C figure of 0.4~mmHg therefore overstates the 25~$^{\circ}$C
+value; the direction is fixed thermodynamically and needs no fitted
+correlation. The match fails the ratio condition once the gap exceeds 0.1383
+decades, which corresponds to a 25~$^{\circ}$C vapour pressure below
+0.2982~mmHg, and fails the closer-than-every-interferent condition beyond
+0.1654 decades, or 0.2802~mmHg. We do not have a measured 25~$^{\circ}$C value
+for that compound, so we report the match as conditional on a gap that its own
+source data cannot resolve.
+
+Table~\ref{tab:vpairing} sets out which compound each agent is nearest to, and
+the designated pairings are not the ones the axis produces. Dichloromethane is
+designated for the choking agent and sits 0.514 decades from phosgene but
+0.232 from hydrogen cyanide, a blood agent. Dipropylene glycol monomethyl
+ether is designated for the blister agent and sits 0.561 decades from sulfur
+mustard and 0.011 from soman, a nerve agent. Dimethyl methylphosphonate, the
+standard G-agent simulant, sits 0.473 decades from sarin while
+\textit{para}-dichlorobenzene, an interferent, sits 0.216. For three of the
+eleven agents the nearest compound in the pool is an interferent rather than a
+simulant. VX has nothing within 2.659 decades.
+
+The second test asks whether volatility distance tracks response distance.
+Exact Mantel permutation in each run-channel cell with at least four mapped
+agents gives four evaluable cells, and the rank correlation is positive in all
+four, at $+0.043$, $+0.389$, $+0.254$ and $+0.546$. Fisher combination of the
+four exact $p$ values, fixed in advance as the single statistic for this test,
+gives $\chi^2 = 14.032$ and $p = 0.0809$. That does not clear 0.05, and it is
+closer to it than any descriptor space reached, where the smallest adjusted
+value on the primary panel was 0.354 and the smallest nominal value 0.192.
+
+Taken together the two tests say something narrower and more useful than the
+descriptor result alone. The axis practitioners name first does carry weak
+directional signal, and the incumbent trio does beat chance on margin
+statistics, so the paper's null is not an artefact of leaving volatility out.
+What the axis does not produce is a defensible valid match, and the one match
+it does produce pairs a blister-agent simulant with a nerve agent on a gap its
+source data cannot resolve. The conclusion of the paper is unchanged and its
+basis is wider.
+
+% 2026-11-03. 두 표 모두 make_si_tables.py 가 산출물에서 생성한다.
+\begin{table}[!htb]
+\centering
+\caption{Adopted vapour pressures for the twenty-eight-compound panel, in
+descending order. Values are measurements retrieved from PubChem, which
+carries them from the Hazardous Substances Data Bank and from the government
+compendia named in the source column; the adoption rule and the tier
+definitions are in the text. No value was converted between temperatures.}
+\label{tab:volatility}
+\small
+\input{tab_volatility}
+\end{table}
+
+\begin{table}[!htb]
+\centering
+\caption{What each agent is nearest to on the volatility axis. The designated
+pairings are not the ones the axis produces, and for three of the eleven
+agents the nearest compound in the pool is an interferent. This table is
+descriptive and enters no multiplicity accounting.}
+\label{tab:vpairing}
+\small
+\setlength{\tabcolsep}{4pt}
+\input{tab_vpairing}
+\end{table}
+
 \section{Dimensionality and the value of the nominal result}
 \label{res:dimdetail}
 

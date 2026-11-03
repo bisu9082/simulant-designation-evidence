@@ -341,6 +341,26 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 휘발성 축 (2026-11-03 신설). 본문 res:panels 말미 단락.
+    #     새 절을 가드 없이 들이는 것이 이 프로젝트의 반복 실패 경로다.
+    ('휘발성 V1 p 오기 (정본 0.0206) — 유의/비유의가 뒤집힌다',
+     'one-sided $p$ of 0.0206 over all\n680 designations',
+     'one-sided $p$ of 0.0706 over all\n680 designations'),
+    ('휘발성 n_valid p 를 유의한 값으로 오기 (정본 0.4647)',
+     'one match with a $p$ of 0.4647',
+     'one match with a $p$ of 0.0647'),
+    ('휘발성 Fisher p 를 유의한 값으로 오기 (정본 0.0809)',
+     'Mantel values giving $p=0.0809$',
+     'Mantel values giving $p=0.0409$'),
+    ('휘발성 DPGME-소만 간격 오기 (정본 0.0107)',
+     'a gap of 0.0107 decades between measurements',
+     'a gap of 0.0507 decades between measurements'),
+    ('휘발성 VX 간격 오기 (정본 2.659)',
+     'within 2.659 decades of VX',
+     'within 1.659 decades of VX'),
+    ('휘발성 DMMP-사린 대 간섭물 비교 오기 (정본 0.216)',
+     'while an interferent sits 0.216',
+     'while an interferent sits 0.616'),
     # 2026-11-03. 종전 앵커는 표지서신의 농도 추세 문장이었고 그 주장을
     # 뺐으므로 자리가 없어졌다. 단위가 틀리면 가장 치명적인 자리, 즉
     # 실험절의 노출 농도 목록으로 옮긴다.
@@ -415,6 +435,31 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 휘발성 축 SI 절 (2026-11-03 신설)
+    ('SI 휘발성 순위 오기 (정본 14/680)',
+     'ranking the incumbent trio fourteenth of 680',
+     'ranking the incumbent trio fourth of 680'),
+    ('SI 휘발성 여유도 오기 (정본 0.0015)',
+     'margin itself is 0.0015 in standardised',
+     'margin itself is 0.0115 in standardised'),
+    ('SI 휘발성 붕괴점 증기압 오기 (정본 0.2982 mmHg)',
+     'vapour pressure below\n0.2982~mmHg',
+     'vapour pressure below\n0.1982~mmHg'),
+    ('SI 휘발성 Fisher chi2 오기 (정본 14.032)',
+     '\\chi^2 = 14.032',
+     '\\chi^2 = 11.032'),
+    ('SI 휘발성 tier 1 건수 오기 (정본 25건)',
+     'twenty-five of them at tier one',
+     'twenty-seven of them at tier one'),
+    ('SI 휘발성 최근접이 간섭물인 작용제 수 오기 (정본 3종)',
+     'For three of the\neleven agents the nearest',
+     'For one of the\neleven agents the nearest'),
+    ('SI 휘발성 log10 범위 오기 (정본 6.209)',
+     'spans 6.209 decades',
+     'spans 4.209 decades'),
+    ('SI 휘발성 셀별 rho 오기 (정본 +0.546)',
+     'and $+0.546$',
+     'and $+0.246$'),
     ('ACS SI 단독으로 모델 성능 오기 (정본 R^2 0.458)',
      r'R^{2}=0.458 \pm', r'R^{2}=0.389 \pm'),
     ('ACS SI 단독으로 적용영역 거리 오기 (정본 3.28)',

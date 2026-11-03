@@ -332,6 +332,76 @@ def agreement():
                              'p_value': float(fisher.pvalue) if pv else None}}
 
 
+def valid_match_detail():
+    """유효매칭을 작용제별로 분해하고, 유일한 매칭의 붕괴점을 계산한다.
+
+    왜 필요한가. V1 의 n_valid 는 '1건, p=0.4647' 로만 보고되는데, 그
+    1건이 무엇인지가 해석을 가른다. 분해하면 DPGME-소만 한 짝이고, 그
+    짝의 근거는 0.011 자수 간격이다. DPGME 는 26 °C 측정값, 소만은
+    25 °C 측정값이므로 그 간격은 온도 불일치 안에 들어간다.
+
+    공통 온도로 맞추면 간격은 넓어질 수밖에 없다. 증기압은 온도에 대해
+    단조증가하므로 DPGME 의 25 °C 값은 26 °C 값 0.4 mmHg 보다 낮고,
+    소만(-0.387)보다 아래에 있는 DPGME(-0.398)는 더 멀어진다. 이 방향은
+    열역학으로 고정되므로 Antoine 계수 추정이 필요 없다 ([C-3] 준수).
+
+    붕괴점은 계산한다. 추정하지 않는다. 25 °C 의 DPGME 증기압이 얼마
+    아래로 내려가면 유효매칭 두 조건이 각각 깨지는지만 적는다.
+    """
+    df = pd.read_csv('descriptor_cache_xtb.csv')
+    names = list(df.compound_name)
+    kl = list(df.compound_class)
+    D, x, _ = space(names)
+    sd = float(np.std(x, ddof=1))
+    Dm = D.copy()
+    np.fill_diagonal(Dm, np.inf)
+    nn_med = float(np.median(Dm.min(1)))
+    i_sim = [i for i, k in enumerate(kl) if k == 'simulant']
+    i_int = [i for i, k in enumerate(kl) if k == 'interferent']
+    rows = []
+    for a, k in enumerate(kl):
+        if k != 'real_agent':
+            continue
+        ds = float(min(Dm[a, t] for t in i_sim))
+        di = float(min(Dm[a, t] for t in i_int))
+        rows.append({'agent': names[a], 'd_nearest_simulant': ds,
+                     'd_nearest_interferent': di,
+                     'ratio_to_nn_median': ds / nn_med,
+                     'nearest_simulant': names[min(
+                         i_sim, key=lambda t: Dm[a, t])],
+                     'valid': bool(ds / nn_med <= 2.0 and ds <= di)})
+    valid = [r for r in rows if r['valid']]
+    out = {'nn_median_distance': nn_med, 'threshold_ratio': 2.0,
+           'threshold_distance_z': 2.0 * nn_med,
+           'log10_sd': sd, 'per_agent': rows,
+           'n_valid': len(valid),
+           'valid_pairs': [(r['agent'], r['nearest_simulant'])
+                           for r in valid]}
+    # 유일 매칭의 붕괴점. 두 조건을 각각 깨는 간격을 자수로, 그리고 그
+    # 간격이 되려면 DPGME 증기압이 얼마여야 하는지를 mmHg 로 적는다.
+    if len(valid) == 1 and valid[0]['nearest_simulant'] == 'DPGME':
+        gd = VP['soman (GD)'][0]
+        gap_ratio = 2.0 * nn_med * sd        # 비율 조건을 깨는 간격 (자수)
+        gap_closer = valid[0]['d_nearest_interferent'] * sd   # 근접 조건
+        out['sole_match_breakpoint'] = {
+            'pair': ['DPGME', 'soman (GD)'],
+            'observed_gap_log10': float(
+                abs(np.log10(VP['DPGME'][0]) - np.log10(gd))),
+            'temperatures_C': [VP['DPGME'][1], VP['soman (GD)'][1]],
+            'gap_breaking_ratio_condition_log10': float(gap_ratio),
+            'vp_breaking_ratio_condition_mmHg': float(gd / 10 ** gap_ratio),
+            'gap_breaking_closer_condition_log10': float(gap_closer),
+            'vp_breaking_closer_condition_mmHg': float(
+                gd / 10 ** gap_closer),
+            'direction_note':
+                'Vapour pressure increases with temperature, so the '
+                "25 C value for DPGME is below the 26 C measurement of "
+                '0.4 mmHg and the gap to soman can only widen. The '
+                'direction is fixed thermodynamically; no Antoine fit '
+                'is used.'}
+    return out
+
+
 def pairing_table():
     """기술표. 작용제별로 (가장 가까운 모사체, 가장 가까운 풀 화합물).
 
@@ -432,6 +502,7 @@ def main():
     print(f"     사전지정 Fisher ({ps['n_cells']} 셀): "
           f"X2 = {ps['statistic']:.3f}, p = {ps['p_value']:.4f}")
     pt = pairing_table()
+    vm = valid_match_detail()
     print()
     print(f"  기술표: 작용제 11종 중 최근접이 간섭물인 경우 "
           f"{pt['n_agents_whose_nearest_is_interferent']}건, "
@@ -442,6 +513,20 @@ def main():
               f"{r['gap_to_nearest_simulant']:.3f}   "
               f"최근접 풀 {r['nearest_pool_compound']:<18}"
               f"{r['gap_to_nearest_pool']:.3f}")
+    print()
+    print(f"  유효매칭 {vm['n_valid']}건 {vm['valid_pairs']}  "
+          f"(임계 거리 {vm['threshold_distance_z']:.4f} z, "
+          f"최근접이웃 중위 {vm['nn_median_distance']:.4f})")
+    bp = vm.get('sole_match_breakpoint')
+    if bp:
+        print(f"     유일 매칭 간격 {bp['observed_gap_log10']:.4f} 자수, "
+              f"온도 {bp['temperatures_C']} °C")
+        print(f"     붕괴점: 비율조건 간격 "
+              f"{bp['gap_breaking_ratio_condition_log10']:.4f} 자수 "
+              f"(DPGME < {bp['vp_breaking_ratio_condition_mmHg']:.4f} mmHg), "
+              f"근접조건 간격 "
+              f"{bp['gap_breaking_closer_condition_log10']:.4f} 자수 "
+              f"(DPGME < {bp['vp_breaking_closer_condition_mmHg']:.4f} mmHg)")
     lew = lewisite_sensitivity()
     print()
     for iso, r in lew.items():
@@ -464,6 +549,7 @@ def main():
                for n, v in VP.items()},
            'unavailable': UNAVAILABLE,
            'designation': v1, 'agreement': v2, 'pairing_table': pt,
+           'valid_match_detail': vm,
            'lewisite_isomer_sensitivity': lew}
     with open('outputs/volatility_space.json', 'w') as fh:
         json.dump(out, fh, indent=1, ensure_ascii=False)
