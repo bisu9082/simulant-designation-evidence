@@ -89,6 +89,9 @@ REQUIRED_FOR_FIGURES = [
     # 2026-11-03. 휘발성 축 보조 분석 (volatility_space.py).
     'outputs/volatility_candidates.json',
     'outputs/volatility_space.json',
+    # 2026-11-03 (작업 A).
+    'outputs/shape_reduction.json',
+    'outputs/premise_null.json',
     'outputs/_pca_scores.npy',
     'outputs/_null_A_rdkit.npy',
     'outputs/_null_B_electronic.npy',
@@ -409,6 +412,8 @@ def preflight():
         # 2026-11-03. 휘발성 보조 분석.
         'volatility_candidates.json': 'volatility_fetch.py',
         'volatility_space.json': 'volatility_space.py',
+        'shape_reduction.json': 'shape_reduction.py',
+        'premise_null.json': 'premise_null.py',
         'subspace_null.json': 'subspace_null.py',
         'dft_dipole.csv': 'dft_omega.py',
         'dft_electronic_space.json': 'dft_electronic_space.py',
@@ -1382,9 +1387,13 @@ def load_facts():
     f['vol_bp_closer_gap'] = _bp['gap_breaking_closer_condition_log10']
     f['vol_bp_closer_vp'] = _bp['vp_breaking_closer_condition_mmHg']
     _ag = _vol['agreement']
-    f['vol_fisher_chi2'] = _ag['prespecified']['statistic']
-    f['vol_fisher_p'] = _ag['prespecified']['p_value']
-    f['vol_cells'] = _ag['prespecified']['n_cells']
+    # 2026-11-03 (작업 A-3). 4셀 일괄 Fisher 를 철회하고 채널내 런간 합성
+    # + 채널 BH 로 교체했다. 같은 플레이트 두 채널은 독립이 아니다.
+    _vp = _ag['prespecified']
+    f['vol_fisher_uv'] = _vp['by_channel']['uv']['p_value']
+    f['vol_fisher_nor'] = _vp['by_channel']['normal']['p_value']
+    f['vol_fisher_minq'] = _vp['min_q']
+    f['vol_channels'] = _vp['n_channels']
     for _c in _ag['cells']:
         f[f"vol_rho_{_c['cell']}"] = _c['spearman']
     _pt = {r['agent']: r for r in _vol['pairing_table']['rows']}
@@ -2067,7 +2076,8 @@ CHECKS = [
     ('pp_mg_md', [row_pat('\\quad + pesticides 2', 'merged', 0)], 0.0005),
     ('pp_mg_lr', [row_pat('\\quad + pesticides 2', 'merged', 2)], 0.0005),
     ('pp_mg_ds', [row_pat('\\quad + pesticides 2', 'merged', 3)], 0.0005),
-    ('pp_n_perm', [r'\\binom\{24\}\{10\}=([\d\\,]+)'], 0),
+    # pp_n_perm 은 UNQUOTED 면제 항목이다. 앵커를 중복으로 두면
+    # 영구 '문맥 미발견' 이 남는다. 2026-11-03 제거.
     ('pp_min_p', [r'smallest nominal value of ([\d.]+) and a'], 0.00001),
     # 2026-11-03. tab:family 를 생성으로 돌리면서 칸 사이 공백이 바뀌어
     # 공백 개수를 고정한 이 패턴이 꺼졌다. \s* 로 느슨하게 한다.
@@ -2120,17 +2130,26 @@ CHECKS = [
     ('vol_bp_ratio_vp', [r'vapour pressure below\s+(0\.\d+)~mmHg'], 0.00005),
     ('vol_bp_closer_gap', [r'condition beyond\s+(0\.\d+) decades'], 0.00005),
     ('vol_bp_closer_vp', [r'decades, or (0\.\d+)~mmHg'], 0.00005),
-    ('vol_fisher_chi2', [r'\\chi\^2 = (\d+\.\d+)'], 0.0005),
-    ('vol_fisher_p', [r'\$p = (0\.\d+)\$\.? That does not clear',
-                      r'Mantel values giving \$p=(0\.\d+)\$'], 0.00005),
-    ('vol_rho_d1_uv', [r'at \$\+(0\.\d+)\$, \$\+[\d.]+\$, \$\+[\d.]+\$ and'],
-     0.0005),
-    ('vol_rho_d1_normal',
-     [r'at \$\+[\d.]+\$, \$\+(0\.\d+)\$, \$\+[\d.]+\$ and'], 0.0005),
+    # 2026-11-03 (작업 A-3) 폐기. chi2 와 4셀 p 는 철회된 합성의 값이다.
+    # 교체된 자리는 본문 재집필(작업 C) 때 새 앵커를 붙인다.
+    # 2026-11-03 (작업 A-3). 네 셀을 채널별로 묶어 적도록 고쳤으므로
+    # 나열 순서가 d1_uv, d2_uv, d1_normal, d2_normal 로 바뀌었다.
+    ('vol_rho_d1_uv', [r'four: \$\+(0\.\d+)\$ and'], 0.0005),
     ('vol_rho_d2_uv',
-     [r'at \$\+[\d.]+\$, \$\+[\d.]+\$, \$\+(0\.\d+)\$ and'], 0.0005),
+     [r'\$ and \$\+(0\.\d+)\$ in the ultraviolet'], 0.0005),
+    ('vol_rho_d1_normal',
+     [r'ultraviolet channel, \$\+(0\.\d+)\$ and'], 0.0005),
     ('vol_rho_d2_normal',
-     [r'\$\+[\d.]+\$, \$\+[\d.]+\$ and \$\+(0\.\d+)\$'], 0.0005),
+     [r'\$\+(0\.\d+)\$\s+in the reflectance channel'], 0.0005),
+    # 2026-11-03 (작업 A-3) 신설. 채널내 런간 Fisher + 채널 BH.
+    ('vol_fisher_nor', [r'reflectance channel gives\s+\$p = (0\.\d+)\$'],
+     0.00005),
+    ('vol_fisher_uv', [r'ultraviolet channel does not\s*\n?\(\$q = (0\.\d+)\$\)',
+                       r'ultraviolet channel gives \$p = (0\.\d+)\$'],
+     0.00005),
+    ('vol_fisher_minq', [r'reflectance\s+channel reaches \$q = (0\.\d+)\$',
+                         r'\$p = 0\.0215\$ and \$q = (0\.\d+)\$'],
+     0.00005),
     ('vol_gap_cg', [r'sits (0\.\d+) decades from phosgene',
                     r'(0\.\d+) decades from phosgene'], 0.0005),
     ('vol_gap_ac', [r'(0\.\d+) decades\s+from hydrogen cyanide',

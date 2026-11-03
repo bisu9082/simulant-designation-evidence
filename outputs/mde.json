@@ -7,6 +7,21 @@
   "p_at_zero": 0.29792490118577075,
   "mde_delta": 0.23,
   "alpha": 0.05,
+  "mde_delta_bh18": 0.43,
+  "bh18_level": 0.002777777777777778,
+  "thresholds": {
+   "alpha": {
+    "level": 0.05,
+    "mde_delta": 0.23,
+    "ratio_median_gap_to_mde": 2.1415498238731785
+   },
+   "bh18": {
+    "level": 0.002777777777777778,
+    "mde_delta": 0.43,
+    "ratio_median_gap_to_mde": 1.14548013835077,
+    "note": "BH over the 18 tests of one panel construction. This is the threshold the conclusions use."
+   }
+  },
   "observed_at_zero": 1.9338575791109014,
   "gap_median": 0.4925564594908311,
   "gap_min": 0.12473514072899886,
@@ -776,6 +791,21 @@
   "p_at_zero": 0.025,
   "mde_delta": 0.0,
   "alpha": 0.05,
+  "mde_delta_bh18": 0.18,
+  "bh18_level": 0.002777777777777778,
+  "thresholds": {
+   "alpha": {
+    "level": 0.05,
+    "mde_delta": 0.0,
+    "ratio_median_gap_to_mde": null
+   },
+   "bh18": {
+    "level": 0.002777777777777778,
+    "mde_delta": 0.18,
+    "ratio_median_gap_to_mde": 0.41342007482788534,
+    "note": "BH over the 18 tests of one panel construction. This is the threshold the conclusions use."
+   }
+  },
   "observed_at_zero": 0.02343700603521553,
   "gap_median": 0.07441561346901936,
   "gap_min": -0.5456997658107252,

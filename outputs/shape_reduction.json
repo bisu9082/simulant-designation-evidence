@@ -1,0 +1,987 @@
+{
+ "generated_by": "shape_reduction.py",
+ "shape_all": [
+  "PMI1",
+  "PMI2",
+  "PMI3",
+  "NPR1",
+  "NPR2",
+  "Asphericity",
+  "Eccentricity",
+  "InertialShapeFactor",
+  "SpherocityIndex",
+  "RadiusOfGyration"
+ ],
+ "shape_primitive": [
+  "PMI1",
+  "PMI2",
+  "PMI3"
+ ],
+ "shape_derived_dropped": [
+  "NPR1",
+  "NPR2",
+  "Asphericity",
+  "Eccentricity",
+  "InertialShapeFactor",
+  "SpherocityIndex",
+  "RadiusOfGyration"
+ ],
+ "rationale": "omega 선례와 같다. 아홉 좌표가 관성텐서 3-벡터의 함수이고 관계가 비(ratio)이므로 선형 상관필터가 못 잡는다. 원시량 PMI1/2/3 만 남긴다.",
+ "variants": {
+  "full": {
+   "panel28_incumbent3": {
+    "n_dims": {
+     "structural": 35,
+     "electronic3": 3,
+     "merged": 38
+    },
+    "kept_shape": [
+     "Asphericity",
+     "Eccentricity",
+     "InertialShapeFactor",
+     "NPR1",
+     "NPR2",
+     "PMI1",
+     "PMI2",
+     "RadiusOfGyration",
+     "SpherocityIndex"
+    ],
+    "block_share_merged": {
+     "shape_pct": 23.684210526315784,
+     "electronic_pct": 7.894736842105262,
+     "n_shape_kept": 9,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 69.84930689888915,
+      "cyanogen chloride (CK) | acetonitrile": 61.850805778205725
+     }
+    },
+    "structural": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.19534354747424018,
+       "p": 0.027941176470588237,
+       "rank": 19
+      },
+      "median_diff": {
+       "observed": 0.5561170108620885,
+       "p": 0.11029411764705882,
+       "rank": 75
+      },
+      "mean_logratio": {
+       "observed": 0.08113344780636339,
+       "p": 0.11323529411764706,
+       "rank": 77
+      },
+      "mean_dsim": {
+       "observed": 6.840795774667281,
+       "p": 0.054411764705882354,
+       "rank": 37
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.11029411764705882,
+       "rank": 75
+      },
+      "n_valid": {
+       "observed": -3.0,
+       "p": 0.2161764705882353,
+       "rank": 147
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.4043810763636831,
+       "p": 0.275,
+       "rank": 187
+      },
+      "median_diff": {
+       "observed": 0.24154326843786533,
+       "p": 0.175,
+       "rank": 119
+      },
+      "mean_logratio": {
+       "observed": 0.30085593269284466,
+       "p": 0.2926470588235294,
+       "rank": 199
+      },
+      "mean_dsim": {
+       "observed": 1.4704786068591984,
+       "p": 0.23529411764705882,
+       "rank": 160
+      },
+      "n_closer": {
+       "observed": -1.0,
+       "p": 0.7573529411764706,
+       "rank": 515
+      },
+      "n_valid": {
+       "observed": -1.0,
+       "p": 0.7573529411764706,
+       "rank": 515
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.023437006035215893,
+       "p": 0.025,
+       "rank": 17
+      },
+      "median_diff": {
+       "observed": 0.28493027690498973,
+       "p": 0.04264705882352941,
+       "rank": 29
+      },
+      "mean_logratio": {
+       "observed": 0.04649879267802551,
+       "p": 0.051470588235294115,
+       "rank": 35
+      },
+      "mean_dsim": {
+       "observed": 7.028000073112003,
+       "p": 0.033823529411764704,
+       "rank": 23
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.11029411764705882,
+       "rank": 75
+      },
+      "n_valid": {
+       "observed": -3.0,
+       "p": 0.23529411764705882,
+       "rank": 160
+      }
+     }
+    },
+    "mantel": {
+     "n_cells": 12,
+     "min_p": 0.016666666666666666,
+     "min_q": 0.11666666666666667,
+     "n_sig_q": 0,
+     "max_abs_rho": 0.5714285714285713,
+     "cells": [
+      {
+       "cell": "d1_uv",
+       "space": "structural",
+       "spearman": 0.06785714285714285,
+       "p_mantel": 0.7847222222222222
+      },
+      {
+       "cell": "d1_uv",
+       "space": "electronic3",
+       "spearman": -0.22499999999999998,
+       "p_mantel": 0.22916666666666666
+      },
+      {
+       "cell": "d1_uv",
+       "space": "merged",
+       "spearman": 0.06785714285714285,
+       "p_mantel": 0.7847222222222222
+      },
+      {
+       "cell": "d1_normal",
+       "space": "structural",
+       "spearman": 0.03214285714285714,
+       "p_mantel": 0.8736111111111111
+      },
+      {
+       "cell": "d1_normal",
+       "space": "electronic3",
+       "spearman": 0.028571428571428564,
+       "p_mantel": 0.9277777777777778
+      },
+      {
+       "cell": "d1_normal",
+       "space": "merged",
+       "spearman": 0.03214285714285714,
+       "p_mantel": 0.8736111111111111
+      },
+      {
+       "cell": "d2_uv",
+       "space": "structural",
+       "spearman": 0.5107142857142856,
+       "p_mantel": 0.016666666666666666
+      },
+      {
+       "cell": "d2_uv",
+       "space": "electronic3",
+       "spearman": 0.014285714285714282,
+       "p_mantel": 0.95
+      },
+      {
+       "cell": "d2_uv",
+       "space": "merged",
+       "spearman": 0.5,
+       "p_mantel": 0.019444444444444445
+      },
+      {
+       "cell": "d2_normal",
+       "space": "structural",
+       "spearman": 0.24642857142857136,
+       "p_mantel": 0.4638888888888889
+      },
+      {
+       "cell": "d2_normal",
+       "space": "electronic3",
+       "spearman": 0.5714285714285713,
+       "p_mantel": 0.044444444444444446
+      },
+      {
+       "cell": "d2_normal",
+       "space": "merged",
+       "spearman": 0.28571428571428564,
+       "p_mantel": 0.3680555555555556
+      }
+     ]
+    },
+    "identity_audit": {
+     "NPR1*PMI3 vs PMI1": 0.06125779653164927,
+     "NPR2*PMI3 vs PMI2": 0.013638568571594793,
+     "PMI2/(PMI1*PMI3) vs ISF": 0.153040058841832,
+     "note": "볼츠만 평균을 서술자마다 독립으로 적용하므로 항등식이 깨진다. 기계정밀도가 아니다."
+    }
+   },
+   "panel35_incumbent3": {
+    "n_dims": {
+     "structural": 38,
+     "electronic3": 3,
+     "merged": 41
+    },
+    "kept_shape": [
+     "Asphericity",
+     "Eccentricity",
+     "InertialShapeFactor",
+     "NPR1",
+     "NPR2",
+     "PMI1",
+     "PMI2",
+     "RadiusOfGyration",
+     "SpherocityIndex"
+    ],
+    "block_share_merged": {
+     "shape_pct": 21.951219512195124,
+     "electronic_pct": 7.317073170731706,
+     "n_shape_kept": 9,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 73.06831180227928,
+      "cyanogen chloride (CK) | acetonitrile": 65.80423423346735
+     }
+    },
+    "structural": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 1.882831413206501,
+       "p": 0.35375494071146246,
+       "rank": 716
+      },
+      "median_diff": {
+       "observed": 1.7702239295975066,
+       "p": 0.32608695652173914,
+       "rank": 660
+      },
+      "mean_logratio": {
+       "observed": 0.38290201209561814,
+       "p": 0.424901185770751,
+       "rank": 860
+      },
+      "mean_dsim": {
+       "observed": 6.76456990787963,
+       "p": 0.25938735177865613,
+       "rank": 525
+      },
+      "n_closer": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      },
+      "n_valid": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.652635486187222,
+       "p": 0.3858695652173913,
+       "rank": 781
+      },
+      "median_diff": {
+       "observed": 0.5871204659230093,
+       "p": 0.37351778656126483,
+       "rank": 756
+      },
+      "mean_logratio": {
+       "observed": 0.6305356287676227,
+       "p": 0.4115612648221344,
+       "rank": 833
+      },
+      "mean_dsim": {
+       "observed": 1.4585453963244503,
+       "p": 0.3438735177865613,
+       "rank": 696
+      },
+      "n_closer": {
+       "observed": -1.0,
+       "p": 0.7233201581027668,
+       "rank": 1464
+      },
+      "n_valid": {
+       "observed": -1.0,
+       "p": 0.6640316205533597,
+       "rank": 1344
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 1.936936936869161,
+       "p": 0.29891304347826086,
+       "rank": 605
+      },
+      "median_diff": {
+       "observed": 1.7863944485097378,
+       "p": 0.24654150197628458,
+       "rank": 499
+      },
+      "mean_logratio": {
+       "observed": 0.37492923551442436,
+       "p": 0.3730237154150198,
+       "rank": 755
+      },
+      "mean_dsim": {
+       "observed": 6.955346593938542,
+       "p": 0.191699604743083,
+       "rank": 388
+      },
+      "n_closer": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      },
+      "n_valid": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      }
+     }
+    }
+   },
+   "panel35_incumbent_plus_lit8": {
+    "n_dims": {
+     "structural": 38,
+     "electronic3": 3,
+     "merged": 41
+    },
+    "kept_shape": [
+     "Asphericity",
+     "Eccentricity",
+     "InertialShapeFactor",
+     "NPR1",
+     "NPR2",
+     "PMI1",
+     "PMI2",
+     "RadiusOfGyration",
+     "SpherocityIndex"
+    ],
+    "block_share_merged": {
+     "shape_pct": 21.951219512195124,
+     "electronic_pct": 7.317073170731706,
+     "n_shape_kept": 9,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 73.06831180227928,
+      "cyanogen chloride (CK) | acetonitrile": 65.80423423346735
+     }
+    },
+    "structural": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.22093704239742679,
+       "p": 0.06732284481645096,
+       "rank": 49514
+      },
+      "median_diff": {
+       "observed": 0.5364319657198378,
+       "p": 0.2985909709560268,
+       "rank": 219605
+      },
+      "mean_logratio": {
+       "observed": -0.08110886967821103,
+       "p": 0.04890471548164373,
+       "rank": 35968
+      },
+      "mean_dsim": {
+       "observed": 5.713023249248933,
+       "p": 0.15454722212024674,
+       "rank": 113665
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.31909483854563947,
+       "rank": 234685
+      },
+      "n_valid": {
+       "observed": -5.0,
+       "p": 0.15942028985507245,
+       "rank": 117249
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.0060107872283561995,
+       "p": 0.12145006397261075,
+       "rank": 89323
+      },
+      "median_diff": {
+       "observed": -0.14383438557299977,
+       "p": 0.08623725476599349,
+       "rank": 63425
+      },
+      "mean_logratio": {
+       "observed": -0.09109540227634748,
+       "p": 0.1231714098856379,
+       "rank": 90589
+      },
+      "mean_dsim": {
+       "observed": 0.9834717982313769,
+       "p": 0.12708590821392005,
+       "rank": 93468
+      },
+      "n_closer": {
+       "observed": -6.0,
+       "p": 0.16506021311513303,
+       "rank": 121397
+      },
+      "n_valid": {
+       "observed": -6.0,
+       "p": 0.07990661766405474,
+       "rank": 58769
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.2776669201045933,
+       "p": 0.05731293280088542,
+       "rank": 42152
+      },
+      "median_diff": {
+       "observed": 0.730326983487279,
+       "p": 0.28337215199511606,
+       "rank": 208412
+      },
+      "mean_logratio": {
+       "observed": -0.10075105748802628,
+       "p": 0.03818641387627792,
+       "rank": 28085
+      },
+      "mean_dsim": {
+       "observed": 5.908891003366905,
+       "p": 0.12469968224443928,
+       "rank": 91713
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.31909483854563947,
+       "rank": 234685
+      },
+      "n_valid": {
+       "observed": -5.0,
+       "p": 0.15942028985507245,
+       "rank": 117249
+      }
+     }
+    }
+   }
+  },
+  "reduced": {
+   "panel28_incumbent3": {
+    "n_dims": {
+     "structural": 28,
+     "electronic3": 3,
+     "merged": 31
+    },
+    "kept_shape": [
+     "PMI1",
+     "PMI2"
+    ],
+    "block_share_merged": {
+     "shape_pct": 6.451612903225806,
+     "electronic_pct": 9.67741935483871,
+     "n_shape_kept": 2,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 0.19540763932695135,
+      "cyanogen chloride (CK) | acetonitrile": 0.11823333602243542
+     }
+    },
+    "structural": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.21505184278405318,
+       "p": 0.033823529411764704,
+       "rank": 23
+      },
+      "median_diff": {
+       "observed": 0.4581549564256111,
+       "p": 0.13088235294117648,
+       "rank": 89
+      },
+      "mean_logratio": {
+       "observed": 0.1635624171668775,
+       "p": 0.20147058823529412,
+       "rank": 137
+      },
+      "mean_dsim": {
+       "observed": 6.213717936651927,
+       "p": 0.08235294117647059,
+       "rank": 56
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.11029411764705882,
+       "rank": 75
+      },
+      "n_valid": {
+       "observed": -1.0,
+       "p": 0.4647058823529412,
+       "rank": 316
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.4043810763636831,
+       "p": 0.275,
+       "rank": 187
+      },
+      "median_diff": {
+       "observed": 0.24154326843786533,
+       "p": 0.175,
+       "rank": 119
+      },
+      "mean_logratio": {
+       "observed": 0.30085593269284466,
+       "p": 0.2926470588235294,
+       "rank": 199
+      },
+      "mean_dsim": {
+       "observed": 1.4704786068591984,
+       "p": 0.23529411764705882,
+       "rank": 160
+      },
+      "n_closer": {
+       "observed": -1.0,
+       "p": 0.7573529411764706,
+       "rank": 515
+      },
+      "n_valid": {
+       "observed": -1.0,
+       "p": 0.7573529411764706,
+       "rank": 515
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 680,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.010389647384581197,
+       "p": 0.027941176470588237,
+       "rank": 19
+      },
+      "median_diff": {
+       "observed": 0.05988224067834658,
+       "p": 0.051470588235294115,
+       "rank": 35
+      },
+      "mean_logratio": {
+       "observed": 0.09293172883770891,
+       "p": 0.18235294117647058,
+       "rank": 124
+      },
+      "mean_dsim": {
+       "observed": 6.398883351286016,
+       "p": 0.051470588235294115,
+       "rank": 35
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.1,
+       "rank": 68
+      },
+      "n_valid": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 680
+      }
+     }
+    },
+    "mantel": {
+     "n_cells": 12,
+     "min_p": 0.03888888888888889,
+     "min_q": 0.17083333333333334,
+     "n_sig_q": 0,
+     "max_abs_rho": 0.5714285714285713,
+     "cells": [
+      {
+       "cell": "d1_uv",
+       "space": "structural",
+       "spearman": 0.06785714285714285,
+       "p_mantel": 0.7847222222222222
+      },
+      {
+       "cell": "d1_uv",
+       "space": "electronic3",
+       "spearman": -0.22499999999999998,
+       "p_mantel": 0.22916666666666666
+      },
+      {
+       "cell": "d1_uv",
+       "space": "merged",
+       "spearman": 0.04285714285714285,
+       "p_mantel": 0.8513888888888889
+      },
+      {
+       "cell": "d1_normal",
+       "space": "structural",
+       "spearman": 0.03214285714285714,
+       "p_mantel": 0.8736111111111111
+      },
+      {
+       "cell": "d1_normal",
+       "space": "electronic3",
+       "spearman": 0.028571428571428564,
+       "p_mantel": 0.9277777777777778
+      },
+      {
+       "cell": "d1_normal",
+       "space": "merged",
+       "spearman": 0.039285714285714285,
+       "p_mantel": 0.8388888888888889
+      },
+      {
+       "cell": "d2_uv",
+       "space": "structural",
+       "spearman": 0.48214285714285704,
+       "p_mantel": 0.03888888888888889
+      },
+      {
+       "cell": "d2_uv",
+       "space": "electronic3",
+       "spearman": 0.014285714285714282,
+       "p_mantel": 0.95
+      },
+      {
+       "cell": "d2_uv",
+       "space": "merged",
+       "spearman": 0.34642857142857136,
+       "p_mantel": 0.15555555555555556
+      },
+      {
+       "cell": "d2_normal",
+       "space": "structural",
+       "spearman": 0.5214285714285714,
+       "p_mantel": 0.05694444444444444
+      },
+      {
+       "cell": "d2_normal",
+       "space": "electronic3",
+       "spearman": 0.5714285714285713,
+       "p_mantel": 0.044444444444444446
+      },
+      {
+       "cell": "d2_normal",
+       "space": "merged",
+       "spearman": 0.5249999999999999,
+       "p_mantel": 0.04861111111111111
+      }
+     ]
+    },
+    "identity_audit": {
+     "NPR1*PMI3 vs PMI1": 0.06125779653164927,
+     "NPR2*PMI3 vs PMI2": 0.013638568571594793,
+     "PMI2/(PMI1*PMI3) vs ISF": 0.153040058841832,
+     "note": "볼츠만 평균을 서술자마다 독립으로 적용하므로 항등식이 깨진다. 기계정밀도가 아니다."
+    }
+   },
+   "panel35_incumbent3": {
+    "n_dims": {
+     "structural": 31,
+     "electronic3": 3,
+     "merged": 34
+    },
+    "kept_shape": [
+     "PMI1",
+     "PMI2"
+    ],
+    "block_share_merged": {
+     "shape_pct": 5.882352941176472,
+     "electronic_pct": 8.823529411764705,
+     "n_shape_kept": 2,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 0.13240738996606197,
+      "cyanogen chloride (CK) | acetonitrile": 0.0786199254664591
+     }
+    },
+    "structural": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 1.652582696306293,
+       "p": 0.28952569169960474,
+       "rank": 586
+      },
+      "median_diff": {
+       "observed": 1.1908092842248643,
+       "p": 0.18379446640316205,
+       "rank": 372
+      },
+      "mean_logratio": {
+       "observed": 0.435718072610555,
+       "p": 0.3858695652173913,
+       "rank": 781
+      },
+      "mean_dsim": {
+       "observed": 5.904586772460618,
+       "p": 0.1941699604743083,
+       "rank": 393
+      },
+      "n_closer": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      },
+      "n_valid": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 0.652635486187222,
+       "p": 0.3858695652173913,
+       "rank": 781
+      },
+      "median_diff": {
+       "observed": 0.5871204659230093,
+       "p": 0.37351778656126483,
+       "rank": 756
+      },
+      "mean_logratio": {
+       "observed": 0.6305356287676227,
+       "p": 0.4115612648221344,
+       "rank": 833
+      },
+      "mean_dsim": {
+       "observed": 1.4585453963244503,
+       "p": 0.3438735177865613,
+       "rank": 696
+      },
+      "n_closer": {
+       "observed": -1.0,
+       "p": 0.7233201581027668,
+       "rank": 1464
+      },
+      "n_valid": {
+       "observed": -1.0,
+       "p": 0.6640316205533597,
+       "rank": 1344
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 2024,
+     "statistics": {
+      "mean_diff": {
+       "observed": 1.6634617697942635,
+       "p": 0.2267786561264822,
+       "rank": 459
+      },
+      "median_diff": {
+       "observed": 1.2701380071236676,
+       "p": 0.08201581027667984,
+       "rank": 166
+      },
+      "mean_logratio": {
+       "observed": 0.39275306326151327,
+       "p": 0.32065217391304346,
+       "rank": 649
+      },
+      "mean_dsim": {
+       "observed": 6.11550093238792,
+       "p": 0.1383399209486166,
+       "rank": 280
+      },
+      "n_closer": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      },
+      "n_valid": {
+       "observed": 0.0,
+       "p": 1.0,
+       "rank": 2024
+      }
+     }
+    }
+   },
+   "panel35_incumbent_plus_lit8": {
+    "n_dims": {
+     "structural": 31,
+     "electronic3": 3,
+     "merged": 34
+    },
+    "kept_shape": [
+     "PMI1",
+     "PMI2"
+    ],
+    "block_share_merged": {
+     "shape_pct": 5.882352941176472,
+     "electronic_pct": 8.823529411764705,
+     "n_shape_kept": 2,
+     "n_elec_kept": 3,
+     "near_linear_pairs_shape_pct": {
+      "hydrogen cyanide (AC) | acetonitrile": 0.13240738996606197,
+      "cyanogen chloride (CK) | acetonitrile": 0.0786199254664591
+     }
+    },
+    "structural": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.1812960361228275,
+       "p": 0.08545952185742198,
+       "rank": 62853
+      },
+      "median_diff": {
+       "observed": 0.5653373704735962,
+       "p": 0.2975657775765462,
+       "rank": 218851
+      },
+      "mean_logratio": {
+       "observed": 0.003699459796087205,
+       "p": 0.2082284685596033,
+       "rank": 153146
+      },
+      "mean_dsim": {
+       "observed": 5.075915348633853,
+       "p": 0.18785105055127937,
+       "rank": 138159
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.3242724730138918,
+       "rank": 238493
+      },
+      "n_valid": {
+       "observed": -4.0,
+       "p": 0.2490118577075099,
+       "rank": 183141
+      }
+     }
+    },
+    "electronic3": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.0060107872283561995,
+       "p": 0.12145006397261075,
+       "rank": 89323
+      },
+      "median_diff": {
+       "observed": -0.14383438557299977,
+       "p": 0.08623725476599349,
+       "rank": 63425
+      },
+      "mean_logratio": {
+       "observed": -0.09109540227634748,
+       "p": 0.1231714098856379,
+       "rank": 90589
+      },
+      "mean_dsim": {
+       "observed": 0.9834717982313769,
+       "p": 0.12708590821392005,
+       "rank": 93468
+      },
+      "n_closer": {
+       "observed": -6.0,
+       "p": 0.16506021311513303,
+       "rank": 121397
+      },
+      "n_valid": {
+       "observed": -6.0,
+       "p": 0.07990661766405474,
+       "rank": 58769
+      }
+     }
+    },
+    "merged": {
+     "n_permutations": 735471,
+     "statistics": {
+      "mean_diff": {
+       "observed": -0.27073871948024136,
+       "p": 0.06330093232771924,
+       "rank": 46556
+      },
+      "median_diff": {
+       "observed": 0.3937275964291649,
+       "p": 0.30935550144057344,
+       "rank": 227522
+      },
+      "mean_logratio": {
+       "observed": -0.046914015188094994,
+       "p": 0.1370727057898952,
+       "rank": 100813
+      },
+      "mean_dsim": {
+       "observed": 5.265590874075194,
+       "p": 0.14123466458908646,
+       "rank": 103874
+      },
+      "n_closer": {
+       "observed": -5.0,
+       "p": 0.31909483854563947,
+       "rank": 234685
+      },
+      "n_valid": {
+       "observed": -4.0,
+       "p": 0.2490118577075099,
+       "rank": 183141
+      }
+     }
+    }
+   }
+  }
+ }
+}
