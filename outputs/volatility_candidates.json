@@ -1,0 +1,1030 @@
+{
+ "generated_by": "volatility_fetch.py",
+ "source": "PubChem PUG-View, heading=Vapor Pressure",
+ "note": "수집 전용. 채택값은 volatility_space.py 가 정본.",
+ "compounds": [
+  {
+   "name": "DMMP",
+   "klass": "simulant",
+   "cid": "12958",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "1.2 mmHg at 77 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "1.2 [mmHg]"
+    },
+    {
+     "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances. Second Revised Edition. Amsterdam: Elsevier, 1984.",
+     "value": "0.962 mm Hg at 25 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.962 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "acetone",
+   "klass": "interferent",
+   "cid": "180",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "180 mmHg at 68 °F ; 270 mmHg at 86 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "231.0 [mmHg]"
+    },
+    {
+     "source": "PMID:7676461",
+     "value": "231 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 24"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "180 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "180 [mm Hg] @20 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "180 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "methanol",
+   "klass": "interferent",
+   "cid": "887",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "100 mmHg at 70.2 °F ; 237.87 mmHg at 100 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "127.0 [mmHg]"
+    },
+    {
+     "source": "Larranaga, M.D., Lewis, R.J. Sr., Lewis, R.A.; Hawley's Condensed Chemical Dictionary 16th  Edition. John Wiley & Sons, Inc. Hoboken, NJ 2016., p. 892",
+     "value": "VP: 92 mm Hg at 20 °C"
+    },
+    {
+     "source": "Haynes, W.M. (ed.). CRC Handbook of Chemistry and Physics. 95th Edition. CRC Press LLC, Boca Raton: FL 2014-2015, p. 6-124",
+     "value": "VP: 18.7 kPa at 300 K"
+    },
+    {
+     "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances. Second Revised Edition. Amsterdam: Elsevier, 1984., p. 57",
+     "value": "127 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 12.9"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "96 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @15.2 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "96 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "acetonitrile",
+   "klass": "interferent",
+   "cid": "6342",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "73 mmHg at 68 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "88.8 [mmHg]"
+    },
+    {
+     "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances. Second Revised Edition. Amsterdam: Elsevier, 1984.",
+     "value": "88.8 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 25 °C: 9.9"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "73 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "73 [mm Hg] @20 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "73 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "chloroform",
+   "klass": "interferent",
+   "cid": "6212",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "100 mmHg at 50.72 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "197.0 [mmHg]"
+    },
+    {
+     "source": "Prager, J.C. Environmental Contaminant Reference Databook Volume 1. New York, NY: Van Nostrand Reinhold, 1995., p. 453",
+     "value": "VP: 100 mm Hg at 10.4 °C"
+    },
+    {
+     "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances. Second Revised Edition. Amsterdam: Elsevier, 1984.",
+     "value": "197 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 21.2"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "160 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @4.3 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "160 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "n-hexane",
+   "klass": "interferent",
+   "cid": "8058",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "120 mmHg at 68 °F ; 180 mmHg at 77 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "153.0 [mmHg]"
+    },
+    {
+     "source": "Verschueren, K. Handbook of Environmental Data on Organic Chemicals. Volumes 1-2. 4th ed. John Wiley & Sons. New York, NY. 2001, p. 1269",
+     "value": "Vapor pressure: 120 mm Hg at 20 °C, 190 mm Hg at 30 °C"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "153 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 17"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "124 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @9.8000000000000007 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "124 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "THF",
+   "klass": "interferent",
+   "cid": "8028",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "114 mmHg at 59 °F ; 145 mmHg at 68 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "162.0 [mmHg]"
+    },
+    {
+     "source": "Verschueren, K. Handbook of Environmental Data on Organic Chemicals. Volumes 1-2. 4th ed. John Wiley & Sons. New York, NY. 2001, p. 1972",
+     "value": "Vapor pressure = 0.06 atm at 0 °C, 0.11 atm at 10 °C, 0.173 atm at 20 °C, 0.26 atm at 30 °C"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "1.62X10+2 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 19.3"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "132 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @9 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "132 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "ethyl acetate",
+   "klass": "interferent",
+   "cid": "8857",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "73 mmHg at 68 °F ; 100 mmHg at 81 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "93.2 [mmHg]"
+    },
+    {
+     "source": "Daubert TE, Danner RP; Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, DC: Taylor and Francis, (1991)",
+     "value": "93.2 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 10"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "73 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @20.399999999999999 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "73 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "benzene",
+   "klass": "interferent",
+   "cid": "241",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "60 mmHg at 59 °F ; 76 mmHg at 68 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "94.8 [mmHg]"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989., p. 361",
+     "value": "94.8 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 10"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "75 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @20 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "75 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "water",
+   "klass": "interferent",
+   "cid": "962",
+   "candidates": [
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "23.75 [mmHg]"
+    },
+    {
+     "source": "Lewis, R.J. Sr. (ed) Sax's Dangerous Properties of Industrial Materials. 11th Edition. Wiley-Interscience, Wiley & Sons, Inc. Hoboken, NJ. 2004., p. V3: 3692",
+     "value": "VP: 760 mm Hg at 100 °C"
+    },
+    {
+     "source": "Haynes, W.M. (ed.). CRC Handbook of Chemistry and Physics. 94th Edition. CRC Press LLC, Boca Raton: FL 2013-2014, p. 6-13",
+     "value": "VP: 611.657 Pa at 273.16 K"
+    }
+   ]
+  },
+  {
+   "name": "dichloromethane",
+   "klass": "simulant",
+   "cid": "6344",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "440 mmHg at 77 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "435.0 [mmHg]"
+    },
+    {
+     "source": "Boublik, T., Fried, V., and Hala, E., The Vapour Pressures of Pure Substances. Second Revised Edition. Amsterdam: Elsevier, 1984.",
+     "value": "435 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 47.4"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "350 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "750 [mm Hg] @39.299999999999997 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "350 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "DPGME",
+   "klass": "simulant",
+   "cid": "25484",
+   "candidates": [
+    {
+     "source": "CAMEO Chemicals",
+     "value": "0.5 mmHg (NIOSH, 2024)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.3 [mmHg]"
+    },
+    {
+     "source": "Browning, E. Toxicity and Metabolism of Industrial Solvents. New York: American Elsevier, 1965., p. 657",
+     "value": "0.4 MM HG @ 26 °C"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "0.5 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.4 [mm Hg] @26 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "0.5 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "ethanol",
+   "klass": "interferent",
+   "cid": "702",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "40 mmHg at 66 °F ; 50 mmHg at 77 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "59.3 [mmHg]"
+    },
+    {
+     "source": "Haynes, W.M. (ed.). CRC Handbook of Chemistry and Physics. 95th Edition. CRC Press LLC, Boca Raton: FL 2014-2015, p. 6-96",
+     "value": "VP: -73 °C at 1 Pa; -56 °C at 10 Pa; -34 °C at 100 Pa; -7 °C at 1 kPa (all extrapolated); 29.2 °C at 10 kPa; 78.0 °C at 100 kPa"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "59.3 mm Hg at 25 °C /Extrapolated/"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 5.8"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "44 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "75 [mm Hg] @29.2 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "44 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "toluene",
+   "klass": "interferent",
+   "cid": "1140",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "10 mmHg at 43.5 °F ; 20 mmHg at 65.1 °F; 40 mmHg at 89.2 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "28.4 [mmHg]"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "28.4 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 25 °C: 3.8"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "21 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "7.5 [mm Hg] @1.5 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "21 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "DMSO",
+   "klass": "interferent",
+   "cid": "679",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "0.42 mmHg at 68 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.61 [mmHg]"
+    },
+    {
+     "source": "Verschueren, K. Handbook of Environmental Data on Organic Chemicals. Volumes 1-2. 4th ed. John Wiley & Sons. New York, NY. 2001, p. 941",
+     "value": "VP: 0.42 mm at 20 °C"
+    },
+    {
+     "source": "Daubert TE, Danner RP; Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, DC: Taylor and Francis (2002)",
+     "value": "0.60 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, Pa at 20 °C: 59.4"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.75 [mm Hg] @27.4 °C"
+    }
+   ]
+  },
+  {
+   "name": "p-dichlorobenzene",
+   "klass": "interferent",
+   "cid": "4685",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "0.6 mmHg at 68 °F ; 1.8 mmHg at 86 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "1.74 [mmHg]"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "1.74 mm Hg at 25 °C"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "1.36 to 2.2 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, Pa at 20 °C: 170"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "1.3 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.75 [mm Hg] @8 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "1.3 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "p-xylene",
+   "klass": "interferent",
+   "cid": "7809",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "10 mmHg at 81.1 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "8.84 [mmHg]"
+    },
+    {
+     "source": "Chao J et al; J Phys Chem Ref Data 12: 1033-66 (1983)",
+     "value": "8.84 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 0.9"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "9 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "sarin (GB)",
+   "klass": "real_agent",
+   "cid": "7871",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "2.9 mmHg at 77 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "2.86 [mmHg]"
+    },
+    {
+     "source": "Epstein J; J Amer Water Works Assoc Jan: 31-7 (1974)",
+     "value": "2.86 mm Hg at 25 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "2.86 [mm Hg] @20 °C"
+    }
+   ]
+  },
+  {
+   "name": "soman (GD)",
+   "klass": "real_agent",
+   "cid": "7305",
+   "candidates": [
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.41 [mmHg]"
+    },
+    {
+     "source": "Balboa A et al; Vapor Pressure of GD, ECBC-TR-575, October 2007, Edgewood Chemical Biological Center, US Army, Aberdeen Proving Ground, MD (2007); Available from, as of June 13, 2013: https://www.dtic.mil/dtic/tr/fulltext/u2/a473748.pdf",
+     "value": "0.41 mm Hg at 25 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.4 [mm Hg] @20 °C"
+    }
+   ]
+  },
+  {
+   "name": "tabun (GA)",
+   "klass": "real_agent",
+   "cid": "6500",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.07 mmHg at 77 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.07 [mmHg]"
+    },
+    {
+     "source": "Munro NB et al; Environ Health Perspectives 107: 933-974 (1999)",
+     "value": "0.07 mm Hg at 25 °C; 0.037 mm Hg at 20 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.07 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "sulfur mustard (HD)",
+   "klass": "real_agent",
+   "cid": "10461",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.09 mmHg at 86 °F (EPA, 1998)"
+    },
+    {
+     "source": "PMID:10585900",
+     "value": "0.11 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, Pa at 20 °C: 9.33"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "0.09 mmHg at 86 °F"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.11 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "lewisite 1 (L)",
+   "klass": "real_agent",
+   "cid": "10923",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.395 mmHg at 68 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.58 [mmHg]"
+    },
+    {
+     "source": "PMID:2692088",
+     "value": "Vapor pressure= 0.4 mm Hg at 25 °C /trans-isomer/"
+    },
+    {
+     "source": "PMID:2692088",
+     "value": "Vapor pressure= 1.562 mm Hg at 25 °C /cis-isomer/"
+    },
+    {
+     "source": "Munro NB et al; Environ Health Perspectives 107: 933-974 (1999)",
+     "value": "0.58 mm Hg at 25 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.4 [mm Hg] @20 °C"
+    }
+   ]
+  },
+  {
+   "name": "hydrogen cyanide (AC)",
+   "klass": "real_agent",
+   "cid": "768",
+   "candidates": [
+    {
+     "source": "CAMEO Chemicals",
+     "value": "630 mmHg (NIOSH, 2024)"
+    },
+    {
+     "source": "CAMEO Chemicals",
+     "value": "630 mmHg (NIOSH, 2024)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "742.0 [mmHg]"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "742 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 82.6"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "630 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "750 [mm Hg] @25.4 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "630 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "cyanogen chloride (CK)",
+   "klass": "real_agent",
+   "cid": "10477",
+   "candidates": [
+    {
+     "source": "U.S. Coast Guard. 1999. Chemical Hazard Response Information System (CHRIS) - Hazardous Chemical Data. Commandant Instruction 16465.12C. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "704.36 mmHg at 50 °F (USCG, 1999)"
+    },
+    {
+     "source": "ATSDR; Toxicological Profile for Cyanide. 4. Chemical and Physical Information. Atlanta, GA: Agency for Toxic Substances and Disease Registry, US Public Health Service (2006). Available from, as of Sept 12, 2013: https://www.atsdr.cdc.gov/toxprofiles/tp8-c4.pdf",
+     "value": "VP: 760 mm Hg at 13 °C"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "1.23X10+3 mm Hg at 25 C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 21.1 °C: 1987"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "1010 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "1230 [mm Hg] @25 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "1010 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "phosgene (CG)",
+   "klass": "real_agent",
+   "cid": "6371",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "1215 mmHg at 68 °F (EPA, 1998)"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "1420 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 161.6"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "1.6 atm"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "750 [mm Hg] @7.2 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "1.6 atm"
+    }
+   ]
+  },
+  {
+   "name": "chloropicrin (PS)",
+   "klass": "real_agent",
+   "cid": "6423",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "16.9 mmHg at 68 °F ; 40 mmHg at 92.8 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "24.0 [mmHg]"
+    },
+    {
+     "source": "Tomlin CDS, ed. Chloropicrin (76-06-2). In: The e-Pesticide Manual, 13th Edition Version 3.1 (2004-05). Surrey UK, British Crop Protection Council.",
+     "value": "3.2 kPa (24 mm Hg) at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, kPa at 20 °C: 2.7"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "18 mmHg"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "7.5 [mm Hg] @4.4000000000000004 °C"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "18 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "cyclosarin (GF)",
+   "klass": "real_agent",
+   "cid": "64505",
+   "candidates": [
+    {
+     "source": "Augerson W; A Review of the Scientific Literature as it Pertains to Gulf War Illnesses. Vol 5. Chemical and Biological Warfare Agents. Rand Corp., Santa Monica, CA (2000)",
+     "value": "0.044 mm Hg at 20 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.05 [mm Hg] @20 °C"
+    }
+   ]
+  },
+  {
+   "name": "VX",
+   "klass": "real_agent",
+   "cid": "39793",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.0007 mmHg at 77 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.000878 [mmHg]"
+    },
+    {
+     "source": "Leggett DC; Persistence of Chemical Agents on the Winter Battlefield. Part 1. CRREL Report 87-12. US Army Cold Reg Res Eng Lab Hanover, NH (1987)",
+     "value": "Vapor pressure: 7.0X10-4 mm Hg at 25 °C"
+    },
+    {
+     "source": "Buchanan JH et al; Vapor Pressure of VX, ECBC-TR-068 (Nov 1999), Edgewood Chemical Biological Center, Aberdeen Proving Ground, MD 21010 (1999). Available from, as of June 24, 2013: https://www.dtic.mil/dtic/tr/fulltext/u2/a371297.pdf",
+     "value": "8.78X10-4 mm Hg at 25 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.0007 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "DCP",
+   "klass": "literature_simulant",
+   "cid": "13139",
+   "candidates": []
+  },
+  {
+   "name": "DFP",
+   "klass": "literature_simulant",
+   "cid": "5936",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.579 mmHg at 68 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.57 [mmHg]"
+    },
+    {
+     "source": "Budavari, S. (ed.). The Merck Index - An Encyclopedia of Chemicals, Drugs, and Biologicals. Whitehouse Station, NJ: Merck and Co., Inc., 1996., p. 883",
+     "value": "0.579 mm Hg @ 20 °C"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.58 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "DCNP",
+   "klass": "literature_simulant",
+   "cid": "76257",
+   "candidates": []
+  },
+  {
+   "name": "CEES",
+   "klass": "literature_simulant",
+   "cid": "12733",
+   "candidates": [
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "3.4 [mmHg]"
+    },
+    {
+     "source": "Bennett SR et al; Environmental Hazards of Chemical Agent Simulants. Aberdeen Proving Ground, MD. CRDC-TR-84055. p. 43 (1984)",
+     "value": "3.4 mm Hg @ 25 °C"
+    }
+   ]
+  },
+  {
+   "name": "methyl salicylate",
+   "klass": "literature_simulant",
+   "cid": "4133",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "0.0975 mmHg at 68 °F ; 1 mmHg at 129 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.03 [mmHg]"
+    },
+    {
+     "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989.",
+     "value": "Vapor pressure = 0.0343 mm Hg @ 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, Pa at 20 °C: 13"
+    },
+    {
+     "source": "PAC Chemical Database, U.S. Department of Energy",
+     "value": "0.0343 [mm Hg] @25 °C"
+    }
+   ]
+  },
+  {
+   "name": "dichlorvos",
+   "klass": "interferent",
+   "cid": "3039",
+   "candidates": [
+    {
+     "source": "U.S. Environmental Protection Agency. 1998. Extremely Hazardous Substances (EHS) Chemical Profiles and Emergency First Aid Guides. Washington, D.C.: U.S. Government Printing Office.",
+     "value": "0.01 mmHg at 86 °F (EPA, 1998)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.01 [mmHg]"
+    },
+    {
+     "source": "MacBean C, ed; e-Pesticide Manual. 15th ed., ver. 5.1, Alton, UK; British Crop Protection Council. Dichlorvos (62-73-7) (2008-2010)",
+     "value": "1.58X10-2 mm Hg at 25 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure, Pa at 20 °C: 1.6"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "0.01 mmHg"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "0.01 mmHg"
+    }
+   ]
+  },
+  {
+   "name": "malathion",
+   "klass": "interferent",
+   "cid": "4004",
+   "candidates": [
+    {
+     "source": "National Toxicology Program, Institute of Environmental Health Sciences, National Institutes of Health (NTP). 1992. National Toxicology Program Chemical Repository Database. Research Triangle Park, North Carolina.",
+     "value": "4e-05 mmHg at 86 °F (NTP, 1992)"
+    },
+    {
+     "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases",
+     "value": "0.00004 [mmHg]"
+    },
+    {
+     "source": "MacBean C, ed; e-Pesticide Manual. 15th ed., ver. 5.1, Alton, UK; British Crop Protection Council. Malathion (121-75-5) (2008-2010)",
+     "value": "3.97X10-5 mm Hg at 30 °C"
+    },
+    {
+     "source": "ILO-WHO International Chemical Safety Cards (ICSCs)",
+     "value": "Vapor pressure at 30 °C: negligible"
+    },
+    {
+     "source": "Occupational Safety and Health Administration (OSHA)",
+     "value": "0.00004 mmHg"
+    },
+    {
+     "source": "The National Institute for Occupational Safety and Health (NIOSH)",
+     "value": "0.00004 mmHg"
+    }
+   ]
+  }
+ ]
+}
