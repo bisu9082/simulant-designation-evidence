@@ -31,7 +31,17 @@ TEX = 'paper/main.tex'
 # 갈라진다. 둘 다 같은 산출물에 대조하면 어느 쪽에 구판 값이 남아도 걸린다.
 EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
              'paper/supplementary.tex', 'paper_acs/main.tex',
-             'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex')
+             'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
+             # 2026-11-03. tab:ablation 을 \input 으로 바꿨으므로 생성된
+             # 표 파일도 대조 대상에 넣는다. 넣지 않으면 그 표의 셀을
+             # 가리키는 앵커 11개가 '문맥 미발견' 으로 조용히 빠진다.
+             # 2026-11-03 (2차). family / blockbalance / sparse 세 표도
+             # 생성으로 돌렸다. 네 표 전부를 넣는다.
+             'paper_acs/tab_ablation.tex', 'paper/tab_ablation.tex',
+             'paper_acs/tab_family.tex', 'paper/tab_family.tex',
+             'paper_acs/tab_blockbalance.tex', 'paper/tab_blockbalance.tex',
+             'paper_acs/tab_sparse.tex', 'paper/tab_sparse.tex',
+             'paper_acs/tab_plocal.tex', 'paper/tab_plocal.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -141,6 +151,98 @@ def _dropped_periods():
                 ctx = ' '.join(body[max(0, m.start() - 60):m.end() + 30].split())
                 out.append(f'  마침표 누락 의심 [{f}] {why}: {ctx}')
     return sorted(set(out))
+
+
+def _ordinal_typos():
+    """소수 뒤 서수 접미사 오류를 찾는다 (2026-11-03 신설).
+
+    왜. 백분위를 되쓰면서 '24.3rd' 의 접미사를 그대로 두고 숫자만 바꿔
+    '22.4rd' 가 되었다. 소수로 끝나는 수의 서수는 영어에서 항상 th 다.
+    GATE 8 8차 리뷰어가 네 자리에서 이걸 찾아냈다.
+    """
+    import os as _o
+    import re as _r
+    bad = []
+    for f in (TEX,) + EXTRA_TEX:
+        if not _o.path.exists(f):
+            continue
+        for m in _r.finditer(r'\d\.\d(?:rd|st|nd)\b', open(f).read()):
+            bad.append(f'  서수 접미사 오류 [{f}]: {m.group(0)} -> '
+                       f'{m.group(0)[:-2]}th')
+    return sorted(set(bad))
+
+
+def _handmade_tables():
+    r"""산출물에서 생성되지 않는 수치 표를 찾는다 (2026-11-03 신설).
+
+    왜 필요한가. SI 의 tab:ablation 은 10열 24수치를 손으로 유지하고
+    있었고, 어떤 스크립트도 만들지 않았다. 그래서 T2-1(상관필터 교체)과
+    T2-8(형태이성질체 재생성)을 전부 통과해 차원 열이 40/42 구판으로
+    살아남았고, 검증기 458건도 통과시켰다. G-D 가드는 인용된 예치 '파일'
+    만 보고 표는 보지 않았다.
+
+    여기서는 방향을 뒤집는다. 수치가 여러 줄 들어가는 table 환경은
+    \input 으로 들어와야 하며, 본문 안에 직접 적혀 있으면 생성기가 없는
+    것으로 보고 보고한다. 판정 기준은 '표 본문에 소수가 12개 이상' 이다.
+    작은 대조표나 문자 표는 걸리지 않는다. 면제가 필요한 표는 캡션에
+    'hand-tabulated' 를 적어 사유를 남긴다.
+    """
+    import os as _o
+    import re as _r
+    out = []
+    for f in (TEX,) + EXTRA_TEX:
+        if not _o.path.exists(f):
+            continue
+        s_ = open(f).read()
+        # 2026-11-03. 생성된 표 파일 자체가 이 가드에 걸렸다. 생성기가
+        # 찍는 머리글이 있으면 '산출물에서 만들어진 표'이므로 건너뛴다.
+        if 'make_si_tables.py' in s_.split('\n')[0]:
+            continue
+        for m in _r.finditer(r'\\begin\{table\}(.*?)\\end\{table\}', s_, _r.S):
+            blk = m.group(1)
+            lab = _r.search(r'\\label\{([^}]*)\}', blk)
+            body = _r.sub(r'\\caption\{.*?\n\n', '', blk, flags=_r.S)
+            nums = _r.findall(r'(?<![\w.])\d+\.\d+', body)
+            if len(nums) >= 12 and 'hand-tabulated' not in blk:
+                out.append(f'  생성기 없는 수치 표 [{f}] '
+                           f'{lab.group(1) if lab else "(라벨 없음)"}: '
+                           f'소수 {len(nums)}개가 본문에 직접 적혀 있다. '
+                           'make_si_tables.py 로 생성하거나 캡션에 '
+                           "'hand-tabulated' 와 사유를 적을 것")
+    return sorted(set(out))
+
+
+def _generated_table_sync():
+    r"""생성된 표의 원고 사본이 outputs/ 와 어긋나지 않는지 본다.
+
+    왜 필요한가 (2026-11-03 신설). 손표를 생성으로 돌리는 것만으로는
+    전파 실패가 사라지지 않는다. 생성기를 다시 돌려도 paper_acs/ 와
+    paper/ 의 사본이 구판이면 원고에 박히는 수치는 그대로다. 도판에서
+    같은 일이 이미 두 번 있었고(GATE 8 3차, 7차), 표에서도 같은 구멍이
+    난다. 빌드 스크립트가 복사하지만, 빌드를 거치지 않고 검증기만 돌린
+    경우에 조용히 통과하는 것을 막는다. 사본이 다르면 어느 파일이
+    어긋났는지 적어 보고한다.
+    """
+    import os as _o
+    bad = []
+    for name in ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
+                 'tab_sparse.tex', 'tab_plocal.tex'):
+        src = f'outputs/{name}'
+        if not _o.path.exists(src):
+            bad.append(f'  생성 표 없음 [{src}]: make_si_tables.py 를 돌릴 것')
+            continue
+        ref = open(src).read()
+        for d in ('paper_acs', 'paper'):
+            dst = f'{d}/{name}'
+            if not _o.path.exists(dst):
+                bad.append(f'  생성 표 사본 없음 [{dst}]: '
+                           'sh build_paper%s.sh 를 돌릴 것'
+                           % ('_acs' if d == 'paper_acs' else ''))
+            elif open(dst).read() != ref:
+                bad.append(f'  생성 표 사본이 구판 [{dst}]: {src} 와 다르다. '
+                           'sh build_paper%s.sh 로 동기화할 것'
+                           % ('_acs' if d == 'paper_acs' else ''))
+    return sorted(set(bad))
 
 
 def preflight():
@@ -1135,7 +1237,19 @@ def row_pat(label, space, col):
 
 # 본문에 인용하지 않기로 한 사실. 키마다 이유를 적는다. 비워 두는 것이 정상이고,
 # 여기 들어오는 항목은 '검사를 끈다'는 선언이므로 심사 대상이다.
-UNQUOTED = {}
+UNQUOTED = {
+    # 2026-11-03. 처음에는 pp_el_* / pp_mg_* 여섯 건도 여기 올렸다. 그것은
+    # 내 오판이었다. 행이 삭제된 것이 아니라, make_si_tables 의 ROWS 가
+    # 블록마다 이름 두 개만 두고 농약 구성의 세 줄짜리 이름을 한 칸에
+    # 넣었던 탓에 이름이 공간과 한 칸씩 어긋나 찍혀 앵커가 빗나간 것이다.
+    # 생성기의 배치를 손표대로 되돌려 여섯 건 모두 되살렸다. 검사를 끄는
+    # 쪽으로 기울면 이런 오판이 통과한다는 사례로 적어 둔다.
+    #
+    # C(24,10) 전수열거 횟수는 농약 구성 절을 줄이면서 본문에서 빠졌다.
+    # 표본이 아니라 전수열거라는 사실 자체는 2.1 이 C(24,3) 으로 이미
+    # 말하고 있다. 이 한 건만 면제로 남긴다.
+    'pp_n_perm': '농약 구성의 전수열거 횟수를 본문에 싣지 않기로 함',
+}
 
 
 # 2026-11-02 신설. 문헌 인용 수치.
@@ -1296,8 +1410,12 @@ CHECKS = [
     ('p_struct', [r'with the structural\s+space at ([\d.]+)',
      r'condition \(structural \$p=([\d.]+)\$',
                   row_pat('28 cpd., incumbent 3', 'structural', 0)], 0.0005),
-    ('p_elec', [r'electronic \$p=([\d.]+)\$',
-                row_pat('(omits the five)', 'electronic', 0)], 0.0005),
+    # 2026-11-03. 'electronic $p=...$' 어법은 본문에서 사라졌고, 삭제판
+    # 행 이름도 (omits the five) -> (omits the seven) 로 바뀌어 두 패턴이
+    # 함께 꺼져 있었다. 살아 있는 두 자리로 다시 가리킨다.
+    ('p_elec', [r'one-sided \$p\$ of ([\d.]+) to five matches',
+                r'a one-sided \$p\$ of ([\d.]+)\.',
+                row_pat('(omits the seven)', 'electronic', 0)], 0.0005),
     # 각 블록의 세 번째 행은 행 이름 칸이 비어 있다. 앞 행을 닻으로 쓴다.
     ('p_merged', [r'merged space returns a nominal one-sided \$p\$ of\s+([\d.]+)',
      r'merged \$p=([\d.]+)\$',
@@ -1403,8 +1521,10 @@ CHECKS = [
     ('sn_actual', [r'reaches \$p<0\.05\$ in ([\d.]+)\\% of them',
      r"incumbent designation's (\d+\.\d+)\\% ranks fifth"], 0.06),
     ('fam_minp_p35', [r'Smallest nominal \$p\$ \(18 tests\)\s*& (\d+\.\d+) &'], 0.0006),
-    ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
-    ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
+    ('fam_minp_p35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*&\s*'
+                         r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0006),
+    ('fam_minp_p28', [r'Smallest nominal \$p\$ \(18 tests\)\s*&\s*'
+                      r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0006),
     ('fam_bh18_p35', [r'Benjamini-Hochberg over 18\s*& (\d+\.\d+) &'], 0.0006),
     ('fam_bh18_p35lit', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & (\d+\.\d+) &'], 0.0006),
     ('fam_bh18_p28', [r'Benjamini-Hochberg over 18\s*& [\d.]+ & [\d.]+ & (\d+\.\d+) &'], 0.0006),
@@ -1711,10 +1831,10 @@ CHECKS = [
     ('minp35', [r'Smallest nominal \$p\$ \(18 tests\)\s+& (\d+\.\d+) &',
                 r'eighteen-test family there is ([\d.]+)\s*\n?with equal weight per'],
      0.0005),
-    ('minp35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & (\d+\.\d+) &'],
-     0.0005),
-    ('minp28', [r'Smallest nominal \$p\$ \(18 tests\)\s+& [\d.]+ & [\d.]+ & ([\d.]+)'],
-     0.0005),
+    ('minp35lit', [r'Smallest nominal \$p\$ \(18 tests\)\s*&\s*'
+                   r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0005),
+    ('minp28', [r'Smallest nominal \$p\$ \(18 tests\)\s*&\s*'
+                r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?(?:[\d.]+|\$<\$0\.001)\}?\s*&\s*' r'(?:\\textbf\{)?([\d.]+)\}?'], 0.0005),
     ('elec_CG', [r'electronic space \([\d.]+ against ([\d.]+)\)'], 0.005),
     ('struct_CG_rival', [r'structural space \(([\d.]+) typical separations'], 0.005),
     ('merged_CG_rival', [r'and in the merged space \(([\d.]+) against'], 0.005),
@@ -1765,7 +1885,10 @@ CHECKS = [
     ('pp_mg_ds', [row_pat('\\quad + pesticides 2', 'merged', 3)], 0.0005),
     ('pp_n_perm', [r'\\binom\{24\}\{10\}=([\d\\,]+)'], 0),
     ('pp_min_p', [r'smallest nominal value of ([\d.]+) and a'], 0.00001),
-    ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)     & [\d.]+  & [\d.]+  & [\d.]+  & ([\d.]+)'], 0.005),
+    # 2026-11-03. tab:family 를 생성으로 돌리면서 칸 사이 공백이 바뀌어
+    # 공백 개수를 고정한 이 패턴이 꺼졌다. \s* 로 느슨하게 한다.
+    ('pf_meff', [r'\$m_\{\\mathrm\{eff\}\}\$ of 18 \(Li-Ji\)\s*&'
+                 r'[\s\d.]+&[\s\d.]+&[\s\d.]+&\s*([\d.]+)'], 0.005),
     ('pf_prespec', [r'Statistic specified in advance \(3 tests\) & [\d.]+ & [\d.]+ & '
                     r'\\textbf\{[\d.]+\} & \\textbf\{([\d.]+)\}'], 0.0005),
     ('struct_removed', [r'remove (\d+) of the 51 on the primary panel'], 0),
@@ -1990,6 +2113,12 @@ def main():
     # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
     body_flat = '\x00'.join(_segs)
     fails, checked, unseen = [], 0, []
+    for _g, _why in ((_ordinal_typos(), '서수 접미사 오류'),
+                     (_handmade_tables(), '생성기 없는 수치 표'),
+                     (_generated_table_sync(), '생성 표 사본 시차')):
+        if _g:
+            fails.append(f'{_why} (2026-11-03 신설 가드):')
+            fails.extend(_g)
     _dp_hits = _dropped_periods()
     if _dp_hits:
         fails.append('문장 끝 마침표가 빠진 자리 (되쓰기 사고 가드):')

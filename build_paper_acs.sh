@@ -31,6 +31,20 @@ for f in Fig_main.png Fig_plocal.png Fig_h1.png Fig_mde.png \
   fi
 done
 
+
+# 생성 표 동기화 (2026-11-03 신설). tab_*.tex 는 make_si_tables.py 가
+# outputs/ 에 만든다. 손으로 유지했던 네 표가 반복적으로 구판 수치를
+# 남긴 것이 전파 실패의 근원이었다. 복사를 빌드에 묶어 시차를 없앤다.
+for f in tab_ablation.tex tab_family.tex tab_blockbalance.tex \
+         tab_sparse.tex tab_plocal.tex; do
+  if [ -f "outputs/$f" ]; then
+    cp -p "outputs/$f" "paper_acs/$f"
+  else
+    echo "[경고] outputs/$f 없음 — make_si_tables.py 를 먼저 돌릴 것" >&2
+    exit 1
+  fi
+done
+
 cd paper_acs
 
 pass() {

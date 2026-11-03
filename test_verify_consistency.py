@@ -36,15 +36,34 @@ def resolve(a, b, src):
 
     단어로 적힌 수(four, three)는 숫자가 아니므로 이 완화가 덮지 못한다.
     그런 항목은 여전히 SKIP 으로 드러나며, 그래야 한다.
+
+    2026-11-03 추가. 표를 생성으로 돌리면 칸 사이 공백 폭이 바뀐다. 손표
+    시절의 앵커는 공백 개수까지 글자 그대로 들고 있었으므로 숫자 완화만으로
+    는 걸리지 않았고 앵커 5개가 SKIP 으로 남았다. 공백 연속은 길이를 묻지
+    않는다.
     """
     if a in src:
         return a, b
     pa = re.split(f'({_NUM})', a)
     if len(pa) < 2:
         return None, None
-    pat = ''.join(re.escape(t) if i % 2 == 0 else _NUM
-                  for i, t in enumerate(pa))
-    ms = list(re.finditer(pat, src))
+
+    def _lit(t):
+        """공백 연속은 \\s+ 로, 나머지는 글자 그대로."""
+        return ''.join(r'\s+' if p.isspace() else re.escape(p)
+                       for p in re.split(r'(\s+)', t) if p)
+
+    # 엄격(공백까지 글자 그대로) 먼저, 유일하지 않으면 공백 완화. 순서를
+    # 바꾸면 안 된다. 완화를 먼저 쓰면 종전에 유일하게 걸리던 앵커 두 개가
+    # 복수 일치로 바뀌어 거꾸로 SKIP 된다 (2026-11-03 실측).
+    ms = []
+    for _lax in (False, True):
+        pat = ''.join((_lit(t) if _lax else re.escape(t))
+                      if i % 2 == 0 else _NUM
+                      for i, t in enumerate(pa))
+        ms = list(re.finditer(pat, src))
+        if len(ms) == 1:
+            break
     if len(ms) != 1:
         return None, None
     found = ms[0].group(0)
@@ -132,8 +151,13 @@ CASES = [
     ('28종 유효매칭 수 오기 (three 대 five)',
      'against\nthree on the twenty-eight-compound panel',
      'against\nseven on the twenty-eight-compound panel'),
-    ('WY 조정 p 오기 (0.075 대 0.045) — 유의/비유의가 뒤집힌다',
-     '& 0.192 & 0.039 & 0.025', '& 0.192 & 0.039 & 0.045'),
+    # 2026-11-03. 종전 앵커 '& 0.192 & 0.039 & 0.025' 는 숫자만으로 되어
+    # 있어서, tab:family 를 생성으로 돌린 뒤 생성 표 안에서 다섯 자리에
+    # 걸렸다. 복수 일치는 SKIP 이므로 가드가 꺼진다. 행 이름을 닻으로
+    # 넣어 유일하게 만든다.
+    ('WY 조정 p 오기 (0.079 대 0.045) — 유의/비유의가 뒤집힌다',
+     'Westfall-Young min-$P$ over 18           & 0.457 & 0.112 & 0.079',
+     'Westfall-Young min-$P$ over 18           & 0.457 & 0.112 & 0.045'),
     ('부트스트랩 0건 비율 오기 (58.8 대 98.8)',
      'exactly zero\nin 58.6\\% of replicates',
      'exactly zero\nin 98.6\\% of replicates'),
@@ -170,14 +194,21 @@ CASES = [
     ('meff 오기 (5.00 대 15.00)',
      'estimates\n5.00 effective tests',
      'estimates\n15.00 effective tests'),
+    # 2026-11-03. 앵커에 행 이름이 없어 생성 표의 전자공간 행 네 개에
+    # 모두 걸렸다. 복수 일치는 SKIP 이고 SKIP 은 꺼진 가드다.
     ('표 1 의 28종 전자공간 행이 구판 (0.275 대 0.297)',
-     '& electronic  &  3 & 0.275  &',
-     '& electronic  &  3 & 0.297  &'),
+     '\\quad (omits the seven) & electronic  &  3 & 0.275 & 0.175',
+     '\\quad (omits the seven) & electronic  &  3 & 0.297 & 0.175'),
     # --- 네 번째 구성 (2026-10-20). 이 논문에서 다중검정 보정을 통과하는
     # 유일한 구성이므로 수치 하나가 틀리면 주장이 통째로 바뀐다.
-    ('표 1 네 번째 블록 구조공간 행이 틀림 (0.013 대 0.113)',
-     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.0279}',
-     '28 cpd., incumbent 3   & structural  & 37 & \\textbf{0.1279}'),
+    # 2026-11-03. 숫자 완화가 '28' 과 '35' 를 함께 풀어 두 블록의 구조공간
+    # 행에 모두 걸렸다. 다섯째 칸까지 넣어 모양으로 구분한다 (35종 행은
+    # 그 자리가 \textbf{$<$0.001} 이다).
+    ('표 1 셋째 블록 구조공간 행이 틀림 (0.028 대 0.128)',
+     '28 cpd., incumbent 3   & structural  & 35 & \\textbf{0.02794} & 0.1103'
+     ' & 0.1132',
+     '28 cpd., incumbent 3   & structural  & 35 & \\textbf{0.1279} & 0.1103'
+     ' & 0.1132'),
     ('표 1 네 번째 블록 병합공간 행이 틀림 (0.005 대 0.055)',
      '+ pesticides 2   & merged      & 42 & \\textbf{0.006}',
      '+ pesticides 2   & merged      & 42 & \\textbf{0.056}'),
@@ -202,9 +233,14 @@ CASES = [
     ('네 번째 구성 최소 nominal p 오기 (0.00006 대 0.00600)',
      'smallest nominal value of 0.00006 and a',
      'smallest nominal value of 0.00600 and a'),
-    ('네 번째 구성 순열 수 오기 (1,961,256 대 1,916,256)',
-     '\\binom{24}{10}=1\\,961\\,256',
-     '\\binom{24}{10}=1\\,916\\,256'),
+    # 2026-11-03 폐기. C(24,10) 전수열거 횟수는 농약 구성 절을 줄이면서
+    # 본문에서 빠졌고, verify_consistency 의 UNQUOTED 에 사유와 함께
+    # 면제로 올렸다. 본문에 없는 문장에 대한 주입 시험은 영구 SKIP 이
+    # 되어 '꺼진 가드'로 남으므로 여기서도 함께 내린다. 그 수치를 본문에
+    # 다시 싣는다면 UNQUOTED 항목과 이 항목을 같이 되살릴 것.
+    # ('네 번째 구성 순열 수 오기 (1,961,256 대 1,916,256)',
+    #  '\\binom{24}{10}=1\\,961\\,256',
+    #  '\\binom{24}{10}=1\\,916\\,256'),
     # --- 인용 문헌에서 옮겨 적은 수치 (2026-10-20).
     ('James 2018 부적합 판정 수 오기 (17 대 12)',
      'judged 17 unsuitable',
@@ -266,6 +302,36 @@ CASES = [
 ]
 
 # 커버레터·하이라이트도 검사 대상이다 (2026-10-13 추가).
+# 2026-11-03 신설. SI 의 네 표(ablation / family / blockbalance / sparse)와
+# plocal 을 make_si_tables.py 생성으로 돌렸다. 그 결과 이 시험의 앵커 8개가
+# 원고 .tex 에서 사라져 SKIP 되었다 — 가드 8개가 조용히 꺼진 것이다.
+#
+# 생성된 표에 주입할 때 주의할 점이 하나 있다. 사본 한쪽만 고치면 검증기의
+# '생성 표 사본 시차' 가드가 먼저 걸리고, 시험은 FAIL 을 받아 통과한 것처럼
+# 보인다. 값 검사가 아니라 다른 가드가 잡은 것이므로 거짓 보증이다. 그래서
+# outputs/ 원본과 두 사본 세 곳을 함께 고친다. 그러면 시차 가드는 조용하고
+# 값 검사만 발동할 수 있다.
+GEN_TABLES = ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
+              'tab_sparse.tex', 'tab_plocal.tex')
+
+
+def gen_paths(name):
+    return (f'outputs/{name}', f'paper_acs/{name}', f'paper/{name}')
+
+
+def find_gen(a, b):
+    """생성 표에서 앵커를 찾는다. (이름, 해결된 a, 해결된 b) 또는 None."""
+    for name in GEN_TABLES:
+        try:
+            src = open(f'outputs/{name}').read()
+        except OSError:
+            continue
+        ra, rb = resolve(a, b, src)
+        if ra:
+            return name, ra, rb
+    return None
+
+
 SIDECAR = 'paper/cover_letter.tex'
 ACS = 'paper_acs/main.tex'
 
@@ -642,8 +708,27 @@ def main():
                 if ra:
                     tgt, src = SUPP, supp_good
                 else:
-                    print(f'  SKIP {desc}: 원문을 찾지 못함 ({a[:40]!r})')
-                    bad += 1
+                    _g = find_gen(a, b)
+                    if _g is None:
+                        print(f'  SKIP {desc}: 원문을 찾지 못함 '
+                              f'({a[:40]!r})')
+                        bad += 1
+                        continue
+                    _name, ra, rb = _g
+                    _paths = gen_paths(_name)
+                    _bak = {q: open(q).read() for q in _paths}
+                    try:
+                        for q in _paths:
+                            open(q, 'w').write(_bak[q].replace(ra, rb, 1))
+                        rc = run()
+                    finally:
+                        for q in _paths:
+                            open(q, 'w').write(_bak[q])
+                    if rc == 0:
+                        print(f'  FAIL {desc}: 주입했는데 통과했다 (생성표)')
+                        bad += 1
+                    else:
+                        print(f'  ok   {desc}: 잡았다 (생성표 {_name})')
                     continue
             open(tgt, 'w').write(src.replace(ra, rb, 1))
             rc = run()
@@ -659,8 +744,27 @@ def main():
             for desc, a, b in SUPP_CASES:
                 ra, rb = resolve(a, b, pbak)
                 if not ra:
-                    print(f'  SKIP {desc}: SI 원문을 찾지 못함 ({a[:40]!r})')
-                    bad += 1
+                    _g = find_gen(a, b)
+                    if _g is None:
+                        print(f'  SKIP {desc}: SI 원문을 찾지 못함 '
+                              f'({a[:40]!r})')
+                        bad += 1
+                        continue
+                    _name, _ra, _rb = _g
+                    _paths = gen_paths(_name)
+                    _bak = {q: open(q).read() for q in _paths}
+                    try:
+                        for q in _paths:
+                            open(q, 'w').write(_bak[q].replace(_ra, _rb, 1))
+                        _rc = run()
+                    finally:
+                        for q in _paths:
+                            open(q, 'w').write(_bak[q])
+                    if _rc == 0:
+                        print(f'  FAIL {desc}: 주입했는데 통과했다 (생성표)')
+                        bad += 1
+                    else:
+                        print(f'  ok   {desc}: 잡았다 (생성표 {_name})')
                     continue
                 open(SUPP, 'w').write(pbak.replace(ra, rb, 1))
                 if run() == 0:
