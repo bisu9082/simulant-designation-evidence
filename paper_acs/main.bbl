@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{12}
+\begin{mcitethebibliography}{35}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -75,11 +75,105 @@ Seitzinger,~A.~T.; Genovese,~J.~A. Chemical Agent Simulant Training
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Lavoie \latin{et~al.}(2011)Lavoie, Srinivasan, and
+  Nagarajan]{lavoie2011}
+Lavoie,~J.; Srinivasan,~S.; Nagarajan,~R. Using cheminformatics to find
+  simulants for chemical warfare agents. \emph{Journal of Hazardous Materials}
+  \textbf{2011}, \emph{194}, 85--91\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bartelt-Hunt \latin{et~al.}(2008)Bartelt-Hunt, Knappe, and
+  Barlaz]{bartelthunt2008}
+Bartelt-Hunt,~S.~L.; Knappe,~D. R.~U.; Barlaz,~M.~A. A Review of Chemical
+  Warfare Agent Simulants for the Study of Environmental Behavior.
+  \emph{Critical Reviews in Environmental Science and Technology}
+  \textbf{2008}, \emph{38}, 112--136\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[James \latin{et~al.}(2018)James, Wyke, Marczylo, Collins, Gaulton,
+  Foxall, Aml{\^o}t, and Duarte-Davidson]{james2018}
+James,~T.; Wyke,~S.; Marczylo,~T.; Collins,~S.; Gaulton,~T.; Foxall,~K.;
+  Aml{\^o}t,~R.; Duarte-Davidson,~R. Chemical warfare agent simulants for human
+  volunteer trials of emergency decontamination: A systematic review.
+  \emph{Journal of Applied Toxicology} \textbf{2018}, \emph{38}, 113--121\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[James \latin{et~al.}(2021)James, Collins, and Marczylo]{james2021}
+James,~T.; Collins,~S.; Marczylo,~T. Identification of novel simulants for
+  toxic industrial chemicals and chemical warfare agents for human
+  decontamination studies: A systematic review and categorisation of
+  physicochemical characteristics. \emph{International Journal of Environmental
+  Research and Public Health} \textbf{2021}, \emph{18}, 8681\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
+  2011; Cited in TOP 08-2-188 CN1 as the governing simulant-selection
+  procedure; the document itself was not obtainable for this work\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Agrawal \latin{et~al.}(2018)Agrawal, Sava~Gallis, Greathouse, and
+  Sholl]{agrawal2018}
+Agrawal,~M.; Sava~Gallis,~D.~F.; Greathouse,~J.~A.; Sholl,~D.~S. How Useful Are
+  Common Simulants of Chemical Warfare Agents at Predicting Adsorption
+  Behavior? \emph{The Journal of Physical Chemistry C} \textbf{2018},
+  \emph{122}, 26061--26069\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Lawrence and Van~Houten(2025)Lawrence, and
   Van~Houten]{lawrence2025simulants}
 Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
   Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025},
   \emph{37}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Webb \latin{et~al.}(2025)Webb, Coulon, and Temple]{webb2025}
+Webb,~S.; Coulon,~F.; Temple,~T. A critical review of liquid, low toxicity
+  chemical warfare agent simulants: Enhancing accuracy, safety, and
+  methodological approaches for sampling. \emph{Journal of Hazardous Materials}
+  \textbf{2025}, \emph{492}, 138021\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Chen and Liu(2026)Chen, and Liu]{chen2026aptamer}
+Chen,~Y.; Liu,~J. A Practical Guide of Choosing and Validating Aptamers for
+  Biosensors. \emph{ACS Sensors} \textbf{2026}, Advance online
+  publication\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Yoo \latin{et~al.}(2025)Yoo, Lee, Lee, Kang, Kim, Jang, Kim, and
+  Park]{yoo2025bioelectronic}
+Yoo,~J.; Lee,~D.; Lee,~S.; Kang,~S.; Kim,~H.~I.; Jang,~Y.~J.; Kim,~J.;
+  Park,~T.~H. Combinatorial Pattern Response of Bioelectronic Nose for the
+  Detection of Real Nerve Agents. \emph{ACS Sensors} \textbf{2025}, \emph{10},
+  185--195\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bae \latin{et~al.}(2025)Bae, Kang, Kim, Jang, and Lee]{ondeviceref}
+Bae,~S.; Kang,~K.; Kim,~Y.~K.; Jang,~Y.~J.; Lee,~D.-H. Field-deployable
+  real-time {AI} System for chemical warfare agent detection using {YOLOv8} and
+  colorimetric sensors. \emph{Chemometrics and Intelligent Laboratory Systems}
+  \textbf{2025}, \emph{261}, 105365\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -111,6 +205,140 @@ Shin,~M.; Kang,~K.; Kim,~J.; Kim,~S.; Yoo,~J.; Jang,~Y.~J.; Kim,~M.-K.;
   sensor array for rapid and selective detection of authentic {Novichok} nerve
   agents. \emph{Sensors and Actuators B: Chemical} \textbf{2026}, \emph{457},
   139706\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Harris \latin{et~al.}(2020)Harris, Millman, Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, Kerkwijk, Brett,
+  Haldane, R{\'i}o, Wiebe, Peterson, G{\'e}rard-Marchant, Sheppard, Reddy,
+  Weckesser, Abbasi, Gohlke, and Oliphant]{numpy2020}
+Harris,~C.~R. \latin{et~al.}  Array programming with NumPy. \emph{Nature}
+  \textbf{2020}, \emph{585}, 357--362\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Virtanen \latin{et~al.}(2020)Virtanen, Gommers, Oliphant, Haberland,
+  Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, Walt, Brett,
+  Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng,
+  Moore, VanderPlas, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris,
+  Archibald, Ribeiro, Pedregosa, Mulbregt, Vijaykumar, Bardelli, Rothberg,
+  Hilboll, Kloeckner, Scopatz, Lee, Rokem, Woods, Fulton, Masson,
+  H{\"a}ggstr{\"o}m, Fitzgerald, Nicholson, Hagen, Pasechnik, Olivetti, Martin,
+  Wieser, Silva, Lenders, Wilhelm, Young, Price, Ingold, Allen, Lee, Audren,
+  Probst, Dietrich, Silterra, Webber, Slavi{\v c}, Nothman, Buchner, Kulick,
+  Sch{\"o}nberger, Cardoso, Reimer, Harrington, Rodr{\'i}guez, Nunez-Iglesias,
+  Kuczynski, Tritz, Thoma, Newville, K{\"u}mmerer, Bolingbroke, Tartre, Pak,
+  Smith, Nowaczyk, Shebanov, Pavlyk, Brodtkorb, Lee, McGibbon, Feldbauer,
+  Lewis, Tygier, Sievert, Vigna, Peterson, More, Pudlik, Oshima, Pingel,
+  Robitaille, Spura, Jones, Cera, Leslie, Zito, Krauss, Upadhyay, Halchenko,
+  and V{\'a}zquez-Baeza]{scipy2020}
+Virtanen,~P. \latin{et~al.}  SciPy 1.0: fundamental algorithms for scientific
+  computing in Python. \emph{Nature Methods} \textbf{2020}, \emph{17},
+  261--272\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[McKinney(2010)]{mckinney2010}
+McKinney,~W. \emph{Data Structures for Statistical Computing in Python}; 2010;
+  pp 56--61\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Pedregosa \latin{et~al.}(2011)Pedregosa, Varoquaux, Gramfort, Michel,
+  Thirion, Grisel, Blondel, Prettenhofer, Weiss, Dubourg, Vanderplas, Passos,
+  Cournapeau, Brucher, Perrot, and Duchesnay]{sklearn2011}
+Pedregosa,~F. \latin{et~al.}  Scikit-learn: Machine Learning in {Python}.
+  \emph{Journal of Machine Learning Research} \textbf{2011}, \emph{12},
+  2825--2830\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Hunter(2007)]{matplotlib2007}
+Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
+  \& Engineering} \textbf{2007}, \emph{9}, 90--95\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
+Landrum,~G.; others {RDKit}: Open-source cheminformatics.
+  \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
+  and project URL: the Zenodo {DOI}s registered for {RDKit} identify individual
+  releases (10.5281/zenodo.10398 is release 2014.03.1) and no
+  version-independent concept {DOI} could be verified, so none is given
+  here\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Sun \latin{et~al.}(2018)Sun, Berkelbach, Blunt, Booth, Guo, Li, Liu,
+  McClain, Sayfutyarova, Sharma, Wouters, and Chan]{pyscf2018}
+Sun,~Q.; Berkelbach,~T.~C.; Blunt,~N.~S.; Booth,~G.~H.; Guo,~S.; Li,~Z.;
+  Liu,~J.; McClain,~J.~D.; Sayfutyarova,~E.~R.; Sharma,~S.; Wouters,~S.;
+  Chan,~G. K.-L. {PySCF}: the {Python}-based simulations of chemistry
+  framework. \emph{WIREs Computational Molecular Science} \textbf{2018},
+  \emph{8}, e1340\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Riniker and Landrum(2015)Riniker, and Landrum]{riniker2015}
+Riniker,~S.; Landrum,~G.~A. Better Informed Distance Geometry: Using What We
+  Know To Improve Conformation Generation. \emph{Journal of Chemical
+  Information and Modeling} \textbf{2015}, \emph{55}, 2562--2574\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wang \latin{et~al.}(2020)Wang, Witek, Landrum, and Riniker]{wang2020}
+Wang,~S.; Witek,~J.; Landrum,~G.~A.; Riniker,~S. Improving Conformer Generation
+  for Small Rings and Macrocycles Based on Distance Geometry and Experimental
+  Torsional-Angle Preferences. \emph{Journal of Chemical Information and
+  Modeling} \textbf{2020}, \emph{60}, 2044--2058\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Grimme \latin{et~al.}(2017)Grimme, Bannwarth, and
+  Shushkov]{gfnxtb2017}
+Grimme,~S.; Bannwarth,~C.; Shushkov,~P. A Robust and Accurate Tight-Binding
+  Quantum Chemical Method for Structures, Vibrational Frequencies, and
+  Noncovalent Interactions of Large Molecular Systems Parametrized for All
+  {spd}-Block Elements ( Z = 1--86). \emph{Journal of Chemical Theory and
+  Computation} \textbf{2017}, \emph{13}, 1989--2009\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bannwarth \latin{et~al.}(2019)Bannwarth, Ehlert, and
+  Grimme]{bannwarth2019}
+Bannwarth,~C.; Ehlert,~S.; Grimme,~S. {GFN2-xTB}---An Accurate and Broadly
+  Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with
+  Multipole Electrostatics and Density-Dependent Dispersion Contributions.
+  \emph{Journal of Chemical Theory and Computation} \textbf{2019}, \emph{15},
+  1652--1671\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wildman and Crippen(1999)Wildman, and Crippen]{wildman1999}
+Wildman,~S.~A.; Crippen,~G.~M. Prediction of Physicochemical Parameters by
+  Atomic Contributions. \emph{Journal of Chemical Information and Computer
+  Sciences} \textbf{1999}, \emph{39}, 868--873\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ertl \latin{et~al.}(2000)Ertl, Rohde, and Selzer]{ertl2000}
+Ertl,~P.; Rohde,~B.; Selzer,~P. Fast Calculation of Molecular Polar Surface
+  Area as a Sum of Fragment-Based Contributions and Its Application to the
+  Prediction of Drug Transport Properties. \emph{Journal of Medicinal
+  Chemistry} \textbf{2000}, \emph{43}, 3714--3717\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
