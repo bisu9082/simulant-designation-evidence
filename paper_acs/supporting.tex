@@ -381,8 +381,10 @@ rather than the four raises tabun's share to 72.1\% and sarin's to 48.8\%.
 \input{tab_sparse}
 \end{table}
 
-Table~\ref{tab:sparse} gives the sweep. Every removal moves the count in the
-same direction, towards more matches and a smaller nominal $p$, and the
+Table~\ref{tab:sparse} gives the sweep. Every removal raises the count above
+the three of the reported encoding and lowers the nominal $p$, though the count
+is not monotone in how much is removed: it reaches five at one setting and
+returns to four at the next. The
 encoding we report is the one that produces the fewest matches and the largest
 $p$ of the seven. We state that plainly because it is the only evidence
 available that the encoding was not selected for its answer, and because a
@@ -480,9 +482,14 @@ a one-sided $p$ of 0.275. Replacing the two orbital energies and leaving the
 dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
 five valid matches and 0.0368. Four of those five are sarin, soman and tabun
 matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
-supports. The fifth is sulfur mustard matched to DPGME, which it does not,
-since the patent that names DPGME calls it a preferred G agent simulant
-(Section~\ref{M-res:docs}). The single match under GFN2 was hydrogen cyanide to
+supports. The fifth is sulfur mustard matched to DPGME, about
+which the designation record says nothing either way: the patent that names
+DPGME requires detectability by ion mobility spectrometry of the composition
+and assigns the compound to no agent class (Section~\ref{M-res:docs}). An
+earlier version of this section wrote that the patent calls DPGME a preferred
+G-agent simulant and rejected this pairing on that ground. We withdraw that
+statement because we could not verify the wording against the patent
+itself. The single match under GFN2 was hydrogen cyanide to
 dichloromethane.
 
 Three things have to be said about that. The first is that the sign of the
@@ -722,10 +729,14 @@ compilation at 25~$^{\circ}$C first, a government compendium at
 25~$^{\circ}$C where no such value exists, and the nearest available
 temperature otherwise, recorded with its temperature. On the
 twenty-eight-compound panel all twenty-eight compounds have a measured value,
-twenty-five of them at tier one, one at tier two and two at tier three. The
+twenty-four of them at tier one, one at tier two and two at tier three. The
 two tier-three entries are dipropylene glycol monomethyl ether at
 26~$^{\circ}$C and cyclosarin at 20~$^{\circ}$C, for which no 25~$^{\circ}$C
-measurement is in the public record we searched. We did not convert between
+measurement is in the public record we searched. One further entry, ethanol,
+is marked TX rather than tier one because the source that supplies its
+25~$^{\circ}$C value labels it as extrapolated rather than measured; it is an
+interferent and enters no pairing reported here, and we flag it rather than
+adopt a measured value at a different temperature. We did not convert between
 temperatures, because conversion needs Antoine coefficients and fitting them
 would replace a measurement with an estimate. On the thirty-five-compound
 panel two compounds have no measured vapour pressure at all, diethyl
@@ -736,10 +747,19 @@ source; every candidate value returned, including the ones not adopted, is in
 the deposited \texttt{volatility\_candidates.json}.
 
 The space is one axis, $\log_{10}(P/\mathrm{mmHg})$ standardised to unit
-variance, and distance is the absolute difference. One axis has a consequence
-worth stating: three of the four analyst freedoms this paper measures
-elsewhere, the descriptor encoding, the correlation filter and the conformer
-seed, have nothing to act on. The panel spans 6.209 decades, from VX at the
+variance, and distance is the absolute difference. One axis removes three of
+the four analyst freedoms this paper measures elsewhere, because the descriptor
+encoding, the correlation filter and the conformer seed have nothing to act on.
+It introduces one of its own, and we report it rather than claim the axis is
+choice-free. Which measurement is adopted where a compound has more than one is
+a choice, and it moves the result: taking the \textit{cis} isomer value for
+lewisite, 1.562~mmHg at 25~$^{\circ}$C from the same source that gives the
+mixture value, moves the pre-specified statistic from $p = 0.0206$ at rank
+fourteen to $p = 0.0103$ at rank seven. Dimethyl methylphosphonate carries a
+competing 25~$^{\circ}$C value of 1.2~mmHg against the adopted 0.962, which is
+0.097 decades away, nine times the gap on which the single valid match rests.
+The adoption rule above was fixed before the values were seen, which is why we
+state it, but it is a choice and not an absence of one. The panel spans 6.209 decades, from VX at the
 low end to phosgene at the high end.
 
 The first test asks whether the three incumbent simulants sit closer to the
@@ -767,16 +787,21 @@ decades, which corresponds to a 25~$^{\circ}$C vapour pressure below
 for that compound, so we report the match as conditional on a gap that its own
 source data cannot resolve.
 
-Table~\ref{tab:vpairing} sets out which compound each agent is nearest to, and
-the designated pairings are not the ones the axis produces. Dichloromethane is
-designated for the choking agent and sits 0.514 decades from phosgene but
-0.232 from hydrogen cyanide, a blood agent. Dipropylene glycol monomethyl
-ether is designated for the blister agent and sits 0.561 decades from sulfur
-mustard and 0.011 from soman, a nerve agent. Dimethyl methylphosphonate, the
-standard G-agent simulant, sits 0.473 decades from sarin while
+Table~\ref{tab:vpairing} sets out which compound each agent is nearest to. The
+axis does not reproduce the pairings the usage literature implies.
+Dichloromethane sits 0.514 decades from phosgene but 0.232 from hydrogen
+cyanide. Dipropylene glycol monomethyl ether sits 0.561 decades from sulfur
+mustard and 0.011 from soman. Dimethyl methylphosphonate, the compound the
+field treats as the G-agent surrogate, sits 0.473 decades from sarin while
 \textit{para}-dichlorobenzene, an interferent, sits 0.216. For three of the
 eleven agents the nearest compound in the pool is an interferent rather than a
-simulant. VX has nothing within 2.659 decades.
+simulant. VX has nothing within 2.659 decades. We state these as distances and
+not as departures from designated pairings, because Section~\ref{M-res:docs}
+finds that the designating documents assign these compounds no agent class:
+the one that names dimethyl methylphosphonate measures filter breakthrough,
+the one that names dipropylene glycol monomethyl ether requires detectability
+by ion mobility spectrometry, and for dichloromethane we found no designating
+document at all.
 
 The second test asks whether volatility distance tracks response distance.
 Exact Mantel permutation in each run-channel cell with at least four mapped
@@ -792,8 +817,7 @@ descriptor result alone. The axis practitioners name first does carry weak
 directional signal, and the incumbent trio does beat chance on margin
 statistics, so the paper's null is not an artefact of leaving volatility out.
 What the axis does not produce is a defensible valid match, and the one match
-it does produce pairs a blister-agent simulant with a nerve agent on a gap its
-source data cannot resolve. The conclusion of the paper is unchanged and its
+it does produce rests on a gap its own source data cannot resolve. The conclusion of the paper is unchanged and its
 basis is wider.
 
 % 2026-11-03. 두 표 모두 make_si_tables.py 가 산출물에서 생성한다.
@@ -811,9 +835,9 @@ definitions are in the text. No value was converted between temperatures.}
 
 \begin{table}[!htb]
 \centering
-\caption{What each agent is nearest to on the volatility axis. The designated
-pairings are not the ones the axis produces, and for three of the eleven
-agents the nearest compound in the pool is an interferent. This table is
+\caption{What each agent is nearest to on the volatility axis. The series
+column is the agent's own class. For three of the eleven agents the nearest
+compound in the pool is an interferent rather than a simulant. This table is
 descriptive and enters no multiplicity accounting.}
 \label{tab:vpairing}
 \small
@@ -824,7 +848,7 @@ descriptive and enters no multiplicity accounting.}
 \section{Dimensionality and the value of the nominal result}
 \label{res:dimdetail}
 
-The structural space has 37 coordinates and the electronic space has 3. Euclidean
+The structural space has 35 coordinates and the electronic space has 3. Euclidean
 distance behaves differently in the two, so a difference between them could be
 geometric rather than chemical. We tested that, and it is not. We also tested
 what the nominal structural value is worth against the descriptors it was drawn
@@ -845,7 +869,7 @@ observed value are the same quantity.
 On the twenty-eight-compound panel the median $p$ is 0.149, the 5th to 95th
 percentile range is 0.006 to 0.710, and 28.95\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
-36-dimensional value of 0.028 sits at the 22.4th percentile of that
+35-dimensional value of 0.028 sits at the 22.4th percentile of that
 distribution, and the electronic value of 0.275 at the 68.8th. The
 three-principal-component value of 0.0029 sits at the 1.6th percentile, which is
 what the leading components of a space should do and is not independent
@@ -891,8 +915,8 @@ That rate is partly an artifact of the descriptors themselves, and we report the
 correction because it is larger than we expected. Three descriptors drawn from a
 correlated pool do not carry three degrees of freedom. Repeating the control on
 ZCA-whitened coordinates (Section~\ref{meth:dimdetail}), where the coordinates are
-uncorrelated by construction, the rate falls from 33.7\% to 17.2\% and the
-median $p$ rises from 0.094 to 0.332. The correlation structure of the
+uncorrelated by construction, the rate falls from 28.95\% to 17.25\% and the
+median $p$ rises from 0.149 to 0.332. The correlation structure of the
 structural block therefore inflates the apparent ease of reaching nominal
 significance by more than a factor of two. The comparison that the argument
 rests on is the percentile rather than the rate, and that is unaffected: the
@@ -902,8 +926,8 @@ chosen.
 So the structural and electronic spaces do differ, and the difference is
 chemical rather than geometric; what the data do not support is that the
 difference says anything about the compounds that were designated. A value at
-the 26th percentile of the subspaces one could have chosen, in a family of
-eighteen tests whose smallest adjusted value is 0.185, on the smaller of two
+the 22.4th percentile of the subspaces one could have chosen, in a family of
+eighteen tests whose smallest adjusted value is 0.163, on the smaller of two
 defensible panels, is not an argument. Picking a space, a panel and a statistic
 fixes the answer, and the practice this paper examines has never written down
 which to pick.
@@ -1326,15 +1350,15 @@ collapsed is recorded in the deposited output.
 
 Treating the fifteen pairs as independent observations, which the first version
 of this analysis did, moves these values by up to 0.038 and in both directions:
-it would have reported the structural cell at $p = 0.060$ rather than 0.024 and
-the electronic cell at $p = 0.026$ rather than 0.044. The error is not large here
+it would have reported the structural cell at $p = 0.052$ rather than 0.017 and
+the merged cell at 0.058 rather than 0.019. The error is not large here
 because the sets are small, but it is the error that would grow with panel size,
-and in the merged cell it runs the other way, to 0.048 from 0.010.
+and in the electronic cell it runs the other way, to 0.026 from 0.044.
 
 Pooling the two compound sets by Fisher transformation, which is legitimate
 because they are different compounds on different plates, the structural space
-gives $\rho = +0.290$ (95\% CI $-0.463$ to $+0.800$) in the ultraviolet channel
-and $+0.168$ ($-0.559$ to $+0.748$) in reflectance, while the electronic space
+gives $\rho = +0.306$ (95\% CI $-0.450$ to $+0.806$) in the ultraviolet channel
+and $+0.141$ ($-0.577$ to $+0.736$) in reflectance, while the electronic space
 gives $-0.107$ ($-0.720$ to $+0.600$) and $+0.327$ ($-0.431$ to $+0.814$). The
 weight here is $n-3$ with $n$ the six compounds, not the fifteen pairs they
 generate; the earlier version of this section used the pairs, which is the error

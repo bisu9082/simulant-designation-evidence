@@ -98,9 +98,9 @@
   "ethanol": {
    "value": 59.3,
    "temperature_C": 25,
-   "tier": "T1",
+   "tier": "TX",
    "source": "Daubert, T.E., R.P. Danner | 59.3 mm Hg at 25 °C /Extrapolated/",
-   "adjudication": "출처가 /Extrapolated/ 로 표시한 값이다. 그대로 적고 flag 를 센다"
+   "adjudication": "출처가 스스로 /Extrapolated/ 로 표시했다. 측정값이 아니므로 T1 에서 내리고 TX(상관식 외삽)로 분류해 표에 표시한다"
   },
   "toluene": {
    "value": 28.4,
@@ -304,10 +304,14 @@
     },
     "n_off_25C": 2,
     "tiers": {
-     "T1": 25,
+     "T1": 24,
      "T2": 1,
-     "T3": 2
-    }
+     "T3": 2,
+     "TX": 1
+    },
+    "extrapolated": [
+     "ethanol"
+    ]
    },
    "log10_vp": {
     "DMMP": -0.016824927962187056,

@@ -341,6 +341,18 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
+    #     숫자가 산출물과 맞는데 그 숫자를 설명하는 말이 틀린 경우다.
+    ('DMMP 4종 평균 부호 오기 (정본 +0.049, 자외)',
+     'over all four G agents is $+0.049$ in the ultraviolet',
+     'over all four G agents is $-0.049$ in the ultraviolet'),
+    ('DMMP 3종 평균을 4종 평균 자리에 오기 (정본 -0.189)',
+     'other than tabun it is $-0.189$ and',
+     'other than tabun it is $-0.289$ and'),
+    # 철회한 주장은 B2 블랙리스트가 잡는다. 주입 시험도 그 경로를 확인한다.
+    ('초록을 철회한 DPGME 계열 주장으로 되돌림',
+     'on a gap smaller than the temperature mismatch',
+     'which pairs a blister-agent simulant with a nerve agent'),
     # --- 휘발성 축 (2026-11-03 신설). 본문 res:panels 말미 단락.
     #     새 절을 가드 없이 들이는 것이 이 프로젝트의 반복 실패 경로다.
     ('휘발성 V1 p 오기 (정본 0.0206) — 유의/비유의가 뒤집힌다',
@@ -435,6 +447,28 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-03 (2차) 교정분
+    ('SI 부분공간 비율을 구판으로 (정본 28.95%)',
+     'the rate falls from 28.95\\% to 17.25\\%',
+     'the rate falls from 33.7\\% to 17.25\\%'),
+    ('SI 백분위 오기 (정본 22.4th)',
+     'the 22.4th percentile of the subspaces',
+     'the 26.4th percentile of the subspaces'),
+    ('SI 18검정 BH 오기 (정본 0.163)',
+     'eighteen tests whose smallest adjusted value is 0.163',
+     'eighteen tests whose smallest adjusted value is 0.185'),
+    ('SI 쌍독립 구조공간 Mantel 오기 (정본 0.017)',
+     'structural cell at $p = 0.052$ rather than 0.017',
+     'structural cell at $p = 0.052$ rather than 0.024'),
+    ('SI pooled 구조공간 rho 오기 (정본 +0.306)',
+     'gives $\\rho = +0.306$ (95\\% CI',
+     'gives $\\rho = +0.290$ (95\\% CI'),
+    ('SI 구조공간 차원 오기 (정본 35좌표)',
+     'The structural space has 35 coordinates',
+     'The structural space has 37 coordinates'),
+    ('SI 루이사이트 cis 민감도 오기 (정본 p=0.0103)',
+     'to $p = 0.0103$ at rank seven',
+     'to $p = 0.0303$ at rank seven'),
     # --- 휘발성 축 SI 절 (2026-11-03 신설)
     ('SI 휘발성 순위 오기 (정본 14/680)',
      'ranking the incumbent trio fourteenth of 680',
@@ -448,8 +482,8 @@ ACS_SUPP_CASES = [
     ('SI 휘발성 Fisher chi2 오기 (정본 14.032)',
      '\\chi^2 = 14.032',
      '\\chi^2 = 11.032'),
-    ('SI 휘발성 tier 1 건수 오기 (정본 25건)',
-     'twenty-five of them at tier one',
+    ('SI 휘발성 tier 1 건수 오기 (정본 24건)',
+     'twenty-four of them at tier one',
      'twenty-seven of them at tier one'),
     ('SI 휘발성 최근접이 간섭물인 작용제 수 오기 (정본 3종)',
      'For three of the\neleven agents the nearest',

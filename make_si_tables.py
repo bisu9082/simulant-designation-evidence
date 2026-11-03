@@ -70,11 +70,18 @@ def load():
     mq = json.load(open('outputs/multiplicity_across_panels.json'))
     pf = json.load(open('outputs/pesticide_family.json'))
     pp = json.load(open('outputs/pesticide_panel.json'))['spaces']
-    return rc, mq, pf, pp
+    # 2026-11-03 (2차). tab:ablation 의 마지막 열은 캡션이 '해당 패널
+    # 구성의 18검정에 대한 BH 최소 q' 라고 적는다. 1차에서 내가
+    # multiplicity_across_panels(72검정)를 붙여 캡션과 어긋났고, 본문
+    # 571/809 행이 0.6299(18검정)를 인용하는 동안 표는 0.3539(72검정)를
+    # 찍고 있었다. 캡션이 말하는 양을 쓴다.
+    mc = {r[0]: r[4] for r in json.load(open('outputs/multiplicity_c.json'))}
+    mc['pesticide10'] = pf['bh_all_min_q']
+    return rc, mq, pf, pp, mc
 
 
-def ablation(rc, mq, pf, pp):
-    MQ = mq['min_q_by_config']
+def ablation(rc, mq, pf, pp, mc):
+    MQ = mc
     lines = []
     for i, (a, b, c, key) in enumerate(ROWS):
         if key == 'pesticide':
@@ -370,8 +377,8 @@ def vpairing():
 
 
 def main():
-    rc, mq, pf, pp = load()
-    body = ablation(rc, mq, pf, pp)
+    rc, mq, pf, pp, mc = load()
+    body = ablation(rc, mq, pf, pp, mc)
     tex = r"""% 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.
 % 수치 출처: outputs/rollback_c.json (패널 3구성),
 %            outputs/pesticide_family.json + pesticide_panel.json (농약 구성),

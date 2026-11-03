@@ -330,8 +330,10 @@ rather than the four raises tabun's share to 72.1\% and sarin's to 48.8\%.
 \input{tab_sparse}
 \end{table}
 
-Table~\ref{tab:sparse} gives the sweep. Every removal moves the count in the
-same direction, towards more matches and a smaller nominal $p$, and the
+Table~\ref{tab:sparse} gives the sweep. Every removal raises the count above
+the three of the reported encoding and lowers the nominal $p$, though the count
+is not monotone in how much is removed: it reaches five at one setting and
+returns to four at the next. The
 encoding we report is the one that produces the fewest matches and the largest
 $p$ of the seven. We state that plainly because it is the only evidence
 available that the encoding was not selected for its answer, and because a
@@ -412,9 +414,14 @@ a one-sided $p$ of 0.275. Replacing the two orbital energies and leaving the
 dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
 five valid matches and 0.0368. Four of those five are sarin, soman and tabun
 matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
-supports. The fifth is sulfur mustard matched to DPGME, which it does not,
-since the patent that names DPGME calls it a preferred G agent simulant
-(Section~\ref{M-res:docs}). The single match under GFN2 was hydrogen cyanide to
+supports. The fifth is sulfur mustard matched to DPGME, about
+which the designation record says nothing either way: the patent that names
+DPGME requires detectability by ion mobility spectrometry of the composition
+and assigns the compound to no agent class (Section~\ref{M-res:docs}). An
+earlier version of this section wrote that the patent calls DPGME a preferred
+G-agent simulant and rejected this pairing on that ground. We withdraw that
+statement because we could not verify the wording against the patent
+itself. The single match under GFN2 was hydrogen cyanide to
 dichloromethane.
 
 Three things have to be said about that. The first is that the sign of the
@@ -627,7 +634,8 @@ the paper asks of others. Values are in the deposited
 \section{Dimensionality and the value of the nominal result}
 \label{res:dimdetail}
 
-The structural space has 37 coordinates and the electronic space has 3. Euclidean
+% 2026-11-03 (2차). T2-8 재생성으로 35 가 되었는데 이 문장이 구판이었다.
+The structural space has 35 coordinates and the electronic space has 3. Euclidean
 distance behaves differently in the two, so a difference between them could be
 geometric rather than chemical. We tested that, and it is not. We also tested
 what the nominal structural value is worth against the descriptors it was drawn
@@ -648,7 +656,7 @@ observed value are the same quantity.
 On the twenty-eight-compound panel the median $p$ is 0.149, the 5th to 95th
 percentile range is 0.006 to 0.710, and 28.95\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
-36-dimensional value of 0.028 sits at the 22.4th percentile of that
+35-dimensional value of 0.028 sits at the 22.4th percentile of that
 distribution, and the electronic value of 0.275 at the 68.8th. The
 three-principal-component value of 0.0029 sits at the 1.6th percentile, which is
 what the leading components of a space should do and is not independent
@@ -694,8 +702,9 @@ That rate is partly an artifact of the descriptors themselves, and we report the
 correction because it is larger than we expected. Three descriptors drawn from a
 correlated pool do not carry three degrees of freedom. Repeating the control on
 ZCA-whitened coordinates (Section~\ref{meth:dimdetail}), where the coordinates are
-uncorrelated by construction, the rate falls from 33.7\% to 17.2\% and the
-median $p$ rises from 0.094 to 0.332. The correlation structure of the
+% 2026-11-03 (2차). ACS 판본과 같은 교정. 리뷰어 1 적발.
+uncorrelated by construction, the rate falls from 28.95\% to 17.25\% and the
+median $p$ rises from 0.149 to 0.332. The correlation structure of the
 structural block therefore inflates the apparent ease of reaching nominal
 significance by more than a factor of two. The comparison that the argument
 rests on is the percentile rather than the rate, and that is unaffected: the
@@ -705,8 +714,8 @@ chosen.
 So the structural and electronic spaces do differ, and the difference is
 chemical rather than geometric; what the data do not support is that the
 difference says anything about the compounds that were designated. A value at
-the 26th percentile of the subspaces one could have chosen, in a family of
-eighteen tests whose smallest adjusted value is 0.185, on the smaller of two
+the 22.4th percentile of the subspaces one could have chosen, in a family of
+eighteen tests whose smallest adjusted value is 0.163, on the smaller of two
 defensible panels, is not an argument. Picking a space, a panel and a statistic
 fixes the answer, and the practice this paper examines has never written down
 which to pick.
@@ -1125,15 +1134,15 @@ collapsed is recorded in the deposited output.
 
 Treating the fifteen pairs as independent observations, which the first version
 of this analysis did, moves these values by up to 0.038 and in both directions:
-it would have reported the structural cell at $p = 0.060$ rather than 0.024 and
-the electronic cell at $p = 0.026$ rather than 0.044. The error is not large here
+it would have reported the structural cell at $p = 0.052$ rather than 0.017 and
+the merged cell at 0.058 rather than 0.019. The error is not large here
 because the sets are small, but it is the error that would grow with panel size,
-and in the merged cell it runs the other way, to 0.048 from 0.010.
+and in the electronic cell it runs the other way, to 0.026 from 0.044.
 
 Pooling the two compound sets by Fisher transformation, which is legitimate
 because they are different compounds on different plates, the structural space
-gives $\rho = +0.290$ (95\% CI $-0.463$ to $+0.800$) in the ultraviolet channel
-and $+0.168$ ($-0.559$ to $+0.748$) in reflectance, while the electronic space
+gives $\rho = +0.306$ (95\% CI $-0.450$ to $+0.806$) in the ultraviolet channel
+and $+0.141$ ($-0.577$ to $+0.736$) in reflectance, while the electronic space
 gives $-0.107$ ($-0.720$ to $+0.600$) and $+0.327$ ($-0.431$ to $+0.814$). The
 weight here is $n-3$ with $n$ the six compounds, not the fifteen pairs they
 generate; the earlier version of this section used the pairs, which is the error
