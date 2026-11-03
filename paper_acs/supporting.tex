@@ -69,7 +69,7 @@ Korea}
 % 붙인다. 제목에 또 쓰면 두 번 찍힌다 (2026-11-02 렌더에서 확인).
 % 2026-11-03. 본문 제목 교체에 맞춰 동기화.
 \title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
-Array Response: A Reanalysis of Sixteen Authentic Chemical Warfare Agents}
+Array Response: A Reanalysis of Authentic Chemical Warfare Agent Measurements}
 
 \begin{document}
 
@@ -1086,12 +1086,26 @@ Table~\ref{tab:ablation}.
 The comparison that matters is between that value and the deficit the incumbent
 compounds actually carry. Across the eleven agents the normalised difference
 between the nearest incumbent simulant and the nearest other compound has a
-median of 0.493, more than twice the detectable value. Only at sarin, where it
-is 0.125, does it fall below what the test can resolve, and that is the agent at
-which the descriptor resampling of Section~\ref{M-res:panels} is also weakest,
-recovering DMMP as nearest in 41.0\% of replicates. The null on the primary
-panel is therefore a statement about the data rather than about the sensitivity
-of the design, with sarin the one case where the two cannot be separated.
+median of 0.4926. Against the uncorrected threshold of 0.23 that is more than
+twice the detectable value, but the threshold this paper is entitled to use is
+the corrected one. Requiring the shifted statistic to clear the
+Benjamini--Hochberg level of the eighteen-test family moves the threshold to
+$\delta = 0.43$, and the median deficit is then 1.15 times what the design can
+resolve rather than twice it. On the twenty-eight-compound panel the corrected
+threshold is $\delta = 0.18$ against a median gap of 0.074, a ratio of 0.41,
+so on that panel the design cannot resolve the deficit the compounds carry and
+we do not read its null as a statement about the data.
+
+Sarin is the one agent whose deficit, 0.125, falls below even the uncorrected
+threshold. It is not the agent at which the descriptor resampling of
+Section~\ref{M-res:panels} is weakest: DMMP recovers sarin as its nearest
+agent in 89.8\% of 1000 bootstrap replicates, the highest of the three
+incumbents, where DPGME recovers sulfur mustard in 41.0\% and dichloromethane
+recovers cyanogen chloride in 47.5\%. The sarin case is therefore a resolution
+limit of the design and not an unstable estimate. Read with the corrected
+threshold, the primary-panel null is a statement about the data for the agents
+whose deficit exceeds 0.43 and a statement about sensitivity for the rest, and
+we mark that boundary rather than claiming the whole panel for either.
 
 \begin{figure}[!htb]
 \centering

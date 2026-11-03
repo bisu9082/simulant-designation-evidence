@@ -256,6 +256,37 @@ def _generated_table_sync():
     return sorted(set(bad))
 
 
+def _title_sync():
+    r"""제목이 본문·SI·커버레터에서 같은지 본다 (2026-11-03 신설, 작업 B).
+
+    왜 필요한가. 제목의 'Sixteen' 을 빼면서 main.tex 만 고쳤고 SI 와
+    커버레터는 구판 제목을 들고 있었다. 금지항목이 그 한 문자열을 잡아
+    주었을 뿐이고, 다음 제목 교체에서는 금지항목이 없으므로 조용히
+    통과한다. 세 파일이 같은지를 직접 본다.
+    """
+    import re as _re
+    import os as _o
+    want, bad = None, []
+    for path, pat in [
+            ('paper_acs/main.tex', r'\\title\{(.+?)\}'),
+            ('paper_acs/supporting.tex', r'\\title\{(.+?)\}'),
+            ('paper_acs/cover_letter.tex',
+             r'We submit \\textit\{(.+?)\} for consideration')]:
+        if not _o.path.exists(path):
+            continue
+        m = _re.search(pat, open(path, encoding='utf8').read(), _re.S)
+        if not m:
+            bad.append(f'  제목을 찾지 못함 [{path}]')
+            continue
+        got = ' '.join(m.group(1).split())
+        if want is None:
+            want = got
+        elif got != want:
+            bad.append(f'  제목이 본문과 다르다 [{path}]:\n'
+                       f'    본문 {want}\n    이쪽 {got}')
+    return bad
+
+
 def _label_scope_guards():
     r"""수치는 맞고 그 수치를 설명하는 '말'이 틀린 경우 (2026-11-03 신설).
 
@@ -1386,6 +1417,54 @@ def load_facts():
     f['vol_bp_ratio_vp'] = _bp['vp_breaking_ratio_condition_mmHg']
     f['vol_bp_closer_gap'] = _bp['gap_breaking_closer_condition_log10']
     f['vol_bp_closer_vp'] = _bp['vp_breaking_closer_condition_mmHg']
+    # 2026-11-03 (작업 A·B). 형태좌표 축소 민감도, 전제검정 라벨순열 귀무,
+    # MDE 의 BH18 문턱, 재표집 회복률. 본문에 실린 수치만 사실로 올린다.
+    _sr = json.load(open('outputs/shape_reduction.json'))
+    _srf = _sr['variants']['full']['panel28_incumbent3']
+    _srr = _sr['variants']['reduced']['panel28_incumbent3']
+    _srf35 = _sr['variants']['full']['panel35_incumbent3']
+    f['sr_nshape'] = _srf['block_share_merged']['n_shape_kept']
+    f['sr_dims28'] = _srf['n_dims']['merged']
+    f['sr_dims35'] = _srf35['n_dims']['merged']
+    f['sr_maxr28'] = _srf['shape_corr']['max_abs_r']
+    f['sr_maxr35'] = _srf35['shape_corr']['max_abs_r']
+    f['sr_share_full'] = _srf['block_share_merged']['shape_pct']
+    f['sr_share_red'] = _srr['block_share_merged']['shape_pct']
+    f['sr_nderived'] = len(_sr['shape_derived_dropped'])
+    _acn_f = sorted(_srf['block_share_merged']['near_linear_pairs_shape_pct']
+                    .values(), reverse=True)
+    _acn_r = sorted(_srr['block_share_merged']['near_linear_pairs_shape_pct']
+                    .values(), reverse=True)
+    f['sr_acn_hi_full'], f['sr_acn_lo_full'] = _acn_f[0], _acn_f[1]
+    f['sr_acn_hi_red'], f['sr_acn_lo_red'] = _acn_r[0], _acn_r[1]
+    f['sr_match_full'] = -_srf['merged']['statistics']['n_valid']['observed']
+    f['sr_match_red'] = -_srr['merged']['statistics']['n_valid']['observed']
+    f['sr_mantel_q_red'] = _srr['mantel']['min_q']
+    f['sr_id_lo'] = min(v for k, v in _srf['identity_audit'].items()
+                        if k != 'note') * 100.0
+    f['sr_id_hi'] = max(v for k, v in _srf['identity_audit'].items()
+                        if k != 'note') * 100.0
+
+    _pn = json.load(open('outputs/premise_null.json'))
+    f['pn_cells'] = _pn['bh']['n_cells']
+    f['pn_min_q'] = _pn['bh']['min_q']
+    f['pn_n_sig'] = _pn['bh']['n_sig_q']
+
+    _md = json.load(open('outputs/mde.json'))
+    f['mde_bh18_35'] = _md['panel35_incumbent3']['thresholds']['bh18']['mde_delta']
+    f['mde_bh18_28'] = _md['panel28_incumbent3']['thresholds']['bh18']['mde_delta']
+    f['mde_ratio_bh35'] = (_md['panel35_incumbent3']['thresholds']['bh18']
+                           ['ratio_median_gap_to_mde'])
+    f['mde_ratio_bh28'] = (_md['panel28_incumbent3']['thresholds']['bh18']
+                           ['ratio_median_gap_to_mde'])
+    f['mde_gap_median_28'] = _md['panel28_incumbent3']['gap_median']
+
+    _nb = json.load(open('outputs/nearest_agent_bootstrap.json'))
+    f['nb_nboot'] = _nb['n_boot']
+    f['nb_dmmp'] = _nb['simulants']['DMMP']['top_pct']
+    f['nb_dpgme'] = _nb['simulants']['DPGME']['top_pct']
+    f['nb_dcm'] = _nb['simulants']['dichloromethane']['top_pct']
+
     _ag = _vol['agreement']
     # 2026-11-03 (작업 A-3). 4셀 일괄 Fisher 를 철회하고 채널내 런간 합성
     # + 채널 BH 로 교체했다. 같은 플레이트 두 채널은 독립이 아니다.
@@ -2112,7 +2191,9 @@ CHECKS = [
                     r'margin itself is (0\.\d+) in standardised'], 0.00005),
     ('vol_p_nvalid', [r'valid matches returns one match with a \$p\$ of '
                       r'(0\.\d+)',
-                      r'one match with a \$p\$ of (0\.\d+)'], 0.0005),
+                      r'one match with a \$p\$ of (0\.\d+)',
+                      # 2026-11-03 (작업 B). 초록 편입분.
+                      r'one valid match at \$p=(0\.\d+)\$'], 0.0005),
     ('vol_rank_nvalid', [r'ranking (\d+)\w*\s+of 680',
                          r'(\d+)\w*\s+of 680 and therefore'], 0),
     # 2026-11-03. 'all 680 designations' 는 본문 2.1 의 'all 2024
@@ -2130,6 +2211,40 @@ CHECKS = [
     ('vol_bp_ratio_vp', [r'vapour pressure below\s+(0\.\d+)~mmHg'], 0.00005),
     ('vol_bp_closer_gap', [r'condition beyond\s+(0\.\d+) decades'], 0.00005),
     ('vol_bp_closer_vp', [r'decades, or (0\.\d+)~mmHg'], 0.00005),
+    # 2026-11-03 (작업 B). 형태좌표 축소 민감도 문단.
+    ('sr_nshape', [r'(\w+) of the thirty-eight coordinates'], 0),
+    ('sr_dims28', [r'Nine of the (thirty-\w+) coordinates'], 0),
+    ('sr_dims35', [r'nine of the ([\w-]+) on the primary'], 0),
+    ('sr_maxr28', [r'block is (0\.\d+) on the twenty-eight'], 0.00005),
+    ('sr_maxr35', [r'and (0\.\d+) on the primary\s*\n?panel'], 0.00005),
+    ('sr_nderived', [r'with the ([\w-]+)\s*\n?derived coordinates dropped'], 0),
+    ('sr_id_lo', [r'discrepancies of (\d+\.\d+) to [\d.]+\\%'], 0.05),
+    ('sr_id_hi', [r'discrepancies of [\d.]+ to (\d+\.\d+)\\%'], 0.05),
+    ('sr_share_full', [r'distance falls from (\d+\.\d+) to [\d.]+\\%'], 0.05),
+    ('sr_share_red', [r'falls from [\d.]+ to (\d+\.\d+)\\%'], 0.05),
+    ('sr_acn_hi_full', [r'it falls from (\d+\.\d+) and [\d.]+\\% to'], 0.05),
+    ('sr_acn_lo_full', [r'falls from [\d.]+ and (\d+\.\d+)\\% to'], 0.05),
+    ('sr_acn_hi_red', [r'to\s*\n?(0\.\d+) and 0\.\d+\\%\.'], 0.005),
+    ('sr_acn_lo_red', [r'to\s*\n?0\.\d+ and (0\.\d+)\\%\.'], 0.005),
+    ('sr_match_full', [r'matches there falls from ([\w-]+) to'], 0),
+    ('sr_match_red', [r'falls from \w+ to ([\w-]+)\. On'], 0),
+    ('sr_mantel_q_red', [r'shape coordinates raises it to (0\.\d+)'], 0.00005),
+    # 전제검정 라벨순열 귀무 (초록).
+    ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a null'], 0),
+    # MDE 의 BH18 문턱.
+    ('mde_bh18_35', [r'moves the threshold to\s*\n?\$\\delta = (0\.\d+)\$'],
+     0.005),
+    ('mde_bh18_28', [r'corrected\s*\n?threshold is \$\\delta = (0\.\d+)\$'],
+     0.005),
+    ('mde_ratio_bh35', [r'then (\d\.\d+) times what the design'], 0.005),
+    ('mde_ratio_bh28', [r'a ratio of (0\.\d+)'], 0.005),
+    ('mde_gap_median_28', [r'a median gap of (0\.\d+)'], 0.0005),
+    # 재표집 회복률. 41.0 을 DMMP 자리에 쓴 오류의 재발을 막는다.
+    ('nb_nboot', [r'agent in [\d.]+\\% of (\d+) bootstrap replicates'], 0),
+    ('nb_dmmp', [r'recovers sarin as its nearest\s*\n?agent in (\d+\.\d+)\\%'],
+     0.05),
+    ('nb_dpgme', [r'DPGME recovers sulfur mustard in (\d+\.\d+)\\%'], 0.05),
+    ('nb_dcm', [r'recovers cyanogen chloride in (\d+\.\d+)\\%'], 0.05),
     # 2026-11-03 (작업 A-3) 폐기. chi2 와 4셀 p 는 철회된 합성의 값이다.
     # 교체된 자리는 본문 재집필(작업 C) 때 새 앵커를 붙인다.
     # 2026-11-03 (작업 A-3). 네 셀을 채널별로 묶어 적도록 고쳤으므로
@@ -2148,7 +2263,9 @@ CHECKS = [
                        r'ultraviolet channel gives \$p = (0\.\d+)\$'],
      0.00005),
     ('vol_fisher_minq', [r'reflectance\s+channel reaches \$q = (0\.\d+)\$',
-                         r'\$p = 0\.0215\$ and \$q = (0\.\d+)\$'],
+                         r'\$p = 0\.0215\$ and \$q = (0\.\d+)\$',
+                         # 2026-11-03 (작업 B). 초록 편입분.
+                         r'reflectance\s*\n?channel at \$q=(0\.\d+)\$'],
      0.00005),
     ('vol_gap_cg', [r'sits (0\.\d+) decades from phosgene',
                     r'(0\.\d+) decades from phosgene'], 0.0005),
@@ -2217,7 +2334,11 @@ WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six':
          'twenty-six': 26, 'twenty-seven': 27, 'twenty-eight': 28,
          'twenty-nine': 29, 'thirty': 30,
          'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
-         'thirty-three': 33, 'thirty-four': 34}
+         'thirty-three': 33, 'thirty-four': 34,
+         # 2026-11-03 (작업 B). 병합공간 차원을 본문이 영문으로 적는다.
+         'thirty-one': 31, 'thirty-two': 32, 'thirty-five': 35,
+         'thirty-six': 36, 'thirty-seven': 37, 'thirty-eight': 38,
+         'thirty-nine': 39, 'forty': 40, 'forty-one': 41}
 
 # 서수. 2026-11-03. 휘발성 절이 '순위 열네 번째'를 영문 서수로 적는다.
 # 서수를 숫자로 바꿔 쓰면 영어가 어색해지므로 맵을 넓힌다.
@@ -2235,6 +2356,24 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-03 (작업 B). 분석선택 수와 매칭 범위가 구판으로 되돌아가는 것을
+    # 막는다. 형태 블록이 다섯째 선택이고 그 선택에서 28종 패널 매칭이 0 이
+    # 되므로 범위 하단이 셋에서 영으로 내려갔다. 검증기 사실이 아니라
+    # 열거의 결과이므로 금지항목으로 지킨다.
+    ('분석선택 수 구판 (정본 다섯. 형태 블록이 다섯째다)',
+     [r'Four analyst choices therefore move',
+      r'moved by all four and is not a measurement',
+      r'four arbitrary choices can move'],
+     []),
+    ('유효매칭 범위 구판 (정본 영에서 여섯)',
+     [r'can move between\s+three and six'],
+     []),
+    # 2026-11-03 (작업 B). 제목의 Sixteen. A계열 4종은 어느 분석에도
+    # 기여하지 않고 1차 패널은 11종, 중심 검정은 셀당 4~7종이다. 제목에
+    # 들어갈 수 있는 수가 없으므로 수를 적지 않는다.
+    ('제목의 작용제 수 (B3. 측정 16 대 1차패널 11 대 셀당 4~7)',
+     [r'Reanalysis of Sixteen Authentic'],
+     []),
     # 2026-11-03 (2차). 철회한 두 주장. 되살아나면 멈춘다.
     #
     # (a) DPGME 의 지정 계열. 등재부의 'blister' 는 PMC3231691 본문에서
@@ -2442,6 +2581,7 @@ def main():
     for _g, _why in ((_ordinal_typos(), '서수 접미사 오류'),
                      (_handmade_tables(), '생성기 없는 수치 표'),
                      (_generated_table_sync(), '생성 표 사본 시차'),
+                     (_title_sync(), '제목 비동기'),
                      (_label_scope_guards(), '수치는 맞고 설명이 틀린 자리')):
         if _g:
             fails.append(f'{_why} (2026-11-03 신설 가드):')
