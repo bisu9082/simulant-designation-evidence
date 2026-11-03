@@ -341,6 +341,40 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-03 (작업 B) 신설분 ---
+    ('초록의 전제검정 셀 수 오기 (정본 six)',
+     'all six clear $q=0.05$ against a null',
+     'all four clear $q=0.05$ against a null'),
+    ('초록의 휘발성 반사 q 오기 (정본 0.0430) — 비유의로 뒤집힌다',
+     'the reflectance\nchannel at $q=0.0430$',
+     'the reflectance\nchannel at $q=0.1430$'),
+    ('초록의 휘발성 유효매칭 p 오기 (정본 0.4647)',
+     'one valid match at $p=0.4647$',
+     'one valid match at $p=0.0647$'),
+    ('형태블록 최대 상관을 R_CUT 위로 오기 (정본 0.9364) — 필터가 잡았어야 한다',
+     'block is 0.9364 on the twenty-eight',
+     'block is 0.9764 on the twenty-eight'),
+    ('형태 기여 축소값 오기 (정본 6.5%)',
+     'distance falls from 23.7 to 6.5\\%',
+     'distance falls from 23.7 to 16.5\\%'),
+    ('형태 축소 후 매칭 수 오기 (정본 zero) — 민감도 결론이 뒤집힌다',
+     'matches there falls from three to zero',
+     'matches there falls from three to three'),
+    ('형태 축소 Mantel q 오기 (정본 0.1708)',
+     'shape coordinates raises it to 0.1708',
+     'shape coordinates raises it to 0.0708'),
+    ('병합공간 차원 오기 (정본 thirty-eight)',
+     'Nine of the thirty-eight coordinates',
+     'Nine of the thirty-nine coordinates'),
+    ('분석선택 수를 넷으로 되돌림 (정본 Five)',
+     'Five analyst choices therefore move',
+     'Four analyst choices therefore move'),
+    ('매칭 범위를 구판으로 되돌림 (정본 zero and six)',
+     'can move between\nzero and six',
+     'can move between\nthree and six'),
+    ('제목에 Sixteen 을 되돌림',
+     'A Reanalysis of Authentic Chemical Warfare Agent Measurements',
+     'A Reanalysis of Sixteen Authentic Chemical Warfare Agents'),
     # --- 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
     #     숫자가 산출물과 맞는데 그 숫자를 설명하는 말이 틀린 경우다.
     ('DMMP 4종 평균 부호 오기 (정본 +0.049, 자외)',
@@ -351,7 +385,7 @@ ACS_CASES = [
      'other than tabun it is $-0.289$ and'),
     # 철회한 주장은 B2 블랙리스트가 잡는다. 주입 시험도 그 경로를 확인한다.
     ('초록을 철회한 DPGME 계열 주장으로 되돌림',
-     'on a gap smaller than the temperature mismatch',
+     'on a gap\nsmaller than the temperature mismatch',
      'which pairs a blister-agent simulant with a nerve agent'),
     # --- 휘발성 축 (2026-11-03 신설). 본문 res:panels 말미 단락.
     #     새 절을 가드 없이 들이는 것이 이 프로젝트의 반복 실패 경로다.
@@ -451,6 +485,25 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-03 (작업 B) 신설분 ---
+    ('MDE 보정 문턱 오기 (정본 0.43) — 배율 주장이 뒤집힌다',
+     'moves the threshold to\n$\\delta = 0.43$',
+     'moves the threshold to\n$\\delta = 0.23$'),
+    ('MDE 보정 배율 오기 (정본 1.15)',
+     'then 1.15 times what the design',
+     'then 2.15 times what the design'),
+    ('28종 패널 보정 문턱 오기 (정본 0.18)',
+     'corrected\nthreshold is $\\delta = 0.18$',
+     'corrected\nthreshold is $\\delta = 0.08$'),
+    ('28종 패널 배율 오기 (정본 0.41) — 해상 가능으로 뒤집힌다',
+     'a ratio of 0.41',
+     'a ratio of 1.41'),
+    ('DMMP 회복률을 DPGME 값으로 되돌림 (정본 89.8%)',
+     'agent in 89.8\\% of 1000 bootstrap replicates',
+     'agent in 41.0\\% of 1000 bootstrap replicates'),
+    ('DPGME 회복률 오기 (정본 41.0%)',
+     'DPGME recovers sulfur mustard in 41.0\\%',
+     'DPGME recovers sulfur mustard in 81.0\\%'),
     # --- 2026-11-03 (2차) 교정분
     ('SI 부분공간 비율을 구판으로 (정본 28.95%)',
      'the rate falls from 28.95\\% to 17.25\\%',

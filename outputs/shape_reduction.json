@@ -56,6 +56,15 @@
       "cyanogen chloride (CK) | acetonitrile": 61.850805778205725
      }
     },
+    "shape_corr": {
+     "n_shape_kept": 9,
+     "max_abs_r": 0.9364278160492754,
+     "pair": [
+      "Asphericity",
+      "NPR1"
+     ],
+     "r_cut": 0.95
+    },
     "structural": {
      "n_permutations": 680,
      "statistics": {
@@ -276,6 +285,15 @@
       "cyanogen chloride (CK) | acetonitrile": 65.80423423346735
      }
     },
+    "shape_corr": {
+     "n_shape_kept": 9,
+     "max_abs_r": 0.9359157561317694,
+     "pair": [
+      "Asphericity",
+      "NPR1"
+     ],
+     "r_cut": 0.95
+    },
     "structural": {
      "n_permutations": 2024,
      "statistics": {
@@ -409,6 +427,15 @@
       "cyanogen chloride (CK) | acetonitrile": 65.80423423346735
      }
     },
+    "shape_corr": {
+     "n_shape_kept": 9,
+     "max_abs_r": 0.9359157561317694,
+     "pair": [
+      "Asphericity",
+      "NPR1"
+     ],
+     "r_cut": 0.95
+    },
     "structural": {
      "n_permutations": 735471,
      "statistics": {
@@ -536,6 +563,15 @@
       "hydrogen cyanide (AC) | acetonitrile": 0.19540763932695135,
       "cyanogen chloride (CK) | acetonitrile": 0.11823333602243542
      }
+    },
+    "shape_corr": {
+     "n_shape_kept": 2,
+     "max_abs_r": 0.8499360665316906,
+     "pair": [
+      "PMI1",
+      "PMI2"
+     ],
+     "r_cut": 0.95
     },
     "structural": {
      "n_permutations": 680,
@@ -750,6 +786,15 @@
       "cyanogen chloride (CK) | acetonitrile": 0.0786199254664591
      }
     },
+    "shape_corr": {
+     "n_shape_kept": 2,
+     "max_abs_r": 0.8882553025101823,
+     "pair": [
+      "PMI1",
+      "PMI2"
+     ],
+     "r_cut": 0.95
+    },
     "structural": {
      "n_permutations": 2024,
      "statistics": {
@@ -875,6 +920,15 @@
       "hydrogen cyanide (AC) | acetonitrile": 0.13240738996606197,
       "cyanogen chloride (CK) | acetonitrile": 0.0786199254664591
      }
+    },
+    "shape_corr": {
+     "n_shape_kept": 2,
+     "max_abs_r": 0.8882553025101823,
+     "pair": [
+      "PMI1",
+      "PMI2"
+     ],
+     "r_cut": 0.95
     },
     "structural": {
      "n_permutations": 735471,

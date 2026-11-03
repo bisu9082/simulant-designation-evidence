@@ -42,7 +42,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 
-from spaces import ELECTRONIC_28, META_NUM, OMEGA_DERIVED, PROTECTED, pick
+from spaces import (ELECTRONIC_28, META_NUM, OMEGA_DERIVED, PROTECTED,
+                    R_CUT, pick)
 
 ELEC3 = [c for c in ELECTRONIC_28 if c != OMEGA_DERIVED]
 
@@ -163,6 +164,24 @@ def exact_perm(D, kl, sim_classes):
             for s in STATS}, len(ALL)
 
 
+def shape_block_corr(df, keep):
+    """보유 형태좌표 사이의 최대 |r| 실측. 선형 필터가 왜 못 잡는지의 근거다.
+
+    관계가 비(ratio)이므로 쌍별 상관이 R_CUT 아래에 머문다. 그 사실을
+    주장하지 말고 측정해서 적는다.
+    """
+    import itertools
+    cols = [c for c in keep if c in SHAPE_ALL]
+    if len(cols) < 2:
+        return {'n_shape_kept': len(cols), 'max_abs_r': None, 'pair': None}
+    X = df[cols].apply(pd.to_numeric, errors='coerce').dropna()
+    R = np.corrcoef(X.values.T)
+    best = max((abs(R[i, j]), cols[i], cols[j])
+               for i, j in itertools.combinations(range(len(cols)), 2))
+    return {'n_shape_kept': len(cols), 'max_abs_r': float(best[0]),
+            'pair': [best[1], best[2]], 'r_cut': R_CUT}
+
+
 def mantel_family(df, keep):
     """12셀 Mantel 전수열거 + BH. sparse_indicators 와 같은 절차."""
     import deltaE_premise as m
@@ -222,7 +241,8 @@ def run(variant, drop):
         SP = {'structural': st, 'electronic3': el, 'merged': st + el}
         panel = {'n_dims': {k: len(v) for k, v in SP.items()},
                  'kept_shape': [c for c in keep if c in SHAPE_ALL],
-                 'block_share_merged': block_share(df, st + el)}
+                 'block_share_merged': block_share(df, st + el),
+                 'shape_corr': shape_block_corr(df, st)}
         for sp, cols in SP.items():
             r, nperm = exact_perm(dist(df, cols), list(df.compound_class),
                                   sim_cls)
@@ -253,12 +273,17 @@ def main():
             md = p['merged']['statistics']['mean_diff']
             nv = p['merged']['statistics']['n_valid']
             bs = p['block_share_merged']
+            sc = p.get('shape_corr') or {}
             print(f"  {label:<30} dims {p['n_dims']}  "
                   f"형태보유 {bs['n_shape_kept']}")
             print(f"     병합 mean_diff p={md['p']:.4f}  "
                   f"유효매칭 {int(-nv['observed'])} (p={nv['p']:.4f})  "
                   f"형태기여 {bs['shape_pct']:.1f}% 대 전자 "
                   f"{bs['electronic_pct']:.1f}%")
+            if sc.get('max_abs_r') is not None:
+                print(f"     형태블록 최대 |r| {sc['max_abs_r']:.4f} "
+                      f"({sc['pair'][0]} 대 {sc['pair'][1]}) "
+                      f"< R_CUT {sc['r_cut']}")
             if 'mantel' in p:
                 mt = p['mantel']
                 print(f"     Mantel {mt['n_cells']}셀 최소 p={mt['min_p']:.4f} "

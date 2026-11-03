@@ -99,7 +99,7 @@ Korea}
 % 4~7종, 1차 패널 11종으로 돌아간다는 사실과 어긋났다. 측정한 것으로
 % 내린다. 편집장·리뷰어 1 이 독립으로 같은 지적을 했다.
 \title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
-Array Response: A Reanalysis of Sixteen Authentic Chemical Warfare Agents}
+Array Response: A Reanalysis of Authentic Chemical Warfare Agent Measurements}
 
 \keywords{chemical warfare agents, simulants, colorimetric sensor array,
 surrogate validation, permutation test, applicability domain}
@@ -145,18 +145,18 @@ with the molecular-descriptor distances on which simulant selection
 rests. All descriptor calculations and tests are new. The array
 discriminates on average: in all six run-channel cells, every compound
 agrees with itself across concentrations more closely than with the other
-compounds of that cell, at the exact floor each cell allows. In 13 of
-those 34 compound-cells it fails against the single nearest other
-compound. Descriptor distance does not track response distance at any
+compounds of that cell, and all six clear $q=0.05$ against a null that
+permutes compound labels within each concentration. Descriptor distance
+does not track response distance at any
 resolvable effect size. Twelve exact Mantel tests and six combinations of
 them leave nothing below $q=0.05$, against a design that resolves a rank
 correlation of 0.67 at 80\% power where the largest observed is 0.57.
 That null holds under every analyst choice we enumerated, from the
 descriptor encoding to the panel composition, while the count of valid
-matches is moved by all four and is not a measurement. Measured vapour
-pressure, tested separately, beats chance for the incumbents yet
-returns one valid match, on a gap smaller than the temperature mismatch
-in its own source data. Dimethyl methylphosphonate, the standard G-agent simulant,
+matches is moved by all five and is not a measurement. Measured vapour
+pressure, tested separately, tracks response distance in the reflectance
+channel at $q=0.0430$ yet returns one valid match at $p=0.4647$, on a gap
+smaller than the temperature mismatch in its own source data. Dimethyl methylphosphonate, the standard G-agent simulant,
 is anti-correlated with soman and cyclosarin in the ultraviolet. Across
 the three runs, one designated simulant has been measured beside the
 agents.
@@ -701,18 +701,37 @@ because that is the only evidence that we did not select the encoding for
 its answer. Supporting Information Section~\ref{S-meth:sparse} gives the
 column-by-column accounting.
 
-Four analyst choices therefore move the count of valid matches: the panel,
+A fifth choice is the shape block. Nine of the thirty-eight coordinates
+retained on the twenty-eight-compound panel, and nine of the forty-one on the
+primary panel, are functions of the three principal moments of inertia.
+Because the relations are ratios rather than linear, the correlation filter at
+$|r| > 0.95$ does not remove them: the largest pairwise correlation inside the
+block is 0.9364 on the twenty-eight-compound panel and 0.9359 on the primary
+panel. They are not exact functions of one another either, since each
+descriptor is Boltzmann averaged over conformers independently, which leaves
+relative discrepancies of 1.4 to 15.3\% in the three identities we checked.
+We therefore kept the full block and recomputed everything with the seven
+derived coordinates dropped, as a declared sensitivity rather than a
+replacement. On the twenty-eight-compound panel the shape contribution to mean
+squared pairwise distance falls from 23.7 to 6.5\%, and for the two agents
+whose nearest-match rule acetonitrile blocks it falls from 69.8 and 61.9\% to
+0.20 and 0.12\%. The count of valid matches there falls from three to zero. On
+the primary panel it is zero under both encodings.
+
+Five analyst choices therefore move the count of valid matches: the panel,
 the order in which the correlation filter is handed its columns, the
-conformer embedding seed and the descriptor encoding. None of them moves
-the result of Section~\ref{res:mantel}. Recomputing the twelve Mantel tests
-under the encodings above leaves the smallest Benjamini--Hochberg value at
-0.1167, 0.4722 and 0.3889, none below 0.05, and removing the single-carrier
-indicators makes the agreement weaker rather than stronger. We draw the
+conformer embedding seed, the descriptor encoding and the shape block. None
+of them moves the result of Section~\ref{res:mantel}. Recomputing the twelve
+Mantel tests under the encodings above leaves the smallest
+Benjamini--Hochberg value at 0.1167, 0.4722 and 0.3889, and dropping the
+derived shape coordinates raises it to 0.1708 with the largest rank
+correlation unchanged at 0.571. None is below 0.05, and removing the
+single-carrier indicators makes the agreement weaker rather than stronger. We draw the
 distinction explicitly because the two results are not equally load-bearing.
 The agreement test between descriptor distance and measured response
 survives every choice we enumerated. The count of valid matches survives
-none of them, and a quantity that four arbitrary choices can move between
-three and six is not a measurement of anything. That is this paper's
+none of them, and a quantity that five arbitrary choices can move between
+zero and six is not a measurement of anything. That is this paper's
 argument applied to its own instrument, and it is the reason we do not
 report a match count as a finding.
 
