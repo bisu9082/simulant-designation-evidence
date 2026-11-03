@@ -164,20 +164,80 @@ for sarin has, in most cases, never been exposed to sarin.
 What licenses the substitution is a claim of similarity. The compound chosen
 is said to be agent-like, and similarity is read from molecular
 descriptors: vapour pressure, dipole moment, frontier orbital energies,
-substructure and shape. The claim that matters for a detector is different.
-It is that the substitute produces the response the agent would produce in
-the same device. Those two claims are connected only if descriptor
-similarity transfers to response similarity, and that transfer has not been
-measured.
+substructure and shape. Cheminformatic selection on exactly those grounds
+has been proposed as the systematic way to find a
+simulant,\cite{lavoie2011} reviews catalogue the compounds in use for
+environmental behaviour,\cite{bartelthunt2008} for emergency
+decontamination trials\cite{james2018} and for toxic industrial
+chemicals,\cite{james2021} and the US Army maintains a test operations
+procedure governing simulant selection for laboratory, chamber and field
+testing.\cite{top082196} The claim that matters for a detector is
+different. It is that the substitute produces the response the agent would
+produce in the same device. Those two claims are connected only if
+descriptor similarity transfers to response similarity.
+
+% 2026-11-03. 선행연구 단락 신설. 우리 bib 에 들어 있으면서 ACS 판본
+% 본문에서 인용되지 않던 항목들이다(JHM 판본에서 옮길 때 빠졌다).
+% Agrawal 2018 은 같은 질문을 흡착에 대해 전산으로 물은 논문이므로
+% 우리 기여의 위치를 정하는 데 가장 중요하다. 초록은 S2 로 실측했다.
+That transfer has been tested once, for a different measurement and in
+simulation. Agrawal and co-workers asked how effectively four common
+simulants, dimethyl methylphosphonate and diisopropyl fluorophosphate among
+them, mimic the adsorption properties of sarin and soman, by computing
+dilute-limit adsorption for all six compounds in 2969 metal--organic
+frameworks of known structure under two independent force
+fields.\cite{agrawal2018} That design answers the question for adsorption,
+which is the quantity a capture material is judged on. It cannot answer it
+for detection, because the response of a detector is not an adsorption
+isotherm, and because a simulation of the agent is not a measurement of it.
+What has not been done is the measured comparison: the agents themselves, in
+a detector, against the descriptor distances on which the substitution
+rests.
 
 It has not been measured because measuring it requires the agents. Response
 data on authentic agents exist in few places, and the compounds used as
 simulants are rarely run alongside them. A recent survey of the field found
 no standard for chemical warfare agent simulants at all, and recorded that
 they have generally been selected on the basis of their historical
-use.\cite{lawrence2025simulants} Our institute is an OPCW designated
-laboratory, which identifies and assays authentic agents under an accredited
-procedure, so the comparison can be made on the agents themselves.
+use.\cite{lawrence2025simulants} A critical review of the low-toxicity
+simulants in current use states the selection criterion plainly, as the
+alignment of physicochemical properties such as hydrophobicity, volatility
+and solubility with those of the agent, and assesses dipropylene glycol
+monomethyl ether and malathion among others on that
+basis.\cite{webb2025} That criterion is a statement about the compound. It
+is not a statement about the detector, and nothing in the review measures
+whether a compound selected that way produces the response the agent
+produces.
+
+% 2026-11-03 (H1). 우리 저자 그룹이 같은 저널에 낸 선행 논문을 인용하지
+% 않고 있었다. 그 논문 초록이 이미 '구조 모사체 기반 탐지 연구가 진본
+% 작용제에서는 센서 선택성에 따라 제대로 작동하지 않을 수 있다' 고
+% 적는다. 우리 기여는 그 주장이 아니라 정량화이므로 위치를 그렇게 잡는다.
+% 숨기면 저자 명단 대조로 즉시 드러나고, 드러나면 더 나쁘다.
+Asking whether the components a detection claim rests on have themselves
+been validated is a question this field has begun to put in print: a recent
+guide to choosing and validating aptamers for biosensors opens on the
+observation that many reported aptamers remain insufficiently characterised,
+and that the resulting reproducibility problem makes a reliable choice
+hard.\cite{chen2026aptamer} Simulants are the analyte-side form of that
+problem, and the concern itself is not new. It has been stated in this
+journal.
+Reporting a bioelectronic nose tested on authentic sarin and VX, two of us
+and our co-workers noted that detection research built on structural
+simulants may not carry over to the agents, depending on the selectivity of
+the sensor, and used combinatorial pattern recognition across a
+multi-receptor array to separate the agents
+themselves.\cite{yoo2025bioelectronic} That work asserted the risk and
+worked around it by measuring the agents. It did not quantify the risk,
+because quantifying it requires putting the descriptor distances and the
+measured responses side by side and asking whether one predicts the other.
+The same holds for our group's field-deployable detection work, which
+likewise measured the agents rather than testing the
+substitution.\cite{ondeviceref} The contribution here is that measurement
+and not the assertion. Our
+institute is an OPCW designated laboratory, which identifies and assays
+authentic agents under an accredited procedure, so the comparison can be
+made on the agents themselves.
 
 This work reports that measurement. A 29-dye colorimetric array was used to
 record the responses of sixteen authentic agents at four exposure
@@ -625,7 +685,10 @@ report a match count as a finding.
 % 예산 400단어. 현재 약 390단어.
 
 Two places remain where the missing evidence might be found, and both are
-empty for the same compounds.
+empty for the same compounds. We looked because the published criterion for
+choosing a low-toxicity simulant is a physicochemical one,\cite{webb2025}
+and a physicochemical criterion does not by itself say what measurement the
+compound was validated against or how toxic it is.
 
 The first is the standard-setting record. We traced each incumbent to the
 document that designates it. DMMP is identified in a NIOSH programme for
@@ -676,7 +739,10 @@ Section~\ref{S-res:h1}.
 Simulant validity is not a property of a compound. It is a claim about a
 measurement, and the practice of designating chemical warfare agent
 simulants records neither the measurement a compound was validated against
-nor the comparison in which its validity was tested.
+nor the comparison in which its validity was tested. The criterion the
+literature does state is physicochemical alignment with the
+agent,\cite{webb2025} which is a property of the compound and not of the
+measurement.
 
 Three counts fix where the evidence stands. In the three runs reanalysed
 here, one designated simulant was measured beside the agents, in one run of
@@ -874,9 +940,17 @@ conclusion can be read against the analyst choices rather than from one of
 them.
 
 \subsection{Software}
-NumPy 2.5.3, SciPy 1.18.1, pandas 3.0.5, scikit-learn 1.9.1, Matplotlib
-3.11.2, RDKit 2026.03.6 and PySCF 2.14.0. All analyses are deterministic given
-the seed, and the permutation tests are exhaustive rather than sampled.
+% 2026-11-03. 종전에는 이름과 버전만 적고 인용이 없었다. bib 에 항목이
+% 있는데도 쓰지 않은 자리였다. PySCF 와 scikit-learn 은 항목이 없어 신설.
+NumPy 2.5.3,\cite{numpy2020} SciPy 1.18.1,\cite{scipy2020} pandas
+3.0.5,\cite{mckinney2010} scikit-learn 1.9.1,\cite{sklearn2011} Matplotlib
+3.11.2,\cite{matplotlib2007} RDKit 2026.03.6\cite{rdkit} and PySCF
+2.14.0.\cite{pyscf2018} Conformer embedding used
+ETKDGv3,\cite{riniker2015,wang2020} the semiempirical electronic
+descriptors GFN2-xTB,\cite{gfnxtb2017,bannwarth2019} and the physicochemical
+descriptors the atomic-contribution and fragment methods implemented in
+RDKit.\cite{wildman1999,ertl2000} All analyses are deterministic given the
+seed, and the permutation tests are exhaustive rather than sampled.
 % 2026-11-02 (GATE 8 7차). 종전에는 "the repository cited below" 라고 적고
 % 참고문헌에 그 저장소가 없었다. 커버레터도 "cited in the manuscript" 라고
 % 단언했다. 원고에 없는 것을 있다고 말한 자리라 항목을 신설해 인용한다.
