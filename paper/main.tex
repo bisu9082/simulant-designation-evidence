@@ -535,8 +535,11 @@ distinguish leaving groups flagged DMMP at the same tier as sarin and admitted
 potassium cyanide to the faithful-and-safe quadrant; both were corrected.
 
 \subsection{Reproducibility}
-All analyses are deterministic given the seed and the permutation test is
-exhaustive rather than sampled. Numerical work used NumPy 2.5.3 \cite{numpy2020},
+% 2026-11-03. 범위 한정. 지정검정(2024, 680)과 Mantel(720)은 전수지만
+% 8종 지정 귀무는 20000회, 부분공간 대조는 2000회 표집이다.
+All analyses are deterministic given the seed. The designation and Mantel
+permutation tests are exhaustive; the eight-simulant designation null and the
+random-subspace controls are sampled, at 20000 and 2000 draws. Numerical work used NumPy 2.5.3 \cite{numpy2020},
 SciPy 1.18.1 \cite{scipy2020}, pandas 3.0.5 \cite{mckinney2010} and scikit-learn
 1.9.1, figures Matplotlib 3.11.2 \cite{matplotlib2007}, and descriptors RDKit
 2026.03.6 \cite{rdkit}.
@@ -561,11 +564,12 @@ appears again in the same document's candidate list for the GB and HD permeation
 study. That document also states the simulant information it provides is not to
 be used
 as a recommendation of any simulant, and the property at issue in both roles is
-breakthrough through a barrier rather than detection chemistry. DPGME appears as ``a preferred G
-agent simulant'' in a patent assigned to the United States Department of the Army
-\cite{seitzinger2006simulant}, in a training composition formulated with a
-fluorescent dye and justified on ion-mobility detectability, so the application
-is field training rather than sensor validation. For dichloromethane we found no
+breakthrough through a barrier rather than detection chemistry. % 2026-11-03 (2차). 특허 직접 인용 철회. 원문 확인 불가.
+DPGME appears in a patent assigned to the United States
+Department of the Army\cite{seitzinger2006simulant} for a training composition
+formulated with a fluorescent dye, where the property required of it is
+detectability by ion mobility spectrometry and no agent class is assigned, so
+the application is field training rather than sensor validation. For dichloromethane we found no
 designating document of any kind: it is absent from the NIOSH document and
 from the Man-in-Simulant Test programme, and present in this role, as far as we
 can establish, only in the research literature, where it is run as a chemical
@@ -949,11 +953,16 @@ Section~\ref{meth:dboot} the three incumbents separate. DMMP is nearest sarin in
 89.8\% of replicates and nearest one of the four G-series agents in 98.0\%.
 Dichloromethane is nearest a G-series agent in 6.0\%, sitting instead with the
 choking and blood agents. DPGME divides evenly, sulfur mustard in 41.0\% and the
-G series in 53.4\%. Being nearest is not being close, and DPGME carries no valid
-match in any space on this panel; but it is the one of the three whose
-designating document names a class, ``a preferred G agent simulant''
-\cite{seitzinger2006simulant}, and it is the one whose class these spaces do not
-resolve.
+G series in 53.4\%. % 2026-11-03 (2차). 종전 문장은 특허 문언을 직접 인용으로 적었다
+% (특허가 DPGME 를 G계열 모사체로 부른다는 문언). 원문 확인 불가로 철회.
+% 철회한 문자열 자체는 B2 블랙리스트에 올려 두었으므로 여기 적지 않는다.
+% 같은 특허에 대해 res:docs 가 사실로 적는 것은 '요구된 성질이 IMS
+% 검출성' 하나다. 직접 인용은 확인 전에는 쓰지 않는다.
+Being nearest is not being close, and DPGME carries no valid
+match in any space on this panel. Its designating document requires
+detectability by ion mobility spectrometry of a training composition and does
+not assign the compound to an agent class,\cite{seitzinger2006simulant} so
+there is no designated class for these spaces to resolve or fail to resolve.
 
 \begin{table}[!htb]
 \centering
@@ -1375,9 +1384,10 @@ public repository at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, at the tagged
 release \texttt{v1.0}, and are also provided with this article. The repository
 also carries the primary EPA source document from which every toxicity value
-here was parsed, so the parse can be checked against the original. The exact
-permutation test is exhaustive and the remaining analyses are deterministic
-given the stated seed. The descriptor cache is checked against the code rather
+here was parsed, so the parse can be checked against the original. The designation and Mantel
+permutation tests are exhaustive; the eight-simulant designation null and the
+random-subspace controls are sampled, at 20000 and 2000 draws, and the
+remaining analyses are deterministic given the stated seed. The descriptor cache is checked against the code rather
 than taken on trust: \texttt{build\_descriptors.py --verify} rebuilds every
 numeric column and the analysis pipeline stops if any column fails to
 reproduce. Section~\ref{S-meth:conformer} reports what that check caught.

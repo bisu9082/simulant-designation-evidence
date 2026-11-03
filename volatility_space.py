@@ -87,10 +87,15 @@ VP = {
            'Browning, E. Toxicity and Metabolism of Industrial Solvents '
            '| 0.4 MM HG @ 26 °C',
            '25 °C 값이 없다. 26 °C 를 쓰고 온도를 적는다'),
- 'ethanol': (59.3, 25, 'T1',
+ # 2026-11-03 (2차). 종전에 T1 로 올려 두었는데, 출처가 스스로
+ # /Extrapolated/ 로 표시한 값이다. 절의 자기 기준('measurements, not
+ # predictions')과 어긋난 채 '증기압 전용 측정값' tier 에 실려 있었다.
+ # tier 를 따로 세우고 표에 표시한다.
+ 'ethanol': (59.3, 25, 'TX',
              'Daubert, T.E., R.P. Danner | 59.3 mm Hg at 25 °C '
              '/Extrapolated/',
-             '출처가 /Extrapolated/ 로 표시한 값이다. 그대로 적고 flag 를 센다'),
+             '출처가 스스로 /Extrapolated/ 로 표시했다. 측정값이 아니므로 '
+             'T1 에서 내리고 TX(상관식 외삽)로 분류해 표에 표시한다'),
  'toluene': (28.4, 25, 'T1',
              'Daubert, T.E., R.P. Danner | 28.4 mm Hg at 25 °C', ''),
  'DMSO': (0.60, 25, 'T1',
@@ -250,7 +255,8 @@ def sanity(names, x):
     out['off_25C'] = {n: VP[n][1] for n in names if VP[n][1] != 25}
     out['n_off_25C'] = len(out['off_25C'])
     out['tiers'] = {t: sum(1 for n in names if VP[n][2] == t)
-                    for t in ('T1', 'T2', 'T3')}
+                    for t in ('T1', 'T2', 'T3', 'TX')}
+    out['extrapolated'] = [n for n in names if VP[n][2] == 'TX']
     return out
 
 

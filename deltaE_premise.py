@@ -277,8 +277,15 @@ def dmmp_question():
         print(f'          G계열(GB/GD/GF) 평균 {g:+.3f}   VX {sims["VX"]:+.3f}   '
               f'차 {diff:+.3f}  95% CI [{lo:+.3f}, {hi:+.3f}]  -> '
               f'{"G 계열" if diff > 0 else "VX"} 를 더 닮음')
+        # 2026-11-03. g_series_mean 은 GB/GD/GF 3종 평균이다(위 273행).
+        # 본문은 이것을 'the mean over the four G agents' 로 적고 있었고,
+        # 숫자 자체는 산출물과 일치하므로 검증기 505건이 전부 통과했다.
+        # 분모가 틀린 경우를 잡으려면 두 평균을 모두 예치해야 한다.
+        g4 = float(np.mean([sims[a] for a in ['GA', 'GB', 'GD', 'GF']]))
         rows.append(dict(mode=mode, **{f'cos_{a}': v for a, v in sims.items()},
-                         g_series_mean=g, vx=sims['VX'], g_minus_vx=diff,
+                         g_series_mean=g, g_series_n=3,
+                         g4_series_mean=g4, g4_series_n=4,
+                         vx=sims['VX'], g_minus_vx=diff,
                          ci_lo=float(lo), ci_hi=float(hi)))
     return pd.DataFrame(rows)
 

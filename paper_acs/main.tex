@@ -142,7 +142,7 @@ We reanalyse the colorimetric tables of three published runs of one
 29-dye array, which measured sixteen authentic agents at four
 concentrations in two optical channels, and compare the response patterns
 with the molecular-descriptor distances on which simulant selection
-rests. All descriptor calculations and tests here are new. The array
+rests. All descriptor calculations and tests are new. The array
 discriminates on average: in all six run-channel cells, every compound
 agrees with itself across concentrations more closely than with the other
 compounds of that cell, at the exact floor each cell allows. In 13 of
@@ -154,9 +154,9 @@ correlation of 0.67 at 80\% power where the largest observed is 0.57.
 That null holds under every analyst choice we enumerated, from the
 descriptor encoding to the panel composition, while the count of valid
 matches is moved by all four and is not a measurement. Measured vapour
-pressure, tested separately, beats chance for the incumbent simulants yet
-returns one valid match, which pairs a blister-agent simulant with a
-nerve agent. Dimethyl methylphosphonate, the standard G-agent simulant,
+pressure, tested separately, beats chance for the incumbents yet
+returns one valid match, on a gap smaller than the temperature mismatch
+in its own source data. Dimethyl methylphosphonate, the standard G-agent simulant,
 is anti-correlated with soman and cyclosarin in the ultraviolet. Across
 the three runs, one designated simulant has been measured beside the
 agents.
@@ -470,10 +470,22 @@ be set against theirs directly.
 In the ultraviolet channel DMMP correlates with tabun at $+0.764$ and with
 sarin at $+0.645$, and anti-correlates with soman at $-0.492$, cyclosarin
 at $-0.721$ and VX at $-0.702$. In the reflectance channel the same
-comparison gives $-0.112$, $+0.569$, $-0.479$, $-0.495$ and $-0.273$. The
-mean over the four G agents is negative in both channels, $-0.189$ and
-$-0.135$. The compound used in place of the G agents does not, on this
-measurement, resemble the G agents as a class.
+comparison gives $-0.112$, $+0.569$, $-0.479$, $-0.495$ and $-0.273$. % 2026-11-03. 종전 문장은 'the mean over the four G agents is negative in
+% both channels, -0.189 and -0.135' 였다. 그 두 수는 산출물의
+% g_series_mean 이고 그것은 GB/GD/GF 3종 평균이다(deltaE_premise 273행).
+% 4종 평균은 자외채널에서 +0.049 로 양수이므로 'four ... negative in both
+% channels' 는 틀린 서술이었다. 숫자가 산출물과 일치했으므로 검증기
+% 505건이 전부 통과했다. 두 평균을 모두 적고, 결론을 부호 패턴으로
+% 다시 세운다. 그 결론이 원래 쓰려던 것보다 정확하다.
+The mean
+over all four G agents is $+0.049$ in the ultraviolet channel and $-0.129$
+in reflectance; over the three G agents other than tabun it is $-0.189$ and
+$-0.135$. Neither mean carries the claim on its own, because the sign of
+the correlation changes with the agent and with the channel: DMMP
+correlates with tabun and sarin in the ultraviolet and anti-correlates with
+soman and cyclosarin, and tabun changes sign between the channels while
+sarin does not. What this measurement does not show is a compound that
+behaves like the G series as a class.
 
 A weaker claim survives in one channel. If DMMP is G-like at all it should
 sit closer to the G series than to VX, and that contrast is $+0.513$ with a
@@ -722,11 +734,13 @@ units, and the count of valid matches returns one match with a $p$ of 0.4647,
 ranking 316th of 680. That single match pairs dipropylene glycol monomethyl
 ether with soman on a gap of 0.0107 decades between measurements at
 26~$^{\circ}$C and 25~$^{\circ}$C, which is smaller than the temperature
-mismatch that produced it. The designated pairings are not the ones the axis
-returns. Dichloromethane, designated for the choking agent, sits 0.232 decades
-from hydrogen cyanide and 0.514 from phosgene; dimethyl methylphosphonate sits
-0.473 from sarin while an interferent sits 0.216; nothing in the panel is
-within 2.659 decades of VX. Agreement with measured response is positive in
+mismatch that produced it. The axis does not reproduce the pairings the usage
+literature implies. Dichloromethane sits 0.232 decades from hydrogen cyanide
+and 0.514 from phosgene; dimethyl methylphosphonate sits 0.473 from sarin
+while an interferent sits 0.216; nothing in the panel is within 2.659 decades
+of VX. We do not describe any of these as a departure from a designated
+pairing, because for two of the three incumbents the designating record
+assigns no agent class at all (Section~\ref{res:docs}). Agreement with measured response is positive in
 all four evaluable cells and does not reach significance, with Fisher
 combination of the four exact Mantel values giving $p=0.0809$. Supporting
 Information Section~\ref{S-res:volatility} sets the axis out in full. The null
@@ -1003,7 +1017,13 @@ ETKDGv3,\cite{riniker2015,wang2020} the semiempirical electronic
 descriptors GFN2-xTB,\cite{gfnxtb2017,bannwarth2019} and the physicochemical
 descriptors the atomic-contribution and fragment methods implemented in
 RDKit.\cite{wildman1999,ertl2000} All analyses are deterministic given the
-seed, and the permutation tests are exhaustive rather than sampled.
+% 2026-11-03. 종전 문장은 'the permutation tests are exhaustive rather
+% than sampled' 였다. 지정검정(2024, 680)과 Mantel(720)은 전수지만,
+% 8종 지정 귀무는 C(24,8) 이 너무 커서 20000회 표집이고 부분공간 대조는
+% 2000회다. 범위를 적는다.
+seed. The designation tests on both panels and the Mantel tests are
+exhaustive; the eight-simulant designation null and the random-subspace
+controls are sampled, at 20000 and 2000 draws from the recorded seed.
 % 2026-11-02 (GATE 8 7차). 종전에는 "the repository cited below" 라고 적고
 % 참고문헌에 그 저장소가 없었다. 커버레터도 "cited in the manuscript" 라고
 % 단언했다. 원고에 없는 것을 있다고 말한 자리라 항목을 신설해 인용한다.

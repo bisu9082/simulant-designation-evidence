@@ -253,6 +253,91 @@ def _generated_table_sync():
     return sorted(set(bad))
 
 
+def _label_scope_guards():
+    r"""수치는 맞고 그 수치를 설명하는 '말'이 틀린 경우 (2026-11-03 신설).
+
+    왜 필요한가. 리뷰어 1 이 결함 10건을 들고 왔고 전부 사실이었는데,
+    검증기 505건은 모두 통과했다. 이유는 하나다. -0.189 도, 0.3539 도,
+    59.3 도 산출물에 실제로 있는 값이다. 틀린 것은 그 값을 설명하는
+    단어였다: 'four' G agents(실제 3종), 'eighteen' tests(실제 72검정),
+    'tier one'(출처가 Extrapolated 라고 적은 값), 'exhaustive'(실제 표집).
+    종전 가드는 '표 셀이 구판인가'를 보았고 이것은 다른 계열이다.
+
+    기계적으로 잡히는 세 가지만 여기서 본다. 분모 오류(3종을 4종이라
+    적는 류)는 문장마다 앵커를 붙이는 수밖에 없고, 그렇게 했다.
+    """
+    import json as _j
+    import os as _o
+    import re as _r
+    bad = []
+
+    # (A) 전수열거 주장 대 표집 산출물. #6 이 이 경로였다.
+    CLAIM = _r.compile(r'exhaustiv\w+', _r.I)
+    sampled = []
+    for fn in sorted(_o.listdir('outputs')):
+        if not fn.endswith('.json'):
+            continue
+        try:
+            txt = open(f'outputs/{fn}').read()
+        except OSError:
+            continue
+        if '"enumerated": false' in txt.replace(' ', '').replace(
+                '"enumerated":false', '"enumerated": false'):
+            sampled.append(fn)
+        elif _r.search(r'"(n_draws|n_rep|n_replicates)":\s*\d+', txt):
+            sampled.append(fn)
+    for f in (TEX,) + EXTRA_TEX:
+        if not _o.path.exists(f):
+            continue
+        raw = open(f).read()
+        body = '\n'.join('' if ln.lstrip().startswith('%')
+                          else _r.sub(r'(?<!\\\\)%.*$', '', ln)
+                          for ln in raw.split('\n'))
+        for m in CLAIM.finditer(body):
+            win = ' '.join(body[max(0, m.start() - 320):m.end() + 320].split())
+            # 범위를 한정한 문장은 통과시킨다. 'sampled' 를 함께 적고
+            # 표집 횟수를 밝힌 문장이 그것이다.
+            if _r.search(r'are sampled|sampled controls|sampled at|draws',
+                         win, _r.I):
+                continue
+            # 'exhaustive representations of all compounds' 처럼 순열검정과
+            # 무관한 뜻으로 쓰인 자리는 대상이 아니다.
+            if not _r.search(r'permutation|enumerat|relabell', win, _r.I):
+                continue
+            bad.append(f'  전수열거 주장에 범위가 없다 [{f}]: '
+                       f'"...{win[260:400]}..." — 표집 산출물 '
+                       f'{len(sampled)}건 존재 ({", ".join(sampled[:3])} 등). '
+                       '전수인 검정과 표집인 검정을 문장에서 구분할 것')
+
+    # (B) tier 주장 대 출처 문자열. #8 이 이 경로였다.
+    vp = 'outputs/volatility_space.json'
+    if _o.path.exists(vp):
+        d = _j.load(open(vp))['vapour_pressure_mmHg']
+        BAD_WORD = _r.compile(r'extrapolat|estimat|predict|calculat', _r.I)
+        for n, e in d.items():
+            if e['tier'] in ('T1', 'T2') and BAD_WORD.search(e['source']):
+                bad.append(f"  측정값 tier 에 추정값 [{n}]: tier {e['tier']} "
+                           f"인데 출처 문자열이 '{e['source'][-30:]}' 다. "
+                           'TX 로 내리거나 다른 온도의 측정값을 쓸 것')
+
+    # (C) 생성 표 캡션이 말하는 가족 크기 대 실제로 읽은 산출물. #4 가 이 경로였다.
+    #     tab_ablation 의 마지막 열은 '해당 패널 구성의 18검정' 이어야 한다.
+    tf = 'outputs/tab_ablation.tex'
+    mc = 'outputs/multiplicity_c.json'
+    if _o.path.exists(tf) and _o.path.exists(mc):
+        want = {round(r[4], 4) for r in _j.load(open(mc))}
+        txt = open(tf).read()
+        if 'eighteen tests' in txt:
+            got = {round(float(x), 4) for x in
+                   _r.findall(r'&\s*([\d.]+)\s*\\\\', txt)}
+            if not (want & got):
+                bad.append('  생성 표의 캡션과 데이터가 다른 가족 '
+                           f'[{tf}]: 캡션은 18검정 BH 라고 적는데 '
+                           f'{sorted(want)} 가 표에 없다. 72검정 파일을 '
+                           '붙였는지 확인할 것')
+    return sorted(set(bad))
+
+
 def preflight():
     """산출물·도판 존재를 먼저 전수 확인한다. 없으면 전부 나열하고 멈춘다."""
     import os
@@ -958,12 +1043,14 @@ def load_facts():
             f['dmmp_gd_uv'] = _d['cos_GD']
             f['dmmp_gf_uv'] = _d['cos_GF']
             f['dmmp_vx_uv'] = _d['cos_VX']
-            f['dmmp_gmean_uv'] = _d['g_series_mean']
+            f['dmmp_g4mean_uv'] = _d['g4_series_mean']
+            f['dmmp_gmean_uv_3'] = _d['g_series_mean']
             f['gvx_uv'] = _d['g_minus_vx']
             f['gvx_uv_lo'] = _d['ci_lo']
             f['gvx_uv_hi'] = _d['ci_hi']
         else:
-            f['dmmp_gmean_nor'] = _d['g_series_mean']
+            f['dmmp_g4mean_nor'] = _d['g4_series_mean']
+            f['dmmp_gmean_nor_3'] = _d['g_series_mean']
             f['gvx_nor'] = _d['g_minus_vx']
             f['gvx_nor_lo'] = _d['ci_lo']
             f['gvx_nor_hi'] = _d['ci_hi']
@@ -1008,6 +1095,22 @@ def load_facts():
     f['rand3_frac28'] = 100.0 * w['raw']['frac_below_05']
     f['rand3_med28'] = w['raw']['quantiles']['q50']
     f['white_frac28'] = 100.0 * w['whitened']['frac_below_05']
+    # 2026-11-03 (2차). 쌍독립 가정 p 와 pooled 구조공간 rho 가 사실표에
+    # 없어서, 그 자리의 오기를 주입해도 검증기가 통과했다.
+    import pandas as _pdx
+    _st = _pdx.read_csv('outputs/deltaE_space_test.csv')
+    for _m, _sp, _k in [('uv', 'structural', 'pairs_d2uv_struct'),
+                        ('uv', 'merged', 'pairs_d2uv_merged'),
+                        ('normal', 'electronic', 'pairs_d2nor_elec')]:
+        _r = _st[(_st.dataset == 'd2') & (_st['mode'] == _m)
+                 & (_st.space == _sp)]
+        f[_k] = float(_r.p.iloc[0])
+    _pl = _pdx.read_csv('outputs/deltaE_pooled.csv')
+    for _m, _tag in [('uv', 'uv'), ('normal', 'nor')]:
+        _r = _pl[(_pl['mode'] == _m) & (_pl.space == 'structural')]
+        f[f'pooled_struct_{_tag}'] = float(_r.pooled_rho.iloc[0])
+        f[f'pooled_struct_{_tag}_lo'] = float(_r.ci_lo.iloc[0])
+        f[f'pooled_struct_{_tag}_hi'] = float(_r.ci_hi.iloc[0])
     f['white_med28'] = w['whitened']['quantiles']['q50']
     s2 = json.load(open('outputs/stat_supplement2.json'))
     wy = s2['westfall_young']
@@ -1224,6 +1327,17 @@ def load_facts():
         if lab == 'panel35_designated_plus_literature8':
             f['bh_q35lit'] = bhq
             f['minp35lit'] = _minp
+    # 2026-11-03 (2차). 별칭은 사실표 끝에서 만든다. 앞에 두었더니
+    # 뒤에 정의되는 사실 3건이 아직 없어 앵커가 조용히 꺼졌다.
+    for _a, _b in [('rand3_frac28', 'rand3_frac28_2'),
+                   ('rand3_med28', 'rand3_med28_2'),
+                   ('white_med28', 'white_med28_2'),
+                   ('pct_struct', 'pct_struct_2'),
+                   ('fam_bh18_p28', 'fam_bh18_p28_2'),
+                   ('mantel_d2nor_elec', 'mantel_d2nor_elec_2'),
+                   ('struct_kept_28', 'struct_kept_28_2')]:
+        if _a in f:
+            f[_b] = f[_a]
     # ---------------------------------------------- 휘발성 축 (2026-11-03)
     # 보조 분석이지만 본문·SI 가 25개 수치를 인용한다. 앵커를 붙이지 않으면
     # 이 프로젝트가 반복해서 빠진 구멍(가드 없는 새 절)이 그대로 생긴다.
@@ -1237,6 +1351,10 @@ def load_facts():
     f['vol_nperm'] = _vd['n_permutations']
     f['vol_range'] = _vd['sanity']['log10_range']
     f['vol_t1'] = _vd['sanity']['tiers']['T1']
+    f['vol_tx'] = _vd['sanity']['tiers']['TX']
+    _lw = _vol['lewisite_isomer_sensitivity']
+    f['vol_lew_cis_p'] = _lw['cis']['p']
+    f['vol_lew_cis_rank'] = _lw['cis']['rank']
     f['vol_t2'] = _vd['sanity']['tiers']['T2']
     f['vol_t3'] = _vd['sanity']['tiers']['T3']
     _bp = _vol['valid_match_detail']['sole_match_breakpoint']
@@ -1505,10 +1623,9 @@ CHECKS = [
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
     ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
     ('dmmp_vx_uv', [r'and VX at \$([-][\d.]+)\$'], 0.0015),
-    ('dmmp_gmean_uv',
-     [r'negative in both channels, \$([-][\d.]+)\$ and'], 0.0015),
-    ('dmmp_gmean_nor',
-     [r'negative in both channels, \$[-][\d.]+\$ and\s+\$([-][\d.]+)\$'], 0.0015),
+    # 2026-11-03 (2차) 폐기. 'negative in both channels' 문장이 분모
+    # 오류여서 교체됐다. 같은 산출물 값(3종 평균)은 dmmp_gmean_uv_3 /
+    # dmmp_gmean_nor_3 가 새 어법 자리에서 검사한다.
     ('gvx_uv', [r'that contrast is \$\+([\d.]+)\$ with a'], 0.0015),
     ('gvx_uv_lo', [r'95\\% interval from\s+\$\+([\d.]+)\$ to'], 0.0015),
     ('gvx_uv_hi', [r'95\\% interval from\s+\$\+[\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
@@ -1803,7 +1920,9 @@ CHECKS = [
                      r'over the twelve leaves a smallest adjusted\s+value of ([\d.]+)',
                      r'smallest \$q\$ = ([\d.]+)\)'], 0.0005),
     ('white_frac28', [r'the rate falls from [\d.]+\\% to ([\d.]+)\\%'], 0.06),
-    ('white_med28', [r'from 0.094 to ([\d.]+)\.'], 0.0005),
+    # 2026-11-03 (2차) 폐기. 이 앵커는 폐기 수치 0.094 를 닻으로 썼다.
+    # 0.094 를 0.149 로 교정하자 꺼졌다. white_med28_2 가 새 어법 자리에서
+    # 같은 값을 검사한다.
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('q_prespec28', [r'returns a value below 0\.05, at ([\d.]+)',
      r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
@@ -2009,6 +2128,48 @@ CHECKS = [
                     r'nothing within (\d+\.\d+) decades'], 0.0005),
     ('vol_n_int_nearest', [r'For (\w+) of the\s+eleven agents the nearest'],
      0),
+    # ------ 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
+    ('dmmp_g4mean_uv', [r'over all four G agents is \$\+([\d.]+)\$ in the'],
+     0.0005),
+    ('dmmp_g4mean_nor',
+     [r'ultraviolet channel and \$(-[\d.]+)\$\s*\n?in reflectance'], 0.0005),
+    ('dmmp_gmean_uv_3',
+     [r'three G agents other than tabun it is \$(-[\d.]+)\$'], 0.0005),
+    ('dmmp_gmean_nor_3',
+     [r'other than tabun it is \$-[\d.]+\$ and\s*\n?\$(-[\d.]+)\$'], 0.0005),
+    ('vol_lew_cis_p',
+     [r'from \$p = [\d.]+\$ at rank\s*\n?fourteen to \$p = ([\d.]+)\$'],
+     0.00005),
+    ('vol_lew_cis_rank', [r'at rank\s*\n?fourteen to \$p = [\d.]+\$ at rank '
+                          r'(\w+)\.'], 0),
+    # ------ 2026-11-03 (2차). 교정한 자리에 앵커가 없어 주입이 통과했다.
+    #        주입 시험이 그것을 잡아냈고, 여기서 메운다.
+    ('rand3_frac28_2', [r'rate falls from ([\d.]+)\\% to'], 0.05),
+    ('rand3_med28_2', [r'median \$p\$ rises from ([\d.]+) to'], 0.0005),
+    ('white_med28_2', [r'median \$p\$ rises from [\d.]+ to ([\d.]+)'],
+     0.0005),
+    ('pct_struct_2', [r'the ([\d.]+)th percentile of the subspaces one'], 0.06),
+    ('fam_bh18_p28_2',
+     [r'eighteen tests whose smallest adjusted value is ([\d.]+)'], 0.0006),
+    ('pairs_d2uv_struct', [r'structural cell at \$p = ([\d.]+)\$ rather'],
+     0.0006),
+    ('mantel_d2uv_struct',
+     [r'structural cell at \$p = [\d.]+\$ rather than ([\d.]+)'], 0.0006),
+    ('pairs_d2uv_merged', [r'the merged cell at ([\d.]+) rather than'], 0.0006),
+    ('mantel_d2uv_merged',
+     [r'the merged cell at [\d.]+ rather than ([\d.]+)'], 0.0006),
+    ('pairs_d2nor_elec',
+     [r'electronic cell it runs the other way, to ([\d.]+) from'], 0.0006),
+    ('mantel_d2nor_elec_2',
+     [r'runs the other way, to [\d.]+ from ([\d.]+)'], 0.0006),
+    ('pooled_struct_uv', [r'gives \$\\rho = \+([\d.]+)\$ \(95'], 0.0006),
+    ('pooled_struct_uv_lo', [r'\(95\\% CI \$(-[\d.]+)\$ to \$\+[\d.]+\$\) in '
+                             r'the ultraviolet'], 0.0006),
+    ('pooled_struct_uv_hi', [r'CI \$-[\d.]+\$ to \$\+([\d.]+)\$\) in the '
+                             r'ultraviolet'], 0.0006),
+    ('pooled_struct_nor', [r'and \$\+([\d.]+)\$ \(\$-[\d.]+\$ to \$\+[\d.]+\$\)'
+                           r' in reflectance'], 0.0006),
+    ('struct_kept_28_2', [r'The structural space has (\d+) coordinates'], 0),
 ]
 
 WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
@@ -2037,6 +2198,20 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-03 (2차). 철회한 두 주장. 되살아나면 멈춘다.
+    #
+    # (a) DPGME 의 지정 계열. 등재부의 'blister' 는 PMC3231691 본문에서
+    #     온 라벨이고 지정 문서가 아니다(2026-09-03 기록, 승인 미회신).
+    #     SI 가 특허 문언이라고 적었던 'a preferred G agent simulant' 는
+    #     특허 원문을 확인할 수 없었다. 두 주장 모두 쓰지 않는다. 본문이
+    #     사실로 적는 것은 '특허가 요구한 성질은 IMS 검출성' 하나다.
+    ('DPGME 지정 계열 주장 (특허 원문 미확인, 등재부 라벨은 지정문서 아님)',
+     [r'a preferred G agent simulant',
+      r'blister-agent simulant with a nerve agent',
+      r'designated for the blister agent',
+      r'designated for the choking agent'],
+     [r'An\s+earlier version of this section wrote',
+      r'We withdraw that\s+statement']),
     # 2026-11-02 신설. 세 원논문의 Methods 를 직접 읽기 전에, 어레이 농도를
     # ppm 으로, 같은 화합물의 서로 다른 농도를 '반복측정(replicate)' 으로
     # 적었다. 둘 다 수행하지 않은 측정을 서술한 것이므로 [C-3] 위반이다.
@@ -2229,7 +2404,8 @@ def main():
     fails, checked, unseen = [], 0, []
     for _g, _why in ((_ordinal_typos(), '서수 접미사 오류'),
                      (_handmade_tables(), '생성기 없는 수치 표'),
-                     (_generated_table_sync(), '생성 표 사본 시차')):
+                     (_generated_table_sync(), '생성 표 사본 시차'),
+                     (_label_scope_guards(), '수치는 맞고 설명이 틀린 자리')):
         if _g:
             fails.append(f'{_why} (2026-11-03 신설 가드):')
             fails.extend(_g)
@@ -2446,6 +2622,11 @@ def main():
         # 구판임을 밝히고 인용하는 문장은 면제한다.
         if re.search(r'earlier version|earlier analysis|superseded|put tabun at',
                      win, re.I):
+            continue
+        # 2026-11-03. 휘발성 축의 간격은 log10 증기압 자수이고 서술자
+        # 공간의 거리가 아니다. 'decades' 가 창에 있으면 그 자리는
+        # vol_gap_* 앵커가 검사한다.
+        if re.search(r'decades', win):
             continue
         if not any(abs(val - v) <= 0.006 for v in ok):
             stray.append(f'{name} = {val:g}  [{" ".join(m.group(0).split())[:58]}]')
