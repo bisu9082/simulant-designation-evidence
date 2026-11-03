@@ -41,7 +41,11 @@ EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
              'paper_acs/tab_family.tex', 'paper/tab_family.tex',
              'paper_acs/tab_blockbalance.tex', 'paper/tab_blockbalance.tex',
              'paper_acs/tab_sparse.tex', 'paper/tab_sparse.tex',
-             'paper_acs/tab_plocal.tex', 'paper/tab_plocal.tex')
+             'paper_acs/tab_plocal.tex', 'paper/tab_plocal.tex',
+             # 2026-11-03. 휘발성 보조 분석의 두 표.
+             'paper_acs/tab_volatility.tex',
+             'paper/tab_volatility.tex',
+             'paper_acs/tab_vpairing.tex', 'paper/tab_vpairing.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -229,7 +233,8 @@ def _generated_table_sync():
     import os as _o
     bad = []
     for name in ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
-                 'tab_sparse.tex', 'tab_plocal.tex'):
+                 'tab_sparse.tex', 'tab_plocal.tex', 'tab_volatility.tex',
+                 'tab_vpairing.tex'):
         src = f'outputs/{name}'
         if not _o.path.exists(src):
             bad.append(f'  생성 표 없음 [{src}]: make_si_tables.py 를 돌릴 것')
@@ -298,6 +303,9 @@ def preflight():
         'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',
         'conformer_sensitivity_single.json': 'conformer_sensitivity.py',
         'multiplicity_across_panels.json': 'multiplicity_panels.py',
+        # 2026-11-03. 휘발성 보조 분석.
+        'volatility_candidates.json': 'volatility_fetch.py',
+        'volatility_space.json': 'volatility_space.py',
         'subspace_null.json': 'subspace_null.py',
         'dft_dipole.csv': 'dft_omega.py',
         'dft_electronic_space.json': 'dft_electronic_space.py',
@@ -1216,8 +1224,44 @@ def load_facts():
         if lab == 'panel35_designated_plus_literature8':
             f['bh_q35lit'] = bhq
             f['minp35lit'] = _minp
-    return f
+    # ---------------------------------------------- 휘발성 축 (2026-11-03)
+    # 보조 분석이지만 본문·SI 가 25개 수치를 인용한다. 앵커를 붙이지 않으면
+    # 이 프로젝트가 반복해서 빠진 구멍(가드 없는 새 절)이 그대로 생긴다.
+    _vol = json.load(open('outputs/volatility_space.json'))
+    _vd = _vol['designation'][0]
+    f['vol_p_md'] = _vd['statistics']['mean_diff']['p']
+    f['vol_rank_md'] = _vd['statistics']['mean_diff']['rank']
+    f['vol_obs_md'] = abs(_vd['statistics']['mean_diff']['observed'])
+    f['vol_p_nvalid'] = _vd['statistics']['n_valid']['p']
+    f['vol_rank_nvalid'] = _vd['statistics']['n_valid']['rank']
+    f['vol_nperm'] = _vd['n_permutations']
+    f['vol_range'] = _vd['sanity']['log10_range']
+    f['vol_t1'] = _vd['sanity']['tiers']['T1']
+    f['vol_t2'] = _vd['sanity']['tiers']['T2']
+    f['vol_t3'] = _vd['sanity']['tiers']['T3']
+    _bp = _vol['valid_match_detail']['sole_match_breakpoint']
+    f['vol_gap'] = _bp['observed_gap_log10']
+    f['vol_bp_ratio_gap'] = _bp['gap_breaking_ratio_condition_log10']
+    f['vol_bp_ratio_vp'] = _bp['vp_breaking_ratio_condition_mmHg']
+    f['vol_bp_closer_gap'] = _bp['gap_breaking_closer_condition_log10']
+    f['vol_bp_closer_vp'] = _bp['vp_breaking_closer_condition_mmHg']
+    _ag = _vol['agreement']
+    f['vol_fisher_chi2'] = _ag['prespecified']['statistic']
+    f['vol_fisher_p'] = _ag['prespecified']['p_value']
+    f['vol_cells'] = _ag['prespecified']['n_cells']
+    for _c in _ag['cells']:
+        f[f"vol_rho_{_c['cell']}"] = _c['spearman']
+    _pt = {r['agent']: r for r in _vol['pairing_table']['rows']}
+    f['vol_gap_cg'] = _pt['phosgene (CG)']['gap_to_nearest_simulant']
+    f['vol_gap_ac'] = _pt['hydrogen cyanide (AC)']['gap_to_nearest_simulant']
+    f['vol_gap_gb'] = _pt['sarin (GB)']['gap_to_nearest_simulant']
+    f['vol_gap_gb_pool'] = _pt['sarin (GB)']['gap_to_nearest_pool']
+    f['vol_gap_hd'] = _pt['sulfur mustard (HD)']['gap_to_nearest_simulant']
+    f['vol_gap_vx'] = _pt['VX']['gap_to_nearest_simulant']
+    f['vol_n_int_nearest'] = _vol['pairing_table'][
+        'n_agents_whose_nearest_is_interferent']
 
+    return f
 
 def nums_in(s):
     return [float(x.replace(',', '').replace('\\,', ''))
@@ -1910,6 +1954,61 @@ CHECKS = [
     ('j21_discounted', [r'discounted (\d+) on the risk'], 0),
     ('j21_suitable', [r'repository of (\d+) suitable'], 0),
     ('j21_possible', [r'suitable and (\d+) provisional'], 0),
+    # ------------------------------------------- 휘발성 축 (2026-11-03 신설)
+    # 본문 res:panels 말미 단락과 SI res:volatility, 그리고 생성표 두 개.
+    ('vol_p_md', [r'one-sided \$p\$ of (0\.\d+) over all\s+680',
+                  r'statistic gives a one-sided \$p\$ of (0\.\d+)'], 0.0005),
+    # 'ranking 316th of 680' 과 구분해야 한다. 뒤따르는 문장을 닻으로 쓴다.
+    ('vol_rank_md', [r'ranking the incumbent trio (\w+) of 680',
+                     r'680 designations,\s*\n?ranking (\w+)\.'], 0),
+    ('vol_obs_md', [r'margin is (0\.\d+) in standardised',
+                    r'margin itself is (0\.\d+) in standardised'], 0.00005),
+    ('vol_p_nvalid', [r'valid matches returns one match with a \$p\$ of '
+                      r'(0\.\d+)',
+                      r'one match with a \$p\$ of (0\.\d+)'], 0.0005),
+    ('vol_rank_nvalid', [r'ranking (\d+)\w*\s+of 680',
+                         r'(\d+)\w*\s+of 680 and therefore'], 0),
+    # 2026-11-03. 'all 680 designations' 는 본문 2.1 의 'all 2024
+    # designations' 와 같은 어법이라 패널을 특정해야 한다. 휘발성 절의
+    # 전수열거 수는 28종 패널의 것이므로 nperm28 이 이미 검사한다. 중복
+    # 앵커를 두는 대신 휘발성 문장 쪽만 따로 가리킨다.
+    ('vol_nperm', [r'exact enumeration of all (\d+) designations'], 0),
+    ('vol_range', [r'spans (\d+\.\d+) decades'], 0.0005),
+    # \w 는 하이픈을 먹지 않아 'twenty-five' 에서 'twenty' 만 잡혔다.
+    ('vol_t1', [r'([\w-]+) of them at tier one'], 0),
+    ('vol_gap', [r'gap of (0\.\d+) decades between',
+                 r'on a gap of (0\.\d+) decades'], 0.00005),
+    ('vol_bp_ratio_gap', [r'ratio condition once the gap exceeds (0\.\d+)'],
+     0.00005),
+    ('vol_bp_ratio_vp', [r'vapour pressure below\s+(0\.\d+)~mmHg'], 0.00005),
+    ('vol_bp_closer_gap', [r'condition beyond\s+(0\.\d+) decades'], 0.00005),
+    ('vol_bp_closer_vp', [r'decades, or (0\.\d+)~mmHg'], 0.00005),
+    ('vol_fisher_chi2', [r'\\chi\^2 = (\d+\.\d+)'], 0.0005),
+    ('vol_fisher_p', [r'\$p = (0\.\d+)\$\.? That does not clear',
+                      r'Mantel values giving \$p=(0\.\d+)\$'], 0.00005),
+    ('vol_rho_d1_uv', [r'at \$\+(0\.\d+)\$, \$\+[\d.]+\$, \$\+[\d.]+\$ and'],
+     0.0005),
+    ('vol_rho_d1_normal',
+     [r'at \$\+[\d.]+\$, \$\+(0\.\d+)\$, \$\+[\d.]+\$ and'], 0.0005),
+    ('vol_rho_d2_uv',
+     [r'at \$\+[\d.]+\$, \$\+[\d.]+\$, \$\+(0\.\d+)\$ and'], 0.0005),
+    ('vol_rho_d2_normal',
+     [r'\$\+[\d.]+\$, \$\+[\d.]+\$ and \$\+(0\.\d+)\$'], 0.0005),
+    ('vol_gap_cg', [r'sits (0\.\d+) decades from phosgene',
+                    r'(0\.\d+) decades from phosgene'], 0.0005),
+    ('vol_gap_ac', [r'(0\.\d+) decades\s+from hydrogen cyanide',
+                    r'but\s+(0\.\d+) from hydrogen cyanide',
+                    r'sits (0\.\d+) decades\s*from hydrogen cyanide'],
+     0.0005),
+    ('vol_gap_gb', [r'sits (0\.\d+) decades from sarin',
+                    r'sits\s+(0\.\d+) from sarin'], 0.0005),
+    ('vol_gap_gb_pool', [r'an interferent, sits (0\.\d+)',
+                         r'while an interferent sits (0\.\d+)'], 0.0005),
+    ('vol_gap_hd', [r'(0\.\d+) decades from sulfur\s+mustard'], 0.0005),
+    ('vol_gap_vx', [r'within (\d+\.\d+) decades of VX',
+                    r'nothing within (\d+\.\d+) decades'], 0.0005),
+    ('vol_n_int_nearest', [r'For (\w+) of the\s+eleven agents the nearest'],
+     0),
 ]
 
 WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
@@ -1921,6 +2020,18 @@ WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six':
          'twenty-nine': 29, 'thirty': 30,
          'twenty-three': 23, 'twenty-four': 24, 'twenty-five': 25,
          'thirty-three': 33, 'thirty-four': 34}
+
+# 서수. 2026-11-03. 휘발성 절이 '순위 열네 번째'를 영문 서수로 적는다.
+# 서수를 숫자로 바꿔 쓰면 영어가 어색해지므로 맵을 넓힌다.
+WORDS.update({
+    'first': 1, 'second': 2, 'third': 3, 'fourth': 4, 'fifth': 5,
+    'sixth': 6, 'seventh': 7, 'eighth': 8, 'ninth': 9, 'tenth': 10,
+    'eleventh': 11, 'twelfth': 12, 'thirteenth': 13, 'fourteenth': 14,
+    'fifteenth': 15, 'sixteenth': 16, 'seventeenth': 17,
+    'eighteenth': 18, 'nineteenth': 19, 'twentieth': 20,
+    'twenty-first': 21, 'twenty-second': 22, 'twenty-third': 23,
+    'twenty-fourth': 24, 'twenty-fifth': 25, 'twenty-sixth': 26,
+    'twenty-seventh': 27, 'twenty-eighth': 28})
 
 
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.

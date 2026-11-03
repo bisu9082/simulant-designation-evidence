@@ -540,6 +540,125 @@
   "max_gap_agent": "VX",
   "temperature_caveat": "DPGME 0.4 mmHg @26 C vs soman 0.41 mmHg @25 C — the 0.011 log-unit gap is within the temperature mismatch and is not evidence of a match"
  },
+ "valid_match_detail": {
+  "nn_median_distance": 0.044236305527572295,
+  "threshold_ratio": 2.0,
+  "threshold_distance_z": 0.08847261105514459,
+  "log10_sd": 1.563099650974544,
+  "per_agent": [
+   {
+    "agent": "sarin (GB)",
+    "d_nearest_simulant": 0.3027260359224124,
+    "d_nearest_interferent": 0.13806975435756014,
+    "ratio_to_nn_median": 6.84338423636496,
+    "nearest_simulant": "DMMP",
+    "valid": false
+   },
+   {
+    "agent": "soman (GD)",
+    "d_nearest_simulant": 0.006860640897134673,
+    "d_nearest_interferent": 0.1057945304771879,
+    "ratio_to_nn_median": 0.15509072955603098,
+    "nearest_simulant": "DPGME",
+    "valid": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "d_nearest_simulant": 0.4842697974129567,
+    "d_nearest_interferent": 0.5969249687872793,
+    "ratio_to_nn_median": 10.947338201901005,
+    "nearest_simulant": "DPGME",
+    "valid": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "d_nearest_simulant": 0.3586894193343201,
+    "d_nearest_interferent": 0.47134459070864265,
+    "ratio_to_nn_median": 8.108484988891094,
+    "nearest_simulant": "DPGME",
+    "valid": false
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "d_nearest_simulant": 0.10323590190450549,
+    "d_nearest_interferent": 0.009419269469817082,
+    "ratio_to_nn_median": 2.3337369762978737,
+    "nearest_simulant": "DPGME",
+    "valid": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "d_nearest_simulant": 0.14836843459071725,
+    "d_nearest_interferent": 0.32422240326834784,
+    "ratio_to_nn_median": 3.353996967451087,
+    "nearest_simulant": "dichloromethane",
+    "valid": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "d_nearest_simulant": 0.28879531397970504,
+    "d_nearest_interferent": 0.4646492826573356,
+    "ratio_to_nn_median": 6.528468201299048,
+    "nearest_simulant": "dichloromethane",
+    "valid": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "d_nearest_simulant": 0.3287052665567938,
+    "d_nearest_interferent": 0.5045592352344244,
+    "ratio_to_nn_median": 7.430667245751642,
+    "nearest_simulant": "dichloromethane",
+    "valid": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "d_nearest_simulant": 0.8049889937973782,
+    "d_nearest_interferent": 0.0029093652141021775,
+    "ratio_to_nn_median": 18.197473414583236,
+    "nearest_simulant": "dichloromethane",
+    "valid": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "d_nearest_simulant": 0.6132733215339875,
+    "d_nearest_interferent": 0.7259284929083101,
+    "ratio_to_nn_median": 13.863574596023552,
+    "nearest_simulant": "DPGME",
+    "valid": false
+   },
+   {
+    "agent": "VX",
+    "d_nearest_simulant": 1.7008291657952368,
+    "d_nearest_interferent": 1.8134843371695595,
+    "ratio_to_nn_median": 38.44871639958987,
+    "nearest_simulant": "DPGME",
+    "valid": false
+   }
+  ],
+  "n_valid": 1,
+  "valid_pairs": [
+   [
+    "soman (GD)",
+    "DPGME"
+   ]
+  ],
+  "sole_match_breakpoint": {
+   "pair": [
+    "DPGME",
+    "soman (GD)"
+   ],
+   "observed_gap_log10": 0.010723865391773058,
+   "temperatures_C": [
+    26,
+    25
+   ],
+   "gap_breaking_ratio_condition_log10": 0.1382915074611031,
+   "vp_breaking_ratio_condition_mmHg": 0.29818950169599495,
+   "gap_breaking_closer_condition_log10": 0.16536739366390818,
+   "vp_breaking_closer_condition_mmHg": 0.2801666666666666,
+   "direction_note": "Vapour pressure increases with temperature, so the 25 C value for DPGME is below the 26 C measurement of 0.4 mmHg and the gap to soman can only widen. The direction is fixed thermodynamically; no Antoine fit is used."
+  }
+ },
  "lewisite_isomer_sensitivity": {
   "trans": {
    "vp_mmHg": 0.4,

@@ -69,6 +69,12 @@ def scan(path, kind):
 TARGETS = [('paper/main.tex', 'tex'), ('paper/supplementary.tex', 'tex'),
            ('paper/cover_letter.tex', 'tex'),
            ('paper/highlights.tex', 'tex'),
+           # 2026-11-03. ACS 판본이 목록에 없었다. 투고 대상이 ACS 쪽인데
+           # 문체 검사는 JHM 판본만 보고 있었고, 이 세션에서 ACS 본문·SI 에
+           # 새로 쓴 단락과 절이 전부 검사 밖에 있었다.
+           ('paper_acs/main.tex', 'tex'),
+           ('paper_acs/supporting.tex', 'tex'),
+           ('paper_acs/cover_letter.tex', 'tex'),
            ('outputs/figure_annotations.json', 'json')]
 
 if __name__ == '__main__':

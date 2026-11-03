@@ -300,6 +300,75 @@ def plocal():
             + foot + '\n' + r'\end{tabular}')
 
 
+# ------------------------------------------------ tab:volatility, tab:vpairing
+# 2026-11-03 신설. 휘발성 보조 분석의 두 표. 손으로 유지하면 다른 네 표와
+# 같은 전파 실패를 되풀이하므로 처음부터 생성으로 만든다. 출처 문자열은
+# volatility_space.VP 에 들어 있는 조회 원문이고 여기서 고치지 않는다.
+VOL_ORDER_DESC = True       # 증기압 내림차순
+
+
+def _vol():
+    return json.load(open('outputs/volatility_space.json'))
+
+
+def volatility():
+    """채택 증기압 표. 값·온도·tier·출처."""
+    d = _vol()
+    vp = d['vapour_pressure_mmHg']
+    import csv as _csv
+    with open('descriptor_cache_xtb.csv') as fh:
+        names = [r['compound_name'] for r in _csv.DictReader(fh)]
+    rows = sorted(((vp[n]['value'], n) for n in names), reverse=VOL_ORDER_DESC)
+    lines = []
+    for val, n in rows:
+        e = vp[n]
+        t = '' if e['temperature_C'] == 25 else f"{e['temperature_C']}"
+        src = e['source'].split('|')[0].strip().rstrip(',')
+        if len(src) > 46:
+            src = src[:44].rstrip() + '.'
+        lines.append(f"{n} & {val:.4g} & {t} & {e['tier']} & {src} \\\\")
+    head = (r'\begin{tabular}{lrccl}' '\n' r'\hline' '\n'
+            r'Compound & $P$ (mmHg) & $T$ ($^{\circ}$C) & Tier'
+            r' & Source \\' '\n' r'\hline' '\n')
+    foot = (r'\multicolumn{5}{l}{\footnotesize Blank temperature means '
+            r'25~$^{\circ}$C. Tier 1 is a vapour-pressure measurement or}\\'
+            '\n'
+            r'\multicolumn{5}{l}{\footnotesize compilation at '
+            r'25~$^{\circ}$C, tier 2 a government compendium at '
+            r'25~$^{\circ}$C, tier 3 the}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize nearest available '
+            r'temperature. Source strings are as returned by PubChem; '
+            r'the}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize full strings and every '
+            r'candidate value are in the deposited JSON.}\\')
+    return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
+            + '\n' + r'\end{tabular}')
+
+
+def vpairing():
+    """작용제별 최근접 모사체 / 최근접 풀 화합물. 기술표."""
+    d = _vol()['pairing_table']
+    lines = []
+    for r in d['rows']:
+        ser = r['series'].replace('vomit/irritant', 'irritant')
+        lines.append(f"{r['agent']} & {ser} & {r['log10_vp']:.3f} & "
+                     f"{r['nearest_simulant']} & "
+                     f"{r['gap_to_nearest_simulant']:.3f} & "
+                     f"{r['nearest_pool_compound']} & "
+                     f"{r['gap_to_nearest_pool']:.3f} \\\\")
+    head = (r'\begin{tabular}{llrlrlr}' '\n' r'\hline' '\n'
+            r'Agent & Series & $\log_{10}P$ & Nearest simulant & $\Delta$'
+            r' & Nearest of pool & $\Delta$ \\' '\n' r'\hline' '\n')
+    foot = (r'\multicolumn{7}{l}{\footnotesize $\Delta$ is the gap in '
+            r'$\log_{10}(P/\mathrm{mmHg})$. The pool is the seventeen '
+            r'non-agents, so}\\' '\n'
+            r'\multicolumn{7}{l}{\footnotesize the last column is a '
+            r'simulant where one is nearest and an interferent '
+            r'otherwise.}\\')
+    return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
+            + '\n' + r'\end{tabular}')
+
+
 def main():
     rc, mq, pf, pp = load()
     body = ablation(rc, mq, pf, pp)
@@ -347,6 +416,10 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_sparse.tex')
     open('outputs/tab_plocal.tex', 'w').write(hdr + plocal() + '\n')
     print('-> outputs/tab_plocal.tex')
+    open('outputs/tab_volatility.tex', 'w').write(hdr + volatility() + '\n')
+    print('-> outputs/tab_volatility.tex')
+    open('outputs/tab_vpairing.tex', 'w').write(hdr + vpairing() + '\n')
+    print('-> outputs/tab_vpairing.tex')
     for i, (a, b, c, key) in enumerate(ROWS):
         if key == 'pesticide':
             dims = {s: pp[s]['n_dims'] for s in pp}

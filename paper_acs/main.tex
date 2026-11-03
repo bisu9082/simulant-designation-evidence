@@ -131,31 +131,35 @@ surrogate validation, permutation test, applicability domain}
 % 강했다. 평균 진술과 짝별 진술을 나누고, 귀무의 검정력 한계를 함께
 % 적는다. 'fails to predict' 도 'does not track at any resolvable effect
 % size' 로 내렸다.
+% 2026-11-03 (2차). 휘발성 보조 분석 한 문장 추가 (반영 방식 2번).
+% 248단어 유지를 위해 줄인 곳: 작용제 5계열 열거 삭제, 분석자 자유도
+% 네 가지 열거를 양 끝만 남김, DMMP 문장의 channel 삭제. 삭제한 것은
+% 모두 본문·SI 에 그대로 있다.
 \begin{abstract}
 Chemical warfare agent detection is developed and qualified on simulants,
-and we asked what measurement establishes that a simulant reproduces its
-agent. We reanalyse the colorimetric tables of three published runs of
-one 29-dye array, which measured sixteen authentic agents spanning nerve,
-blood, choking, vesicant and A-series compounds at four concentrations in
-two optical channels, and compare the response patterns with the
-molecular-descriptor distances on which simulant selection rests. The
-descriptor calculations and every test reported here are new. The array
+and we asked what measurement establishes that one reproduces its agent.
+We reanalyse the colorimetric tables of three published runs of one
+29-dye array, which measured sixteen authentic agents at four
+concentrations in two optical channels, and compare the response patterns
+with the molecular-descriptor distances on which simulant selection
+rests. All descriptor calculations and tests here are new. The array
 discriminates on average: in all six run-channel cells, every compound
 agrees with itself across concentrations more closely than with the other
-compounds of that cell, at the exact floor each cell's four to seven
-compounds allow. In 13 of those 34 compound-cells it does not survive
-against the single nearest other compound. Descriptor distance does not
-track response distance at any resolvable effect size. Twelve exact
-Mantel tests and six combinations of them leave nothing below $q=0.05$,
-against a design that resolves a rank correlation of 0.67 at 80\% power
-where the largest observed is 0.57. That null holds under every analyst
-choice we enumerated, including the descriptor encoding, the correlation
-filter, the conformer seed and the panel composition, while the count of
-valid descriptor-space matches is moved by all four and is not a
-measurement. Dimethyl methylphosphonate, the standard G-agent simulant,
-is anti-correlated with soman and cyclosarin in the ultraviolet channel.
-Across the three runs, one designated simulant has been measured beside
-the agents.
+compounds of that cell, at the exact floor each cell allows. In 13 of
+those 34 compound-cells it fails against the single nearest other
+compound. Descriptor distance does not track response distance at any
+resolvable effect size. Twelve exact Mantel tests and six combinations of
+them leave nothing below $q=0.05$, against a design that resolves a rank
+correlation of 0.67 at 80\% power where the largest observed is 0.57.
+That null holds under every analyst choice we enumerated, from the
+descriptor encoding to the panel composition, while the count of valid
+matches is moved by all four and is not a measurement. Measured vapour
+pressure, tested separately, beats chance for the incumbent simulants yet
+returns one valid match, which pairs a blister-agent simulant with a
+nerve agent. Dimethyl methylphosphonate, the standard G-agent simulant,
+is anti-correlated with soman and cyclosarin in the ultraviolet. Across
+the three runs, one designated simulant has been measured beside the
+agents.
 \end{abstract}
 
 \section{Introduction}
@@ -178,7 +182,8 @@ for sarin has, in most cases, never been exposed to sarin.
 What licenses the substitution is a claim of similarity. The compound chosen
 is said to be agent-like, and similarity is read from molecular
 descriptors: vapour pressure, dipole moment, frontier orbital energies,
-substructure and shape. Cheminformatic selection on exactly those grounds
+substructure and shape. We test the first of those separately, on measured
+vapour pressures, in Section~\ref{res:panels}. Cheminformatic selection on exactly those grounds
 has been proposed as the systematic way to find a
 simulant,\cite{lavoie2011} reviews catalogue the compounds in use for
 environmental behaviour,\cite{bartelthunt2008} for emergency
@@ -698,6 +703,35 @@ none of them, and a quantity that four arbitrary choices can move between
 three and six is not a measurement of anything. That is this paper's
 argument applied to its own instrument, and it is the reason we do not
 report a match count as a finding.
+
+% 2026-11-03 신설. 리뷰어 1: 서론이 휘발성을 제일 먼저 드는데 서술자
+% 패널에 없다. 그 반론은 '서술자를 잘못 골랐다'로 논문을 읽게 만들므로
+% 개정으로 닫히지 않는다. 사전지정 2검정을 72검정 가족과 분리해 보고하고
+% 그 분리 사실을 문장에 적는다. 정본 outputs/volatility_space.json.
+One descriptor the opening of this paper names first is absent from the
+panel above, and we tested it separately rather than argue around it.
+Volatility enters as one axis, $\log_{10}$ of measured vapour pressure, for
+which all twenty-eight compounds of the reduced panel have a measurement and
+two compounds of the primary panel have none. Two tests were fixed before the
+values were seen and are held outside the family of seventy-two, because
+folding them in would recompute every adjusted value in the paper to answer a
+question one test each can settle. On this axis the incumbent trio does beat
+chance: the pre-specified statistic gives a one-sided $p$ of 0.0206 over all
+680 designations, ranking fourteenth. The margin is 0.0015 in standardised
+units, and the count of valid matches returns one match with a $p$ of 0.4647,
+ranking 316th of 680. That single match pairs dipropylene glycol monomethyl
+ether with soman on a gap of 0.0107 decades between measurements at
+26~$^{\circ}$C and 25~$^{\circ}$C, which is smaller than the temperature
+mismatch that produced it. The designated pairings are not the ones the axis
+returns. Dichloromethane, designated for the choking agent, sits 0.232 decades
+from hydrogen cyanide and 0.514 from phosgene; dimethyl methylphosphonate sits
+0.473 from sarin while an interferent sits 0.216; nothing in the panel is
+within 2.659 decades of VX. Agreement with measured response is positive in
+all four evaluable cells and does not reach significance, with Fisher
+combination of the four exact Mantel values giving $p=0.0809$. Supporting
+Information Section~\ref{S-res:volatility} sets the axis out in full. The null
+this paper reports is therefore not an artefact of omitting volatility, and
+the axis practitioners name first does not qualify the incumbents either.
 
 \subsection{Neither the designation record nor a toxicity model fills the gap}
 \label{res:docs}
