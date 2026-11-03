@@ -344,12 +344,20 @@ It is stable enough (Figure~\ref{fig:response}a). One compound's patterns at two
 concentrations correlate at
 $+0.345$ to $+0.542$, different compounds anti-correlate at $-0.103$ to
 $-0.330$, and the ordering holds in all six run-channel cells. Because the
-independent unit is the compound and not the pair, the test is a
-sign-flip enumeration over the four to seven compounds of each cell, and
-every cell returns the smallest value its compound count allows: exact
-one-sided $p$ from 0.0078 to 0.0625, with Cohen's $d_z$ from $+0.92$ to
-$+5.12$. The four-compound cell cannot reach 0.05 under any test, since
-$2^{-4}=0.0625$.
+independent unit is the compound and not the pair, we pre-specified a
+sign-flip enumeration over the four to seven compounds of each cell. That
+test returns the smallest value its compound count allows in all six cells,
+from 0.0078 to 0.0625, so what it reports is a property of the design and
+not of the data: centring leaves the per-compound difference positive for
+almost any input that is not degenerate. We withdraw it. The same statistic
+is tested here against a null that permutes compound labels within each
+concentration, which leaves every centred vector untouched and changes only
+which response is assigned to which compound. All six cells clear
+$q = 0.05$, the smallest adjusted value over the six being 0.0001, and the
+two four-compound cells by exact enumeration of all 13,824 relabellings.
+Cohen's $d_z$ over compounds runs from $+0.92$ to $+5.12$ as a descriptive
+effect size. Supporting Information Section~\ref{S-meth:deltaE} gives the
+per-cell values and why the bound the earlier version used does not apply.
 
 The tables analysed here hold one value per compound, concentration, dye
 and channel, so the within-compound term is agreement of a compound with
@@ -361,17 +369,23 @@ third\cite{group3ref}, but the repeat-level values are not in these
 tables, so no repeatability estimate enters any analysis below.
 
 Two features of the measurement belong here rather than in the Supporting
-Information. The first is that dye-wise centring forces the mean
-between-compound cosine towards an algebraic floor of $-1/(n-1)$, and the
-observed means clear that floor by between 0.0032 and 0.1576 across the six
-cells. The smallest margin is the reflectance channel of the third run,
-where four compounds put the floor at $-1/3$ and the observed mean is
-$-0.3302$. In that cell the between-compound structure is close to what
-centring alone would produce, and we do not read a separation from it.
-Most of the apparent separation in the other cells is a property of the
-centring too, and what our test on its own establishes is the weaker
-statement that a compound agrees with itself across concentrations more
-than it agrees with the other compounds in its cell on average. It does not
+Information. The first is that dye-wise centring drives the mean
+between-compound cosine negative by itself. An earlier version of this
+section compared the observed means against $-1/(n-1)$ and read the margin
+above it as evidence. That comparison does not hold, and Supporting
+Information Section~\ref{S-meth:deltaE} gives the two reasons: the centring
+step renormalises each vector to unit length, which destroys the zero-sum
+property the identity requires, and for vectors that do sum to zero
+$-1/(n-1)$ is an upper bound on the norm-weighted mean cosine rather than a
+floor. What does quantify the inflation is the permutation null itself.
+Relabelling compounds within each concentration leaves a mean
+within-minus-between difference of $+0.1024$ to $+0.3138$ across the six
+cells, against observed differences of $+0.5578$ to $+0.7288$. The
+separation exceeds what centring alone produces in every cell, including the
+reflectance channel of the third run that the earlier comparison set aside.
+What the test establishes is the per-compound statement that a compound
+agrees with itself across concentrations more than it agrees with the other
+compounds in its cell on average. It does not
 establish the stronger pairwise statement: in 13 of the 34
 compound-and-cell instances, some other compound's consensus pattern is
 closer to a compound than that compound's own agreement across

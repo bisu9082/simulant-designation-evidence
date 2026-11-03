@@ -341,6 +341,23 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-03 (작업 C) 신설분. 바닥 논증 대체 ---
+    ('바닥 논증을 본문에 되살림',
+     'renormalises each vector to unit length, which destroys the zero-sum',
+     'forces the mean between-compound cosine towards an algebraic floor'),
+    ('귀무 평균 상한 오기 (정본 +0.3138) — 중심화 기여를 축소한다',
+     'difference of $+0.1024$ to\n$+0.3138$',
+     'difference of $+0.1024$ to\n$+0.1138$'),
+    ('관측 하한 오기 (정본 +0.5578)',
+     'observed differences of $+0.5578$',
+     'observed differences of $+0.7578$'),
+    ('전수열거 수 오기 (정본 13,824)',
+     'exact enumeration of all 13,824 relabellings',
+     'exact enumeration of all 13,284 relabellings'),
+    ('부호뒤집기를 유효한 검정으로 되돌림',
+     'not of the data: centring leaves the per-compound difference',
+     'and the four-compound cell cannot reach 0.05 under any test'),
+
     # --- 2026-11-03 (작업 B) 신설분 ---
     ('초록의 전제검정 셀 수 오기 (정본 six)',
      'all six clear $q=0.05$ against a null',
@@ -485,6 +502,23 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-03 (작업 C) 신설분 ---
+    ('영합 잔차 상한 오기 (정본 0.7430) — 전제 붕괴가 작아 보인다',
+     'between 0.1292 and 0.7430 after the',
+     'between 0.1292 and 0.1430 after the'),
+    ('부등호 방향을 바닥으로 되돌림 (정본 at most)',
+     'mean cosine of at most $-1/(n-1)$',
+     'mean cosine of at least $-1/(n-1)$'),
+    ('물질내 상한 오기 (정본 +0.5416)',
+     'to $+0.3451$ to\n$+0.5416$ within compounds',
+     'to $+0.3451$ to\n$+0.9416$ within compounds'),
+    ('물질간 하한 오기 (정본 -0.3302)',
+     'against $-0.1026$ to\n$-0.3302$\nbetween them',
+     'against $-0.1026$ to\n$-0.5302$\nbetween them'),
+    ('순도 민감도에서 설계 바닥을 증거로 되돌림',
+     '$2^{-6}$ and carries no information',
+     '$2^{-6}$, and not a loss of evidence'),
+
     # --- 2026-11-03 (작업 B) 신설분 ---
     ('MDE 보정 문턱 오기 (정본 0.43) — 배율 주장이 뒤집힌다',
      'moves the threshold to\n$\\delta = 0.43$',

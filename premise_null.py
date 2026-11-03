@@ -62,6 +62,37 @@ def cell_vectors(tag, mode):
     return names, out
 
 
+def zero_sum_residual(tag, mode):
+    """재정규화가 Sum u = 0 을 깨는 정도를 실측한다 (2026-11-03, 작업 C).
+
+    항등식 -1/(n-1) 은 영합 벡터에만 성립한다. centred() 는 물질축 평균을
+    뺀 뒤 unit() 으로 다시 정규화하므로 영합이 보전되지 않는다. 그것을
+    주장하지 말고 농도별로 ||Sum_i u_i|| 를 재서 적는다. 비교를 위해
+    정규화 전(평균을 뺀 직후) 값도 함께 낸다. 그쪽은 0 이어야 한다.
+    """
+    raw = m.raw_patterns(*m.load(tag, mode))
+    cen = m.centred(raw)
+    names = sorted(cen)
+    concs = sorted({c for a in names for c in cen[a]})
+    after, before = [], []
+    for c in concs:
+        here = [a for a in names if c in cen[a]]
+        if len(here) < 2:
+            continue
+        U = np.array([cen[a][c] for a in here], float)
+        after.append(float(np.linalg.norm(U.sum(0)) / np.sqrt(len(here))))
+        V = np.array([raw[a][c] for a in here], float)
+        V = V - V.mean(0)
+        before.append(float(np.linalg.norm(V.sum(0))
+                            / max(np.linalg.norm(V, axis=1).mean(), 1e-30)
+                            / np.sqrt(len(here))))
+    return {'after_renorm_max': max(after), 'after_renorm_min': min(after),
+            'before_renorm_max': max(before),
+            'note': ('||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 '
+                     '전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 '
+                     '직후이므로 수치오차 수준이어야 한다.')}
+
+
 def statistic(names, per_conc, assign):
     """mean_a (w_a - b_a). assign[c] 는 슬롯 -> 화합물 이름."""
     vecs = {a: [] for a in names}
@@ -175,8 +206,20 @@ def main():
     print(f'\n  {K}셀 BH 최소 q = {bh[0]:.4f}  '
           f'유의 {int((bh < 0.05).sum())}건')
     os.makedirs('outputs', exist_ok=True)
+    zs = {}
+    for tag in ['d1', 'd2', 'd3']:
+        for mode in ['uv', 'normal']:
+            try:
+                zs[f'{tag}_{mode}'] = zero_sum_residual(tag, mode)
+            except Exception as e:
+                zs[f'{tag}_{mode}'] = {'error': f'[수집 불가: {e}]'}
+    _af = [v['after_renorm_max'] for v in zs.values() if 'error' not in v]
+    _bf = [v['before_renorm_max'] for v in zs.values() if 'error' not in v]
+    print(f'\n  영합 잔차 ||Sum u||/sqrt(n): 정규화 후 최대 {max(_af):.4f}, '
+          f'정규화 전 최대 {max(_bf):.2e}')
     with open('outputs/premise_null.json', 'w') as fh:
         json.dump({'generated_by': 'premise_null.py', 'seed': SEED,
+                   'zero_sum_residual': zs,
                    'statistic': 'mean over compounds of (within - between)',
                    'null': 'compound labels permuted within each '
                            'concentration',

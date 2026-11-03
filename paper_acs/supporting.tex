@@ -416,10 +416,13 @@ count stays at three valid matches with the dimension falling from 38 to 37; on
 the primary panel it stays at zero with the dimension falling from 41 to 39;
 admitting the eight literature simulants it stays at five. In the second run's
 premise test the mean difference moves from $+0.558$ to $+0.529$ in the
-ultraviolet channel and from $+0.619$ to $+0.625$ in reflectance, with the
-exact one-sided $p$ rising from 0.0078 to 0.0156 in both. That rise is the
-design floor moving with the compound count, from $2^{-7}$ to $2^{-6}$, and not
-a loss of evidence. The counts are in \texttt{purity\_sensitivity.json} under
+ultraviolet channel and from $+0.619$ to $+0.625$ in reflectance. The
+sign-flip $p$ recorded at the time rose from 0.0078 to 0.0156 in both, which
+is that test's design floor moving with the compound count from $2^{-7}$ to
+$2^{-6}$ and carries no information. We withdraw the sign-flip test in
+Section~\ref{meth:deltaE}, and this sensitivity does not rest on it: the
+statistic itself moves by 0.029 and 0.006, so removing lewisite does not
+change what either cell shows. The counts are in \texttt{purity\_sensitivity.json} under
 \texttt{outputs/}.
 
 \section{Density-functional check on the electrophilicity axis}
@@ -622,11 +625,39 @@ Two properties of this processing constrain what the patterns can be used to
 show, and we state both because the first version of this analysis did not.
 
 Subtracting the compound-axis mean at each concentration makes the resulting
-vectors sum to zero across compounds, which fixes the mean cosine between
-distinct compounds at $-1/(n-1)$ for $n$ compounds in a set. A negative
-between-compound cosine is therefore an identity of the centring and not
-evidence that the array separates the compounds. We report the observed mean
-against that floor in Section~\ref{res:arraydetail} rather than against zero.
+vectors sum to zero across compounds. An earlier version of this section drew
+from that an identity fixing the mean cosine between distinct compounds at
+$-1/(n-1)$ for $n$ compounds in a set, and compared the observed means against
+it as against a floor. Two things are wrong with that, and we state both
+because the comparison appeared in the main text.
+
+The first is that the processing does not stop at the subtraction. Each centred
+vector is renormalised to unit length before any cosine is taken, and
+renormalisation does not preserve $\sum_i u_i = 0$ unless the norms happen to
+be equal. Measured on the vectors this work actually uses,
+$\lVert\sum_i u_i\rVert/\sqrt{n}$ is $7.2\times10^{-16}$ immediately after
+the subtraction and between 0.1292 and 0.7430 after the renormalisation. The
+premise of the identity is not merely perturbed, it is gone.
+
+The second is that $-1/(n-1)$ is not a floor even for vectors that do sum to
+zero. From $\lVert\sum_i u_i\rVert^2 = 0$ one has
+$\sum_{i<j}\langle u_i, u_j\rangle = -\tfrac{1}{2}\sum_i \lVert u_i\rVert^2$,
+while $\sum_{i<j}\lVert u_i\rVert\lVert u_j\rVert \le
+\tfrac{n-1}{2}\sum_i \lVert u_i\rVert^2$ by Cauchy--Schwarz. Dividing the
+first by the second gives a norm-weighted mean cosine of at most $-1/(n-1)$,
+with equality only when every norm is equal. The quantity is bounded above by
+that value, so a margin above it was never the thing to read.
+
+We therefore do not compare the observed means against $-1/(n-1)$ anywhere in
+this work. The value is reported in
+\texttt{outputs/premise\_null.json} for comparison only.
+Section~\ref{res:arraydetail} compares the observed means against a
+permutation null instead: compound labels are permuted within each
+concentration, which leaves the set of centred vectors in a concentration
+unchanged, and therefore their mean unchanged, while changing which compound
+each one belongs to. That is the null the premise claim needs, because the
+claim is that one compound's response at one concentration is related to the
+same compound's response at another.
 
 Pairwise distances are not independent observations. A set of $n$ compounds
 gives $\binom{n}{2}$ pairs that share compounds, so correlating measured
@@ -1248,28 +1279,44 @@ difference is a non-negative quantity, so every analyte shares a common
 compressed towards unity. Between-compound similarity of 0.77 to 0.80 is not
 separable from the within-compound value of 0.79 to 0.83 across concentrations
 ($p = 0.06$ to $0.94$). Subtracting the compound-axis mean at each concentration
-separates them, to $+0.35$ to $+0.54$ within compounds against $-0.10$ to $-0.33$
-between them, in all six combinations of compound set and channel (exact
-one-sided $p$ from 0.0078 to 0.0625, each the floor its compound count
-allows).
+separates them, to $+0.3451$ to $+0.5416$ within compounds against $-0.1026$ to
+$-0.3302$ between them, in all six combinations of compound set and channel.
 
-The between-compound half of that contrast is largely arithmetic. Centring forces
-the mean cosine between distinct compounds to $-1/(n-1)$, which is $-0.200$ for
-the six-compound sets, $-0.167$ for the seven-compound set and $-0.333$ for the
-four-compound set (Section~\ref{meth:deltaE}). The observed means clear that
-floor by 0.0032 to 0.1576 over all six cells: $-0.1872$ and $-0.1665$ for the
-first set in the two channels against a floor of $-0.200$, $-0.1026$ and
-$-0.1166$ for the second against $-0.167$, and $-0.1758$ and $-0.3302$ for the
-third against $-0.333$. The negative between-compound similarity is therefore not
-evidence of separation, and in the reflectance channel of the third run the
-observed mean sits $0.0032$ above the floor, which is close enough that we read
-no separation from that cell at all. The within-compound reproducibility across
-concentrations, which carries no such constraint, is the part of this comparison
-that remains informative, and even there the contrast holds per compound on
-average rather than pairwise: in 13 of the 34 compound-and-cell instances some
-other compound's consensus is closer than the compound's own agreement across
-concentrations. All results below use the centred patterns, with those caveats
-attached.
+The sign-flip enumeration we pre-specified for this contrast returns the
+smallest value each compound count allows in every cell, from 0.0078 to 0.0625,
+and Section~\ref{meth:deltaE} withdraws it. The test reported below permutes
+compound labels within each concentration. The statistic is unchanged, the mean
+over compounds of the within-concentration agreement minus the
+between-compound agreement, and only the null changes.
+
+\begin{table}[!htb]
+\centering
+\caption{Premise test under the label-permutation null. The statistic is the
+mean over compounds of (agreement with itself across concentrations) minus
+(agreement with the other compounds' consensus patterns). The null permutes
+compound labels within each concentration. Fixing the first concentration's
+labels leaves $(n!)^{C-1}$ distinct relabellings, which is enumerable for the
+four-compound set and sampled for the others.}
+\label{tab:premisenull}
+\input{tab_premisenull}
+\end{table}
+
+Table~\ref{tab:premisenull} gives the result. All six cells clear
+$q = 0.05$, the smallest adjusted value being 0.0001, and the null mean is
+positive in every cell rather than zero. That positive null mean is the
+quantity the withdrawn floor argument was reaching for: it says how much of
+the observed difference centring produces on its own, between $+0.1024$ and
+$+0.3138$ against observed values of $+0.5578$ to $+0.7288$. The reflectance
+channel of the third run, which the floor comparison discarded for sitting
+$0.0032$ above $-1/3$, has the largest null mean of the six and still clears
+the threshold.
+
+Two limits stay. The contrast holds per compound on average and not pairwise:
+in 13 of the 34 compound-and-cell instances some other compound's consensus is
+closer than the compound's own agreement across concentrations. And the
+sampled cells give a resolution of $10^{-4}$ in $p$, so the four sampled
+values are upper bounds on how small those values are rather than estimates of
+them. All results below use the centred patterns, with those caveats attached.
 
 % 2026-11-03 (T1-13). 종전에는 바닥이 네 셀에서만 계산되어 있었다. d3 두
 % 셀이 Mantel 관문 뒤에 있어 빠졌고, 빠진 셀 하나가 여유 최소값이다.

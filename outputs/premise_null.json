@@ -1,6 +1,44 @@
 {
  "generated_by": "premise_null.py",
  "seed": 49374,
+ "zero_sum_residual": {
+  "d1_uv": {
+   "after_renorm_max": 0.4898585684007171,
+   "after_renorm_min": 0.1258308449616845,
+   "before_renorm_max": 6.347166259310774e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d1_normal": {
+   "after_renorm_max": 0.4857779290258388,
+   "after_renorm_min": 0.10190201273714891,
+   "before_renorm_max": 5.681465558311598e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d2_uv": {
+   "after_renorm_max": 0.564349933688059,
+   "after_renorm_min": 0.12292477303603074,
+   "before_renorm_max": 7.222452101308872e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d2_normal": {
+   "after_renorm_max": 0.576062968756546,
+   "after_renorm_min": 0.21041303753216148,
+   "before_renorm_max": 5.339235170626095e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d3_uv": {
+   "after_renorm_max": 0.7429746560620897,
+   "after_renorm_min": 0.43385147535945046,
+   "before_renorm_max": 3.0011292748201247e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d3_normal": {
+   "after_renorm_max": 0.12922083370138226,
+   "after_renorm_min": 0.0445284266215188,
+   "before_renorm_max": 3.462970373835568e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  }
+ },
  "statistic": "mean over compounds of (within - between)",
  "null": "compound labels permuted within each concentration",
  "cells": [
