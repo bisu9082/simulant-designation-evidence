@@ -289,6 +289,97 @@ data. We therefore report three valid matches on the twenty-eight-compound panel
 and name tabun as a borderline case wherever the count appears, rather than
 presenting either three or four as settled.
 
+\section{Sparse indicator columns and the distance they add}
+\label{meth:sparse}
+
+Eleven of the thirty-eight retained coordinates of the merged space are binary,
+and they are not evenly populated. Four are carried by exactly one compound of
+the twenty-eight: \texttt{n\_As} by lewisite~1, \texttt{n\_P\_CN} by tabun,
+\texttt{n\_P\_S} by VX and \texttt{n\_nitro} by chloropicrin. One is carried by
+two compounds, three by three, two by four and one by five.
+
+A binary column with a single one has mean $1/n$ and sample variance exactly
+$1/n$, so its standard deviation is $n^{-1/2}$ and standardising it places the
+carrier and every non-carrier exactly $\sqrt{n}$ apart. The squared Euclidean
+distance between the carrier and every other compound therefore gains exactly
+$n$, which is 28 here, from that one column, while the distance between two
+non-carriers gains nothing. We verified the figure against the standardised
+column rather than relying on the algebra; it is 28.000000.
+
+What that addition encodes is that the compound is the only one of its kind in
+this panel. It is a true statement about the panel and it carries no information
+about proximity to any particular simulant, yet it enters the distance on the
+same footing as molar refractivity. The effect is concentrated on four
+agent-to-simulant distances. For tabun against DMMP the four single-carrier
+columns are 47.6\% of the squared distance, essentially all of it from
+\texttt{n\_P\_CN}; for VX against dipropylene glycol monomethyl ether 20.4\%;
+for lewisite against dichloromethane 41.8\%. For sarin, soman and cyclosarin,
+which carry none of the four, it is zero. Counting all eleven binary columns
+rather than the four raises tabun's share to 72.1\% and sarin's to 48.8\%.
+
+\begin{table}[htb]
+  \centering
+  \caption{Valid matches on the twenty-eight-compound panel as sparse indicator
+  columns are removed. The threshold for a binary column is the number of
+  compounds carrying a one. The last row removes every coordinate with five or
+  fewer distinct values, which also removes two counts and one protected
+  coordinate and is the least defensible of the variants. The one-sided $p$ is
+  the merged-space exact enumeration over all $\binom{17}{3}=680$ designations.}
+  \label{tab:sparse}
+  \begin{tabular}{lrrrrr}
+    \hline
+    Encoding & Removed & Dim. & Matches & Tabun $d_{\mathrm{norm}}$ & $p$ \\
+    \hline
+    As reported                  &  0 & 38 & 3 & 2.0038 & 0.0250 \\
+    Drop single-carrier binaries &  4 & 34 & 4 & 1.4509 & 0.0250 \\
+    Drop binaries with $\le 2$   &  5 & 33 & 4 & 1.4509 & 0.0206 \\
+    Drop binaries with $\le 3$   &  8 & 30 & 5 & 1.6780 & 0.0162 \\
+    Drop binaries with $\le 4$   & 10 & 28 & 4 & 1.4392 & 0.0132 \\
+    Drop binaries with $\le 5$   & 11 & 27 & 4 & 1.2455 & 0.0132 \\
+    Drop cardinality $\le 5$     & 14 & 24 & 6 & 1.1604 & 0.0074 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:sparse} gives the sweep. Every removal moves the count in the
+same direction, towards more matches and a smaller nominal $p$, and the
+encoding we report is the one that produces the fewest matches and the largest
+$p$ of the seven. We state that plainly because it is the only evidence
+available that the encoding was not selected for its answer, and because a
+reader who repeats this analysis with a different descriptor set will get a
+different count.
+
+The agreement test between descriptor distance and measured response does not
+behave this way. Recomputing the twelve Mantel tests of
+Section~\ref{M-res:measured} under the first, second and fourth encodings of
+Table~\ref{tab:sparse} leaves the smallest Benjamini--Hochberg value at 0.1167,
+0.4722 and 0.3889 respectively, with no cell below 0.05 under any of them.
+Removing the single-carrier indicators makes the agreement weaker, not
+stronger. The paper's result is in that test, and it is the one quantity here
+that no analyst choice we enumerated has moved.
+
+\section{Lewisite purity and what depends on it}
+\label{meth:purity}
+
+The second run reports GC--MS purities above 95\% for hydrogen cyanide,
+cyanogen chloride, phosgene, chloropicrin, sulfur mustard and nitrogen
+mustard, and 67\% for lewisite~1.\cite{multiplexref} The first and third runs
+report no purity values; we searched the methods of both and found none, and we
+do not estimate them.
+
+A 67\% sample is a mixture, and lewisite enters both the descriptor panels, as
+one of the eleven agents, and the second run's premise test, as one of seven
+compounds. Removing it changes neither. On the twenty-eight-compound panel the
+count stays at three valid matches with the dimension falling from 38 to 37; on
+the primary panel it stays at zero with the dimension falling from 41 to 39;
+admitting the eight literature simulants it stays at five. In the second run's
+premise test the mean difference moves from $+0.558$ to $+0.529$ in the
+ultraviolet channel and from $+0.619$ to $+0.625$ in reflectance, with the
+exact one-sided $p$ rising from 0.0078 to 0.0156 in both. That rise is the
+design floor moving with the compound count, from $2^{-7}$ to $2^{-6}$, and not
+a loss of evidence. The counts are in \texttt{purity\_sensitivity.json} under
+\texttt{outputs/}.
+
 \section{Density-functional check on the electrophilicity axis}
 \label{meth:dft}
 
@@ -1000,14 +1091,25 @@ between them, in all six combinations of compound set and channel ($p = 8 \times
 
 The between-compound half of that contrast is largely arithmetic. Centring forces
 the mean cosine between distinct compounds to $-1/(n-1)$, which is $-0.200$ for
-the six-compound sets and $-0.167$ for the seven-compound set
-(Section~\ref{meth:deltaE}). The observed means clear that floor by 0.013 to
-0.066: $-0.187$ and $-0.167$ for the first set in the two channels against a
-floor of $-0.200$, and $-0.101$ and $-0.117$ for the second against $-0.167$. The
-negative between-compound similarity is therefore not evidence of separation. The
-within-compound reproducibility across concentrations, which carries no such
-constraint, is the part of this comparison that remains informative. All results
-below use the centred patterns, with that caveat attached.
+the six-compound sets, $-0.167$ for the seven-compound set and $-0.333$ for the
+four-compound set (Section~\ref{meth:deltaE}). The observed means clear that
+floor by 0.0032 to 0.1576 over all six cells: $-0.1872$ and $-0.1665$ for the
+first set in the two channels against a floor of $-0.200$, $-0.1026$ and
+$-0.1166$ for the second against $-0.167$, and $-0.1758$ and $-0.3302$ for the
+third against $-0.333$. The negative between-compound similarity is therefore not
+evidence of separation, and in the reflectance channel of the third run the
+observed mean sits $0.0032$ above the floor, which is close enough that we read
+no separation from that cell at all. The within-compound reproducibility across
+concentrations, which carries no such constraint, is the part of this comparison
+that remains informative, and even there the contrast holds per compound on
+average rather than pairwise: in 13 of the 34 compound-and-cell instances some
+other compound's consensus is closer than the compound's own agreement across
+concentrations. All results below use the centred patterns, with those caveats
+attached.
+
+% 2026-11-03 (T1-13). 종전에는 바닥이 네 셀에서만 계산되어 있었다. d3 두
+% 셀이 Mantel 관문 뒤에 있어 빠졌고, 빠진 셀 하나가 여유 최소값이다.
+% 수치는 outputs/rollback_c.json 의 deltaE.centring_floor 실측.
 
 The measurement bears on Supplementary Section~\ref{res:plocal}, and it narrows the claim
 rather than confirming it. What replicates across both channels is specific to

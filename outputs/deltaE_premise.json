@@ -7,6 +7,12 @@
    "mode": "uv",
    "unit": "compound",
    "n_compounds": 6,
+   "n_pairwise_violations": 3,
+   "pairwise_violators": [
+    "GA",
+    "GB",
+    "GF"
+   ],
    "within": 0.541627355773119,
    "between": -0.1871794194774622,
    "diff": 0.7288067752505812,
@@ -28,42 +34,60 @@
      "n_concentrations": 4,
      "within": 0.7775090648667637,
      "between": -0.10103872752388414,
-     "diff": 0.8785477923906478
+     "diff": 0.8785477923906478,
+     "nearest_other": "GA",
+     "nearest_other_cos": 0.7641071211995062,
+     "beats_nearest_other": true
     },
     {
      "compound": "GA",
      "n_concentrations": 4,
      "within": 0.3524424102997192,
      "between": -0.09105479863970259,
-     "diff": 0.4434972089394218
+     "diff": 0.4434972089394218,
+     "nearest_other": "DMMP",
+     "nearest_other_cos": 0.7641071211995062,
+     "beats_nearest_other": false
     },
     {
      "compound": "GB",
      "n_concentrations": 4,
      "within": 0.652890329276354,
      "between": -0.0989442779419594,
-     "diff": 0.7518346072183134
+     "diff": 0.7518346072183134,
+     "nearest_other": "GA",
+     "nearest_other_cos": 0.7192762424005696,
+     "beats_nearest_other": false
     },
     {
      "compound": "GD",
      "n_concentrations": 4,
      "within": 0.5258639500694953,
      "between": -0.2524828482911997,
-     "diff": 0.778346798360695
+     "diff": 0.778346798360695,
+     "nearest_other": "GF",
+     "nearest_other_cos": 0.4142085688254262,
+     "beats_nearest_other": true
     },
     {
      "compound": "GF",
      "n_concentrations": 4,
      "within": 0.3192331139779457,
      "between": -0.28668495887447853,
-     "diff": 0.6059180728524243
+     "diff": 0.6059180728524243,
+     "nearest_other": "VX",
+     "nearest_other_cos": 0.48469031644949073,
+     "beats_nearest_other": false
     },
     {
      "compound": "VX",
      "n_concentrations": 4,
      "within": 0.6218252661484361,
      "between": -0.29287090559354884,
-     "diff": 0.914696171741985
+     "diff": 0.914696171741985,
+     "nearest_other": "GF",
+     "nearest_other_cos": 0.48469031644949073,
+     "beats_nearest_other": true
     }
    ]
   },
@@ -72,6 +96,12 @@
    "mode": "normal",
    "unit": "compound",
    "n_compounds": 6,
+   "n_pairwise_violations": 3,
+   "pairwise_violators": [
+    "DMMP",
+    "GD",
+    "GF"
+   ],
    "within": 0.5266061949925505,
    "between": -0.16653878689416354,
    "diff": 0.693144981886714,
@@ -93,42 +123,60 @@
      "n_concentrations": 4,
      "within": 0.5581691578370822,
      "between": -0.15794297502325133,
-     "diff": 0.7161121328603335
+     "diff": 0.7161121328603335,
+     "nearest_other": "GB",
+     "nearest_other_cos": 0.5686170540105187,
+     "beats_nearest_other": false
     },
     {
      "compound": "GA",
      "n_concentrations": 4,
      "within": 0.3874224191899738,
      "between": -0.03989789827499064,
-     "diff": 0.4273203174649644
+     "diff": 0.4273203174649644,
+     "nearest_other": "GD",
+     "nearest_other_cos": 0.2931040384298876,
+     "beats_nearest_other": true
     },
     {
      "compound": "GB",
      "n_concentrations": 4,
      "within": 0.576561674863412,
      "between": -0.1630272630642693,
-     "diff": 0.7395889379276813
+     "diff": 0.7395889379276813,
+     "nearest_other": "DMMP",
+     "nearest_other_cos": 0.5686170540105187,
+     "beats_nearest_other": true
     },
     {
      "compound": "GD",
      "n_concentrations": 4,
      "within": 0.38891151120534934,
      "between": -0.10959981636843877,
-     "diff": 0.49851132757378813
+     "diff": 0.49851132757378813,
+     "nearest_other": "GF",
+     "nearest_other_cos": 0.8200977159672886,
+     "beats_nearest_other": false
     },
     {
      "compound": "GF",
      "n_concentrations": 4,
      "within": 0.5615260684406183,
      "between": -0.1392102252425536,
-     "diff": 0.7007362936831718
+     "diff": 0.7007362936831718,
+     "nearest_other": "GD",
+     "nearest_other_cos": 0.8200977159672886,
+     "beats_nearest_other": false
     },
     {
      "compound": "VX",
      "n_concentrations": 4,
      "within": 0.6870463384188671,
      "between": -0.3895545433914776,
-     "diff": 1.0766008818103447
+     "diff": 1.0766008818103447,
+     "nearest_other": "GB",
+     "nearest_other_cos": -0.11159685089127908,
+     "beats_nearest_other": true
     }
    ]
   },
@@ -137,6 +185,12 @@
    "mode": "uv",
    "unit": "compound",
    "n_compounds": 7,
+   "n_pairwise_violations": 3,
+   "pairwise_violators": [
+    "CG",
+    "CK",
+    "HN"
+   ],
    "within": 0.45520869271648723,
    "between": -0.1026345905946376,
    "diff": 0.5578432833111249,
@@ -158,49 +212,70 @@
      "n_concentrations": 4,
      "within": 0.6634313229276586,
      "between": 0.04792301658433967,
-     "diff": 0.6155083063433189
+     "diff": 0.6155083063433189,
+     "nearest_other": "HN",
+     "nearest_other_cos": 0.6041153969820019,
+     "beats_nearest_other": true
     },
     {
      "compound": "CG",
      "n_concentrations": 4,
      "within": 0.17749987396518016,
      "between": -0.030841040904188207,
-     "diff": 0.20834091486936837
+     "diff": 0.20834091486936837,
+     "nearest_other": "CK",
+     "nearest_other_cos": 0.4029236661419162,
+     "beats_nearest_other": false
     },
     {
      "compound": "CK",
      "n_concentrations": 4,
      "within": 0.2849304868181374,
      "between": 0.03874975958128268,
-     "diff": 0.2461807272368547
+     "diff": 0.2461807272368547,
+     "nearest_other": "AC",
+     "nearest_other_cos": 0.5247427309022712,
+     "beats_nearest_other": false
     },
     {
      "compound": "HD",
      "n_concentrations": 4,
      "within": 0.6178050600385815,
      "between": -0.051227926546868634,
-     "diff": 0.6690329865854501
+     "diff": 0.6690329865854501,
+     "nearest_other": "HN",
+     "nearest_other_cos": 0.5689261934298909,
+     "beats_nearest_other": true
     },
     {
      "compound": "HN",
      "n_concentrations": 4,
      "within": 0.21883962580679484,
      "between": 0.025748171783198232,
-     "diff": 0.1930914540235966
+     "diff": 0.1930914540235966,
+     "nearest_other": "AC",
+     "nearest_other_cos": 0.6041153969820019,
+     "beats_nearest_other": false
     },
     {
      "compound": "L",
      "n_concentrations": 4,
      "within": 0.7325211409938973,
      "between": -0.411449535859818,
-     "diff": 1.1439706768537152
+     "diff": 1.1439706768537152,
+     "nearest_other": "PS",
+     "nearest_other_cos": 0.36467784291087524,
+     "beats_nearest_other": true
     },
     {
      "compound": "PS",
      "n_concentrations": 4,
      "within": 0.4914333384651612,
      "between": -0.33734457880040886,
-     "diff": 0.82877791726557
+     "diff": 0.82877791726557,
+     "nearest_other": "L",
+     "nearest_other_cos": 0.36467784291087524,
+     "beats_nearest_other": true
     }
    ]
   },
@@ -209,6 +284,10 @@
    "mode": "normal",
    "unit": "compound",
    "n_compounds": 7,
+   "n_pairwise_violations": 1,
+   "pairwise_violators": [
+    "CG"
+   ],
    "within": 0.5021304354934577,
    "between": -0.11656020866017644,
    "diff": 0.6186906441536342,
@@ -230,49 +309,70 @@
      "n_concentrations": 4,
      "within": 0.47905130201841023,
      "between": -0.019816345294782624,
-     "diff": 0.49886764731319283
+     "diff": 0.49886764731319283,
+     "nearest_other": "CK",
+     "nearest_other_cos": 0.4624036044455377,
+     "beats_nearest_other": true
     },
     {
      "compound": "CG",
      "n_concentrations": 4,
      "within": 0.07769326736888846,
      "between": -0.0090438106525872,
-     "diff": 0.08673707802147566
+     "diff": 0.08673707802147566,
+     "nearest_other": "CK",
+     "nearest_other_cos": 0.46804594951754797,
+     "beats_nearest_other": false
     },
     {
      "compound": "CK",
      "n_concentrations": 4,
      "within": 0.5102706052088352,
      "between": 0.019613722787159612,
-     "diff": 0.49065688242167554
+     "diff": 0.49065688242167554,
+     "nearest_other": "CG",
+     "nearest_other_cos": 0.46804594951754797,
+     "beats_nearest_other": true
     },
     {
      "compound": "HD",
      "n_concentrations": 4,
      "within": 0.5758495062292711,
      "between": -0.2009311280400531,
-     "diff": 0.7767806342693242
+     "diff": 0.7767806342693242,
+     "nearest_other": "AC",
+     "nearest_other_cos": 0.12273731531822538,
+     "beats_nearest_other": true
     },
     {
      "compound": "HN",
      "n_concentrations": 4,
      "within": 0.7062350737185552,
      "between": -0.1319295822676254,
-     "diff": 0.8381646559861806
+     "diff": 0.8381646559861806,
+     "nearest_other": "AC",
+     "nearest_other_cos": 0.03832962033064402,
+     "beats_nearest_other": true
     },
     {
      "compound": "L",
      "n_concentrations": 4,
      "within": 0.6913722536338117,
      "between": -0.3761956382898444,
-     "diff": 1.0675678919236562
+     "diff": 1.0675678919236562,
+     "nearest_other": "PS",
+     "nearest_other_cos": -0.05888250556972361,
+     "beats_nearest_other": true
     },
     {
      "compound": "PS",
      "n_concentrations": 4,
      "within": 0.4744410402764319,
      "between": -0.0976186788635018,
-     "diff": 0.5720597191399337
+     "diff": 0.5720597191399337,
+     "nearest_other": "CG",
+     "nearest_other_cos": 0.27737392567032315,
+     "beats_nearest_other": true
     }
    ]
   },
@@ -281,6 +381,11 @@
    "mode": "uv",
    "unit": "compound",
    "n_compounds": 4,
+   "n_pairwise_violations": 2,
+   "pairwise_violators": [
+    "A",
+    "B"
+   ],
    "within": 0.3911381362075824,
    "between": -0.17575382911496593,
    "diff": 0.5668919653225484,
@@ -302,28 +407,40 @@
      "n_concentrations": 4,
      "within": 0.26956703230933565,
      "between": 0.03900180402052486,
-     "diff": 0.2305652282888108
+     "diff": 0.2305652282888108,
+     "nearest_other": "B",
+     "nearest_other_cos": 0.686586412737194,
+     "beats_nearest_other": false
     },
     {
      "compound": "B",
      "n_concentrations": 4,
      "within": 0.11258248118757334,
      "between": 0.0926101054095116,
-     "diff": 0.01997237577806174
+     "diff": 0.01997237577806174,
+     "nearest_other": "A",
+     "nearest_other_cos": 0.686586412737194,
+     "beats_nearest_other": false
     },
     {
      "compound": "C",
      "n_concentrations": 4,
      "within": 0.6632460412110834,
      "between": -0.7502050506324139,
-     "diff": 1.4134510918434975
+     "diff": 1.4134510918434975,
+     "nearest_other": "A",
+     "nearest_other_cos": -0.6059653338099865,
+     "beats_nearest_other": true
     },
     {
      "compound": "D",
      "n_concentrations": 4,
      "within": 0.5191569901223373,
      "between": -0.08442217525748615,
-     "diff": 0.6035791653798235
+     "diff": 0.6035791653798235,
+     "nearest_other": "B",
+     "nearest_other_cos": 0.47312143133588525,
+     "beats_nearest_other": true
     }
    ]
   },
@@ -332,6 +449,10 @@
    "mode": "normal",
    "unit": "compound",
    "n_compounds": 4,
+   "n_pairwise_violations": 1,
+   "pairwise_violators": [
+    "B"
+   ],
    "within": 0.34512841364265096,
    "between": -0.33017055119732286,
    "diff": 0.6752989648399739,
@@ -353,28 +474,40 @@
      "n_concentrations": 4,
      "within": 0.38249409590177036,
      "between": -0.32978987843167906,
-     "diff": 0.7122839743334495
+     "diff": 0.7122839743334495,
+     "nearest_other": "B",
+     "nearest_other_cos": 0.316226258926935,
+     "beats_nearest_other": true
     },
     {
      "compound": "B",
      "n_concentrations": 4,
      "within": 0.27210629925171564,
      "between": -0.2939010419679426,
-     "diff": 0.5660073412196582
+     "diff": 0.5660073412196582,
+     "nearest_other": "A",
+     "nearest_other_cos": 0.316226258926935,
+     "beats_nearest_other": false
     },
     {
      "compound": "C",
      "n_concentrations": 4,
      "within": 0.47782981905721483,
      "between": -0.3683842076542476,
-     "diff": 0.8462140267114624
+     "diff": 0.8462140267114624,
+     "nearest_other": "D",
+     "nearest_other_cos": 0.2062757129418629,
+     "beats_nearest_other": true
     },
     {
      "compound": "D",
      "n_concentrations": 4,
      "within": 0.24808344035990304,
      "between": -0.3286070767354221,
-     "diff": 0.5766905170953252
+     "diff": 0.5766905170953252,
+     "nearest_other": "C",
+     "nearest_other_cos": 0.2062757129418629,
+     "beats_nearest_other": true
     }
    ]
   }

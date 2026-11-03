@@ -169,10 +169,22 @@ def discrimination():
                 if not wa or not ba:
                     continue
                 w.append(float(np.mean(wa))); b.append(float(np.mean(ba)))
+                # 2026-11-03 (T1). 평균 대비는 통과하지만 쌍별로는 어떤가.
+                # 자기일치(농도간 평균 코사인)보다 더 가까운 타 화합물이
+                # 있는지 센다. 있으면 그 셀에서 그 화합물은 '자기와 가장
+                # 비슷하다'고 말할 수 없다. 초록과 본문이 평균 표현을 쓰는
+                # 근거이자, 그 표현의 한계를 수치로 적기 위한 것이다.
+                _worst = max(ba)
+                _who = [o for o in names
+                        if o != a and float(np.dot(P[a], P[o])) == _worst]
                 per.append(dict(compound=a, n_concentrations=len(ks),
                                 within=float(np.mean(wa)),
                                 between=float(np.mean(ba)),
-                                diff=float(np.mean(wa) - np.mean(ba))))
+                                diff=float(np.mean(wa) - np.mean(ba)),
+                                nearest_other=_who[0] if _who else None,
+                                nearest_other_cos=float(_worst),
+                                beats_nearest_other=bool(
+                                    np.mean(wa) > _worst)))
             w = np.array(w); b = np.array(b); d = w - b
             n = len(d)
 
@@ -211,12 +223,18 @@ def discrimination():
             p_old = float(stats.mannwhitneyu(within_all, between_all,
                                              alternative='greater').pvalue)
 
+            _nviol = sum(1 for r in per if not r['beats_nearest_other'])
             print(f'  {tag} {mode:<7} n={n}  물질내 {w.mean():+.3f}  '
                   f'물질간 {b.mean():+.3f}  차 {obs:+.3f}  '
                   f'정확p={p_exact:.4f}  (최소가능 {1/2**n:.4f})  '
-                  f'd_z={dz:+.2f}  [구판 쌍독립 p={p_old:.3g}]')
+                  f'd_z={dz:+.2f}  쌍별위반 {_nviol}/{n}  '
+                  f'[구판 쌍독립 p={p_old:.3g}]')
             rows.append(dict(dataset=tag, mode=mode,
                              unit='compound', n_compounds=n,
+                             n_pairwise_violations=_nviol,
+                             pairwise_violators=sorted(
+                                 r['compound'] for r in per
+                                 if not r['beats_nearest_other']),
                              within=float(w.mean()), between=float(b.mean()),
                              diff=obs, p=p_exact,
                              p_exact_signflip=p_exact,
