@@ -83,11 +83,18 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #   purity_sensitivity     루이사이트 순도 67% 민감도
 #   channel_classification 선언 29채널 대 유효 23채널의 분류 성능
 # order_invariance 는 치환 40회 x 패널 3종 x 규칙 2종이라 약 20분 걸린다.
+#   multiplicity_panels    구성 4개 x 공간 3종 x 통계량 6종 = 72검정 BH
+#                          2026-11-03: T0-6 에서 스크립트만 만들고 이 목록에
+#                          넣지 않아, T2-1 의 필터 교체가 이 예치물에
+#                          전파되지 않았다. 리뷰어가 구판 p 를 찾아냈다.
+#   make_si_tables         SI 의 tab:ablation 을 산출물에서 생성. 종전에는
+#                          10열 24수치를 손으로 유지하고 있었고, 그래서
+#                          T2-1·T2-8 을 전부 통과해 구판으로 살아남았다.
 #   sparse_indicators      희소 지시자 인코딩 민감도 + 논지 안정성 대조
 # sparse_indicators 는 Mantel 전수열거를 세 변종에 돌리므로 약 10분 걸린다.
 run_strict order_invariance.py match_rule_audit.py deltaE_noise.py \
            purity_sensitivity.py channel_classification.py \
-           sparse_indicators.py
+           sparse_indicators.py multiplicity_panels.py make_si_tables.py
 
 # dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로

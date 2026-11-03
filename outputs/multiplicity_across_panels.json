@@ -10,25 +10,25 @@
  },
  "min_q_by_config": {
   "panel28_designated3": {
-   "q": 0.23895299746692938,
+   "q": 0.23554089828150937,
    "space": "structural",
    "statistic": "mean_diff",
-   "p": 0.026470588235294117
+   "p": 0.027941176470588237
   },
   "panel35_designated3": {
-   "q": 0.3192904656319291,
+   "q": 0.3539069626026148,
    "space": "merged",
-   "statistic": "median_diff",
-   "p": 0.16946640316205533
+   "statistic": "mean_dsim",
+   "p": 0.191699604743083
   },
   "panel35_designated_plus_literature8": {
-   "q": 0.23895299746692938,
+   "q": 0.23554089828150937,
    "space": "structural",
-   "statistic": "mean_diff",
-   "p": 0.06406370883420284
+   "statistic": "mean_logratio",
+   "p": 0.049659333950624836
   },
   "pesticide10": {
-   "q": 0.004442051420110379,
+   "q": 0.003010315838421909,
    "space": "structural",
    "statistic": "median_diff",
    "p": 6.169515861264415e-05

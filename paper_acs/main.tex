@@ -91,8 +91,15 @@ Korea}
 %   Jin Yoo          0000-0002-7738-8424   tysonyj@snu.ac.kr
 %   Yoon Jeong Jang  0000-0002-5625-2528   yjjangchem@korea.kr
 
-\title{Descriptor Similarity Does Not Predict Array Response: Chemical
-Warfare Agent Simulants Tested Against Sixteen Authentic Agents}
+% 2026-11-03. 제목 교체. 종전 제목 "Descriptor Similarity Does Not Predict
+% Array Response: ... Tested Against Sixteen Authentic Agents" 는 두 군데를
+% 넘겨 말했다. (1) 'Does Not Predict' 는 검정력이 제한된 귀무 결과를 보편
+% 부정으로 적었다. 설계는 rank r=0.67 을 80 퍼센트 검정력으로 분해하고
+% 관측 최대는 0.57 이다. (2) 'Tested Against Sixteen' 은 중심 검정이 셀당
+% 4~7종, 1차 패널 11종으로 돌아간다는 사실과 어긋났다. 측정한 것으로
+% 내린다. 편집장·리뷰어 1 이 독립으로 같은 지적을 했다.
+\title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
+Array Response: A Reanalysis of Sixteen Authentic Chemical Warfare Agents}
 
 \keywords{chemical warfare agents, simulants, colorimetric sensor array,
 surrogate validation, permutation test, applicability domain}
@@ -116,32 +123,39 @@ surrogate validation, permutation test, applicability domain}
 \end{tocentry}
 
 % --- Abstract: ACS Sensors 는 80~250 단어. 목적 1문장, 방법 2~3문장,
-%     결과 2~3문장 구조를 요구한다. 현재 228단어.
+%     결과 2~3문장 구조를 요구한다. 현재 248단어.
+% 2026-11-03. 초록 교체. 종전 초록은 "every compound agrees with itself
+% ... more closely than with the other compounds" 를 무조건으로 적었는데,
+% 2.1 본문은 같은 쪽에서 34개 화합물-셀 중 13개가 최근접 타화합물에
+% 대해서는 그 관계가 성립하지 않는다고 적고 있었다. 초록이 본문보다
+% 강했다. 평균 진술과 짝별 진술을 나누고, 귀무의 검정력 한계를 함께
+% 적는다. 'fails to predict' 도 'does not track at any resolvable effect
+% size' 로 내렸다.
 \begin{abstract}
 Chemical warfare agent detection is developed and qualified on simulants,
-and we asked what measurement establishes that a simulant reproduces the
-agent it stands in for. We reanalyse the colorimetric tables of three
-published runs of one 29-dye array, which between them measured sixteen
-authentic agents spanning nerve, blood, choking, vesicant and A-series
-compounds at four exposure concentrations against a zero-concentration
-baseline in two optical channels, and compare the response patterns with
-the molecular-descriptor distances on which simulant selection in practice
-rests. The descriptor calculations and every test reported here are new.
-The array discriminates: in all six run-channel cells, every compound
+and we asked what measurement establishes that a simulant reproduces its
+agent. We reanalyse the colorimetric tables of three published runs of
+one 29-dye array, which measured sixteen authentic agents spanning nerve,
+blood, choking, vesicant and A-series compounds at four concentrations in
+two optical channels, and compare the response patterns with the
+molecular-descriptor distances on which simulant selection rests. The
+descriptor calculations and every test reported here are new. The array
+discriminates on average: in all six run-channel cells, every compound
 agrees with itself across concentrations more closely than with the other
-compounds in that cell, at the exact floor each cell's four to seven
-compounds allow. Descriptor distance nonetheless fails to predict response
-distance. Twelve exact Mantel tests and six combinations of them leave
-nothing below $q=0.05$, against a design that resolves a rank correlation
-of 0.67 at 80\% power where the largest observed is 0.57. That null holds
-under every analyst choice we enumerated, including the descriptor
-encoding, the correlation filter, the conformer seed and the panel
-composition, while the descriptor-space count of valid matches is moved by
-all four and is therefore not a measurement. Dimethyl methylphosphonate,
-the standard G-agent simulant and the benchmark compound for
-decontamination efficiency, is anti-correlated with soman and cyclosarin in
-the ultraviolet channel. In the three runs reanalysed here, one designated
-simulant has been measured beside the agents.
+compounds of that cell, at the exact floor each cell's four to seven
+compounds allow. In 13 of those 34 compound-cells it does not survive
+against the single nearest other compound. Descriptor distance does not
+track response distance at any resolvable effect size. Twelve exact
+Mantel tests and six combinations of them leave nothing below $q=0.05$,
+against a design that resolves a rank correlation of 0.67 at 80\% power
+where the largest observed is 0.57. That null holds under every analyst
+choice we enumerated, including the descriptor encoding, the correlation
+filter, the conformer seed and the panel composition, while the count of
+valid descriptor-space matches is moved by all four and is not a
+measurement. Dimethyl methylphosphonate, the standard G-agent simulant,
+is anti-correlated with soman and cyclosarin in the ultraviolet channel.
+Across the three runs, one designated simulant has been measured beside
+the agents.
 \end{abstract}
 
 \section{Introduction}
@@ -324,8 +338,13 @@ stable enough across dose to be treated as that compound's pattern at all.
 It is stable enough (Figure~\ref{fig:response}a). One compound's patterns at two
 concentrations correlate at
 $+0.345$ to $+0.542$, different compounds anti-correlate at $-0.103$ to
-$-0.330$, and the ordering holds in all six run-channel cells, with $p$
-from $4.6\times10^{-8}$ to 0.025.
+$-0.330$, and the ordering holds in all six run-channel cells. Because the
+independent unit is the compound and not the pair, the test is a
+sign-flip enumeration over the four to seven compounds of each cell, and
+every cell returns the smallest value its compound count allows: exact
+one-sided $p$ from 0.0078 to 0.0625, with Cohen's $d_z$ from $+0.92$ to
+$+5.12$. The four-compound cell cannot reach 0.05 under any test, since
+$2^{-4}=0.0625$.
 
 The tables analysed here hold one value per compound, concentration, dye
 and channel, so the within-compound term is agreement of a compound with
@@ -588,7 +607,7 @@ construction, and we report all four rather than the one that passes.
 The surviving structural value is also an ordinary draw from the choices
 available to an analyst. Drawing three descriptors at random from the
 structural block 2000 times and repeating the whole procedure places the
-observed value at the 22.4rd percentile of that distribution. A value at
+observed value at the 22.4th percentile of that distribution. A value at
 the quarter mark of what random descriptor choices produce is not evidence
 about chemistry. The null for that percentile, the dimensionality controls
 and the effect of weighting the two descriptor blocks equally are in

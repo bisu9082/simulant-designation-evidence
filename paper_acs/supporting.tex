@@ -67,9 +67,9 @@ Korea}
 
 % achemso 의 suppinfo 모드가 제목 앞에 'Supporting Information:' 를 스스로
 % 붙인다. 제목에 또 쓰면 두 번 찍힌다 (2026-11-02 렌더에서 확인).
-\title{Descriptor Similarity Does Not Predict Array
-Response: Chemical Warfare Agent Simulants Tested Against Sixteen Authentic
-Agents}
+% 2026-11-03. 본문 제목 교체에 맞춰 동기화.
+\title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
+Array Response: A Reanalysis of Sixteen Authentic Chemical Warfare Agents}
 
 \begin{document}
 
@@ -377,19 +377,8 @@ rather than the four raises tabun's share to 72.1\% and sarin's to 48.8\%.
   coordinate and is the least defensible of the variants. The one-sided $p$ is
   the merged-space exact enumeration over all $\binom{17}{3}=680$ designations.}
   \label{tab:sparse}
-  \begin{tabular}{lrrrrr}
-    \hline
-    Encoding & Removed & Dim. & Matches & Tabun $d_{\mathrm{norm}}$ & $p$ \\
-    \hline
-    As reported                  &  0 & 38 & 3 & 2.0038 & 0.0250 \\
-    Drop single-carrier binaries &  4 & 34 & 4 & 1.4509 & 0.0250 \\
-    Drop binaries with $\le 2$   &  5 & 33 & 4 & 1.4509 & 0.0206 \\
-    Drop binaries with $\le 3$   &  8 & 30 & 5 & 1.6780 & 0.0162 \\
-    Drop binaries with $\le 4$   & 10 & 28 & 4 & 1.4392 & 0.0132 \\
-    Drop binaries with $\le 5$   & 11 & 27 & 4 & 1.2455 & 0.0132 \\
-    Drop cardinality $\le 5$     & 14 & 24 & 6 & 1.1604 & 0.0074 \\
-    \hline
-  \end{tabular}
+  % 2026-11-03. outputs/tab_sparse.tex 로 자동 생성.
+\input{tab_sparse}
 \end{table}
 
 Table~\ref{tab:sparse} gives the sweep. Every removal moves the count in the
@@ -507,7 +496,7 @@ geometry confound of the preceding paragraph applies to it in full. We report it
 because the alternative is to leave standing a negative claim that our own check
 does not support. The second is that the merged space does not move the same
 way. Rebuilt from the same three density-functional coordinates it retains the
-thirty-nine coordinates of the main analysis and returns three valid matches and
+thirty-eight coordinates of the main analysis and returns three valid matches and
 a one-sided $p$ of 0.0250, against four and 0.0250 for the GFN2 control, so the
 value the main text carries is not an artefact of the semiempirical method. The
 third is that the analyst freedoms this paper is about therefore include one we
@@ -651,50 +640,11 @@ four panel and designation configurations, three spaces and six statistics, in
 full rather than selected from, because the pattern across the cells is the
 finding. Main-text Section~\ref{M-res:panels} states what holds across it.
 
-\begin{table}[!htb]
-\centering
-\caption{Every exact permutation test available. One-sided $p$ for six distance
-statistics (Main-text Section~\ref{M-meth:spaces}) in three spaces, over four designation
-configurations on two panels (Main-text Section~\ref{M-meth:spaces}). $q$ is the smallest
-Benjamini-Hochberg value over the eighteen tests of that configuration. Bold
-marks nominal $p<0.05$. Only the fourth configuration, which relabels the two
-organophosphorus pesticides as simulants, reaches $q<0.05$.}
-\label{tab:ablation}
-\small
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{llcccccccc}
-\hline
-Panel / simulant set & Space & Dim. & $\Delta\bar{d}$ & $\Delta\tilde{d}$ &
-$\overline{\ln r}$ & $\bar{d}_\mathrm{sim}$ & $n_\mathrm{closer}$ &
-$n_\mathrm{valid}$ & min $q$ \\
-\hline
-\textbf{35 cpd., incumbent 3} & structural  & 39 & 0.326  & 0.311  & 0.399  & 0.230  & 1.000  & 1.000 &  \\
-\textbf{(primary)}     & electronic  &  3 & 0.386  & 0.374  & 0.412  & 0.344  & 0.723  & 0.664 &  \\
-                       & merged      & 42 & 0.280  & 0.156  & 0.354  & 0.176  & 1.000  & 1.000 & 0.617 \\
-\hline
-35 cpd., incumbent     & structural  & 39 & 0.0705  & 0.409  & 0.0528  & 0.159  & 0.319  & 0.159 &  \\
-\quad + literature 8   & electronic  &  3 & 0.121  & 0.0862  & 0.123  & 0.127  & 0.165  & 0.0799 &  \\
-                       & merged      & 42 & 0.0569  & 0.301  & \textbf{0.0371}  & 0.123  & 0.319  & 0.159 & 0.212 \\
-\hline
-28 cpd., incumbent 3   & structural  & 37 & \textbf{0.0279}  & 0.178  & 0.0824  & \textbf{0.0485}  & 0.110  & 0.235 &  \\
-\quad (omits the five) & electronic  &  3 & 0.275  & 0.175  & 0.293  & 0.235  & 0.757  & 0.757 &  \\
-                       & merged      & 40 & \textbf{0.025}  & 0.0691  & \textbf{0.0368}  & \textbf{0.0309}  & 0.110  & 0.181 & 0.165 \\
-\hline
-35 cpd., incumbent 3   & structural  & 39 & \textbf{0.0115}  & \textbf{$<$0.001}  & 0.0549  & 0.214  & 0.318  & 0.268 &  \\
-\quad + literature 5   & electronic  &  3 & 0.0892  & 0.0526  & 0.0589  & 0.0856  & 0.0664  & 0.055 &  \\
-\quad + pesticides 2   & merged      & 42 & \textbf{0.005}  & \textbf{$<$0.001}  & \textbf{0.0352}  & 0.143  & 0.318  & 0.268 & \textbf{0.001} \\
-\hline
-\hline
-\multicolumn{10}{l}{\footnotesize Statistics, in order: mean and median of
-$d_\mathrm{sim}-d_\mathrm{intf}$; mean $\ln(d_\mathrm{sim}/d_\mathrm{intf})$;
-mean $d_\mathrm{sim}$;}\\
-\multicolumn{10}{l}{\footnotesize count of agents with a simulant closer than
-any interferent; count of valid matches. Permutations:}\\
-\multicolumn{10}{l}{\footnotesize $\binom{17}{3}=680$, $\binom{24}{3}=2024$,
-$\binom{24}{8}=735\,471$, $\binom{24}{10}=1\,961\,256$, enumerated exhaustively
-in each case.}\\
-\end{tabular}
-\end{table}
+% 2026-11-03. 이 표는 outputs/tab_ablation.tex 로 자동 생성한다.
+% 종전에는 10열 24수치를 손으로 유지했고, 그래서 T2-1(상관필터
+% 교체)과 T2-8(형태이성질체 재생성)을 전부 통과해 차원 열이
+% 40/42 구판으로 남았다. 생성기는 make_si_tables.py 다.
+\input{tab_ablation}
 
 Two further values belong with Table~\ref{tab:family}. Weighting the 35
 structural and 3 electronic descriptors as two equal blocks, instead of the
@@ -723,22 +673,10 @@ differs from the second by two class labels, is below 0.05 under every scheme.}
 \label{tab:family}
 \small
 \setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccc}
-\hline
-Accounting scheme & 35 cpd., & 35 cpd., & 28 cpd., & 35 cpd., \\
-                  & incumbent 3 & + literature 8 & incumbent 3 & relabelled 10 \\
-                  & (primary) & & (omits the five) & (pesticides in) \\
-\hline
-Smallest nominal $p$ (18 tests)      & 0.192 & 0.039 & 0.025 & \textbf{$<$0.001} \\
-Benjamini-Hochberg over 18           & 0.630 & 0.212 & 0.163 & \textbf{0.001} \\
-Benjamini-Hochberg over 6, per space & 0.560 & 0.153 & 0.077 & \textbf{$<$0.001} \\
-Westfall-Young min-$P$ over 18       & 0.457 & 0.112 & 0.079 & \textbf{$<$0.001} \\
-$m_{\mathrm{eff}}$ of 18 (Li-Ji)     & 6.00  & 5.00  & 5.00  & 5.00  \\
-Bonferroni at $m_{\mathrm{eff}}$     & 1.000 & 0.193 & 0.125 & \textbf{$<$0.001} \\
-Statistic specified in advance (3 tests) & 0.386 & 0.103 & \textbf{0.042} & \textbf{0.014} \\
-Benjamini-Hochberg over all 72          & 0.319 & 0.239 & 0.239 & \textbf{0.004} \\
-\hline
-\end{tabular}
+% 2026-11-03. outputs/tab_family.tex 로 자동 생성. 생성기는
+% make_si_tables.py. 종전에는 34수치를 손으로 유지했고 72검정
+% BH 행이 구판으로 남아 있었다.
+\input{tab_family}
 \end{table}
 
 The sixth row was added after a reading of an earlier draft pointed out that
@@ -752,8 +690,8 @@ argument is that the configuration is itself a choice. We therefore pooled the
 % 신설해 현행 산출물에서 재생성했고 네 값이 모두 바뀌었다.
 four configurations into one family of 72 tests and corrected across all of
 them. The smallest adjusted value on the twenty-eight-compound panel rises from
-0.165 to 0.239 and the two thirty-five-compound configurations rise to 0.319 and
-0.239, while the relabelled configuration stays significant at 0.004. Nothing in
+0.163 to 0.236 and the two thirty-five-compound configurations rise to 0.354 and
+0.236, while the relabelled configuration stays significant at 0.003. Nothing in
 the paper's conclusions changes, and the scheme that most nearly reaches
 significance is still the one that fixes the statistic in advance. We report it
 because leaving it out would have exempted our own accounting from the standard
@@ -784,9 +722,9 @@ observed value are the same quantity.
 On the twenty-eight-compound panel the median $p$ is 0.149, the 5th to 95th
 percentile range is 0.006 to 0.710, and 28.95\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
-36-dimensional value of 0.028 sits at the 22.4rd percentile of that
+36-dimensional value of 0.028 sits at the 22.4th percentile of that
 distribution, and the electronic value of 0.275 at the 68.8th. The
-three-principal-component value of 0.0029 sits at the 1.6rd percentile, which is
+three-principal-component value of 0.0029 sits at the 1.6th percentile, which is
 what the leading components of a space should do and is not independent
 evidence.
 
@@ -871,33 +809,29 @@ the same three configurations, with the same six statistics.
 \begin{table}[!htb]
 \centering
 \caption{Equal weight per descriptor against equal weight per block, in the
-merged space. Valid-match counts are identical on the primary panel and differ
-on the twenty-eight-compound one, four against three. The
-smallest $p$ is taken over the eighteen-test family of three spaces by six
-statistics, and $q$ is the Benjamini--Hochberg adjusted value of that family.}
+merged space. Valid-match counts are identical under the two weightings on
+every panel construction. The smallest $p$ is taken over the eighteen-test
+family of three spaces by six statistics, and $q$ is the
+Benjamini--Hochberg adjusted value of that family.}
 \label{tab:blockbalance}
 \small
-\begin{tabular}{lcccccc}
-\hline
- & \multicolumn{2}{c}{Valid matches} & \multicolumn{2}{c}{Smallest nominal $p$}
- & \multicolumn{2}{c}{Smallest $q$} \\
-Configuration & per desc. & per block & per desc. & per block
- & per desc. & per block \\
-\hline
-Thirty-five, incumbent three & 0/11 & 0/11 & 0.151 & 0.061 & 0.617 & 0.630 \\
-Thirty-five, plus literature 8 & 5/11 & 5/11 & 0.039 & 0.022 & 0.212 & 0.222 \\
-Twenty-eight, incumbent three & 3/11 & 3/11 & 0.025 & 0.009 & 0.185 & 0.146 \\
-\hline
-\end{tabular}
+% 2026-11-03. outputs/tab_blockbalance.tex 로 자동 생성.
+% 종전 q 두 열은 어느 산출물에도 없는 값이었고 두 열의
+% 가족 정의도 달랐다. 이제 양쪽 모두 같은 6개 병합공간
+% 통계량에 대한 BH 최소 q 다.
+\input{tab_blockbalance}
 \end{table}
 
-Two things follow, and they point in opposite directions. The valid-match counts
-on the primary panel do not move: zero of eleven with the incumbent three and
-five with the literature eight admitted, under either weighting, exactly as
-reported in the main text. On the twenty-eight-compound panel the count does
-move, from four under equal per-descriptor weighting to three under block
-balance, and the agent it loses is tabun, the match nearest the threshold in the
-main analysis. The paper's headline is therefore invariant to the weighting, and
+% 2026-11-03. 종전 산문은 28종 패널에서 매칭이 4에서 3으로 움직인다고
+% 적었다. 그것은 구판 상관필터에서 기준이 4였을 때의 서술이고, 결정적
+% 필터에서는 기준도 3이며 블록 균등에서도 3이다. 표 본문은 이미 3/11 과
+% 3/11 로 갱신되어 있었고 산문과 캡션만 구판으로 남아 있었다.
+% 수치는 outputs/blockbalance.json 실측.
+The valid-match counts do not move under either weighting, on any panel
+construction: zero of eleven on the primary panel with the incumbent three,
+five with the literature eight admitted, and three on the
+twenty-eight-compound panel. The paper's headline is therefore invariant to
+the weighting, and
 so is the pre-specified-statistic counterfactual of Table~\ref{tab:family},
 which stays at 0.042 on the twenty-eight-compound panel: the merged nominal value
 there falls from 0.025 to 0.016, but the value that binds after correction is the
@@ -1010,9 +944,9 @@ of the design, with sarin the one case where the two cannot be separated.
 the mean-difference statistic as the incumbent simulants are moved $\delta$
 typical nearest-neighbour separations closer to the eleven agents, with the rest
 of each panel unchanged and the null taken from the unmodified distances. On the
-primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.22$. The shaded
+primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.23$. The shaded
 band spans that value and the median deficit the incumbent compounds actually
-carry, 0.46; the deficit falls below the detectable value only at sarin.}
+carry, 0.493; the deficit falls below the detectable value only at sarin.}
 \label{fig:mde}
 \end{figure}
 
@@ -1081,25 +1015,7 @@ electrophilicity of Domingo et al.~\cite{domingo2016}. The two reactivity
 conventions disagree about VX and the text says why.}
 \label{tab:plocal}
 \small
-\begin{tabular}{lcccccc}
-\hline
-Compound & $q_{\mathrm{P}}$ (e) & $q_{\mathrm{P=O}}$ (e) & $W_{\mathrm{P=O}}$ &
-$f^{+}(\mathrm{P})$ & $\omega$ (eV) & $\omega_k$ (eV) \\
-\hline
-GB & 0.54044 & -0.42847 & 1.9527 & 0.66793 & 5.69 & 3.80 \\
-GD & 0.54460 & -0.43006 & 1.9507 & 0.63692 & 5.54 & 3.53 \\
-GF & 0.53868 & -0.42662 & 1.9546 & 0.63203 & 5.62 & 3.55 \\
-\textbf{DMMP} & 0.46630 & -0.44588 & 1.9246 & 0.55852 & 4.66 & 2.60 \\
-GA & 0.34433 & -0.38982 & 2.0146 & 0.42143 & 20.73 & 8.74 \\
-VX & 0.33196 & -0.40303 & 1.9863 & 0.20431 & 17.99 & 3.68 \\
-\hline
-\multicolumn{7}{l}{\footnotesize GB/GD/GF mean $f^{+}(\mathrm{P})$ = 0.6456
-$\pm$ 0.0195, DMMP 4.47 SD below; mean $\omega_k$ = 3.63 $\pm$ 0.15,}\\
-\multicolumn{7}{l}{\footnotesize DMMP 6.87 SD below. $\omega$ and $\omega_k$ are
-reported here and used in no distance (Section~\ref{M-meth:spaces}).}\\
-\multicolumn{7}{l}{\footnotesize DMMP/VX = 2.73 by $f^{+}(\mathrm{P})$ but 0.71 by
-$\omega_k$. Values are GFN2-derived and relative within one protocol.}\\
-\end{tabular}
+\input{tab_plocal}
 \end{table}
 
 The Wiberg P=O bond order,\cite{wiberg1968,mayer1983} which spans
@@ -1163,8 +1079,9 @@ compressed towards unity. Between-compound similarity of 0.77 to 0.80 is not
 separable from the within-compound value of 0.79 to 0.83 across concentrations
 ($p = 0.06$ to $0.94$). Subtracting the compound-axis mean at each concentration
 separates them, to $+0.35$ to $+0.54$ within compounds against $-0.10$ to $-0.33$
-between them, in all six combinations of compound set and channel ($p = 8 \times
-10^{-5}$ to $0.025$).
+between them, in all six combinations of compound set and channel (exact
+one-sided $p$ from 0.0078 to 0.0625, each the floor its compound count
+allows).
 
 The between-compound half of that contrast is largely arithmetic. Centring forces
 the mean cosine between distinct compounds to $-1/(n-1)$, which is $-0.200$ for
