@@ -252,6 +252,50 @@ def _generated_table_sync():
     return sorted(set(bad))
 
 
+def _filter_dependent_staleness():
+    r"""상관필터에 의존하는 예치물이 정본 실행보다 오래됐는지 본다.
+
+    왜 필요한가 (2026-11-04 신설, 작업 D). 11-02 08:17 의 구판 실행이 만든
+    예치물 일곱 개가 재생성되지 않고 저장소에 남아 있었다. 전부 읽는 코드도
+    생성기도 본문 인용도 없는 고아였고, 그래서 기존 고아 검사(본문이 인용한
+    예치물에 생성기가 있는가)를 빠져나갔다. 그 안에는 전자공간 좌표를 4개로
+    (정본 3), 28종 구조공간을 38개로 (정본 35) 적는 값이 들어 있었고,
+    sync_submission.sh 가 outputs/*.json 을 전량 복사하므로 리뷰어가 받는
+    패키지에 그대로 들어갔다. 네 명이 같은 자리를 지적했다.
+
+    더 나쁜 것은 distance_table_normalized*.csv 네 벌이 검증기 자신의 거리
+    화이트리스트를 넓히고 있었다는 점이다. 구판 거리가 '허용된 값' 이 되면
+    본문의 구판 인용이 통과한다.
+
+    여기서는 상관필터와 공간 정의에 의존하는 이름만 본다. 웹에서 받은
+    출처(pubchem, volatility_candidates), DFT 실행, 캐시는 정본 실행보다
+    오래되어도 정상이므로 대상이 아니다.
+    """
+    import os as _o
+    import glob as _g
+    FAMILIES = ('distance_table', 'experiment_summary', 'match_by_panel',
+                'panel35_', 'subspace_null', 'permutation_',
+                # 2026-11-04 (작업 D, 2차). deltaE_extended.json 이 구판
+                # Mantel p 로 Fisher 를 합성해 본문이 0.204 를 싣고 있었다.
+                # 정본 p 로 다시 합성하면 0.2373 이다. R3·R4 중복 지적.
+                'deltaE_', 'rollback_', 'multiplicity', 'mantel_')
+    ref = 'outputs/experiment_summary.json'
+    if not _o.path.exists(ref):
+        return []
+    t0 = _o.path.getmtime(ref)
+    bad = []
+    for f in sorted(_g.glob('outputs/*.json') + _g.glob('outputs/*.csv')):
+        b = _o.path.basename(f)
+        if not b.startswith(FAMILIES):
+            continue
+        if _o.path.getmtime(f) < t0 - MTIME_TOL:
+            bad.append(f'  구판 예치물 [{f}]: 정본 실행('
+                       f'{ref})보다 오래됐다. 파이프라인에 넣어 재생성하거나 '
+                       f'삭제할 것 — 패키지에 들어가면 리뷰어가 본문과 다른 '
+                       f'수치를 받는다')
+    return bad
+
+
 def _title_sync():
     r"""제목이 본문·SI·커버레터에서 같은지 본다 (2026-11-03 신설, 작업 B).
 
@@ -823,6 +867,9 @@ def load_facts():
     # 읽었던 자리를 뒤집는 수치이므로 전부 건다.
     if os.path.exists('outputs/subspace_null.json'):
         _sn = json.load(open('outputs/subspace_null.json'))
+        # 2026-11-04 (작업 D). 순위 자체에 검사가 없었다. 37좌표 구판의
+        # 'fifth' 를 되살리는 주입이 통과했다. 서수를 사실로 올린다.
+        f['sn_rank'] = _sn['rank_of_actual']
         f['sn_actual'] = 100 * _sn['actual_designation_frac']
         f['sn_mean'] = 100 * _sn['null_mean_frac']
         f['sn_median'] = 100 * _sn['null_median_frac']
@@ -1902,12 +1949,22 @@ CHECKS = [
      r'with a median of (\d+\.\d+)\\%'], 0.06),
     ('sn_p95', [r'95th percentile of (\d+\.\d+)\\%'], 0.06),
     ('sn_max', [r'a maximum\s*\n?of (\d+\.\d+)\\%'], 0.06),
-    ('sn_p', [r'ranks fifth of \d+\s+\(\$p=([\d.]+)\$\)',
-     r'ranks fifth of 680, \$p=(\d+\.\d+)\$'], 0.0006),
+    # 2026-11-04 (작업 D). 순위를 어법에 박아 두면 순위가 바뀔 때 앵커가
+    # 죽는다. 실제로 37좌표 -> 35좌표 교정에서 5위가 7위로 바뀌며 죽었다.
+    # 서수를 자리표시로 바꾼다.
+    ('sn_p', [r'ranks [a-z]+ of \d+\s*\n?\(\$p=([\d.]+)\$\)',
+     r'ranks [a-z]+ of 680, \$p=(\d+\.\d+)\$'], 0.0006),
+    # 2026-11-04 (작업 D). 본문이 '0.0824' 를 싣고 있었고 어느 산출물에도
+    # 없는 값이었다. 생성표 tab_family 는 같은 양을 0.077 로 적는다.
+    # R2·R5 가 같은 자리를 지적했다. 앵커가 없어서 통과했다.
+    ('q_by_space28', [r'correcting within each space gives (0\.\d+)'],
+     0.00005),
     ('sn_nsub', [r'Across (\d+) random three-descriptor subspaces',
      r'Over (\d+) subspaces'], 0),
     # 2026-11-01 신설. 사실로는 적재되는데 검사 항목이 없던 셋.
-    ('sn_ndesig', [r'ranks fifth of (\d+)'], 0),
+    ('sn_ndesig', [r'ranks [a-z]+ of (\d+)'], 0),
+    ('sn_rank', [r'designation ranks ([a-z]+) of 680',
+                 r'ranks ([a-z]+) of 680, \$p='], 0),
     ('heldout_err_min',
      [r'without exception, by ([\d.]+) to [\d.]+\s+log units'], 0.0006),
     ('heldout_err_max',
@@ -2748,6 +2805,7 @@ def main():
                      (_handmade_tables(), '생성기 없는 수치 표'),
                      (_generated_table_sync(), '생성 표 사본 시차'),
                      (_title_sync(), '제목 비동기'),
+                     (_filter_dependent_staleness(), '구판 예치물'),
                      (_label_scope_guards(), '수치는 맞고 설명이 틀린 자리')):
         if _g:
             fails.append(f'{_why} (2026-11-03 신설 가드):')
@@ -2927,7 +2985,13 @@ def main():
             for _a in _pan['agents']:
                 allowed.setdefault(_a['agent'], set()).add(round(_a['d_norm'], 3))
     # 병합공간 말고 구조·전자 공간의 정규화거리도 본문에 나온다.
-    for _dt in glob.glob('outputs/distance_table_normalized*.csv'):
+    # 2026-11-04 (작업 D). 종전에는 glob 이 접미사 붙은 사본까지 끌어왔다.
+    # 그 사본 넷은 11-02 08:17 의 상관필터 교체 전 실행이고 파이프라인이
+    # 다시 만들지 않는다. C_merged 정규화자가 3.5013/3.5188/3.5331 로
+    # 정본 3.5590 과 다르고 1차 패널 매칭을 3~8개로 적는데 정본은 0 이다.
+    # 구판 거리가 화이트리스트를 넓혀 본문의 구판 인용을 통과시킨다.
+    # 파이프라인이 생성하는 한 벌만 읽는다.
+    for _dt in ['outputs/distance_table_normalized.csv']:
         _d = pd.read_csv(_dt)
         for _r in _d.itertuples():
             allowed.setdefault(_r.real_agent, set()).add(round(_r.d_sim_norm, 3))

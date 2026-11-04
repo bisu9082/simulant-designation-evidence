@@ -72,7 +72,8 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
            analyze_electronic.py normalize_nn.py perm_statistics.py \
            deltaE_premise.py mantel_power.py deltaE_power.py rollback_c.py match_by_panel.py \
            mde.py blockbalance.py pesticide_panel.py pesticide_family.py stat_supplement.py stat_supplement2.py nearest_agent_boot.py null_match_expectation.py \
-           match_by_panel_ascl3.py dft_electronic_space.py
+           match_by_panel_ascl3.py dft_electronic_space.py \
+           subspace_null.py deltaE_extended.py
 
 # 2026-11-02 (T2). 다섯 스크립트를 파이프라인에 넣는다. 전부 원고가 인용하는
 # 예치물을 만들며, 목록에 없으면 빈 outputs/ 로 클론했을 때 검증기의 G-D

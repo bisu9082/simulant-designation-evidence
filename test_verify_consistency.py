@@ -344,6 +344,19 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-04 (작업 D) 신설분. 구판 수치 3건 ---
+    ('공간내 보정값을 구판으로 되돌림 (정본 0.0772, 구판 0.0824)',
+     'correcting within each space gives 0.0772',
+     'correcting within each space gives 0.0824'),
+    ('Fisher 최소 q 를 구판 p 로 합성한 값으로 되돌림 (정본 0.2373)',
+     'over the six is 0.2373', 'over the six is 0.204'),
+    ('부분공간 실제지정 비율을 37좌표 구판으로 되돌림 (정본 27.4%)',
+     'reaches $p<0.05$ in 27.4\\% of them',
+     'reaches $p<0.05$ in 36.0\\% of them'),
+    ('부분공간 순위를 구판으로 되돌림 (정본 seventh)',
+     'designation ranks seventh of 680',
+     'designation ranks fifth of 680'),
+
     # --- 2026-11-03 (작업 C) 신설분. 바닥 논증 대체 ---
     ('바닥 논증을 본문에 되살림',
      'renormalises each vector to unit length, which destroys the zero-sum',
@@ -505,6 +518,13 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (작업 D) 신설분 ---
+    ('SI 부분공간 최대값을 37좌표 구판으로 되돌림 (정본 44.6%)',
+     'a maximum\nof 44.6\\%', 'a maximum\nof 52.8\\%'),
+    ('SI 부분공간 p 를 구판으로 되돌림 (정본 0.0103)',
+     "27.4\\% ranks seventh of 680, $p=0.0103$",
+     "27.4\\% ranks seventh of 680, $p=0.0074$"),
+
     # --- 2026-11-04 (J-C) 신설분. AEGL-3 순서 다섯 값 ---
     ('AEGL-3 VX 오기 (정본 0.0295)',
      'VX (0.0295~mg~m$^{-3}$),',
