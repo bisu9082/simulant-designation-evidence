@@ -24,31 +24,22 @@ import sys
 
 import pandas as pd
 
-TEX = 'paper/main.tex'
+# 2026-11-04 (결정 J-C). 1차 본문을 ACS본으로 옮긴다.
+# 종전에는 paper/main.tex 가 TEX 였고 paper_acs/ 가 추가본이었다. JHM
+# 평행본은 archive/jhm_v1/ 로 동결했으므로 축을 뒤집는다. 동결 사유와
+# 되살리는 조건은 archive/jhm_v1/FROZEN.md 에 있다.
+TEX = 'paper_acs/main.tex'
 # 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
 # 2026-11-02. paper_acs/supporting.tex 를 넣는다. 내용이
 # paper/supplementary.tex 와 거의 같은 평행 사본이라, 한쪽만 고치면 조용히
 # 갈라진다. 둘 다 같은 산출물에 대조하면 어느 쪽에 구판 값이 남아도 걸린다.
-EXTRA_TEX = ('paper/cover_letter.tex', 'paper/highlights.tex',
-             'paper/supplementary.tex', 'paper_acs/main.tex',
-             'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
-             # 2026-11-03. tab:ablation 을 \input 으로 바꿨으므로 생성된
-             # 표 파일도 대조 대상에 넣는다. 넣지 않으면 그 표의 셀을
-             # 가리키는 앵커 11개가 '문맥 미발견' 으로 조용히 빠진다.
-             # 2026-11-03 (2차). family / blockbalance / sparse 세 표도
-             # 생성으로 돌렸다. 네 표 전부를 넣는다.
-             'paper_acs/tab_ablation.tex', 'paper/tab_ablation.tex',
-             'paper_acs/tab_family.tex', 'paper/tab_family.tex',
-             'paper_acs/tab_blockbalance.tex', 'paper/tab_blockbalance.tex',
-             'paper_acs/tab_sparse.tex', 'paper/tab_sparse.tex',
-             'paper_acs/tab_plocal.tex', 'paper/tab_plocal.tex',
-             # 2026-11-03. 휘발성 보조 분석의 두 표.
-             'paper_acs/tab_volatility.tex',
-             'paper/tab_volatility.tex',
-             'paper_acs/tab_vpairing.tex', 'paper/tab_vpairing.tex',
-             # 2026-11-03 (작업 C). 전제검정 라벨순열 귀무 표.
-             'paper_acs/tab_premisenull.tex',
-             'paper/tab_premisenull.tex')
+EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
+             # 생성된 표 파일도 대조 대상에 넣는다. 넣지 않으면 그 표의
+             # 셀을 가리키는 앵커들이 '문맥 미발견' 으로 조용히 빠진다.
+             'paper_acs/tab_ablation.tex', 'paper_acs/tab_family.tex',
+             'paper_acs/tab_blockbalance.tex', 'paper_acs/tab_sparse.tex',
+             'paper_acs/tab_plocal.tex', 'paper_acs/tab_volatility.tex',
+             'paper_acs/tab_vpairing.tex', 'paper_acs/tab_premisenull.tex')
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -108,8 +99,11 @@ REQUIRED_FOR_FIGURES = [
     'outputs/null_match_expectation.json',
 ]
 
-FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
-           'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png']
+# 2026-11-04 (J-C). ACS본의 도판 집합. 종전 목록은 JHM 평행본의 것이어서
+# Fig_spaces·Fig_toxicity 를 요구했는데, ACS본은 그 둘을 Fig_talk_response·
+# Fig_talk_tox 로 바꿨다. build_paper_acs.sh 가 복사하는 목록과 맞춘다.
+FIGURES = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
+           'Fig_talk_response.png', 'Fig_talk_tox.png', 'toc_acs.png']
 
 # 도판 신선도 검사의 mtime 허용오차(초). 2026-10-22. 종전 1초 기준은 갓 클론한
 # 저장소에서 거짓으로 걸린다. git clone 은 모든 파일의 mtime 을 체크아웃 시각으로
@@ -246,16 +240,15 @@ def _generated_table_sync():
             bad.append(f'  생성 표 없음 [{src}]: make_si_tables.py 를 돌릴 것')
             continue
         ref = open(src).read()
-        for d in ('paper_acs', 'paper'):
+        # 2026-11-04 (J-C). paper/ 는 archive/jhm_v1/ 로 동결했다.
+        for d in ('paper_acs',):
             dst = f'{d}/{name}'
             if not _o.path.exists(dst):
                 bad.append(f'  생성 표 사본 없음 [{dst}]: '
-                           'sh build_paper%s.sh 를 돌릴 것'
-                           % ('_acs' if d == 'paper_acs' else ''))
+                           'sh build_paper_acs.sh 를 돌릴 것')
             elif open(dst).read() != ref:
                 bad.append(f'  생성 표 사본이 구판 [{dst}]: {src} 와 다르다. '
-                           'sh build_paper%s.sh 로 동기화할 것'
-                           % ('_acs' if d == 'paper_acs' else ''))
+                           'sh build_paper_acs.sh 로 동기화할 것')
     return sorted(set(bad))
 
 
@@ -398,7 +391,7 @@ def preflight():
     import os
     missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
     figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
-    nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
+    nofig = [f for f in FIGURES if not os.path.exists(f'paper_acs/{f}')]
     # 그래픽 초록은 build_paper.sh 바깥에 있어서 분석을 다시 돌려도 갱신되지
     # 않았다. 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
     # 그대로 들고 있는 10-11 판이 발견됐다. 산출물보다 오래되면 멈춘다.
@@ -419,7 +412,15 @@ def preflight():
         import fig_annot as _fa
         # graphical_abstract 는 원고에 실리는 도판이 아니라 투고 시스템에
         # 따로 올리는 첨부다. FIGURES 에는 없지만 등재부는 쓴다 (2026-10-22).
-        live = {f[:-4] for f in FIGURES} | {'graphical_abstract'}
+        # 2026-11-04 (J-C). 종전에는 FIGURES(현 원고가 싣는 도판)와
+        # 비교했다. JHM 평행본을 동결하고 FIGURES 를 ACS 집합으로 줄이자
+        # Fig_spaces·Fig_toxicity 가 폐기로 걸렸는데, 그 둘은 생성기가
+        # 여전히 만들고 있다(make_fig_main.py, make_fig_toxicity.py).
+        # 이 검사의 목적은 '만드는 곳이 없어진 주석' 을 잡는 것이므로
+        # outputs/ 에 실제로 생성된 도판 전부와 비교한다.
+        live = ({f[:-4] for f in FIGURES} | {'graphical_abstract'}
+                | {os.path.basename(x)[:-4]
+                   for x in glob.glob('outputs/Fig_*.png')})
         stale = sorted(set(_fa.load()) - live)
     # 2026-11-02 신설. 원고가 '반복측정' 을 주장했는데 원자료에는 조합당
     # 한 행뿐이었다. 주장을 자료에 걸어 둔다. 어느 피벗에든 (dye, agent,
@@ -463,8 +464,7 @@ def preflight():
     }
     orphan = []
     _cited = set()
-    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
-                 'paper/main.tex', 'paper/supplementary.tex'):
+    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
         if not os.path.exists(_doc):
             continue
         _t = '\n'.join(l for l in open(_doc).read().split('\n')
@@ -599,11 +599,11 @@ def preflight():
         for p in figless:
             print(f'   도판 생성 필수 누락: {p}')
         for f in nofig:
-            print(f'   원고 도판 누락: paper/{f}')
+            print(f'   원고 도판 누락: paper_acs/{f}')
         for f in stale:
             print(f'   도판 주석 등재부에 폐기 항목: {f} '
                   f'(outputs/figure_annotations.json 을 지우고 도판 재생성)')
-        print('[verify] sh run_analysis.sh && sh build_paper.sh --figs 를 먼저 '
+        print('[verify] sh run_analysis.sh && sh build_paper_acs.sh --figs 를 먼저 '
               '실행하거나, 저장소에서 빠진 파일을 추가할 것.')
         return False
     return True
@@ -710,7 +710,13 @@ def load_facts():
                     ('n-hexane', 'hexane'), ('chloroform', 'chloroform'),
                     ('toluene', 'toluene'), ('acetone', 'acetone'),
                     ('benzene', 'benzene'), ('p-xylene', 'pxylene'),
-                    ('cyclosarin (GF)', 'gf'), ('VX', 'vx')]:
+                    ('cyclosarin (GF)', 'gf'), ('VX', 'vx'),
+                    # 2026-11-04 (J-C). SI 의 AEGL-3 순서 문장에 앵커가
+                    # 없었다. 주입시험 하나가 숫자를 바꿔 끼우다 그 문장에
+                    # 잘못 붙는 사고로 드러났다. 순서를 적는 다섯 값 전부를
+                    # 사실로 올린다.
+                    ('soman (GD)', 'gd'), ('sarin (GB)', 'gb'),
+                    ('tabun (GA)', 'ga')]:
         r = T[T.compound_name == nm]
         if len(r) and r.AEGL3_10min_mgm3.notna().all():
             f[f'aegl3_{key}'] = float(r.AEGL3_10min_mgm3.iloc[0])
@@ -1538,6 +1544,100 @@ UNQUOTED = {
     # 표본이 아니라 전수열거라는 사실 자체는 2.1 이 C(24,3) 으로 이미
     # 말하고 있다. 이 한 건만 면제로 남긴다.
     'pp_n_perm': '농약 구성의 전수열거 횟수를 본문에 싣지 않기로 함',
+
+    # ------------------------------------------------------------------
+    # 2026-11-04 (결정 J-C). JHM 평행본을 archive/jhm_v1/ 로 동결하고
+    # 1차 본문을 paper_acs/ 로 옮겼다. 그러자 아래 사실들이 '문맥
+    # 미발견' 으로 떠올랐다. 전부 JHM 본문·SI 에만 적혀 있던 수치이고,
+    # ACS본은 분량을 줄이면서 그 서술을 싣지 않는다. 주석을 벗기고
+    # 값별로 대조해 확인했다.
+    #
+    # 중요한 점: 이 항목들이 틀렸다는 뜻이 아니다. 투고되는 문서가
+    # 그 수치를 말하지 않으므로 대조할 문장이 없다는 뜻이다. ACS본이
+    # 실어야 할 서술이 이 안에 있는지는 편집 판단이고, 검증기가
+    # 답할 문제가 아니다. 동결본을 되살릴 때(ACS 데스크리젝 시)
+    # 이 블록을 통째로 되돌리면 그쪽 검사가 다시 살아난다.
+    # ------------------------------------------------------------------
+    'pc1_struct28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pc12_elec28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pc1_struct35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pc12_elec35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pc12_merged28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pc12_merged35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'lumo_min': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'lumo_max': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'n_lumo_below4': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'nullexp_k3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'nullexp_k8': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'na_dmmp_top': 'ACS본 미수록 (J-C). nb_dmmp 가 같은 양을 ACS 어법으로 검사한다',
+    'na_dmmp_g': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'na_dcm_g': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'na_dpgme_top': 'ACS본 미수록 (J-C). nb_dpgme 가 같은 양을 ACS 어법으로 검사한다',
+    'na_dpgme_g': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'fig3_from_panel': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'fig3_unlabelled': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'r_lumo_omega': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'omega_distrank': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'omega_pc3_var': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'nopatho_struct_p': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'nopatho_elec_p': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'nopatho_merged_p': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'null3_lower': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'null8_nested_mean': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'null8_nested_p': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'match35_lit': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'match28_inc': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dfp_gb': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dfp_gd': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dfp_gf': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dmmp_gb_35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dmmp_gd_35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'dmmp_gf_35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'cees_hd': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'mde_gap_min': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'null_exp35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'null_exp28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'boot_inc_zero': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'boot_diff_pos': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'ret_gb3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'ret_gd3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'ret_gf3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'ret_ga8': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_GD': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_CK': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_GF': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_AC': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_CG': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_HD': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_GA': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_L': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_PS': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    't3_VX': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_GD': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_GF': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_VX': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'merged_VX': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'elec_AC': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_CG': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'elec_CG': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_CG_rival': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'merged_CG_rival': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'elec_CG_rival': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pp_min_p': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_removed': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_removed_28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'struct_kept_28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    # 순도 민감도의 '38 to 37' 은 28종 패널의 병합 차원이고 이 사실의
+    # 35종 구조좌표 수와 값만 같다. 앵커로 쓰려다 검증기가 41 을 잡아
+    # 냈다. 우연한 동일값에 앵커를 걸지 않는다.
+    'struct_kept_35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'pp_bh_q': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j18_identified': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j18_unsuitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j21_identified': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j21_discounted': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j21_suitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+    'j21_possible': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
 }
 
 
@@ -1596,6 +1696,12 @@ CHECKS = [
                       r'association across the (\d[\d,]*)\s*\n?compounds',
                       r'for the (\d[\d,]*) candidates\s*\n?carrying both axes',
                       r'of the (\d[\d,]*), none combines'], 0),
+    # 2026-11-04 (J-C). SI 의 AEGL-3 순서 문장. 다섯 값 전부를 가린다.
+    ('aegl3_vx', [r'VX \((0\.\d+)~mg~m\$\^\{-3\}\$\),'], 0.00005),
+    ('aegl3_gd', [r'soman \((0\.\d+)\), sarin'], 0.0005),
+    ('aegl3_gb', [r'sarin \((0\.\d+)\), cyclosarin'], 0.0005),
+    ('aegl3_gf', [r'cyclosarin \((0\.\d+)\), tabun'], 0.0005),
+    ('aegl3_ga', [r'tabun \((0\.\d+)\), sulfur'], 0.0005),
     ('dcm_aegl3', [r'dichloromethane[,\s]+(\d[\d,\\]*)~mg~m',
                    r'at\s*\n?(\d[\d,\\]*)~mg~m\$\^\{-3\}\$ it sits at the',
                    r"dichloromethane's (\d[\d,\\]*)~mg~m"], 1.0),
@@ -2027,7 +2133,9 @@ CHECKS = [
     ('p28_struct', [r'-dimensional value of (\d+\.\d+) sits at the',
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
-    ('pct_struct_caption', [r'is the (\d+)th percentile of those draws'], 1.0),
+    # 2026-11-04 (J-C). ACS본 어법으로 교정.
+    ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
+                            r'observed value at the (\d+\.\d+)th percentile'], 0.06),
     ('pct_struct', [r'observed value at the ([\d.]+)(?:st|nd|rd|th) percentile of that',
      r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
@@ -2059,6 +2167,7 @@ CHECKS = [
                      r'returns \$p<0\.05\$ at\s*\n?\$\\delta = ([\d.]+)\$',
                      r'"mde_delta35": "([\d.]+)"'], 0.005),
     ('mde_gap_median', [r'carry has a median of\s*\n?([\d.]+)',
+                        r'other compound has a median of (0\.\d+)',
                         r'median of ([\d.]+), more than twice',
                         r'"gap_median35": "([\d.]+)"'], 0.0005),
     ('mde_gap_min', [r'only at sarin, where it is\s*\n?([\d.]+)',
@@ -2085,7 +2194,8 @@ CHECKS = [
     ('malathion_fold', [r'is predicted (\d[\d,]*) times too toxic'], 1),
     # 표 3 (tab:match) 전수 대조. 2026-10-17 신설. 이 표는 그때까지 검증기에
     # 등록되지 않아 11행 중 9행이 구판 값인 채로 144건 검사를 통과했다.
-    ('t3_GB', [r'GB & \S+ & (\d+\.\d+) &', r'Sarin \(([\d.]+)\), soman'], 0.0005),
+    ('t3_GB', [r'GB & \S+ & (\d+\.\d+) &', r'Sarin \(([\d.]+)\), soman',
+              r'where sarin sits at (\d+\.\d+)'], 0.0005),
     ('t3_GD', [r'GD & \S+ & (\d+\.\d+) &',
                r'Sarin \([\d.]+\), soman \(([\d.]+)\)'], 0.0005),
     ('t3_CK', [r'CK & \S+ & (\d+\.\d+) &'], 0.0005),
@@ -2179,6 +2289,7 @@ CHECKS = [
     ('struct_kept_35', [r'leaving (\d+) and \d+ structural coordinates'], 0),
     ('struct_kept_28', [r'leaving \d+ and (\d+) structural coordinates'], 0),
     ('struct_candidates', [r'removes \d+ of the (\d+)',
+                          r'physicochemical descriptors,\s*\n?(\d+) after excluding',
                            r'descriptors \((\d+) after excluding run metadata\)'], 0),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
                  r'produces an adjusted\s*\n?(?:value of )?(\d+\.\d+)',
@@ -2650,19 +2761,20 @@ def main():
     # 복사되는데 그 복사가 수작업이었다. 분석을 다시 돌린 뒤 복사를 잊으면
     # 원고에 옛 그림이 박히고, 수치 대조는 전부 통과한다. GATE 8 3차에서
     # 도판과 본문이 어긋난 경로가 이것이므로 시각을 직접 비교한다.
-    FIGS = ['Fig_main.png', 'Fig_spaces.png', 'Fig_toxicity.png',
-            'Fig_plocal.png', 'Fig_h1.png']
+    FIGS = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
+            'Fig_talk_response.png', 'Fig_talk_tox.png']
     for fig in FIGS:
-        src, dst = f'outputs/{fig}', f'paper/{fig}'
+        # 2026-11-04 (J-C). 사본 대상을 paper_acs/ 로 옮긴다.
+        src, dst = f'outputs/{fig}', f'paper_acs/{fig}'
         if not os.path.exists(src):
             unseen.append(f'{fig}: outputs/ 에 없음 (도판 스크립트 미실행)')
             continue
         if not os.path.exists(dst):
-            fails.append(f'  도판 누락 {fig}: paper/ 에 없다')
+            fails.append(f'  도판 누락 {fig}: paper_acs/ 에 없다')
             continue
         if os.path.getmtime(dst) < os.path.getmtime(src) - MTIME_TOL:
-            fails.append(f'  도판 구판 {fig}: paper/ 사본이 outputs/ 보다 '
-                         f'오래됐다 (sh build_paper.sh 로 복사할 것)')
+            fails.append(f'  도판 구판 {fig}: paper_acs/ 사본이 outputs/ 보다 '
+                         f'오래됐다 (sh build_paper_acs.sh 로 복사할 것)')
         checked += 1
     # 분석 산출물보다 도판이 오래되면 그림이 낡은 수치를 그리고 있다.
     newest = max(os.path.getmtime(x) for x in
@@ -2672,7 +2784,7 @@ def main():
         src = f'outputs/{fig}'
         if os.path.exists(src) and os.path.getmtime(src) < newest - MTIME_TOL:
             fails.append(f'  도판 구판 {fig}: 분석 산출물보다 오래됐다 '
-                         f'(sh build_paper.sh --figs 로 재생성할 것)')
+                         f'(sh build_paper_acs.sh --figs 로 재생성할 것)')
 
     for key, pats, tol in CHECKS:
         if key not in f:

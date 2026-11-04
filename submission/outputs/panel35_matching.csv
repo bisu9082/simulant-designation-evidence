@@ -1,0 +1,100 @@
+panel,space,agent,sim,d_sim,d_norm,intf,d_intf,intf_closer,valid
+28종 (지정 3종),A_rdkit,sarin (GB),DMMP,4.404745857971931,1.2565995262362588,ethyl acetate,6.981101022182165,False,True
+28종 (지정 3종),A_rdkit,soman (GD),DMMP,5.466595888370502,1.5595273881736011,n-hexane,8.090399340763065,False,True
+28종 (지정 3종),A_rdkit,tabun (GA),DMMP,7.471366040891936,2.131454419857316,ethyl acetate,9.33699603281237,False,False
+28종 (지정 3종),A_rdkit,sulfur mustard (HD),dichloromethane,6.612031246220428,1.8863007309314952,n-hexane,5.451747071501319,True,False
+28종 (지정 3종),A_rdkit,lewisite 1 (L),dichloromethane,8.207100141247944,2.3413469202997583,p-dichlorobenzene,7.074227279033871,True,False
+28종 (지정 3종),A_rdkit,hydrogen cyanide (AC),dichloromethane,6.048157298105289,1.7254370264396552,acetonitrile,3.152406588829215,True,False
+28종 (지정 3종),A_rdkit,cyanogen chloride (CK),dichloromethane,5.366623929928242,1.5310070785652514,acetonitrile,3.147095173341763,True,False
+28종 (지정 3종),A_rdkit,phosgene (CG),dichloromethane,6.002536600673325,1.71242221273007,ethyl acetate,3.8555051835803473,True,False
+28종 (지정 3종),A_rdkit,chloropicrin (PS),DMMP,9.331994951414616,2.66226039206403,chloroform,8.687033281521394,True,False
+28종 (지정 3종),A_rdkit,cyclosarin (GF),DMMP,5.789659831417176,1.65169206937575,n-hexane,7.392983311675184,False,True
+28종 (지정 3종),A_rdkit,VX,DPGME,11.843066995184019,3.3786267937339294,n-hexane,13.974169125579316,False,False
+28종 (지정 3종),B_electronic,sarin (GB),DMMP,0.9672906012629237,1.35532015526823,acetonitrile,1.1706645628007457,False,True
+28종 (지정 3종),B_electronic,soman (GD),DMMP,1.0094160419423008,1.41434425694747,acetonitrile,1.1219614229294246,False,True
+28종 (지정 3종),B_electronic,tabun (GA),dichloromethane,2.45575553818486,3.4408842316548367,acetone,0.7392124799281302,True,False
+28종 (지정 3종),B_electronic,sulfur mustard (HD),dichloromethane,1.8046501246802487,2.5285872559839335,acetone,1.0462213366772284,True,False
+28종 (지정 3종),B_electronic,lewisite 1 (L),dichloromethane,1.3862271098907846,1.9423134468185819,p-dichlorobenzene,0.869086511763262,True,False
+28종 (지정 3종),B_electronic,hydrogen cyanide (AC),dichloromethane,0.9528299604259458,1.3350586144666734,ethyl acetate,1.0832845471414683,False,True
+28종 (지정 3종),B_electronic,cyanogen chloride (CK),dichloromethane,1.644359502848491,2.3039958972077628,acetonitrile,1.4097920045057792,True,False
+28종 (지정 3종),B_electronic,phosgene (CG),dichloromethane,2.1813951953059374,3.056463973642805,chloroform,1.4267565371191586,True,False
+28종 (지정 3종),B_electronic,chloropicrin (PS),dichloromethane,3.591823979266963,5.032687619336269,chloroform,3.042774619560453,True,False
+28종 (지정 3종),B_electronic,cyclosarin (GF),DMMP,0.9091985424677733,1.273924411276406,acetonitrile,1.117121687207491,False,True
+28종 (지정 3종),B_electronic,VX,DPGME,3.1498060952626967,4.413353836502211,DMSO,2.1148240479182028,True,False
+28종 (지정 3종),C_merged,sarin (GB),DMMP,4.50970477754503,1.1256678084975549,ethyl acetate,7.237258156077514,False,True
+28종 (지정 3종),C_merged,soman (GD),DMMP,5.5590099255604635,1.3875849593259366,ethyl acetate,8.412374983872997,False,True
+28종 (지정 3종),C_merged,tabun (GA),DMMP,8.002660261916963,1.9975447359741472,ethyl acetate,9.515044718247193,False,True
+28종 (지정 3종),C_merged,sulfur mustard (HD),dichloromethane,6.853883517649224,1.710798471204954,n-hexane,6.5098593601087895,True,False
+28종 (지정 3종),C_merged,lewisite 1 (L),dichloromethane,8.323347783714686,2.0775915766613697,p-dichlorobenzene,7.127412080156149,True,False
+28종 (지정 3종),C_merged,hydrogen cyanide (AC),dichloromethane,6.122751965914476,1.5283006598930797,acetonitrile,3.3871555571608885,True,False
+28종 (지정 3종),C_merged,cyanogen chloride (CK),dichloromethane,5.612893245010685,1.4010347794609752,acetonitrile,3.4484375485195384,True,False
+28종 (지정 3종),C_merged,phosgene (CG),dichloromethane,6.38662122256571,1.5941650883903635,ethyl acetate,4.481347560785144,True,False
+28종 (지정 3종),C_merged,chloropicrin (PS),DMMP,10.480222475908418,2.6159692593990096,chloroform,9.204511101612166,True,False
+28종 (지정 3종),C_merged,cyclosarin (GF),DMMP,5.860614554221349,1.4628685173690057,n-hexane,8.014218862135168,False,True
+28종 (지정 3종),C_merged,VX,DPGME,12.254775162775164,3.0589155125628715,p-dichlorobenzene,14.356311256354896,False,False
+35종 (지정 3종),A_rdkit,sarin (GB),DMMP,4.058169347625735,1.236879381529674,dichlorvos,6.000452744515395,False,True
+35종 (지정 3종),A_rdkit,soman (GD),DMMP,4.985303215482187,1.5194582161809236,dichlorvos,5.622695634341743,False,True
+35종 (지정 3종),A_rdkit,tabun (GA),DMMP,8.728154832121902,2.6602326876689535,dichlorvos,8.777539722332211,False,False
+35종 (지정 3종),A_rdkit,sulfur mustard (HD),dichloromethane,5.57307628458495,1.6986041137312473,n-hexane,4.62809698732931,True,False
+35종 (지정 3종),A_rdkit,lewisite 1 (L),dichloromethane,8.269810236977966,2.520534974043281,p-dichlorobenzene,7.43193544647271,True,False
+35종 (지정 3종),A_rdkit,hydrogen cyanide (AC),dichloromethane,6.050603683336057,1.8441485065438104,acetonitrile,3.362121782772294,True,False
+35종 (지정 3종),A_rdkit,cyanogen chloride (CK),dichloromethane,5.382728875984486,1.6405885986411088,acetonitrile,3.381333541370323,True,False
+35종 (지정 3종),A_rdkit,phosgene (CG),dichloromethane,5.699656825295733,1.737184283136855,ethyl acetate,3.9203530651352434,True,False
+35종 (지정 3종),A_rdkit,chloropicrin (PS),DMMP,9.611387612507373,2.929431018632905,chloroform,8.620844110069447,True,False
+35종 (지정 3종),A_rdkit,cyclosarin (GF),DMMP,5.476185685979911,1.669073068224545,dichlorvos,5.702777186788888,False,True
+35종 (지정 3종),A_rdkit,VX,DMMP,9.883539740974975,3.012379591623811,malathion,7.871825961546187,True,False
+35종 (지정 3종),B_electronic,sarin (GB),DMMP,0.9390116248213969,1.3505828778570912,acetonitrile,1.219202621323509,False,True
+35종 (지정 3종),B_electronic,soman (GD),DMMP,0.9742669906536192,1.4012907628150053,acetonitrile,1.1779055226293556,False,True
+35종 (지정 3종),B_electronic,tabun (GA),dichloromethane,2.402460493398583,3.455465216130186,dichlorvos,0.45761486836129955,True,False
+35종 (지정 3종),B_electronic,sulfur mustard (HD),dichloromethane,1.7769252692541257,2.555756265895739,acetone,1.0268752953089837,True,False
+35종 (지정 3종),B_electronic,lewisite 1 (L),dichloromethane,1.4028733671034581,2.017756435946183,p-dichlorobenzene,0.8469031716420856,True,False
+35종 (지정 3종),B_electronic,hydrogen cyanide (AC),dichloromethane,0.9343702560769025,1.3439071850430353,chloroform,1.0518221460848356,False,True
+35종 (지정 3종),B_electronic,cyanogen chloride (CK),dichloromethane,1.6054306734117914,2.3090951398061303,acetonitrile,1.3903777083119262,True,False
+35종 (지정 3종),B_electronic,phosgene (CG),dichloromethane,2.225260781334983,3.200598406446307,chloroform,1.465082107368784,True,False
+35종 (지정 3종),B_electronic,chloropicrin (PS),dichloromethane,3.6860905403285447,5.301713672549718,chloroform,3.1174794570062767,True,False
+35종 (지정 3종),B_electronic,cyclosarin (GF),DMMP,0.8804027489314913,1.2662855782550617,acetonitrile,1.169720347800073,False,True
+35종 (지정 3종),B_electronic,VX,DPGME,3.219167815625054,4.630137495431718,malathion,1.505502956683522,True,False
+35종 (지정 3종),C_merged,sarin (GB),DMMP,4.165390892288358,1.1658518108510665,dichlorvos,6.410907225505158,False,True
+35종 (지정 3종),C_merged,soman (GD),DMMP,5.079610646434852,1.4217328994328775,dichlorvos,6.021268513993021,False,True
+35종 (지정 3종),C_merged,tabun (GA),DMMP,9.203499603835148,2.5759687282082524,dichlorvos,8.789460446743313,True,False
+35종 (지정 3종),C_merged,sulfur mustard (HD),dichloromethane,5.849499353476077,1.6372171520439673,n-hexane,5.881841053261769,False,True
+35종 (지정 3종),C_merged,lewisite 1 (L),dichloromethane,8.387956547321508,2.347706273651174,p-dichlorobenzene,7.4800340549141175,True,False
+35종 (지정 3종),C_merged,hydrogen cyanide (AC),dichloromethane,6.12232412636256,1.7135781140136126,acetonitrile,3.572830486275646,True,False
+35종 (지정 3종),C_merged,cyanogen chloride (CK),dichloromethane,5.617043510556834,1.5721550552520323,acetonitrile,3.656031549339624,True,False
+35종 (지정 3종),C_merged,phosgene (CG),dichloromethane,6.11864964441402,1.7125496627723196,ethyl acetate,4.541886236333937,True,False
+35종 (지정 3종),C_merged,chloropicrin (PS),DMMP,10.800278358064284,3.022891346105424,chloroform,9.167204117667241,True,False
+35종 (지정 3종),C_merged,cyclosarin (GF),DMMP,5.5465050858768175,1.5524120461865374,dichlorvos,6.076557761522718,False,True
+35종 (지정 3종),C_merged,VX,DMMP,10.531490741957183,2.947660344483713,malathion,8.014498307533378,True,False
+35종 (지정+문헌 8종),A_rdkit,sarin (GB),DFP,3.742728652237169,1.1407369934724167,dichlorvos,6.000452744515395,False,True
+35종 (지정+문헌 8종),A_rdkit,soman (GD),DFP,3.439225672518482,1.048233072199025,dichlorvos,5.622695634341743,False,True
+35종 (지정+문헌 8종),A_rdkit,tabun (GA),DCNP,6.151729980815069,1.8749705402165564,dichlorvos,8.777539722332211,False,True
+35종 (지정+문헌 8종),A_rdkit,sulfur mustard (HD),CEES,1.8503335765368392,0.5639585866739303,n-hexane,4.62809698732931,False,True
+35종 (지정+문헌 8종),A_rdkit,lewisite 1 (L),CEES,7.981973332414276,2.4328058770043803,p-dichlorobenzene,7.43193544647271,True,False
+35종 (지정+문헌 8종),A_rdkit,hydrogen cyanide (AC),dichloromethane,6.050603683336057,1.8441485065438104,acetonitrile,3.362121782772294,True,False
+35종 (지정+문헌 8종),A_rdkit,cyanogen chloride (CK),dichloromethane,5.382728875984486,1.6405885986411088,acetonitrile,3.381333541370323,True,False
+35종 (지정+문헌 8종),A_rdkit,phosgene (CG),dichloromethane,5.699656825295733,1.737184283136855,ethyl acetate,3.9203530651352434,True,False
+35종 (지정+문헌 8종),A_rdkit,chloropicrin (PS),DCP,9.543042562780911,2.9086003002485827,chloroform,8.620844110069447,True,False
+35종 (지정+문헌 8종),A_rdkit,cyclosarin (GF),DFP,4.054987734403726,1.2359096655180424,dichlorvos,5.702777186788888,False,True
+35종 (지정+문헌 8종),A_rdkit,VX,DCP,8.858316450839768,2.699904324968379,malathion,7.871825961546187,True,False
+35종 (지정+문헌 8종),B_electronic,sarin (GB),DFP,0.27997193527039427,0.4026843673299881,acetonitrile,1.219202621323509,False,True
+35종 (지정+문헌 8종),B_electronic,soman (GD),DFP,0.3834985603816309,0.5515869832099146,acetonitrile,1.1779055226293556,False,True
+35종 (지정+문헌 8종),B_electronic,tabun (GA),DCNP,1.3355270032032034,1.9208919844683674,dichlorvos,0.45761486836129955,True,False
+35종 (지정+문헌 8종),B_electronic,sulfur mustard (HD),CEES,0.7808482236920092,1.1230960440177085,acetone,1.0268752953089837,False,True
+35종 (지정+문헌 8종),B_electronic,lewisite 1 (L),methyl salicylate,1.0113940723497739,1.4546907415992565,p-dichlorobenzene,0.8469031716420856,True,False
+35종 (지정+문헌 8종),B_electronic,hydrogen cyanide (AC),dichloromethane,0.9343702560769025,1.3439071850430353,chloroform,1.0518221460848356,False,True
+35종 (지정+문헌 8종),B_electronic,cyanogen chloride (CK),DCNP,1.1869389858139365,1.7071774501261054,acetonitrile,1.3903777083119262,False,True
+35종 (지정+문헌 8종),B_electronic,phosgene (CG),dichloromethane,2.225260781334983,3.200598406446307,chloroform,1.465082107368784,True,False
+35종 (지정+문헌 8종),B_electronic,chloropicrin (PS),methyl salicylate,2.982724048734955,4.290059806618718,chloroform,3.1174794570062767,False,False
+35종 (지정+문헌 8종),B_electronic,cyclosarin (GF),DFP,0.6326387568129119,0.9099259798650849,acetonitrile,1.169720347800073,False,True
+35종 (지정+문헌 8종),B_electronic,VX,CEES,1.4316964415748323,2.059212739403174,malathion,1.505502956683522,False,False
+35종 (지정+문헌 8종),C_merged,sarin (GB),DFP,3.7531855867803965,1.0504796130680003,dichlorvos,6.410907225505158,False,True
+35종 (지정+문헌 8종),C_merged,soman (GD),DFP,3.460541051963549,0.9685712952955827,dichlorvos,6.021268513993021,False,True
+35종 (지정+문헌 8종),C_merged,tabun (GA),DCNP,6.295030908037219,1.7619170381070113,dichlorvos,8.789460446743313,False,True
+35종 (지정+문헌 8종),C_merged,sulfur mustard (HD),CEES,2.0083471544786717,0.5621165521827465,n-hexane,5.881841053261769,False,True
+35종 (지정+문헌 8종),C_merged,lewisite 1 (L),CEES,8.26760182637946,2.314020174799194,p-dichlorobenzene,7.4800340549141175,True,False
+35종 (지정+문헌 8종),C_merged,hydrogen cyanide (AC),dichloromethane,6.12232412636256,1.7135781140136126,acetonitrile,3.572830486275646,True,False
+35종 (지정+문헌 8종),C_merged,cyanogen chloride (CK),dichloromethane,5.617043510556834,1.5721550552520323,acetonitrile,3.656031549339624,True,False
+35종 (지정+문헌 8종),C_merged,phosgene (CG),dichloromethane,6.11864964441402,1.7125496627723196,ethyl acetate,4.541886236333937,True,False
+35종 (지정+문헌 8종),C_merged,chloropicrin (PS),DCP,10.455162384067847,2.926296790242185,chloroform,9.167204117667241,True,False
+35종 (지정+문헌 8종),C_merged,cyclosarin (GF),DFP,4.104041583949467,1.148680744780467,dichlorvos,6.076557761522718,False,True
+35종 (지정+문헌 8종),C_merged,VX,DCP,9.70304071307496,2.715785355713729,malathion,8.014498307533378,True,False

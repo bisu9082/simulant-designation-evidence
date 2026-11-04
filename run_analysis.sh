@@ -44,7 +44,7 @@
 # xtb 바이너리가 필요하다. 산출물 aegl_electronic.csv 와 xtb_fast_vs_slow.csv
 # 는 저장소에 포함해 두었으므로 하위 단계가 그대로 돌아간다.
 #
-# 사용: sh run_analysis.sh && sh build_paper.sh --figs && python3 verify_consistency.py
+# 사용: sh run_analysis.sh && sh build_paper_acs.sh --figs && python3 verify_consistency.py
 set -e
 cd "$(dirname "$0")"
 
@@ -167,4 +167,4 @@ for lab, sp in r['panels'].items():
 json.dump(rows, open('outputs/multiplicity_c.json', 'w'), indent=1)
 PY
 
-echo '[run] 완료. 다음: sh build_paper.sh --figs && python3 verify_consistency.py'
+echo '[run] 완료. 다음: sh build_paper_acs.sh --figs && python3 verify_consistency.py'

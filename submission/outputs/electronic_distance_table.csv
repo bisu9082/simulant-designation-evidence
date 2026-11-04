@@ -1,0 +1,12 @@
+real_agent,nearest_simulant,d_simulant,nearest_interferent,d_interferent,interferent_closer
+cyclosarin (GF),DMMP,0.902802860004885,acetonitrile,0.8617887824429399,True
+hydrogen cyanide (AC),dichloromethane,0.9173780936875484,chloroform,1.0822343584659317,False
+lewisite 1 (L),dichloromethane,0.9447160914549921,p-dichlorobenzene,0.861300077481823,True
+sarin (GB),DMMP,0.9604262876297742,acetonitrile,0.935741586108072,True
+soman (GD),DMMP,1.004585076975537,acetonitrile,0.8605933840851597,True
+phosgene (CG),dichloromethane,1.4654248488807997,chloroform,0.7637648683493066,True
+cyanogen chloride (CK),dichloromethane,1.6223748755242444,acetonitrile,1.380831607086379,True
+chloropicrin (PS),dichloromethane,1.7246802965963248,chloroform,1.323388413944776,True
+sulfur mustard (HD),dichloromethane,1.7582145912444396,acetone,0.9873913948663005,True
+tabun (GA),DMMP,2.2356461932394684,DMSO,0.652195622360424,True
+VX,DPGME,2.6390154602131677,DMSO,2.017842740259555,True

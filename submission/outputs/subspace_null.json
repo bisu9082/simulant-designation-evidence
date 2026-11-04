@@ -1,0 +1,13 @@
+{
+ "n_subspaces": 500,
+ "n_designations": 680,
+ "seed": 49374,
+ "n_coords": 37,
+ "actual_designation_frac": 0.36,
+ "null_mean_frac": 0.04682941176470589,
+ "null_median_frac": 0.02,
+ "null_p95_frac": 0.178,
+ "null_max_frac": 0.528,
+ "rank_of_actual": 5,
+ "p_of_actual": 0.007352941176470588
+}

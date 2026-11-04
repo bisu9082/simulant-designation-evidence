@@ -13,10 +13,11 @@ zip -q -X "$Z" *.py *.sh
 zip -q -X "$Z" descriptor_cache.csv descriptor_cache_35.csv \
     descriptor_cache_xtb.csv descriptor_cache_xtb_35.csv \
     inchikeys.csv panel_all.csv panel_new.csv
-zip -q -X "$Z" paper/main.tex paper/supplementary.tex paper/cover_letter.tex \
-    paper/highlights.tex paper/abstract_300.tex paper/refs.bib
-zip -q -X "$Z" paper/Fig_*.png paper/main.pdf paper/supplementary.pdf \
-    paper/cover_letter.pdf paper/highlights.pdf
+# 2026-11-04 (J-C). ACS본이 정본. JHM 평행본은 archive/jhm_v1/ 동결.
+zip -q -X "$Z" paper_acs/main.tex paper_acs/supporting.tex \
+    paper_acs/cover_letter.tex paper_acs/refs.bib paper_acs/tab_*.tex
+zip -q -X "$Z" paper_acs/Fig_*.png paper_acs/toc_acs.png \
+    paper_acs/main.pdf paper_acs/supporting.pdf paper_acs/cover_letter.pdf
 # outputs/ 중 저장소에 들어갈 것만. _crop_* 는 도판 검수용 조각이고
 # _superseded/ 는 폐기본이다. 2026-10-24 에 둘 다 패키지로 새어 나갔다.
 zip -q -X -r "$Z" outputs -i 'outputs/*.json' 'outputs/*.csv' 'outputs/*.png' \

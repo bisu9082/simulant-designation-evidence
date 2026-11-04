@@ -1,0 +1,69 @@
+{
+  "n_compounds": 28,
+  "n_phosphorus": 6,
+  "descriptors_global": [
+    "E_HOMO_eV",
+    "E_LUMO_eV",
+    "dipole_moment_D"
+  ],
+  "seed": 42,
+  "bootstrap_samples": 10000,
+  "pca": {
+    "explained_variance_ratio": [
+      0.3703576753845005,
+      0.3338844114562587,
+      0.2957579131592409
+    ],
+    "pc1_pc2_cumulative": 0.7042420868407592,
+    "loadings": {
+      "PC1": {
+        "E_HOMO_eV": 0.7096856820167203,
+        "E_LUMO_eV": 0.615794776750833,
+        "dipole_moment_D": -0.34226163335503207
+      },
+      "PC2": {
+        "E_HOMO_eV": -0.008824371621103656,
+        "E_LUMO_eV": 0.4935408666728976,
+        "dipole_moment_D": 0.8696778388514093
+      }
+    }
+  },
+  "distance_test": {
+    "test_used": "t-test (paired)",
+    "statistic": 2.7054880153376977,
+    "p_value": 0.02210414777961365,
+    "cohens_dz": 0.8157353292434945,
+    "ci_95": [
+      0.15063660762308084,
+      0.700846997392559
+    ],
+    "shapiro_W": 0.8802377404931493,
+    "shapiro_p": 0.10477177321179071,
+    "mean_diff_sim_minus_intf": 0.4043810763636831,
+    "n_interferent_closer": 10,
+    "n_real_agents": 11
+  },
+  "p_local": {
+    "f_plus_P": {
+      "sarin (GB)": 0.66793,
+      "soman (GD)": 0.63692,
+      "cyclosarin (GF)": 0.63203,
+      "DMMP": 0.55852,
+      "tabun (GA)": 0.42143,
+      "VX": 0.20431
+    },
+    "q_P": {
+      "sarin (GB)": 0.54044,
+      "soman (GD)": 0.5446,
+      "cyclosarin (GF)": 0.53868,
+      "DMMP": 0.4663,
+      "tabun (GA)": 0.34433,
+      "VX": 0.33196
+    },
+    "DMMP_over_GB": 0.8361954096986212,
+    "VX_over_GB": 0.3058853472669291,
+    "G_series_mean": 0.6456266666666667,
+    "G_series_sd": 0.019469387081604127,
+    "DMMP_z_vs_G_series": -4.4740323001215785
+  }
+}

@@ -1,0 +1,387 @@
+{
+ "panel": "descriptor_cache_xtb.csv",
+ "cols": [
+  "dipole_moment_D",
+  "E_LUMO_eV",
+  "E_HOMO_eV"
+ ],
+ "threshold": 2.0,
+ "gfn2": {
+  "label": "GFN2",
+  "nn_median": 0.652195622360424,
+  "n_match": 1,
+  "observed_diff": 0.4043810763636831,
+  "p_one_sided": 0.275,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.473,
+    "match": false
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.54,
+    "match": false
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 3.428,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.696,
+    "match": false
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.449,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.407,
+    "match": true
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.488,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.247,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.644,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.384,
+    "match": false
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 4.046,
+    "match": false
+   }
+  ]
+ },
+ "b3lyp": {
+  "label": "B3LYP-2of3",
+  "nn_median": 0.6293876989258278,
+  "n_match": 4,
+  "observed_diff": 0.2307999266205523,
+  "p_one_sided": 0.12794117647058822,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.404,
+    "match": true
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.602,
+    "match": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 2.644,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "DPGME",
+    "d_norm": 1.064,
+    "match": true
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.677,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.605,
+    "match": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.447,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.012,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "dichloromethane",
+    "d_norm": 4.937,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.372,
+    "match": true
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 1.964,
+    "match": false
+   }
+  ]
+ },
+ "b3lyp_full": {
+  "label": "B3LYP-3of3",
+  "nn_median": 0.6703533379946285,
+  "n_match": 5,
+  "observed_diff": 0.10598824273175027,
+  "p_one_sided": 0.03676470588235294,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 0.723,
+    "match": true
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 0.812,
+    "match": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 1.508,
+    "match": true
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "DPGME",
+    "d_norm": 0.988,
+    "match": true
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 3.3,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.648,
+    "match": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.98,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.791,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "dichloromethane",
+    "d_norm": 4.645,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DPGME",
+    "d_norm": 1.247,
+    "match": true
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 1.857,
+    "match": false
+   }
+  ]
+ },
+ "merged_gfn2": {
+  "label": "merged-GFN2",
+  "n_coords": 38,
+  "nn_median": 3.8289044949365705,
+  "n_match": 3,
+  "observed_diff": 0.02343700603521553,
+  "p_one_sided": 0.025,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.187,
+    "match": true
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.446,
+    "match": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 2.004,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.695,
+    "match": false
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.137,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.586,
+    "match": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.451,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.606,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "DMMP",
+    "d_norm": 2.429,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.594,
+    "match": true
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 3.057,
+    "match": false
+   }
+  ]
+ },
+ "merged_b3lyp": {
+  "label": "merged-B3LYP",
+  "n_coords": 38,
+  "nn_median": 3.6463145595221507,
+  "n_match": 3,
+  "observed_diff": 0.03361285792245259,
+  "p_one_sided": 0.025,
+  "agents": [
+   {
+    "agent": "sarin (GB)",
+    "nearest": "DMMP",
+    "d_norm": 1.226,
+    "match": true
+   },
+   {
+    "agent": "soman (GD)",
+    "nearest": "DMMP",
+    "d_norm": 1.501,
+    "match": true
+   },
+   {
+    "agent": "tabun (GA)",
+    "nearest": "DMMP",
+    "d_norm": 2.032,
+    "match": false
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "nearest": "DPGME",
+    "d_norm": 1.809,
+    "match": false
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "nearest": "dichloromethane",
+    "d_norm": 2.31,
+    "match": false
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.716,
+    "match": false
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.556,
+    "match": false
+   },
+   {
+    "agent": "phosgene (CG)",
+    "nearest": "dichloromethane",
+    "d_norm": 1.716,
+    "match": false
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "nearest": "DMMP",
+    "d_norm": 2.709,
+    "match": false
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "nearest": "DMMP",
+    "d_norm": 1.685,
+    "match": true
+   },
+   {
+    "agent": "VX",
+    "nearest": "DPGME",
+    "d_norm": 3.146,
+    "match": false
+   }
+  ]
+ },
+ "caveat": "B3LYP 기하는 RDKit ETKDG+MMFF94 이고 GFN2 기하가 아니다. 차이에 방법과 기하가 함께 들어 있다. b3lyp 배치는 쌍극자를 GFN2 로 남긴 2좌표 교체이고, b3lyp_full 은 세 좌표 전부 B3LYP 이다."
+}

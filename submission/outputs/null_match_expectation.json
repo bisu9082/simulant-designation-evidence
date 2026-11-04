@@ -1,0 +1,50 @@
+{
+ "panel": "descriptor_cache_xtb_35.csv",
+ "dim": 41,
+ "nn_median": 3.5594247868424618,
+ "threshold": 2.0,
+ "n_agents": 11,
+ "n_non_agents": 24,
+ "sets": {
+  "incumbent3": {
+   "k": 3,
+   "observed": 0,
+   "null_mean": 1.0,
+   "null_sd": 1.234,
+   "deviation": -1.0,
+   "p_at_least_observed": 1.0,
+   "p_at_most_observed": 0.4788,
+   "p_two_sided": 0.9575,
+   "p_reportable": 0.4788,
+   "p_reportable_tail": "lower",
+   "enumerated": true,
+   "n_designations": 2024,
+   "ceiling_11k_over_n": 1.375
+  },
+  "incumbent_plus_lit8": {
+   "k": 8,
+   "observed": 5,
+   "null_mean": 2.68,
+   "null_sd": 1.76,
+   "deviation": 2.32,
+   "p_at_least_observed": 0.1612,
+   "p_at_most_observed": 0.93,
+   "p_two_sided": 0.3224,
+   "p_reportable": 0.1612,
+   "p_reportable_tail": "upper",
+   "enumerated": false,
+   "n_designations": 20000,
+   "ceiling_11k_over_n": 3.667
+  }
+ },
+ "nested_null_8": {
+  "description": "incumbent 3 held fixed, 5 drawn at random",
+  "n_draws": 20000,
+  "observed": 5,
+  "null_mean": 1.918,
+  "p_at_least_observed": 0.0682
+ },
+ "raw_gap": 5,
+ "null_gap": 1.68,
+ "deviation_gap": 3.32
+}

@@ -1,0 +1,37 @@
+{
+ "n_tests": 72,
+ "n_configs": 4,
+ "generated_by": "multiplicity_panels.py",
+ "sources": {
+  "panel28_designated3": "outputs/permutation_statistics.json",
+  "panel35_designated3": "outputs/permutation_statistics.json",
+  "panel35_designated_plus_literature8": "outputs/permutation_statistics.json",
+  "pesticide10": "outputs/pesticide_panel.json"
+ },
+ "min_q_by_config": {
+  "panel28_designated3": {
+   "q": 0.23554089828150937,
+   "space": "structural",
+   "statistic": "mean_diff",
+   "p": 0.027941176470588237
+  },
+  "panel35_designated3": {
+   "q": 0.3539069626026148,
+   "space": "merged",
+   "statistic": "mean_dsim",
+   "p": 0.191699604743083
+  },
+  "panel35_designated_plus_literature8": {
+   "q": 0.23554089828150937,
+   "space": "structural",
+   "statistic": "mean_logratio",
+   "p": 0.049659333950624836
+  },
+  "pesticide10": {
+   "q": 0.003010315838421909,
+   "space": "structural",
+   "statistic": "median_diff",
+   "p": 6.169515861264415e-05
+  }
+ }
+}

@@ -1,0 +1,92 @@
+{
+  "source": "EPA Compiled AEGL values, 27 July 2018",
+  "source_url": "https://www.epa.gov/sites/default/files/2018-08/documents/compiled_aegls_update_27jul2018.pdf",
+  "metric": "AEGL-3, 10-minute, mg/m3 (lower = more acutely toxic)",
+  "ppm_to_mgm3": "value_ppm * MW / 24.45 (25 C, 1 atm)",
+  "n_listed": 19,
+  "n_with_aegl3": 19,
+  "n_from_footnote": 5,
+  "n_from_table": 14,
+  "footnote_compounds": [
+    "acetone",
+    "methanol",
+    "n-hexane",
+    "benzene",
+    "p-xylene"
+  ],
+  "unmatched": [
+    "DMMP",
+    "THF",
+    "ethyl acetate",
+    "water",
+    "DPGME",
+    "ethanol",
+    "DMSO",
+    "p-dichlorobenzene",
+    "cyanogen chloride (CK)"
+  ],
+  "cas_name_crosscheck": [
+    {
+      "compound": "p-xylene",
+      "cas": "106-42-3",
+      "source_name": "Xylenes",
+      "note": "CAS 미적중인데 이름만 적중"
+    },
+    {
+      "compound": "cyclosarin (GF)",
+      "cas": "329-99-7",
+      "source_name": "GF Agent",
+      "note": "CAS만 적중 — 이름 패턴 실패"
+    }
+  ],
+  "conversion_check": [
+    {
+      "compound": "sarin (GB)",
+      "level": "AEGL2",
+      "computed": 0.08595,
+      "epa_bracket": 0.087
+    },
+    {
+      "compound": "sarin (GB)",
+      "level": "AEGL3",
+      "computed": 0.36671,
+      "epa_bracket": 0.38
+    },
+    {
+      "compound": "soman (GD)",
+      "level": "AEGL2",
+      "computed": 0.04247,
+      "epa_bracket": 0.044
+    },
+    {
+      "compound": "soman (GD)",
+      "level": "AEGL3",
+      "computed": 0.3651,
+      "epa_bracket": 0.38
+    },
+    {
+      "compound": "tabun (GA)",
+      "level": "AEGL2",
+      "computed": 0.0862,
+      "epa_bracket": 0.087
+    },
+    {
+      "compound": "tabun (GA)",
+      "level": "AEGL3",
+      "computed": 0.72941,
+      "epa_bracket": 0.76
+    },
+    {
+      "compound": "cyclosarin (GF)",
+      "level": "AEGL2",
+      "computed": 0.04568,
+      "epa_bracket": 0.044
+    },
+    {
+      "compound": "cyclosarin (GF)",
+      "level": "AEGL3",
+      "computed": 0.39053,
+      "epa_bracket": 0.38
+    }
+  ]
+}

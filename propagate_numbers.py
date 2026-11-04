@@ -18,8 +18,8 @@ import sys
 
 import verify_consistency as V
 
-FILES = ['paper/main.tex', 'paper/supplementary.tex',
-         'paper/cover_letter.tex', 'paper/highlights.tex']
+FILES = ['paper_acs/main.tex', 'paper_acs/supporting.tex',
+         'paper_acs/cover_letter.tex']
 
 WORD = {0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
         6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten',

@@ -1,0 +1,29 @@
+{
+ "screen_rules": {
+  "multicomponent": 3,
+  "open_shell": 3,
+  "single_atom": 3,
+  "tiny_gap": 1
+ },
+ "n_records_screened": 10,
+ "screened": {
+  "n_candidates": 207,
+  "spearman_r": 0.0617,
+  "spearman_ci": [
+   -0.077,
+   0.199
+  ],
+  "verdict": "H1 유지 — 충실도와 안전성이 통계적으로 분리돼 있다. RQ-3 성립 가능"
+ },
+ "kept": {
+  "n_candidates": 215,
+  "spearman_r": 0.0302,
+  "spearman_ci": [
+   -0.101,
+   0.161
+  ],
+  "verdict": "H1 유지 — 충실도와 안전성이 통계적으로 분리돼 있다. RQ-3 성립 가능"
+ },
+ "delta_spearman": -0.0315,
+ "verdict_unchanged": true
+}

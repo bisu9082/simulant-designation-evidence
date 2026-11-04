@@ -1,0 +1,110 @@
+{
+ "purity_source": {
+  "second_run": {
+   "quote": "The purity of each agent was confirmed by GC-MS analysis; AC, CK, CG, PS, HD, and HN exhibited purities > 95%, while L was used with a purity of 67% (determined by quantitative analysis).",
+   "source": "multiplexref, Methods"
+  },
+  "first_run": "[수집 불가: 원논문에 순도 서술이 없다 (Methods 전문에서 'purit' 0건).]",
+  "third_run": "[수집 불가: 원논문에 순도 서술이 없다 (Methods 전문에서 'purit' 0건). 반복측정은 triplicate 로 명시되어 있다.]"
+ },
+ "match": {
+  "panel28_incumbent3": {
+   "with_lewisite": {
+    "n_dims": 38,
+    "n_agents": 11,
+    "nn_median": 3.8289,
+    "n_match": 3,
+    "matched": [
+     "cyclosarin (GF)",
+     "sarin (GB)",
+     "soman (GD)"
+    ]
+   },
+   "without_lewisite": {
+    "n_dims": 37,
+    "n_agents": 10,
+    "nn_median": 3.3309,
+    "n_match": 3,
+    "matched": [
+     "cyclosarin (GF)",
+     "sarin (GB)",
+     "soman (GD)"
+    ]
+   }
+  },
+  "panel35_incumbent3": {
+   "with_lewisite": {
+    "n_dims": 41,
+    "n_agents": 11,
+    "nn_median": 3.5594,
+    "n_match": 0,
+    "matched": []
+   },
+   "without_lewisite": {
+    "n_dims": 39,
+    "n_agents": 10,
+    "nn_median": 3.5239,
+    "n_match": 0,
+    "matched": []
+   }
+  },
+  "panel35_incumbent_plus_lit8": {
+   "with_lewisite": {
+    "n_dims": 41,
+    "n_agents": 11,
+    "nn_median": 3.5594,
+    "n_match": 5,
+    "matched": [
+     "cyclosarin (GF)",
+     "sarin (GB)",
+     "soman (GD)",
+     "sulfur mustard (HD)",
+     "tabun (GA)"
+    ]
+   },
+   "without_lewisite": {
+    "n_dims": 39,
+    "n_agents": 10,
+    "nn_median": 3.5239,
+    "n_match": 5,
+    "matched": [
+     "cyclosarin (GF)",
+     "sarin (GB)",
+     "soman (GD)",
+     "sulfur mustard (HD)",
+     "tabun (GA)"
+    ]
+   }
+  }
+ },
+ "premise": {
+  "d2.uv": {
+   "with_lewisite": {
+    "n_compounds": 7,
+    "mean_diff": 0.5578432833111249,
+    "p_exact": 0.0078125,
+    "p_min_attainable": 0.0078125
+   },
+   "without_lewisite": {
+    "n_compounds": 6,
+    "mean_diff": 0.5294352969871677,
+    "p_exact": 0.015625,
+    "p_min_attainable": 0.015625
+   }
+  },
+  "d2.normal": {
+   "with_lewisite": {
+    "n_compounds": 7,
+    "mean_diff": 0.6186906441536342,
+    "p_exact": 0.0078125,
+    "p_min_attainable": 0.0078125
+   },
+   "without_lewisite": {
+    "n_compounds": 6,
+    "mean_diff": 0.6250302648689695,
+    "p_exact": 0.015625,
+    "p_min_attainable": 0.015625
+   }
+  }
+ }
+}

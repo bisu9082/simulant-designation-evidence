@@ -16,7 +16,10 @@ import subprocess
 import sys
 import tempfile
 
-TEX = 'paper/main.tex'
+# 2026-11-04 (결정 J-C). JHM 평행본을 archive/jhm_v1/ 로 동결했으므로
+# 주입 대상을 ACS본으로 옮긴다. 종전 JHM 전용 사례는 ACS본에 같은 문장이
+# 있으면 그대로 살고, 없으면 SKIP 으로 보고된다. 조용히 꺼지지는 않는다.
+TEX = 'paper_acs/main.tex'
 
 _NUM = r'\d+(?:\.\d+)?'
 
@@ -316,7 +319,7 @@ GEN_TABLES = ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
 
 
 def gen_paths(name):
-    return (f'outputs/{name}', f'paper_acs/{name}', f'paper/{name}')
+    return (f'outputs/{name}', f'paper_acs/{name}')
 
 
 def find_gen(a, b):
@@ -332,7 +335,7 @@ def find_gen(a, b):
     return None
 
 
-SIDECAR = 'paper/cover_letter.tex'
+SIDECAR = 'paper_acs/cover_letter.tex'
 ACS = 'paper_acs/main.tex'
 
 # 2026-11-02. ACS 판본 전용 주입 사례. 둘 다 실제로 발생한 결함이다.
@@ -502,6 +505,19 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (J-C) 신설분. AEGL-3 순서 다섯 값 ---
+    ('AEGL-3 VX 오기 (정본 0.0295)',
+     'VX (0.0295~mg~m$^{-3}$),',
+     'VX (0.0195~mg~m$^{-3}$),'),
+    ('AEGL-3 소만 오기 (정본 0.365)',
+     'soman (0.365),', 'soman (0.465),'),
+    ('AEGL-3 사린 오기 (정본 0.367) — 소만과의 순서가 뒤집힌다',
+     'sarin (0.367), cyclosarin', 'sarin (0.317), cyclosarin'),
+    ('AEGL-3 사이클로사린 오기 (정본 0.391)',
+     'cyclosarin (0.391), tabun', 'cyclosarin (0.491), tabun'),
+    ('AEGL-3 타분 오기 (정본 0.729)',
+     'tabun (0.729), sulfur', 'tabun (0.529), sulfur'),
+
     # --- 2026-11-03 (작업 C) 신설분 ---
     ('영합 잔차 상한 오기 (정본 0.7430) — 전제 붕괴가 작아 보인다',
      'between 0.1292 and 0.7430 after the',
@@ -646,7 +662,7 @@ ANNOT_CASES = [
 # 아래 8건은 2026-10-14 분량 재배치로 supplementary.tex 로 옮겨간 문장이다.
 # main.tex 에만 주입하던 종전 설계로는 전부 SKIP 되어, 검증기가 SI 를 덮는지
 # 확인할 수 없었다. 주입 대상을 SI 로 돌린다.
-SUPP = 'paper/supplementary.tex'
+SUPP = 'paper_acs/supporting.tex'
 SUPP_CASES = [
     ('천단위 환산값 반올림 분기 (41,685 대 41,683)',
      r'dichloromethane (41\,685)', r'dichloromethane (41\,683)'),
@@ -823,6 +839,97 @@ SUPP_CASES += SUPP_CASES_DFT
 SUPP_CASES += SUPP_CASES_EXTRA
 SUPP_CASES += SUPP_CASES_DIPOLE
 
+# ---------------------------------------------------------------------------
+# 2026-11-04 (결정 J-C). JHM 평행본 전용 주입 사례.
+#
+# archive/jhm_v1/ 로 동결한 본문·SI·커버레터에만 있던 문장을 겨냥한 시험이다.
+# 주입 대상을 ACS본으로 옮기자 아래 55건이 '원문을 찾지 못함' 으로 떴다.
+# 그대로 두면 SKIP 55건이 보고에 깔려서, 다음에 생기는 '진짜' SKIP 한 건이
+# 그 속에 묻힌다. 이 프로젝트가 반복해서 걸린 경로가 바로 그것이다.
+#
+# 그래서 이름으로 명시해 제외한다. 실행할 때마다 제외 건수를 찍으므로
+# 숨지 않는다. ACS본이 나중에 같은 서술을 갖게 되면 이 명단에서 지워야
+# 되살아난다는 점이 이 방식의 대가다. 동결본을 되살릴 때는 명단을 비우고
+# TEX/SUPP/SIDECAR 를 archive/jhm_v1/ 로 되돌리면 된다.
+# ---------------------------------------------------------------------------
+ARCHIVED_JHM = {
+    # 이 건은 SKIP 이 아니라 FAIL 로 나타났다. resolve() 가 조각의 수를
+    # 현행값으로 바꿔 끼우다 보니 'soman (1.446)' 이 ACS SI 의 전혀 다른
+    # 문장 'soman (0.365)' (AEGL-3 순서)에 붙었고, 그 자리에는 앵커가
+    # 없어서 주입이 통과했다. 사례는 JHM 전용이므로 제외하고, 드러난
+    # 구멍(AEGL 순서 다섯 값)에는 검증기에 앵커를 새로 달았다.
+    '산문이 표 3 과 다른 소만 거리를 싣는다 (1.395 대 1.495)',
+    '28종 구조공간 p 를 구판으로 (0.031 대 0.028)',
+    '28종 구조좌표 수를 구판으로 (36 대 38)',
+    '28종 매치 수를 구판으로 (four 대 three)',
+    '28종 유효매칭 수 오기 (three 대 five)',
+    '35종 귀무기대 오기 (9.63 대 6.63)',
+    'BH 보정값 오기 (0.159 대 0.059)',
+    'CEES-HD 거리 오기 (0.57 대 1.57)',
+    'DCM 의 G계열 비율 오기 (2.3 대 12.3)',
+    'DFP 변위 거리 오기 (1.07 대 2.07) — 변위 논증이 무너진다',
+    'DMMP 의 사린 최근접 비율 오기 (93.3 대 88.1)',
+    'DPGME 의 G계열 비율이 구판이다 (46.7 대 61.2)',
+    'Fig3 라벨 작용제 수 오기 (ten 대 nine)',
+    'Fig3 무라벨 작용제 수 오기 (seven 대 six)',
+    'GB 회복률 오기 (37.8 대 7.8) — 가장 약한 지점을 숨김',
+    'James 2018 부적합 판정 수 오기 (17 대 12)',
+    'James 2021 배제 수 오기 (78 대 87)',
+    'James 2021 적합 수 오기 (39 대 93)',
+    'Westfall-Young 을 구판으로 (0.079 대 0.075)',
+    'omega 상관계수 오기 (-0.899 대 -0.959)',
+    '결론의 네 번째 구성 보정값 오기 (0.0006 대 0.0006 유지 실패)',
+    '구조공간 명목 p 를 앙상블 이전으로 (0.026 대 0.031)',
+    '구조공간 유의 통계량 수를 구판으로 (two 대 one)',
+    '구조좌표 수를 메타열 포함 시절로 (36 대 37)',
+    '네 번째 구성 BH q 를 비유의로 오기 (0.0006 대 0.0600) — 결론이 뒤집힌다',
+    '네 번째 구성 최소 nominal p 오기 (0.00006 대 0.00600)',
+    '도판 캡션의 각주 유래 개수 (5 대 9)',
+    '도판1 캡션 BH 를 구판으로 (0.185 대 0.159)',
+    '도판2 캡션 백분위 오기 (26th 대 21st)',
+    '도판2 캡션 통계량 서술을 구판으로 (평균차 대 여섯 중 최소)',
+    '두 패널 보존 좌표를 같게 (38/36 대 38/38)',
+    '백분위 오기 — 구조 관측값을 더 특별해 보이게 (25.8 대 4.2)',
+    '본문 3좌표 B3LYP p 오기 (0.0368 대 0.128)',
+    '본문 3좌표 B3LYP 매칭 수 오기 (five 대 four)',
+    '본문 병합공간 값 오기 (0.0221 대 0.0321)',
+    '부분공간 백분위를 구판으로 (25.4 대 22.7)',
+    '부트스트랩 0건 비율 오기 (58.8 대 98.8)',
+    '부트스트랩 차 양수 복제수 오기 (1000 대 600)',
+    '사린 결손 오기 (0.117 대 0.317)',
+    '사전지정 q 를 구판으로 (0.046 대 0.042)',
+    '사전지정 q 오기 (0.046 대 0.146) — 유의/비유의가 뒤집힌다',
+    '서술자 제거 수 오기 (13 대 23) — 51 과 38 이 안 맞게 된다',
+    '실제 결손 중위 오기 (0.463 대 0.163) — 검출 가능 폭보다 작아진다',
+    '적용영역 내 최대오차를 전체 최대로 오기 (2.68 대 3.42)',
+    '전자공간 유효매칭 개수 주장이 산문에만 있고 거리는 구판 (1.407 대 1.335)',
+    '주 패널 유효매칭 수 오기 (zero 대 three)',
+    '주성분3 백분위 오기 (2.1 대 0.4)',
+    '초록의 네 번째 구성 보정값 오기 (0.0006 대 0.0060)',
+    '초록이 Results 와 다른 Spearman 을 싣는다',
+    '최소검출효과 오기 (0.22 대 0.42) — 검정력 주장이 뒤집힌다',
+    '커버레터가 본문과 다른 Spearman 을 싣는다',
+    '포스겐 경쟁 거리를 다른 공간의 값으로 섞어 씀 (1.12 대 1.14)',
+    '표 3 CG 행이 구판 (1.600 대 1.64)',
+    '표 3 GA 행이 임계값 2 를 넘지 않게 보이도록 오기',
+    '표 3 PS 행이 구판 (2.530 대 2.70) — 반올림으로 설명 안 됨',
+    '한 양을 두 값으로 (208/218 계열)',
+}
+_ARCH_DROPPED = 0
+
+
+def _drop_archived(lst):
+    global _ARCH_DROPPED
+    out = [c for c in lst if c[0] not in ARCHIVED_JHM]
+    _ARCH_DROPPED += len(lst) - len(out)
+    return out
+
+
+CASES = _drop_archived(CASES)
+SUPP_CASES = _drop_archived(SUPP_CASES)
+SIDECAR_CASES = _drop_archived(SIDECAR_CASES)
+ANNOT_CASES = _drop_archived(ANNOT_CASES)
+
 
 def run():
     r = subprocess.run([sys.executable, 'verify_consistency.py'],
@@ -858,6 +965,9 @@ def main():
         print('\n'.join(_self))
         print(f'[test_verify] 시험 자체의 결함 {len(_self)}건. 먼저 고칠 것')
         return 1
+    if _ARCH_DROPPED:
+        print(f'[test_verify] 동결본(archive/jhm_v1) 전용 사례 '
+              f'{_ARCH_DROPPED}건 제외 — ARCHIVED_JHM')
     for _p in (TEX, SUPP, SIDECAR, ANNOT, ACS, ACS_SUPP, ACS_CL):
         _guard(_p)
     good = open(TEX).read()
