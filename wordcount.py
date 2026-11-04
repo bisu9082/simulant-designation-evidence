@@ -54,7 +54,7 @@ def sections(body):
 
 
 def main():
-    txt = pdftext('paper/main.pdf')
+    txt = pdftext('paper_acs/main.pdf')
     a = txt.index('Chemical warfare agent detection is developed')
     b = txt.index('Keywords')
     n_abs = len(words(txt[a:b]))
@@ -76,7 +76,7 @@ def main():
     for name, n in sections(body):
         print(f'  {name[:52]:<54} {n:>5}')
 
-    sup = pdftext('paper/supplementary.pdf')
+    sup = pdftext('paper_acs/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
 
 

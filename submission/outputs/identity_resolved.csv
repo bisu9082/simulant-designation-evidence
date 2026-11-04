@@ -1,0 +1,248 @@
+ok,cid,smiles,mw,title,cas_roundtrip,n_syn,cas,aegl_name,old_smiles,old_mw
+True,5943,C(Cl)(Cl)(Cl)Cl,153.8,Carbon Tetrachloride,True,143,56-23-5,Carbon tetrachloride,C(Cl)(Cl)(Cl)Cl,153.8
+True,5976,CN(C)N,60.1,"1,1-Dimethylhydrazine",True,82,57-14-7,"1,1- Dimethyl hydrazine",CN(C)N,60.1
+True,3082,CNC(=O)CSP(=S)(OC)OC,229.3,Dimethoate,False,210,60-34-4,Methyl hydrazine,CNN,46.072
+True,6115,C1=CC=C(C=C1)N,93.13,Aniline,True,149,62-53-3,Aniline,C1=CC=C(C=C1)N,93.13
+True,6212,C(Cl)(Cl)Cl,119.37,Chloroform,True,171,67-66-3,Chloroform,C(Cl)(Cl)Cl,119.37
+True,6228,CN(C)C=O,73.09,Dimethylformamide,True,217,68-12-2,"N,N-Dimethylformamide",CN(C)C=O,73.09
+True,6323,CBr,94.94,Methyl Bromide,True,133,74-83-9,Methyl bromide,CBr,94.94
+True,6327,CCl,50.49,Methyl Chloride,True,105,74-87-3,Methyl chloride,CCl,50.49
+True,768,C#N,27.025,Hydrogen Cyanide,True,102,74-90-8,Hydrogen cyanide,C#N,27.025
+True,878,CS,48.11,Methanethiol,True,78,74-93-1,Methyl mercaptan,CS,48.11
+True,6334,CCC,44.1,Propane,True,85,74-98-6,Propane,CCC,44.1
+True,6338,C=CCl,62.5,Vinyl Chloride,True,106,75-01-4,Vinyl chloride,C=CCl,62.5
+True,6342,CC#N,41.05,Acetonitrile,True,191,75-05-8,Acetonitrile,CC#N,41.05
+True,6343,CCS,62.14,Ethanethiol,True,90,75-08-1,Ethyl mercaptan,CCS,62.14
+True,6348,C(=S)=S,76.15,Carbon Disulfide,True,116,75-15-0,Carbon disulfide,C(=S)=S,76.15
+True,6354,C1CO1,44.05,Ethylene Oxide,True,117,75-21-8,Ethylene oxide,C1CO1,44.05
+True,6371,C(=O)(Cl)Cl,98.91,Phosgene,True,62,75-44-5,Phosgene,C(=O)(Cl)Cl,98.91
+True,6376,C[SiH](Cl)Cl,115.03,Methyldichlorosilane,True,27,75-54-7,Methyl dichlorosilane,C[SiH](Cl)Cl,115.03
+True,6377,CC1CN1,57.09,2-Methylaziridine,True,65,75-55-8,Propylenimine,CC1CN1,57.09
+True,6378,CC1CO1,58.08,Propylene Oxide,True,113,75-56-9,Propylene oxide,CC1CO1,58.08
+True,6397,C[Si](C)(C)Cl,108.64,Chlorotrimethylsilane,True,114,75-77-4,Trimethyl chlorosilane,C[Si](C)(C)Cl,108.64
+True,6398,C[Si](C)(Cl)Cl,129.06,Dichlorodimethylsilane,True,72,75-78-5,Dimethyl dichlorosilane,C[Si](C)(Cl)Cl,129.06
+True,6399,C[Si](Cl)(Cl)Cl,149.47,Trichloromethylsilane,True,62,75-79-6,Methyl trichlorosilane,C[Si](Cl)(Cl)Cl,149.47
+True,6406,CC(C)(C#N)O,85.1,Acetone Cyanohydrin,True,102,75-86-5,Acetone cyanohydrin,CC(C)(C#N)O,85.1
+True,6413,C=C[Si](Cl)(Cl)Cl,161.48,Vinyltrichlorosilane,True,57,75-94-5,Vinyl trichlorosilane,C=C[Si](Cl)(Cl)Cl,161.48
+True,6500,CCOP(=O)(C#N)N(C)C,162.13,Tabun,True,50,77-81-6,Agent GA (Tabun),CCOP(=O)(C#N)N(C)C,162.13
+True,6559,CC(C)C#N,69.11,Isobutyronitrile,True,78,78-82-0,Isobutyronitrile,CC(C)C#N,69.11
+True,6562,CC(=C)C=O,70.09,Methacrolein,True,79,78-85-3,Methacrylaldehyde,CC(=C)C=O,70.09
+True,6571,CC(=O)CCl,92.52,Chloroacetone,True,84,78-95-5,Chloroacetone,CC(=O)CCl,92.52
+True,6585,CC(=O)OO,76.05,Peracetic Acid,True,102,79-21-0,Peracetic Acid,CC(=O)OO,76.05
+True,6586,COC(=O)Cl,94.5,Methyl chloroformate,True,87,79-22-1,Methyl chloroformate,COC(=O)Cl,94.5
+True,6627,C1=CC=C(C=C1)[Si](C2=CC=CC=C2)(Cl)Cl,253.19,Dichlorodiphenylsilane,True,49,80-10-4,Diphenyl dichlorosilane,C1=CC=C(C=C1)[Si](C2=CC=CC=C2)(Cl)Cl,253.19
+True,7040,CC1=C(C=CC=C1N=C=O)N=C=O,174.16,"Toluene 2,6-Diisocyanate",True,63,91-08-7,"2,6-Toluenediisocyanate",CC1=C(C=CC=C1N=C=O)N=C=O,174.16
+True,7305,CC(C(C)(C)C)OP(=O)(C)F,182.17,Soman,True,55,96-64-0,Agent GD (Soman),CC(C(C)(C)C)OP(=O)(C)F,182.17
+True,7372,C1=CC=C(C=C1)[Si](Cl)(Cl)Cl,211.5,Phenyltrichlorosilane,True,58,98-13-5,Trichlorophenysilane,C1=CC=C(C=C1)[Si](Cl)(Cl)Cl,211.5
+True,7505,C1=CC=C(C=C1)C#N,103.12,Benzonitrile,True,80,100-47-0,Benzonitrile,C1=CC=C(C=C1)C#N,103.12
+True,5993,C1C2C(C(C1Cl)Cl)C3(C(=C(C2(C3(Cl)Cl)Cl)Cl)Cl)Cl,409.8,"Chlordane, technical",False,68,103-71-9,Phenyl isocyanate,C1=CC=C(C=C1)N=C=O,119.12
+True,7835,C1C(O1)CCl,92.52,Epichlorohydrin,True,168,106-89-8,Epichlorohydrin,C1C(O1)CCl,92.52
+True,7843,CCCC,58.12,Butane,True,102,106-97-8,Butane,CCCC,58.12
+True,7847,C=CC=O,56.06,Acrolein,True,134,107-02-8,Acrolein,C=CC=O,56.06
+True,34,C(CCl)O,80.51,2-Chloroethanol,True,118,107-07-3,Ethylene chlorohydrin (2-Chloroethanol),C(CCl)O,80.51
+True,7853,C=CCN,57.09,Allylamine,True,78,107-11-9,Allyl Amine,C=CCN,57.09
+True,7854,CCC#N,55.08,Propionitrile,True,72,107-12-0,Propionitrile,CCC#N,55.08
+True,6579,C=CC(=O)N,71.08,Acrylamide,False,166,107-13-1,Acrylonitrile,C=CC#N,53.06
+True,7856,C(C#N)Cl,75.5,Chloroacetonitrile,True,70,107-14-2,Chloroacetonitrile,C(C#N)Cl,75.5
+True,3301,C(CN)N,60.1,Ethylenediamine,True,141,107-15-3,Ethylene diamine,C(CN)N,60.1
+True,7858,C=CCO,58.08,Allyl Alcohol,True,103,107-18-6,Allyl alcohol,C=CCO,58.08
+True,7859,C#CCO,56.06,Propargyl alcohol,True,85,107-19-7,Propargyl alcohol,C#CCO,56.06
+True,33,C(C=O)Cl,78.5,Chloroacetaldehyde,True,64,107-20-0,Chloroacetaldehyde,C(C=O)Cl,78.5
+True,7864,COCCl,80.51,Chloromethyl Methyl Ether,True,106,107-30-2,Chloromethyl methyl ether,COCCl,80.51
+True,7867,C=CC[Si](Cl)(Cl)Cl,175.51,Trichloro-2-propen-1-ylsilane,True,51,107-37-9,Allyl trichlorosilane,C=CC[Si](Cl)(Cl)Cl,175.51
+True,7871,CC(C)OP(=O)(C)F,140.09,Sarin,True,80,107-44-8,Agent GB (Sarin),CC(C)OP(=O)(C)F,140.09
+True,7885,CCCCC[Si](Cl)(Cl)Cl,205.6,Trichloropentylsilane,True,40,107-72-2,Amy ltrichlorosilane,CCCCC[Si](Cl)(Cl)Cl,205.6
+True,7904,CC(=O)OC=C,86.09,Vinyl Acetate,True,117,108-05-4,Vinyl acetate,CC(=O)OC=C,86.09
+True,7917,CC(C)OC(=O)Cl,122.55,Isopropyl chloroformate,True,66,108-23-6,Isopropyl chloroformate,CC(C)OC(=O)Cl,122.55
+True,1140,CC1=CC=CC=C1,92.14,Toluene,True,193,108-88-3,Toluene,CC1=CC=CC=C1,92.14
+True,7964,C1=CC=C(C=C1)Cl,112.55,Chlorobenzene,True,143,108-90-7,Chlorobenzene,C1=CC=C(C=C1)Cl,112.55
+True,2266,C(CCCC(=O)O)CCCC(=O)O,188.22,Azelaic Acid,False,203,108-91-8,Cyclohexylamine,C1CCC(CC1)N,99.17
+True,7969,C1=CC=C(C=C1)S,110.18,Thiophenol,True,89,108-98-5,Phenyl mercaptan,C1=CC=C(C=C1)S,110.18
+True,5312,CC(=O)CC(=O)CCC(=O)O,158.15,Succinylacetone,False,64,109-61-5,Propyl chloroformate,CCCOC(=O)Cl,122.55
+True,8010,C(C#N)C#N,66.06,Malononitrile,True,80,109-77-3,Malononitrile,C(C#N)C#N,66.06
+True,8022,CCN=C=O,71.08,Ethyl isocyanate,True,50,109-90-0,Ethyl isocyanate,CCN=C=O,71.08
+True,8029,C1=COC=C1,68.07,Furan,True,80,110-00-9,Furan,C1=COC=C1,68.07
+True,8082,C1CCNCC1,85.15,Piperidine,True,104,110-89-4,Piperidine,C1CCNCC1,85.15
+True,8110,CCCCN=C=O,99.13,Butyl isocyanate,True,57,111-36-4,n-Butyl isocyanate,CCCCN=C=O,99.13
+True,8157,CCCCCCCCCCCCCCCCCC[Si](Cl)(Cl)Cl,387.9,Trichlorooctadecylsilane,True,49,112-04-9,Octadecyl trichlorosilane,CCCCCCCCCCCCCCCCCC[Si](Cl)(Cl)Cl,387.9
+True,8260,CC[Si](Cl)(Cl)Cl,163.5,Trichloroethylsilane,True,54,115-21-9,Ethyl trichlorosilane,CC[Si](Cl)(Cl)Cl,163.5
+True,8301,C(=C(F)F)(F)F,100.01,Tetrafluoroethylene,True,183,116-14-3,Tetrafluoroethylene,C(=C(F)F)(F)F,100.01
+True,20138,CC=CC=O,70.09,But-2-enal,False,22,123-73-9,trans-Crotonaldehyde,C/C=C/C=O,70.09
+True,31297,CS(=O)(=O)Cl,114.55,Methanesulfonyl chloride,True,115,124-63-0,Methanesulfonyl chloride,CS(=O)(=O)Cl,114.55
+True,31299,C[Si](C=C)(Cl)Cl,141.07,Methylvinyldichlorosilane,True,42,124-70-9,Methylvinyl dichlorosilane,C[Si](C=C)(Cl)Cl,141.07
+True,31368,CC(=C)C#N,67.09,Methacrylonitrile,True,79,126-98-7,Methacrylonitrile,CC(=C)C#N,67.09
+True,8850,CCC[Si](Cl)(Cl)Cl,177.53,Propyltrichlorosilane,True,44,141-57-1,Propyl trichlorosilane,CCC[Si](Cl)(Cl)Cl,177.53
+True,8851,CC(C)(C)CC(C)(C)S,146.3,tert-OCTYL MERCAPTAN,True,40,141-59-3,t-Octyl mercaptan,CC(C)(C)CC(C)(C)S,146.3
+True,8929,[C-]#N.[Na+],49.007,Sodium Cyanide,True,69,143-33-9,Sodium cyanide,[C-]#N.[Na+],49.007
+True,9032,[C-]#N.[K+],65.116,Potassium Cyanide,True,66,151-50-8,Potassium cyanide,[C-]#N.[K+],65.116
+True,9033,C1CN1,43.07,Aziridine,True,133,151-56-4,Ethylenimine,C1CN1,43.07
+True,10900,C(=CCl)Cl,96.94,"1,2-Dichloroethylene",False,56,156-59-2,"cis-1,2-Dichloroethylene",C(=C\Cl)\Cl,96.94
+True,10900,C(=CCl)Cl,96.94,"1,2-Dichloroethylene",False,56,156-60-5,"cis- and trans-1,2-Dichloroethylene",C(=C/Cl)\Cl,96.94
+True,9321,NN,32.046,Hydrazine,True,93,302-01-2,Hydrazine,NN,32.046
+True,64505,CP(=O)(OC1CCCCC1)F,180.16,Cyclosarin,True,32,329-99-7,GF Agent,CP(=O)(OC1CCCCC1)F,180.16
+True,9623,C(=O)(F)F,66.007,Carbonyl fluoride,True,40,353-50-4,Carbonyl fluoride,C(=O)(F)F,66.007
+True,9999,C(#N)C#N,52.03,Cyanogen,True,46,460-19-5,Cyanogen,C(#N)C#N,52.03
+True,10038,C=C=O,42.04,Ketene,True,35,463-51-4,Ketene,C=C=O,42.04
+True,10387,C1=CC=C(C=C1)COC(=O)Cl,170.59,Benzyl chloroformate,True,94,501-53-1,Benzyl chloroformate,C1=CC=C(C=C1)COC(=O)Cl,170.59
+True,10461,C(CCl)SCCCl,159.08,Sulfur Mustard,True,101,505-60-2,Sulfur Mustard,C(CCl)SCCCl,159.08
+True,10509,C([N+](=O)[O-])([N+](=O)[O-])([N+](=O)[O-])[N+](=O)[O-],196.03,Tetranitromethane,True,42,509-14-8,Tetranitromethane,C([N+](=O)[O-])([N+](=O)[O-])([N+](=O)[O-])[N+](=O)[O-],196.03
+True,1322,CNNC,60.1,"1,2-Dimethylhydrazine",True,74,540-73-8,"1,2-Dimethyl hydrazine",CNNC,60.1
+True,10923,C(=C[As](Cl)Cl)Cl,207.31,Lewisite,True,22,541-25-3,Lewisite 1,C(=C[As](Cl)Cl)Cl,207.31
+True,10928,CCOC(=O)Cl,108.52,Ethyl chloroformate,True,108,541-41-3,Ethyl chloroformate,CCOC(=O)Cl,108.52
+True,10967,C(OCCl)Cl,114.96,Bis(Chloromethyl) Ether,True,74,542-88-1,Bis-chloromethyl ether,C(OCCl)Cl,114.96
+True,62365,CC(C)COC(=O)Cl,136.58,Isobutyl chloroformate,True,75,543-27-1,Isobutyl chloroformate,CC(C)COC(=O)Cl,136.58
+True,11167,CN=C=S,73.12,Methyl isothiocyanate,True,109,556-61-6,Methyl isothiocyanate,CN=C=S,73.12
+True,7040,CC1=C(C=CC=C1N=C=O)N=C=O,174.16,"Toluene 2,6-Diisocyanate",False,63,584-84-9,"2,4-Toluene Diisocyanate",CC1=C(C=C(C=C1)N=C=O)N=C=O,174.16
+True,11590,[C-]#N.[C-]#N.[Ca+2],92.11,Calcium cyanide Ca(CN)2,False,7,592-01-8,Calcium cyanide,[C-]#N.[C-]#N.[Ca+2],92.11
+True,61140,CCCCOC(=O)Cl,136.58,Butyl chloroformate,True,51,592-34-7,n-Butyl chloroformate,CCCCOC(=O)Cl,136.58
+True,11666,C(SCl)(Cl)(Cl)Cl,185.9,Trichloromethanesulfenyl chloride,True,79,594-42-3,Perchloromethyl mercaptan,C(SCl)(Cl)(Cl)Cl,185.9
+True,11715,CC(=O)CBr,136.98,Bromoacetone,True,57,598-31-2,Bromoacetone,CC(=O)CBr,136.98
+True,12228,CN=C=O,57.05,Methyl Isocyanate,True,85,624-83-9,Methyl isocyanate,CN=C=O,57.05
+True,281,[C-]#[O+],28.01,Carbon Monoxide,True,66,630-08-0,Carbon monoxide,[C-]#[O+],28.01
+True,12661,C=C1CC(=O)O1,84.07,Diketene,True,50,674-82-8,Diketene,C=C1CC(=O)O1,84.07
+True,12682,CO[Si](OC)(OC)OC,152.22,Tetramethoxysilane,True,75,681-84-5,Tetramethoxy silane,CO[Si](OC)(OC)OC,152.22
+True,12695,C(=O)(C(F)(F)F)C(F)(F)F,166.02,Hexafluoroacetone,True,54,684-16-2,Hexafluoroacetone,C(=O)(C(F)(F)F)C(F)(F)F,166.02
+True,13129,C(C(F)(F)F)F,102.03,"1,1,1,2-Tetrafluoroethane",True,85,811-97-2,HFC 134A,C(C(F)(F)F)F,102.03
+True,13571,CCCCCC[Si](Cl)(Cl)Cl,219.6,Hexyltrichlorosilane,True,38,928-65-4,Hexyltrichlorosilane,CCCCCC[Si](Cl)(Cl)Cl,219.6
+True,61244,C[SiH2]Cl,80.59,(Chlorosilyl)methane,True,13,993-00-0,Methyl chlorosilane,C[SiH2]Cl,80.59
+True,66108,C[SiH](C)Cl,94.61,Chlorodimethylsilane,True,25,1066-35-9,Dimethyl chlorosilane,C[SiH](C)Cl,94.61
+True,14780,[P-3].[P-3].[Ca+2].[Ca+2].[Ca+2],182.18,Calcium phosphide,True,25,1305-99-3,Calcium phosphide,[P-3].[P-3].[Ca+2].[Ca+2].[Ca+2],182.18
+True,4643716,P=[Zn].P=[Zn].[Zn],260.1,ZINC PHOSPHIDE (Zn3P2),False,27,1314-84-7,Zinc phosphide,[P-3].[P-3].[Zn+2].[Zn+2].[Zn+2],258.1
+True,15158,CCOP(=O)(Cl)Cl,162.94,Ethyl dichlorophosphate,True,55,1498-51-7,Ethylphosphorodichloridate,CCOP(=O)(Cl)Cl,162.94
+True,15258,C([Si](Cl)(Cl)Cl)Cl,183.9,Trichloro(chloromethyl)silane,True,39,1558-25-4,Chloromethyl trichlorosilane,C([Si](Cl)(Cl)Cl)Cl,183.9
+True,15586,CC(F)(Cl)Cl,116.95,"1,1-Dichloro-1-fluoroethane",True,48,1717-00-6,HCFC 141b,CC(F)(Cl)Cl,116.95
+True,15589,CC[Si](CC)(Cl)Cl,157.11,Diethyldichlorosilane,True,38,1719-53-5,Diethyl dichlorosilane,CC[Si](CC)(Cl)Cl,157.11
+True,15891,C1=CC=C(C=C1)OC(=O)Cl,156.56,Phenyl chloroformate,True,63,1885-14-9,Phenyl chloroformate,C1=CC=C(C=C1)OC(=O)Cl,156.56
+True,17215,CO[SiH](OC)OC,122.19,Trimethoxysilane,True,17,2487-90-3,Trimethoxysilane,CO[SiH](OC)OC,122.19
+True,17604,C1=CC=C(C(=C1)C=C(C#N)C#N)Cl,188.61,2-Chlorobenzylidenemalononitrile,True,86,2698-41-1,Tear Gas,C1=CC=C(C(=C1)C=C(C#N)C#N)Cl,188.61
+True,18052,C=CCOC(=O)Cl,120.53,Allyl chloroformate,True,50,2937-50-0,Allyl chloroformate,C=CCOC(=O)Cl,120.53
+True,18056,CCSC(=O)Cl,124.59,Ethyl chlorothioformate,True,60,2941-64-2,Ethylchlorothioformate,CCSC(=O)Cl,124.59
+True,7672,C1=CC=C(C=C1)N=C=O,119.12,Phenyl isocyanate,False,63,3173-53-3,Cyclohexyl isocyanate,C1CCC(CC1)N=C=O,125.17
+True,62493,CC(C)(C)C(=O)Cl,120.58,Pivaloyl chloride,True,73,3282-30-2,Trimethylacetyl chloride,CC(C)(C)C(=O)Cl,120.58
+True,61330,[SiH2](Cl)Cl,101.0,Dichlorosilane,True,19,4109-96-0,Dichlorosilane,[SiH2](Cl)Cl,101.0
+True,20138,CC=CC=O,70.09,But-2-enal,False,22,4170-30-3,cis-Crotonaldehyde,C/C=C/C=O,70.09
+True,20568,CCCCCCCCCCCC[Si](Cl)(Cl)Cl,303.8,Dodecyltrichlorosilane,True,42,4484-72-4,Dodecyl trichlorosilane,CCCCCCCCCCCC[Si](Cl)(Cl)Cl,303.8
+True,21354,CCCCCCCC[Si](Cl)(Cl)Cl,247.7,Octyltrichlorosilane,True,39,5283-66-9,Octyl trichlorosilane,CCCCCCCC[Si](Cl)(Cl)Cl,247.7
+True,21355,CCCCCCCCC[Si](Cl)(Cl)Cl,261.7,Nonyltrichlorosilane,True,24,5283-67-0,Nonyl trichlorosilane,CCCCCCCCC[Si](Cl)(Cl)Cl,261.7
+True,22933,CC(CO[N+](=O)[O-])O[N+](=O)[O-],166.09,Propylene glycol dinitrate,True,39,6423-43-4,Propylene Glycol Dinitrate (main component of Otto Fuel 106602-80-6),CC(CO[N+](=O)[O-])O[N+](=O)[O-],166.09
+True,1119,O=S=O,64.07,Sulfur Dioxide,True,87,7446-09-5,Sulfur Dioxide,O=S=O,64.07
+True,24142,CCCC[Si](Cl)(Cl)Cl,191.55,Butyltrichlorosilane,True,45,7521-80-4,Butyl trichlorosilane,CCCC[Si](Cl)(Cl)Cl,191.55
+True,24258,O=Cl(=O)(=O)F,102.45,Perchloryl fluoride,True,33,7616-94-6,Perchloryl fluoride,O=Cl(=O)(=O)F,102.45
+True,6356,B(F)(F)F,67.81,Boron trifluoride,True,62,7637-07-2,Boron trifluoride,B(F)(F)F,67.81
+True,312,[Cl-],35.45,Chloride,False,75,7647-01-0,Hydrogen chloride,Cl,36.46
+True,14917,F,20.0064,Hydrofluoric Acid,True,115,7664-39-3,Hydrogen fluoride,F,20.0064
+True,222,N,17.031,Ammonia,True,175,7664-41-7,Ammonia,N,17.031
+True,943,[N+](=O)([O-])[O-],62.005,Nitrate,False,62,7697-37-2,Nitric Acid,[N+](=O)(O)[O-],63.013
+True,24387,P(Cl)(Cl)Cl,137.33,Phosphorus trichloride,True,59,7719-12-2,Phosphorus Trichloride,P(Cl)(Cl)Cl,137.33
+True,259,[Br-],79.9,Bromide ion,False,40,7726-95-6,Bromine,BrBr,159.81
+True,14917,F,20.0064,Hydrofluoric Acid,False,115,7782-41-4,Fluorine,FF,37.99680632
+True,313,Cl,36.46,Hydrochloric Acid,False,352,7782-50-5,Chlorine,ClCl,70.9
+True,402,S,34.08,Hydrogen Sulfide,True,722,7783-06-4,Hydrogen sulfide,S,34.08
+True,533,[SeH2],80.99,Hydrogen selenide,True,28,7783-07-5,Hydrogen selenide,[SeH2],80.99
+True,24547,O(F)F,53.996,Oxygen difluoride,True,38,7783-41-7,Oxygen difluoride,O(F)F,53.996
+True,24559,F[Te](F)(F)(F)(F)F,241.6,Tellurium hexafluoride,True,35,7783-80-4,Tellurium hexafluoride,F[Te](F)(F)(F)(F)F,241.6
+True,24560,F[U](F)(F)(F)(F)F,352.0193,Uranium hexafluoride,True,38,7783-81-5,Uranium hexafluoride,F[U](F)(F)(F)(F)F,352.0193
+True,23969,[AsH3],77.946,Arsine,True,27,7784-42-1,Arsine,[AsH3],77.946
+True,24594,FBr(F)F,136.9,Bromine trifluoride,True,23,7787-71-5,Bromine trifluoride,FBr(F)F,136.9
+True,24606,FBr(F)(F)(F)F,174.9,Bromine pentafluoride,True,27,7789-30-2,Bromine pentafluoride,FBr(F)(F)(F)F,174.9
+True,24637,FCl(F)F,92.45,Chlorine trifluoride,True,31,7790-91-2,Chlorine trifluoride,FCl(F)F,92.45
+True,24648,O=S(=O)(Cl)Cl,134.97,Sulfuryl chloride,True,65,7791-25-5,Sulfuryl chloride,O=S(=O)(Cl)Cl,134.97
+True,24404,P,33.998,Phosphine,True,99,7803-51-2,Phosphine,P,33.998
+True,24811,[SiH](Cl)(Cl)Cl,135.45,Trichlorosilane,True,28,10025-78-2,Trichlorosilane,[SiH](Cl)(Cl)Cl,135.45
+True,24813,O=P(Cl)(Cl)Cl,153.33,Phosphorus oxychloride,True,95,10025-87-3,Phosphorus oxychloride,O=P(Cl)(Cl)Cl,153.33
+True,12079,C1=CC(=CC(=C1)[N+](=O)[O-])C#N,148.12,3-Nitrobenzonitrile,False,53,10026-04-7,Tetrachlorosilane,[Si](Cl)(Cl)(Cl)Cl,169.9
+True,260,Br,80.91,Hydrogen Bromide,True,117,10035-10-6,Hydrogen Bromide,Br,80.91
+True,24453,OCl=O,68.46,Chlorous acid,False,27,10049-04-4,Chlorine dioxide,O=Cl[O],67.45
+True,24529,N(=O)O,47.014,Nitrous Acid,False,38,10102-44-0,Nitrogen dioxide,N(=O)[O],46.006
+True,25134,B(Br)(Br)Br,250.53,Boron tribromide,True,43,10294-33-4,Boron tribromide,B(Br)(Br)Br,250.53
+True,24529,N(=O)O,47.014,Nitrous Acid,False,38,10544-72-6,Nitrogen Tetroxide ppm,[N+](=O)([N+](=O)[O-])[O-],92.011
+True,61546,[Mg+2].[Mg+2].[Mg+2].[P-3].[P-3],134.86,Magnesium phosphide,True,35,12057-74-8,Magnesium phosphide,[Mg+2].[Mg+2].[Mg+2].[P-3].[P-3],134.86
+True,61547,[Na+].[Na+].[Na+].[P-3],99.9430698,Sodium phosphide,True,28,12058-85-4,Sodium phosphide,[Na+].[Na+].[Na+].[P-3],99.9430698
+True,166710,[P-3].[P-3].[Sr+2].[Sr+2].[Sr+2],324.8,Strontium Phosphide,True,18,12504-13-1,Strontium phosphide,[P-3].[P-3].[Sr+2].[Sr+2].[Sr+2],324.8
+True,26039,[C-]#[O+].[C-]#[O+].[C-]#[O+].[C-]#[O+].[Ni],170.73,Nickel tetracarbonyl,True,25,13463-39-3,Nickel carbonyl,[C-]#[O+].[C-]#[O+].[C-]#[O+].[C-]#[O+].[Ni],170.73
+True,26040,[C]=O.[C]=O.[C]=O.[C]=O.[C]=O.[Fe],195.9,Iron pentacarbonyl,True,29,13463-40-6,Iron pentacarbonyl,[C]=O.[C]=O.[C]=O.[C]=O.[C]=O.[Fe],195.9
+True,61654,FCl(F)(F)(F)F,130.44,Chlorine pentafluoride,True,18,13637-63-3,Chlorine pentafluoride,FCl(F)(F)(F)F,130.44
+True,61697,ClBr,115.36,BROMINE CHLORIDE (BrCl),True,27,13863-41-7,Bromine chloride,ClBr,115.36
+True,11829505,CCC(C)OC(=O)Cl,136.58,sec-Butyl chloroformate,True,33,17462-58-7,sec-Butyl chloroformate,CCC(C)OC(=O)Cl,136.58
+True,6328200,B#B,21.63,Diboron,False,22,19287-45-7,Diborane,B.B,27.67
+True,12027532,[B][B][B][B][B],54.1,CID 12027532,False,7,19624-22-7,Pentaborane,CCO[P@@](=S)(C1=CC=CC=C1)OC2=CC=C(C=C2)[N+](=O)[O-],323.31
+True,62745,[PH2-].[K+].[K+].[K+],150.285,Potassium phosphide (K3P),True,9,20770-41-6,Potassium phosphide,[PH2-].[K+].[K+].[K+],150.285
+True,30332,[Al]#P,57.9553,Aluminium phosphide (AlP),False,16,20859-73-8,Aluminum phosphide,[Al+3].[P-3],57.9553
+True,62783,CCCCC(CC)COC(=O)Cl,192.68,2-Ethylhexyl chloroformate,True,45,24468-13-1,2-Ethylhexylchloroformate,CCCCC(CC)COC(=O)Cl,192.68
+True,4570824,C1=CC(=C(C=C1[Si](Cl)(Cl)Cl)Cl)Cl,280.4,"Trichloro-(3,4-dichlorophenyl)silane",False,7,27137-85-5,Trichlorophenylsilane,C1=CC=C(C=C1)[Si](Cl)(Cl)Cl.Cl.Cl,284.5
+True,39793,CCOP(=O)(C)SCCN(C(C)C)C(C)C,267.37,"Phosphonothioic acid, methyl-, S-(2-(bis(1-methylethyl)amino)ethyl) O-ethyl ester",True,70,50782-69-9,Agent VX,CCOP(=O)(C)SCCN(C(C)C)C(C)C,267.37
+True,712,C=O,30.026,Formaldehyde,True,181,50-00-0,Formaldehyde,C=O,30.026
+True,4033,CN(CCCl)CCCl,156.05,Mechlorethamine,True,186,51-75-2,Nitrogen Mustard-2,CN(CCCl)CCCl,156.05
+True,991,CCOP(=S)(OCC)OC1=CC=C(C=C1)[N+](=O)[O-],291.26,Parathion,True,262,56-38-2,Parathion,CCOP(=S)(OCC)OC1=CC=C(C=C1)[N+](=O)[O-],291.26
+True,6278,CC(Cl)(Cl)Cl,133.4,"1,1,1-Trichloroethane",True,140,71-55-6,"1,1,1-Trichloroethane",CC(Cl)(Cl)Cl,133.4
+True,6329,CN,31.057,Methylamine,True,132,74-89-5,Methyl amine,CN,31.057
+True,6341,CCN,45.08,Ethylamine,True,88,75-04-7,Ethylamine,CCN,45.08
+True,177,CC=O,44.05,Acetaldehyde,True,122,75-07-0,Acetaldehyde,CC=O,44.05
+True,6344,C(Cl)Cl,84.93,Dichloromethane,True,209,75-09-2,Methylene chloride,C(Cl)Cl,84.93
+True,1146,CN(C)C,59.11,Trimethylamine,True,99,75-50-3,Trimethyl amine,CN(C)C,59.11
+True,6423,C([N+](=O)[O-])(Cl)(Cl)Cl,164.37,Chloropicrin,True,101,76-06-2,Chloropicrin,C([N+](=O)[O-])(Cl)(Cl)Cl,164.37
+True,6497,COS(=O)(=O)OC,126.13,Dimethyl Sulfate,True,105,77-78-1,Dimethyl sulfate,COS(=O)(=O)OC,126.13
+True,6570,CC(=O)C=C,70.09,Methyl vinyl ketone,True,106,78-94-4,Methyl vinyl ketone,CC(=O)C=C,70.09
+True,6278,CC(Cl)(Cl)Cl,133.4,"1,1,1-Trichloroethane",False,140,79-01-6,Trichloroethylene,C(=C(Cl)Cl)Cl,131.38
+True,6577,C(C(=O)Cl)Cl,112.94,Chloroacetyl chloride,True,83,79-04-9,Chloroacetyl chloride,C(C(=O)Cl)Cl,112.94
+True,6581,C=CC(=O)O,72.06,Acrylic Acid,True,185,79-10-7,Acrylic acid,C=CC(=O)O,72.06
+True,6593,C(C(=O)Cl)(Cl)Cl,147.38,Dichloroacetyl chloride,True,61,79-36-7,Dichloroacetyl Chloride,C(C(=O)Cl)(Cl)Cl,147.38
+True,6594,C(=C(F)Cl)(F)F,116.47,Chlorotrifluoroethylene,True,124,79-38-9,Trifluorochloroethylene,C(=C(F)Cl)(F)F,116.47
+True,4093,CC(=C)C(=O)O,86.09,Methacrylic Acid,True,97,79-41-4,Methacrylic acid,CC(=C)C(=O)O,86.09
+True,6658,CC(=C)C(=O)OC,100.12,Methyl Methacrylate,True,191,80-62-6,Methyl methacrylate,CC(=C)C(=O)OC,100.12
+True,7406,CC(C)C1=CC=CC=C1,120.19,Cumene,True,135,98-82-8,Cumene,CC(C)C1=CC=CC=C1,120.19
+True,6837,C1=CC=C(C=C1)C(C#N)C2=CC=CC=C2,193.24,Diphenylacetonitrile,False,113,100-41-4,Ethyl benzene,CCC1=CC=CC=C1,106.16
+True,5984,C([C@H]([C@H]([C@@H](C(=O)CO)O)O)O)O,180.16,D-(-)-Fructose,False,100,100-42-5,Styrene,C=CC1=CC=CC=C1,104.15
+True,7834,CCC1CO1,72.11,"1,2-Epoxybutane",True,95,106-88-7,"1,2-Butylene oxide",CCC1CO1,72.11
+True,3024,C(Br)Br,173.83,Dibromomethane,False,64,106-93-4,"1,2-Dibromoethane",C(CBr)Br,187.86
+True,5129,C1=CC(=CC=C1CSC2=NC=NC3=C2N=CN3C4C(C(C(O4)CO)O)O)[N+](=O)[O-],419.4,"2-(Hydroxymethyl)-5-[6-[(4-nitrophenyl)methylsulfanyl]purin-9-yl]oxolane-3,4-diol",False,27,106-99-0,"1,3-Butadiene",C=CC=C,54.09
+True,3367,C1=NC2=C(N=C(N=C2N1C3C(C(C(O3)CO)O)O)F)N,285.23,Fludarabine Base,False,42,107-05-1,Allyl chloride,C=CCCl,76.52
+True,8302,C(=C(F)F)(C(F)(F)F)F,150.02,Hexafluoropropylene,True,56,116-15-4,Hexafluoropropylene,C(=C(F)F)(C(F)(F)F)F,150.02
+True,8472,COP(OC)OC,124.08,Trimethyl phosphite,True,63,121-45-9,Trimethyl phosphite,COP(OC)OC,124.08
+True,4004,CCOC(=O)CC(C(=O)OCC)SP(=S)(OC)OC,330.4,Malathion,True,324,121-75-5,Malathion,CCOC(=O)CC(C(=O)OCC)SP(=S)(OC)OC,330.4
+True,527,CCC=O,58.08,Propanal,True,94,123-38-6,Propionaldehyde,CCC=O,58.08
+True,31275,C1COCCO1,88.11,"1,4-Dioxane",True,152,123-91-1,"1,4-Dioxane",C1COCCO1,88.11
+True,674,CNC,45.08,Dimethylamine,True,123,124-40-3,Dimethylamine,CNC,45.08
+True,31373,C(=C(Cl)Cl)(Cl)Cl,165.8,Tetrachloroethylene,True,159,127-18-4,Tetrachloroethylene,C(=C(Cl)Cl)(Cl)Cl,165.8
+True,8821,CCOC(=O)C=C,100.12,Ethyl Acrylate,True,120,140-88-5,Ethyl acrylate,CCOC(=O)C=C,100.12
+True,8846,CCCCOC(=O)C=C,128.17,Butyl Acrylate,True,92,141-32-2,n-Butyl acrylate,CCCCOC(=O)C=C,128.17
+True,4130,COP(=S)(OC)OC1=CC=C(C=C1)[N+](=O)[O-],263.21,Methyl Parathion,True,212,298-00-0,Methyl parathion,COP(=S)(OC)OC1=CC=C(C=C1)[N+](=O)[O-],263.21
+True,4790,CCOP(=S)(OCC)SCSCC,260.4,Phorate,True,143,298-02-2,Phorate,CCOP(=S)(OCC)SCSCC,260.4
+True,61109,C(=C(F)F)(C(F)(F)F)C(F)(F)F,200.03,"1,1,3,3,3-Pentafluoro-2-(trifluoromethyl)-1-propene",True,31,382-21-8,Perfluoroisobutylene,C(=C(F)F)(C(F)(F)F)C(F)(F)F,200.03
+True,10039,C(=O)=S,60.08,Carbonyl Sulfide,True,41,463-58-1,Carbonyl sulfide,C(=O)=S,60.08
+True,10848,CCN(CCCl)CCCl,170.08,Bis(2-chloroethyl)ethylamine,True,36,538-07-8,Nitrogen Mustard-1,CCN(CCCl)CCCl,170.08
+True,5561,C(CCl)N(CCCl)CCCl,204.5,Tris(2-chloroethyl)amine,True,101,555-77-1,Nitrogen Mustard-3,C(CCl)N(CCCl)CCCl,204.5
+True,11362,C1=CC=C2C(=C1)NC3=CC=CC=C3[As]2Cl,277.58,Adamsite,True,49,578-94-9,Adamsite,C1=CC=C2C(=C1)NC3=CC=CC=C3[As]2Cl,277.58
+True,61142,C[As](Cl)Cl,160.86,As-Methylarsonous dichloride,True,23,593-89-5,Methyldichloroarsine,C[As](Cl)Cl,160.86
+True,12836,C1=CC=C(C=C1)[As](C2=CC=CC=C2)Cl,264.58,Diphenylchloroarsine,True,45,712-48-1,Diphenylchloroarsine,C1=CC=C(C=C1)[As](C2=CC=CC=C2)Cl,264.58
+True,13361,COP(=O)OC,110.05,"Phosphonic acid, dimethyl ester",True,25,868-85-9,Dimethyl phosphite,COP(=O)OC,110.05
+True,14888,[O-2].[O-2].[O-2].[As+3].[As+3],197.841,Arsenic Trioxide,True,96,1327-53-3,Arsenic trioxide,[O-2].[O-2].[O-2].[As+3].[As+3],197.841
+True,65582,C(=NO)(Cl)Cl,113.93,"Carbonimidic dichloride, hydroxy-",True,28,1794-86-1,Phosgene oxime,C(=NO)(Cl)Cl,113.93
+True,17607,O=S(=O)(F)F,102.06,Sulfuryl fluoride,True,48,2699-79-8,Sulfuryl fluoride,O=S(=O)(F)F,102.06
+True,23931,[Hg],200.59,Mercury,True,143,7439-97-6,Mercury Vapor,[Hg],200.59
+True,23973,[Cd],112.41,Cadmium,True,375,7440-43-9,Cadmium,[Cd],112.41
+True,24682,O=S(=O)=O,80.07,Sulfur trioxide,True,24,7446-11-9,Sulfur trioxide,O=S(=O)=O,80.07
+True,24193,Cl[Ti](Cl)(Cl)Cl,189.7,Titanium Tetrachloride,True,55,7550-45-0,Titanium tetrachloride,Cl[Ti](Cl)(Cl)Cl,189.7
+True,1118,OS(=O)(=O)O,98.08,Sulfuric Acid,True,176,7664-93-9,Sulfuric acid,OS(=O)(=O)O,98.08
+True,24386,O=S(Cl)Cl,118.97,Thionyl Chloride,True,68,7719-09-7,Thionyl chloride,O=S(Cl)Cl,118.97
+True,23984,[GeH4],76.66,Germanium tetrahydride,True,37,7782-65-2,Germane,[GeH4],76.66
+True,24553,N(F)(F)F,71.002,Nitrogen trifluoride,True,38,7783-54-2,Nitrogen trifluoride,N(F)(F)F,71.002
+True,24556,F[Si](F)(F)F,104.079,Silicon tetrafluoride,True,28,7783-61-1,Silicon tetrafluoride,F[Si](F)(F)F,104.079
+True,24558,F[Se](F)(F)(F)(F)F,192.96,Selenium Hexafluoride,True,36,7783-79-1,Selenium hexafluoride,F[Se](F)(F)(F)(F)F,192.96
+True,24638,OS(=O)(=O)Cl,116.53,Chlorosulfonic acid,True,54,7790-94-5,Chlorosulfonic acid,OS(=O)(=O)Cl,116.53
+True,9359,[SbH3],124.784,Stibine,True,24,7803-52-3,Stibine,[SbH3],124.784
+True,23953,[SiH4],32.117,Silane,True,23,7803-62-5,Silane,[SiH4],32.117
+True,24681,OS(=O)(=O)O.O=S(=O)=O,178.15,Fuming sulfuric acid,True,43,8014-95-7,Oleum,OS(=O)(=O)O.O=S(=O)=O,178.15
+True,24807,S(SCl)Cl,135.0,Sulfur monochloride,True,38,10025-67-9,Disulfur dichloride,S(SCl)Cl,135.0
+True,12159,CCN(CC)CCCO,131.22,3-(Diethylamino)-1-propanol,False,60,10034-85-2,Hydrogen Iodide,I,127.9124
+True,30318,O=[Os](=O)(=O)=O,254.2,Osmium Tetroxide,True,59,20816-12-0,Osmium tetroxide,O=[Os](=O)(=O)=O,254.2
+True,6328,CI,141.939,Methyl iodide,True,103,74-88-4,Methyl iodide,CI,141.939
+True,2086,CC(C)(C=NOC(=O)NC)SC,190.27,Aldicarb [ISO],False,43,116-06-3,Aldicarb,CC(C)(/C=N/OC(=O)NC)SC,190.27
+True,8854,CC(=CC(=O)N(C)C)OP(=O)(OC)OC,237.19,"3-Hydroxy-N,N-dimethylcrotonamide dimethyl phosphate",False,14,141-66-2,Dicrotophos,C/C(=C\C(=O)N(C)C)/OP(=O)(OC)OC,237.19
+True,23353,CC(=CC(=O)NC)OP(=O)(OC)OC,223.16,Moncrotophos,False,20,6923-22-4,Monocrotophos,C/C(=C\C(=O)NC)/OP(=O)(OC)OC,223.16
+True,24404,P,33.998,Phosphine,False,99,7723-14-0,Red Phosphorus,[P],30.973762
+True,4096,COP(=O)(N)SC,141.13,Methamidophos,True,122,10265-92-6,Methamidophos,COP(=O)(N)SC,141.13
+True,25750,CCN(CC)C(=O)C(=C(C)OP(=O)(OC)OC)Cl,299.69,Phosphamidon,True,55,13171-21-6,Phosphamidon,CCN(CC)C(=O)C(=C(C)OP(=O)(OC)OC)Cl,299.69
+True,4109,CC(=NOC(=O)NC)SC,162.21,Methomyl,True,74,16752-77-5,Methomyl,CC(=NOC(=O)NC)SC,162.21
+True,31070,CCOP(=O)(NC(C)C)OC1=CC(=C(C=C1)SC)C,303.36,Fenamiphos,True,97,22224-92-6,Fenamiphos,CCOP(=O)(NC(C)C)OC1=CC(=C(C=C1)SC)C,303.36
+True,31657,CNC(=O)ON=C(C(=O)N(C)C)SC,219.26,Oxamyl,True,69,23135-22-0,Oxamyl,CNC(=O)ON=C(C(=O)N(C)C)SC,219.26

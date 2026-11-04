@@ -1,0 +1,159 @@
+{
+ "generated_by": "premise_null.py",
+ "seed": 49374,
+ "zero_sum_residual": {
+  "d1_uv": {
+   "after_renorm_max": 0.4898585684007171,
+   "after_renorm_min": 0.1258308449616845,
+   "before_renorm_max": 6.347166259310774e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d1_normal": {
+   "after_renorm_max": 0.4857779290258388,
+   "after_renorm_min": 0.10190201273714891,
+   "before_renorm_max": 5.681465558311598e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d2_uv": {
+   "after_renorm_max": 0.564349933688059,
+   "after_renorm_min": 0.12292477303603074,
+   "before_renorm_max": 7.222452101308872e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d2_normal": {
+   "after_renorm_max": 0.576062968756546,
+   "after_renorm_min": 0.21041303753216148,
+   "before_renorm_max": 5.339235170626095e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d3_uv": {
+   "after_renorm_max": 0.7429746560620897,
+   "after_renorm_min": 0.43385147535945046,
+   "before_renorm_max": 3.0011292748201247e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  },
+  "d3_normal": {
+   "after_renorm_max": 0.12922083370138226,
+   "after_renorm_min": 0.0445284266215188,
+   "before_renorm_max": 3.462970373835568e-16,
+   "note": "||Sum u|| / sqrt(n). 정규화 후 0 이 아니면 항등식의 전제가 깨진 것이다. 정규화 전 값은 평균을 뺀 직후이므로 수치오차 수준이어야 한다."
+  }
+ },
+ "statistic": "mean over compounds of (within - between)",
+ "null": "compound labels permuted within each concentration",
+ "cells": [
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "n_compounds": 6,
+   "n_concentrations": 4,
+   "observed": 0.7288067752505812,
+   "null_mean": 0.15706764346499658,
+   "null_sd": 0.10128366401387129,
+   "p_one_sided": 9.999000099990002e-05,
+   "enumerated": false,
+   "n_null": 10000,
+   "n_distinct_labelings": 373248000,
+   "p_min_attainable": null,
+   "mean_within": 0.541627355773119,
+   "mean_between": -0.1871794194774622,
+   "minus_one_over_n_minus_1": -0.2,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "n_compounds": 6,
+   "n_concentrations": 4,
+   "observed": 0.693144981886714,
+   "null_mean": 0.1497376908984447,
+   "null_sd": 0.08451123410835053,
+   "p_one_sided": 9.999000099990002e-05,
+   "enumerated": false,
+   "n_null": 10000,
+   "n_distinct_labelings": 373248000,
+   "p_min_attainable": null,
+   "mean_within": 0.5266061949925505,
+   "mean_between": -0.16653878689416354,
+   "minus_one_over_n_minus_1": -0.2,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "n_compounds": 7,
+   "n_concentrations": 4,
+   "observed": 0.5578432833111249,
+   "null_mean": 0.10236858937972858,
+   "null_sd": 0.09028556007195244,
+   "p_one_sided": 9.999000099990002e-05,
+   "enumerated": false,
+   "n_null": 10000,
+   "n_distinct_labelings": 128024064000,
+   "p_min_attainable": null,
+   "mean_within": 0.45520869271648723,
+   "mean_between": -0.1026345905946376,
+   "minus_one_over_n_minus_1": -0.16666666666666666,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "n_compounds": 7,
+   "n_concentrations": 4,
+   "observed": 0.6186906441536342,
+   "null_mean": 0.11090984866307647,
+   "null_sd": 0.06537447937238013,
+   "p_one_sided": 9.999000099990002e-05,
+   "enumerated": false,
+   "n_null": 10000,
+   "n_distinct_labelings": 128024064000,
+   "p_min_attainable": null,
+   "mean_within": 0.5021304354934577,
+   "mean_between": -0.11656020866017644,
+   "minus_one_over_n_minus_1": -0.16666666666666666,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "n_compounds": 4,
+   "n_concentrations": 4,
+   "observed": 0.5668919653225484,
+   "null_mean": 0.18979246301649474,
+   "null_sd": 0.14416406355441183,
+   "p_one_sided": 0.004629629629629629,
+   "enumerated": true,
+   "n_null": 13824,
+   "n_distinct_labelings": 13824,
+   "p_min_attainable": 7.233796296296296e-05,
+   "mean_within": 0.3911381362075824,
+   "mean_between": -0.17575382911496593,
+   "minus_one_over_n_minus_1": -0.3333333333333333,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "n_compounds": 4,
+   "n_concentrations": 4,
+   "observed": 0.6752989648399739,
+   "null_mean": 0.31375247901831266,
+   "null_sd": 0.10245293560053939,
+   "p_one_sided": 0.0033275462962962963,
+   "enumerated": true,
+   "n_null": 13824,
+   "n_distinct_labelings": 13824,
+   "p_min_attainable": 7.233796296296296e-05,
+   "mean_within": 0.34512841364265096,
+   "mean_between": -0.33017055119732286,
+   "minus_one_over_n_minus_1": -0.3333333333333333,
+   "note_bound": "centred() 가 unit(v-mu) 로 재정규화하므로 Sum u = 0 이 깨진다. -1/(n-1) 은 영합 벡터의 노름가중 평균에 대한 상한이며 이 양의 바닥이 아니다. 비교를 위해 적어 두기만 한다."
+  }
+ ],
+ "bh": {
+  "n_cells": 6,
+  "min_q": 0.00014998500149985002,
+  "n_sig_q": 6
+ }
+}

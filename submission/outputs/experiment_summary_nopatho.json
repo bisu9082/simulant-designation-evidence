@@ -1,0 +1,413 @@
+{
+  "seed": 42,
+  "bootstrap_samples": 10000,
+  "corr_cutoff": 0.95,
+  "drop_pathological": true,
+  "pathological_detected": [
+    "kappa2",
+    "kappa3"
+  ],
+  "class_counts": {
+    "interferent": 14,
+    "real_agent": 11,
+    "simulant": 3
+  },
+  "simulants": [
+    "DMMP",
+    "dichloromethane",
+    "DPGME"
+  ],
+  "conditions": [
+    {
+      "condition": "A_rdkit",
+      "n_in": 49,
+      "n_kept": 33,
+      "kept": [
+        "Asphericity",
+        "Eccentricity",
+        "HBA",
+        "HBD",
+        "InertialShapeFactor",
+        "MR_crippen",
+        "MW",
+        "NPR1",
+        "NPR2",
+        "PMI1",
+        "PMI2",
+        "RadiusOfGyration",
+        "SpherocityIndex",
+        "TPSA",
+        "balaban_j",
+        "chi1v",
+        "chi4v",
+        "fraction_csp3",
+        "logP_crippen",
+        "n_As",
+        "n_P_C",
+        "n_P_CN",
+        "n_P_F",
+        "n_P_S",
+        "n_P_alkoxy",
+        "n_S_divalent",
+        "n_arom_rings",
+        "n_carbonyl",
+        "n_halogen",
+        "n_heteroatoms",
+        "n_nitrile",
+        "n_nitro",
+        "rot_bonds"
+      ],
+      "dropped": [
+        [
+          "n_P_N",
+          "n_P_CN",
+          1.0
+        ],
+        [
+          "n_PdO",
+          "n_P",
+          1.0
+        ],
+        [
+          "n_OH",
+          "lser_A_proxy",
+          1.0
+        ],
+        [
+          "n_P",
+          "is_organophosphorus",
+          1.0
+        ],
+        [
+          "lser_A_proxy",
+          "HBD",
+          1.0
+        ],
+        [
+          "lser_B_proxy",
+          "HBA",
+          1.0
+        ],
+        [
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
+        ],
+        [
+          "PMI3",
+          "PMI2",
+          0.9980415323115968
+        ],
+        [
+          "labute_asa",
+          "MR_crippen",
+          0.9831694729522648
+        ],
+        [
+          "kappa1",
+          "chi0v",
+          0.9816289671962878
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi0v",
+          "MR_crippen",
+          0.9783799674974305
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "chi3v",
+          "chi4v",
+          0.9518607261430984
+        ],
+        [
+          "lser_S_proxy",
+          [
+            "MR_crippen",
+            "TPSA"
+          ]
+        ],
+        [
+          "is_organophosphorus",
+          [
+            "n_P_C",
+            "n_P_CN"
+          ]
+        ]
+      ],
+      "evr": [
+        0.338952590806714,
+        0.1409562065448784,
+        0.10333557052224426,
+        0.06958989379210895,
+        0.06532026202150587
+      ],
+      "pc1_pc2": 0.4799087973515924,
+      "pc1_loadings": {
+        "PMI1": 0.28261349176537587,
+        "MW": 0.2808942446527969,
+        "MR_crippen": 0.27719691672677277,
+        "chi1v": 0.27670449097007954,
+        "PMI2": 0.26885780902959405,
+        "chi4v": 0.26179024033967285
+      },
+      "n_interferent_closer": 6,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": 0.42712910732410464,
+      "p_value": 0.6783357677270145,
+      "cohens_dz": 0.12878427145759072,
+      "mean_diff": 0.22490820334749564,
+      "ci_95": [
+        -0.7500772757183483,
+        1.2375505541571707
+      ],
+      "shapiro_p": 0.24006368282291196
+    },
+    {
+      "condition": "B_electronic",
+      "n_in": 3,
+      "n_kept": 3,
+      "kept": [
+        "E_HOMO_eV",
+        "E_LUMO_eV",
+        "dipole_moment_D"
+      ],
+      "dropped": [],
+      "evr": [
+        0.3703576753845005,
+        0.3338844114562587,
+        0.2957579131592409
+      ],
+      "pc1_pc2": 0.7042420868407592,
+      "pc1_loadings": {
+        "E_HOMO_eV": 0.7096856820167203,
+        "E_LUMO_eV": 0.615794776750833,
+        "dipole_moment_D": -0.34226163335503207
+      },
+      "n_interferent_closer": 10,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": 2.7054880153376977,
+      "p_value": 0.02210414777961365,
+      "cohens_dz": 0.8157353292434945,
+      "mean_diff": 0.4043810763636831,
+      "ci_95": [
+        0.15778005858022404,
+        0.7073795418997563
+      ],
+      "shapiro_p": 0.1047717732117911
+    },
+    {
+      "condition": "C_merged",
+      "n_in": 52,
+      "n_kept": 36,
+      "kept": [
+        "Asphericity",
+        "E_HOMO_eV",
+        "E_LUMO_eV",
+        "Eccentricity",
+        "HBA",
+        "HBD",
+        "InertialShapeFactor",
+        "MR_crippen",
+        "MW",
+        "NPR1",
+        "NPR2",
+        "PMI1",
+        "PMI2",
+        "RadiusOfGyration",
+        "SpherocityIndex",
+        "TPSA",
+        "balaban_j",
+        "chi1v",
+        "chi4v",
+        "dipole_moment_D",
+        "fraction_csp3",
+        "logP_crippen",
+        "n_As",
+        "n_P_C",
+        "n_P_CN",
+        "n_P_F",
+        "n_P_S",
+        "n_P_alkoxy",
+        "n_S_divalent",
+        "n_arom_rings",
+        "n_carbonyl",
+        "n_halogen",
+        "n_heteroatoms",
+        "n_nitrile",
+        "n_nitro",
+        "rot_bonds"
+      ],
+      "dropped": [
+        [
+          "n_P_N",
+          "n_P_CN",
+          1.0
+        ],
+        [
+          "n_PdO",
+          "n_P",
+          1.0
+        ],
+        [
+          "n_OH",
+          "lser_A_proxy",
+          1.0
+        ],
+        [
+          "n_P",
+          "is_organophosphorus",
+          1.0
+        ],
+        [
+          "lser_A_proxy",
+          "HBD",
+          1.0
+        ],
+        [
+          "lser_B_proxy",
+          "HBA",
+          1.0
+        ],
+        [
+          "lser_L_proxy",
+          "MR_crippen",
+          0.9999999999999998
+        ],
+        [
+          "PMI3",
+          "PMI2",
+          0.9980415323115968
+        ],
+        [
+          "labute_asa",
+          "MR_crippen",
+          0.9831694729522648
+        ],
+        [
+          "kappa1",
+          "chi0v",
+          0.9816289671962878
+        ],
+        [
+          "chi2v",
+          "chi1v",
+          0.9796231786415271
+        ],
+        [
+          "chi0v",
+          "MR_crippen",
+          0.9783799674974305
+        ],
+        [
+          "heavy_atoms",
+          "MR_crippen",
+          0.9717476518816224
+        ],
+        [
+          "chi3v",
+          "chi4v",
+          0.9518607261430984
+        ],
+        [
+          "lser_S_proxy",
+          [
+            "MR_crippen",
+            "TPSA"
+          ]
+        ],
+        [
+          "is_organophosphorus",
+          [
+            "n_P_C",
+            "n_P_CN"
+          ]
+        ]
+      ],
+      "evr": [
+        0.31902709768438525,
+        0.13881637868522356,
+        0.1124858903198433,
+        0.08036366957844443,
+        0.06698965173752192
+      ],
+      "pc1_pc2": 0.4578434763696088,
+      "pc1_loadings": {
+        "PMI1": 0.27866228151123934,
+        "MW": 0.27540948704748464,
+        "MR_crippen": 0.2745442880942378,
+        "chi1v": 0.2730417896763028,
+        "PMI2": 0.2665590240220974,
+        "chi4v": 0.2597518619708189
+      },
+      "n_interferent_closer": 6,
+      "n_real": 11,
+      "test_used": "t-test (paired)",
+      "statistic": 0.11222816110286009,
+      "p_value": 0.9128633418948587,
+      "cohens_dz": 0.03383806375361322,
+      "mean_diff": 0.06019836990133654,
+      "ci_95": [
+        -0.9311778596177567,
+        1.0596020938923145
+      ],
+      "shapiro_p": 0.2451302794735417
+    }
+  ],
+  "p_local": {
+    "table": {
+      "sarin (GB)": {
+        "q_P": 0.54044,
+        "q_phosphoryl_O": -0.42847,
+        "wiberg_PO": 1.95274,
+        "fukui_f_plus_P": 0.66793
+      },
+      "soman (GD)": {
+        "q_P": 0.5446,
+        "q_phosphoryl_O": -0.43006,
+        "wiberg_PO": 1.95068,
+        "fukui_f_plus_P": 0.63692
+      },
+      "cyclosarin (GF)": {
+        "q_P": 0.53868,
+        "q_phosphoryl_O": -0.42662,
+        "wiberg_PO": 1.95465,
+        "fukui_f_plus_P": 0.63203
+      },
+      "DMMP": {
+        "q_P": 0.4663,
+        "q_phosphoryl_O": -0.44588,
+        "wiberg_PO": 1.92461,
+        "fukui_f_plus_P": 0.55852
+      },
+      "tabun (GA)": {
+        "q_P": 0.34433,
+        "q_phosphoryl_O": -0.38982,
+        "wiberg_PO": 2.01462,
+        "fukui_f_plus_P": 0.42143
+      },
+      "VX": {
+        "q_P": 0.33196,
+        "q_phosphoryl_O": -0.40303,
+        "wiberg_PO": 1.98628,
+        "fukui_f_plus_P": 0.20431
+      }
+    },
+    "G3_mean": 0.6456266666666667,
+    "G3_sd": 0.019469387081604127,
+    "DMMP_z_vs_G3": -4.4740323001215785,
+    "DMMP_over_GB": 0.8361954096986212,
+    "VX_over_GB": 0.3058853472669291,
+    "DMMP_over_VX": 2.733689002006755
+  }
+}

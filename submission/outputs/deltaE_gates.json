@@ -1,0 +1,363 @@
+{
+ "stability": [
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "DMMP",
+   "n_conc": 4,
+   "mean_cos": 0.9574024378963734,
+   "min_cos": 0.949333555549127
+  },
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "GA",
+   "n_conc": 4,
+   "mean_cos": 0.8501883208658687,
+   "min_cos": 0.747250752483046
+  },
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "GB",
+   "n_conc": 4,
+   "mean_cos": 0.9175609130527546,
+   "min_cos": 0.9060035543829894
+  },
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "GD",
+   "n_conc": 4,
+   "mean_cos": 0.6944876056413575,
+   "min_cos": 0.4004455820314939
+  },
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "GF",
+   "n_conc": 4,
+   "mean_cos": 0.6634587707707871,
+   "min_cos": 0.4006783946177605
+  },
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "agent": "VX",
+   "n_conc": 4,
+   "mean_cos": 0.8628223010618777,
+   "min_cos": 0.7167520486647239
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "DMMP",
+   "n_conc": 4,
+   "mean_cos": 0.8318251254501061,
+   "min_cos": 0.7600720242718082
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "GA",
+   "n_conc": 4,
+   "mean_cos": 0.7681144297495245,
+   "min_cos": 0.5519653472095163
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "GB",
+   "n_conc": 4,
+   "mean_cos": 0.8087650671195763,
+   "min_cos": 0.7001517908015943
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "GD",
+   "n_conc": 4,
+   "mean_cos": 0.7112926271858998,
+   "min_cos": 0.4220457180869706
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "GF",
+   "n_conc": 4,
+   "mean_cos": 0.7523304379676693,
+   "min_cos": 0.532556137589177
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "agent": "VX",
+   "n_conc": 4,
+   "mean_cos": 0.8767143319539815,
+   "min_cos": 0.7861830248085758
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "AC",
+   "n_conc": 4,
+   "mean_cos": 0.9249234921520405,
+   "min_cos": 0.8534661296059696
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "CG",
+   "n_conc": 4,
+   "mean_cos": 0.7175120668918966,
+   "min_cos": 0.48344863245051595
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "CK",
+   "n_conc": 4,
+   "mean_cos": 0.7784743026085805,
+   "min_cos": 0.5794107248492002
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "HD",
+   "n_conc": 4,
+   "mean_cos": 0.8916303945091014,
+   "min_cos": 0.8134646839773637
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "HN",
+   "n_conc": 4,
+   "mean_cos": 0.8206264071989758,
+   "min_cos": 0.6639904094374091
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "L",
+   "n_conc": 4,
+   "mean_cos": 0.7589134930974816,
+   "min_cos": 0.5391337628991048
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "agent": "PS",
+   "n_conc": 4,
+   "mean_cos": 0.7117630286838965,
+   "min_cos": 0.370832717734679
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "AC",
+   "n_conc": 4,
+   "mean_cos": 0.845846051846849,
+   "min_cos": 0.757046962971265
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "CG",
+   "n_conc": 4,
+   "mean_cos": 0.6992450531563997,
+   "min_cos": 0.4487930160302628
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "CK",
+   "n_conc": 4,
+   "mean_cos": 0.8726034396904215,
+   "min_cos": 0.8338188750529051
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "HD",
+   "n_conc": 4,
+   "mean_cos": 0.8296773637884343,
+   "min_cos": 0.7314403656047045
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "HN",
+   "n_conc": 4,
+   "mean_cos": 0.8870362017035102,
+   "min_cos": 0.8247997837328469
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "L",
+   "n_conc": 4,
+   "mean_cos": 0.8191531221268313,
+   "min_cos": 0.5872988670707957
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "agent": "PS",
+   "n_conc": 4,
+   "mean_cos": 0.8408005694000323,
+   "min_cos": 0.7540099390173551
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "agent": "A",
+   "n_conc": 4,
+   "mean_cos": 0.7920240587505295,
+   "min_cos": 0.541965028513194
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "agent": "B",
+   "n_conc": 4,
+   "mean_cos": 0.7928072483009867,
+   "min_cos": 0.5584033980199811
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "agent": "C",
+   "n_conc": 4,
+   "mean_cos": 0.6738653977475436,
+   "min_cos": 0.4356372570459439
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "agent": "D",
+   "n_conc": 4,
+   "mean_cos": 0.9261431337173134,
+   "min_cos": 0.8597302339016589
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "agent": "A",
+   "n_conc": 4,
+   "mean_cos": 0.8042819598367212,
+   "min_cos": 0.5768386327624849
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "agent": "B",
+   "n_conc": 4,
+   "mean_cos": 0.7681098300689353,
+   "min_cos": 0.4946321958620197
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "agent": "C",
+   "n_conc": 4,
+   "mean_cos": 0.7824610029054501,
+   "min_cos": 0.6520129491500998
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "agent": "D",
+   "n_conc": 4,
+   "mean_cos": 0.7939826187287636,
+   "min_cos": 0.6877529888230648
+  }
+ ],
+ "mode_agreement": [
+  {
+   "dataset": "d1",
+   "agent": "DMMP",
+   "cos_uv_normal": 0.41479533913204614
+  },
+  {
+   "dataset": "d1",
+   "agent": "GA",
+   "cos_uv_normal": 0.5206880294401464
+  },
+  {
+   "dataset": "d1",
+   "agent": "GB",
+   "cos_uv_normal": 0.5942128828268127
+  },
+  {
+   "dataset": "d1",
+   "agent": "GD",
+   "cos_uv_normal": 0.6813396343859284
+  },
+  {
+   "dataset": "d1",
+   "agent": "GF",
+   "cos_uv_normal": 0.6381530508506994
+  },
+  {
+   "dataset": "d1",
+   "agent": "VX",
+   "cos_uv_normal": 0.7427215254881955
+  },
+  {
+   "dataset": "d2",
+   "agent": "AC",
+   "cos_uv_normal": 0.5431922153719941
+  },
+  {
+   "dataset": "d2",
+   "agent": "CG",
+   "cos_uv_normal": 0.6225345094691643
+  },
+  {
+   "dataset": "d2",
+   "agent": "CK",
+   "cos_uv_normal": 0.539546010034866
+  },
+  {
+   "dataset": "d2",
+   "agent": "HD",
+   "cos_uv_normal": 0.5647172817743592
+  },
+  {
+   "dataset": "d2",
+   "agent": "HN",
+   "cos_uv_normal": 0.4679506546904223
+  },
+  {
+   "dataset": "d2",
+   "agent": "L",
+   "cos_uv_normal": 0.6759432593781541
+  },
+  {
+   "dataset": "d2",
+   "agent": "PS",
+   "cos_uv_normal": 0.6352232630018569
+  },
+  {
+   "dataset": "d3",
+   "agent": "A",
+   "cos_uv_normal": 0.554697017844234
+  },
+  {
+   "dataset": "d3",
+   "agent": "B",
+   "cos_uv_normal": 0.4642516511380347
+  },
+  {
+   "dataset": "d3",
+   "agent": "C",
+   "cos_uv_normal": 0.7496784613009688
+  },
+  {
+   "dataset": "d3",
+   "agent": "D",
+   "cos_uv_normal": 0.5189671657454017
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "retrieved": "2026-10-20",
+ "source": "Semantic Scholar Graph API, publisher abstract field",
+ "papers": {
+  "james2018": {
+   "doi": "10.1002/jat.3527",
+   "journal": "Journal of Applied Toxicology",
+   "volume": 38,
+   "number": 1,
+   "pages": "113-121",
+   "year": 2018,
+   "n_simulants_identified": 22,
+   "n_unsuitable": 17,
+   "n_remaining": 5,
+   "quote_basis": "Twenty-two simulants were identified, of which 17 were determined unsuitable for use in HVTs. The remaining simulants (n = 5) were further scrutinized."
+  },
+  "james2021": {
+   "doi": "10.3390/ijerph18168681",
+   "journal": "International Journal of Environmental Research and Public Health",
+   "volume": 18,
+   "number": 16,
+   "pages": "8681",
+   "year": 2021,
+   "n_chemicals_identified": 171,
+   "n_discounted": 78,
+   "n_suitable": 39,
+   "n_possible": 54,
+   "quote_basis": "Of the 171 unique chemicals identified, 78 were discounted for the risk they could pose to human volunteers, 39 were deemed suitable for use, and a further 54 were considered to be possible simulants."
+  },
+  "lavoie2011": {
+   "doi": "10.1016/j.jhazmat.2011.07.077",
+   "journal": "Journal of Hazardous Materials",
+   "volume": 194,
+   "pages": "85-91",
+   "year": 2011,
+   "abstract_status": "[수집 불가: 출판사가 초록 비공개 처리]",
+   "note": "본문은 이 논문에서 수치를 인용하지 않는다. 방법(제약 유사성 검색의 모사체 식별 적용)과 목적(가깝지만 덜 독성인 화합물) 진술만 쓰며, 그 범위는 제목과 S2 TLDR 로 확인했다."
+  }
+ }
+}

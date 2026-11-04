@@ -30,8 +30,8 @@ def main():
     src = open('test_verify_consistency.py', encoding='utf8').read()
 
     body = ''
-    for p in ('paper/main.tex', 'paper/supplementary.tex',
-              'paper/cover_letter.tex', 'paper/highlights.tex'):
+    for p in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
+              'paper_acs/cover_letter.tex'):
         body += open(p, encoding='utf8').read() + '\n'
 
     cases = []

@@ -1,0 +1,966 @@
+{
+ "n_compounds": 28,
+ "baseline_dims": 38,
+ "mantel_stability": [
+  {
+   "variant": "baseline",
+   "n_dropped": 0,
+   "n_dims": 38,
+   "n_cells": 12,
+   "min_p": 0.016666666666666666,
+   "min_q": 0.11666666666666667,
+   "n_sig_q": 0
+  },
+  {
+   "variant": "drop_binary_nonzero_le_1",
+   "n_dropped": 4,
+   "n_dims": 34,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.47222222222222215,
+   "n_sig_q": 0
+  },
+  {
+   "variant": "drop_binary_nonzero_le_3",
+   "n_dropped": 8,
+   "n_dims": 30,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.3888888888888889,
+   "n_sig_q": 0
+  }
+ ],
+ "column_info": {
+  "Asphericity": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 0.0068107184304433,
+   "vmax": 1.0,
+   "is_binary": false
+  },
+  "E_HOMO_eV": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -12.7422,
+   "vmax": -8.93016,
+   "is_binary": false
+  },
+  "E_LUMO_eV": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -9.638,
+   "vmax": 2.2266,
+   "is_binary": false
+  },
+  "Eccentricity": {
+   "n_unique": 27,
+   "n_nonzero": 28,
+   "vmin": 0.495602107306746,
+   "vmax": 1.0,
+   "is_binary": false
+  },
+  "HBA": {
+   "n_unique": 5,
+   "n_nonzero": 19,
+   "vmin": 0.0,
+   "vmax": 4.0,
+   "is_binary": false
+  },
+  "HBD": {
+   "n_unique": 2,
+   "n_nonzero": 3,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "InertialShapeFactor": {
+   "n_unique": 27,
+   "n_nonzero": 26,
+   "vmin": 0.0,
+   "vmax": 1.0168864297833606,
+   "is_binary": false
+  },
+  "MR_crippen": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 3.6138,
+   "vmax": 74.59250000000006,
+   "is_binary": false
+  },
+  "MW": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 18.015,
+   "vmax": 267.375,
+   "is_binary": false
+  },
+  "NPR1": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -3.2613054112875813e-17,
+   "vmax": 0.8685496826509769,
+   "is_binary": false
+  },
+  "NPR2": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 0.500000168819135,
+   "vmax": 1.0,
+   "is_binary": false
+  },
+  "PMI1": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -3.7409979366124126e-16,
+   "vmax": 646.5413664391886,
+   "is_binary": false
+  },
+  "PMI2": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 1.1750919550263157,
+   "vmax": 2702.332811362102,
+   "is_binary": false
+  },
+  "RadiusOfGyration": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": 0.3172016107674254,
+   "vmax": 3.426325063996399,
+   "is_binary": false
+  },
+  "SpherocityIndex": {
+   "n_unique": 26,
+   "n_nonzero": 25,
+   "vmin": 0.0,
+   "vmax": 0.6262707907464872,
+   "is_binary": false
+  },
+  "TPSA": {
+   "n_unique": 12,
+   "n_nonzero": 19,
+   "vmin": 0.0,
+   "vmax": 53.330000000000005,
+   "is_binary": false
+  },
+  "balaban_j": {
+   "n_unique": 23,
+   "n_nonzero": 27,
+   "vmin": 0.0,
+   "vmax": 4.290343871518226,
+   "is_binary": false
+  },
+  "chi1v": {
+   "n_unique": 28,
+   "n_nonzero": 27,
+   "vmin": 0.0,
+   "vmax": 9.584087515861167,
+   "is_binary": false
+  },
+  "chi4v": {
+   "n_unique": 17,
+   "n_nonzero": 16,
+   "vmin": 0.0,
+   "vmax": 4.643902093715655,
+   "is_binary": false
+  },
+  "dipole_moment_D": {
+   "n_unique": 27,
+   "n_nonzero": 26,
+   "vmin": 0.0,
+   "vmax": 4.33792,
+   "is_binary": false
+  },
+  "fraction_csp3": {
+   "n_unique": 8,
+   "n_nonzero": 21,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": false
+  },
+  "kappa2": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -27.040000000000028,
+   "vmax": 7.754610350981559,
+   "is_binary": false
+  },
+  "kappa3": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -104.0400000000001,
+   "vmax": 126.37222222222238,
+   "is_binary": false
+  },
+  "logP_crippen": {
+   "n_unique": 28,
+   "n_nonzero": 28,
+   "vmin": -0.8247,
+   "vmax": 3.697800000000002,
+   "is_binary": false
+  },
+  "n_As": {
+   "n_unique": 2,
+   "n_nonzero": 1,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_P_C": {
+   "n_unique": 2,
+   "n_nonzero": 5,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_P_CN": {
+   "n_unique": 2,
+   "n_nonzero": 1,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_P_F": {
+   "n_unique": 2,
+   "n_nonzero": 3,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_P_S": {
+   "n_unique": 2,
+   "n_nonzero": 1,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_P_alkoxy": {
+   "n_unique": 3,
+   "n_nonzero": 6,
+   "vmin": 0.0,
+   "vmax": 2.0,
+   "is_binary": false
+  },
+  "n_S_divalent": {
+   "n_unique": 2,
+   "n_nonzero": 2,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_arom_rings": {
+   "n_unique": 2,
+   "n_nonzero": 4,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_carbonyl": {
+   "n_unique": 2,
+   "n_nonzero": 3,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_halogen": {
+   "n_unique": 4,
+   "n_nonzero": 11,
+   "vmin": 0.0,
+   "vmax": 3.0,
+   "is_binary": false
+  },
+  "n_heteroatoms": {
+   "n_unique": 7,
+   "n_nonzero": 24,
+   "vmin": 0.0,
+   "vmax": 6.0,
+   "is_binary": false
+  },
+  "n_nitrile": {
+   "n_unique": 2,
+   "n_nonzero": 4,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "n_nitro": {
+   "n_unique": 2,
+   "n_nonzero": 1,
+   "vmin": 0.0,
+   "vmax": 1.0,
+   "is_binary": true
+  },
+  "rot_bonds": {
+   "n_unique": 7,
+   "n_nonzero": 11,
+   "vmin": 0.0,
+   "vmax": 8.0,
+   "is_binary": false
+  }
+ },
+ "singleton_indicators": [
+  "n_As",
+  "n_P_CN",
+  "n_P_S",
+  "n_nitro"
+ ],
+ "singleton_carriers": {
+  "n_As": "lewisite 1 (L)",
+  "n_P_CN": "tabun (GA)",
+  "n_P_S": "VX",
+  "n_nitro": "chloropicrin (PS)"
+ },
+ "pedestal_per_singleton": 28,
+ "pedestal_formula": "sqrt(n)^2 = n; 1종만 1 인 0/1 열의 표본분산은 1/n",
+ "variants": [
+  {
+   "variant": "baseline",
+   "dropped": [],
+   "n_dropped": 0,
+   "n_dims": 38,
+   "nn_median": 3.8289,
+   "n_match": 3,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)"
+   ],
+   "tabun_d_norm": 2.0038,
+   "tabun_match": false,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 1.187,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.446,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DMMP",
+     "d_norm": 2.0038,
+     "match": false
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6953,
+     "match": false
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 2.1366,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.5855,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.4507,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6056,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 2.4291,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DMMP",
+     "d_norm": 1.5944,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 3.0566,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.025,
+   "observed": 0.02343700603521537
+  },
+  {
+   "variant": "drop_binary_nonzero_le_1",
+   "dropped": [
+    "n_As",
+    "n_P_CN",
+    "n_P_S",
+    "n_nitro"
+   ],
+   "n_dropped": 4,
+   "n_dims": 34,
+   "nn_median": 3.8289,
+   "n_match": 4,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.4509,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 1.187,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.446,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DMMP",
+     "d_norm": 1.4509,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6953,
+     "match": false
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6295,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.5855,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.4507,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6056,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 1.9976,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DMMP",
+     "d_norm": 1.5944,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.7263,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.025,
+   "observed": 0.026485139372086408
+  },
+  {
+   "variant": "drop_binary_nonzero_le_2",
+   "dropped": [
+    "n_As",
+    "n_P_CN",
+    "n_P_S",
+    "n_S_divalent",
+    "n_nitro"
+   ],
+   "n_dropped": 5,
+   "n_dims": 33,
+   "nn_median": 3.8289,
+   "n_match": 4,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.4509,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 1.187,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.446,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DMMP",
+     "d_norm": 1.4509,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.372,
+     "match": false
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6295,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.5855,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.4507,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6056,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 1.9976,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DMMP",
+     "d_norm": 1.5944,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.538,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.020588235294117647,
+   "observed": 0.021532229717213802
+  },
+  {
+   "variant": "drop_binary_nonzero_le_3",
+   "dropped": [
+    "HBD",
+    "n_As",
+    "n_P_CN",
+    "n_P_F",
+    "n_P_S",
+    "n_S_divalent",
+    "n_carbonyl",
+    "n_nitro"
+   ],
+   "n_dropped": 8,
+   "n_dims": 30,
+   "nn_median": 3.2529,
+   "n_match": 5,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "sulfur mustard (HD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.678,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 0.9998,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.3944,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DPGME",
+     "d_norm": 1.678,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "DPGME",
+     "d_norm": 1.4356,
+     "match": true
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.918,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.8663,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.7076,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6184,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 2.3514,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DMMP",
+     "d_norm": 1.603,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.8234,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.016176470588235296,
+   "observed": 0.03200408518142872
+  },
+  {
+   "variant": "drop_binary_nonzero_le_4",
+   "dropped": [
+    "HBD",
+    "n_As",
+    "n_P_CN",
+    "n_P_F",
+    "n_P_S",
+    "n_S_divalent",
+    "n_arom_rings",
+    "n_carbonyl",
+    "n_nitrile",
+    "n_nitro"
+   ],
+   "n_dropped": 10,
+   "n_dims": 28,
+   "nn_median": 3.2529,
+   "n_match": 4,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.4392,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 0.9998,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.3944,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DPGME",
+     "d_norm": 1.4392,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "DPGME",
+     "d_norm": 1.4356,
+     "match": false
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.918,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6549,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.4736,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6184,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 2.3514,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DMMP",
+     "d_norm": 1.603,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.8234,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.013235294117647059,
+   "observed": 0.038766399915371785
+  },
+  {
+   "variant": "drop_binary_nonzero_le_5",
+   "dropped": [
+    "HBD",
+    "n_As",
+    "n_P_C",
+    "n_P_CN",
+    "n_P_F",
+    "n_P_S",
+    "n_S_divalent",
+    "n_arom_rings",
+    "n_carbonyl",
+    "n_nitrile",
+    "n_nitro"
+   ],
+   "n_dropped": 11,
+   "n_dims": 27,
+   "nn_median": 3.2529,
+   "n_match": 4,
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.2455,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 0.9998,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.3944,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DMMP",
+     "d_norm": 1.2455,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "DPGME",
+     "d_norm": 1.4356,
+     "match": false
+    },
+    "lewisite 1 (L)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.918,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6549,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.4736,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6184,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 2.2153,
+     "match": false
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DPGME",
+     "d_norm": 1.4475,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.7112,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.013235294117647059,
+   "observed": 0.057439417515716684
+  },
+  {
+   "variant": "drop_cardinality_le_5",
+   "dropped": [
+    "HBA",
+    "HBD",
+    "n_As",
+    "n_P_C",
+    "n_P_CN",
+    "n_P_F",
+    "n_P_S",
+    "n_P_alkoxy",
+    "n_S_divalent",
+    "n_arom_rings",
+    "n_carbonyl",
+    "n_halogen",
+    "n_nitrile",
+    "n_nitro"
+   ],
+   "n_dropped": 14,
+   "n_dims": 24,
+   "nn_median": 3.07,
+   "n_match": 6,
+   "matched": [
+    "chloropicrin (PS)",
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "sulfur mustard (HD)",
+    "tabun (GA)"
+   ],
+   "tabun_d_norm": 1.1604,
+   "tabun_match": true,
+   "agents": {
+    "sarin (GB)": {
+     "nearest": "DMMP",
+     "d_norm": 0.7426,
+     "match": true
+    },
+    "soman (GD)": {
+     "nearest": "DMMP",
+     "d_norm": 1.2697,
+     "match": true
+    },
+    "tabun (GA)": {
+     "nearest": "DMMP",
+     "d_norm": 1.1604,
+     "match": true
+    },
+    "sulfur mustard (HD)": {
+     "nearest": "DPGME",
+     "d_norm": 1.2693,
+     "match": true
+    },
+    "lewisite 1 (L)": {
+     "nearest": "DMMP",
+     "d_norm": 1.7992,
+     "match": false
+    },
+    "hydrogen cyanide (AC)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6199,
+     "match": false
+    },
+    "cyanogen chloride (CK)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.5041,
+     "match": false
+    },
+    "phosgene (CG)": {
+     "nearest": "dichloromethane",
+     "d_norm": 1.6901,
+     "match": false
+    },
+    "chloropicrin (PS)": {
+     "nearest": "DMMP",
+     "d_norm": 1.7379,
+     "match": true
+    },
+    "cyclosarin (GF)": {
+     "nearest": "DPGME",
+     "d_norm": 1.3347,
+     "match": true
+    },
+    "VX": {
+     "nearest": "DPGME",
+     "d_norm": 2.7881,
+     "match": false
+    }
+   },
+   "p_one_sided": 0.007352941176470588,
+   "observed": -0.22421514800948028
+  }
+ ],
+ "share_singletons": {
+  "tabun (GA) -> DMMP": {
+   "sq_total": 58.864,
+   "sq_sparse": 28.0,
+   "share": 0.4757
+  },
+  "sarin (GB) -> DMMP": {
+   "sq_total": 20.657,
+   "sq_sparse": 0.0,
+   "share": 0.0
+  },
+  "soman (GD) -> DMMP": {
+   "sq_total": 30.655,
+   "sq_sparse": 0.0,
+   "share": 0.0
+  },
+  "cyclosarin (GF) -> DMMP": {
+   "sq_total": 37.271,
+   "sq_sparse": 0.0,
+   "share": 0.0
+  },
+  "VX -> DPGME": {
+   "sq_total": 136.971,
+   "sq_sparse": 28.0,
+   "share": 0.2044
+  },
+  "lewisite 1 (L) -> dichloromethane": {
+   "sq_total": 66.927,
+   "sq_sparse": 28.0,
+   "share": 0.4184
+  }
+ },
+ "share_all_binary": {
+  "tabun (GA) -> DMMP": {
+   "sq_total": 58.864,
+   "sq_sparse": 42.449,
+   "share": 0.7211
+  },
+  "sarin (GB) -> DMMP": {
+   "sq_total": 20.657,
+   "sq_sparse": 10.08,
+   "share": 0.488
+  },
+  "soman (GD) -> DMMP": {
+   "sq_total": 30.655,
+   "sq_sparse": 10.08,
+   "share": 0.3288
+  },
+  "cyclosarin (GF) -> DMMP": {
+   "sq_total": 37.271,
+   "sq_sparse": 10.08,
+   "share": 0.2705
+  },
+  "VX -> DPGME": {
+   "sq_total": 136.971,
+   "sq_sparse": 59.192,
+   "share": 0.4322
+  },
+  "lewisite 1 (L) -> dichloromethane": {
+   "sq_total": 66.927,
+   "sq_sparse": 28.0,
+   "share": 0.4184
+  }
+ }
+}

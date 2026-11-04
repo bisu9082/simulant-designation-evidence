@@ -1,0 +1,8 @@
+{
+  "n_extracted": 270,
+  "n_with_aegl3": 257,
+  "pubchem_failures": [
+    "1330-20-7",
+    "9009-86-3"
+  ]
+}

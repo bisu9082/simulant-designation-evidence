@@ -9,16 +9,23 @@ cd "$(dirname "$0")"
 
 mkdir -p submission/code submission/outputs
 
-cp -p paper/main.tex paper/refs.bib paper/cover_letter.tex \
-      paper/highlights.tex paper/supplementary.tex submission/
-for f in main.pdf cover_letter.pdf highlights.pdf supplementary.pdf; do
-  [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
+# 2026-11-04 (결정 J-C). 투고 패키지는 ACS Sensors 판본이다. JHM 평행본은
+# archive/jhm_v1/ 로 동결했다 (사유와 되살리는 절차는 그쪽 FROZEN.md).
+cp -p paper_acs/main.tex paper_acs/refs.bib paper_acs/cover_letter.tex \
+      paper_acs/supporting.tex submission/
+for f in acs-main.bib acs-supporting.bib; do
+  [ -f "paper_acs/$f" ] && cp -p "paper_acs/$f" "submission/$f"
 done
-[ -f paper/main.pdf ] && cp -p paper/main.pdf submission/simulant_manuscript.pdf
+for f in main.pdf cover_letter.pdf supporting.pdf; do
+  [ -f "paper_acs/$f" ] && cp -p "paper_acs/$f" "submission/$f"
+done
+[ -f paper_acs/main.pdf ] && cp -p paper_acs/main.pdf \
+    submission/simulant_manuscript.pdf
 
-for f in Fig_main.png Fig_spaces.png Fig_toxicity.png Fig_plocal.png \
-         Fig_h1.png Fig_mde.png graphical_abstract.png graphical_abstract.pdf; do
-  cp -p "outputs/$f" "submission/$f"
+for f in Fig_main.png Fig_plocal.png Fig_h1.png Fig_mde.png \
+         Fig_talk_response.png Fig_talk_tox.png toc_acs.png \
+         graphical_abstract.png graphical_abstract.pdf; do
+  [ -f "outputs/$f" ] && cp -p "outputs/$f" "submission/$f"
 done
 
 # 코드: 분석·도판·검증 스크립트와 빌드 스크립트 전량
@@ -47,10 +54,10 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
 # 패키지 안의 원고와 산출물이 서로 맞는지 확인한다.
 ( cd submission/code \
   && ln -sfn ../../outputs outputs 2>/dev/null \
-  && mkdir -p paper \
-  && cp -p ../main.tex ../supplementary.tex ../cover_letter.tex \
-           ../highlights.tex paper/ \
-  && cp -p ../Fig_*.png paper/ \
+  && mkdir -p paper_acs \
+  && cp -p ../main.tex ../supporting.tex ../cover_letter.tex paper_acs/ \
+  && cp -p ../../paper_acs/tab_*.tex paper_acs/ \
+  && cp -p ../Fig_*.png ../toc_acs.png paper_acs/ 2>/dev/null \
   && python3 verify_consistency.py ) || {
   echo '[sync] 패키지 자기검증 실패'; exit 1; }
-rm -rf submission/code/paper submission/code/outputs
+rm -rf submission/code/paper_acs submission/code/outputs

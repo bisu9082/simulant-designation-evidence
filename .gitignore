@@ -2,13 +2,14 @@ __pycache__/
 *.pyc
 outputs/_log_*.txt
 outputs/*.zip
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.bbl
-paper/*.blg
-paper/*.spl
-paper/*.synctex.gz
+# 2026-11-04 (J-C). paper/ 를 archive/jhm_v1/ 로 동결했다.
+archive/jhm_v1/*.aux
+archive/jhm_v1/*.log
+archive/jhm_v1/*.out
+archive/jhm_v1/*.bbl
+archive/jhm_v1/*.blg
+archive/jhm_v1/*.spl
+archive/jhm_v1/*.synctex.gz
 paper_acs/*.aux
 paper_acs/*.log
 paper_acs/*.out
