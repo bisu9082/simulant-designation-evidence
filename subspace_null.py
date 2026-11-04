@@ -28,9 +28,12 @@ from spaces import pick, PROTECTED
 PANEL = 'descriptor_cache_xtb.csv'
 N_SUB = 500
 SEED = 49374
-ELEC = {'dipole_moment_D', 'E_HOMO_eV', 'E_LUMO_eV',
-        'electrophilicity_index_eV'}
-META = {'n_conformers', 'conformer_w_max'}
+# 2026-11-04 (작업 D). 공간 정의를 여기서 따로 들고 있었고 spaces.py 와
+# 갈라져 있었다. META 에 '_n_conf_xtb' 가 빠져서 형태이성질체 개수(실행
+# 메타데이터)가 구조 좌표로 들어갔고, 보유 좌표가 36 이 되어 SI 가 적는
+# 35 와 어긋났다. 정의를 복제하지 않고 spaces.py 를 쓴다.
+from spaces import ELECTRONIC_28 as ELEC, META_NUM
+META = set(META_NUM)
 
 
 def main():
