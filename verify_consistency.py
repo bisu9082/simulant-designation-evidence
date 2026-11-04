@@ -296,6 +296,41 @@ def _filter_dependent_staleness():
     return bad
 
 
+def _figure_panel_refs():
+    r"""인용된 도판 패널 문자가 그 도판 캡션에 실제로 있는지 본다.
+
+    왜 필요한가 (2026-11-04 신설, 작업 D). ACS본은 JHM본의 4패널 독성 도판을
+    2패널 Fig_talk_tox 로 바꿨는데 SI 의 인용은 'Fig.~\ref{M-fig:tox}c and d'
+    로 남아 있었다. 없는 패널을 가리키므로 조판은 통과하고 독자는 찾지
+    못한다. 수치 검사로는 잡히지 않는 종류다.
+    """
+    import os as _o
+    import re as _re
+    caps = {}
+    for f in ('paper_acs/main.tex',):
+        if not _o.path.exists(f):
+            continue
+        txt = open(f, encoding='utf8').read()
+        for blk in _re.findall(r'\\begin\{figure\*?\}(.*?)\\end\{figure\*?\}',
+                               txt, _re.S):
+            lab = _re.search(r'\\label\{(fig:[^}]+)\}', blk)
+            if not lab:
+                continue
+            caps[lab.group(1)] = set(_re.findall(r'\((\w)\)', blk))
+    bad = []
+    for f in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+        if not _o.path.exists(f):
+            continue
+        txt = open(f, encoding='utf8').read()
+        for m in _re.finditer(r'ref\{(?:M-)?(fig:[^}]+)\}([a-z])\b', txt):
+            lab, panel = m.group(1), m.group(2)
+            if lab in caps and panel not in caps[lab]:
+                bad.append(f'  없는 패널 인용 [{f}]: {lab} 에 ({panel}) 가 '
+                           f'없다. 캡션의 패널은 '
+                           f'{sorted(caps[lab]) or "없음"}')
+    return sorted(set(bad))
+
+
 def _title_sync():
     r"""제목이 본문·SI·커버레터에서 같은지 본다 (2026-11-03 신설, 작업 B).
 
@@ -2144,10 +2179,10 @@ CHECKS = [
     ('ascl3_a28_dist', [r'Twenty-eight, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
     ('ascl3_a35_match', [r'Thirty-five, incumbent three & (\d+)/11 & dichloromethane'], 0),
     ('ascl3_a35_dist', [r'Thirty-five, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
-    ('ascl3_a35l_dist', [r'Thirty-five, plus literature eight & \d+/11 & CEES & ([\d.]+)'], 0.006),
+    ('ascl3_a35l_dist', [r'Thirty-five, incumbent 3 \+ literature 5 & \d+/11 & CEES & ([\d.]+)'], 0.006),
     ('ascl3_a36_match', [r'Thirty-six, incumbent three & (\d+)/11 & dichloromethane'], 0),
     ('ascl3_a36_dist', [r'Thirty-six, incumbent three & \d+/11 & dichloromethane & ([\d.]+)'], 0.006),
-    ('ascl3_a36l_match', [r'Thirty-six, plus literature & (\d+)/11 & AsCl'], 0),
+    ('ascl3_a36l_match', [r'Thirty-six, incumbent 3 \+ literature 6 & (\d+)/11 & AsCl'], 0),
     ('null3_lower', [r'the three at \$p=([\d.]+)\$ over all',
                      r'zero sits at \$p=([\d.]+)\$ against an expected'], 0.006),
     ('null8_nested_mean', [r'gives a mean of ([\d.]+) rather',
@@ -2299,13 +2334,13 @@ CHECKS = [
                    r'0\.151 with equal weight per descriptor and ([\d.]+) with'],
      0.0005),
     ('bb_minp35lit',
-     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
+     [r'Thirty-five, incumbent 3 \+ literature 5 & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('bb_minp28',
      [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
     ('bbq_35', [r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
     ('bbq_35lit',
-     [r'Thirty-five, plus literature 8 & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
+     [r'Thirty-five, incumbent 3 \+ literature 5 & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
      0.0005),
     ('bbq_28',
      [r'Twenty-eight, incumbent three & \d+/11 & \d+/11 & [\d.]+ & [\d.]+ & [\d.]+ & ([\d.]+)'],
@@ -2313,25 +2348,28 @@ CHECKS = [
     # 2026-10-24. 유효매칭 열을 per descriptor / per block 두 칸으로 쪼갰다.
     # 둘 다 걸지 않으면 한쪽을 망가뜨리는 주입이 통과한다 (실제로 통과했다).
     ('bb_cur_match35', [r'Thirty-five, incumbent three & (\d+)/11'], 0),
-    ('bb_cur_match35lit', [r'Thirty-five, plus literature 8 & (\d+)/11'], 0),
+    ('bb_cur_match35lit', [r'Thirty-five, incumbent 3 \+ literature 5 & (\d+)/11'], 0),
     ('bb_cur_match28', [r'Twenty-eight, incumbent three & (\d+)/11'], 0),
     ('bb_match35', [r'Thirty-five, incumbent three & \d+/11 & (\d+)/11'], 0),
-    ('bb_match35lit', [r'Thirty-five, plus literature 8 & \d+/11 & (\d+)/11'], 0),
+    ('bb_match35lit', [r'Thirty-five, incumbent 3 \+ literature 5 & \d+/11 & (\d+)/11'], 0),
     ('bb_match28', [r'Twenty-eight, incumbent three & \d+/11 & (\d+)/11'], 0),
     ('bb_meandiff28', [r'there falls from 0\.025 to ([\d.]+)'], 0.0005),
     ('bbpre_28', [r'which stays at ([\d.]+) on the twenty-eight-compound panel'],
      0.0005),
     # 네 번째 구성 (2026-10-20). 표 1 네 번째 블록 + §3.1 산문 + Limitations.
     # 표 3 사건의 교훈대로 표를 먼저 등록한다.
-    ('pp_st_md', [row_pat('35 cpd., incumbent 3', 'structural', 0)], 0.0005),
-    ('pp_st_lr', [row_pat('35 cpd., incumbent 3', 'structural', 2)], 0.0005),
-    ('pp_st_ds', [row_pat('35 cpd., incumbent 3', 'structural', 3)], 0.0005),
-    ('pp_el_md', [row_pat('\\quad + literature 5', 'electronic', 0)], 0.0005),
-    ('pp_el_mdn', [row_pat('\\quad + literature 5', 'electronic', 1)], 0.0005),
-    ('pp_el_nv', [row_pat('\\quad + literature 5', 'electronic', 5)], 0.0005),
-    ('pp_mg_md', [row_pat('\\quad + pesticides 2', 'merged', 0)], 0.0005),
-    ('pp_mg_lr', [row_pat('\\quad + pesticides 2', 'merged', 2)], 0.0005),
-    ('pp_mg_ds', [row_pat('\\quad + pesticides 2', 'merged', 3)], 0.0005),
+    ('pp_st_md', [row_pat('35 cpd., ten designated', 'structural', 0)], 0.0005),
+    ('pp_st_lr', [row_pat('35 cpd., ten designated', 'structural', 2)], 0.0005),
+    ('pp_st_ds', [row_pat('35 cpd., ten designated', 'structural', 3)], 0.0005),
+    # 2026-11-04 (작업 D). 라벨을 '지정 후보 총수' 로 통일했다. 종전
+    # '+ literature 5' 는 2행과 4행이 같은 문자열이 되어 앵커가 엉뚱한
+    # 행에 붙었다. 농약 구성은 4행이고 이제 라벨이 유일하다.
+    ('pp_el_md', [row_pat('\\quad (3 incumbent + 5 literature', 'electronic', 0)], 0.0005),
+    ('pp_el_mdn', [row_pat('\\quad (3 incumbent + 5 literature', 'electronic', 1)], 0.0005),
+    ('pp_el_nv', [row_pat('\\quad (3 incumbent + 5 literature', 'electronic', 5)], 0.0005),
+    ('pp_mg_md', [row_pat('\\quad + 2 pesticides)', 'merged', 0)], 0.0005),
+    ('pp_mg_lr', [row_pat('\\quad + 2 pesticides)', 'merged', 2)], 0.0005),
+    ('pp_mg_ds', [row_pat('\\quad + 2 pesticides)', 'merged', 3)], 0.0005),
     # pp_n_perm 은 UNQUOTED 면제 항목이다. 앵커를 중복으로 두면
     # 영구 '문맥 미발견' 이 남는다. 2026-11-03 제거.
     ('pp_min_p', [r'smallest nominal value of ([\d.]+) and a'], 0.00001),
@@ -2555,6 +2593,16 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-04 (작업 D). 패널 구성 명명. 8 은 문헌이 제안한 화합물 수가
+    # 아니라 지정 후보의 총수다 — 기존 3종(DMMP, DPGME, 디클로로메탄) +
+    # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature
+    # simulants' 는 문헌이 8종을 제안했다고 읽힌다. 생성표 라벨도
+    # '여덟 지정' 으로 통일했다.
+    ('패널 구성 명명 구판 (8 = 기존 3 + 문헌 5, 문헌이 8종이 아니다)',
+     [r'eight literature simulants',
+      r'literature eight',
+      r'\+ literature 8'],
+     []),
     # 2026-11-03 (작업 C). 중심화 '바닥' 논증 전량 철회.
     #
     # 두 가지가 겹쳐 있었다. (1) centred() 가 unit(v-mu) 로 재정규화하므로
@@ -2805,6 +2853,7 @@ def main():
                      (_handmade_tables(), '생성기 없는 수치 표'),
                      (_generated_table_sync(), '생성 표 사본 시차'),
                      (_title_sync(), '제목 비동기'),
+                     (_figure_panel_refs(), '없는 도판 패널 인용'),
                      (_filter_dependent_staleness(), '구판 예치물'),
                      (_label_scope_guards(), '수치는 맞고 설명이 틀린 자리')):
         if _g:
