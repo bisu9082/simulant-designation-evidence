@@ -26,6 +26,7 @@
     "faithful_but_toxic": 52,
     "safe_but_unfaithful": 8
   },
+  "n_strictly_safer_than_incumbent": 7,
   "n_faithful_safe_passing_alerts": 0,
   "safety_tiers": {
     "ten_times_safer": {

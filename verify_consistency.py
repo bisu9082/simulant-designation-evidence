@@ -296,6 +296,46 @@ def _filter_dependent_staleness():
     return bad
 
 
+def _si_section_labels():
+    r"""SI 의 모든 절에 라벨이 있고, 그 라벨이 어딘가에서 인용되는지 본다.
+
+    왜 필요한가 (2026-11-04 신설, G3). SI 26개 절 중 세 개에 라벨이 없어
+    아예 가리킬 수 없었고, 세 개는 라벨은 있는데 본문·SI 어디서도 인용되지
+    않았다. 그중 하나(res:mde)는 바로 위에 같은 제목의 빈 subsection 이
+    붙어 있어 목차에 두 번 찍혔다. 조판은 전부 통과한다.
+    """
+    import os as _o
+    import re as _re
+    f_si, f_mn = 'paper_acs/supporting.tex', 'paper_acs/main.tex'
+    if not (_o.path.exists(f_si) and _o.path.exists(f_mn)):
+        return []
+    strip = lambda t: '\n'.join(_re.sub(r'(?<!\\)%.*$', '', l)
+                                for l in t.split('\n'))
+    si = strip(open(f_si, encoding='utf8').read())
+    mn = strip(open(f_mn, encoding='utf8').read())
+    secs = [(m.start(), ' '.join(m.group(1).split()))
+            for m in _re.finditer(r'\\section\*?\{(.+?)\}', si, _re.S)]
+    labs = {m.start(): m.group(1)
+            for m in _re.finditer(r'\\label\{([^}]+)\}', si)}
+    bad = []
+    titles = [t for _, t in secs]
+    for i, (pos, title) in enumerate(secs):
+        nxt = secs[i + 1][0] if i + 1 < len(secs) else len(si)
+        lab = next((l for p, l in sorted(labs.items()) if pos < p < nxt), None)
+        if lab is None:
+            bad.append(f'  SI 절에 라벨이 없다: "{title[:52]}" — 가리킬 수 '
+                       f'없으므로 항해 불가')
+            continue
+        cited = (_re.findall(r'ref\{' + _re.escape(lab) + r'\}', si)
+                 or _re.findall(r'ref\{S-' + _re.escape(lab) + r'\}', mn))
+        if not cited:
+            bad.append(f'  SI 절이 어디서도 인용되지 않는다: {lab} '
+                       f'("{title[:40]}")')
+    for t in sorted({t for t in titles if titles.count(t) > 1}):
+        bad.append(f'  SI 절 제목 중복: "{t[:52]}"')
+    return bad
+
+
 def _figure_panel_refs():
     r"""인용된 도판 패널 문자가 그 도판 캡션에 실제로 있는지 본다.
 
@@ -900,6 +940,13 @@ def load_facts():
 
     # 2026-10-27. 부분공간 대조의 귀무 보정. 본문이 36.0% 를 '평범한 draw' 로
     # 읽었던 자리를 뒤집는 수치이므로 전부 건다.
+    # 2026-11-04 (G3). SI 의 두 '수' 가 산출물에 없거나 앵커가 없었다.
+    # 207종 중 일곱만 더 안전(경계값인 DCM 자신은 분면 8에 포함되므로
+    # 둘은 다른 수다)과 한 자릿수 아래 여덟 후보.
+    _h1s = json.load(open('outputs/h1_summary.json'))
+    f['h1_safer7'] = _h1s['n_strictly_safer_than_incumbent']
+    f['h1_relaxed10'] = _h1s['safety_tiers']['relaxed_10']['n']
+    f['h1_ncand'] = _h1s['n_candidates']
     if os.path.exists('outputs/subspace_null.json'):
         _sn = json.load(open('outputs/subspace_null.json'))
         # 2026-11-04 (작업 D). 순위 자체에 검사가 없었다. 37좌표 구판의
@@ -1994,6 +2041,10 @@ CHECKS = [
     # R2·R5 가 같은 자리를 지적했다. 앵커가 없어서 통과했다.
     ('q_by_space28', [r'correcting within each space gives (0\.\d+)'],
      0.00005),
+    ('h1_safer7', [r'only ([a-z]+) of the \d+ candidate compounds are'], 0),
+    ('h1_ncand', [r'only [a-z]+ of the (\d+) candidate compounds are',
+                  r'Across the (\d+) candidates carrying both'], 0),
+    ('h1_relaxed10', [r'there are ([a-z]+) compounds, all of'], 0),
     ('sn_nsub', [r'Across (\d+) random three-descriptor subspaces',
      r'Over (\d+) subspaces'], 0),
     # 2026-11-01 신설. 사실로는 적재되는데 검사 항목이 없던 셋.
@@ -2598,6 +2649,14 @@ SUPERSEDED = [
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature
     # simulants' 는 문헌이 8종을 제안했다고 읽힌다. 생성표 라벨도
     # '여덟 지정' 으로 통일했다.
+    # 2026-11-04 (G3). S-disc 의 두 수는 서로 다른 것을 센다. 207종 중
+    # 일곱만 DCM 보다 안전하고(경계값 DCM 자신은 분면 8에 포함), 한 자릿수
+    # 아래 완화 기준에서 후보가 여덟이다. 'the seven are a lower bound' 는
+    # 바로 앞 문장의 여덟과 뭉개져 읽힌다.
+    ('S-disc 의 두 수 지시대상 뭉갬 (일곱=더 안전, 여덟=완화기준 후보)',
+     [r'the seven are a lower bound',
+      r'safer than all but seven of the'],
+     []),
     ('패널 구성 명명 구판 (8 = 기존 3 + 문헌 5, 문헌이 8종이 아니다)',
      [r'eight literature simulants',
       r'literature eight',
@@ -2854,6 +2913,7 @@ def main():
                      (_generated_table_sync(), '생성 표 사본 시차'),
                      (_title_sync(), '제목 비동기'),
                      (_figure_panel_refs(), '없는 도판 패널 인용'),
+                     (_si_section_labels(), 'SI 항해성'),
                      (_filter_dependent_staleness(), '구판 예치물'),
                      (_label_scope_guards(), '수치는 맞고 설명이 틀린 자리')):
         if _g:
