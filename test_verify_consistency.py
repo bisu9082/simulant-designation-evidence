@@ -212,9 +212,10 @@ CASES = [
      ' & 0.1132',
      '28 cpd., incumbent 3   & structural  & 35 & \\textbf{0.1279} & 0.1103'
      ' & 0.1132'),
-    ('표 1 네 번째 블록 병합공간 행이 틀림 (0.005 대 0.055)',
-     '+ pesticides 2   & merged      & 42 & \\textbf{0.006}',
-     '+ pesticides 2   & merged      & 42 & \\textbf{0.056}'),
+    # 2026-11-04 (작업 D). 라벨 통일과 차원 교정(42 -> 41)에 맞춰 갱신.
+    ('표 1 네 번째 블록 병합공간 행이 틀림 (0.004756 대 0.04756)',
+     '+ 2 pesticides)  & merged      & 41 & \\textbf{0.004756}',
+     '+ 2 pesticides)  & merged      & 41 & \\textbf{0.04756}'),
     ('네 번째 구성 BH q 를 비유의로 오기 (0.0006 대 0.0600) — 결론이 뒤집힌다',
      'Benjamini-Hochberg value of 0.0008 over the same',
      'Benjamini-Hochberg value of 0.0600 over the same'),
@@ -518,6 +519,14 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (작업 D, 2차) 신설분 ---
+    ('없는 도판 패널 인용으로 되돌림 (fig:tox 는 a·b 뿐)',
+     '(Fig.~\\ref{M-fig:tox}b) reached',
+     '(Fig.~\\ref{M-fig:tox}c and d) reached'),
+    ('패널 구성 명명을 구판으로 되돌림 (8 은 문헌 수가 아니다)',
+     'the five literature-proposed simulants are admitted alongside the three',
+     'the eight literature simulants are admitted as candidates to the three'),
+
     # --- 2026-11-04 (작업 D) 신설분 ---
     ('SI 부분공간 최대값을 37좌표 구판으로 되돌림 (정본 44.6%)',
      'a maximum\nof 44.6\\%', 'a maximum\nof 52.8\\%'),

@@ -36,14 +36,21 @@ SPACE_LABEL = {'structural': 'structural', 'electronic3': 'electronic',
 ROWS = [
     ('\\textbf{35 cpd., incumbent 3}', '\\textbf{(primary)}', '',
      'panel35_designated3'),
-    ('35 cpd., incumbent', '\\quad + literature 8', '',
+    ('35 cpd., eight designated', '\\quad (3 incumbent + 5 literature)', '',
      'panel35_designated_plus_literature8'),
     ('28 cpd., incumbent 3', '\\quad (omits the seven)', '',
      'panel28_designated3'),
-    ('35 cpd., incumbent 3', '\\quad + literature 5',
-     '\\quad + pesticides 2', 'pesticide'),
+    ('35 cpd., ten designated', '\\quad (3 incumbent + 5 literature',
+     '\\quad + 2 pesticides)', 'pesticide'),
 ]
 
+
+# 2026-11-04 (작업 D). 패널 명명 규칙. 종전에는 같은 구성을 'literature 8',
+# 'literature eight', 'the eight literature simulants' 로 적었다. 8 은 문헌이
+# 제안한 화합물 수가 아니라 **지정 후보의 총수**다: 기존 3종(DMMP, DPGME,
+# 디클로로메탄) + 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 아래 라벨은
+# 문헌 쪽 수(5)만 적고, 총수 8 은 본문이 문장으로 말한다.
+#   28종 구성 = 35종에서 7종을 뺀 것 (문헌 5 + 농약 2)
 
 def fmt(p, dp=4):
     """p 를 SI 관례로 쓴다. 0.001 미만은 <0.001, 0.05 미만은 굵게."""
@@ -111,10 +118,11 @@ def ablation(rc, mq, pf, pp, mc):
 
 # ---------------------------------------------------------------- tab:family
 FAM_COLS = [('panel35_incumbent3', '35 cpd.,', 'incumbent 3', '(primary)'),
-            ('panel35_incumbent_plus_lit8', '35 cpd.,', '+ literature 8', ''),
+            ('panel35_incumbent_plus_lit8', '35 cpd.,',
+             'eight designated', ''),
             ('panel28_incumbent3', '28 cpd.,', 'incumbent 3',
              '(omits the seven)'),
-            ('pesticide', '35 cpd.,', 'relabelled 10', '(pesticides in)')]
+            ('pesticide', '35 cpd.,', 'ten designated', '(pesticides in)')]
 FAM_ROWS = [('Smallest nominal $p$ (18 tests)', 'min_p'),
             ('Benjamini-Hochberg over 18', 'bh_all_min_q'),
             ('Benjamini-Hochberg over 6, per space', 'bh_by_space_min_q'),
@@ -167,7 +175,8 @@ Accounting scheme & """ + ' & '.join(c[1] for c in FAM_COLS) + r""" \\
 
 # ------------------------------------------------------ tab:blockbalance
 BB_ROWS = [('Thirty-five, incumbent three', 'panel35_incumbent3'),
-           ('Thirty-five, plus literature 8', 'panel35_incumbent_plus_lit8'),
+           ('Thirty-five, incumbent 3 + literature 5',
+            'panel35_incumbent_plus_lit8'),
            ('Twenty-eight, incumbent three', 'panel28_incumbent3')]
 
 
