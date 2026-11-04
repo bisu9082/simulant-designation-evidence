@@ -86,6 +86,8 @@ REQUIRED_FOR_FIGURES = [
     # 2026-11-03 (작업 A).
     'outputs/shape_reduction.json',
     'outputs/premise_null.json',
+    # 2026-11-04 (E2).
+    'outputs/lewisite_isomer.json',
     'outputs/_pca_scores.npy',
     'outputs/_null_A_rdkit.npy',
     'outputs/_null_B_electronic.npy',
@@ -568,6 +570,7 @@ def preflight():
         'volatility_space.json': 'volatility_space.py',
         'shape_reduction.json': 'shape_reduction.py',
         'premise_null.json': 'premise_null.py',
+        'lewisite_isomer.json': 'lewisite_isomer.py',
         'subspace_null.json': 'subspace_null.py',
         'dft_dipole.csv': 'dft_omega.py',
         'dft_electronic_space.json': 'dft_electronic_space.py',
@@ -1583,6 +1586,10 @@ def load_facts():
     f['sr_id_hi'] = max(v for k, v in _srf['identity_audit'].items()
                         if k != 'note') * 100.0
 
+    # 2026-11-04 (E2). 루이사이트 기하이성질체 민감도.
+    _li = json.load(open('outputs/lewisite_isomer.json'))
+    f['lew_dnorm_E'] = _li['E_trans']['d_norm']
+    f['lew_dnorm_Z'] = _li['Z_cis']['d_norm']
     _pn = json.load(open('outputs/premise_null.json'))
     f['pn_cells'] = _pn['bh']['n_cells']
     f['pn_min_q'] = _pn['bh']['min_q']
@@ -2498,6 +2505,9 @@ CHECKS = [
     ('sr_mantel_q_red', [r'shape coordinates raises it to (0\.\d+)'], 0.00005),
     # 전제검정 라벨순열 귀무 (초록).
     ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a null'], 0),
+    # 2026-11-04 (E2). 루이사이트 기하이성질체 민감도.
+    ('lew_dnorm_E', [r'primary panel from (\d\.\d+) to'], 0.00005),
+    ('lew_dnorm_Z', [r'from \d\.\d+ to (\d\.\d+), leaves CEES'], 0.00005),
     # 2026-11-03 (작업 C). 바닥 논증 대체 문단.
     ('pn_null_max', [r'difference of \$\+[\d.]+\$ to\s*\n?\$\+(0\.\d+)\$',
                      r'between \$\+[\d.]+\$ and\s*\n?\$\+(0\.\d+)\$'],
@@ -2649,6 +2659,32 @@ SUPERSEDED = [
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature
     # simulants' 는 문헌이 8종을 제안했다고 읽힌다. 생성표 라벨도
     # '여덟 지정' 으로 통일했다.
+    # 2026-11-04 (E2). 이성질체 교체는 판정을 바꾸지 않는다(둘 다 음성).
+    # 바뀐다고 적으면 민감도의 결론이 뒤집힌다.
+    ('이성질체가 매칭 판정을 바꾼다는 주장 (실측: E·Z 모두 음성)',
+     [r'changes the match verdict, which is positive',
+      r'the \$Z\$ form makes it a match'],
+     []),
+    # 2026-11-04 (E1). 런 1·3 은 어떤 순도 수치도 보고하지 않는다. 원문을
+    # 읽어 확인했다. 공급자 등급·역가·확인분석 어느 것도 없다.
+    ('런 1·3 에 순도 수치가 있다는 주장 (원문 확인: 전무)',
+     [r'Both report supplier grades',
+      r'first and third runs report purit',
+      r'purity (?:was )?confirmed for all three runs'],
+     []),
+    # 2026-11-04 (E1/E6). 원논문이 말하지 않는 출처 주장. 런 1 은 작용제를
+    # 연구소에서 '받았다'(obtained from)고만 적고, 런 3 은 출처를 아예 적지
+    # 않는다. 어느 쪽도 '생산했다' 고 말하지 않는다.
+    ('작용제 생산 주장 (원논문 미기재 — 런1 obtained from, 런3 무기재)',
+     [r'All agents were produced\s*\n?and handled at',
+      r'agents were produced and handled'],
+     []),
+    # 2026-11-04 (E3). 원논문은 A계열 코드가 어느 화합물인지 동정하지 않고
+    # 구조 그림을 'representative' 로 단다. 우리가 구조를 배정하지 않는다.
+    ('A계열 코드에 구조·화합물 배정 (원논문이 동정하지 않는다)',
+     [r'A-230 is\b', r'A-232 is\b', r'A-234 is\b', r'A-242 is\b',
+      r'A-series compounds are identified as'],
+     []),
     # 2026-11-04 (G3). S-disc 의 두 수는 서로 다른 것을 센다. 207종 중
     # 일곱만 DCM 보다 안전하고(경계값 DCM 자신은 분면 8에 포함), 한 자릿수
     # 아래 완화 기준에서 후보가 여덟이다. 'the seven are a lower bound' 는
