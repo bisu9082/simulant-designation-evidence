@@ -424,7 +424,11 @@ that designates dipropylene glycol monomethyl ether is
 of low-toxicity liquid simulants\cite{webb2025}, which does not list
 dichloromethane as a simulant for any agent and names it only as the
 extraction solvent recommended by the Organisation for the Prohibition of
-Chemical Weapons.
+Chemical Weapons. The fourth is the National Research Council assessment of
+the Man-in-Simulant Test programme\cite{nrc1997mist}, whose chapter on
+simulant selection names methyl salicylate, dimethyl methylphosphonate and
+di-isopropyl methyl phosphonate for fabric testing and does not name
+dichloromethane.
 
 Three limits apply and we state them rather than claim coverage we do not
 have. The search covers the public record reachable without clearance or a
@@ -444,8 +448,35 @@ usage is not in dispute.
 The second run reports GC--MS purities above 95\% for hydrogen cyanide,
 cyanogen chloride, phosgene, chloropicrin, sulfur mustard and nitrogen
 mustard, and 67\% for lewisite~1.\cite{multiplexref} The first and third runs
-report no purity values; we searched the methods of both and found none, and we
-do not estimate them.
+report no purity values. We read the Materials section of each. The first
+states only that the agents were obtained from the CBRN Defense Research
+Institute\cite{hazref}; the third states only that the work was carried out
+at an Organisation for the Prohibition of Chemical Weapons designated
+laboratory and gives no provenance for the agents at all\cite{group3ref}.
+Neither reports an assay, a supplier grade or a confirmatory analysis. We do
+not estimate the missing values.
+
+Two things follow from the 67\% and we state both. The first is the isomer.
+Lewisite~1 has geometric isomers and the technical material is predominantly
+the \textit{trans} form. We compute it as the $E$ isomer, with input SMILES
+\texttt{Cl/C=C/[As](Cl)Cl}, and the descriptor code assigns that double bond
+\texttt{STEREOE}. Recomputing the compound as the $Z$ isomer and leaving the
+rest of the panel untouched moves its normalised distance in the structural
+space of the primary panel from 2.4769 to 2.4892, leaves CEES as its nearest
+candidate simulant and \textit{para}-dichlorobenzene as its nearest
+non-simulant, and does not change the match verdict, which is negative under
+both. The comparison is of the structural space only: the electronic
+descriptors are produced by a semiempirical step that we did not re-run for
+the alternative isomer, so we do not report a merged-space figure for it.
+Values are in \texttt{outputs/lewisite\_isomer.json}.
+
+The second is the other 33\%. The source does not say what it is, and we do
+not assume. Technical lewisite can carry the bis and tris homologues and
+arsenic trichloride, and of those the one that the sensing literature also
+treats as a simulant is arsenic trichloride; Section~\ref{sec:si-ascl3} adds
+it to the panel and reports what changes. We do not extend that to the
+homologues, because adding a compound the source does not place in the vial
+would be an assumption dressed as a control.
 
 A 67\% sample is a mixture, and lewisite enters both the descriptor panels, as
 one of the eleven agents, and the second run's premise test, as one of seven
@@ -639,7 +670,12 @@ exception being nitrogen mustard HN, which the descriptor panel does not carry.
 The third set is excluded entirely and the criterion is arithmetic rather than
 editorial: none of its four compounds appears in the descriptor panel, so no
 pair of a measured pattern and a descriptor distance can be formed from it. It
-contributes to no analysis in this paper.
+contributes to no analysis in this paper. The exclusion is not a judgement we
+had to make on chemical grounds, because the source does not supply the
+identities that such a judgement would need: it carries the four as the codes
+A-230, A-232, A-234 and A-242, labels its structure figure representative, and
+does not map any code to a named compound\cite{group3ref}. We therefore do not
+assign structures to those codes anywhere in this work.
 
 The three sets are different compounds measured on different plates, not
 replicates, so no $\Delta E$ value is compared across sets; every analysis is run

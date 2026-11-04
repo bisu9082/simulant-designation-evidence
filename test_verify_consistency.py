@@ -345,6 +345,14 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-04 (E1/E3/E6) 신설분 ---
+    ('원논문이 말하지 않는 생산 주장으로 되돌림',
+     'We made no\nmeasurement of our own and handled no agent',
+     'All agents were produced\nand handled at'),
+    ('A계열 코드에 동정을 부여',
+     'does not state which compound each\ncode denotes',
+     'A-230 is the methyl ethoxy member and each\ncode denotes'),
+
     # --- 2026-11-04 (작업 D) 신설분. 구판 수치 3건 ---
     ('공간내 보정값을 구판으로 되돌림 (정본 0.0772, 구판 0.0824)',
      'correcting within each space gives 0.0772',
@@ -519,6 +527,17 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (E1/E2) 신설분 ---
+    ('루이사이트 Z 이성질체 거리 오기 (정본 2.4892)',
+     'from 2.4769 to 2.4892, leaves CEES',
+     'from 2.4769 to 3.4892, leaves CEES'),
+    ('이성질체가 판정을 바꾼다고 되돌림 (정본 둘 다 음성)',
+     'does not change the match verdict, which is negative under\nboth',
+     'changes the match verdict, which is positive under the $Z$ form'),
+    ('런 1·3 순도 부재 서술을 뭉갬',
+     'Neither reports an assay, a supplier grade or a confirmatory analysis',
+     'Both report supplier grades above 95\\%'),
+
     # --- 2026-11-04 (G3) 신설분 ---
     ('207종 중 더 안전한 수 오기 (정본 seven)',
      'only seven of the 207 candidate compounds are',

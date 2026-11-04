@@ -5,27 +5,31 @@ The style file: achemso.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-main.bib
 Database file #2: refs.bib
+Repeated entry---line 866 of file refs.bib
+ : @book{nrc1997mist
+ :                  ,
+I'm skipping whatever remains of this entry
 achemso 2024-01-30 v3.13g
 You've used 35 entries,
             2538 wiz_defined-function locations,
-            984 strings with 17875 characters,
-and the built_in function-call counts, 13799 in all, are:
-= -- 954
+            985 strings with 17990 characters,
+and the built_in function-call counts, 13812 in all, are:
+= -- 957
 > -- 1132
 < -- 19
 + -- 418
 - -- 383
-* -- 1547
-:= -- 1896
+* -- 1548
+:= -- 1897
 add.period$ -- 64
 call.type$ -- 35
 change.case$ -- 4
 chr.to.int$ -- 2
 cite$ -- 35
-duplicate$ -- 658
-empty$ -- 792
+duplicate$ -- 659
+empty$ -- 793
 format.name$ -- 427
-if$ -- 2581
+if$ -- 2585
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
@@ -38,7 +42,7 @@ quote$ -- 0
 skip$ -- 31
 stack$ -- 0
 substring$ -- 566
-swap$ -- 973
+swap$ -- 974
 text.length$ -- 69
 text.prefix$ -- 0
 top$ -- 1
@@ -46,4 +50,5 @@ type$ -- 239
 warning$ -- 0
 while$ -- 114
 width$ -- 0
-write$ -- 456
+write$ -- 457
+(There was 1 error message)
