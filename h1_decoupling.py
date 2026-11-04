@@ -318,6 +318,12 @@ json.dump(dict(seed=SEED, bootstrap=N_BOOT, n_pool=int(len(P)),
                verdict=verdict, fidelity_cut=fid_cut, tox_cut=tox_cut,
                dcm_aegl3_mgm3=DCM_AEGL3,
                quadrants={k: int(v) for k, v in Cand.quadrant.value_counts().items()},
+               # 2026-11-04 (G3). SI 가 '207종 중 일곱만 빼고 더 안전' 이라고
+               # 적는데 그 수가 산출물에 없었다. 분면의 safe_but_unfaithful(8)
+               # 은 경계값인 DCM 자신을 포함하므로 둘은 다른 수다. 둘 다
+               # 적어 두지 않으면 어느 쪽도 검사할 수 없다.
+               n_strictly_safer_than_incumbent=int(
+                   (Cand.y_tox > tox_cut + 1e-12).sum()),
                n_faithful_safe_passing_alerts=int(len(FS)),
                safety_tiers=tier_out,
                pool_screen=SCREEN, n_screened_distinct=int(_bad.sum()),

@@ -519,6 +519,17 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (G3) 신설분 ---
+    ('207종 중 더 안전한 수 오기 (정본 seven)',
+     'only seven of the 207 candidate compounds are',
+     'only eight of the 207 candidate compounds are'),
+    ('한 자릿수 아래 후보 수 오기 (정본 eight)',
+     'there are eight compounds, all of',
+     'there are seven compounds, all of'),
+    ('두 수의 지시대상을 다시 뭉갬 (정본 both counts)',
+     'so both counts are lower bounds rather than',
+     'so the seven are a lower bound rather than'),
+
     # --- 2026-11-04 (작업 D, 2차) 신설분 ---
     ('없는 도판 패널 인용으로 되돌림 (fig:tox 는 a·b 뿐)',
      '(Fig.~\\ref{M-fig:tox}b) reached',
