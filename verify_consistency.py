@@ -1333,6 +1333,7 @@ def load_facts():
     f['boot_inc_lo'] = bt['incumbent3']['ci'][0]
     f['boot_inc_hi'] = bt['incumbent3']['ci'][1]
     f['boot_inc_zero'] = 100.0 * bt['incumbent3']['frac_zero']
+    f['boot_inc_le1'] = 100.0 * bt['incumbent3']['frac_le1']
     f['boot_lit_med'] = bt['incumbent_plus_lit8']['median']
     f['boot_diff_med'] = bt['difference']['median']
     f['boot_diff_pos'] = round(bt['difference']['frac_positive'] * bt['n_boot'])
@@ -1762,7 +1763,6 @@ UNQUOTED = {
     'mde_gap_min': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'null_exp35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'null_exp28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
-    'boot_inc_zero': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'boot_diff_pos': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'ret_gb3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'ret_gd3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
@@ -2378,7 +2378,11 @@ CHECKS = [
     ('wy28', [r'handles the dependence between tests exactly,\s+gives ([\d.]+)',
      r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('wy35lit', [r'Westfall-Young min-\$P\$ over 18\s+& [\d.]+ & (\d+\.\d+) &'], 0.0005),
-    ('boot_inc_zero', [r'exactly zero\s*\n?in ([\d.]+)\\% of replicates'], 0.05),
+    # 2026-11-06 (9차). Figure 1(b) 의 재표집 수치를 본문으로 올리면서
+    # 면제를 해제하고 정규식을 새 문장에 맞춘다.
+    ('boot_inc_zero', [r'no match at all in ([\d.]+)\\% of replicates',
+                       r'exactly zero\s*\n?in ([\d.]+)\\% of replicates'], 0.05),
+    ('boot_inc_le1', [r'at most one in ([\d.]+)\\%'], 0.05),
     ('boot_diff_pos', [r'positive in (\d+) of 1000'], 0),
     ('ret_gb3', [r'as its nearest compound in ([\d.]+)\\% of replicates'], 0.05),
     ('ret_gd3', [r'replicates, soman in ([\d.]+)\\%'], 0.05),
