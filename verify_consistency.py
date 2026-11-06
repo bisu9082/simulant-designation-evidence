@@ -523,8 +523,12 @@ def preflight():
                     'outputs/h1_candidates.csv', 'outputs/stat_supplement.json')
                    if os.path.exists(p))
         if _ga < _src - MTIME_TOL:
-            nofig.append('graphical_abstract.png (산출물보다 오래됐다 — '
-                         'python3 make_ga.py 로 재생성할 것)')
+            # 2026-11-06. 메시지를 고친다. 이 항목은 outputs/ 의 파일인데
+            # 호출부가 'paper_acs/' 를 붙여 출력하고 있었다. paper_acs 에는
+            # 그런 파일이 없으므로(투고 시스템에 따로 올리는 첨부다) 읽는
+            # 사람이 없는 경로를 찾게 된다. 9차에서 세 번 헛돌았다.
+            nofig.append('[outputs/] graphical_abstract.png 가 산출물보다 '
+                         '오래됐다 — python3 make_ga.py 로 재생성할 것')
     # 2026-10-20 신설. figure_annotations.json 은 누적만 하므로, 폐기된 도판의
     # 주석이 남아 본문 검사를 대신 통과시킬 수 있다. 등재부에 현행 도판이 아닌
     # 항목이 하나라도 있으면 멈춘다.
@@ -912,6 +916,12 @@ def load_facts():
         _mp = json.load(open('outputs/mantel_power.json'))
         f['mde_rho_mantel'] = _mp['mde_rho_mantel']
         f['mantel_power_perm'] = _mp['n_perm']
+        # 2026-11-06. GATE 8 9차 C3-1. SI 가 'type I rate ... at 0.049' 라고
+        # 적고 있었는데 이 스크립트에 귀무 조건이 없었다. 수행하지 않은 결과를
+        # 적은 것이다. mantel_power.py 에 run_null() 을 신설해 실제로 돌렸고
+        # 그 값을 여기에 묶는다. 원고가 다시 떠다니면 FAIL 로 잡힌다.
+        f['mantel_type_i'] = _mp['null']['type_i_rate']
+        f['mantel_type_i_nrep'] = _mp['null']['n_rep']
     # 2026-10-26. 다중성 표(tab:family) 28칸을 전부 등록한다. 종전에는 몇 칸만
     # 걸려 있어 BH 0.185, meff 5.00, 사전지정 0.046 이 구판인 채 통과했다.
     _fam = json.load(open('outputs/stat_supplement.json'))['family']
@@ -1117,6 +1127,7 @@ def load_facts():
         # 병합공간 대조. GFN2 쪽이 정본(39좌표, 4/11, 0.0250)을 재현하는 것이
         # 이 비교의 관문이다.
         f['dft_mg_gfn2_p'] = float(_es['merged_gfn2']['p_one_sided'])
+        f['dft_mg_gfn2_match'] = int(_es['merged_gfn2']['n_match'])
         f['dft_mg_b3lyp_p'] = float(_es['merged_b3lyp']['p_one_sided'])
         f['dft_mg_b3lyp_match'] = int(_es['merged_b3lyp']['n_match'])
     # 2026-11-02 (GATE 8 7차). SI 가 쌍극자 재계산을 설명하면서 두 방법의
@@ -1606,7 +1617,13 @@ def load_facts():
     f['pn_between_lo'] = min(c['mean_between'] for c in _pc)
     f['pn_exact_n'] = max(c['n_null'] for c in _pc if c['enumerated'])
     _zs = [v for v in _pn['zero_sum_residual'].values() if 'error' not in v]
-    f['pn_zs_min'] = min(v['after_renorm_max'] for v in _zs)
+    # 2026-11-06 (9차 B1). 아래 min 이 'after_renorm_max' 를 읽고 있었다.
+    # 셀별 최대값들의 최소를 구한 셈이라, 전역 최소(0.0445, d3_normal)가
+    # 아니라 d3_normal 의 최대값(0.1292)이 나왔다. 원고가 그 0.1292 를
+    # 하한으로 싣고 있었고 검증기가 같은 실수를 공유했으므로 461건 PASS 가
+    # 이 양을 덮지 못했다. 필드를 바로잡는다 — 실제 하한은 2.9배 더 작고,
+    # 즉 영합 전제가 깨졌다는 논거에 **불리한** 쪽이 아니라 유리한 쪽이다.
+    f['pn_zs_min'] = min(v['after_renorm_min'] for v in _zs)
     f['pn_zs_max'] = max(v['after_renorm_max'] for v in _zs)
     f['pn_zs_before'] = max(v['before_renorm_max'] for v in _zs)
 
@@ -2186,13 +2203,19 @@ CHECKS = [
     ('dft_es_full_match',
      [r'Replacing all three gives\s+(\w+) valid matches',
       r'from one valid match to (\w+)'], 0),
+    # 2026-11-06 (9차 B5). 종전 앵커는 'against four' 를 글자로 박고 있었다.
+    # 예치물의 merged_gfn2.n_match 는 3 인데 원고가 four 라고 적고 있었고,
+    # 앵커가 그 오기를 전제로 짜여 있어서 고치는 순간 두 사실이 미발견으로
+    # 빠졌다. 개수를 글자로 박지 말고 사실로 묶는다.
     ('dft_mg_b3lyp_p',
-     [r'a one-sided \$p\$ of (\d+\.\d+), against four and',
+     [r'a one-sided \$p\$ of (\d+\.\d+), against [a-z]+ and',
       r'holds\s+at (\d+\.\d+)'], 0.0006),
     ('dft_mg_b3lyp_match',
      [r'analysis and returns (\w+) valid matches and\s+a one-sided'], 0),
+    ('dft_mg_gfn2_match',
+     [r'of \d+\.\d+, against ([a-z]+) and \d+\.\d+ for the GFN2 control'], 0),
     ('dft_mg_gfn2_p',
-     [r'against four and (\d+\.\d+) for the GFN2 control'], 0.0006),
+     [r'against [a-z]+ and (\d+\.\d+) for the GFN2 control'], 0.0006),
     ('nopatho_struct_p', [r'to three decimal places \((\d+\.\d+),'], 0.006),
     ('nopatho_elec_p', [r'three decimal places \(\d+\.\d+, (\d+\.\d+) and'], 0.006),
     ('nopatho_merged_p', [r'three decimal places \(\d+\.\d+, \d+\.\d+ and (\d+\.\d+)\)'], 0.006),
@@ -2257,6 +2280,8 @@ CHECKS = [
                         r'design detects \$\|\\rho\| \\ge ([\d.]+)\$ at 80\\% power'], 0.006),
     ('mantel_power_perm', [r'all \$6! = (\d+)\$ relabellings',
                            r'exact Mantel over all (\d+) relabellings'], 0),
+    ('mantel_type_i', [r'type~I rate of the simulated test at ([\d.]+)'], 0.0),
+    ('mantel_type_i_nrep', [r'over ([\d,\\\s]+) null replicates'], 0),
     ('mantel_d2nor_elec', [r'reflectance channel \(\$\\rho = \+\d+\.\d+\$,\s*\n?Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_merged_rho',
      [r"merged space in the\s*\n?second compound set's ultraviolet channel "

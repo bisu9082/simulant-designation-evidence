@@ -23,6 +23,7 @@ from scipy.stats import rankdata
 
 SEED = 0xC0DE
 N_REP = 2000
+N_REP_NULL = 20000
 ALPHA = 0.05
 N = 6
 
@@ -68,6 +69,35 @@ def run(noise, rng):
     return float(rhos.mean()), rejects / N_REP
 
 
+def run_null(n_rep, rng):
+    """귀무 조건의 1종오류율 (2026-11-06 신설).
+
+    왜 신설했는가. SI 가 'the type I rate of the simulated test at 0.049'
+    이라고 적고 있었는데, 이 스크립트에는 귀무 조건이 없었고 어느 예치물에도
+    그 수가 없었다. 수행하지 않은 결과를 적은 것이므로 [C-3] 위반이다.
+    문장을 지우는 대신 실제로 돌려서 나온 수로 교체한다.
+
+    귀무의 모양. '두 거리행렬이 무관하다'이므로 잡음을 쌍에 직접 얹으면 안
+    된다. 그건 거리행렬이 아니다. 독립한 배치 Y 에서 두 번째 거리행렬을
+    만들어야 삼각부등식 같은 거리행렬 고유의 종속구조가 보존된다.
+
+    기대값. 검정이 720 전수 치환이고 항등치환을 귀무분포에 포함하므로
+    p >= 1/720 이고 검정은 보수적으로 타당하다. 즉 1종오류율은 0.05 를
+    넘지 않아야 하고, 넘으면 절차에 버그가 있는 것이다.
+    """
+    rejects = 0
+    for _ in range(n_rep):
+        X = rng.normal(size=(N, 3))
+        Y = rng.normal(size=(N, 3))
+        d = np.sqrt(((X[:, None] - X[None]) ** 2).sum(-1))[IU]
+        v = np.sqrt(((Y[:, None] - Y[None]) ** 2).sum(-1))[IU]
+        p, _ = mantel_p(rankdata(d), rankdata(v))
+        rejects += (p <= ALPHA)
+    rate = rejects / n_rep
+    se = float(np.sqrt(rate * (1 - rate) / n_rep))
+    return rate, se
+
+
 def main():
     rng = np.random.default_rng(SEED)
     rows = []
@@ -76,6 +106,14 @@ def main():
         rho, pw = run(noise, rng)
         rows.append(dict(noise=noise, mean_abs_rho=rho, power=pw))
         print(f'  {noise:.2f}        {rho:.3f}            {pw:.3f}')
+
+    print()
+    t1, t1_se = run_null(N_REP_NULL, rng)
+    print(f'[mantel_power] 귀무 1종오류율 = {t1:.4f} +- {t1_se:.4f} '
+          f'(명목 {ALPHA}, 반복 {N_REP_NULL})')
+    if t1 > ALPHA + 3 * t1_se:
+        print('[mantel_power] 경고: 명목 수준을 유의하게 초과한다. 절차 재점검.')
+    print()
 
     rows.sort(key=lambda r: r['mean_abs_rho'])
     mde = None
@@ -91,7 +129,16 @@ def main():
         print(f'[mantel_power] 정확 Mantel 80% 검정력 최소탐지 |rho| = {mde:.3f}')
     json.dump(dict(seed=SEED, n_compounds=N, n_perm=len(PAIRPERM),
                    n_rep=N_REP, alpha=ALPHA, grid=rows,
-                   mde_rho_mantel=(None if mde is None else round(float(mde), 3))),
+                   mde_rho_mantel=(None if mde is None else round(float(mde), 3)),
+                   null=dict(n_rep=N_REP_NULL,
+                             type_i_rate=round(float(t1), 5),
+                             type_i_se=round(float(t1_se), 5),
+                             nominal_alpha=ALPHA,
+                             p_min_attainable=1.0 / len(PAIRPERM),
+                             note='독립한 두 배치에서 거리행렬 2개를 만들어 '
+                                  '실제 절차(720 전수 치환, 양측)를 그대로 돌린 '
+                                  '기각률. 항등치환을 귀무분포에 포함하므로 '
+                                  'p >= 1/720 이고 검정은 보수적으로 타당하다.')),
               open('outputs/mantel_power.json', 'w'), indent=1)
     print('[done] outputs/mantel_power.json')
 

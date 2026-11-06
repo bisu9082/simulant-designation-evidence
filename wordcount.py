@@ -53,18 +53,33 @@ def sections(body):
     return out
 
 
+def acs_sections():
+    """원고의 \\section 제목을 정본으로 쓴다 (2026-11-06 재작성).
+
+    종전 구현은 JHM 양식을 전제로 'Keywords' 와 '1. Introduction' 을 찾았다.
+    achemso 본에는 둘 다 없어서 ValueError 로 죽었고, 9차 채점 때까지 분량
+    예산 도구가 현행 원고에서 한 번도 돌지 않았다. 본문이 자체 예산 5,000
+    단어를 53% 넘긴 것을 아무도 못 본 이유다. 양식에 의존하지 않도록
+    제목 목록을 main.tex 에서 직접 읽는다.
+    """
+    src = open('paper_acs/main.tex').read()
+    return [m.group(1) for m in re.finditer(r'^\\section\*?\{([^}]+)\}', src, re.M)]
+
+
 def main():
     txt = pdftext('paper_acs/main.pdf')
-    a = txt.index('Chemical warfare agent detection is developed')
-    b = txt.index('Keywords')
-    n_abs = len(words(txt[a:b]))
+    heads = acs_sections()
+    if not heads:
+        raise SystemExit('[wordcount] main.tex 에서 \\section 을 찾지 못했다.')
 
-    s = txt.index('1. Introduction')
+    first = txt.index(heads[0])
+    a = txt.index('Abstract')
+    n_abs = len(words(txt[a + len('Abstract'):first]))
+
     e = txt.index('References')
-    body = txt[s:e]
+    body = txt[first:e]
     n_body = len(words(body))
 
-    # 캡션 제외분. 캡션은 'Table N.' / 'Figure N.' 로 시작해 빈 줄까지.
     cap = sum(len(words(m.group(0))) for m in
               re.finditer(r'^\s*(?:Table|Figure|Fig\.)\s*\d+[.:][\s\S]*?\n\s*\n',
                           body, re.M))
@@ -73,8 +88,16 @@ def main():
     print(f'본문 (전체)     {n_body:>6} 단어')
     print(f'본문 (캡션 제외){n_body - cap:>6} 단어   [캡션 {cap}]')
     print()
-    for name, n in sections(body):
-        print(f'  {name[:52]:<54} {n:>5}')
+    pos = [(h, body.index(h)) for h in heads if h in body]
+    for i, (h, j) in enumerate(pos):
+        k = pos[i + 1][1] if i + 1 < len(pos) else len(body)
+        print(f'  {h[:52]:<54} {len(words(body[j + len(h):k])):>5}')
+
+    # ACS Article 환산: 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
+    figs = len(re.findall(r'\\includegraphics', open('paper_acs/main.tex').read()))
+    pages = (n_body - cap) / 1000.0 + figs * 0.5
+    print(f'\n  ACS 환산 {pages:.1f}면 (본문 {(n_body-cap)/1000:.1f} + 도판 {figs}장 x 0.5)'
+          f'  권장 8면')
 
     sup = pdftext('paper_acs/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')

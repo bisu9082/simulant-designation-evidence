@@ -51,5 +51,13 @@
    "power": 1.0
   }
  ],
- "mde_rho_mantel": 0.666
+ "mde_rho_mantel": 0.666,
+ "null": {
+  "n_rep": 20000,
+  "type_i_rate": 0.05,
+  "type_i_se": 0.00154,
+  "nominal_alpha": 0.05,
+  "p_min_attainable": 0.001388888888888889,
+  "note": "\ub3c5\ub9bd\ud55c \ub450 \ubc30\uce58\uc5d0\uc11c \uac70\ub9ac\ud589\ub82c 2\uac1c\ub97c \ub9cc\ub4e4\uc5b4 \uc2e4\uc81c \uc808\ucc28(720 \uc804\uc218 \uce58\ud658, \uc591\uce21)\ub97c \uadf8\ub300\ub85c \ub3cc\ub9b0 \uae30\uac01\ub960. \ud56d\ub4f1\uce58\ud658\uc744 \uadc0\ubb34\ubd84\ud3ec\uc5d0 \ud3ec\ud568\ud558\ubbc0\ub85c p >= 1/720 \uc774\uace0 \uac80\uc815\uc740 \ubcf4\uc218\uc801\uc73c\ub85c \ud0c0\ub2f9\ud558\ub2e4."
+ }
 }
