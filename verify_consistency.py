@@ -2042,10 +2042,12 @@ CHECKS = [
      [r'Monotonicity is perfect in (\w+) of the ten'], 0),
     ('trend_bh_q',
      [r'over the ten leaves a smallest adjusted\s+value of ([\d.]+)'], 0.0015),
-    ('rank_obs', [r'the observed number is (\w+), with a'], 0),
+    # 2026-11-06 (9차 분량). 세 앵커가 접속사까지 글자로 박고 있어 문장을
+    # 줄이자 끊겼다. 'against four' 와 같은 취약성이므로 수치 주변만 남긴다.
+    ('rank_obs', [r'the observed number is (\w+)[,.]'], 0),
     ('rank_exp',
-     [r'over ten\s+agent-channel cells is ([\d.]+), and'], 0.0015),
-    ('rank_p', [r'one-sided binomial \$p\$ of ([\d.]+)'], 0.005),
+     [r'over ten\s+agent-channel cells\s+is ([\d.]+)[,.]'], 0.0015),
+    ('rank_p', [r'one-sided binomial \$p\$ (?:of |is )([\d.]+)'], 0.005),
     ('dye_null_uv', [r'gives a mean of ([\d.]+) and [\d.]+\.'], 0.0015),
     ('dye_null_normal', [r'gives a mean of [\d.]+ and ([\d.]+)\.'], 0.0015),
     ('fisher_minq',

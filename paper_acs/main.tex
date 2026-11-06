@@ -501,14 +501,12 @@ behaves like the G series as a class.
 A weaker claim survives in one channel. If DMMP is G-like at all it should
 sit closer to the G series than to VX, and that contrast, taken against the
 mean over the three matched G agents and excluding tabun, is $+0.513$ in the
-ultraviolet channel and $+0.137$ in the reflectance channel. The intervals
+ultraviolet channel and $+0.137$ in the reflectance channel. The ranges
 quoted with them, $+0.131$ to $+0.722$ and $-0.144$ to $+0.290$, come from
 resampling the four design concentrations with replacement. Four fixed design
-levels are not an exchangeable sample, and the response magnitude rises
-monotonically with concentration, so we read these as descriptive ranges over
-the concentrations measured and not as tests: the ultraviolet range lies above
-zero and the reflectance range spans it. One optical channel is consistent
-with the ordering and the other does not resolve it.
+levels are not an exchangeable sample, so these are descriptive ranges and
+not tests: the ultraviolet range lies above zero and the reflectance range
+spans it.
 
 Concentration changes the picture (Figure~\ref{fig:response}c). The
 DMMP-to-sarin cosine rises monotonically from $+0.363$ at 10~$\mu$M to
@@ -525,35 +523,28 @@ significance claim.
 % 치환했다. 용액상 µM 과 증기상 탐지는 다른 양이고 이 데이터는 후자를
 % 재지 않았다. 또 농도와 응답 크기의 순위상관이 모든 셀에서 정확히
 % +1.000 이므로 SNR 교란을 분리할 수 없다. 수치는 outputs/deltaE_noise.json.
-Two limits sit on that direction. The concentrations are of analyte in a
-dye solution, not of vapour at an inlet, so we do not translate the range
-into the operating band of a point detector. And the mean response
-magnitude rises with concentration at a Spearman correlation of exactly
-$+1.000$ in every one of the six run-channel cells, so a similarity that grows with
-concentration cannot be separated here from one that grows with
-signal-to-noise ratio. Distinguishing the two needs a repeat-level noise
-estimate, which the deposited tables do not carry. What the direction
-supports is the narrower statement that the resemblance between this
-simulant and this agent is not constant over the range at which the array
-was characterised.
+Two limits sit on that direction. The concentrations are of analyte in a dye
+solution, not of vapour at an inlet, so we do not translate the range into
+the operating band of a point detector. And the mean response magnitude rises
+with concentration at a Spearman correlation of exactly $+1.000$ in every one
+of the six run-channel cells, so a similarity that grows with concentration
+cannot be separated here from one that grows with signal-to-noise ratio;
+distinguishing them needs a repeat-level noise estimate the deposited tables
+do not carry. What the direction supports is that the resemblance between
+this simulant and this agent is not constant over the range at which the
+array was characterised.
 
-Two further readings suggested themselves to us and did not survive their
-own controls. We report both, because the alternative is to present
-artefacts as results.
-
-The first was a ranking. DMMP is the nearest of the five candidates to
-tabun in the ultraviolet channel and to sarin in the reflectance channel,
-and it is nearest to nothing else, and the two channels never agree on
-which agent it is nearest to. That reads as evidence that the choice of
-optical channel decides which agent the standard simulant stands in for.
-It is not. With five candidates the probability of rank one is $1/5$ under
-random assignment, the expected number of first places over ten
-agent-channel cells is 2.0, and the observed number is two, with a
-one-sided binomial $p$ of 0.62. The ten cells share DMMP's two response
-vectors, one per channel, so they are not ten independent trials and the
-binomial is an approximation; it is reported because the observed count sits
-on the expectation, where no correction could move the reading. The ranking
-carries no information.
+Two further readings suggested themselves and did not survive their own
+controls. We report both, because the alternative is to present artefacts as
+results. The first was a ranking. DMMP is the nearest of the five candidates
+to tabun in the ultraviolet channel and to sarin in the reflectance channel
+and to nothing else, which reads as evidence that the optical channel decides
+which agent the standard simulant stands in for. It is not. With five
+candidates the expected number of first places over ten agent-channel cells
+is 2.0, the observed number is two, and the one-sided binomial $p$ is 0.62.
+The ten cells share DMMP's two response vectors, so they are not ten
+independent trials and the binomial is an approximation; the observed count
+sits on the expectation, where no correction could move the reading.
 
 The second was a channel decomposition. The cosine is a sum over dye
 channels, and the DMMP-to-tabun value of $+0.764$ turns out to rest on two
