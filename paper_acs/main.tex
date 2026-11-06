@@ -136,8 +136,8 @@ surrogate validation, permutation test, applicability domain}
 % 네 가지 열거를 양 끝만 남김, DMMP 문장의 channel 삭제. 삭제한 것은
 % 모두 본문·SI 에 그대로 있다.
 \begin{abstract}
-Chemical warfare agent detection is developed and qualified on simulants,
-and we asked what measurement establishes that one reproduces its agent.
+Chemical warfare agent detection is qualified on simulants, and we asked
+what measurement establishes that one reproduces its agent.
 We reanalyse the colorimetric tables of three published runs of one
 29-component array, which measured sixteen authentic agents at four
 concentrations in two optical channels, and compare the response patterns
@@ -660,55 +660,30 @@ Significance here is a property of one correction scheme on one panel
 construction, and we report all four rather than the one that passes.
 
 The surviving structural value is also an ordinary draw from the choices
-available to an analyst. Drawing three descriptors at random from the
-structural block 2000 times and repeating the whole procedure places the
-observed value at the 22.4th percentile of that distribution. A value at
-the quarter mark of what random descriptor choices produce is not evidence
-about chemistry. The null for that percentile, the dimensionality controls
-and the effect of weighting the two descriptor blocks equally are in
-Supporting Information Sections~\ref{S-res:dimdetail},
+available to an analyst: drawing three descriptors at random from the
+structural block 2000 times places the observed value at the 22.4th
+percentile of that distribution. One quantity in this family does separate the
+incumbents, and it is easy to over-read. Across 500 random three-descriptor
+subspaces the incumbent designation reaches $p<0.05$ in 27.4\% of them, which
+ranks seventh of 680 ($p=0.0103$) against a mean of 4.5\%. That is a
+statement about the flexibility of the comparison, not about proximity to the
+agents. The nulls, the dimensionality controls and the block-weighting check
+are in Supporting Information Sections~\ref{S-res:dimdetail},
 \ref{S-res:subspacenull} and~\ref{S-res:blockbalance}.
 
-One quantity in this family does separate the incumbents from the
-alternatives, and it is worth stating precisely because it is easy to
-over-read. Across 500 random three-descriptor subspaces, the incumbent
-designation reaches $p<0.05$ in 27.4\% of them. Referred to the same
-quantity computed for all 680 designations, where the mean is 4.5\% and
-the median 2.4\%, the incumbent designation ranks seventh of 680
-($p=0.0103$). The incumbents are therefore unusual in how often a lucky
-choice of three descriptors can be found for them. That is a statement
-about the flexibility of the comparison, not about proximity to the agents.
-
-% 2026-11-02 (GATE 8 7차). 이 문단 신설. SI 는 전자공간 역전을 처음부터
-% 보고하고 있었는데 본문은 그것을 올리지 않았고, Experimental 은 오히려
-% 반대로 적고 있었다. 이 논문의 논지가 "분석자 선택이 답을 정한다" 이므로
-% 전자구조 방법 선택은 가장 큰 사례이지 숨길 것이 아니다. 수치는
-% outputs/dft_electronic_space.json 실측.
-One analyst freedom we did not enumerate when we set the comparison up
-moved the answer further than any we did. The electronic descriptors
-throughout are GFN2-xTB, a method parameterised for geometries and energies
-rather than for virtual orbital energies. Recomputing all three coordinates
-of the electronic space at B3LYP/def2-SVPD moves it from one valid match of
-eleven and a one-sided $p$ of 0.275 to five matches and 0.0368. The five are
-sarin, soman and tabun matched to DMMP, and sulfur mustard and cyclosarin
-matched to DPGME. Only one of them, sarin to DMMP, is a pairing the
-designation record makes. The NIOSH programme names DMMP for GB and for HD,
-the National Research Council assessment names it for VX, and the patent that
-names DPGME gives it no agent class at all, so the flipped result does not
-recover the record either. We do not promote that value to a positive
-finding. It is a single uncorrected statistic in
-one space, reached by changing a method after seeing the first answer, and
-the two sets of calculations sit on different geometries, so the difference
-carries a geometry term we cannot separate from the method term. What it
-establishes is narrower and bears directly on this paper's argument: the
+One analyst freedom we did not enumerate when we set the comparison up moved
+the answer further than any we did. The electronic descriptors throughout are
+GFN2-xTB. Recomputing all three coordinates of the electronic space at
+B3LYP/def2-SVPD moves it from one valid match of eleven and a one-sided $p$ of
+0.275 to five matches and 0.0368. Only one of the five is a pairing the
+designation record makes. We do not promote that value: it is a single
+uncorrected statistic in one space, reached by changing a method after seeing
+the first answer, on different geometries. What it establishes is that the
 space in which the incumbents did worst is the space whose answer the choice
-of electronic-structure method decides. The merged space does not move at
-all: thirty-eight coordinates, three valid matches and a one-sided $p$ of
-0.0250 under both methods, to the precision the exact enumeration of 680
-designations can report. The result we carry forward is therefore not an
-artefact of the semiempirical method, while the three-coordinate space is
-a function of it. Supporting Information Section~\ref{S-meth:dft} gives the
-full comparison and the limits on it.
+of electronic-structure method decides. The merged space does not move at all: thirty-eight
+coordinates, three valid matches and a one-sided $p$ of 0.0250 under both
+methods. Supporting Information Section~\ref{S-meth:dft} gives the full
+comparison and the limits on it.
 
 Panel composition decides the answer as well. Adding back the five
 compounds the sensing literature also treats as simulants moves the count
@@ -747,24 +722,15 @@ because that is the only evidence that we did not select the encoding for
 its answer. Supporting Information Section~\ref{S-meth:sparse} gives the
 column-by-column accounting.
 
-A fifth choice is the shape block. Nine of the thirty-eight coordinates
-retained on the twenty-eight-compound panel, and nine of the forty-one on the
-primary panel, are functions of the three principal moments of inertia.
-Because the relations are ratios rather than linear, the correlation filter at
-$|r| > 0.95$ does not remove them: the largest pairwise correlation inside the
-block is 0.9364 on the twenty-eight-compound panel and 0.9359 on the primary
-panel. The one shape coordinate the filter does remove is the third principal
-moment itself, dropped against the second at $|r| = 0.998$ on both panels,
-while nine coordinates built from the same three moments are kept. They are not exact functions of one another either, since each
-descriptor is Boltzmann averaged over conformers independently, which leaves
-relative discrepancies of 1.4 to 15.3\% in the three identities we checked.
-We therefore kept the full block and recomputed everything with the seven
-derived coordinates dropped, as a declared sensitivity rather than a
-replacement. On the twenty-eight-compound panel the shape contribution to mean
-squared pairwise distance falls from 23.7 to 6.5\%, and for the two agents
-whose nearest-match rule acetonitrile blocks it falls from 69.8 and 61.9\% to
-0.20 and 0.12\%. The count of valid matches there falls from three to zero. On
-the primary panel it is zero under both encodings.
+A fifth choice is the shape block. Nine of the retained coordinates on each
+panel are functions of the three principal moments of inertia, and the
+correlation filter does not remove them because the relations are ratios
+rather than linear. We kept the full block and recomputed everything with the
+seven derived coordinates dropped, as a declared sensitivity rather than a
+replacement: the valid-match count on the twenty-eight-compound panel falls
+from three to zero, and on the primary panel it is zero either way.
+Supporting Information Section~\ref{S-res:shapeblock} gives the correlations,
+the contribution shares and the Mantel values under the reduced block.
 
 Five analyst choices therefore move the count of valid matches: the panel,
 the order in which the correlation filter is handed its columns, the
@@ -787,42 +753,22 @@ report a match count as a finding.
 % 패널에 없다. 그 반론은 '서술자를 잘못 골랐다'로 논문을 읽게 만들므로
 % 개정으로 닫히지 않는다. 사전지정 2검정을 72검정 가족과 분리해 보고하고
 % 그 분리 사실을 문장에 적는다. 정본 outputs/volatility_space.json.
-One descriptor the opening of this paper names first is absent from the
-panel above, and we tested it separately rather than argue around it.
-Volatility enters as one axis, $\log_{10}$ of measured vapour pressure, for
-which all twenty-eight compounds of the reduced panel have a measurement and
-two compounds of the primary panel have none. Two tests were fixed before the
-values were seen and are held outside the family of seventy-two, because
-folding them in would recompute every adjusted value in the paper to answer a
-question one test each can settle. On this axis the incumbent trio does beat
-chance: the pre-specified statistic gives a one-sided $p$ of 0.0206 over all
-680 designations, ranking fourteenth. The margin is 0.0015 in standardised
-units, and the count of valid matches returns one match with a $p$ of 0.4647,
-ranking 316th of 680. That single match pairs dipropylene glycol monomethyl
-ether with soman on a gap of 0.0107 decades between measurements at
-26~$^{\circ}$C and 25~$^{\circ}$C, which is smaller than the temperature
-mismatch that produced it. The axis does not reproduce the pairings the usage
-literature implies. Dichloromethane sits 0.232 decades from hydrogen cyanide
-and 0.514 from phosgene; dimethyl methylphosphonate sits 0.473 from sarin
-while an interferent sits 0.216; nothing in the panel is within 2.659 decades
-of VX. We do not describe any of these as a departure from a designated pairing.
-For two of the three incumbents the record names no agent, and for the third
-it names three across two documents and sets the volatility deliberately
-between two of them (Section~\ref{res:docs}), so there is no single pairing
-for a distance to depart from. Agreement with measured
-response is positive in all four evaluable cells. Combining the two runs within
-each optical channel and then correcting across the two channels, the
-reflectance channel reaches $q = 0.0430$ while the ultraviolet channel does not
-($q = 0.6389$). Volatility distance therefore does track response distance in
-one channel. That value is corrected within the prespecified family of two
-channels and not against the twelve descriptor cells, so it is not on the same
-footing as the descriptor values reported above; corrected jointly with them,
-over sixteen cells, the smallest adjusted value is 0.1556 and nothing clears
-0.05. It does not
-follow that the null reported here is an artefact of omitting volatility: on
-the pairing question the volatility axis returns one valid match at
-$p = 0.4647$, so it does not qualify the incumbents either. Supporting
-Information Section~\ref{S-res:volatility} sets the axis out in full.
+One descriptor the opening of this paper names first is absent from the panel
+above, and we tested it separately rather than argue around it. Volatility
+enters as one axis, $\log_{10}$ of measured vapour pressure. Two tests were
+fixed before the values were seen and are held outside the family of
+seventy-two. On the pairing question the incumbent trio does beat chance, with
+a one-sided $p$ of 0.0206 over all 680 designations, but the margin is 0.0015
+in standardised units and the count of valid matches returns one match at
+$p = 0.4647$, so the axis does not qualify the incumbents either. On agreement
+with measured response it is the one quantity in this paper that reaches
+$q = 0.0430$, in the reflectance channel, corrected within its prespecified
+family of two channels and not against the twelve descriptor cells; corrected
+jointly with them, over sixteen cells, the smallest adjusted value is 0.1556
+and nothing clears 0.05. Supporting Information
+Section~\ref{S-res:volatility} sets the axis out in full, with the distances,
+the four evaluable cells and why we do not read any of them as a departure
+from a designated pairing.
 
 \subsection{Neither the designation record nor a toxicity model fills the gap}
 \label{res:docs}
