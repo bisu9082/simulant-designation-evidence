@@ -2552,7 +2552,7 @@ CHECKS = [
     ('sr_match_red', [r'falls from \w+ to ([\w-]+)\. On'], 0),
     ('sr_mantel_q_red', [r'shape coordinates raises it to (0\.\d+)'], 0.00005),
     # 전제검정 라벨순열 귀무 (초록).
-    ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a null'], 0),
+    ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a (?:label-permutation )?null'], 0),
     # 2026-11-04 (E2). 루이사이트 기하이성질체 민감도.
     ('lew_dnorm_E', [r'primary panel from (\d\.\d+) to'], 0.00005),
     ('lew_dnorm_Z', [r'from \d\.\d+ to (\d\.\d+), leaves CEES'], 0.00005),
