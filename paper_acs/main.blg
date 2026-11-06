@@ -5,14 +5,10 @@ The style file: achemso.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-main.bib
 Database file #2: refs.bib
-Repeated entry---line 866 of file refs.bib
- : @book{nrc1997mist
- :                  ,
-I'm skipping whatever remains of this entry
 achemso 2024-01-30 v3.13g
 You've used 35 entries,
             2538 wiz_defined-function locations,
-            985 strings with 17990 characters,
+            986 strings with 18003 characters,
 and the built_in function-call counts, 13812 in all, are:
 = -- 957
 > -- 1132
@@ -51,4 +47,3 @@ warning$ -- 0
 while$ -- 114
 width$ -- 0
 write$ -- 457
-(There was 1 error message)

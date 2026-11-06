@@ -1,0 +1,25 @@
+compound_name,cas,register,tier,value,unit,basis,source_url,collected_on,note
+DMMP,756-79-6,DOE_PAC,PAC-1,11,mg/m3,TEEL,https://edms3.energy.gov/pac/search/detail/1061,2026-11-06,TEEL-3 from rat 1-h LC50 26100 mg/m3; TEEL-2 = TEEL-3/6; TEEL-1 = TEEL-2/11
+DMMP,756-79-6,DOE_PAC,PAC-2,120,mg/m3,TEEL,https://edms3.energy.gov/pac/search/detail/1061,2026-11-06,
+DMMP,756-79-6,DOE_PAC,PAC-3,730,mg/m3,TEEL,https://edms3.energy.gov/pac/search/detail/1061,2026-11-06,
+DPGME,34590-94-8,NIOSH_IDLH,IDLH,600,ppm,acute toxicity data in humans and animals,https://cdc.gov/niosh/idlh/34590948.html,2026-11-06,revised value; NIOSH notes it may be conservative for 400-1000 ppm
+DPGME,34590-94-8,NIOSH_REL,TWA,100,ppm,,https://cdc.gov/niosh/idlh/34590948.html,2026-11-06,600 mg/m3; skin notation
+DPGME,34590-94-8,NIOSH_REL,STEL,150,ppm,,https://cdc.gov/niosh/idlh/34590948.html,2026-11-06,900 mg/m3; skin notation
+DPGME,34590-94-8,OSHA_PEL,TWA,100,ppm,,https://cdc.gov/niosh/idlh/34590948.html,2026-11-06,600 mg/m3; skin notation
+dichloromethane,75-09-2,DOE_PAC,PAC-1,200,ppm,AEGL,https://edms3.energy.gov/pac/search/detail/1929,2026-11-06,PAC-n taken directly from AEGL-n; 690 mg/m3
+dichloromethane,75-09-2,DOE_PAC,PAC-2,560,ppm,AEGL,https://edms3.energy.gov/pac/search/detail/1929,2026-11-06,1900 mg/m3
+dichloromethane,75-09-2,DOE_PAC,PAC-3,6900,ppm,AEGL,https://edms3.energy.gov/pac/search/detail/1929,2026-11-06,24000 mg/m3
+acetone,67-64-1,DOE_PAC,PAC-3,5700,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/14,2026-11-06,14000 mg/m3
+methanol,67-56-1,DOE_PAC,PAC-3,7200,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/1854,2026-11-06,9400 mg/m3; LEL 10 percent flammability caveat on record
+acetonitrile,75-05-8,DOE_PAC,PAC-3,150,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/17,2026-11-06,250 mg/m3
+chloroform,67-66-3,DOE_PAC,PAC-3,3200,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/672,2026-11-06,16000 mg/m3; TEEL-1 basis recorded as OSHA REL-STEL
+n-hexane,110-54-3,DOE_PAC,PAC-3,8600,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/1506,2026-11-06,30000 mg/m3; TEEL-1 from German MAK-STEL
+benzene,71-43-2,DOE_PAC,PAC-3,4000,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/272,2026-11-06,13000 mg/m3
+toluene,108-88-3,DOE_PAC,PAC-3,3700,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/3059,2026-11-06,14000 mg/m3
+soman (GD),96-64-0,DOE_PAC,PAC-3,0.017,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/2838,2026-11-06,0.13 mg/m3
+lewisite 1 (L),541-25-3,DOE_PAC,PAC-3,0.087,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/706,2026-11-06,0.74 mg/m3; no AEGL-1 so TEEL-1 = TEEL-2/11
+cyanogen chloride (CK),506-77-4,DOE_PAC,PAC-3,4.0,ppm,TEEL from ERPG-3,https://edms3.energy.gov/pac/search/detail/807,2026-11-06,10 mg/m3; the only panel compound whose PAC rests on an ERPG rather than an AEGL
+phosgene (CG),75-44-5,DOE_PAC,PAC-3,0.75,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/2335,2026-11-06,3.0 mg/m3
+chloropicrin (PS),76-06-2,DOE_PAC,PAC-3,1.4,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/689,2026-11-06,9.4 mg/m3
+cyclosarin (GF),329-99-7,DOE_PAC,PAC-3,0.018,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/1863,2026-11-06,0.13 mg/m3; listed as Methyl cyclohexylfluorophosphonate (GF)
+DIMP,1445-75-6,DOE_PAC,PAC-3,22,ppm,TEEL,https://edms3.energy.gov/pac/search/detail/1031,2026-11-06,160 mg/m3; TEEL-3 from rat oral LD50 826 mg/kg. NRC 1997 designates DIMP for GB. Not on the 28-compound panel

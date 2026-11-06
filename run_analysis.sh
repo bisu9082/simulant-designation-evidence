@@ -51,11 +51,17 @@ cd "$(dirname "$0")"
 run_strict() {
   for s in "$@"; do
     printf '[run] %-22s ' "$s"
-    if python3 "$s" > "outputs/_log_${s%.py}.txt" 2>&1; then
+    # 2026-11-06 (9차). 항목이 인자를 가질 수 있게 했다. order_invariance 는
+    # --n 40 을 넘겨야 예치본과 같은 결과가 나온다. $s 를 일부러 따옴표 없이
+    # 둬서 낱말 분리가 일어나게 하고, 로그 이름은 첫 낱말에서만 뽑는다.
+    # 목록은 이 파일 안에서만 정해지므로 외부 입력이 섞일 여지가 없다.
+    _prog=${s%% *}
+    # shellcheck disable=SC2086
+    if python3 $s > "outputs/_log_${_prog%.py}.txt" 2>&1; then
       echo ok
     else
       echo FAIL
-      tail -20 "outputs/_log_${s%.py}.txt"
+      tail -20 "outputs/_log_${_prog%.py}.txt"
       exit 1
     fi
   done
@@ -100,11 +106,22 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #                          T2-1·T2-8 을 전부 통과해 구판으로 살아남았다.
 #   sparse_indicators      희소 지시자 인코딩 민감도 + 논지 안정성 대조
 # sparse_indicators 는 Mantel 전수열거를 세 변종에 돌리므로 약 10분 걸린다.
-run_strict order_invariance.py match_rule_audit.py deltaE_noise.py \
+#   conformer_sensitivity  RDKit 매장 시드 6종 x 단일/앙상블. SI 가 두 예치물을
+#                          이름 대어 인용하는데 2026-11-06 (9차) 까지 이 목록에
+#                          없었다. 빈 outputs/ 로 클론하면 검증기 사전 점검에서
+#                          멈춘다. dft_omega / xtb_fast 와 달리 제외 사유도
+#                          재생성 명령도 적혀 있지 않았다.
+# order_invariance 의 --n 40 은 반드시 명시해야 한다. 스크립트 기본값은 200
+# 인데 예치본과 SI (S-meth:order 의 37 / 36 / 25 대 15) 는 40 회 결과다.
+# 2026-11-06 (9차) 까지 인자 없이 호출하고 있어서, 예치된 사용법대로 돌린
+# 독자는 SI 수치 네 개 중 세 개를 재현하지 못했다. 'distinct retained sets'
+# 는 추첨 횟수에 따라 늘어나는 양이라 n 을 고정하지 않으면 뜻이 없다.
+run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            purity_sensitivity.py channel_classification.py \
            sparse_indicators.py multiplicity_panels.py \
            volatility_fetch.py volatility_space.py \
-           shape_reduction.py premise_null.py make_si_tables.py
+           shape_reduction.py premise_null.py conformer_sensitivity.py \
+           make_si_tables.py
 
 # dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로

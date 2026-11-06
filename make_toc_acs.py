@@ -60,7 +60,14 @@ plt.rcParams.update({
 fig = plt.figure(figsize=(3.25, 1.75), dpi=600)
 
 # 머리글 한 줄. 높이 예산 0.17 in.
-fig.text(0.5, 0.955, 'Descriptor similarity does not predict array response',
+# 2026-11-06. GATE 8 9차. 종전 머리글은 'Descriptor similarity does not
+# predict array response' 였다. 제목은 검정력 한계 때문에 'does not predict'
+# 에서 'no resolvable agreement' 로 이미 내렸는데 TOC 만 구판이었다. 독자가
+# 가장 먼저 보는 자리에 철회한 주장이 남아 있었으므로 제목과 동기화한다.
+# 폭 실측: FS_TITLE 6.4 에서 2.98 in (그림 3.25 in, 여백 포함 상한 3.10 in).
+# 제목 전문은 3.73 in 로 넘쳐서 'distance' 와 'array' 를 뺐다. 두 낱말은
+# 좌우 패널의 축 설명이 이미 적고 있다.
+fig.text(0.5, 0.955, 'No resolvable agreement between descriptor and response',
          ha='center', va='top', fontsize=FS_TITLE, fontweight='bold',
          color='#2B2B2B')
 

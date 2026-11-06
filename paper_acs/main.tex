@@ -215,10 +215,11 @@ rests.
 
 It has not been measured because measuring it requires the agents. Response
 data on authentic agents exist in few places, and the compounds used as
-simulants are rarely run alongside them. A recent survey of the field found
-no standard for chemical warfare agent simulants at all, and recorded that
-they have generally been selected on the basis of their historical
-use.\cite{lawrence2025simulants} A critical review of the low-toxicity
+simulants are rarely run alongside them. A recent survey of threat simulants
+records that they have generally been selected on the basis of their
+historical use, and reports a draft ASTM guide for explosive and contraband
+simulants; it describes no equivalent document on the chemical warfare agent
+side.\cite{lawrence2025simulants} A critical review of the low-toxicity
 simulants in current use states the selection criterion plainly, as the
 alignment of physicochemical properties such as hydrophobicity, volatility
 and solubility with those of the agent, and assesses dipropylene glycol
@@ -612,7 +613,7 @@ cyclosarin all sit inside the threshold of DMMP, at 1.1805, 1.4583 and
 still, and tabun, which is outside the threshold at 2.5320, has diethyl
 cyanophosphonate nearer than DMMP. Those two compounds are not interferents.
 They are compounds the sensing literature itself proposes as simulants. If
-the comparison set is narrowed to the fourteen interferents, which is how
+the comparison set is narrowed to the sixteen interferents, which is how
 the second part is implemented in the deposited distance table, the same
 three G agents pass and the count on this panel is three rather than zero.
 We report the wider reading as the primary one because it is the criterion
@@ -809,19 +810,21 @@ simulant for VX and gives di-isopropyl methyl phosphonate for
 GB.\cite{nrc1997mist} That report also states the basis on which its
 simulants were chosen, low toxicity and similarity of certain physical
 properties, and records that the chemical structure may be quite different.
-One compound therefore stands in for the nerve agent class in one document
-and for GB and HD in another, against two measurements that are neither
-detection.
+One compound therefore stands in for VX in one document and for GB and HD in
+another, against two measurements, neither of which is detection.
 DPGME appears in a US Army patent for a training composition, where the
 property required of it is detectability by ion mobility
 spectrometry.\cite{seitzinger2006simulant} For dichloromethane we found no
 designating document in the public record we searched; Supporting
 Information Section~\ref{S-meth:docsearch} gives the sources, the date and
 the three limits of that search, one of which is a Test Operations Procedure
-we identified but could not obtain. Each of the two traceable
-designations is a validation against a measurement, and neither of those
-measurements is detection. A simulant is validated for a purpose, and that
-validation does not travel with the compound to a different purpose.
+we identified but could not obtain. Each of the two traceable designations is
+a validation against a measurement. For DMMP those measurements are filter
+breakthrough and fabric penetration, neither of which is detection. For DPGME
+the measurement is detection, but by ion mobility spectrometry, a different
+transduction from the colorimetric response reanalysed here. A simulant is
+validated for a purpose, and that validation does not travel with the compound
+to a different purpose.
 
 \begin{figure}[htb]
   \centering
@@ -1094,8 +1097,14 @@ controls are sampled, at 20000 and 2000 draws from the recorded seed.
 % 단언했다. 원고에 없는 것을 있다고 말한 자리라 항목을 신설해 인용한다.
 Analysis code, descriptor tables, the parsed regulatory values with their
 sources and every figure script are deposited in a public
-repository\cite{simulantrepo}, from which every number reported here can be
-regenerated.
+repository\cite{simulantrepo}, from which every number we computed can be
+regenerated. Three classes of number are quoted rather than recomputed and are
+marked as such where they appear: values taken from the three source studies,
+values taken from regulatory registers, and the two cross-validated
+classification accuracies that the deposited tables do not reproduce. The
+colorimetric input is the deposited $\Delta E_{00}$ table; the conversion from
+the original plate images to those colour differences was performed in the
+source studies and is outside this deposit.
 
 % 2026-11-02 작성. 자금은 JHM 판본과 같다 (특정 지원 없음). 측정 데이터는
 % 이 연구소의 선행 세 편에서 왔으므로 그 사실을 명시한다. 기여 진술은

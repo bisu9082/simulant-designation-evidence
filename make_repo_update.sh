@@ -23,7 +23,13 @@ zip -q -X "$Z" paper_acs/Fig_*.png paper_acs/toc_acs.png \
 zip -q -X -r "$Z" outputs -i 'outputs/*.json' 'outputs/*.csv' 'outputs/*.png' \
     'outputs/*.pdf' 'outputs/*.tex' \
     -x 'outputs/_crop_*' 'outputs/_superseded/*'
-zip -q -X -r "$Z" sources
+# 2026-11-06 (9차). 종전에는 sources/ 전체를 넣었다. 그 안에는 투고 전 내부
+# 자기심사 메모(GATE8 채점·교정계획, T1/T2 작업결과, 원논문 Methods 직독)가
+# 들어 있어서 공개 저장소에 함께 올라갔다. 원고가 예치를 약속한 것은 파싱한
+# 규제값과 그 출처뿐이므로 1차 사료만 넣는다. 새 1차 사료를 받으면 여기에
+# 확장자나 파일명을 더할 것. 와일드카드를 열어 두면 메모가 다시 샌다.
+zip -q -X "$Z" sources/compiled_aegls_27jul2018.pdf \
+    sources/registers_20261106.csv
 
 n=$(unzip -l "$Z" | tail -1 | awk '{print $2}')
 printf '[repo] %s  (%s개 파일, %s)\n' "$Z" "$n" "$(du -h "$Z" | cut -f1)"
