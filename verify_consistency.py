@@ -915,6 +915,7 @@ def load_facts():
     if _os.path.exists('outputs/mantel_power.json'):
         _mp = json.load(open('outputs/mantel_power.json'))
         f['mde_rho_mantel'] = _mp['mde_rho_mantel']
+        f['mde_rho_mantel_bh'] = _mp['mde_rho_mantel_bh']
         f['mantel_power_perm'] = _mp['n_perm']
         # 2026-11-06. GATE 8 9차 C3-1. SI 가 'type I rate ... at 0.049' 라고
         # 적고 있었는데 이 스크립트에 귀무 조건이 없었다. 수행하지 않은 결과를
@@ -1091,7 +1092,11 @@ def load_facts():
             f['d1_p_min'] = min(x['p_mantel'] for x in _d1)
     # 농도와 응답크기의 순위상관. 모든 셀에서 같은 값이어야 한다.
     if _os.path.exists('outputs/deltaE_noise.json'):
-        _dn = json.load(open('outputs/deltaE_noise.json'))[
+        # 2026-11-06 (9차 R3 6-4). 종전에는 concentration_vs_magnitude
+        # 를 읽었는데 그 표는 DMMP 가 있는 두 셀뿐이다. 본문은 '모든
+        # 런-채널 셀' 이라고 적으므로 여섯 셀 전수 표를 읽는다.
+        _dnj = json.load(open('outputs/deltaE_noise.json'))
+        _dn = _dnj.get('concentration_vs_norm_all_cells') or _dnj[
             'concentration_vs_magnitude']
         _rs = {round(r['rho_conc_vs_norm'], 6) for r in _dn}
         if len(_rs) == 1:
@@ -1627,6 +1632,13 @@ def load_facts():
     f['pn_zs_max'] = max(v['after_renorm_max'] for v in _zs)
     f['pn_zs_before'] = max(v['before_renorm_max'] for v in _zs)
 
+    # 2026-11-06 (9차 R3 6-4). 본문이 '모든 런-채널 셀에서 정확히 +1.000'
+    # 이라고 적는데 예치물에는 두 셀뿐이었다(DMMP 없는 런을 건너뛴다).
+    # deltaE_noise 에 여섯 셀 전수 산출을 신설하고 여기에 묶는다.
+    _dn = json.load(open('outputs/deltaE_noise.json'))
+    if 'concentration_vs_norm_all_cells' in _dn:
+        f['conc_norm_cells'] = len(_dn['concentration_vs_norm_all_cells'])
+
     _md = json.load(open('outputs/mde.json'))
     f['mde_bh18_35'] = _md['panel35_incumbent3']['thresholds']['bh18']['mde_delta']
     f['mde_bh18_28'] = _md['panel28_incumbent3']['thresholds']['bh18']['mde_delta']
@@ -2009,13 +2021,16 @@ CHECKS = [
     # 2026-11-03 (2차) 폐기. 'negative in both channels' 문장이 분모
     # 오류여서 교체됐다. 같은 산출물 값(3종 평균)은 dmmp_gmean_uv_3 /
     # dmmp_gmean_nor_3 가 새 어법 자리에서 검사한다.
-    ('gvx_uv', [r'that contrast is \$\+([\d.]+)\$ with a'], 0.0015),
-    ('gvx_uv_lo', [r'95\\% interval from\s+\$\+([\d.]+)\$ to'], 0.0015),
-    ('gvx_uv_hi', [r'95\\% interval from\s+\$\+[\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
-    ('gvx_nor', [r'same contrast is \$\+([\d.]+)\$'], 0.0015),
-    ('gvx_nor_lo', [r'an interval from\s+\$([-][\d.]+)\$ to'], 0.0015),
+    # 2026-11-06 (9차 R3-3). 문장을 재집필했다. 재표집 단위가 설계농도
+    # 4개라는 것과 G 평균이 타분을 뺀 3종이라는 것을 본문에 적고, 구간을
+    # 검정이 아니라 서술 범위로 읽도록 바꿨다. 앵커도 함께 옮긴다.
+    ('gvx_uv', [r'excluding tabun, is \$\+([\d.]+)\$ in the\s*\n?ultraviolet channel'], 0.0015),
+    ('gvx_uv_lo', [r'with them, \$\+([\d.]+)\$ to'], 0.0015),
+    ('gvx_uv_hi', [r'with them, \$\+[\d.]+\$ to \$\+([\d.]+)\$ and'], 0.0015),
+    ('gvx_nor', [r'ultraviolet channel and \$\+([\d.]+)\$ in the reflectance'], 0.0015),
+    ('gvx_nor_lo', [r'and \$([-][\d.]+)\$ to \$\+[\d.]+\$, come from'], 0.0015),
     ('gvx_nor_hi',
-     [r'an interval from\s+\$[-][\d.]+\$ to \$\+([\d.]+)\$'], 0.0015),
+     [r'and \$[-][\d.]+\$ to \$\+([\d.]+)\$, come from'], 0.0015),
     # 2026-11-02. 원논문 Methods 를 직접 읽어 농도 단위를 ppm 에서 µM 으로
     # 바로잡았다. 단위를 앵커에서 빼면 같은 실수를 다시 못 잡으므로 단위째
     # 교정하고 남겨 둔다.
@@ -2171,9 +2186,13 @@ CHECKS = [
       r'at 80\\% power\s*\n?where the largest observed is ([\d.]+)'], 0.005),
     ('conc_norm_rho',
      [r'at a Spearman correlation of exactly\s*\n?\$\+([\d.]+)\$ in every '
-      r'run-channel cell'], 0.0005),
+      r'one of the \w+ run-channel cells'], 0.0005),
     # 초록의 MDE 와 최대 관측 rho.
-    ('mde_rho_mantel', [r'resolves a rank correlation\s*\n?of ([\d.]+) at 80'],
+    ('mde_rho_mantel_bh',
+     [r'resolves a rank\s*\n?correlation of ([\d.]+) at 80\\% power at the corrected',
+      r'resolves a rank\s*\n?correlation of ([\d.]+) at 80\\% power at that corrected',
+      r'that threshold the same simulation puts 80\\% power at\s*\n?\$\|\\rho\| = ([\d.]+)\$'], 0.006),
+    ('mde_rho_mantel', [r'and ([\d.]+) at a nominal \$\\alpha\$'],
      0.005),
     ('conf_ens_match_hi',
      [r'against (\w+) under the\s*\n?other \w+\.'], 0),
@@ -2545,7 +2564,10 @@ CHECKS = [
                     r'\$\+(0\.\d+)\$',
                     r'observed values of \$\+[\d.]+\$ to \$\+(0\.\d+)\$'],
      0.00005),
-    ('pn_exact_n', [r'exact enumeration of all ([\d,]+) relabellings'], 0),
+    ('conc_norm_cells',
+     [r'\$\+1\.000\$ in every one of the ([a-z]+) run-channel cells'], 0),
+    # WORDS 가 six -> 6 으로 바꿔 준다.
+    ('pn_exact_n', [r'by enumeration of all ([\d,]+)\s*\n?relabellings'], 0),
     ('pn_within_min', [r'separates them, to \$\+(0\.\d+)\$'], 0.00005),
     ('pn_within_max', [r'to \$\+[\d.]+\$ to\s*\n?\$\+(0\.\d+)\$ within'],
      0.00005),
@@ -2577,8 +2599,10 @@ CHECKS = [
      [r'\$ and \$\+(0\.\d+)\$ in the ultraviolet'], 0.0005),
     ('vol_rho_d1_normal',
      [r'ultraviolet channel, \$\+(0\.\d+)\$ and'], 0.0005),
+    # 2026-11-06. 'in the reflectance channel' 만으로는 DMMP 대비 문장도
+    # 걸린다. 휘발성 절의 짝 문장으로 한정한다.
     ('vol_rho_d2_normal',
-     [r'\$\+(0\.\d+)\$\s+in the reflectance channel'], 0.0005),
+     [r'\$\+0\.\d+\$ and \$\+(0\.\d+)\$\s*\n?in the reflectance channel'], 0.0005),
     # 2026-11-03 (작업 A-3) 신설. 채널내 런간 Fisher + 채널 BH.
     ('vol_fisher_nor', [r'reflectance channel gives\s+\$p = (0\.\d+)\$'],
      0.00005),

@@ -410,6 +410,37 @@ def premisenull():
             + '\n' + r'\end{tabular}')
 
 
+def registers():
+    """세 인컴번트의 규제 레지스터 보유 현황 (2026-11-06 신설).
+
+    GATE 8 9차에서 본문이 'DMMP 는 어떤 종류의 규제 흡입값도 갖지 않는다'
+    고 적은 것이 DOE PAC 과 NIOSH IDLH 로 반증됐다. 공백은 규제값의 공백이
+    아니라 EPA AEGL 한 레지스터의 공백이다. 수집분은 sources 에 출처 URL
+    과 함께 예치했고 이 표는 그 파일에서 생성한다.
+    """
+    import csv
+    SRC = 'sources/registers_20261106.csv'
+    KEEP = ('DMMP', 'DPGME', 'dichloromethane')
+    rows = []
+    with open(SRC, newline='') as fh:
+        for r in csv.DictReader(fh):
+            if r['compound_name'] not in KEEP:
+                continue
+            rows.append(r)
+    order = {n: i for i, n in enumerate(KEEP)}
+    rows.sort(key=lambda r: (order[r['compound_name']], r['register'], r['tier']))
+    lines = []
+    for r in rows:
+        reg = r['register'].replace('_', ' ')
+        lines.append(f"{r['compound_name']} & {reg} & {r['tier']} & "
+                     f"{r['value']} & {r['unit'].replace('mg/m3', 'mg m$^{-3}$')}"
+                     f" & {r['basis'] or '--'} \\\\")
+    head = (r'\begin{tabular}{lllrll}' '\n' r'\hline' '\n'
+            r'Compound & Register & Tier & Value & Unit & Basis \\' '\n'
+            r'\hline' '\n')
+    return head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + r'\end{tabular}'
+
+
 def main():
     rc, mq, pf, pp, mc = load()
     body = ablation(rc, mq, pf, pp, mc)
@@ -450,6 +481,18 @@ every interferent; count of valid matches.}\\
 
     hdr = ('% 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.\n')
     open('outputs/tab_family.tex', 'w').write(hdr + family(mq) + '\n')
+    open('outputs/tab_registers.tex', 'w').write(
+        hdr + '% 출처: sources/registers_20261106.csv (URL 포함)\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{Regulatory acute '
+        'inhalation values held for the three incumbent simulants, by '
+        'register. Sources and collection dates are in '
+        '\\texttt{sources/registers\\_20261106.csv} of the deposit. EPA '
+        'AEGL is the axis the agents are placed on in the main text; the '
+        'other registers use different averaging times and severity '
+        'definitions and are not interchangeable with it.}\n'
+        '\\label{tab:registers}\n\\small\n'
+        + registers() + '\n\\end{table}\n')
+    print('-> outputs/tab_registers.tex')
     print('-> outputs/tab_family.tex')
     open('outputs/tab_blockbalance.tex', 'w').write(hdr + blockbalance() + '\n')
     print('-> outputs/tab_blockbalance.tex')

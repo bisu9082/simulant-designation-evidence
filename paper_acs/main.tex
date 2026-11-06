@@ -150,12 +150,14 @@ permutes compound labels within each concentration. Descriptor distance
 does not track response distance at any
 resolvable effect size. Twelve exact Mantel tests and six combinations of
 them leave nothing below $q=0.05$, against a design that resolves a rank
-correlation of 0.67 at 80\% power where the largest observed is 0.57.
+correlation of 0.85 at 80\% power at the corrected threshold the conclusions
+use, and 0.67 at a nominal $\alpha$, where the largest observed is 0.57.
 That null holds under every analyst choice we enumerated, from the
 descriptor encoding to the panel composition, while the count of valid
 matches is moved by all five and is not a measurement. Measured vapour
-pressure, tested separately, tracks response distance in the reflectance
-channel at $q=0.0430$ yet returns one valid match at $p=0.4647$, on a gap
+pressure, tested separately, reaches $q=0.0430$ in the reflectance channel
+within its own prespecified family of two, uncorrected against the twelve
+descriptor cells, yet returns one valid match at $p=0.4647$, on a gap
 smaller than the temperature mismatch in its own source data. Dimethyl methylphosphonate, the standard G-agent simulant,
 is anti-correlated with soman and cyclosarin in the ultraviolet. Across
 the three runs, one designated simulant has been measured beside the
@@ -268,9 +270,10 @@ Descriptor distance nonetheless carries no detectable information about
 response distance. Dimethyl methylphosphonate, the compound the field treats
 as the G-agent surrogate, is anti-correlated with two of the four G agents,
 and its resemblance to sarin weakens as the concentration falls towards the
-range where point detectors operate. Where the designation record and a
-regulatory toxicity model might have supplied the missing evidence, both are
-empty for the same compounds.
+range where point detectors operate. Where the designation record and the regulatory
+toxicity axis might have supplied the missing evidence, the record names a
+measurement that is not detection and the axis the agents are placed on does
+not reach the incumbents.
 
 % 기여 선언. 거부 조항을 겨냥한 단락이므로 지우지 말 것.
 This is not a new sensing method, and we propose no replacement compound.
@@ -354,8 +357,14 @@ almost any input that is not degenerate. We withdraw it. The same statistic
 is tested here against a null that permutes compound labels within each
 concentration, which leaves every centred vector untouched and changes only
 which response is assigned to which compound. All six cells clear
-$q = 0.05$, the smallest adjusted value over the six being 0.0001, and the
-two four-compound cells by exact enumeration of all 13,824 relabellings.
+$q = 0.05$. Four of the six are sampled at 10,000 relabellings and return the
+smallest value that sampler can give, $9.999\times10^{-5}$, so those four are
+censored at the sampler's resolution and the smallest adjusted value over the
+six, 0.00015, is an upper bound rather than an estimate. The two
+four-compound cells are exact, by enumeration of all 13,824 relabellings, and
+give one-sided values of 0.0046 and 0.0033. The effect is large enough that
+the censoring does not bear on the conclusion: the observed statistics run
+from $+0.558$ to $+0.729$ against null means of $+0.102$ to $+0.314$.
 Cohen's $d_z$ over compounds runs from $+0.92$ to $+5.12$ as a descriptive
 effect size. Supporting Information Section~\ref{S-meth:deltaE} gives the
 per-cell values and why the bound the earlier version used does not apply.
@@ -506,11 +515,16 @@ sarin does not. What this measurement does not show is a compound that
 behaves like the G series as a class.
 
 A weaker claim survives in one channel. If DMMP is G-like at all it should
-sit closer to the G series than to VX, and that contrast is $+0.513$ with a
-95\% interval from $+0.131$ to $+0.722$ in the ultraviolet channel, which
-excludes zero. In the reflectance channel the same contrast is $+0.137$
-with an interval from $-0.144$ to $+0.290$, which does not. One optical
-channel supports the ordering and the other does not resolve it.
+sit closer to the G series than to VX, and that contrast, taken against the
+mean over the three matched G agents and excluding tabun, is $+0.513$ in the
+ultraviolet channel and $+0.137$ in the reflectance channel. The intervals
+quoted with them, $+0.131$ to $+0.722$ and $-0.144$ to $+0.290$, come from
+resampling the four design concentrations with replacement. Four fixed design
+levels are not an exchangeable sample, and the response magnitude rises
+monotonically with concentration, so we read these as descriptive ranges over
+the concentrations measured and not as tests: the ultraviolet range lies above
+zero and the reflectance range spans it. One optical channel is consistent
+with the ordering and the other does not resolve it.
 
 Concentration changes the picture (Figure~\ref{fig:response}c). The
 DMMP-to-sarin cosine rises monotonically from $+0.363$ at 10~$\mu$M to
@@ -531,7 +545,7 @@ Two limits sit on that direction. The concentrations are of analyte in a
 dye solution, not of vapour at an inlet, so we do not translate the range
 into the operating band of a point detector. And the mean response
 magnitude rises with concentration at a Spearman correlation of exactly
-$+1.000$ in every run-channel cell, so a similarity that grows with
+$+1.000$ in every one of the six run-channel cells, so a similarity that grows with
 concentration cannot be separated here from one that grows with
 signal-to-noise ratio. Distinguishing the two needs a repeat-level noise
 estimate, which the deposited tables do not carry. What the direction
@@ -551,7 +565,11 @@ optical channel decides which agent the standard simulant stands in for.
 It is not. With five candidates the probability of rank one is $1/5$ under
 random assignment, the expected number of first places over ten
 agent-channel cells is 2.0, and the observed number is two, with a
-one-sided binomial $p$ of 0.62. The ranking carries no information.
+one-sided binomial $p$ of 0.62. The ten cells share DMMP's two response
+vectors, one per channel, so they are not ten independent trials and the
+binomial is an approximation; it is reported because the observed count sits
+on the expectation, where no correction could move the reading. The ranking
+carries no information.
 
 The second was a channel decomposition. The cosine is a sum over dye
 channels, and the DMMP-to-tabun value of $+0.764$ turns out to rest on two
@@ -669,10 +687,14 @@ moved the answer further than any we did. The electronic descriptors
 throughout are GFN2-xTB, a method parameterised for geometries and energies
 rather than for virtual orbital energies. Recomputing all three coordinates
 of the electronic space at B3LYP/def2-SVPD moves it from one valid match of
-eleven and a one-sided $p$ of 0.275 to five matches and 0.0368. Four of
-those five are pairings the designation record supports: sarin, soman and
-tabun matched to DMMP, and cyclosarin matched to DPGME. We do not promote
-that value to a positive finding. It is a single uncorrected statistic in
+eleven and a one-sided $p$ of 0.275 to five matches and 0.0368. The five are
+sarin, soman and tabun matched to DMMP, and sulfur mustard and cyclosarin
+matched to DPGME. Only one of them, sarin to DMMP, is a pairing the
+designation record makes. The NIOSH programme names DMMP for GB and for HD,
+the National Research Council assessment names it for VX, and the patent that
+names DPGME gives it no agent class at all, so the flipped result does not
+recover the record either. We do not promote that value to a positive
+finding. It is a single uncorrected statistic in
 one space, reached by changing a method after seeing the first answer, and
 the two sets of calculations sit on different geometries, so the difference
 carries a geometry term we cannot separate from the method term. What it
@@ -782,7 +804,11 @@ response is positive in all four evaluable cells. Combining the two runs within
 each optical channel and then correcting across the two channels, the
 reflectance channel reaches $q = 0.0430$ while the ultraviolet channel does not
 ($q = 0.6389$). Volatility distance therefore does track response distance in
-one channel, which is more than any descriptor space achieved. It does not
+one channel. That value is corrected within the prespecified family of two
+channels and not against the twelve descriptor cells, so it is not on the same
+footing as the descriptor values reported above; corrected jointly with them,
+over sixteen cells, the smallest adjusted value is 0.1556 and nothing clears
+0.05. It does not
 follow that the null reported here is an artefact of omitting volatility: on
 the pairing question the volatility axis returns one valid match at
 $p = 0.4647$, so it does not qualify the incumbents either. Supporting
@@ -792,8 +818,8 @@ Information Section~\ref{S-res:volatility} sets the axis out in full.
 \label{res:docs}
 % 예산 400단어. 현재 약 390단어.
 
-Two places remain where the missing evidence might be found, and both are
-empty for the same compounds. We looked because the published criterion for
+Two places remain where the missing evidence might be found, and neither
+supplies it for the incumbents. We looked because the published criterion for
 choosing a low-toxicity simulant is a physicochemical one,\cite{webb2025}
 and a physicochemical criterion does not by itself say what measurement the
 compound was validated against or how toxic it is.
@@ -836,10 +862,23 @@ to a different purpose.
   \label{fig:tox}
 \end{figure}
 
-The second is regulatory toxicity (Figure~\ref{fig:tox}). One of the three
-incumbents carries a regulator-derived acute inhalation value. DMMP, the
-compound against which decontamination efficiency is quantified, carries
-none of any kind. A model cannot fill that gap. A random forest trained on
+The second is regulatory toxicity (Figure~\ref{fig:tox}). The axis on which
+the agents are placed here is the EPA acute exposure guideline level, and
+nineteen of the twenty-eight panel compounds carry one. Two of the three
+incumbents do not. DMMP, the compound against which decontamination
+efficiency is quantified, has no AEGL, and neither has DPGME; dichloromethane
+has one. Those two are not absent from every register. The US Department of
+Energy protective action criteria give DMMP 11, 120 and 730~mg~m$^{-3}$ for
+PAC-1 to PAC-3, derived as temporary emergency exposure limits from a rat
+one-hour LC$_{50}$, and NIOSH gives DPGME an immediately dangerous to life or
+health value of 600~ppm with a recommended exposure limit of 100~ppm. What is
+missing is not a number of any kind but a number on the axis the agents
+occupy: those values rest on different averaging times, different severity
+definitions and different derivations, so placing them beside a ten-minute
+AEGL-3 would compare quantities that are not the same quantity. Supporting
+Information Section~\ref{S-res:registers} lists what each register holds for
+the three incumbents with its source. A model cannot close the gap on the
+AEGL axis either. A random forest trained on
 230 AEGL chemicals reaches $R^{2}=0.458$ in cross-validation, with an
 out-of-fold bias of $+0.001$ log units, so nothing in its internal
 statistics warns a user off. Applied to twenty military agents held out of
@@ -876,7 +915,8 @@ searched; we state that as the limit of our search rather than as a claim
 about every measurement ever made. Twelve exact Mantel tests and six
 combinations of them leave no agreement between descriptor distance and
 response distance below $q=0.05$, against a design that resolves a rank
-correlation of 0.67 at 80\% power; Supporting Information
+correlation of 0.85 at 80\% power at that corrected threshold; Supporting
+Information
 Section~\ref{S-res:mde} gives what the design could have detected at each
 displacement, read against the corrected multiplicity threshold. On the
 primary panel no agent of the
@@ -889,12 +929,13 @@ The documentary record accounts for the first of those counts rather than
 contradicting it. DMMP was designated for respirator filter breakthrough
 testing and DPGME for an ion-mobility training composition. Neither
 measurement is detection, and a validation does not travel with a compound
-to a purpose it was never tested for. The toxicity axis is empty in the
+to a purpose it was never tested for. The toxicity axis stops in the
 same place: DMMP, the compound against which decontamination efficiency is
-quantified, carries no regulator-derived acute inhalation value, and a
-random forest trained on 230 AEGL chemicals is wrong in one direction
-without exception on twenty held-out military agents, so a prediction
-cannot stand in for the missing measurement.
+quantified, carries no AEGL, and while other registers hold values for it
+they are not the quantity the agents are placed on. A random forest trained
+on 230 AEGL chemicals is wrong in one direction without exception on twenty
+held-out military agents, so a prediction cannot stand in for the missing
+measurement either.
 
 Absence of evidence is not evidence of unsuitability, and we conclude
 nothing about whether the incumbents are poor choices. We propose no

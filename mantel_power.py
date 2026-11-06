@@ -57,7 +57,7 @@ def mantel_p(dr, pr):
 
 
 def run(noise, rng):
-    rejects, rhos = 0, np.empty(N_REP)
+    rejects, rejects_bh, rhos = 0, 0, np.empty(N_REP)
     for r in range(N_REP):
         X = rng.normal(size=(N, 3))
         D = np.sqrt(((X[:, None] - X[None]) ** 2).sum(-1))
@@ -66,7 +66,12 @@ def run(noise, rng):
         p, obs = mantel_p(rankdata(d), rankdata(v))
         rhos[r] = obs
         rejects += (p <= ALPHA)
-    return float(rhos.mean()), rejects / N_REP
+        # 2026-11-06 (9차 R3-2). 논문이 실제로 판정에 쓰는 임계는 명목
+        # alpha 가 아니라 12셀 BH 다. 지정검정에서는 이미 보정 임계의 MDE
+        # 를 싣고 있었는데(mde.json 의 bh18) 헤드라인인 Mantel 에만
+        # 적용하지 않았다. 같은 격자에서 두 임계의 검정력을 함께 센다.
+        rejects_bh += (p <= ALPHA_BH)
+    return float(rhos.mean()), rejects / N_REP, rejects_bh / N_REP
 
 
 def run_null(n_rep, rng):
@@ -98,14 +103,18 @@ def run_null(n_rep, rng):
     return rate, se
 
 
+BH_FAMILY = 12                    # 서술자 Mantel 셀 수 (rollback_c.deltaE.mantel_bh)
+ALPHA_BH = 0.05 / BH_FAMILY       # BH 에서 최소순위가 통과해야 하는 임계
+
+
 def main():
     rng = np.random.default_rng(SEED)
     rows = []
-    print('잡음폭   평균 관측 |rho|   기각률(검정력)')
+    print('잡음폭   평균 관측 |rho|   기각률 @a=0.05   기각률 @a=0.05/12')
     for noise in (0.10, 0.20, 0.30, 0.40, 0.50, 0.65, 0.85, 1.10, 1.50):
-        rho, pw = run(noise, rng)
-        rows.append(dict(noise=noise, mean_abs_rho=rho, power=pw))
-        print(f'  {noise:.2f}        {rho:.3f}            {pw:.3f}')
+        rho, pw, pw_bh = run(noise, rng)
+        rows.append(dict(noise=noise, mean_abs_rho=rho, power=pw, power_bh=pw_bh))
+        print(f'  {noise:.2f}        {rho:.3f}          {pw:.3f}            {pw_bh:.3f}')
 
     print()
     t1, t1_se = run_null(N_REP_NULL, rng)
@@ -116,12 +125,24 @@ def main():
     print()
 
     rows.sort(key=lambda r: r['mean_abs_rho'])
-    mde = None
-    for a, b in zip(rows, rows[1:]):
-        if a['power'] <= 0.8 <= b['power']:
-            t = (0.8 - a['power']) / (b['power'] - a['power'])
-            mde = a['mean_abs_rho'] + t * (b['mean_abs_rho'] - a['mean_abs_rho'])
-            break
+
+    def interp(field):
+        for a, b in zip(rows, rows[1:]):
+            if a[field] <= 0.8 <= b[field]:
+                t = (0.8 - a[field]) / (b[field] - a[field])
+                return a['mean_abs_rho'] + t * (b['mean_abs_rho']
+                                                - a['mean_abs_rho'])
+        return None
+
+    mde = interp('power')
+    mde_bh = interp('power_bh')
+    if mde_bh is None:
+        print('[mantel_power] 보정 임계의 80% 구간이 격자 밖이다 — '
+              f'최대 격자점에서도 검정력 {rows[-1]["power_bh"]:.3f}. '
+              '격자를 넓히거나 상한으로 보고할 것.')
+    else:
+        print(f'[mantel_power] BH 임계(a={ALPHA_BH:.5f}) 80% 검정력 '
+              f'최소탐지 |rho| = {mde_bh:.3f}')
     print()
     if mde is None:
         print('[mantel_power] 80% 구간이 격자 밖이다. 격자를 넓힐 것.')
@@ -130,6 +151,9 @@ def main():
     json.dump(dict(seed=SEED, n_compounds=N, n_perm=len(PAIRPERM),
                    n_rep=N_REP, alpha=ALPHA, grid=rows,
                    mde_rho_mantel=(None if mde is None else round(float(mde), 3)),
+                   bh_family=BH_FAMILY, alpha_bh=ALPHA_BH,
+                   mde_rho_mantel_bh=(None if mde_bh is None
+                                      else round(float(mde_bh), 3)),
                    null=dict(n_rep=N_REP_NULL,
                              type_i_rate=round(float(t1), 5),
                              type_i_se=round(float(t1_se), 5),
