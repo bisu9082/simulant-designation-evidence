@@ -37,7 +37,8 @@ done
 # 남긴 것이 전파 실패의 근원이었다. 복사를 빌드에 묶어 시차를 없앤다.
 for f in tab_ablation.tex tab_family.tex tab_blockbalance.tex \
          tab_sparse.tex tab_plocal.tex tab_volatility.tex \
-         tab_vpairing.tex tab_premisenull.tex tab_registers.tex; do
+         tab_vpairing.tex tab_premisenull.tex tab_registers.tex \
+         tab_designations.tex tab_dyepanel.tex; do
   if [ -f "outputs/$f" ]; then
     cp -p "outputs/$f" "paper_acs/$f"
   else

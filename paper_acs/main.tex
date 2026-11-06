@@ -256,21 +256,26 @@ measured responses side by side and asking whether one predicts the other.
 The same holds for our group's field-deployable detection work, which
 likewise measured the agents rather than testing the
 substitution.\cite{ondeviceref} The contribution here is that measurement
-and not the assertion. Our
-institute is an OPCW designated laboratory, which identifies and assays
-authentic agents under an accredited procedure, so the comparison can be
-made on the agents themselves.
+and not the assertion. The three source studies were run at an
+OPCW designated laboratory, which identifies and assays authentic agents
+under an accredited procedure. That is what made the original measurements
+possible; the reanalysis reported here handled no agent and made no
+measurement of its own.
 
 This work reports that measurement. A 29-dye colorimetric array was used to
-record the responses of sixteen authentic agents at four exposure
-concentrations in two optical channels, and those responses were compared against the
-molecular-descriptor distances that simulant selection relies on. The array
-separates compounds in every run and channel, so the measurement is sound.
+record the responses of sixteen authentic agents, twelve of them
+Chemical Weapons Convention Schedule~1 compounds and four Schedule~3
+industrial chemicals, at four solution concentrations in two optical
+channels, and those responses were compared against the
+molecular-descriptor distances that simulant selection relies on. The array separates compounds in every run and channel once the
+compound-axis mean is removed, which is the representation every comparison
+here uses; on the raw vectors, before that removal, the separation is not
+resolvable, and the cross-validated accuracies quoted for it come from runs
+that contain no simulant (Section~\ref{res:premise}).
 Descriptor distance nonetheless carries no detectable information about
 response distance. Dimethyl methylphosphonate, the compound the field treats
 as the G-agent surrogate, is anti-correlated with two of the four G agents,
-and its resemblance to sarin weakens as the concentration falls towards the
-range where point detectors operate. Where the designation record and the regulatory
+and its resemblance to sarin weakens as the solution concentration falls. Where the designation record and the regulatory
 toxicity axis might have supplied the missing evidence, the record names a
 measurement that is not detection and the axis the agents are placed on does
 not reach the incumbents.
@@ -324,10 +329,10 @@ below, which covers all six run-channel cells including that run's two.
 
 What our own check adds is narrower and is reported because the comparison
 that follows is made on patterns rather than on class labels. Each
-exposure gives a 29-dye $\Delta E_{00}$ vector, which we centred dye-wise
-at each concentration and normalised to unit length, so that agreement is
-measured between patterns and not between magnitudes, and took agreement
-as the cosine. The question it answers is whether a compound's pattern is
+exposure gives a 29-dye $\Delta E_{00}$ vector, which we scaled to unit
+length, centred dye-wise at each concentration, and scaled to unit length
+again, so that agreement is measured between patterns and not between
+magnitudes, and took agreement as the cosine. The question it answers is whether a compound's pattern is
 stable enough across dose to be treated as that compound's pattern at all.
 
 \begin{figure}[htb]
@@ -797,9 +802,11 @@ mismatch that produced it. The axis does not reproduce the pairings the usage
 literature implies. Dichloromethane sits 0.232 decades from hydrogen cyanide
 and 0.514 from phosgene; dimethyl methylphosphonate sits 0.473 from sarin
 while an interferent sits 0.216; nothing in the panel is within 2.659 decades
-of VX. We do not describe any of these as a departure from a designated
-pairing, because for two of the three incumbents the designating record
-assigns no agent class at all (Section~\ref{res:docs}). Agreement with measured
+of VX. We do not describe any of these as a departure from a designated pairing.
+For two of the three incumbents the record names no agent, and for the third
+it names three across two documents and sets the volatility deliberately
+between two of them (Section~\ref{res:docs}), so there is no single pairing
+for a distance to depart from. Agreement with measured
 response is positive in all four evaluable cells. Combining the two runs within
 each optical channel and then correcting across the two channels, the
 reflectance channel reaches $q = 0.0430$ while the ultraviolet channel does not
@@ -829,6 +836,19 @@ documents that designate it. DMMP is identified in a NIOSH programme for
 respirator materials resistance testing, where the measurement is filter
 breakthrough and the same document states that the simulant information is
 not to be used as a recommendation of any simulant.\cite{niosh2002simulant}
+That document carries a draft-for-discussion marking, which is worth saying
+plainly: the most-cited designation of the compound this field treats as the
+standard nerve agent simulant has never been issued as a final standard.
+That document also gives its reasons, and they are worth quoting because they
+are not what a detection user would assume. DMMP is called a good filtration
+simulant because it is relatively non-toxic, is easily detectable, and has a
+volatility intermediate between GB and HD. The third reason is the one that
+matters here: the volatility was chosen to sit between two agents rather than
+to match either, so a gap between DMMP and any single agent on that axis is
+the designation behaving as specified and not a defect in it. The second
+reason shows that detectability did enter the choice, as a property of the
+compound in an unspecified instrument, not as a measured correspondence
+between the compound's response and an agent's.
 It is designated a second time, for a different agent and a different
 measurement, in a National Research Council assessment of the
 Man-in-Simulant Test programme, which lists it as the fabric-testing
@@ -1003,12 +1023,20 @@ Dropping lewisite changes no count reported here, on either panel and in
 either optical channel of the second run (Supporting Information
 Section~\ref{S-meth:purity}).
 
-The array is the same 29 commercial chromogenic and fluorogenic dyes in the
-same order in all three runs, commercially sourced and used as
-received. Stock solutions at 100~mM were prepared in ethanol, methanol,
+The array is the same 29 commercial reagents in the same order in all three
+runs, commercially sourced and used as received. Supporting Information
+Table~\ref{S-tab:dyepanel} lists them. Six are not chromogenic dyes:
+anthracene and pyrene are fluorophores, reduced L-glutathione is a thiol
+reducing agent, and 2,4-dinitrophenylhydrazine and 2-hydrazinobenzothiazole
+are carbonyl derivatising reagents, so part of the array responds by covalent
+derivatisation and part by solvatochromic shift. The sources agree on the
+identities and the order; they disagree on one stock solvent, giving dimethyl
+sulfoxide for dye 15 in the first two runs and water in the third, which we
+report as published rather than resolve. Stock solutions at 100~mM were prepared in ethanol, methanol,
 dimethyl sulfoxide, water, tetrahydrofuran or toluene and sonicated to
 dissolution, then diluted into acetonitrile to a working concentration of
-100~$\mu$M, which holds the residual stock solvent below 0.1\% (v/v) and
+100~$\mu$M, a thousandfold dilution that puts the residual stock solvent at
+0.1\% (v/v) and
 places every dye in one solvent environment. Each analyte was delivered in
 acetonitrile by serial dilution to final concentrations of 0, 10, 50, 100 and
 500~$\mu$M in a 2.0~mL dye solution. Samples were mixed without
@@ -1019,7 +1047,15 @@ interest were central 20~$\times$~10 pixel zones; RGB values were read at five
 positions within each region, averaged, converted to CIE $L^{*}a^{*}b^{*}$,
 and expressed as the CIEDE2000 colour difference $\Delta E_{00}$ against the
 0~$\mu$M image of the same dye in the same channel. The self-referencing
-removes illumination and device offsets common to an image pair.
+removes illumination and device offsets common to an image pair. The sources
+do not state the working colour space, the reference white or whether the
+camera's transfer function was linearised before conversion, and we were not
+able to establish them; the deposited tables begin at $\Delta E_{00}$, so this
+work inherits those three choices rather than making them. A signed readout,
+$\Delta L^{*}$, $\Delta a^{*}$ and $\Delta b^{*}$ in place of a single
+unsigned magnitude, would also carry direction that $\Delta E_{00}$ discards,
+and is part of what the bridging run proposed in the Conclusions should
+record.
 
 The three runs are different compounds measured on different plates and are
 not replicates of one another, so no $\Delta E_{00}$ value is compared across
@@ -1031,10 +1067,15 @@ concentration, dye and channel.
 
 \subsection{Response patterns}
 \label{meth:patterns}
-Each exposure gives a 29-dye $\Delta E_{00}$ vector. Vectors were centred
-dye-wise within each concentration and normalised to unit length, so that
-agreement is measured between patterns and not between magnitudes, and
-agreement was taken as the cosine. Dye columns that are bit-identical across
+Each compound-concentration cell gives a 29-dye $\Delta E_{00}$ vector. The
+processing is three
+steps and the order matters, so we state it in full: each vector is scaled to
+unit length, the compound-axis mean within that concentration is subtracted,
+and the result is scaled to unit length again. Agreement is then the cosine,
+measured between patterns rather than between magnitudes. The first scaling
+removes response magnitude before the mean is formed; the second is what
+makes the cosine a cosine, and it is also what breaks the zero-sum property
+discussed in Supporting Information Section~\ref{S-meth:deltaE}. Dye columns that are bit-identical across
 every row carry no information and were counted once, which leaves 23
 effective channels in the ultraviolet pivot of the second run and 25 in that
 of the third.

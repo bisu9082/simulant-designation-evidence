@@ -430,14 +430,40 @@ simulant selection names methyl salicylate, dimethyl methylphosphonate and
 di-isopropyl methyl phosphonate for fabric testing and does not name
 dichloromethane.
 
+Table~\ref{tab:designations} lists every designation we located, with the
+document, the agent it names, the measurement it was made against, and the
+basis the document itself states. We tabulate rather than narrate because an
+earlier version of this section narrated it and two errors survived that
+would not have survived a table: it summarised the National Research Council
+designation of DMMP for VX as a designation for the nerve agent class, and it
+said elsewhere that the designating documents name no agent class for these
+compounds, which is false for DMMP in both documents.
+
+\input{tab_designations}
+
+One classification in the panel is contestable and we record it rather than
+settle it. Malathion enters the panel as an interferent, because that is how
+the sensing literature uses it, but the critical review cited in the
+Introduction assesses it as a low-toxicity simulant on the physicochemical
+criterion.\cite{webb2025} Dichlorvos is in the same position. Neither
+reading changes a count. In the narrowed comparison set the only two agents
+either pesticide blocks are tabun, blocked by dichlorvos, and VX, blocked by
+malathion, and both of those agents already fail the distance threshold at
+2.5320 and 3.0364, so moving the two compounds out of the comparison set
+leaves the three valid matches and the wider reading's zero exactly where
+they are.
+
 Three limits apply and we state them rather than claim coverage we do not
 have. The search covers the public record reachable without clearance or a
 subscription, so a designation in a restricted or unindexed document would
-not be found. US Army Test Operations Procedure 08-2-196A, \emph{Simulant
-Selection}, is the one further document we identified as likely to carry a
-designation of this kind; it is held by the Defense Technical Information
-Center under accession AD1167884 and we were not able to obtain it, so we
-report it as unexamined rather than as absent. And the search was for a
+not be found. US Army Test Operations Procedure 08-2-196, \emph{Simulant
+Selection for Laboratory, Chamber, and Field Testing}, is the one further
+document we identified as likely to carry a designation of this
+kind.\cite{top082196} We know of it only through the citation in TOP
+08-2-188 CN1, which is also where its title comes from; a revision 08-2-196A
+is held by the Defense Technical Information Center under accession
+AD1167884. We obtained neither, so we report the procedure as unexamined
+rather than as absent, and we do not characterise what it contains. And the search was for a
 designating document, not for usage: dichloromethane is used as a simulant
 in the sensing literature, which is why it is an incumbent here, and that
 usage is not in dispute.
@@ -652,8 +678,15 @@ percentile to 0.05.
 
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
-Measured response was taken from a 29-dye colorimetric array reported in earlier
-work from this laboratory \cite{hazref,multiplexref,group3ref}. Colour difference
+Measured response was taken from a 29-component colorimetric array reported in
+earlier work from this laboratory \cite{hazref,multiplexref,group3ref}. The
+array is listed compound by compound in Table~\ref{tab:dyepanel}. Six of the
+twenty-nine are not chromogenic dyes: two are fluorophores, one is a thiol
+reducing agent and two are carbonyl derivatising reagents, so part of the
+pattern is covalent derivatisation rather than a solvatochromic shift. The
+stock solvent of one component, Quinoline Yellow, differs between the source
+studies, dimethyl sulfoxide in the first two runs and water in the third; we
+report that as published and do not resolve it. Colour difference
 $\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
 the same dye in the same channel, given per dye for three compound sets at
 solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
@@ -677,6 +710,8 @@ A-230, A-232, A-234 and A-242, labels its structure figure representative, and
 does not map any code to a named compound\cite{group3ref}. We therefore do not
 assign structures to those codes anywhere in this work.
 
+\input{tab_dyepanel}
+
 The three sets are different compounds measured on different plates, not
 replicates, so no $\Delta E$ value is compared across sets; every analysis is run
 within a set and the results are reported separately or combined only at the
@@ -689,8 +724,11 @@ reproducibility rather than averaged away.
 Each compound's 29-dimensional response at each concentration was scaled to unit
 length, so that pattern rather than magnitude is compared. The compound-axis mean
 was then subtracted at each concentration to remove the common non-negative
-response component, and the resulting vectors were averaged over concentrations
-and renormalised to give one pattern per compound per channel. Similarity is the
+response component, and each centred vector was scaled to unit length again.
+Those three steps, in that order, are what the code performs, and the second
+scaling is load-bearing for the argument two paragraphs below. The resulting
+vectors were averaged over concentrations and renormalised to give one pattern
+per compound per channel. Similarity is the
 cosine between patterns and dissimilarity is one minus that. Confidence intervals
 are bootstrapped over concentrations with 10\,000 resamples, which means they
 describe variation across the four concentrations of one plate set and not
