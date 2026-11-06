@@ -363,12 +363,14 @@ ACS_CASES = [
      'reaches $p<0.05$ in 27.4\\% of them',
      'reaches $p<0.05$ in 36.0\\% of them'),
     ('부분공간 순위를 구판으로 되돌림 (정본 seventh)',
-     'designation ranks seventh of 680',
+     'ranks seventh of 680',
      'designation ranks fifth of 680'),
 
     # --- 2026-11-03 (작업 C) 신설분. 바닥 논증 대체 ---
     ('바닥 논증을 본문에 되살림',
-     'renormalises each vector to unit length, which destroys the zero-sum',
+     # 2026-11-06 (9차 분량). 본문의 바닥 논거 서술을 SI 로 줄이면서
+     # 종전 앵커가 사라졌다. 같은 논거를 담은 SI 문장으로 다시 건다.
+     'renormalisation does not preserve $\\sum_i u_i = 0$ unless',
      'forces the mean between-compound cosine towards an algebraic floor'),
     ('귀무 평균 상한 오기 (정본 +0.3138) — 중심화 기여를 축소한다',
      'difference of $+0.1024$ to\n$+0.3138$',
@@ -377,7 +379,7 @@ ACS_CASES = [
      'observed differences of $+0.5578$',
      'observed differences of $+0.7578$'),
     ('전수열거 수 오기 (정본 13,824)',
-     'exact enumeration of all 13,824 relabellings',
+     'by enumeration of all 13,824 relabellings',
      'exact enumeration of all 13,284 relabellings'),
     ('부호뒤집기를 유효한 검정으로 되돌림',
      'not of the data: centring leaves the per-compound difference',
@@ -385,10 +387,10 @@ ACS_CASES = [
 
     # --- 2026-11-03 (작업 B) 신설분 ---
     ('초록의 전제검정 셀 수 오기 (정본 six)',
-     'all six clear $q=0.05$ against a null',
+     'all six clear $q=0.05$ against a label-permutation null',
      'all four clear $q=0.05$ against a null'),
     ('초록의 휘발성 반사 q 오기 (정본 0.0430) — 비유의로 뒤집힌다',
-     'the reflectance\nchannel at $q=0.0430$',
+     'reaches $q=0.0430$ in the reflectance\nchannel',
      'the reflectance\nchannel at $q=0.1430$'),
     ('초록의 휘발성 유효매칭 p 오기 (정본 0.4647)',
      'one valid match at $p=0.4647$',
@@ -400,8 +402,8 @@ ACS_CASES = [
      'distance falls from 23.7 to 6.5\\%',
      'distance falls from 23.7 to 16.5\\%'),
     ('형태 축소 후 매칭 수 오기 (정본 zero) — 민감도 결론이 뒤집힌다',
-     'matches there falls from three to zero',
-     'matches there falls from three to three'),
+     'valid matches there falls from\nthree to zero',
+     'valid matches there falls from\nthree to three'),
     ('형태 축소 Mantel q 오기 (정본 0.1708)',
      'shape coordinates raises it to 0.1708',
      'shape coordinates raises it to 0.0708'),
@@ -427,7 +429,9 @@ ACS_CASES = [
      'other than tabun it is $-0.289$ and'),
     # 철회한 주장은 B2 블랙리스트가 잡는다. 주입 시험도 그 경로를 확인한다.
     ('초록을 철회한 DPGME 계열 주장으로 되돌림',
-     'on a gap\nsmaller than the temperature mismatch',
+     # 2026-11-06 (9차 분량). 초록·본문에서 이 구절을 덜어내 SI 에만
+     # 남았다. SI 문장으로 다시 건다.
+     'The gap is smaller than the temperature\nmismatch',
      'which pairs a blister-agent simulant with a nerve agent'),
     # --- 휘발성 축 (2026-11-03 신설). 본문 res:panels 말미 단락.
     #     새 절을 가드 없이 들이는 것이 이 프로젝트의 반복 실패 경로다.
@@ -439,19 +443,19 @@ ACS_CASES = [
      'one match with a $p$ of 0.0647'),
     # 2026-11-03 (작업 A-3). 4셀 일괄 Fisher 철회에 따라 교체.
     ('휘발성 반사 채널 q 오기 (정본 0.0430) — 유의가 비유의로 뒤집힌다',
-     'reflectance\nchannel reaches $q = 0.0430$',
+     'reflectance channel gives\n$p = 0.0215$ and $q = 0.0430$',
      'reflectance\nchannel reaches $q = 0.1430$'),
     ('휘발성 자외 채널 q 오기 (정본 0.6389) — 비유의가 유의로 뒤집힌다',
-     'ultraviolet channel does not\n($q = 0.6389$)',
+     'ultraviolet channel gives $p = 0.6389$ and\n$q = 0.6389$',
      'ultraviolet channel does not\n($q = 0.0389$)'),
     ('휘발성 DPGME-소만 간격 오기 (정본 0.0107)',
-     'a gap of 0.0107 decades between measurements',
+     'rests on a gap of 0.0107 decades between a measurement',
      'a gap of 0.0507 decades between measurements'),
     ('휘발성 VX 간격 오기 (정본 2.659)',
-     'within 2.659 decades of VX',
+     'VX has nothing within 2.659 decades',
      'within 1.659 decades of VX'),
     ('휘발성 DMMP-사린 대 간섭물 비교 오기 (정본 0.216)',
-     'while an interferent sits 0.216',
+     'an interferent, sits 0.216',
      'while an interferent sits 0.616'),
     # 2026-11-03. 종전 앵커는 표지서신의 농도 추세 문장이었고 그 주장을
     # 뺐으므로 자리가 없어졌다. 단위가 틀리면 가장 치명적인 자리, 즉
@@ -865,14 +869,14 @@ SUPP_CASES_DIPOLE = [
      'return 0.0368. The permutation test is still not\nsignificant at any '
      'conventional level. We do not promote'),
     ('병합공간 B3LYP p 오기 (0.0221 대 0.1221)',
-     'a one-sided $p$ of 0.0250, against four and',
-     'a one-sided $p$ of 0.1221, against four and'),
+     'a one-sided $p$ of 0.0250, against three and',
+     'a one-sided $p$ of 0.1221, against three and'),
     ('병합공간 B3LYP 매칭 수 오기 (three 대 five)',
      'analysis and returns three valid matches and\na one-sided',
      'analysis and returns five valid matches and\na one-sided'),
     ('병합공간 GFN2 대조값 오기 (0.0250 대 0.0350)',
-     'against four and 0.0250 for the GFN2 control',
-     'against four and 0.0350 for the GFN2 control'),
+     'against three and 0.0250 for the GFN2 control',
+     'against three and 0.0350 for the GFN2 control'),
     ('5건 전부 기록 지지 짝이라고 서술 (정본 4/5)',
      'Four of those five are sarin',
      'The five are pairings the designation record supports. Those five '
@@ -1159,23 +1163,37 @@ def main():
         finally:
             open(ACS_SUPP, 'w').write(qbak)
 
+        # 2026-11-06 (9차 분량). 본문을 줄이면서 여러 서술이 SI 로 옮겨갔고,
+        # 그 자리를 겨냥하던 주입 사례 16건이 '원문을 찾지 못함' 으로 빠졌다.
+        # 이 시험의 목적은 '이 오염을 검증기가 잡는가' 이지 '어느 파일에
+        # 있는가' 가 아니다. 검증기는 main 과 SI 를 합쳐 훑으므로, 본문에서
+        # 못 찾으면 SI 에서 찾아 같은 주입을 한다. 어디에 주입했는지는
+        # 출력에 적어 이동 사실이 보이게 둔다.
         abak = open(ACS).read()
+        qbak2 = open(ACS_SUPP).read()
         try:
             for desc, a, b in ACS_CASES:
+                tgt, bak = ACS, abak
                 ra, rb = resolve(a, b, abak)
                 if not ra:
-                    print(f'  SKIP {desc}: ACS 원문을 찾지 못함 ({a[:40]!r})')
+                    ra, rb = resolve(a, b, qbak2)
+                    tgt, bak = ACS_SUPP, qbak2
+                if not ra:
+                    print(f'  SKIP {desc}: ACS 본문에도 SI 에도 원문이 없다 '
+                          f'({a[:40]!r})')
                     bad += 1
                     continue
-                open(ACS, 'w').write(abak.replace(ra, rb, 1))
+                where = 'ACS' if tgt is ACS else 'ACS->SI'
+                open(tgt, 'w').write(bak.replace(ra, rb, 1))
                 if run() == 0:
-                    print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS)')
+                    print(f'  FAIL {desc}: 주입했는데 통과했다 ({where})')
                     bad += 1
                 else:
-                    print(f'  ok   {desc}: 잡았다 (ACS)')
-                open(ACS, 'w').write(abak)
+                    print(f'  ok   {desc}: 잡았다 ({where})')
+                open(tgt, 'w').write(bak)
         finally:
             open(ACS, 'w').write(abak)
+            open(ACS_SUPP, 'w').write(qbak2)
 
         sbak = open(SIDECAR).read()
         try:

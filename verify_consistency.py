@@ -2183,9 +2183,10 @@ CHECKS = [
     ('t3_GA_legacy',
      [r'crosses the threshold of 2:\s*\n?([\d.]+) under the old filter'],
      0.00005),
+    # 2026-11-06 (9차). 커버레터를 본문과 같은 두 임계 서술로 고치면서
+    # 'where the largest observed is' 앞 문구가 바뀌었다. 수치 주변만 남긴다.
     ('mantel_rho_max_abs',
-     [r'at 80\\% power where the largest\s*\n?observed is ([\d.]+)',
-      r'at 80\\% power\s*\n?where the largest observed is ([\d.]+)'], 0.005),
+     [r'(?:where the|the)\s+largest\s*\n?\s*observed is ([\d.]+)'], 0.005),
     ('conc_norm_rho',
      [r'at a Spearman correlation of exactly\s*\n?\$\+([\d.]+)\$ in every '
       r'one of the \w+ run-channel cells'], 0.0005),
@@ -2298,7 +2299,11 @@ CHECKS = [
     ('mde_rho_compound', [r'as the unit, which is the unit the Mantel test uses,\s*\n?'
                           r'returns \$([\d.]+)\$'], 0.0015),
     ('mde_rho_mantel', [r'80\\% power is reached at \$\|\\rho\| = ([\d.]+)\$',
-                        r'design detects \$\|\\rho\| \\ge ([\d.]+)\$ at 80\\% power'], 0.006),
+                        r'design detects \$\|\\rho\| \\ge ([\d.]+)\$ at 80\\% power',
+                        # 2026-11-06 (9차). 주입시험이 커버레터의 MDE 를
+                        # 무검사로 잡아냈다. 본문은 0.85/0.67 로 고쳤는데
+                        # 커버레터만 0.67 단독으로 남아 있었다.
+                        r'and ([\d.]+) at a nominal \$\\alpha\$'], 0.006),
     ('mantel_power_perm', [r'all \$6! = (\d+)\$ relabellings',
                            r'exact Mantel over all (\d+) relabellings'], 0),
     ('mantel_type_i', [r'type~I rate of the simulated test at ([\d.]+)'], 0.0),
