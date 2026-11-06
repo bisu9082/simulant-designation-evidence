@@ -310,19 +310,16 @@ of 10 to 500~$\mu$M with a detection limit near 10~$\mu$M\cite{group3ref}.
 % 1차 런에는 유보표본 평가가 없다. 즉 검증된 두 수치는 헤드라인을 내는
 % 런의 것이 아니다. 그 불일치를 적고, 전제의 근거를 우리 자신의 여섯 셀
 % 검정으로 옮긴다. 인용값은 예치물로 재현할 수 없음도 적는다.
-Three qualifications belong with those figures, and together they move
-where the premise rests. Each is obtained on a dye subset chosen for that
-run, not on the 29-dye array we analyse. The first run reports no held-out
-evaluation, so its 100\% is an apparent rather than a validated accuracy.
-And the run that carries the comparison this paper is about is that first
-run, because it is the only one in which a designated simulant was measured
-beside the agents; the two cross-validated figures come from the second and
-third runs, which contain no simulant. A validated accuracy on a run that
-holds no simulant does not establish the premise for a run that does. We
-also cannot reproduce either cross-validated figure from the deposited
-tables, which are averaged over replicates, so we quote them and do not
-verify them. The premise for the first run therefore rests on our own check
-below, which covers all six run-channel cells including that run's two.
+Three qualifications move where the premise rests. Each figure is obtained on
+a dye subset chosen for that run, not on the 29-component array we analyse;
+the first run reports no held-out evaluation, so its 100\% is an apparent
+rather than a validated accuracy; and that first run is the only one in which
+a designated simulant was measured beside the agents, so the two
+cross-validated figures come from runs that contain no simulant. We cannot
+reproduce either cross-validated figure from the deposited tables, which are
+averaged over replicates, so we quote them and do not verify them. The
+premise for the first run therefore rests on our own check below, which
+covers all six run-channel cells.
 
 What our own check adds is narrower and is reported because the comparison
 that follows is made on patterns rather than on class labels. Each
@@ -382,36 +379,21 @@ tables, so no repeatability estimate enters any analysis below.
 
 Two features of the measurement belong here rather than in the Supporting
 Information. The first is that dye-wise centring drives the mean
-between-compound cosine negative by itself. An earlier version of this
-section compared the observed means against $-1/(n-1)$ and read the margin
-above it as evidence. That comparison does not hold, and Supporting
-Information Section~\ref{S-meth:deltaE} gives the two reasons: the centring
-step renormalises each vector to unit length, which destroys the zero-sum
-property the identity requires, and for vectors that do sum to zero
-$-1/(n-1)$ is an upper bound on the norm-weighted mean cosine rather than a
-floor. What does quantify the inflation is the permutation null itself.
-Relabelling compounds within each concentration leaves a mean
-within-minus-between difference of $+0.1024$ to $+0.3138$ across the six
-cells, against observed differences of $+0.5578$ to $+0.7288$. The
-separation exceeds what centring alone produces in every cell, including the
-reflectance channel of the third run that the earlier comparison set aside.
-What the test establishes is the per-compound statement that a compound
-agrees with itself across concentrations more than it agrees with the other
-compounds in its cell on average. It does not
-establish the stronger pairwise statement: in 13 of the 34
-compound-and-cell instances, some other compound's consensus pattern is
-closer to a compound than that compound's own agreement across
-concentrations. The classification results reported for these runs in the
-source work, not this cosine, are what establish that the agents are
-separable, and we quote those rather than reproduce them, because the
-deposited tables are averaged over replicates and the cross-validation
-design cannot be rebuilt from them. The second is that six dye columns in the ultraviolet pivot of
-the second run were bit-identical across every row. Tracing them to the
-source images showed that those dyes do not fluoresce under ultraviolet
-excitation and the regions of interest had read plate background, so one
-channel had been recorded six times. Columns identical across all rows are
-counted once, which leaves 23 effective channels in that cell and 25 in the
-ultraviolet pivot of the third run. Supporting Information
+between-compound cosine negative by itself, so an earlier version's
+comparison against $-1/(n-1)$ does not hold; Supporting Information
+Section~\ref{S-meth:deltaE} gives the two reasons. What does quantify the
+inflation is the permutation null. Relabelling compounds within each
+concentration leaves a mean within-minus-between difference of $+0.1024$ to
+$+0.3138$ across the six cells, against observed differences of $+0.5578$ to
+$+0.7288$. What the test establishes is the per-compound statement, not the
+stronger pairwise one: in 13 of the 34 compound-and-cell instances, some
+other compound's consensus pattern is closer to a compound than that
+compound's own agreement across concentrations. The second is that six dye
+columns in the ultraviolet pivot of the second run were bit-identical across
+every row, because those dyes do not fluoresce under ultraviolet excitation
+and the regions of interest had read plate background. Columns identical
+across all rows are counted once, which leaves 23 effective channels in that
+cell and 25 in the ultraviolet pivot of the third run. Supporting Information
 Section~\ref{S-res:arraydetail} sets out what the array does and does not
 establish in more detail.
 
@@ -895,16 +877,15 @@ displace the incumbents there are themselves literature-proposed simulants
 rather than interferents.
 
 The documentary record accounts for the first of those counts rather than
-contradicting it. DMMP was designated for respirator filter breakthrough
-testing and DPGME for an ion-mobility training composition. Neither
-measurement is detection, and a validation does not travel with a compound
-to a purpose it was never tested for. The toxicity axis stops in the
-same place: DMMP, the compound against which decontamination efficiency is
-quantified, carries no AEGL, and while other registers hold values for it
-they are not the quantity the agents are placed on. A random forest trained
+contradicting it. DMMP was designated against respirator filter breakthrough
+and fabric penetration, neither of which is detection, and DPGME against
+detectability by ion mobility spectrometry, which is a different transduction
+from the colorimetric response reanalysed here. A validation does not travel
+with a compound to a purpose it was never tested for. The toxicity axis stops
+in the same place: DMMP carries no AEGL, and the values other registers hold
+for it are not the quantity the agents are placed on. A random forest trained
 on 230 AEGL chemicals is wrong in one direction without exception on twenty
-held-out military agents, so a prediction cannot stand in for the missing
-measurement either.
+held-out military agents, so a prediction cannot stand in either.
 
 Absence of evidence is not evidence of unsuitability, and we conclude
 nothing about whether the incumbents are poor choices. We propose no
@@ -1020,18 +1001,14 @@ concentration, dye and channel.
 
 \subsection{Response patterns}
 \label{meth:patterns}
-Each compound-concentration cell gives a 29-dye $\Delta E_{00}$ vector. The
-processing is three
-steps and the order matters, so we state it in full: each vector is scaled to
+Each compound-concentration cell gives a 29-dye $\Delta E_{00}$ vector.
+The processing is three steps and the order matters: each vector is scaled to
 unit length, the compound-axis mean within that concentration is subtracted,
-and the result is scaled to unit length again. Agreement is then the cosine,
-measured between patterns rather than between magnitudes. The first scaling
-removes response magnitude before the mean is formed; the second is what
-makes the cosine a cosine, and it is also what breaks the zero-sum property
-discussed in Supporting Information Section~\ref{S-meth:deltaE}. Dye columns that are bit-identical across
-every row carry no information and were counted once, which leaves 23
-effective channels in the ultraviolet pivot of the second run and 25 in that
-of the third.
+and the result is scaled to unit length again. Agreement is then the cosine.
+The second scaling is what breaks the zero-sum property discussed in
+Supporting Information Section~\ref{S-meth:deltaE}. Dye columns bit-identical
+across every row were counted once, which leaves 23 effective channels in the
+ultraviolet pivot of the second run and 25 in that of the third.
 
 \subsection{Descriptors}
 \label{meth:descriptors}
@@ -1039,19 +1016,15 @@ Structural and physicochemical descriptors, 51 after excluding run metadata,
 were computed with RDKit from canonical SMILES. Ten are read from a
 three-dimensional structure and are taken as Boltzmann-weighted means over an
 ETKDGv3 conformer ensemble at 298~K with MMFF94 energies, or UFF for
-lewisite~1, the one compound without MMFF parameters, so that no result
-depends on an undeclared choice of conformer; Supporting Information
-Section~\ref{S-meth:conformer} reports what the two treatments do to the
-results. Electronic descriptors were
-computed with GFN2-xTB in the gas phase, Boltzmann averaged over up to five
-conformers at 298.15~K. The electronic space carries $E_\mathrm{HOMO}$,
-$E_\mathrm{LUMO}$ and the dipole moment. The Parr electrophilicity index
-$\omega = \mu^{2}/2\eta$ is reported but admitted to no distance, because it
-is an exact function of the two orbital energies that accompany it and a
-filter built on linear correlation does not detect that. It and the
-condensed Fukui index at phosphorus, which exists only for the six
-phosphorus-bearing compounds, are reported in Supporting Information
-Section~\ref{S-res:plocal} and admitted to no distance. Dipole moments were
+lewisite~1, the one compound without MMFF parameters; Supporting Information
+Section~\ref{S-meth:conformer} reports what the two treatments do. Electronic
+descriptors were computed with GFN2-xTB in the gas phase, Boltzmann averaged
+over up to five conformers at 298.15~K, and the electronic space carries
+$E_\mathrm{HOMO}$, $E_\mathrm{LUMO}$ and the dipole moment. The Parr
+electrophilicity index $\omega = \mu^{2}/2\eta$ and the condensed Fukui index
+at phosphorus are reported in Supporting Information
+Section~\ref{S-res:plocal} and admitted to no distance, $\omega$ because it
+is an exact function of the two orbital energies that accompany it. Dipole moments were
 % 2026-11-02 (GATE 8 7차). 종전 문장은 B3LYP 재계산이 "the reported result
 % does not depend on the semiempirical method" 임을 확인했다고 적었다.
 % 산출물은 그 반대를 보인다: 전자공간에서 1/11, p=0.275 가 5/11, p=0.0368 로
@@ -1067,16 +1040,17 @@ against PubChem, and no property value was taken from a prediction service.
 
 \subsection{Distances and tests}
 \label{meth:spaces}
-Within each space, descriptors of zero variance were removed, then one of each
-pair correlated at $|r| > 0.95$, retaining a protected set. Remaining
+Within each space the filter runs in three stages: constant columns are
+removed, then columns that are exact algebraic functions of others already
+present, then one of each pair correlated at $|r| > 0.95$. The second stage
+overrides the protected set where the determining columns survive
+(Supporting Information Section~\ref{S-meth:orderinvariance}). Remaining
 descriptors were standardised and distances taken as Euclidean, normalised by
 the median nearest-neighbour separation of the same space, which makes a
 normalised distance comparable within a panel and not between panels.
 
-A paired comparison of the distance to the nearest incumbent simulant against
-the distance to the nearest interferent is confounded by group size, since the
-minimum of many draws is smaller than the minimum of few by construction. We
-therefore enumerated every way of designating three of the non-agents as
+A paired comparison against the nearest interferent is confounded by group
+size, so we enumerated every way of designating three of the non-agents as
 simulants and report the rank of the actual designation as an exact
 $p$-value: $\binom{24}{3} = 2024$ designations on the primary panel and
 $\binom{17}{3} = 680$ on the twenty-eight-compound panel. The hypothesis is
@@ -1141,15 +1115,14 @@ controls are sampled, at 20000 and 2000 draws from the recorded seed.
 \section*{Data Availability}
 Analysis code, descriptor tables, the parsed regulatory values with their
 sources and every figure script are deposited in a public
-repository\cite{simulantrepo}, from which every number we computed can be
-regenerated. Three classes of number are quoted rather than recomputed and are
-marked as such where they appear: values taken from the three source studies,
-values taken from regulatory registers, and the two cross-validated
-classification accuracies that the deposited tables do not reproduce. The
-colorimetric input is the deposited $\Delta E_{00}$ table; the conversion from
-the original plate images to those colour differences was performed in the
-source studies and is outside this deposit. The measured response tables
-themselves were published with the three source studies.
+repository.\cite{simulantrepo} Every number we computed can be regenerated
+from it. Three classes are quoted rather than recomputed and are marked as
+such where they appear: values from the three source studies, values from
+regulatory registers, and the two cross-validated accuracies the deposited
+tables do not reproduce. The colorimetric input is the deposited
+$\Delta E_{00}$ table, published with the source studies; the conversion from
+plate images to those colour differences was performed there and is outside
+this deposit.
 
 \begin{acknowledgement}
 The colorimetric response data reanalysed here were measured in three earlier
