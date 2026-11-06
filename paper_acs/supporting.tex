@@ -280,6 +280,32 @@ correlation filter is handed its columns
 (Section~\ref{meth:orderinvariance}). We report tabun as a borderline case
 throughout rather than counting it on either side.
 
+\section{The shape block as a declared sensitivity}
+\label{res:shapeblock}
+
+Nine of the thirty-eight coordinates retained on the twenty-eight-compound
+panel, and nine of the forty-one on the primary panel, are functions of the
+three principal moments of inertia. Because the relations are ratios rather
+than linear, the correlation filter at $|r| > 0.95$ does not remove them: the
+largest pairwise correlation inside the block is 0.9364 on the
+twenty-eight-compound panel and 0.9359 on the primary panel. The one shape
+coordinate the filter does remove is the third principal moment itself,
+dropped against the second at $|r| = 0.998$ on both panels, while nine
+coordinates built from the same three moments are kept. They are not exact
+functions of one another either, since each descriptor is Boltzmann averaged
+over conformers independently, which leaves relative discrepancies of 1.4 to
+15.3\% in the three identities we checked.
+
+We therefore kept the full block and recomputed everything with the seven
+derived coordinates dropped, as a declared sensitivity rather than a
+replacement. On the twenty-eight-compound panel the shape contribution to
+mean squared pairwise distance falls from 23.7 to 6.5\%, and for the two
+agents whose nearest-match rule acetonitrile blocks it falls from 69.8 and
+61.9\% to 0.20 and 0.12\%. The count of valid matches there falls from
+three to zero. On the primary panel it is zero under both encodings, and the
+smallest Benjamini--Hochberg value over the twelve Mantel cells rises from
+0.1167 to 0.1708 with the largest rank correlation unchanged at 0.571.
+
 \section{Column order in the correlation filter}
 \label{meth:orderinvariance}
 
