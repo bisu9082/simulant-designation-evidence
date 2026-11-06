@@ -2,6 +2,10 @@ __pycache__/
 *.pyc
 outputs/_log_*.txt
 outputs/*.zip
+# 2026-11-06 (9차). 전달용 패키지는 make_repo_update.sh 가 매번 새로
+# 만드는 11MB 빌드 산물인데 저장소 루트라 추적되고 있었다. 돌릴 때마다
+# 미커밋 변경으로 남아 실제 작업 변경을 가린다.
+simulant_repo_update_*.zip
 # 2026-11-04 (J-C). paper/ 를 archive/jhm_v1/ 로 동결했다.
 archive/jhm_v1/*.aux
 archive/jhm_v1/*.log
