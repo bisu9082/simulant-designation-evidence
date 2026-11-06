@@ -283,7 +283,16 @@ throughout rather than counting it on either side.
 \section{Column order in the correlation filter}
 \label{meth:orderinvariance}
 
-The descriptor spaces are built by dropping one coordinate from every pair whose
+The descriptor spaces are built in three stages, not one. The first drops any
+coordinate that is constant across the panel. The second drops any coordinate
+that is an exact algebraic function of others already present, which on the
+primary panel removes the four Abraham-parameter proxies, the organophosphorus
+indicator and the hydrogen-bond-donor count, and on the twenty-eight-compound
+panel removes three more because the smaller panel makes additional identities
+exact. This stage overrides the protected list: \texttt{lser\_S\_proxy} is
+nominally protected but is computed from the molar refractivity and the polar
+surface area, so it is removed wherever both of those survive. The third drops
+one coordinate from every remaining pair whose
 absolute Pearson correlation exceeds 0.95, so that no retained pair sits above
 that cut. More than one retained set satisfies that constraint, and until this
 revision the set we used was chosen by the order in which the columns happened
@@ -688,7 +697,14 @@ stock solvent of one component, Quinoline Yellow, differs between the source
 studies, dimethyl sulfoxide in the first two runs and water in the third; we
 report that as published and do not resolve it. Colour difference
 $\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
-the same dye in the same channel, given per dye for three compound sets at
+the same dye in the same channel. The source studies do not state the working
+colour space, the reference white or the transfer function used to reach
+CIELAB from the camera output, and we did not have the plate images, so that
+conversion is an input to this reanalysis rather than part of it. Every
+comparison made here is within one run and one channel, where whatever
+convention was used is common to the vectors being compared and cancels from
+the cosine; no comparison in this paper puts a $\Delta E_{00}$ from one run
+beside one from another. The values are given given per dye for three compound sets at
 solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
 acetonitrile, in two imaging channels: ultraviolet-excited emission and
 reflectance. An earlier version of this section called these nominal vapour

@@ -719,7 +719,11 @@ from three valid matches to zero, because diisopropyl fluorophosphate is
 nearer to three G agents than any incumbent is, and 2-chloroethyl ethyl
 sulfide is nearer to sulfur mustard than dichloromethane is. The incumbents
 do not move. What moves is whether anything closer is allowed into the
-comparison.
+comparison. Resampling the descriptor columns a thousand times puts the same
+point in distributional form (Figure~\ref{fig:descriptor}b): the three
+incumbents return a median of zero valid matches, with no match at all in
+61.2\% of replicates and at most one in 85.6\%, while the eight-compound
+set returns a median of five; the difference is positive in every replicate.
 
 % 2026-11-03 (T1-14). 이 단락 신설. 리뷰어 R4 가 서술자 인코딩이 결과를
 % 움직이는데 analyst freedom 목록에 빠져 있다고 지적했고, 결정적 필터 위에서
@@ -752,7 +756,9 @@ primary panel, are functions of the three principal moments of inertia.
 Because the relations are ratios rather than linear, the correlation filter at
 $|r| > 0.95$ does not remove them: the largest pairwise correlation inside the
 block is 0.9364 on the twenty-eight-compound panel and 0.9359 on the primary
-panel. They are not exact functions of one another either, since each
+panel. The one shape coordinate the filter does remove is the third principal
+moment itself, dropped against the second at $|r| = 0.998$ on both panels,
+while nine coordinates built from the same three moments are kept. They are not exact functions of one another either, since each
 descriptor is Boltzmann averaged over conformers independently, which leaves
 relative discrepancies of 1.4 to 15.3\% in the three identities we checked.
 We therefore kept the full block and recomputed everything with the seven
@@ -1164,9 +1170,14 @@ NumPy 2.5.3,\cite{numpy2020} SciPy 1.18.1,\cite{scipy2020} pandas
 3.11.2,\cite{matplotlib2007} RDKit 2026.03.6\cite{rdkit} and PySCF
 2.14.0.\cite{pyscf2018} Conformer embedding used
 ETKDGv3,\cite{riniker2015,wang2020} the semiempirical electronic
-descriptors GFN2-xTB,\cite{gfnxtb2017,bannwarth2019} and the physicochemical
+descriptors GFN2-xTB,\cite{gfnxtb2017,bannwarth2019} whose binary version was
+not recorded when the cache was built and is therefore not pinned, and the
+physicochemical
 descriptors the atomic-contribution and fragment methods implemented in
 RDKit.\cite{wildman1999,ertl2000} All analyses are deterministic given the
+% 2026-11-06 (9차). Figure 1(b) 가 그리는 재표집 수치가 본문에 없었다.
+% 리뷰어가 도판에만 있는 수치라고 지적했고, frac_zero 는 논지에 직접
+% 쓰이는 값이므로 본문으로 올린다. 출처 outputs/stat_supplement2.json.
 % 2026-11-03. 종전 문장은 'the permutation tests are exhaustive rather
 % than sampled' 였다. 지정검정(2024, 680)과 Mantel(720)은 전수지만,
 % 8종 지정 귀무는 C(24,8) 이 너무 커서 20000회 표집이고 부분공간 대조는
