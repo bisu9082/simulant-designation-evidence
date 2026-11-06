@@ -902,12 +902,17 @@ field treats as the G-agent surrogate, sits 0.473 decades from sarin while
 \textit{para}-dichlorobenzene, an interferent, sits 0.216. For three of the
 eleven agents the nearest compound in the pool is an interferent rather than a
 simulant. VX has nothing within 2.659 decades. We state these as distances and
-not as departures from designated pairings, because Section~\ref{M-res:docs}
-finds that the designating documents assign these compounds no agent class:
-the one that names dimethyl methylphosphonate measures filter breakthrough,
-the one that names dipropylene glycol monomethyl ether requires detectability
-by ion mobility spectrometry, and for dichloromethane we found no designating
-document at all.
+not as departures from designated pairings, because the designating documents do not
+pair these compounds with agents on anything a volatility distance can be
+read against. Dimethyl methylphosphonate is the one exception and it points
+two ways at once: the NIOSH programme names it for GB and for HD against a
+filter breakthrough measurement, and the National Research Council assessment
+names it for VX against a fabric test. Dipropylene glycol monomethyl ether is
+named with no agent class, against detectability by ion mobility
+spectrometry, and for dichloromethane we found no designating document at
+all. A distance to sarin is therefore not a departure from a designated
+pairing for two of the three, and for the third it would have to be read
+against two different agents at once.
 
 The second test asks whether volatility distance tracks response distance.
 Exact Mantel permutation in each run-channel cell with at least four mapped
@@ -1515,6 +1520,16 @@ it criticises two paragraphs above and which narrowed every interval by roughly
 a factor of two. Every interval contains zero. The electronic space is the
 better predictor in one of the four cells.
 
+Two of the twelve cells are exact duplicates of two others. On the first
+compound set the correlation filter leaves the merged space identical to the
+structural space in both channels, so \texttt{d1.uv/merged} reproduces
+\texttt{d1.uv/structural} and \texttt{d1.normal/merged} reproduces
+\texttt{d1.normal/structural}, to the digit. Counting them separately
+enlarges the correction family and therefore moves the result towards the
+null we report, which is the conservative direction. Removing them and
+correcting over the remaining ten gives a smallest adjusted value of 0.0972
+against the 0.1167 we report, and changes no conclusion.
+
 Six compounds per set bound how much that null can carry, and bounding it
 correctly took us two attempts. A Fisher $z$ calculation on the fifteen pairs
 returns $|\rho| \ge 0.669$ at 80\% power; the same calculation with the six
@@ -1528,7 +1543,13 @@ therefore simulated the procedure itself (Section~\ref{meth:deltaE}): at
 $\alpha = 0.05$, 80\% power is reached at $|\rho| = 0.67$, with the type~I rate
 of the simulated test at 0.05 against a nominal 0.05, measured on two
 independent configurations over 20,000 null replicates with a standard error of
-0.0015. The smallest attainable
+0.0015. That figure is for a single test at the nominal level, and it is not
+the threshold the conclusions use. The twelve cells are corrected by
+Benjamini--Hochberg, so the smallest-ranked cell has to clear $0.05/12 =
+0.00417$, and at that threshold the same simulation puts 80\% power at
+$|\rho| = 0.85$. We quote both, and read the null against 0.85, for the same
+reason the designation test is read against its corrected displacement in
+Section~\ref{res:mde} rather than its nominal one. The smallest attainable
 $p$ is $1/720$, so the resolution is coarse but not as coarse as the
 compound-unit approximation suggests. These data exclude a strong association
 between either descriptor space and the measured response and nothing weaker. They do not show that the
@@ -1591,6 +1612,39 @@ our conversion from the published parts-per-million value gives
 \textit{GF Agent} rather than \textit{Agent GF}, which is why matching on
 compound names rather than on registry numbers can miss it;
 Section~\ref{meth:aegl} describes the CAS-keyed procedure used here.
+
+\section{What each register holds for the three incumbents}
+\label{res:registers}
+
+The toxicity axis of the main text is the EPA acute exposure guideline level,
+because that is the register on which the eleven agents are placed. Two of the
+three incumbents are absent from it. They are not absent from every register,
+and an earlier version of this work said that they were; the correction is
+recorded here with its sources.
+
+Table~\ref{tab:registers} lists what we found. The US Department of Energy
+protective action criteria hold values for DMMP, derived as temporary
+emergency exposure limits from a rat one-hour LC$_{50}$ rather than from a
+human-health assessment, and NIOSH holds an immediately dangerous to life or
+health value and a recommended exposure limit for DPGME. These are real
+regulator-derived numbers and we do not discount them. They are also not the
+quantity the agents carry. An AEGL-3 is a ten-minute, three-tier, lethality
+threshold set by a federal advisory committee from a documented weight of
+evidence; a PAC-3 is a sixty-minute value that falls back to a formula on an
+animal LC$_{50}$ when no AEGL or ERPG exists; an IDLH is a thirty-minute
+escape criterion. Placing a PAC-3 for the simulant beside an AEGL-3 for the
+agent would put two different quantities on one axis and report the difference
+between them as a difference between compounds.
+
+A single-register axis that reaches more of the panel would be the better
+instrument, and the protective action criteria are the obvious candidate: they
+cover compounds the AEGL list does not, including DMMP and cyanogen chloride.
+We did not build it. The values have to come from the register's own tables
+and we were not able to obtain them for every panel compound, so a PAC axis
+here would have had worse coverage than the AEGL axis it replaced. We record
+it as the measurement this comparison still needs.
+
+\input{tab_registers}
 
 \section{A QSAR cannot fill the gaps}
 \label{res:qsar}

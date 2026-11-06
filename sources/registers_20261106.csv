@@ -23,3 +23,6 @@ phosgene (CG),75-44-5,DOE_PAC,PAC-3,0.75,ppm,TEEL from AEGL-3,https://edms3.ener
 chloropicrin (PS),76-06-2,DOE_PAC,PAC-3,1.4,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/689,2026-11-06,9.4 mg/m3
 cyclosarin (GF),329-99-7,DOE_PAC,PAC-3,0.018,ppm,TEEL from AEGL-3,https://edms3.energy.gov/pac/search/detail/1863,2026-11-06,0.13 mg/m3; listed as Methyl cyclohexylfluorophosphonate (GF)
 DIMP,1445-75-6,DOE_PAC,PAC-3,22,ppm,TEEL,https://edms3.energy.gov/pac/search/detail/1031,2026-11-06,160 mg/m3; TEEL-3 from rat oral LD50 826 mg/kg. NRC 1997 designates DIMP for GB. Not on the 28-compound panel
+DMMP,756-79-6,EPA_AEGL,AEGL-3 10min,not listed,,,https://www.epa.gov/aegl,2026-11-06,parsed from compiled_aegls_27jul2018.pdf
+DPGME,34590-94-8,EPA_AEGL,AEGL-3 10min,not listed,,,https://www.epa.gov/aegl,2026-11-06,parsed from compiled_aegls_27jul2018.pdf
+dichloromethane,75-09-2,EPA_AEGL,AEGL-3 10min,41685,mg/m3,,https://www.epa.gov/aegl,2026-11-06,parsed from compiled_aegls_27jul2018.pdf
