@@ -93,11 +93,20 @@ def main():
         k = pos[i + 1][1] if i + 1 < len(pos) else len(body)
         print(f'  {h[:52]:<54} {len(words(body[j + len(h):k])):>5}')
 
-    # ACS Article 환산: 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
-    figs = len(re.findall(r'\\includegraphics', open('paper_acs/main.tex').read()))
-    pages = (n_body - cap) / 1000.0 + figs * 0.5
-    print(f'\n  ACS 환산 {pages:.1f}면 (본문 {(n_body-cap)/1000:.1f} + 도판 {figs}장 x 0.5)'
-          f'  권장 8면')
+    # ACS Article 환산 (2026-11-07 정정). 저자안내는 총 분량에 본문·그림·
+    # 표·참고문헌을 전부 포함하고 TOC 그래픽만 제외한다. 종전 구현은
+    # 거꾸로였다 — TOC 를 도판으로 세고 참고문헌을 빼서 면수를 과소·과대
+    # 양쪽으로 틀리게 냈다. 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
+    src = open('paper_acs/main.tex').read()
+    figs = [m.group(1) for m in
+            re.finditer(r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', src)]
+    figs = [f for f in figs if 'toc' not in f.lower()]
+    refs = len(words(txt[txt.index('References'):]))
+    pages = (n_body - cap) / 1000.0 + len(figs) * 0.5 + refs / 1000.0
+    print(f'\n  참고문헌      {refs:>6} 단어')
+    print(f'  ACS 환산 {pages:.1f}면 = 본문 {(n_body-cap)/1000:.1f}'
+          f' + 도판 {len(figs)}장 x 0.5 + 참고문헌 {refs/1000:.1f}'
+          f'   (TOC 제외, 권장 8면)')
 
     sup = pdftext('paper_acs/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
