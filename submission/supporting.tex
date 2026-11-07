@@ -68,8 +68,9 @@ Korea}
 % achemso 의 suppinfo 모드가 제목 앞에 'Supporting Information:' 를 스스로
 % 붙인다. 제목에 또 쓰면 두 번 찍힌다 (2026-11-02 렌더에서 확인).
 % 2026-11-03. 본문 제목 교체에 맞춰 동기화.
-\title{Dimethyl Methylphosphonate Responds Opposite to Soman, Cyclosarin and
-VX in a Colorimetric Array of Authentic Chemical Warfare Agents}
+% 2026-11-07 (12차 Step 5). 다시 동기화.
+\title{In a Colorimetric Array of Authentic Chemical Warfare Agents, One
+Compound in Three Is Nearer Another Compound Than Its Own Repeat Measurement}
 
 \begin{document}
 
@@ -880,9 +881,14 @@ replicates, so no $\Delta E$ value is compared across sets; every analysis is ru
 within a set and the results are reported separately or combined only at the
 level of correlation coefficients. The two channels are likewise not replicates
 but physically different measurements, and the same compound's patterns in the
-two channels agree only to a mean cosine of 0.584. They are therefore treated as
-independent modalities, and agreement between them is used as evidence of
-reproducibility rather than averaged away.
+% 2026-11-07 (12차 A-6). 0.584 는 중심화 전 값이고, 이 문단이 속한
+% 분석은 전부 중심화 후다. 두 값을 모두 적는다. 실측은
+% reversal_audit.json 의 inter_channel 이다.
+two channels agree only to a mean cosine of 0.353 over the seventeen
+compound-and-plate instances, computed on the centred patterns every test here
+uses, and 0.584 on the unit-scaled patterns before centring. They are therefore
+treated as independent modalities, and agreement between them is used as
+evidence of reproducibility rather than averaged away.
 
 Each compound's 29-dimensional response at each concentration was scaled to unit
 length, so that pattern rather than magnitude is compared. The compound-axis mean
@@ -940,9 +946,21 @@ gives $\binom{n}{2}$ pairs that share compounds, so correlating measured
 dissimilarity against descriptor distance over pairs and testing it as if the
 pairs were independent inflates significance; the unit of analysis is the
 compound. We therefore test the association by Mantel permutation
+% 2026-11-07 (12차 A-7). 종전 문장은 "10,000 times (seed 0xC0DE)" 였다.
+% rollback_c.py:280 은 list(permutations(range(k))) 로 전수열거하고 그
+% 주석 자신이 "전수로 바꿔 원고의 서술과 일치시킨다" 라고 적는다. 같은
+% 문서 아래쪽(\ref{res:permfamily})도 720 전수로 적고 있었다. 즉 심사자가
+% 읽는 방법 기술만 구판이었다.
 \cite{mantel1967}, permuting compound labels on the descriptor distance matrix
-10\,000 times (seed \texttt{0xC0DE}) and comparing the observed Spearman
-coefficient against $|\rho|$ of the permuted matrices. Both the Mantel value and
+over all $6! = 720$ relabellings of the six compounds each cell carries, and
+comparing the observed Spearman
+coefficient against $|\rho|$ of the permuted matrices. The enumeration over
+this family of twelve cells is exhaustive, so these twelve tests are exact and
+carry no sampling seed. The analyses in this document that are sampled rather
+than enumerated, the Mantel power curve, the null match expectation, the
+premise null in its four larger cells, the collapse sensitivity and the
+reversal audit, are declared with their seeds and their numbers of draws where
+they appear. Both the Mantel value and
 the value that treating pairs as independent would have given are reported, so
 the size of the error is visible.
 
@@ -963,7 +981,7 @@ finding. Main-text Section~\ref{M-res:panels} states what holds across it.
 Two further values belong with Table~\ref{tab:family}. Weighting the 35
 structural and 3 electronic descriptors as two equal blocks, instead of the
 per-descriptor standardisation used throughout, lowers the primary panel's
-smallest nominal value from 0.151 to 0.061, which still survives no correction
+smallest nominal value from 0.192 to 0.061, which still survives no correction
 and leaves the primary panel's valid-match count unchanged at zero. On the
 twenty-eight-compound panel the two weightings do not agree, four matches per
 descriptor against three per block, which is one more way the smaller panel's
@@ -1126,7 +1144,8 @@ because it bears on everything below: the prespecified statistic did not clear
 0.05, and the family we report instead was chosen afterwards. The ground for
 withdrawing it is methodological and not the value. The two optical channels of
 one plate are read from the same wells and are not independent, with a mean
-inter-channel cosine of 0.584 across the array, so the four $p$ values do not
+inter-channel cosine of 0.353 across the array on the centred patterns and
+0.584 before centring, so the four $p$ values do not
 satisfy the assumption that combination requires. Runs do. We therefore combine
 across runs within each channel and correct across the two channels with
 Benjamini-Hochberg. The reflectance channel gives $p = 0.0215$ and
@@ -1319,7 +1338,7 @@ Benjamini--Hochberg adjusted value below 0.05 under either weighting.
 Every nominal $p$ falls, however, and that is why the main text states the
 primary-panel result as a conclusion about significance rather than as a
 numerical floor. The smallest value of the eighteen-test family there is 0.192
-with equal weight per descriptor and 0.076 with equal weight per block, so a
+with equal weight per descriptor and 0.061 with equal weight per block, so a
 floor quoted from either weighting would not hold under the other. The direction
 is away from the designations: equalising the blocks makes the incumbent
 simulants look better on the nominal scale while leaving them with no agent
@@ -1602,9 +1621,25 @@ channel of the third run, which the floor comparison discarded for sitting
 $0.0032$ above $-1/3$, has the largest null mean of the six and still clears
 the threshold.
 
-Two limits stay. The contrast holds per compound on average and not pairwise:
-in 13 of the 34 compound-and-cell instances some other compound's consensus is
-closer than the compound's own agreement across concentrations. And the
+% 2026-11-07 (12차 Step 5). 이 계수가 본문 헤드라인이 되었으므로 감사
+% 전체를 여기에 편다. 수치는 outputs/reversal_audit.json 실측이다.
+% 종전에는 13/34 한 수만 있었고 산출 경로가 없었다.
+Two limits stay. The contrast holds per compound on average and not pairwise,
+and the main text carries that count as its headline. In 13 of the 34
+compound-and-cell instances some other compound's consensus is closer than the
+compound's own agreement across concentrations, and in 28 of the 34 before
+centring, against a label-permutation expectation of 29.8 and 33.8. Four of the
+six cells fall below $q = 0.05$ against that null after centring, from under
+0.0001 to 0.0120, and three before it; the cells that do not are the two
+channels of the third run after centring, at 0.139 and 0.151, with the first
+run's ultraviolet channel at 0.070 joining them before it. The smallest value a
+cell can attain under this null is 0.0349 or below in every cell and in both
+representations, so a cell that does not reach 0.05 had the resolution to reach
+it, and the failure is in the data rather than in the test. Collapsing the
+duplicate dye channels moves the count after centring to 14 of 34 and leaves
+the count before it unchanged at 28. The per-cell counts, the nulls with their
+five seeds, the Benjamini--Hochberg table and the attainable minima are in
+\texttt{outputs/reversal\_audit.json}. And the
 sampled cells give a resolution of $10^{-4}$ in $p$, so the four sampled
 values are upper bounds on how small those values are rather than estimates of
 them. All results below use the centred patterns, with those caveats attached.
@@ -1814,6 +1849,39 @@ concentration at a Spearman correlation of exactly $+1.000$ in every one of the
 six run-channel cells, so a similarity that grows with concentration cannot be
 separated here from one that grows with signal-to-noise ratio; distinguishing
 them needs a repeat-level noise estimate the deposited tables do not carry.
+
+% 2026-11-07 (12차 Step 5). 본문 res:dmmp 에서 옮겨 왔다. 헤드라인이
+% 역전 계수로 바뀌었으므로 이 두 측정은 본문이 아니라 여기에 속한다.
+\subsection*{Two readings of the simulant cell}
+
+A weaker claim survives in one channel. If DMMP is G-like at all it should sit
+closer to the G series than to VX, and that contrast, against the mean over
+the three matched G agents and excluding tabun, is $+0.513$ in the ultraviolet
+channel and $+0.137$ in reflectance. The ranges quoted with them, $+0.131$ to
+$+0.722$ and $-0.144$ to $+0.290$, come from resampling the four design
+concentrations with replacement; four fixed design levels are not an
+exchangeable sample, so these are descriptive ranges and not tests, and the
+ultraviolet range lies above zero while the reflectance range spans it.
+
+Concentration changes the picture (Figure 2c of the main article). The
+DMMP-to-sarin cosine rises monotonically from $+0.363$ at 10~$\mu$M to
+$+0.771$ at 500~$\mu$M, and the DMMP-to-cyclosarin cosine falls monotonically
+from $-0.462$ to $-0.700$ over the same range, with monotonicity perfect in
+three of the ten agent-channel series. That is also the strongest result the
+design can give: with four concentrations the two-sided exact permutation has
+a floor of $p=0.083$, three series reach exactly that floor, and
+Benjamini--Hochberg correction over the ten leaves a smallest adjusted value
+of 0.278. We report the direction and not a significance claim.
+
+% 2026-11-03 (T1-5, T1-9). 종전 문장은 µM 농도를 점 탐지기 경보 구간으로
+% 치환했다. 용액상 µM 과 증기상 탐지는 다른 양이고 이 데이터는 후자를
+% 재지 않았다. 또 농도와 응답 크기의 순위상관이 모든 셀에서 정확히
+% +1.000 이므로 SNR 교란을 분리할 수 없다. 수치는 outputs/deltaE_noise.json.
+What the direction supports is that the resemblance between this simulant and
+this agent is not constant over the range at which the array was
+characterised. Two limits sit on it, the solution-phase concentration axis and
+a signal-to-noise confound that these tables cannot separate from it, and both are stated above.
+
 % 2026-11-07 (10차 R4-P2). 원논문 직독: "dissolving each nerve agent in THF
 % to create 1 M stock solutions, which were then further diluted with
 % acetonitrile" (JHM 501 (2026) 140703, 2.2절). 원고는 MeCN 만 적고 있었다.

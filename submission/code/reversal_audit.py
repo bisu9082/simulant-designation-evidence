@@ -123,6 +123,106 @@ def exact_space(pat):
     return n, n <= EXACT_CAP
 
 
+# 비작용제는 DMMP 하나다. 2차 런의 일곱 종은 원천 논문이 모두 작용제로
+# 세고 (main.tex:285 "all seven agents"), 그 가운데 HN 은 서술자 벡터가
+# 없어 Mantel 에서만 빠진다 (main.tex:453). 3차 런의 A-230/232/234/242 도
+# 작용제다. 따라서 "지정 모사체가 작용제와 함께 계측된" 셀은 1차 런
+# 두 채널뿐이고, 이것이 main.tex:301 의 서술과 일치한다.
+SIMULANTS = {'DMMP'}
+
+
+def pair_baseline():
+    """셀 기저선. 작용제끼리의 쌍 분포 대 비작용제 각자의 대작용제 분포.
+
+    왜 필요한가. 중심화 코사인에서 음의 부호는 중심화가 만든다. 그래서
+    "이 화합물이 저 화합물에 반대로 응답한다" 는 진술은 같은 셀의 임의
+    쌍이 어디에 있는지를 함께 적지 않으면 뜻이 없다. 11차 판본의 헤드라인
+    이 그 대조 없이 세워져 있었다.
+    """
+    out = {}
+    for tag, mode in CELLS:
+        try:
+            D, dy = m.load(tag, mode)
+        except Exception as e:
+            out[f'{tag}.{mode}'] = dict(unavailable=str(e))
+            continue
+        P = consensus_of(m.centred(m.raw_patterns(D, dy)))
+        nm = sorted(P)
+        sims = [a for a in nm if a in SIMULANTS]
+        ags = [a for a in nm if a not in SIMULANTS]
+        if len(ags) < 3 or not sims:
+            out[f'{tag}.{mode}'] = dict(n_agents=len(ags),
+                                        non_agents=sims,
+                                        note='작용제 쌍 또는 비작용제 부족')
+            continue
+        aa = {}
+        for a, b in itertools.combinations(ags, 2):
+            aa[(a, b)] = float(np.dot(P[a], P[b]))
+        av = list(aa.values())
+        worst = min(aa.items(), key=lambda kv: kv[1])
+        blk = dict(
+            n_agents=len(ags), agents=ags, n_agent_pairs=len(av),
+            agent_pair_mean=float(np.mean(av)),
+            agent_pair_median=float(np.median(av)),
+            agent_pair_min=float(min(av)), agent_pair_max=float(max(av)),
+            most_negative_pair=list(worst[0]),
+            most_negative_value=float(worst[1]),
+            non_agents={})
+        for s in sims:
+            sv = [float(np.dot(P[s], P[a])) for a in ags]
+            blk['non_agents'][s] = dict(
+                n_pairs=len(sv), mean=float(np.mean(sv)),
+                median=float(np.median(sv)),
+                per_agent={a: float(np.dot(P[s], P[a])) for a in ags},
+                n_agent_pairs_below_its_mean=int(
+                    sum(1 for x in av if x < np.mean(sv))),
+                above_agent_pair_mean=bool(np.mean(sv) >
+                                           np.mean(av)))
+        out[f'{tag}.{mode}'] = blk
+    return out
+
+
+def inter_channel():
+    """같은 플레이트 두 채널의 평균 상호 코사인.
+
+    왜 여기에 있는가. SI 가 이 양을 0.584 로 두 곳에서 인용하는데
+    (채널 두 개를 한 Fisher 결합에 넣지 않는 근거다), 그 값은
+    volatility_space.py 의 주석과 rationale 문자열에 리터럴로만 있었고
+    계산하는 코드가 없었다. 실제로 재보니 0.584 는 중심화 전 값이고,
+    검정이 쓰는 중심화 표현에서는 0.353 이다. 두 값을 모두 낸다.
+
+    두 채널의 유효 채널 수가 다를 수 있으므로 (축약은 채널별로 걸린다)
+    공통 채널로 제한한 뒤 비교한다.
+    """
+    cen, raw = [], []
+    per_plate = {}
+    for tag in ('d1', 'd2', 'd3'):
+        try:
+            Du, du = m.load(tag, 'uv')
+            Dn, dn = m.load(tag, 'normal')
+        except Exception as e:
+            per_plate[tag] = dict(unavailable=str(e))
+            continue
+        common = [c for c in du if c in dn]
+        Pu = consensus_of(m.centred(m.raw_patterns(Du, common)))
+        Pn = consensus_of(m.centred(m.raw_patterns(Dn, common)))
+        Ru = consensus_of(m.raw_patterns(Du, common))
+        Rn = consensus_of(m.raw_patterns(Dn, common))
+        nm = sorted(set(Pu) & set(Pn))
+        cv = [float(np.dot(Pu[a], Pn[a])) for a in nm]
+        rv = [float(np.dot(Ru[a], Rn[a])) for a in nm]
+        cen += cv
+        raw += rv
+        per_plate[tag] = dict(n_common_channels=len(common),
+                              n_compounds=len(nm),
+                              centred_mean=float(np.mean(cv)),
+                              uncentred_mean=float(np.mean(rv)))
+    return dict(n_pairs=len(cen),
+                centred_mean=float(np.mean(cen)) if cen else None,
+                uncentred_mean=float(np.mean(raw)) if raw else None,
+                per_plate=per_plate)
+
+
 def collapse_free_counts():
     """중복 채널 축약을 끈 상태에서 같은 계수를 낸다.
 
@@ -179,6 +279,24 @@ def main():
         tot['centred'] += hc
         inst += nu
 
+        # 본문이 인용하는 두 범위를 여기서 낸다.
+        #  (1) 중심화 전 쌍평균: 모든 화합물이 서로 닮는 수준
+        #  (2) 중심화 후 자기일치 셀평균 / 쌍평균 셀평균
+        Pr, Pc = consensus_of(raw), consensus_of(cen)
+        nm = sorted(Pc)
+        pre = [float(np.dot(Pr[a], Pr[b]))
+               for a, b in itertools.combinations(nm, 2)]
+        post = [float(np.dot(Pc[a], Pc[b]))
+                for a, b in itertools.combinations(nm, 2)]
+        wi = []
+        for a in nm:
+            cs = sorted(cen[a])
+            wi += [float(np.dot(cen[a][i], cen[a][j]))
+                   for i, j in itertools.combinations(cs, 2)]
+        cellstat = dict(pre_centring_pair_mean=float(np.mean(pre)),
+                        post_centring_pair_mean=float(np.mean(post)),
+                        post_centring_within_mean=float(np.mean(wi)))
+
         # 귀무를 두 표현에서 각각 구한다. 중심화 전 표현의 귀무가
         # 핵심이다 - 원천 논문 분류기가 보는 표현에서 화합물 정체성이
         # 라벨을 뒤섞은 것보다 나은지를 그 수가 답한다.
@@ -230,7 +348,8 @@ def main():
             dataset=tag, mode=mode, n_instances=nu,
             reversals_uncentred=hu, reversals_centred=hc,
             detail_uncentred=du, detail_centred=dc,
-            null_uncentred=nulls['uncentred'], null_centred=null_block))
+            null_uncentred=nulls['uncentred'], null_centred=null_block,
+            **cellstat))
 
     # 6셀 BH 보정. 표집 셀은 시드 간 최대 p 를 쓴다 (보수적).
     def _p(block):
@@ -274,6 +393,32 @@ def main():
             print(f'      {r["dataset"]} {r["mode"]:<7} '
                   f'p {r["p"]:.4f}  q {r["q"]:.4f}  최소달성p {fs}{reach}')
 
+    ic = inter_channel()
+    report['inter_channel'] = ic
+    print(f'\n  [채널 간] 같은 플레이트 두 채널, {ic["n_pairs"]}건')
+    print(f'    중심화 후 평균 {ic["centred_mean"]:+.4f}   '
+          f'중심화 전 평균 {ic["uncentred_mean"]:+.4f}')
+
+    pb = pair_baseline()
+    report['pair_baseline'] = pb
+    print('\n  [셀 기저선] 작용제끼리의 쌍 대 비작용제의 대작용제 쌍')
+    for k, v in pb.items():
+        if 'unavailable' in v:
+            print(f'    {k:<12} [수집 불가: {v["unavailable"]}]')
+            continue
+        if 'note' in v:
+            print(f'    {k:<12} {v["note"]} (작용제 {v["n_agents"]}종)')
+            continue
+        print(f'    {k:<12} 작용제 {v["n_agent_pairs"]}쌍 평균 '
+              f'{v["agent_pair_mean"]:+.4f} 중위 {v["agent_pair_median"]:+.4f}'
+              f'  최저쌍 {"-".join(v["most_negative_pair"])} '
+              f'{v["most_negative_value"]:+.4f}')
+        for s2, d2 in v['non_agents'].items():
+            print(f'      {s2:<8} 평균 {d2["mean"]:+.4f} '
+                  f'중위 {d2["median"]:+.4f}  작용제쌍 '
+                  f'{d2["n_agent_pairs_below_its_mean"]}/{v["n_agent_pairs"]}'
+                  f' 이 더 낮다  기저선 위 {d2["above_agent_pair_mean"]}')
+
     cf = collapse_free_counts()
     report['collapse_free'] = cf
     cfu = sum(v.get('reversals_uncentred', 0) for v in cf.values())
@@ -283,9 +428,24 @@ def main():
                                           reversals_uncentred=cfu,
                                           reversals_centred=cfc)
 
-    report['totals'] = dict(n_instances=inst,
-                            reversals_uncentred=tot['uncentred'],
-                            reversals_centred=tot['centred'])
+    ok = [c for c in report['cells'] if 'unavailable' not in c]
+    report['totals'] = dict(
+        n_instances=inst,
+        reversals_uncentred=tot['uncentred'],
+        reversals_centred=tot['centred'],
+        null_mean_sum_uncentred=float(
+            sum(c['null_uncentred']['mean'] for c in ok)),
+        null_mean_sum_centred=float(
+            sum(c['null_centred']['mean'] for c in ok)),
+        pre_centring_pair_mean_range=[
+            float(min(c['pre_centring_pair_mean'] for c in ok)),
+            float(max(c['pre_centring_pair_mean'] for c in ok))],
+        post_centring_pair_mean_range=[
+            float(min(c['post_centring_pair_mean'] for c in ok)),
+            float(max(c['post_centring_pair_mean'] for c in ok))],
+        post_centring_within_mean_range=[
+            float(min(c['post_centring_within_mean'] for c in ok)),
+            float(max(c['post_centring_within_mean'] for c in ok))])
     print('\n' + '-' * 78)
     print(f'  합계 사례 {inst}건')
     print(f'    중심화 전 역전 {tot["uncentred"]}/{inst}')

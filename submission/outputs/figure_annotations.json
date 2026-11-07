@@ -31,8 +31,8 @@
   "p_at_zero28": "0.0250"
  },
  "toc_acs": {
-  "headline": "DMMP responds opposite to soman, cyclosarin and VX",
-  "panel_a": "cosine to DMMP, UV channel: GA +0.764, GB +0.645, GD -0.492, GF -0.721, VX -0.702",
+  "headline": "13 of 34 cases are nearest a different compound",
+  "panel_a": "nearest neighbour is a different compound in 28 of 34 cases before centring and 13 of 34 after; label-permutation chance 33.8 and 29.8",
   "panel_b": "rank correlation, 12 cells: -0.225 to +0.571; none below q = 0.05"
  }
 }

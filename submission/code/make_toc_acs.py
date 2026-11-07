@@ -29,11 +29,17 @@ C_TAN = '#C9A882'
 C_GREY = '#8A8279'
 
 D = json.load(open('outputs/deltaE_premise.json'))
+# 2026-11-07 (12차 Step 5). 패널 (a) 를 교체한다. 종전 패널은 DMMP 대
+# 작용제 코사인 다섯 개였고, 중심화가 음의 부호를 만들므로 기저선 없이
+# 읽으면 표현의 성질을 화합물의 성질로 보여 준다. 역전 계수로 바꾼다.
+R = json.load(open('outputs/reversal_audit.json'))
 
-# --- (a) DMMP 대 작용제 코사인, UV 채널 -------------------------------------
-uv = next(r for r in D['dmmp'] if r['mode'] == 'uv')
-AG = ['GA', 'GB', 'GD', 'GF', 'VX']
-cos = [uv[f'cos_{a}'] for a in AG]
+# --- (a) 자기보다 남이 가까운 사례, 34건 중 ---------------------------------
+RT = R['totals']
+REV = [RT['reversals_uncentred'], RT['reversals_centred']]
+REV_NULL = [RT['null_mean_sum_uncentred'], RT['null_mean_sum_centred']]
+N_INST = RT['n_instances']
+REV_LAB = ['before\ncentring', 'after\ncentring']
 
 # --- (b) 서술자거리 대 응답거리, 12셀 ---------------------------------------
 st = D['space_test']
@@ -67,7 +73,9 @@ fig = plt.figure(figsize=(3.25, 1.75), dpi=600)
 # 2026-11-07 (방향 A). 머리글을 제목과 함께 측정 소견으로 옮긴다. 종전
 # 머리글은 귀무였고, 그것이 세 회차 연속 편집장 지적의 핵심이었다.
 # 폭 실측: FS_TITLE 6.4 에서 2.72 in (그림 3.25 in, 상한 3.10 in).
-HEADLINE = 'DMMP responds opposite to soman, cyclosarin and VX'
+# 2026-11-07 (12차 Step 5). 방향 A 머리글 철회. 폭 실측은 아래 출력에서
+# 확인한다 (상한 3.10 in).
+HEADLINE = '13 of 34 cases are nearest a different compound'
 fig.text(0.5, 0.955, HEADLINE,
          ha='center', va='top', fontsize=FS_TITLE, fontweight='bold',
          color='#2B2B2B')
@@ -77,25 +85,32 @@ axA = fig.add_axes([0.105, 0.195, 0.355, 0.60])
 axB = fig.add_axes([0.620, 0.195, 0.350, 0.60])
 
 # ---------------------------------------------------------------- (a)
-colA = [C_DARK_TEAL if c > 0 else C_RED for c in cos]
-axA.bar(range(5), cos, width=0.68, color=colA, edgecolor='none', zorder=3)
-axA.axhline(0, color='#555555', lw=0.6, zorder=4)
-axA.set_xticks(range(5))
-axA.set_xticklabels(AG, fontsize=FS_SM)
-axA.set_ylim(-1.05, 1.00)
-axA.set_yticks([-0.8, -0.4, 0.0, 0.4, 0.8])
-axA.set_ylabel('cosine to DMMP', fontsize=FS_SM, labelpad=1.5)
+axA.bar(range(2), REV, width=0.52, color=[C_RED, C_DARK_TEAL],
+        edgecolor='none', zorder=3)
+# 라벨순열 기대값을 열린 표식으로 겹쳐 둔다. 관측이 우연보다 낮다는 것을
+# 막대 하나당 점 하나로 보인다.
+axA.scatter(range(2), REV_NULL, s=7.0, facecolors='none',
+            edgecolors='#2B2B2B', linewidths=0.6, zorder=5)
+# 표식 설명은 한 줄로 모은다. 막대마다 붙이면 위쪽 라벨이 패널 제목에
+# 닿고 같은 말이 두 번 나온다. 자리는 라벨 우선순위대로 우하단이다.
+# 우하단이되 막대 오른쪽 빈 띠 안이다. 우측 정렬로 두면 글자가 막대
+# 위로 넘어온다 (막대는 x 1.26 까지다).
+axA.text(1.30, 1.2, u'\u25cb = chance', ha='left', va='bottom',
+         fontsize=4.4, color='#2B2B2B', style='italic')
+axA.set_xticks(range(2))
+axA.set_xticklabels(REV_LAB, fontsize=FS_SM)
+axA.set_xlim(-0.62, 1.78)
+axA.set_ylim(0, N_INST + 2.8)
+axA.set_yticks([0, 10, 20, 30])
+axA.set_ylabel(f'cases of {N_INST}', fontsize=FS_SM, labelpad=1.5)
 axA.grid(axis='y', color='#DDD9D2', lw=0.35, zorder=0)
 axA.set_axisbelow(True)
 for s in ('top', 'right'):
     axA.spines[s].set_visible(False)
-# 값 라벨은 막대 바깥쪽에 둔다 (막대 위에 얹으면 겹친다).
-for i, c in enumerate(cos):
-    off = 0.055 if c > 0 else -0.055
-    axA.text(i, c + off, f'{c:+.2f}', ha='center',
-             va='bottom' if c > 0 else 'top',
-             fontsize=4.8, color=colA[i], fontweight='bold')
-axA.set_title('the standard G-agent simulant,\nmeasured beside the agents',
+for i, v in enumerate(REV):
+    axA.text(i, v - 1.1, f'{v}', ha='center', va='top',
+             fontsize=5.4, color='white', fontweight='bold')
+axA.set_title('nearest neighbour is a\ndifferent compound',
               fontsize=FS_SM, pad=2.0, color='#2B2B2B')
 
 # ---------------------------------------------------------------- (b)
@@ -135,8 +150,10 @@ import fig_annot
 
 fig_annot.record('toc_acs', 'headline', HEADLINE)
 fig_annot.record('toc_acs', 'panel_a',
-                 'cosine to DMMP, UV channel: '
-                 + ', '.join(f'{a} {c:+.3f}' for a, c in zip(AG, cos)))
+                 f'nearest neighbour is a different compound in '
+                 f'{REV[0]} of {N_INST} cases before centring and '
+                 f'{REV[1]} of {N_INST} after; label-permutation chance '
+                 f'{REV_NULL[0]:.1f} and {REV_NULL[1]:.1f}')
 fig_annot.record('toc_acs', 'panel_b',
                  f'rank correlation, 12 cells: {min(rho):+.3f} to '
                  f'{max(rho):+.3f}; none below q = 0.05')
@@ -145,5 +162,5 @@ fig.savefig('outputs/toc_acs.png', dpi=600, facecolor='white')
 fig.savefig('outputs/toc_acs.pdf', facecolor='white')
 print('[TOC] outputs/toc_acs.png / .pdf 생성')
 print(f'[TOC] 실척 3.25 x 1.75 in, 600 dpi -> {int(3.25*600)} x {int(1.75*600)} px')
-print(f'[TOC] (a) UV 코사인 {dict(zip(AG, [round(c,3) for c in cos]))}')
+print(f'[TOC] (a) 역전 {REV[0]}/{N_INST} (중심화 전), {REV[1]}/{N_INST} (후); 귀무 {REV_NULL[0]:.2f} / {REV_NULL[1]:.2f}')
 print(f'[TOC] (b) rho 범위 {min(rho):+.3f} ~ {max(rho):+.3f}, n={len(rho)}')

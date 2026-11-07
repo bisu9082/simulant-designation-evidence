@@ -762,10 +762,13 @@ def load_facts():
     # 2026-11-07. ga_q28 (구판 그래픽 초록 주석) 을 폐기하고 TOC 주석으로
     # 옮긴다. TOC 는 독자가 가장 먼저 보는 자리이고 9차에 철회한 주장을
     # 들고 있었다.
+    # 2026-11-07 (12차 Step 5). TOC 패널 (a) 가 DMMP 코사인에서 역전 계수로
+    # 바뀌었다. toc_cos_* 다섯은 폐기하고 역전 두 사실을 건다. 값의 출처는
+    # reversal_audit.json 이고 TOC 주석이 적는 글자와 같은 수다.
     _tc = json.load(open('outputs/deltaE_premise.json'))
-    _tuv = next(r for r in _tc['dmmp'] if r['mode'] == 'uv')
-    for _ag in ('GA', 'GB', 'GD', 'GF', 'VX'):
-        f[f'toc_cos_{_ag}'] = _tuv[f'cos_{_ag}']
+    _trv = json.load(open('outputs/reversal_audit.json'))['totals']
+    f['toc_rev_uncentred'] = _trv['reversals_uncentred']
+    f['toc_rev_centred'] = _trv['reversals_centred']
     _trho = [r['spearman'] for r in _tc['space_test']]
     f['toc_rho_min'] = min(_trho)
     f['toc_rho_max'] = max(_trho)
@@ -1531,6 +1534,11 @@ def load_facts():
     for _lab, _tag in _BBTAG.items():
         _p = bb[_lab]['block_balanced']['p']
         f[f'bb_minp{_tag}'] = min(_p[s] for s in _S6)
+        # 2026-11-07 (12차 A-3). 서술자 균등 쪽 최소값은 사실로 등록돼
+        # 있지 않았고, 그래서 SI 산문의 0.151 이 어느 산출물과도 대조되지
+        # 않았다. 실측은 0.192 다. 두 값을 모두 등록한다.
+        f[f'bb_minpdesc{_tag}'] = min(
+            bb[_lab]['equal_per_descriptor']['p'][s] for s in _S6)
         f[f'bb_match{_tag}'] = bb[_lab]['block_balanced']['n_valid']
         f[f'bb_cur_match{_tag}'] = bb[_lab]['equal_per_descriptor']['n_valid']
         f[f'bb_meandiff{_tag}'] = _p['mean_diff']
@@ -2053,11 +2061,14 @@ CHECKS = [
     ('na_dpgme_top',
      [r'DPGME divides evenly, sulfur mustard in\s*\n?(\d+\.\d+)\\%'], 0.05),
     ('na_dpgme_g', [r'and the\s*\n?G series in (\d+\.\d+)\\%'], 0.05),
-    ('toc_cos_GA', [r'UV channel: GA ([-+][\d.]+)'], 0.0005),
-    ('toc_cos_GB', [r'GA [-+][\d.]+, GB ([-+][\d.]+)'], 0.0005),
-    ('toc_cos_GD', [r'GB [-+][\d.]+, GD ([-+][\d.]+)'], 0.0005),
-    ('toc_cos_GF', [r'GD [-+][\d.]+, GF ([-+][\d.]+)'], 0.0005),
-    ('toc_cos_VX', [r'GF [-+][\d.]+, VX ([-+][\d.]+)'], 0.0005),
+    # 2026-11-07 (12차 Step 5). TOC 패널 (a) 가 DMMP 코사인에서 역전 계수로
+    # 바뀌었으므로 toc_cos_* 다섯 사실을 폐기하고 역전 두 사실로 건다.
+    # 폐기한 사실은 facts 쪽에서도 지웠다 (등재부가 더 이상 그 글자를 적지
+    # 않으므로 앵커만 남기면 영구 미발견이 된다).
+    ('toc_rev_uncentred',
+     [r'different compound in (\d+) of 34 cases before centring'], 0),
+    ('toc_rev_centred',
+     [r'before centring and (\d+) of 34 after'], 0),
     ('toc_rho_min', [r'12 cells: ([-+][\d.]+) to'], 0.0005),
     ('toc_rho_max', [r'12 cells: [-+][\d.]+ to ([-+][\d.]+)'], 0.0005),
     ('toc_cells', [r'rank correlation, (\d+) cells'], 0),
@@ -2136,7 +2147,10 @@ CHECKS = [
     #   ('cl_d2_acc', [r'cross-validated accuracy of (\d\.\d{3}) on'], 0.0005),
     #   ('cl_d3_acc', [r'seven-agent run and (\d\.\d{3}) on the Novichok'], 0.0005),
     ('cl_dmmp_ga', [r'correlates at\s*\n?\$\+(\d\.\d{2})\$ with tabun'], 0.005),
-    ('cl_dmmp_gb', [r'\$\+(\d\.\d{2})\$ with\s*\n?sarin but at'], 0.005),
+    # 2026-11-07 (12차 Step 5). 커버레터 문장에 'in the ultraviolet
+    # channel' 이 끼었다.
+    ('cl_dmmp_gb', [r'\$\+(\d\.\d{2})\$ with\s*\n?sarin[^.]{0,45}?but at'],
+     0.005),
     ('cl_dmmp_gd', [r'but at\s*\n?\$(-\d\.\d{2})\$ with soman'], 0.005),
     ('cl_dmmp_gf', [r'\$(-\d\.\d{2})\$ with cyclosarin'], 0.005),
     ('cl_dmmp_vx', [r'\$(-\d\.\d{2})\$ with VX'], 0.005),
@@ -2147,7 +2161,10 @@ CHECKS = [
     #   ('cl_conc_lo', [...], 0.005),
     # 2026-11-01 신설. ACS 판본 Results 2.1~2.3 의 수치.
     ('dmmp_gd_uv', [r'anti-correlates with soman at\s+\$([-][\d.]+)\$'], 0.0015),
-    ('dmmp_gf_uv', [r'cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
+    # 2026-11-07 (12차 Step 5). 종전 정규식은 'cyclosarin at $-x$' 를 문맥
+    # 없이 잡았고, 신설한 기저선 문장의 '사린 대 사이클로사린' 값(-0.820)
+    # 에도 걸렸다. 그 쌍은 DMMP 와 무관하다. 'against' 앞머리를 배제한다.
+    ('dmmp_gf_uv', [r'(?<!against )cyclosarin\s+at \$([-][\d.]+)\$'], 0.0015),
     ('dmmp_vx_uv', [r'and VX at \$([-][\d.]+)\$'], 0.0015),
     # 2026-11-03 (2차) 폐기. 'negative in both channels' 문장이 분모
     # 오류여서 교체됐다. 같은 산출물 값(3종 평균)은 dmmp_gmean_uv_3 /
@@ -2641,10 +2658,18 @@ CHECKS = [
                     r'puts (\d+) structural coordinates'], 0),
     ('bb_nelec', [r'and (\d+) electronic descriptors as two equal blocks',
                   r'\$n_\{e\}=(\d+)\$'], 0),
+    # 2026-11-07 (12차 A-3). 종전 두 패턴이 0\.151 을 리터럴로 들고 있었고
+    # 그래서 그 값은 검사 대상 밖이었다. 리터럴을 지우고 두 값을 각각
+    # 자기 사실에 건다.
     ('bb_minp35', [r'lowers that value to ([\d.]+)',
-                   r'nominal value from 0\.151 to ([\d.]+)',
+                   r'nominal value from [\d.]+ to ([\d.]+)',
                    r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &',
-                   r'0\.151 with equal weight per descriptor and ([\d.]+) with'],
+                   r'with equal weight per descriptor and ([\d.]+) with'],
+     0.0005),
+    ('bb_minpdesc35',
+     [r'nominal value from ([\d.]+) to [\d.]+',
+      r'Thirty-five, incumbent three & \d+/11 & \d+/11 & (\d+\.\d+) &',
+      r'([\d.]+) with equal weight per descriptor and'],
      0.0005),
     ('bb_minp35lit',
      [r'Thirty-five, incumbent 3 \+ literature 5 & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &'], 0.0005),
@@ -2759,7 +2784,10 @@ CHECKS = [
     ('sr_match_red', [r'falls from \w+ to ([\w-]+)\. On'], 0),
     ('sr_mantel_q_red', [r'shape coordinates raises it to (0\.\d+)'], 0.00005),
     # 전제검정 라벨순열 귀무 (초록).
-    ('pn_cells', [r'all ([\w-]+) clear \$q=0\.05\$ against a (?:label-permutation )?null'], 0),
+    # 2026-11-07 (12차 Step 5). 초록에서 그 문장을 뺐다. 같은 사실을
+    # 적는 자리는 SI 이고 거기는 'All six cells clear $q = 0.05$' 로
+    # 띄어쓰기가 다르다.
+    ('pn_cells', [r'[Aa]ll ([\w-]+) cells? clear \$q\s*=\s*0\.05\$'], 0),
     # 2026-11-04 (E2). 루이사이트 기하이성질체 민감도.
     ('lew_dnorm_E', [r'primary panel from (\d\.\d+) to'], 0.00005),
     ('lew_dnorm_Z', [r'from \d\.\d+ to (\d\.\d+), leaves CEES'], 0.00005),
