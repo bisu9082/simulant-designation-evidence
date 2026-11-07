@@ -525,6 +525,38 @@ ACS_CASES = [
     ('결론부 AEGL 훈련 화합물 수 오기 (정본 230)',
      'random forest trained on 230 AEGL chemicals is wrong in one direction',
      'random forest trained on 320 AEGL chemicals is wrong in one direction'),
+
+    # --- 2026-11-07 (12차 Step 5) 신설분 ---
+    # 12차가 적발한 것은 '새로 들어온 수치가 검사되지 않는다' 였다
+    # (0.151 리터럴, 13/34 산출물 부재, 0.584 리터럴). 이번에 들어온
+    # 수치는 전부 여기서 주입 시험을 받는다.
+    ('역전 계수 중심화 후를 오기 (정본 13 of the 34)',
+     'It does not in 13 of the 34.',
+     'It does not in 7 of the 34.'),
+    ('역전 계수 중심화 전을 오기 (정본 28 of the 34)',
+     'it does not in 28 of the 34. The same label-permutation null',
+     'it does not in 19 of the 34. The same label-permutation null'),
+    ('라벨순열 기대값을 오기 (정본 29.8 과 33.8)',
+     'puts the expected\ncount at 29.8 of 34 after centring',
+     'puts the expected\ncount at 31.9 of 34 after centring'),
+    ('DMMP 기저선 평균을 오기 (정본 -0.101)',
+     "the mean over DMMP's five agent pairs is $-0.101$",
+     "the mean over DMMP's five agent pairs is $-0.501$"),
+    ('중심화 전 쌍평균 범위를 오기 (정본 +0.763 ~ +0.867)',
+     'agrees at a mean of $+0.763$ to\n$+0.867$',
+     'agrees at a mean of $+0.263$ to\n$+0.867$'),
+    ('기저선 작용제 쌍 평균을 오기 (정본 -0.230)',
+     'the mean cosine is $-0.230$ in the ultraviolet channel',
+     'the mean cosine is $-0.630$ in the ultraviolet channel'),
+    ('가장 음수인 쌍 값을 오기 (정본 -0.820, 사린 대 사이클로사린)',
+     'sarin against cyclosarin at $-0.820$, more negative',
+     'sarin against cyclosarin at $-0.420$, more negative'),
+    ('비염료 수를 구판 다섯으로 되돌림 (정본 Six — 퀴닌 포함)',
+     'Six are not chromogenic dyes: quinine',
+     'Five are not chromogenic dyes: anthracene'),
+    ('문자 그대로 판독의 28종 계수를 오기 (정본 three to zero)',
+     'takes the twenty-eight-compound count from three to zero',
+     'takes the twenty-eight-compound count from three to two'),
 ]
 
 # 2026-11-02. ACS SI (paper_acs/supporting.tex) 전용.
@@ -696,6 +728,27 @@ ACS_SUPP_CASES = [
      r'R^{2}=0.458 \pm', r'R^{2}=0.389 \pm'),
     ('ACS SI 단독으로 적용영역 거리 오기 (정본 3.28)',
      "DMMP's domain distance, 3.28,", "DMMP's domain distance, 3.09,"),
+
+    # --- 2026-11-07 (12차 Step 5) 신설분 ---
+    # 12차가 적발한 것은 '새로 들어온 수치가 검사되지 않는다' 였다
+    # (0.151 리터럴, 13/34 산출물 부재, 0.584 리터럴). 이번에 들어온
+    # 수치는 전부 여기서 주입 시험을 받는다.
+    ('퀴닌 채널 비를 오기 (정본 79.6)',
+     'a ratio of 79.6, the largest',
+     'a ratio of 29.6, the largest'),
+    ('GFN2 양수 LUMO 수를 오기 (정본 Six of the twenty-eight)',
+     'Six\nof the twenty-eight GFN2-xTB LUMO energies are positive',
+     'Two\nof the twenty-eight GFN2-xTB LUMO energies are positive'),
+    ('B3LYP 양수 LUMO 수를 오기 (정본 nine)',
+     'In nine of the twenty-eight compounds the B3LYP LUMO',
+     'In two of the twenty-eight compounds the B3LYP LUMO'),
+    ('채널 간 코사인을 중심화 전 값으로 되돌림 (정본 0.353)',
+     'a mean cosine of 0.353 over the seventeen',
+     'a mean cosine of 0.584 over the seventeen'),
+    ('블록균등 서술자쪽 최소값을 구판으로 되돌림 (정본 0.192)',
+     'smallest nominal value from 0.192 to 0.061',
+     'smallest nominal value from 0.151 to 0.061'),
+
 ]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
 # 그 문장들이 다시 틀어지면 잡히도록 건다.
