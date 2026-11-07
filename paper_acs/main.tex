@@ -248,8 +248,10 @@ measurement of its own.
 
 This work reports that measurement. A 29-component colorimetric array recorded
 the responses of sixteen authentic agents, twelve of them Chemical Weapons
-Convention Schedule~1 compounds and four Schedule~3 industrial chemicals, at
-four solution concentrations in two optical channels. The result that bears
+Convention Schedule~1 compounds and four Schedule~3 industrial
+chemicals,\cite{opcwschedules,opcwnovichok} at
+four solution concentrations in two optical channels; Supporting Information
+Section~\ref{S-meth:cwc} gives the entry each falls under. The result that bears
 most directly on practice is the simplest one in the paper: dimethyl
 methylphosphonate, the compound the field treats as the G-agent surrogate,
 responds opposite to soman, cyclosarin and VX in both optical channels and
@@ -364,7 +366,8 @@ agents measured with it}
 The array resolves the compounds, so the measurement can be put to the one
 compound the field uses in their place. DMMP is named here rather than treated
 as one of many, because the field treats it as the G-agent surrogate and
-because decontamination efficiency is quantified against it. The first run
+because it is the one incumbent that the designating record traces to two
+separate measurements (Section~\ref{res:docs}). The first run
 contains DMMP together with the four G agents and VX, the only place in the
 three runs where a designated simulant was measured beside the agents it
 stands in for.
@@ -656,19 +659,20 @@ Man-in-Simulant Test programme, which lists it as the fabric-testing simulant
 for VX.\cite{nrc1997mist} One compound therefore stands in for VX in one
 document and for GB and HD in another, against two measurements, neither of
 which is detection.
-DPGME appears in a US Army patent for a training composition, where the
-property required of it is detectability by ion mobility
-spectrometry.\cite{seitzinger2006simulant} For dichloromethane we found no
-designating document in the public record we searched; Supporting
-Information Section~\ref{S-meth:docsearch} gives the sources, the date and
-the three limits of that search, one of which is a Test Operations Procedure
-we identified but could not obtain. Each of the two traceable designations is
-a validation against a measurement. For DMMP those measurements are filter
-filtration and fabric penetration, neither of which is detection. For DPGME
-the measurement is detection, but by ion mobility spectrometry, a different
-transduction from the colorimetric response reanalysed here. A simulant is
-validated for a purpose, and that validation does not travel with the compound
-to a different purpose.
+DPGME appears in a US Army patent for a chemical agent simulant training
+composition.\cite{seitzinger2006simulant} We were not able to retrieve the
+text of that patent, so which detection instrument its training requirement
+names is recorded as unestablished and is used in no argument here; what the
+record establishes is that the compound is designated for training use.
+For dichloromethane we found no designating document in the public record we
+searched. Supporting Information Section~\ref{S-meth:docsearch} gives the
+sources, the date and the limits of that search, among them a Test Operations
+Procedure we identified but could not obtain and the patent text we could not
+retrieve. One designation is therefore traceable to the measurement it was made
+against, and for DMMP those measurements are filter filtration and fabric
+penetration, neither of which is detection. A simulant is validated for a
+purpose, and that validation does not travel with the compound to a different
+purpose.
 
 \begin{figure}[htb]
   \centering
@@ -683,8 +687,7 @@ to a different purpose.
 The second is regulatory toxicity (Figure~\ref{fig:tox}). The axis on which
 the agents are placed here is the EPA acute exposure guideline level, and
 nineteen of the twenty-eight panel compounds carry one. Two of the three
-incumbents do not. DMMP, the compound against which decontamination
-efficiency is quantified, has no AEGL, and neither has DPGME; dichloromethane
+incumbents do not. DMMP has no AEGL, and neither has DPGME; dichloromethane
 has one. Those two are not absent from every register: the US Department of Energy
 protective action criteria hold values for DMMP and NIOSH holds two for DPGME,
 tabulated with their sources in Supporting Information
@@ -737,9 +740,8 @@ simulants rather than interferents.
 
 The documentary record accounts for the first of those counts rather than
 contradicting it. DMMP was designated against respirator filtration and fabric
-penetration and DPGME against detectability by ion mobility spectrometry, and
-a validation does not travel with a compound to a purpose it was never tested
-for. The toxicity axis stops in the same place: DMMP carries no AEGL, the
+penetration, and a validation does not travel with a compound to a purpose it
+was never tested for. The toxicity axis stops in the same place: DMMP carries no AEGL, the
 values other registers hold for it are not the quantity the agents are placed
 on, and a random forest trained on 230 AEGL chemicals is wrong in one direction
 without exception on twenty held-out military agents. Absence of evidence is
@@ -752,11 +754,11 @@ paper is about.
 % 기준 화합물로, DPGME 를 IMS 검출성으로 designated 되었다고 적으므로,
 % 독자가 그 두 용도에 대한 판정으로 읽을 수 있다. 명시적으로 부인한다.
 Two readings this paper does not support should be ruled out, because the
-designating documents are cited here for what they measured. Filtration and
-surface decontamination are mass-transport and reactivity measurements, and
-nothing here bears on whether DMMP is suitable for either; the same holds for
-DPGME and ion mobility spectrometry, which we did not measure. A compound can
-be a sound surrogate for one measurement and an unsound surrogate for another.
+designating documents are cited here for what they measured. Filtration and fabric penetration are
+mass-transport measurements, and nothing here bears on whether DMMP is suitable
+for either, nor on its use in decontamination testing, which we did not
+measure. A compound can be a
+sound surrogate for one measurement and an unsound surrogate for another.
 The claim at issue is narrower: that a validation performed against one
 measurement is being carried, without a second validation, to colorimetric
 and spectroscopic detection of the agents themselves.
@@ -807,15 +809,24 @@ first two runs and water in the third, which we report as published. Stock
 solutions at 100~mM in ethanol, methanol, dimethyl sulfoxide, water,
 tetrahydrofuran or toluene were diluted into acetonitrile to a working
 concentration of 100~$\mu$M, putting the residual stock solvent at 0.1\% (v/v).
-Each analyte was delivered in acetonitrile by serial dilution to final
-concentrations of 0, 10, 50, 100 and 500~$\mu$M in a 2.0~mL dye solution, mixed
-without incubation and imaged at once under visible light and under ultraviolet
-excitation at 365~nm, with a smartphone camera in an enclosed box at
-22~$\pm$~3~$^\circ$C and 35~$\pm$~5\% relative humidity. Regions of interest
-were central 20~$\times$~10 pixel zones; RGB values were read at five positions
-per region, averaged, converted to CIE $L^{*}a^{*}b^{*}$, and expressed as the
-CIEDE2000 difference $\Delta E_{00}$ against the 0~$\mu$M image of the same dye
-in the same channel. The sources do not state the working colour space, the
+Each analyte was dissolved in tetrahydrofuran at 1~M, diluted with
+acetonitrile, and delivered by serial dilution to final concentrations of 0, 10,
+50, 100 and 500~$\mu$M in a 2.0~mL dye solution, mixed without incubation and
+imaged at once under visible light and under ultraviolet excitation at 365~nm,
+with a smartphone camera in an enclosed box at 22~$\pm$~3~$^\circ$C and
+35~$\pm$~5\% relative humidity. The residual tetrahydrofuran from that stock is
+proportional to the final analyte concentration, which matters for the dose
+direction of Section~\ref{res:dmmp} and is the third of the confounders set out
+in Supporting Information Section~\ref{S-res:doselimits}. Regions of interest
+were central 20~$\times$~10 pixel zones, and RGB values were read at five
+positions per region, the centre, top, bottom, left and right, converted to CIE
+$L^{*}a^{*}b^{*}$ and expressed as the CIEDE2000 difference $\Delta E_{00}$
+against the 0~$\mu$M image of the same dye in the same channel. The sources
+report that the five positions agree within a frame and conclude from that
+agreement that a single central reading suffices; they do not state which of
+the two reductions produced the single value per compound, concentration, dye
+and channel that the deposited tables carry, and we did not make that
+reduction. The sources do not state the working colour space, the
 reference white or whether the camera's transfer function was linearised, so
 this work inherits those three choices rather than making them, and a signed
 readout would carry direction that $\Delta E_{00}$ discards. The three runs are

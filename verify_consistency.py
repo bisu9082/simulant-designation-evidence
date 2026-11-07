@@ -56,6 +56,7 @@ REQUIRED_OUTPUTS = [
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
     'outputs/collapse_sensitivity.json',
+    'outputs/length_audit.json',
     'outputs/descriptor_gate_scope.json',
     'outputs/dim_percentiles.json',
     'outputs/distance_table_normalized.csv',
@@ -581,6 +582,7 @@ def preflight():
         'volatility_space.json': 'volatility_space.py',
         'shape_reduction.json': 'shape_reduction.py',
         'collapse_sensitivity.json': 'collapse_sensitivity.py',
+        'length_audit.json': 'wordcount.py',
         'premise_null.json': 'premise_null.py',
         'stat_supplement.json': 'stat_supplement.py',
         'lewisite_isomer.json': 'lewisite_isomer.py',
@@ -1445,6 +1447,13 @@ def load_facts():
     # 3 -> 5, panel35 0, 귀무기대 9.06/9.63 을 산출물에서 읽는다.
     # 2026-11-07 (10차 R3). 붕괴 문단의 여섯 수치를 collapse_sensitivity.py
     # 실측에서 읽는다. 종전 값은 어느 실행에서도 나오지 않았다.
+    # 2026-11-07. 커버레터의 분량 숫자. wordcount.py 실측이다.
+    _la = json.load(open('outputs/length_audit.json'))
+    f['len_body'] = _la['body_words']
+    f['len_refs'] = _la['ref_words']
+    f['len_pages'] = _la['acs_pages']
+    f['len_figs'] = _la['n_figures']
+
     _cs = json.load(open('outputs/collapse_sensitivity.json'))
     f['coll_q_off'] = _cs['bh_min_q_uncollapsed']
     f['coll_q_on'] = _cs['bh_min_q_collapsed']
@@ -2441,6 +2450,10 @@ CHECKS = [
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     # 2026-11-04 (J-C). ACS본 어법으로 교정.
+    ('len_pages', [r'runs to ([\d.]+) journal pages against'], 0.05),
+    ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
+    ('len_refs', [r'and ([\d,]+) words of\s*\n?references'], 0),
+    ('len_figs', [r'([a-z]+) double-column figures at 500 words'], 0),
     ('coll_merged_off',
      [r'the merged space from\s*\n?\$\\rho = \+([\d.]+)\$ to'], 0.00005),
     ('coll_merged_on',

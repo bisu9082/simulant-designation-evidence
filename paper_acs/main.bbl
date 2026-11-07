@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{35}
+\begin{mcitethebibliography}{37}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -176,6 +176,29 @@ Bae,~S.; Kang,~K.; Kim,~Y.~K.; Jang,~Y.~J.; Lee,~D.-H. Field-deployable
   real-time {AI} System for chemical warfare agent detection using {YOLOv8} and
   colorimetric sensors. \emph{Chemometrics and Intelligent Laboratory Systems}
   \textbf{2025}, \emph{261}, 105365\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Organisation for the Prohibition of Chemical
+  Weapons}()]{opcwschedules}
+{Organisation for the Prohibition of Chemical Weapons} Scheduled Chemicals
+  under the Chemical Weapons Convention. Guide to Schedules, OPCW Technical
+  Secretariat,
+  \url{https://www.opcw.org/sites/default/files/documents/2018/07/Guide_to_Schedules.pdf},
+  Schedule~1 entries 1A(1)--1A(6) and Schedule~3 entries 3A(1)--3A(4)\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Organisation for the Prohibition of Chemical
+  Weapons}(2019)]{opcwnovichok}
+{Organisation for the Prohibition of Chemical Weapons} Consolidated Text of
+  Adopted Changes to Schedule~1 of the Annex on Chemicals to the Chemical
+  Weapons Convention. Technical Secretariat note S/1820/2019 (CS-2019-2235(E)),
+  2019;
+  \url{https://www.opcw.org/sites/default/files/documents/2019/12/s-1820-2019(e).pdf},
+  Adds entries 1A(13)--1A(16); entered into force 7 June 2020\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

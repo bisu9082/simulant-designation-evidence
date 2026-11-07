@@ -473,8 +473,14 @@ def designations():
     def esc(t):
         return (t.replace('&', r'\&').replace('%', r'\%')
                  .replace('[수집 불가', '[not obtained')
+                 .replace('특허 본문 미열람 — Google Patents, Justia, USPTO '
+                          '전문 서비스 모두 접근 거부. 서지사항만 확인',
+                          'patent text not retrieved; Google Patents, Justia '
+                          'and the USPTO full-text service all refused; '
+                          'bibliographic record only')
                  .replace('특허 본문 미열람 — Google Patents 및 Justia 접근 거부',
                           'patent text not read; Google Patents and Justia refused')
+                 .replace('특허 본문 미열람', 'patent text not retrieved')
                  .replace('공개 기록에서 지정 문서를 찾지 못함',
                           'no designating document found in the public record'))
 
