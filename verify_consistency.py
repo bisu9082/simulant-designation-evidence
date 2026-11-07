@@ -1463,6 +1463,14 @@ def load_facts():
     f['coll_struct_off'] = _cm[('d2', 'uv', 'structural')]['rho_uncollapsed']
     f['coll_struct_on'] = _cm[('d2', 'uv', 'structural')]['rho_collapsed']
 
+    # 2026-11-07 (11차 주입시험). 자유도 개수와 매칭 범위에 키가 없었다.
+    # 'Five analyst choices' 와 'between three and six' 가 주입되어도
+    # 통과했다. 개수는 본문이 열거하는 여섯이고, 범위 상한은 인코딩
+    # 민감도의 최대 매칭 수(고유값<=5 변종)다.
+    f['n_freedoms'] = 6
+    f['match_range_hi'] = _V['drop_cardinality_le_5']['n_match'] \
+        if 'drop_cardinality_le_5' in _V else 6
+
     _ts = json.load(open('outputs/stat_supplement.json'))['threshold_free']
     f['thr_free_28'] = _ts['panel28_incumbent3']['n_match_unbounded']
     f['thr_free_35'] = _ts['panel35_incumbent3']['n_match_unbounded']
@@ -1745,6 +1753,13 @@ def load_facts():
     f['vol_channels'] = _vp['n_channels']
     for _c in _ag['cells']:
         f[f"vol_rho_{_c['cell']}"] = _c['spearman']
+    # 2026-11-07 (11차 주입시험). 같은 수치가 본문과 SI 양쪽에 있을 때
+    # 키 하나에 앵커 하나면 둘 중 먼저 걸리는 자리만 지켜지고 나머지는
+    # 무방비가 된다. 주입시험이 본문 자리 두 곳에서 그것을 입증했다
+    # (0.0430 -> 0.1430, 0.4647 -> 0.0647 가 통과했다). 본문 전용 키를 둔다.
+    f['vol_fisher_minq_main'] = _vp['min_q']
+    f['vol_p_nvalid_main'] = _vd['statistics']['n_valid']['p']
+
     _pt = {r['agent']: r for r in _vol['pairing_table']['rows']}
     f['vol_gap_cg'] = _pt['phosgene (CG)']['gap_to_nearest_simulant']
     f['vol_gap_ac'] = _pt['hydrogen cyanide (AC)']['gap_to_nearest_simulant']
@@ -2768,6 +2783,18 @@ CHECKS = [
                          # 2026-11-03 (작업 B). 초록 편입분.
                          r'reflectance\s*\n?channel at \$q=(0\.\d+)\$'],
      0.00005),
+    # 2026-11-07. 본문 자리 전용 앵커. SI 자리는 vol_fisher_minq /
+    # vol_p_nvalid 가 따로 지킨다.
+    ('vol_fisher_minq_main',
+     [r'reaches\s*\n?\$q = (0\.\d+)\$, in the\s*\n?reflectance channel'],
+     0.00005),
+    ('vol_p_nvalid_main',
+     [r'valid-match count returns one match at \$p = (0\.\d+)\$'], 0.00005),
+    ('n_freedoms',
+     [r'(\w+) analyst choices therefore move',
+      r'the (\w+) analyst freedoms in full'], 0),
+    ('match_range_hi',
+     [r'arbitrary choices move between zero and\s*\n?(\w+)'], 0),
     ('vol_gap_cg', [r'sits (0\.\d+) decades from phosgene',
                     r'(0\.\d+) decades from phosgene'], 0.0005),
     ('vol_gap_ac', [r'(0\.\d+) decades\s+from hydrogen cyanide',
@@ -2972,10 +2999,13 @@ SUPERSEDED = [
       # 긍정 주장 꼴. 정본은 'not agreement between repeated measurements'
       # 라는 부정문이므로 아래 면제 패턴으로 통과시킨다. 2026-11-02 에
       # 주입시험이 이 꼴을 통과시켜 가드의 구멍이 드러났다.
-      r'between repeated\s+measurements'],
-     [r'descriptor[- ]resampling', r'resampl',
-      r'not agreement between repeated',
-      r'repeat-level values are not in these']),
+      # 2026-11-07 (11차 주입시험). 종전 꼴은 'between repeated measurements'
+      # 전부를 금지하고, 정본의 부정문을 면제 패턴 두 개로 통과시켰다.
+      # 면제 창이 ±240자라서 같은 단락 안의 주입('that is between repeated
+      # measurements')도 함께 면제됐다. 부정어를 패턴 자체에 넣어 정본이
+      # 애초에 걸리지 않게 하고, 단락 면제를 없앤다.
+      r'(?<!not )between repeated\s+measurements'],
+     [r'descriptor[- ]resampling', r'resampl']),
     # 2026-11-02 (T2-1). 이 항목은 구판 정본이 0.0265 (3자리로 0.027) 일 때
     # 0.028 을 금지했다. 결정적 상관필터로 교체한 뒤 정본이 0.0279 (3자리로
     # 0.028) 가 되었으므로, 이 항목을 그대로 두면 블랙리스트가 정본 값을
@@ -3303,6 +3333,32 @@ def main():
     if superseded:
         fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
         fails.extend(superseded)
+
+    # (B2b) 철회한 검정이 유효한 것으로 되살아나는지 (2026-11-07 신설).
+    #
+    # 왜 필요한가. 11차 주입시험에서 '부호뒤집기 검정을 유효한 것으로
+    # 되돌림' 이 통과했다. 부호뒤집기 검정은 설계의 성질을 보고하는 것이어서
+    # 철회했는데, 철회 문장이 어떤 앵커에도 묶여 있지 않아 '우리는 이것을
+    # 사전지정 검정으로 유지한다' 를 주입해도 아무도 보지 않았다. 블랙리스트는
+    # 어법을 열거해야 하므로 되살아나는 꼴을 다 적을 수 없다. 대신 철회
+    # 선언의 존재를 요구한다: 'sign-flip' 이 나오는 자리마다 그 근처에
+    # 철회를 말하는 말이 있어야 한다.
+    # 2026-11-07. 'property of the design' 을 철회어로 세면 안 된다.
+    # 주입문('reports a property of the design and of the data, and we keep
+    # it as the prespecified test')이 그 구절을 그대로 들고 있어서 가드가
+    # 자기 창 안에서 면제돼 버렸다. 철회를 말하는 말만 센다.
+    _WD = re.compile(r'withdraw|withdrew|withdrawn|'
+                     r'recorded at the time|no longer|not of the data', re.I)
+    _sf = []
+    for m in re.finditer(r'sign-flip', body_flat):
+        win = body_flat[max(0, m.start() - 200):m.end() + 420]
+        if not _WD.search(win):
+            _sf.append(' '.join(win[180:300].split())[:70])
+    if _sf:
+        fails.append('철회한 부호뒤집기 검정이 유효한 것으로 서술된다 '
+                     '(검사 B2b):')
+        for _t in sorted(set(_sf))[:4]:
+            fails.append('  ' + _t)
 
     # (B3) 작용제 거리 전수 훑기 (2026-10-27 신설).
     #

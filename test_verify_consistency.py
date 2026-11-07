@@ -71,13 +71,28 @@ def resolve(a, b, src):
         return None, None
     found = ms[0].group(0)
     na, nb = re.findall(_NUM, a), re.findall(_NUM, b)
-    if len(na) != len(nb) or na == nb:
-        return None, None            # 숫자 아닌 곳이 달라졌다. 손으로.
-    pf = re.split(f'({_NUM})', found)
-    for i, (x, y) in enumerate(zip(na, nb)):
-        if x != y:
-            pf[2 * i + 1] = y
-    return found, ''.join(pf)
+    if len(na) == len(nb) and na != nb:
+        # 정상 경로. 어법은 같고 숫자만 바뀌었다. b 의 숫자를 현행 글에 옮긴다.
+        pf = re.split(f'({_NUM})', found)
+        for i, (x, y) in enumerate(zip(na, nb)):
+            if x != y:
+                pf[2 * i + 1] = y
+        return found, ''.join(pf)
+
+    # 2026-11-07. 종전에는 여기서 손들었다. 그래서 b 의 숫자 개수가 a 와
+    # 다른 사례(틀린 글을 다른 꼴로 적은 경우)는 a 가 글자 그대로 남아
+    # 있을 때만 작동했고, 본문을 되쓰면 조용히 SKIP 되었다. 11차 삭감에서
+    # 그 꼴로 15건이 한꺼번에 꺼졌다.
+    #
+    # b 는 '틀린 글' 이므로 a 의 숫자 배치를 따라야 할 이유가 없다. 다만
+    # b 의 숫자가 현행 글에 이미 있으면 주입이 올바른 값을 넣는 셈이 되어
+    # 시험이 무효가 된다. 그 경우에만 손으로 넘긴다.
+    nf = set(re.findall(_NUM, found))
+    if nb and (set(nb) & nf):
+        return None, None
+    if b.strip() and b != found:
+        return found, b
+    return None, None
 
 # 2026-11-02. 이 시험이 타임아웃으로 중단되었을 때 주입값(0.0221 자리에
 # 0.0321)이 paper/main.tex 에 그대로 남았다. finally 는 SIGTERM 을 막지
@@ -347,16 +362,16 @@ ACS = 'paper_acs/main.tex'
 ACS_CASES = [
     # --- 2026-11-04 (E1/E3/E6) 신설분 ---
     ('원논문이 말하지 않는 생산 주장으로 되돌림',
-     'We made no\nmeasurement of our own and handled no agent',
-     'All agents were produced\nand handled at'),
+     'We made no measurement of our own and handled no\nagent',
+     'All agents were produced and handled at'),
     ('A계열 코드에 동정을 부여',
-     'does not state which compound each\ncode denotes',
-     'A-230 is the methyl ethoxy member and each\ncode denotes'),
+     'does not state which\ncompound each code denotes',
+     'states that A-230 is the methyl ethoxy member and each\ncode denotes'),
 
     # --- 2026-11-04 (작업 D) 신설분. 구판 수치 3건 ---
     ('공간내 보정값을 구판으로 되돌림 (정본 0.0772, 구판 0.0824)',
-     'correcting within each space gives 0.0772',
-     'correcting within each space gives 0.0824'),
+     '0.0772\nwithin each space',
+     '0.0824\nwithin each space'),
     ('Fisher 최소 q 를 구판 p 로 합성한 값으로 되돌림 (정본 0.2373)',
      'over the six is 0.2373', 'over the six is 0.204'),
     ('부분공간 실제지정 비율을 37좌표 구판으로 되돌림 (정본 27.4%)',
@@ -382,19 +397,19 @@ ACS_CASES = [
      'by enumeration of all 13,824 relabellings',
      'exact enumeration of all 13,284 relabellings'),
     ('부호뒤집기를 유효한 검정으로 되돌림',
-     'not of the data: centring leaves the per-compound difference',
-     'and the four-compound cell cannot reach 0.05 under any test'),
+     'and not of the data, and we withdraw it',
+     'and of the data, and we keep it as the prespecified test'),
 
     # --- 2026-11-03 (작업 B) 신설분 ---
     ('초록의 전제검정 셀 수 오기 (정본 six)',
-     'all six clear $q=0.05$ against a label-permutation null',
-     'all four clear $q=0.05$ against a null'),
+     'all six clear\n$q=0.05$ against a label-permutation null',
+     'all four clear\n$q=0.05$ against a null'),
     ('초록의 휘발성 반사 q 오기 (정본 0.0430) — 비유의로 뒤집힌다',
-     'reaches $q=0.0430$ in the reflectance\nchannel',
-     'the reflectance\nchannel at $q=0.1430$'),
+     'reaches $q = 0.0430$, in the\nreflectance channel',
+     'reaches $q = 0.1430$, in the\nreflectance channel'),
     ('초록의 휘발성 유효매칭 p 오기 (정본 0.4647)',
-     'one valid match at $p=0.4647$',
-     'one valid match at $p=0.0647$'),
+     'returns one match at $p = 0.4647$',
+     'returns one match at $p = 0.0647$'),
     ('형태블록 최대 상관을 R_CUT 위로 오기 (정본 0.9364) — 필터가 잡았어야 한다',
      'block is 0.9364 on the twenty-eight',
      'block is 0.9764 on the twenty-eight'),
@@ -410,15 +425,16 @@ ACS_CASES = [
     ('병합공간 차원 오기 (정본 thirty-eight)',
      'Nine of the thirty-eight coordinates',
      'Nine of the thirty-nine coordinates'),
-    ('분석선택 수를 넷으로 되돌림 (정본 Five)',
-     'Five analyst choices therefore move',
-     'Four analyst choices therefore move'),
+    # 2026-11-07. 역치가 여섯째 자유도로 편입됐다. 이제 구판 다섯이 결함이다.
+    ('분석선택 수를 다섯으로 되돌림 (정본 Six — 역치 포함)',
+     'Six analyst choices therefore move',
+     'Five analyst choices therefore move'),
     ('매칭 범위를 구판으로 되돌림 (정본 zero and six)',
-     'can move between\nzero and six',
-     'can move between\nthree and six'),
+     'six arbitrary choices move between zero and\nsix',
+     'six arbitrary choices move between three and\nsix'),
     ('제목에 Sixteen 을 되돌림',
-     'A Reanalysis of Authentic Chemical Warfare Agent Measurements',
-     'A Reanalysis of Sixteen Authentic Chemical Warfare Agents'),
+     'VX in a Colorimetric Array of Authentic Chemical Warfare Agents',
+     'VX in a Colorimetric Array of Sixteen Chemical Warfare Agents'),
     # --- 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
     #     숫자가 산출물과 맞는데 그 숫자를 설명하는 말이 틀린 경우다.
     ('DMMP 4종 평균 부호 오기 (정본 +0.049, 자외)',
@@ -461,19 +477,19 @@ ACS_CASES = [
     # 뺐으므로 자리가 없어졌다. 단위가 틀리면 가장 치명적인 자리, 즉
     # 실험절의 노출 농도 목록으로 옮긴다.
     ('어레이 농도를 ppm 으로 되돌림 (정본 µM)',
-     'final concentrations of 0, 10, 50, 100 and\n500~$\\mu$M',
-     'final concentrations of 0, 10, 50, 100 and\n500~ppm'),
+     'final concentrations of 0, 10,\n50, 100 and 500~$\\mu$M',
+     'final concentrations of 0, 10,\n50, 100 and 500~ppm'),
     ('농도축 추세를 ppm 으로 되돌림 (정본 µM)',
      'from $+0.363$ at 10~$\\mu$M to\n$+0.771$ at 500~$\\mu$M',
      'from $+0.363$ at 10~ppm to\n$+0.771$ at 500~ppm'),
     ('수행하지 않은 반복측정 주장 (본문)',
-     "One compound's patterns at two\nconcentrations correlate at",
+     "One compound's patterns at\ntwo concentrations correlate at",
      'Replicates of one compound correlate at'),
     # 2026-11-02 재집필로 방법 문장이 2.1 에서 Experimental 로 옮겨갔다.
     # 앵커를 현행 본문에 다시 건다.
     ('수행하지 않은 반복측정 주장 (전제 문단)',
-     'itself at a different dose and not agreement between repeated\nmeasurements',
-     'itself at a different dose, that is between repeated\nmeasurements'),
+     'itself at a different\ndose and not between repeated measurements',
+     'itself at a different\ndose, that is between repeated measurements'),
     ('수행하지 않은 반복측정 주장 (도판 캡션)',
      'within one compound across concentrations\n  and between different compounds',
      'within replicates of the same compound and\n  between different compounds'),
