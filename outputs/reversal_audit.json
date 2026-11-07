@@ -1256,6 +1256,125 @@
   "reversals_uncentred": 28,
   "reversals_centred": 14
  },
+ "estimator_level": {
+  "mixed": {
+   "totals": {
+    "reversals_uncentred": 28,
+    "reversals_centred": 13,
+    "n_instances": 34
+   },
+   "cells": {
+    "d1.uv": {
+     "n_instances": 6,
+     "reversals_uncentred": 5,
+     "reversals_centred": 3
+    },
+    "d1.normal": {
+     "n_instances": 6,
+     "reversals_uncentred": 5,
+     "reversals_centred": 3
+    },
+    "d2.uv": {
+     "n_instances": 7,
+     "reversals_uncentred": 6,
+     "reversals_centred": 3
+    },
+    "d2.normal": {
+     "n_instances": 7,
+     "reversals_uncentred": 5,
+     "reversals_centred": 1
+    },
+    "d3.uv": {
+     "n_instances": 4,
+     "reversals_uncentred": 3,
+     "reversals_centred": 2
+    },
+    "d3.normal": {
+     "n_instances": 4,
+     "reversals_uncentred": 4,
+     "reversals_centred": 1
+    }
+   }
+  },
+  "raw_mean": {
+   "totals": {
+    "reversals_uncentred": 13,
+    "reversals_centred": 6,
+    "n_instances": 34
+   },
+   "cells": {
+    "d1.uv": {
+     "n_instances": 6,
+     "reversals_uncentred": 2,
+     "reversals_centred": 1
+    },
+    "d1.normal": {
+     "n_instances": 6,
+     "reversals_uncentred": 3,
+     "reversals_centred": 1
+    },
+    "d2.uv": {
+     "n_instances": 7,
+     "reversals_uncentred": 3,
+     "reversals_centred": 2
+    },
+    "d2.normal": {
+     "n_instances": 7,
+     "reversals_uncentred": 2,
+     "reversals_centred": 1
+    },
+    "d3.uv": {
+     "n_instances": 4,
+     "reversals_uncentred": 2,
+     "reversals_centred": 1
+    },
+    "d3.normal": {
+     "n_instances": 4,
+     "reversals_uncentred": 1,
+     "reversals_centred": 0
+    }
+   }
+  },
+  "raw_max": {
+   "totals": {
+    "reversals_uncentred": 32,
+    "reversals_centred": 30,
+    "n_instances": 34
+   },
+   "cells": {
+    "d1.uv": {
+     "n_instances": 6,
+     "reversals_uncentred": 6,
+     "reversals_centred": 6
+    },
+    "d1.normal": {
+     "n_instances": 6,
+     "reversals_uncentred": 5,
+     "reversals_centred": 5
+    },
+    "d2.uv": {
+     "n_instances": 7,
+     "reversals_uncentred": 6,
+     "reversals_centred": 7
+    },
+    "d2.normal": {
+     "n_instances": 7,
+     "reversals_uncentred": 7,
+     "reversals_centred": 5
+    },
+    "d3.uv": {
+     "n_instances": 4,
+     "reversals_uncentred": 4,
+     "reversals_centred": 3
+    },
+    "d3.normal": {
+     "n_instances": 4,
+     "reversals_uncentred": 4,
+     "reversals_centred": 4
+    }
+   }
+  }
+ },
  "totals": {
   "n_instances": 34,
   "reversals_uncentred": 28,
