@@ -2,18 +2,22 @@
 
 Analysis code, descriptor tables and permutation results for:
 
-> **Whether Chemical Warfare Agent Simulant Designations Look Supported Depends
-> on Which Compounds Are in the Comparison**
-> Ku Kang, Yoon Jeong Jang.
+> **In a Colorimetric Array of Authentic Chemical Warfare Agents, One Compound
+> in Three Is Nearer Another Compound Than Its Own Repeat Measurement**
+> Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee, Jin Yoo, Yoon Jeong Jang.
 > CBRN Defense Research Institute, Ministry of National Defense, Republic of Korea.
-> Submitted to *Journal of Hazardous Materials*.
+> Submitted to *ACS Sensors*.
 
-The paper asks whether three compounds in routine use as chemical warfare agent
-simulants (dimethyl methylphosphonate, dichloromethane, dipropylene glycol
-monomethyl ether) sit measurably closer to eleven authentic agents than
-compounds drawn at random, under an exact permutation test over every possible
-designation. The answer depends on which compounds are in the comparison, and
-that dependence is the result.
+A designation says one compound stands in for another, which is a claim about a
+nearest neighbour. The paper counts how often this array supplies one: in 13 of
+the 34 compound-and-cell instances a compound's response pattern is nearer
+another compound's than its own agreement across concentrations, and in 28 of
+the 34 before the dye-wise centring that makes compound identity recoverable.
+It then asks whether descriptor distance, the basis on which simulants are
+selected, predicts response distance. Twelve exact Mantel tests leave nothing
+below q = 0.05. Whether the three incumbent designations look supported at all
+depends on which compounds are in the comparison, and that dependence is
+reported rather than resolved.
 
 ## What is here
 
@@ -49,11 +53,13 @@ parse of the EPA document.
 The version of the `xtb` binary that produced `descriptor_cache_xtb*.csv` was
 not recorded, so that axis is not version-pinned. `requirements.txt` says so.
 
-One step in `run_analysis.sh` needs the network and is slow:
-`build_tox_trainset.py` resolves about 3,900 compound names against the PubChem
-REST service at four requests a second, so a cold clone spends roughly twenty
-minutes there. It is the only step that leaves the machine. Nothing else in the
-pipeline does.
+Two steps in `run_analysis.sh` need the network. `build_tox_trainset.py`
+resolves about 3,900 compound names against the PubChem REST service at four
+requests a second, so a cold clone spends roughly twenty minutes there.
+`volatility_fetch.py` queries the same service for vapour pressures, which is
+quick. Those two are the only steps that leave the machine; both cache their
+results, and the cached files are in the deposit, so a clone that keeps them
+needs no network at all.
 
 ## Reproducing
 
@@ -165,13 +171,13 @@ document under `sources/`, and the colorimetric Delta E_00 tables under
 `deltaE/`, which were measured and published in the three source studies cited
 in the manuscript. `LICENSE` states this in full.
 
-The manuscript cites this repository on branch `b_acs`. The submission
-state will be tagged immediately before submission, and
-`verify_consistency.py` check A-tag confirms that any tag the manuscript
-names is present on the remote. Branches
-move; cite the tag.
+The manuscript cites this repository on branch `b_acs`. The submission state
+will be tagged immediately before submission, and `verify_consistency.py` check
+A-tag confirms that any tag the manuscript names is present on the remote.
 
 ## Citation
 
-Please cite the paper. For the code and data, cite this repository at the
-tagged release `v1.0`, which is the state the manuscript refers to.
+Please cite the paper. For the code and data, cite this repository at the tag
+the manuscript names once that tag exists. Branches move, so do not cite
+`b_acs` itself. The earlier tag `v1.0` predates the ACS Sensors rewrite and is
+not the state this manuscript reports.

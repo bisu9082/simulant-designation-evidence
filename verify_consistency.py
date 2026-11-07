@@ -402,14 +402,21 @@ def _title_sync():
             ('paper_acs/main.tex', r'\\title\{(.+?)\}'),
             ('paper_acs/supporting.tex', r'\\title\{(.+?)\}'),
             ('paper_acs/cover_letter.tex',
-             r'We submit \\textit\{(.+?)\} for consideration')]:
+             r'We submit \\textit\{(.+?)\} for consideration'),
+            # 2026-11-07 (12차 R5-B3). README 머리말도 제목을 싣는다.
+            # 세 tex 만 보던 탓에 README 가 구판 제목·저자 2인·JHM 투고를
+            # 들고 공개돼 있었고, 예치물 링크를 따라간 심사자가 가장 먼저
+            # 보는 자리였다.
+            ('README.md', r'^> \*\*(.+?)\*\*$')]:
         if not _o.path.exists(path):
             continue
-        m = _re.search(pat, open(path, encoding='utf8').read(), _re.S)
+        m = _re.search(pat, open(path, encoding='utf8').read(),
+                       _re.S | _re.M)
         if not m:
             bad.append(f'  제목을 찾지 못함 [{path}]')
             continue
-        got = ' '.join(m.group(1).split())
+        # README 는 인용블록이라 줄이 이어지면 '> ' 가 끼어든다.
+        got = ' '.join(t for t in m.group(1).split() if t != '>')
         if want is None:
             want = got
         elif got != want:
@@ -491,6 +498,35 @@ def _label_scope_guards():
                 '자기인용' in hit and 'journal' not in txt[:200]):
             bad.append(f'  내부 문서가 예치물에 있다 [outputs/{fn}]: '
                        f'{hit} — 공개 저장소에서 제거할 것')
+
+    # (B0b) 내부 심의 문서와 폐기본이 추적되고 있는지 (2026-11-07 신설,
+    #       12차 R5-A5/A6).
+    #
+    # 왜 필요한가. 위 B0 는 outputs/*.json 만 훑는다. 그래서 sources/ 의
+    # GATE8 채점 메모 7건과 outputs/_superseded/ 18건이 공개 저장소에
+    # 그대로 들어가 있었고 어느 검사도 묻지 않았다. 가드의 범위가 위험
+    # 보다 좁으면 가드가 아니다. 경로 패턴으로 직접 센다.
+    import subprocess as _sp2
+    _INTERNAL_PAT = ('sources/GATE8_', 'sources/T1_', 'sources/T2_',
+                     'sources/NOTE_', 'outputs/_superseded/')
+    try:
+        _tracked = _sp2.run(['git', '-c', 'core.quotepath=false',
+                             'ls-files'], capture_output=True, text=True,
+                            timeout=60)
+        _files = _tracked.stdout.splitlines() if _tracked.returncode == 0 \
+            else None
+    except Exception:
+        _files = None
+    if _files is None:
+        print('[verify] 검사 B0b: git 을 쓸 수 없어 건너뛴다.')
+    else:
+        _leak = [f for f in _files
+                 if any(f.startswith(p_) for p_ in _INTERNAL_PAT)]
+        if _leak:
+            bad.append(f'  내부 문서·폐기본이 예치물에 추적되고 있다 '
+                       f'(검사 B0b): {len(_leak)}건, 예: '
+                       f'{", ".join(_leak[:3])} — .gitignore 에 넣고 '
+                       'git rm --cached 할 것')
 
     # (B) tier 주장 대 출처 문자열. #8 이 이 경로였다.
     vp = 'outputs/volatility_space.json'
