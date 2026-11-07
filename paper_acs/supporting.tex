@@ -309,18 +309,20 @@ smallest Benjamini--Hochberg value over the twelve Mantel cells rises from
 \section{Column order in the correlation filter}
 \label{meth:orderinvariance}
 
-The descriptor spaces are built in three stages, not one. The first drops any
-coordinate that is constant across the panel. The second drops any coordinate
-that is an exact algebraic function of others already present, which on the
-primary panel removes the four Abraham-parameter proxies, the organophosphorus
-indicator and the hydrogen-bond-donor count, and on the twenty-eight-compound
-panel removes three more because the smaller panel makes additional identities
-exact. This stage overrides the protected list: \texttt{lser\_S\_proxy} is
-nominally protected but is computed from the molar refractivity and the polar
-surface area, so it is removed wherever both of those survive. The third drops
-one coordinate from every remaining pair whose
+The descriptor spaces are built in three stages, not one, and the order is
+the order the code runs them. The first drops any coordinate that is constant
+across the panel. The second drops one coordinate from every pair whose
 absolute Pearson correlation exceeds 0.95, so that no retained pair sits above
-that cut. More than one retained set satisfies that constraint, and until this
+that cut. The third drops any coordinate that is still an exact algebraic
+function of others present after that cut. On the primary panel the third
+stage removes nothing, because the four Abraham-parameter proxies it would
+otherwise catch are perfectly correlated with their determining columns and
+the second stage has already taken them. On the twenty-eight-compound panel it
+removes exactly two, \texttt{lser\_S\_proxy} and
+\texttt{is\_organophosphorus}. The first of those is on the protected list
+and is removed anyway, because it is computed from the molar refractivity and
+the polar surface area and both survive; we record that the protected list
+does not override this stage. More than one retained set satisfies that constraint, and until this
 revision the set we used was chosen by the order in which the columns happened
 to sit in the descriptor file. The filter walked the pairs in that order and
 dropped the later member of each supra-threshold pair, which means the surviving
@@ -720,7 +722,7 @@ percentile to 0.05.
 \label{meth:deltaE}
 Measured response was taken from a 29-component colorimetric array reported in
 earlier work from this laboratory \cite{hazref,multiplexref,group3ref}. The
-array is listed compound by compound in Table~\ref{tab:dyepanel}. Six of the
+array is listed compound by compound in Table~\ref{tab:dyepanel}. Five of the
 twenty-nine are not chromogenic dyes: two are fluorophores, one is a thiol
 reducing agent and two are carbonyl derivatising reagents, so part of the
 pattern is covalent derivatisation rather than a solvatochromic shift. The

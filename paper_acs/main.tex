@@ -971,7 +971,7 @@ Section~\ref{S-meth:purity}).
 
 The array is the same 29 commercial reagents in the same order in all three
 runs, commercially sourced and used as received. Supporting Information
-Table~\ref{S-tab:dyepanel} lists them. Six are not chromogenic dyes:
+Table~\ref{S-tab:dyepanel} lists them. Five are not chromogenic dyes:
 anthracene and pyrene are fluorophores, reduced L-glutathione is a thiol
 reducing agent, and 2,4-dinitrophenylhydrazine and 2-hydrazinobenzothiazole
 are carbonyl derivatising reagents, so part of the array responds by covalent
@@ -1052,11 +1052,12 @@ against PubChem, and no property value was taken from a prediction service.
 
 \subsection{Distances and tests}
 \label{meth:spaces}
-Within each space the filter runs in three stages: constant columns are
-removed, then columns that are exact algebraic functions of others already
-present, then one of each pair correlated at $|r| > 0.95$. The second stage
-overrides the protected set where the determining columns survive
-(Supporting Information Section~\ref{S-meth:orderinvariance}). Remaining
+Within each space the filter runs in three stages, in this order: constant
+columns are removed, then one of each pair correlated at $|r| > 0.95$, then
+any column that remains an exact algebraic function of others still present.
+The third stage overrides the protected set where the determining columns
+survive (Supporting Information
+Section~\ref{S-meth:orderinvariance}). Remaining
 descriptors were standardised and distances taken as Euclidean, normalised by
 the median nearest-neighbour separation of the same space, which makes a
 normalised distance comparable within a panel and not between panels.
