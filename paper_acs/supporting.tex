@@ -486,7 +486,11 @@ among them. The second is the patent literature, through Google Patents and
 Justia, for patents naming dichloromethane as a chemical agent simulant;
 the training-composition patents returned name other compounds, and the one
 that designates dipropylene glycol monomethyl ether is
-\cite{seitzinger2006simulant}. The third is the most recent critical review
+\cite{seitzinger2006simulant}. Its full text is the second limit of this
+search. Google Patents, Justia and the USPTO full-text service all refused
+retrieval from our environment, so the bibliographic record is established and
+the document's own wording is not; nothing in this paper rests on what that
+patent requires. The third is the most recent critical review
 of low-toxicity liquid simulants\cite{webb2025}, which does not list
 dichloromethane as a simulant for any agent and names it only as the
 extraction solvent recommended by the Organisation for the Prohibition of
@@ -648,13 +652,14 @@ dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
 five valid matches and 0.0368. Four of those five are sarin, soman and tabun
 matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
 supports. The fifth is sulfur mustard matched to DPGME, about
-which the designation record says nothing either way: the patent that names
-DPGME requires detectability by ion mobility spectrometry of the composition
-and assigns the compound to no agent class (Section~\ref{M-res:docs}). An
-earlier version of this section wrote that the patent calls DPGME a preferred
-G-agent simulant and rejected this pairing on that ground. We withdraw that
-statement because we could not verify the wording against the patent
-itself. The single match under GFN2 was hydrogen cyanide to
+which the designation record says nothing either way. An earlier version of
+this section wrote that the patent calls DPGME a preferred G-agent simulant and
+rejected this pairing on that ground, and a later one wrote that the patent
+requires detectability by ion mobility spectrometry and assigns the compound to
+no agent class. We withdraw both, for the same reason: we were not able to
+retrieve the text of that patent, so nothing about its internal requirements is
+established here and neither its agent class nor its detection instrument
+enters any argument (Section~\ref{M-res:docs}). The single match under GFN2 was hydrogen cyanide to
 dichloromethane.
 
 Three things have to be said about that. The first is that the sign of the
@@ -804,6 +809,28 @@ drawn from are uncorrelated by construction. Both the raw and the whitened rates
 are reported. That draw count carries a Monte Carlo
 standard error near one percentage point on a proportion and resolves a
 percentile to 0.05.
+
+\section{How the sixteen agents were classified under the Convention}
+\label{meth:cwc}
+
+% 2026-11-07 (10차 R4-D5). 본문이 'twelve Schedule 1 and four Schedule 3' 를
+% 적으면서 출처가 없었다. OPCW 일람과 2019 개정 결정문으로 확인했다.
+The main text states that twelve of the sixteen measured agents are Chemical
+Weapons Convention Schedule~1 compounds and four are Schedule~3 industrial
+chemicals. The assignment is read from the Annex on Chemicals as the
+Organisation for the Prohibition of Chemical Weapons publishes
+it.\cite{opcwschedules} Sarin and soman fall under 1A(1), tabun under 1A(2), VX
+under 1A(3), sulfur mustard under 1A(4), lewisite under 1A(5) and nitrogen
+mustard under 1A(6); cyclosarin is not named individually and falls under
+1A(1), whose R$_2$ position admits a cycloalkyl group. Phosgene, cyanogen
+chloride, hydrogen cyanide and chloropicrin are 3A(1) to 3A(4). The four
+A-series compounds fall under the entries 1A(13) to 1A(16) added by the 2019
+amendment, which entered into force on 7 June 2020.\cite{opcwnovichok} One
+caveat belongs with that last group: the source study reports them as the codes
+A-230, A-232, A-234 and A-242 and gives their structures as representative
+rather than assigned (Section~\ref{M-meth:array}), so their Schedule~1
+membership is stated at the level of those families and not of a named
+compound.
 
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
@@ -1081,10 +1108,10 @@ pair these compounds with agents on anything a volatility distance can be
 read against. Dimethyl methylphosphonate is the one exception and it points
 two ways at once: the NIOSH programme names it for GB and for HD against a
 filtration measurement, and the National Research Council assessment
-names it for VX against a fabric test. Dipropylene glycol monomethyl ether is
-named with no agent class, against detectability by ion mobility
-spectrometry, and for dichloromethane we found no designating document at
-all. A distance to sarin is therefore not a departure from a designated
+names it for VX against a fabric test. Dipropylene glycol monomethyl ether appears in a
+training-composition patent whose text we could not retrieve, so it pairs with
+no agent here either, and for dichloromethane we found no designating document
+at all. A distance to sarin is therefore not a departure from a designated
 pairing for two of the three, and for the third it would have to be read
 against two different agents at once.
 
@@ -1667,10 +1694,14 @@ association. Restoring it moves the smallest adjusted value from 0.133 to
 Not every declared channel is a separate measurement, and in one plate set six of
 them are not. In the second set's ultraviolet channel, dyes 22 to 27 return
 values identical to the last decimal place in every row. The images behind them
-are distinct files, so this is not a naming collision; the six dyes do not
-fluoresce under ultraviolet illumination and the region of interest read plate
-background instead. One background channel was therefore entering the unit-
-normalised pattern six times. Two further columns in the same channel, and five
+are distinct files, so this is not a naming collision. What the deposited
+tables establish is the identity, not its cause: the most likely reading is
+that those regions of interest read plate background rather than a dye
+response, which would make one background channel enter the unit-normalised
+pattern six times, but the tables begin at $\Delta E_{00}$ and the source
+reports no per-channel diagnostic, so we record that as our inference and not
+as a finding. The consequence for the analysis is the same either way, because
+six identical columns carry one channel's information whatever produced them. Two further columns in the same channel, and five
 in the third set's, are identically zero. We collapse columns that are equal in
 every row to a single occurrence, a rule declared once and applied to all six
 plate-channel combinations, which leaves 23 effective channels in the second
@@ -1776,16 +1807,25 @@ record of what was looked at is complete.
 \label{res:doselimits}
 
 % 2026-11-07 (11차 6단계). 본문 res:dmmp 와 res:premise 에서 옮겨 왔다.
-Two limits sit on that direction. The concentrations are of analyte in a dye
-solution, not of vapour at an inlet, so we do not translate the range into
-the operating band of a point detector. And the mean response magnitude rises
-with concentration at a Spearman correlation of exactly $+1.000$ in every one
-of the six run-channel cells, so a similarity that grows with concentration
-cannot be separated here from one that grows with signal-to-noise ratio;
-distinguishing them needs a repeat-level noise estimate the deposited tables
-do not carry. What the direction supports is that the resemblance between
-this simulant and this agent is not constant over the range at which the
-array was characterised.
+Three limits sit on that direction. The concentrations are of analyte in a dye
+solution, not of vapour at an inlet, so we do not translate the range into the
+operating band of a point detector. The mean response magnitude rises with
+concentration at a Spearman correlation of exactly $+1.000$ in every one of the
+six run-channel cells, so a similarity that grows with concentration cannot be
+separated here from one that grows with signal-to-noise ratio; distinguishing
+them needs a repeat-level noise estimate the deposited tables do not carry.
+% 2026-11-07 (10차 R4-P2). 원논문 직독: "dissolving each nerve agent in THF
+% to create 1 M stock solutions, which were then further diluted with
+% acetonitrile" (JHM 501 (2026) 140703, 2.2절). 원고는 MeCN 만 적고 있었다.
+% 잔류 THF 는 최종 농도에 정비례하므로 농도추세의 세 번째 교란 후보다.
+And the agent stock of the first run was 1~M in tetrahydrofuran, diluted with
+acetonitrile, so the residual tetrahydrofuran in the vial is proportional to
+the final analyte concentration, rising from roughly 0.001 to 0.05 per cent by
+volume across the four levels. A solvent gradient of that shape is a third
+candidate for anything that varies monotonically with dose, and these tables
+cannot separate it from the other two either. What the direction supports is
+that the resemblance between this simulant and this agent is not constant over
+the range at which the array was characterised.
 
 These tables hold one value per compound, concentration, dye and channel, so
 the within-compound term is agreement of a compound with itself at a different

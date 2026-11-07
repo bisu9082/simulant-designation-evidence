@@ -8,6 +8,7 @@
 # 쓰는 법:  sh build_paper_acs.sh
 set -e
 cd "$(dirname "$0")"
+ROOT=$(pwd)
 
 # 도판 동기화 (2026-11-02 신설). 이 단계가 없었다. build_paper.sh 는 JHM
 # 판본(paper/)에만 도판을 복사하므로, 파이프라인을 다시 돌려도 paper_acs/ 의
@@ -96,5 +97,14 @@ for f in main supporting; do
         echo "  $f.pdf 없음"; fail=1
     fi
 done
+
+# 2026-11-07. 커버레터가 분량을 숫자로 적고 검증기가 그 숫자를
+# outputs/length_audit.json 과 대조한다. 그 파일은 빌드된 PDF 를 읽어야
+# 만들어지므로 여기서 갱신한다. 빌드가 성공한 뒤에만 돈다.
+if [ "$fail" -eq 0 ]; then
+    # 이 지점의 cwd 는 paper_acs/ 다. 상대경로에 의지하지 않는다.
+    ( cd "$ROOT" && python3 wordcount.py >/dev/null 2>&1 ) \
+        || echo '  [주의] wordcount.py 실패 — length_audit.json 갱신 안 됨'
+fi
 
 [ "$fail" -eq 0 ] && echo '[빌드] 오류 없음' || { echo '[빌드] 위 항목 확인'; exit 1; }

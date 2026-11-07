@@ -108,6 +108,17 @@ def main():
           f' + 도판 {len(figs)}장 x 0.5 + 참고문헌 {refs/1000:.1f}'
           f'   (TOC 제외, 권장 8면)')
 
+    # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
+    # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.
+    import json as _j
+    import os as _o
+    _o.makedirs('outputs', exist_ok=True)
+    _j.dump({'body_words': n_body - cap, 'caption_words': cap,
+             'ref_words': refs, 'n_figures': len(figs),
+             'acs_pages': round(pages, 2)},
+            open('outputs/length_audit.json', 'w'), indent=1)
+    print('  -> outputs/length_audit.json')
+
     sup = pdftext('paper_acs/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
 
