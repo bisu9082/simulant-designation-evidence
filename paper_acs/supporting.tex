@@ -2040,7 +2040,7 @@ estimate enters any analysis below.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{Fig_talk_tox.png}
-  \caption{The toxicity axis. (a) Measured EPA AEGL-3 10-minute values for
+  \caption{The toxicity axis. (a) EPA AEGL-3 10-minute values for
   the panel compounds that carry one. (b) Prediction error of a random
   forest trained on 230 AEGL chemicals, for twenty military agents held out
   of training, against distance to the training set.}
@@ -2049,13 +2049,38 @@ estimate enters any analysis below.
 
 
 
+% 2026-11-07 (12차 R4). 세 가지를 적는다. (1) AEGL 은 측정값이 아니라
+% 위원회가 독성자료에 불확실성 계수를 적용해 유도한 지침값이다. 이 논문이
+% 'measured AEGL-3' 라고 쓸 때 뜻하는 것은 모델 예측이 아니라 등재값
+% 이라는 것뿐이다. (2) 편람은 Final 185 / Interim 72 / Proposed 12 로
+% 나뉘는데 원고는 등급을 기록하지 않고 한 축에 놓고 있었다. 19종 중
+% 다섯이 Interim 이고 그 하나가 지정 모사체다. (3) G 작용제 셋은 이 축이
+% 사실상 분해하지 못한다. 수치는 outputs/toxicity_aegl.csv 의 aegl_status.
+An AEGL is not a measurement. It is a guideline level the National Advisory
+Committee derives from toxicological data by applying uncertainty factors, and
+where this document writes a measured AEGL-3 it means the registered value as
+opposed to the model prediction of Section~\ref{res:qsar}, not a quantity read
+off an instrument. The compilation separates Final, Interim and Proposed
+values, and we now carry that status with each entry: of the nineteen panel
+compounds that have an AEGL-3 at 10~min, fourteen are Final and five are
+Interim, and the five include the incumbent simulant dichloromethane and three
+of the four compounds at the safe end of the axis.
+
 Nineteen of the twenty-eight compounds have an AEGL-3 at 10~min
 (Fig.~\ref{fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
 sarin (0.367), cyclosarin (0.391), tabun (0.729), sulfur mustard (3.84),
 lewisite~1 (3.9), chloropicrin (13.4), phosgene (14.6), hydrogen cyanide (29.8),
 acetonitrile (403), chloroform (19\,530), benzene (30\,990), p-xylene (31\,264),
 toluene (37\,685), acetone (38\,007), dichloromethane (41\,685), n-hexane
-(42\,296) and methanol (52\,420). The axis spans six orders of magnitude, and
+(42\,296) and methanol (52\,420).
+% 2026-11-07 (12차 R4). 셋의 순위가 단위에 따라 뒤집힌다. 편람이 싣는
+% 원값은 ppm 이고 mg/m3 는 분자량 환산이다.
+That ordering should not be read between
+the three G agents. Their values lie within 7\% of each other, and the
+compilation records them in ppm, where soman at 0.049 sits below cyclosarin at
+0.053 and cyclosarin below sarin at 0.064; converting each by its molecular
+weight puts sarin below cyclosarin, so the rank of two of the three is a
+property of the unit rather than of the toxicology. The axis spans six orders of magnitude, and
 the incumbent simulant dichloromethane sits at the safe end of it,
 $1.4\times10^{6}$ times less acutely toxic than VX and 1400 times less toxic
 than hydrogen cyanide. On this axis the incumbent simulant is not the weak link.

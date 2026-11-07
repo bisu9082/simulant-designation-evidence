@@ -144,6 +144,12 @@ for _, row in df.iterrows():
     out.append(dict(compound_name=nm, compound_class=row.compound_class,
                     aegl_cas=hit['cas'], aegl_name=hit['name'],
                     aegl_unit=hit['unit'],
+                    # 2026-11-07 (12차 R4). EPA 편람은 Final 185 / Interim
+                    # 72 / Proposed 12 / Holding 1 로 나뉜다. 추출기는
+                    # 그 구간을 이미 읽고 있었는데 이 표로 나가지 않아,
+                    # 원고가 등급이 다른 값을 한 축에 놓고 있었다.
+                    # 지정 모사체 디클로로메탄이 Interim 이다.
+                    aegl_status=hit.get('section', 'unknown'),
                     AEGL3_10min_mgm3=vals['AEGL3'],
                     AEGL2_10min_mgm3=vals['AEGL2'],
                     AEGL3_provenance=prov.get('AEGL3', ''),

@@ -1613,6 +1613,15 @@ def load_facts():
     f['mde_below_alpha'] = _mj['n_below_alpha_mde']
     f['mde_below_bh'] = _mj['n_below_bh_mde']
 
+    # 2026-11-07 (12차 R4). AEGL 등급. 편람이 Final/Interim/Proposed 로
+    # 나누는데 원고가 등급 없이 한 축에 놓고 있었다.
+    import pandas as _pdq
+    _tx = _pdq.read_csv('outputs/toxicity_aegl.csv')
+    _tx = _tx[_tx.AEGL3_10min_mgm3.notna()]
+    f['aegl_n_with'] = int(len(_tx))
+    f['aegl_n_final'] = int((_tx.aegl_status == 'Final').sum())
+    f['aegl_n_interim'] = int((_tx.aegl_status == 'Interim').sum())
+
     # 양수 가상궤도 (2026-11-07 신설, 12차 A-5).
     _pl = json.load(open('outputs/dft_electronic_space.json'))['positive_lumo']
     f['lumo_n'] = _pl['n_compounds']
@@ -2682,6 +2691,9 @@ CHECKS = [
     ('swap_inc_max', [r'and by ([\d.]+)\\% for tabun'], 0.05),
     ('mde_below_alpha', [r'(\w+) agents fall below even the uncorrected'], 0),
     ('mde_below_bh', [r'of 0\.43, which is the one\s*\n?this paper is entitled to use, (\w+) do'], 0),
+    ('aegl_n_with', [r'of the (\w+) panel\s*\n?compounds that have an AEGL-3 at 10'], 0),
+    ('aegl_n_final', [r'(\w+) are Final and \w+ are\s*\n?Interim'], 0),
+    ('aegl_n_interim', [r'\w+ are Final and (\w+) are\s*\n?Interim'], 0),
     # 2026-11-07 (12차 A-5) 양수 가상궤도.
     ('lumo_b3lyp_pos',
      [r'In (\w+) of the twenty-eight compounds the B3LYP LUMO'], 0),
