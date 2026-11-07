@@ -73,9 +73,14 @@ def load_cells():
             per = {}
             for nm, a in v.get('agents', {}).items():
                 dn = a.get('d_norm')
+                # sparse_indicators 는 차단자를 계산하지 않는다. 종전에
+                # blocker=None 을 넣어서 '차단자 없음' 과 구별되지
+                # 않았고, 그 결과 fail_mode 가 틀린 라벨을 냈다
+                # (2026-11-07 에디터 게이트 2회차). 미기록을 명시한다.
                 per[nm] = dict(
                     match=bool(a.get('match')), d_norm=dn,
-                    nearest=a.get('nearest'), blocker=None,
+                    nearest=a.get('nearest'),
+                    blocker=None, blocker_recorded=False,
                     within_threshold=(None if dn is None
                                       else bool(dn <= THRESHOLD)))
             cells.append((f"sparse/{v['variant']}", per))
@@ -83,6 +88,23 @@ def load_cells():
         print(f'  [수집 불가: {p} 없음]')
 
     return cells
+
+
+def verdict_vectors(cells):
+    """25구성을 '같은 판정을 내는 묶음' 으로 접는다.
+
+    왜. 2026-11-07 에디터 게이트 2회차가 25구성이 서로 다른 분석
+    선택이 아니라고 적발했다. sparse/baseline 은
+    match_rule/panel28_incumbent3/deterministic/wide 와 같은 셀이고,
+    panel28 과 panel35+lit8 에서 wide 와 narrow 는 비교군이 동일하며,
+    sparse 7변형은 희소성 절단값 하나를 중첩 샘플링한 것이다.
+    25 를 분모로 쓰면 중복 가중치가 대비를 만든다.
+    """
+    groups = {}
+    for name, per in cells:
+        key = tuple(sorted(nm for nm, a in per.items() if a['match']))
+        groups.setdefault(key, []).append(name)
+    return groups
 
 
 def main():
@@ -121,15 +143,25 @@ def main():
                      if not a['match'] and a.get('within_threshold') is False)
         n_blk = sum(1 for _, a in rec
                     if not a['match'] and a.get('blocker'))
+        # 차단자가 기록되지 않는 셀(sparse 7변형)을 따로 센다. 종전에는
+        # 이 셀들이 '차단자 없음' 과 섞여서 else 분기로 떨어졌고,
+        # n_over=0 인 작용제에 'both' 가 붙었다. 2026-11-07 교정.
+        n_unrec = sum(1 for _, a in rec
+                      if not a['match'] and not a.get('blocker_recorded',
+                                                      True))
         nfail = len(rec) - nmat
+        n_judged = nfail - n_unrec
         if nfail == 0:
             mode = 'never_fails'
         elif n_over == nfail:
-            mode = 'threshold_only'
-        elif n_blk == nfail and n_over == 0:
-            mode = 'blocker_only'
+            mode = 'threshold_in_every_failing_cell'
+        elif n_over == 0 and n_blk == n_judged and n_judged > 0:
+            mode = ('blocker_only' if n_unrec == 0
+                    else 'blocker_only_where_recorded')
+        elif n_over > 0 and n_blk > 0:
+            mode = 'mixed'
         else:
-            mode = 'both'
+            mode = 'undetermined'
 
         report['agents'][nm] = dict(
             n_cells=len(rec), n_match=nmat,
@@ -139,7 +171,17 @@ def main():
             d_norm_max=(max(ds) if ds else None),
             n_cells_over_threshold=n_over,
             n_cells_blocked=n_blk,
+            n_cells_blocker_unrecorded=n_unrec,
             fail_mode=mode,
+            # [자유도: 역치] 역치 2.0 을 제거하고 '비교군에 더 가까운
+            # 것이 없다' 만 요구하면 어떻게 되는가. 본문 652-655 가
+            # 이미 28종 패널에서 3 -> 5 로 보고하는 축인데 25구성에는
+            # 들어 있지 않았다. beats_comparison_set 이 예치돼 있으므로
+            # 새 계산 없이 센다. 2026-11-07 에디터 게이트 2회차 지적.
+            n_match_no_threshold=sum(
+                1 for _, a in rec
+                if a.get('blocker') is None
+                and a.get('blocker_recorded', True)),
             blockers=bl,
             nearest_designated=sorted({a['nearest'] for _, a in rec
                                        if a.get('nearest')}))
@@ -150,17 +192,41 @@ def main():
 
     inv = sorted(k for k, v in report['agents'].items()
                  if v['invariant_fail'])
+    # 역치를 자유도로 넣으면 남는 것. 역치 제거만으로 매칭이 되는
+    # 작용제는 '모든 구성에서 실패' 가 아니다.
+    inv_th = sorted(k for k in inv
+                    if report['agents'][k]['n_match_no_threshold'] == 0)
     report['invariant_failures'] = inv
+    report['invariant_failures_threshold_in_audit'] = inv_th
     report['n_agents'] = len(report['agents'])
     report['n_invariant_failures'] = len(inv)
+    report['n_invariant_failures_threshold_in_audit'] = len(inv_th)
+
+    groups = verdict_vectors(cells)
+    report['n_distinct_verdict_vectors'] = len(groups)
+    report['verdict_vectors'] = [
+        dict(matched=list(k), n_cells=len(v), cells=sorted(v))
+        for k, v in sorted(groups.items(), key=lambda kv: -len(kv[1]))]
 
     print()
-    print(f'  감사된 {len(cells)}개 구성 전부에서 유효 매칭이 성립하지 '
-          f'않는 작용제: {len(inv)}/{len(report["agents"])}종')
+    print(f'  감사 셀 {len(cells)}개는 서로 다른 판정벡터 '
+          f'{len(groups)}개로 접힌다. 25 는 독립 선택의 수가 아니다.')
+    for g in report['verdict_vectors']:
+        print(f'    셀 {g["n_cells"]:>2}개 -> 매칭 '
+              f'{{{", ".join(g["matched"]) if g["matched"] else "없음"}}}')
+
+    print()
+    print(f'  역치 2.0 을 고정한 채로: 모든 구성에서 실패 '
+          f'{len(inv)}/{len(report["agents"])}종')
     for nm in inv:
         v = report['agents'][nm]
-        print(f'    {nm:<22} {v["fail_mode"]:<15} '
-              f'{", ".join(v["blockers"]) if v["blockers"] else ""}')
+        extra = ('' if v['n_match_no_threshold'] == 0 else
+                 f'  <- 역치 제거하면 {v["n_match_no_threshold"]}셀에서 매칭')
+        print(f'    {nm:<22} {v["fail_mode"]:<32} '
+              f'{", ".join(v["blockers"]) if v["blockers"] else ""}{extra}')
+    print()
+    print(f'  역치를 자유도로 넣으면: {len(inv_th)}종 '
+          f'({", ".join(inv_th)})')
 
     with open(OUT, 'w') as f:
         json.dump(report, f, indent=1, ensure_ascii=False)
