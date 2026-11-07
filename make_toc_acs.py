@@ -64,10 +64,10 @@ fig = plt.figure(figsize=(3.25, 1.75), dpi=600)
 # predict array response' 였다. 제목은 검정력 한계 때문에 'does not predict'
 # 에서 'no resolvable agreement' 로 이미 내렸는데 TOC 만 구판이었다. 독자가
 # 가장 먼저 보는 자리에 철회한 주장이 남아 있었으므로 제목과 동기화한다.
-# 폭 실측: FS_TITLE 6.4 에서 2.98 in (그림 3.25 in, 여백 포함 상한 3.10 in).
-# 제목 전문은 3.73 in 로 넘쳐서 'distance' 와 'array' 를 뺐다. 두 낱말은
-# 좌우 패널의 축 설명이 이미 적고 있다.
-fig.text(0.5, 0.955, 'No resolvable agreement between descriptor and response',
+# 2026-11-07 (방향 A). 머리글을 제목과 함께 측정 소견으로 옮긴다. 종전
+# 머리글은 귀무였고, 그것이 세 회차 연속 편집장 지적의 핵심이었다.
+# 폭 실측: FS_TITLE 6.4 에서 2.72 in (그림 3.25 in, 상한 3.10 in).
+fig.text(0.5, 0.955, 'DMMP responds opposite to soman, cyclosarin and VX',
          ha='center', va='top', fontsize=FS_TITLE, fontweight='bold',
          color='#2B2B2B')
 
