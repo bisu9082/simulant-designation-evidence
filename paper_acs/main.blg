@@ -5,45 +5,51 @@ The style file: achemso.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-main.bib
 Database file #2: refs.bib
+You're missing a field name---line 867 of file refs.bib
+ : 
+ : % 표기 확인 (2026-11-07): DRAFT FOR DISCUSSION 머리글은 원 HTML 쪽
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 achemso 2024-01-30 v3.13g
-You've used 37 entries,
+You've used 38 entries,
             2538 wiz_defined-function locations,
-            997 strings with 18822 characters,
-and the built_in function-call counts, 14182 in all, are:
-= -- 994
-> -- 1148
-< -- 21
-+ -- 424
-- -- 387
-* -- 1575
-:= -- 1951
-add.period$ -- 68
-call.type$ -- 37
+            999 strings with 18909 characters,
+and the built_in function-call counts, 14341 in all, are:
+= -- 1004
+> -- 1156
+< -- 22
++ -- 427
+- -- 389
+* -- 1586
+:= -- 1976
+add.period$ -- 69
+call.type$ -- 38
 change.case$ -- 4
 chr.to.int$ -- 2
-cite$ -- 37
-duplicate$ -- 680
-empty$ -- 822
-format.name$ -- 433
-if$ -- 2663
+cite$ -- 38
+duplicate$ -- 689
+empty$ -- 837
+format.name$ -- 436
+if$ -- 2695
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
-newline$ -- 244
-num.names$ -- 108
-pop$ -- 71
+newline$ -- 250
+num.names$ -- 111
+pop$ -- 74
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 31
+skip$ -- 32
 stack$ -- 0
 substring$ -- 566
-swap$ -- 987
-text.length$ -- 73
+swap$ -- 991
+text.length$ -- 75
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 253
+type$ -- 260
 warning$ -- 0
-while$ -- 118
+while$ -- 120
 width$ -- 0
-write$ -- 482
+write$ -- 491
+(There was 1 error message)

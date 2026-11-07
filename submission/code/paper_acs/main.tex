@@ -322,17 +322,15 @@ rather than a validated accuracy; and that first run is the only one in which
 a designated simulant was measured beside the agents, so the two
 cross-validated figures come from runs that contain no simulant. Neither
 cross-validated figure can be reproduced from the deposited tables, which are
-averaged over replicates, so we quote them without verifying them. The premise
-for the first run therefore rests on our own check below, over all six
-run-channel cells.
+averaged over replicates, so we quote them unverified, and the premise for the
+first run rests on our own check below.
 
-Our own check is narrower, and we report it because the comparison that
-follows is made on patterns rather than on class labels. Each exposure gives a
-29-dye $\Delta E_{00}$ vector, which we scaled to unit length, centred dye-wise
-at each concentration and scaled to unit length again, so that agreement, taken
-as the cosine, is measured between patterns and not magnitudes. It answers
-whether a compound's pattern is stable enough across dose to be treated as
-that compound's pattern at all.
+Our own check is narrower, because the comparison that follows is made on
+patterns rather than class labels. Each exposure gives a 29-dye
+$\Delta E_{00}$ vector, scaled to unit length, centred dye-wise at each
+concentration and scaled again, so that agreement, taken as the cosine, is
+between patterns and not magnitudes. It asks whether a compound's pattern is
+stable enough across dose to be that compound's pattern at all.
 
 \begin{figure}[htb]
   \centering
@@ -722,10 +720,19 @@ simulant for GB and for HD and the properties that carry the choice are mass
 transfer and absorbent capacity.\cite{niosh2002simulant} The same document
 names carbon tetrachloride and cyclohexane for the same purpose, so DMMP is
 one of three rather than the designated compound, and it carries a
-draft-for-discussion marking: the most-cited designation of the compound this
-field treats as the standard nerve agent simulant has never been issued as a
-final standard. Its stated reasons are not what a detection user would assume,
-and Supporting Information Section~\ref{S-meth:docsearch} quotes them. The
+draft-for-discussion marking.
+% 2026-11-07 (12차 R4). 두 가지를 보탠다. 문서 자신이 상관이 잘 이해돼
+% 있다고 적으면서 그 자료는 뒤에 제공하겠다고 적는다. 그리고 실제로
+% 발효된 표준시험절차는 DMMP 가 아니라 실작용제 사린으로 시험한다.
+That matters twice over. The document asserts that
+``Correlations between DMMP and GB or HD are well understood'' while stating
+that the supporting data will be provided, and the data is not in it. And the
+standard that issued does not use the compound: the NIOSH procedure for
+canister performance challenges the respirator with sarin
+itself.\cite{nioshaprstp0350} The most-cited designation of the standard nerve
+agent simulant is a draft concept the final standard did not adopt. Its stated
+reasons are not what a detection user would assume, and Supporting Information
+Section~\ref{S-meth:docsearch} quotes them. The
 volatility was chosen to sit between two agents rather than to match either, so
 a gap between DMMP and any single agent on that axis is the designation
 behaving as specified, and detectability entered as a property of the compound
@@ -752,26 +759,24 @@ with the compound to a different purpose.
 % 예시이고 본문 서술이 수치를 모두 들고 있다. 본문 0.5면이 빠진다.
 
 The second is regulatory toxicity (Supporting Information
-Figure~\ref{S-fig:tox}). The axis on which
-the agents are placed here is the EPA acute exposure guideline level, and
-nineteen of the twenty-eight panel compounds carry one. Two of the three
-incumbents do not. DMMP has no AEGL, and neither has DPGME; dichloromethane
-has one. Those two are not absent from every register: the US Department of Energy
-protective action criteria hold values for DMMP and NIOSH holds two for DPGME,
+Figure~\ref{S-fig:tox}). The axis the agents are placed on is the EPA acute
+exposure guideline level, which nineteen of the twenty-eight panel compounds
+carry and two of the three incumbents do not: DMMP and DPGME have none, and
+dichloromethane's is an interim rather than a final value. Those two are not
+absent from every register, and the Department of Energy and NIOSH values are
 tabulated with their sources in Supporting Information
-Section~\ref{S-res:registers}. What is missing is not a number of any kind but
-a number on the axis the agents occupy, because those values rest on different
-averaging times, severity definitions and derivations, so placing them beside
-a ten-minute AEGL-3 would compare quantities that are not the same quantity. A
+Section~\ref{S-res:registers}. What is missing is not a number but a number on
+the axis the agents occupy, because those rest on different averaging times,
+severity definitions and derivations. A
 model cannot close the gap either. A random forest trained on 230 AEGL
 chemicals reaches $R^{2}=0.458$ in cross-validation with an out-of-fold bias of
 $+0.001$ log units, so nothing in its internal statistics warns a user off, and
-applied to twenty military agents held out of training it is wrong in one
-direction without exception, by 0.40 to 3.42 log units. Its
+on twenty military agents held out of training it is wrong in one
+direction without exception, by 0.40 to 3.42 log units, while its
 applicability-domain check certifies fourteen of the twenty as inside the
-domain, and the worst of those is wrong by 2.68 log units, a factor of 482. The measured axis and its gaps, the effect size of that failure, the test of
-whether fidelity and acute toxicity are associated at all, which finds no
-monotonic relation, and what the two axes license are in Supporting Information
+domain. The axis and its gaps, the effect size of that failure, the absence of
+any monotonic relation between fidelity and acute toxicity, and what the two
+axes license are in Supporting Information
 Sections~\ref{S-res:qsar}, \ref{S-res:h1} and~\ref{S-S-disc}.
 
 % ===========================================================================
