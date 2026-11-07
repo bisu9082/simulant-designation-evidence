@@ -2,6 +2,48 @@
  "ref": "descriptor_cache.csv",
  "n_numeric": 61,
  "n_checked": 53,
+ "n_caches": 5,
+ "n_checked_min": 53,
+ "n_checked_max": 53,
+ "n_numeric_min": 53,
+ "n_numeric_max": 62,
+ "caches": [
+  {
+   "ref": "descriptor_cache.csv",
+   "n_rows": 28,
+   "n_numeric": 61,
+   "n_checked": 53,
+   "n_exempt_present": 8
+  },
+  {
+   "ref": "descriptor_cache_35.csv",
+   "n_rows": 35,
+   "n_numeric": 53,
+   "n_checked": 53,
+   "n_exempt_present": 0
+  },
+  {
+   "ref": "descriptor_cache_ascl3.csv",
+   "n_rows": 1,
+   "n_numeric": 53,
+   "n_checked": 53,
+   "n_exempt_present": 0
+  },
+  {
+   "ref": "descriptor_cache_xtb.csv",
+   "n_rows": 28,
+   "n_numeric": 62,
+   "n_checked": 53,
+   "n_exempt_present": 9
+  },
+  {
+   "ref": "descriptor_cache_xtb_35.csv",
+   "n_rows": 35,
+   "n_numeric": 62,
+   "n_checked": 53,
+   "n_exempt_present": 9
+  }
+ ],
  "exempt": [
   "E_HOMO_eV",
   "E_LUMO_eV",
@@ -10,6 +52,7 @@
   "fukui_f_plus_P",
   "q_P",
   "q_phosphoryl_O",
-  "wiberg_PO"
+  "wiberg_PO",
+  "_n_conf_xtb"
  ]
 }

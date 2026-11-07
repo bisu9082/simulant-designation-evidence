@@ -108,11 +108,12 @@ current counts; we do not repeat the counts here, because a number in a README
 is one more thing that goes stale.
 
 The descriptor reproduction gate has a stated scope and prints it on every run.
-`build_descriptors.py --verify` recomputes the RDKit-derived columns of each
-cache and compares them to the deposited values; that is 53 of the 61 numeric
-columns. The eight it does not recompute are the semiempirical electronic
+`build_descriptors.py --verify` recomputes the RDKit-derived columns of the
+five caches the analysis reads and compares them to the deposited values; that
+is 53 columns in each, out of 53 to 62 numeric columns depending on the cache.
+The nine columns it does not recompute are the eight semiempirical electronic
 coordinates and their derivatives, which need the `xtb` binary whose version
-was not recorded. The gate names those eight rather than counting them as
+was not recorded, together with the count of conformers that binary used. The gate names those eight rather than counting them as
 checked, fails if any other column falls outside that declared list, and fails
 if a cache file is missing instead of skipping it. The eight are checked
 separately by the B3LYP/def2-SVPD recomputation in the Supporting Information.

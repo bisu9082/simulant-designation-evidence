@@ -1498,7 +1498,10 @@ def load_facts():
     # 'Five analyst choices' 와 'between three and six' 가 주입되어도
     # 통과했다. 개수는 본문이 열거하는 여섯이고, 범위 상한은 인코딩
     # 민감도의 최대 매칭 수(고유값<=5 변종)다.
-    f['n_freedoms'] = 6
+    # 2026-11-07 (12차 A-2). 비교군이 일곱째다. 실험절이 적는 문자
+    # 그대로의 판독(작용제 포함)은 감사된 적이 없었고, 재보니 이
+    # 목록에서 가장 크게 움직인다 (28종 3->0, 문헌8 5->2).
+    f['n_freedoms'] = 7
     f['match_range_hi'] = _V['drop_cardinality_le_5']['n_match'] \
         if 'drop_cardinality_le_5' in _V else 6
 
@@ -1509,9 +1512,16 @@ def load_facts():
     f['thr_null_35'] = _ts['panel35_incumbent3']['null_expectation_outside_closer']
 
     _gs = json.load(open('outputs/descriptor_gate_scope.json'))
-    f['gate_numeric'] = _gs['n_numeric']
+    # 2026-11-07 (12차 A-4). 관문이 다섯 캐시를 돌므로 수치열 수가
+    # 캐시마다 다르다 (53~62). 산문이 그 범위를 적으므로 하한을 건다.
+    f['gate_numeric'] = _gs['n_numeric_min']
     f['gate_checked'] = _gs['n_checked']
     f['gate_exempt'] = len(_gs['exempt'])
+    # 2026-11-07 (12차 A-4). 관문이 다섯 캐시를 돈다. 캐시 수와 수치열
+    # 상한을 사실로 건다. 종전에는 refs[0] 하나만 기록됐고, 그래서
+    # '각 캐시' 라는 서술을 어느 검사도 받지 않았다.
+    f['gate_caches'] = _gs['n_caches']
+    f['gate_numeric_max'] = _gs['n_numeric_max']
 
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
@@ -2547,8 +2557,12 @@ CHECKS = [
     ('thr_null_28', [r'any incumbent is ([\d.]+) of\s*\n?eleven on the '
                      r'twenty-eight-compound panel'], 0.005),
     ('thr_null_35', [r'and ([\d.]+) of eleven on the primary\s*\n?one'], 0.006),
-    ('gate_checked', [r'reproduces from the code, (\d+) of the \d+ numeric'], 0),
-    ('gate_numeric', [r'reproduces from the code, \d+ of the (\d+) numeric'], 0),
+    ('gate_checked', [r'(\d+) columns in each, out of \d+ to \d+ numeric',
+                      r'reproduces from the code, (\d+) of the \d+ numeric'], 0),
+    ('gate_numeric', [r'out of (\d+) to \d+ numeric columns',
+                      r'reproduces from the code, \d+ of the (\d+) numeric'], 0),
+    ('gate_numeric_max', [r'out of \d+ to (\d+) numeric columns'], 0),
+    ('gate_caches', [r'the (\w+) caches the analysis reads'], 0),
     ('gate_exempt', [r'The (\w+)\s*\n?columns it does not recompute'], 0),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
                             r'observed value at the (\d+\.\d+)th percentile',

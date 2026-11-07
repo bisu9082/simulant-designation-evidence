@@ -660,16 +660,34 @@ report the sweeps because that is the only evidence that we did not select a
 convention for its answer.
 
 A sixth choice is the match threshold itself. Removing the normalised distance
-of 2 and keeping only the requirement that nothing outside the designated set
+of 2 and keeping only the requirement that nothing in that comparison set
 be nearer takes the twenty-eight-compound count from three to five, while the
-primary panel stays at zero. Six analyst choices therefore move the count of
+primary panel stays at zero.
+
+% 2026-11-07 (12차 A-2). 신설. 실험절이 '지정집합 밖의 모든 화합물' 이라고
+% 적는데 작용제도 지정집합 밖이다. match_by_panel.py 와 종전 감사의
+% wide/narrow 는 둘 다 작용제를 비교군에서 뺐으므로 문자 그대로의 판독은
+% 감사된 적이 없었다. match_rule_audit.py 에 literal 판독을 신설해 재니
+% 이 목록에서 가장 크게 움직이는 선택이다. 수치는
+% outputs/match_rule_audit.json 실측.
+A seventh choice is the comparison set the second condition is tested against.
+The criterion as this section states it names every compound outside the
+designated set, and the agents are outside that set, so the literal reading
+asks whether an agent's nearest designated simulant is nearer to it than every
+other agent is. Under that reading the twenty-eight-compound count falls from
+three to zero and the count on the panel that adds the five literature
+candidates falls from five to two, while the primary panel stays at zero. The
+analysis reported here uses the narrower set that excludes the other agents,
+because a criterion requiring a simulant to beat the agents themselves tests
+whether the agents resemble each other rather than whether the simulant
+resembles its agent. Seven analyst choices therefore move the count of
 valid matches: the panel, the order in which the correlation filter is handed
 its columns, the conformer embedding seed, the descriptor encoding, the shape
-block and the threshold. None of them moves the result of
+block, the threshold and the comparison set. None of them moves the result of
 Section~\ref{res:mantel}. Recomputing the twelve Mantel tests under all seven
 encodings leaves the smallest Benjamini--Hochberg value between 0.1167 and
 0.4722, and dropping the derived shape coordinates raises it to 0.1708 with the
-largest rank correlation unchanged at 0.571. A quantity that six arbitrary choices move between zero and
+largest rank correlation unchanged at 0.571. A quantity that seven arbitrary choices move between zero and
 six is not a measurement of anything, which is why we do not report a match
 count as a finding.
 
@@ -962,10 +980,15 @@ directional, so the reported $p$ is one-sided; the two-sided values are given
 in Supporting Information Section~\ref{S-meth:multiplicity}, because on the
 twenty-eight-compound panel the convention decides the answer. The Mantel tests
 of Section~\ref{res:mantel} are two-sided, since the direction of a matrix
-correlation is not fixed in advance. A valid match requires a normalised
+correlation is not fixed in advance. % 2026-11-07 (12차 A-2). 종전 문장은 '지정집합 밖의 모든 화합물' 이었고
+% 작용제도 지정집합 밖이므로 코드가 실제로 쓰는 비교군과 달랐다. 코드가
+% 쓰는 집합을 그대로 적고, 문자 그대로의 판독이 무엇을 하는지 가리킨다.
+A valid match requires a normalised
 distance of 2 or less together with a distance smaller than that to every
-compound outside the designated set; that threshold is itself an analyst choice
-and Section~\ref{res:panels} reports what dropping it does. Sensitivity to
+compound that is neither an agent nor a designated simulant. That comparison
+set and that threshold are both analyst choices; Section~\ref{res:panels}
+reports what the literal reading of the first, which would place the other
+agents in the comparison set, and the removal of the second do to the count. Sensitivity to
 descriptor choice was assessed by resampling the merged-space descriptors with
 replacement 1000 times under a fixed seed, restandardising and recomputing
 within each replicate, so those intervals are percentile ranges over descriptor
@@ -1037,7 +1060,7 @@ The Supporting Information is available free of charge at
   conformer dependence of the shape descriptors; the
   density-functional check on the electronic coordinates; the full permutation
   family under all six multiplicity schemes; the dimensionality, subspace and
-  block-weighting controls with their nulls; the six analyst freedoms in full;
+  block-weighting controls with their nulls; the seven analyst freedoms in full;
   the measured array response and what it does and does not establish;
   phosphorus-local reactivity; and the structural filter
   (Section~\ref{S-meth:alerts}) (PDF)

@@ -175,19 +175,23 @@ def descriptors(name, smiles, klass='', series=''):
     return d
 
 
-def gate_verify():
+def gate_verify(ref_paths=None):
     """재현 검사를 실제 관문으로 쓴다 (2026-10-25).
 
     종전에는 sys.exit(0 if not verify() else 0) 이라 어느 쪽이든 0 을
     반환했다. 그래서 52열 중 11열이 재현되지 않는 상태로 파이프라인이
     계속 돌았고, 그 열 9개가 본문의 모든 거리에 들어가 있었다.
     """
-    import sys as _s
-    refs = ['descriptor_cache.csv', 'descriptor_cache_35.csv',
-            'descriptor_cache_ascl3.csv']
-    for _a in _s.argv[1:]:
-        if _a.startswith('--ref='):
-            refs = [_a.split('=', 1)[1]]
+    # 2026-11-07 (12차 A-4). 종전에는 sys.argv 를 직접 훑어 --ref= 를
+    # 읽었는데, main 의 argparse 가 그 인자를 먼저 'unrecognized' 로
+    # 거부하므로 이 분기에 도달한 적이 없다. 즉 관문 범위를 넓힐 유일한
+    # 경로가 죽어 있었다. argparse 에 등록하고 인자로 받는다.
+    # 기본 범위에 분석이 실제로 읽는 두 캐시를 넣는다. 종전 기본은
+    # 비반경험 세 개뿐이었고, 거리 계산은 _xtb 와 _xtb_35 를 읽는다.
+    refs = list(ref_paths) if ref_paths else [
+        'descriptor_cache.csv', 'descriptor_cache_35.csv',
+        'descriptor_cache_ascl3.csv',
+        'descriptor_cache_xtb.csv', 'descriptor_cache_xtb_35.csv']
     # 2026-11-07 (10차 R5-B5). 종전에는 없는 캐시를 continue 로 넘겼다.
     # 캐시가 없는 패키지에서 관문이 조용히 건너뛰고도 '전 수치열 재현' 을
     # 찍었고, 풀어 돌린 사람에게는 통과로 보였다. 없는 것은 중단 사유이고,
@@ -217,31 +221,55 @@ def gate_verify():
     # 2026-11-07. 관문의 범위를 산출물로 남긴다. SI 가 '53 of the 61' 이라고
     # 적으므로 그 두 수가 손으로 적힌 값이 아니라 이 실행의 결과여야 한다.
     # verify_consistency.py 가 이 파일을 읽어 본문과 대조한다.
+    # 2026-11-07 (12차 A-4). 종전에는 refs[0] 하나만 기록했고, 기본 범위가
+    # 세 캐시일 때도 그랬다. 이제 관문이 다섯 캐시를 돌므로 전부 적는다.
     import json as _j
-    _R = pd.read_csv(refs[0])
     _META = ('compound_name', 'compound_class', 'agent_series', 'input_smiles',
              'canonical_smiles', 'formula', 'leaving_group',
              'conformer_forcefield')
-    _all = [c for c in _R.columns
-            if _R[c].dtype.kind in 'if' and c not in _META]
+    _per = []
+    for _rp in refs:
+        _R = pd.read_csv(_rp)
+        _all = [c for c in _R.columns
+                if _R[c].dtype.kind in 'if' and c not in _META]
+        _per.append({'ref': _rp, 'n_rows': int(len(_R)),
+                     'n_numeric': len(_all),
+                     'n_checked': len([c for c in _all
+                                       if c not in XTB_EXEMPT]),
+                     'n_exempt_present': len([c for c in _all
+                                              if c in XTB_EXEMPT])})
     _os.makedirs('outputs', exist_ok=True)
-    _j.dump({'ref': refs[0], 'n_numeric': len(_all),
-             'n_checked': len([c for c in _all if c not in XTB_EXEMPT]),
+    _j.dump({'ref': refs[0], 'n_numeric': _per[0]['n_numeric'],
+             'n_checked': _per[0]['n_checked'],
+             'n_caches': len(_per),
+             'n_checked_min': min(x['n_checked'] for x in _per),
+             'n_checked_max': max(x['n_checked'] for x in _per),
+             'n_numeric_min': min(x['n_numeric'] for x in _per),
+             'n_numeric_max': max(x['n_numeric'] for x in _per),
+             'caches': _per,
              'exempt': list(XTB_EXEMPT)},
             open('outputs/descriptor_gate_scope.json', 'w'), indent=1)
     print('\n[gate] RDKit 서술자 전 수치열 재현. 통과.')
-    print('[gate] 범위: 반경험 전자 좌표 8열은 이 관문이 재계산하지 않는다 '
-          '(xtb 바이너리 필요, 버전 미기록). SI meth:dft 의 B3LYP 대조가 '
-          '그 축을 따로 검사한다.')
+    print(f'[gate] 범위: 캐시 {len(_per)}개, 수치열 '
+          f'{_per[0]["n_numeric_min"] if False else min(x["n_numeric"] for x in _per)}'
+          f'~{max(x["n_numeric"] for x in _per)} 중 '
+          f'{min(x["n_checked"] for x in _per)} 대조. 면제는 반경험 전자 '
+          f'좌표 8열과 형태 수 기록열 1개이며 xtb 바이너리가 필요하다 '
+          f'(버전 미기록). SI meth:dft 의 B3LYP 대조가 그 축을 따로 '
+          f'검사한다.')
     return 0
 
 
 # 2026-11-07 (10차 R5-B5). 서술자 관문이 재계산하지 못하는 열. 전부
 # GFN2-xTB 또는 그 파생이고, descriptors() 는 RDKit 경로만 돈다. 여기에
 # 열을 더하려면 왜 재계산할 수 없는지를 함께 적을 것.
+# 2026-11-07 (12차 A-4). _n_conf_xtb 를 추가한다. xtb 가 쓴 형태 수를
+# 적어 둔 기록열이고 RDKit 쪽에서 재생성되지 않는다. 이 한 열이 면제에
+# 없어서 관문을 _xtb 캐시에 걸면 중단됐고, 그래서 분석이 실제로 읽는
+# 캐시(참조 59회·36회)가 존재 확인만 받고 있었다.
 XTB_EXEMPT = ('E_HOMO_eV', 'E_LUMO_eV', 'dipole_moment_D',
               'electrophilicity_index_eV', 'fukui_f_plus_P',
-              'q_P', 'q_phosphoryl_O', 'wiberg_PO')
+              'q_P', 'q_phosphoryl_O', 'wiberg_PO', '_n_conf_xtb')
 
 
 def verify(ref_path='descriptor_cache.csv'):
@@ -298,11 +326,15 @@ def verify(ref_path='descriptor_cache.csv'):
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('--verify', action='store_true')
+    # 2026-11-07 (12차 A-4). 관문이 재계산할 캐시를 지정한다. 기본은 반경험
+    # 아닌 세 개이고, 여러 번 주면 모두 돈다.
+    ap.add_argument('--ref', action='append', default=[],
+                    help='관문이 재계산할 캐시 경로. 여러 번 지정 가능.')
     ap.add_argument('--new', default='')
     ap.add_argument('--out', default='')
     a = ap.parse_args()
     if a.verify:
-        sys.exit(gate_verify())
+        sys.exit(gate_verify(a.ref))
     if a.new:
         NEW = pd.read_csv(a.new)
         rows = [descriptors(r.compound_name, r.input_smiles,
