@@ -401,9 +401,11 @@ ACS_CASES = [
      'and of the data, and we keep it as the prespecified test'),
 
     # --- 2026-11-03 (작업 B) 신설분 ---
-    ('초록의 전제검정 셀 수 오기 (정본 six)',
-     'all six clear\n$q=0.05$ against a label-permutation null',
-     'all four clear\n$q=0.05$ against a null'),
+    # 2026-11-07 (12차). 초록을 역전 계수로 다시 썼다. 같은 사실을 적는
+    # 자리는 이제 SI premise null 절이다.
+    ('전제검정 셀 수 오기 (정본 six)',
+     'All six cells clear\n$q = 0.05$',
+     'All four cells clear\n$q = 0.05$'),
     ('초록의 휘발성 반사 q 오기 (정본 0.0430) — 비유의로 뒤집힌다',
      'reaches $q = 0.0430$, in the\nreflectance channel',
      'reaches $q = 0.1430$, in the\nreflectance channel'),
@@ -426,23 +428,26 @@ ACS_CASES = [
      'Nine of the thirty-eight coordinates',
      'Nine of the thirty-nine coordinates'),
     # 2026-11-07. 역치가 여섯째 자유도로 편입됐다. 이제 구판 다섯이 결함이다.
-    ('분석선택 수를 다섯으로 되돌림 (정본 Six — 역치 포함)',
-     'Six analyst choices therefore move',
-     'Five analyst choices therefore move'),
+    # 2026-11-07 (12차 A-2). 비교군이 일곱째로 편입됐다. 이제 구판 여섯이
+    # 결함이다.
+    ('분석선택 수를 여섯으로 되돌림 (정본 Seven — 비교군 포함)',
+     'Seven analyst choices therefore move',
+     'Six analyst choices therefore move'),
     ('매칭 범위를 구판으로 되돌림 (정본 zero and six)',
-     'six arbitrary choices move between zero and\nsix',
-     'six arbitrary choices move between three and\nsix'),
+     'seven arbitrary choices move between zero and\nsix',
+     'seven arbitrary choices move between three and\nsix'),
+    # 2026-11-07 (12차 Step 5). 제목이 역전 계수로 바뀌었다.
     ('제목에 Sixteen 을 되돌림',
-     'VX in a Colorimetric Array of Authentic Chemical Warfare Agents',
-     'VX in a Colorimetric Array of Sixteen Chemical Warfare Agents'),
+     'In a Colorimetric Array of Authentic Chemical Warfare Agents, One',
+     'In a Colorimetric Array of Sixteen Chemical Warfare Agents, One'),
     # --- 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
     #     숫자가 산출물과 맞는데 그 숫자를 설명하는 말이 틀린 경우다.
     ('DMMP 4종 평균 부호 오기 (정본 +0.049, 자외)',
      'over all four G agents is $+0.049$ in the ultraviolet',
      'over all four G agents is $-0.049$ in the ultraviolet'),
     ('DMMP 3종 평균을 4종 평균 자리에 오기 (정본 -0.189)',
-     'other than tabun it is $-0.189$ and',
-     'other than tabun it is $-0.289$ and'),
+     'other than tabun $-0.189$ and',
+     'other than tabun $-0.289$ and'),
     # 철회한 주장은 B2 블랙리스트가 잡는다. 주입 시험도 그 경로를 확인한다.
     ('초록을 철회한 DPGME 계열 주장으로 되돌림',
      # 2026-11-06 (9차 분량). 초록·본문에서 이 구절을 덜어내 SI 에만
@@ -482,9 +487,11 @@ ACS_CASES = [
     ('농도축 추세를 ppm 으로 되돌림 (정본 µM)',
      'from $+0.363$ at 10~$\\mu$M to\n$+0.771$ at 500~$\\mu$M',
      'from $+0.363$ at 10~ppm to\n$+0.771$ at 500~ppm'),
+    # 2026-11-07 (12차). 종전 문장은 셀평균을 화합물별 사실로 적고 있었고
+    # 그 자리를 다시 썼다. 새 문장에 건다.
     ('수행하지 않은 반복측정 주장 (본문)',
-     "One compound's patterns at\ntwo concentrations correlate at",
-     'Replicates of one compound correlate at'),
+     'the\nwithin-compound mean runs from',
+     'repeated measurements of one compound agree from'),
     # 2026-11-02 재집필로 방법 문장이 2.1 에서 Experimental 로 옮겨갔다.
     # 앵커를 현행 본문에 다시 건다.
     ('수행하지 않은 반복측정 주장 (전제 문단)',
@@ -570,9 +577,10 @@ ACS_SUPP_CASES = [
      'so the seven are a lower bound rather than'),
 
     # --- 2026-11-04 (작업 D, 2차) 신설분 ---
+    # 2026-11-07 (12차 7단계). 독성 도판을 SI 로 옮겨 지역 참조가 됐다.
     ('없는 도판 패널 인용으로 되돌림 (fig:tox 는 a·b 뿐)',
-     '(Fig.~\\ref{M-fig:tox}b) reached',
-     '(Fig.~\\ref{M-fig:tox}c and d) reached'),
+     '(Fig.~\\ref{fig:tox}b) reached',
+     '(Fig.~\\ref{fig:tox}c and d) reached'),
     ('패널 구성 명명을 구판으로 되돌림 (8 은 문헌 수가 아니다)',
      'the five literature-proposed simulants are admitted alongside the three',
      'the eight literature simulants are admitted as candidates to the three'),
