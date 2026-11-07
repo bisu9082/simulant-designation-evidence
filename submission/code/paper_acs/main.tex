@@ -257,11 +257,10 @@ field-deployable detection work.\cite{ondeviceref} Neither quantified it,
 which requires putting the descriptor distances and the measured responses side
 by side and asking whether one predicts the other. The contribution here is that measurement and
 not the assertion. The three source studies were run at an OPCW designated
-laboratory, which identifies and assays authentic agents under an accredited
-procedure; the reanalysis reported here handled no agent and made no
-measurement of its own.
+laboratory under an accredited procedure; this reanalysis handled no agent and
+made no measurement of its own.
 
-This work reports that measurement. A 29-component colorimetric array recorded
+A 29-component colorimetric array recorded
 the responses of sixteen authentic agents, twelve of them Chemical Weapons
 Convention Schedule~1 compounds and four Schedule~3 industrial
 chemicals,\cite{opcwschedules,opcwnovichok} at
@@ -368,16 +367,15 @@ reports a property of the design and not of the data, and we withdraw it. The
 same statistic is tested here against a null that permutes compound labels
 within each concentration, which leaves every centred vector untouched and
 changes only which response is assigned to which compound. All six cells clear
-$q = 0.05$. Four are sampled at 10,000 relabellings and return the smallest
-value that sampler can give, $9.999\times10^{-5}$, so the smallest adjusted
-value over the six, 0.00015, is an upper bound rather than an estimate; the two
-four-compound cells are exact, by enumeration of all 13,824 relabellings, and
-give one-sided values of 0.0046 and 0.0033. The censoring does not bear on the
+$q = 0.05$, four of them at the floor the sampler allows, so the smallest
+adjusted value over the six, 0.00015, is an upper bound rather than an
+estimate. The censoring does not bear on the
 conclusion, because relabelling leaves a mean within-minus-between difference
 of $+0.1024$ to $+0.3138$ across the six cells against observed differences of
 $+0.5578$ to $+0.7288$, with Cohen's $d_z$ over compounds from $+0.92$ to
-$+5.12$ as a descriptive effect size (Supporting Information
-Section~\ref{S-meth:deltaE}).
+$+5.12$ as a descriptive effect size; the two exact cells and the draw counts
+are in Supporting Information
+Section~\ref{S-meth:deltaE}.
 
 % 2026-11-07 (12차 Step 5). 종전에는 13/34 를 한 문장에 넣고 산출물 없이
 % 인용했다. reversal_audit.py 를 신설해 두 표현·귀무·BH·도달가능 최소 p·
@@ -489,18 +487,17 @@ empty.
 \label{res:mantel}
 % 예산 700단어. 현재 약 650단어.
 
-One compound is one compound. The practice that put DMMP there is general, and
-it rests on an implicit transfer: that a compound close to an agent in
-descriptor space will be close to it in whatever the detector measures. We
-tested that transfer directly, as the Mantel agreement between a
-descriptor-distance matrix and a response-distance matrix over the same
-compounds, referred to a null that enumerates every relabelling of the
-compounds, so the test is exact rather than sampled.
+One compound is one compound. The practice that put DMMP there is general and
+rests on an implicit transfer: that a compound close to an agent in descriptor
+space will be close to it in whatever the detector measures. We tested that
+transfer as the Mantel agreement between a descriptor-distance matrix and a
+response-distance matrix over the same compounds, against a null that
+enumerates every relabelling, so the test is exact rather than sampled.
 
-The test is run within each run and never across runs. The three runs share no
-compound, so the dye-wise sensitivity of one plate cannot be calibrated against
-another, and pooling across them would need a commutability assumption we
-cannot support. That restriction sets the power: six compounds in the first run
+The test is run within each run and never across runs, because the three share
+no compound, so one plate's dye-wise sensitivity cannot be calibrated against
+another and pooling would need a commutability assumption we cannot support.
+That sets the power: six compounds in the first run
 and six in the second carry both a response pattern and a descriptor vector,
 giving fifteen pairs in each. The third run drops out because the source reports
 its four compounds as the codes A-230, A-232, A-234 and A-242, gives their
@@ -626,14 +623,13 @@ Panel composition decides the answer as well. Adding back the seven compounds
 the reduced panel omits moves the count from three
 valid matches to zero, because diisopropyl fluorophosphate is nearer to three G
 agents than any incumbent is and 2-chloroethyl ethyl sulfide is nearer to
-sulfur mustard than dichloromethane is. What the incumbents lose is standing
-rather than position. The nearest incumbent to each of the eleven agents is the
+sulfur mustard than dichloromethane is. The incumbents keep their position and
+lose their standing: the nearest incumbent to each of the eleven agents is the
 same compound on both panels, while the distance to it moves by a median of
-6.2\% and by 26.4\% for tabun, because the standardisation and the retained
-coordinate set are both properties of the panel rather than of the compounds.
-Over the 378 pairs the two panels share, the normalised distance moves by a
+6.2\% and by 26.4\% for tabun, because standardisation and the retained
+coordinate set are properties of the panel. Over the 378 pairs the two panels share, the normalised distance moves by a
 median of 8.6\%, and by 10.5\% over the quartile of pairs furthest from the
-seven compounds added, so the effect is not confined to their neighbourhood. Resampling the
+seven added, so the effect is not local to them. Resampling the
 descriptor columns a thousand times says the same distributionally
 (Figure~\ref{fig:descriptor}b): the incumbents return a median of zero valid
 matches, no match at all in 61.2\% of replicates and at most one in 85.6\%,
@@ -683,12 +679,9 @@ whether the simulant resembles its agent. % 2026-11-07 (12차 R2-F4). 종전 목
 Seven analyst choices therefore move the count of
 valid matches: the panel, the correlation filter rule, the conformer embedding
 seed, the descriptor encoding, the shape
-block, the threshold and the comparison set. The filter rule is on that list
-because the superseded rule made the retained coordinate set a function of the
-column order in the descriptor file, which took the reduced-panel count to
-three in twenty-four of forty orderings and to four in the other sixteen; the
-rule we use removes that dependence and returns three, and the choice between
-the two rules is what remains
+block, the threshold and the comparison set. The filter rule is on that list because the superseded rule made the retained
+set a function of column order, taking the reduced-panel count to three in
+twenty-four of forty orderings and four in the rest
 (Supporting Information Section~\ref{S-meth:orderinvariance}). None of them moves the result of
 Section~\ref{res:mantel}. Recomputing the twelve Mantel tests under all seven
 encodings leaves the smallest Benjamini--Hochberg value between 0.1167 and
@@ -744,19 +737,16 @@ for VX.\cite{nrc1997mist} One compound therefore stands in for VX in one
 document and for GB and HD in another, against two measurements, neither of
 which is detection.
 DPGME appears in a US Army patent for a chemical agent simulant training
-composition.\cite{seitzinger2006simulant} We were not able to retrieve the
-text of that patent, so which detection instrument its training requirement
-names is recorded as unestablished and is used in no argument here; what the
-record establishes is that the compound is designated for training use.
-For dichloromethane we found no designating document in the public record we
-searched. Supporting Information Section~\ref{S-meth:docsearch} gives the
-sources, the date and the limits of that search, among them a Test Operations
-Procedure we identified but could not obtain and the patent text we could not
-retrieve. One designation is therefore traceable to the measurement it was made
-against, and for DMMP those measurements are filter filtration and fabric
-penetration, neither of which is detection. A simulant is validated for a
-purpose, and that validation does not travel with the compound to a different
-purpose.
+composition.\cite{seitzinger2006simulant} We could not retrieve that patent's
+text, so which detection instrument its training requirement names is recorded
+as unestablished and used in no argument here; the record establishes only that
+the compound is designated for training. For dichloromethane we found no
+designating document at all. Supporting Information
+Section~\ref{S-meth:docsearch} gives the sources, the date and the limits of
+that search, including a Test Operations Procedure we identified but could not
+obtain. The designations that are traceable name filter filtration and fabric
+penetration, neither of which is detection, and a validation does not travel
+with the compound to a different purpose.
 
 % 2026-11-07 (12차 7단계, 분량). 독성 도판을 SI 로 옮겼다. 2차 결과의
 % 예시이고 본문 서술이 수치를 모두 들고 있다. 본문 0.5면이 빠진다.
@@ -779,11 +769,9 @@ $+0.001$ log units, so nothing in its internal statistics warns a user off, and
 applied to twenty military agents held out of training it is wrong in one
 direction without exception, by 0.40 to 3.42 log units. Its
 applicability-domain check certifies fourteen of the twenty as inside the
-domain, and the worst of those fourteen is wrong by 2.68 log units, a factor of
-482. The measured axis and its gaps, the effect size of that failure, the test
-of whether fidelity and acute toxicity are associated at all, which finds no
-monotonic relation across the compounds carrying both axes, and what the two
-axes together do and do not license are in Supporting Information
+domain, and the worst of those is wrong by 2.68 log units, a factor of 482. The measured axis and its gaps, the effect size of that failure, the test of
+whether fidelity and acute toxicity are associated at all, which finds no
+monotonic relation, and what the two axes license are in Supporting Information
 Sections~\ref{S-res:qsar}, \ref{S-res:h1} and~\ref{S-S-disc}.
 
 % ===========================================================================
@@ -818,22 +806,20 @@ between descriptor distance and response distance below $q=0.05$, against a
 design that resolves a rank correlation of 0.85 at 80\% power at that corrected
 threshold, so that count bounds the design rather than the chemistry
 (Supporting Information Sections~\ref{S-meth:deltaE} and~\ref{S-res:mde}). On
-the primary panel no agent of the eleven has a valid match to an incumbent
-simulant, at a Benjamini--Hochberg adjusted value of 0.6299, and the compounds
-that displace the incumbents there are themselves literature-proposed
-simulants rather than interferents.
+the primary panel no agent of the eleven has a valid match to an incumbent,
+at a Benjamini--Hochberg adjusted value of 0.6299, and the compounds that
+displace them are themselves literature-proposed simulants.
 
 The documentary record accounts for the first of those counts rather than
 contradicting it. DMMP was designated against respirator filtration and fabric
-penetration, and a validation does not travel with a compound to a purpose it
-was never tested for. The toxicity axis stops in the same place: DMMP carries no AEGL, the
+penetration, and a validation does not travel to a purpose it was never tested
+for. The toxicity axis stops in the same place: DMMP carries no AEGL, the
 values other registers hold for it are not the quantity the agents are placed
 on, and a random forest trained on 230 AEGL chemicals is wrong in one direction
 without exception on twenty held-out military agents. Absence of evidence is
 not evidence of unsuitability, so we conclude nothing about whether the
-incumbents are poor choices, and we propose no replacement compound either,
-because selecting one on descriptor similarity would repeat the error this
-paper is about.
+incumbents are poor choices, and propose no replacement, because selecting one
+on descriptor similarity would repeat the error this paper is about.
 
 % 2026-11-03 (T1-8). 함의 부인 단락 신설. 본문이 DMMP 를 제독 효율의
 % 기준 화합물로, DPGME 를 IMS 검출성으로 designated 되었다고 적으므로,
@@ -894,13 +880,12 @@ or emission and part by solvatochromic shift.
 % 0 인 열은 SI res:arraydetail 이 이미 보고하고 축약이 제거하지만, 0 은
 % 아니면서 잡음 수준인 열은 축약에 걸리지 않고 코사인에 들어간다. 1차
 % 런이 그 경우다. 수치는 outputs/dye_panel_audit.json.
-Not every component responds in every cell. Over and above the columns that are
-identically zero, which the collapse of Supporting Information
-Section~\ref{S-res:arraydetail} removes, two components of the first run's
-ultraviolet channel and one of its reflectance channel reach a maximum
-$\Delta E_{00}$ below one across every compound and concentration. Those are
-not identical to anything and so survive the collapse, entering the cosine as
-directions carrying no response. The sources agree on the identities and the
+Not every component responds in every cell. Beyond the identically zero columns
+that the collapse removes (Supporting Information
+Section~\ref{S-res:arraydetail}), two components of the first run's
+ultraviolet channel and one of its reflectance channel never reach a
+$\Delta E_{00}$ of one, and survive the collapse because they duplicate
+nothing. The sources agree on the identities and the
 order and disagree on one stock solvent, dimethyl sulfoxide for dye 15 in the
 first two runs and water in the third, which we report as published. Stock
 solutions at 100~mM in ethanol, methanol, dimethyl sulfoxide, water,
@@ -974,12 +959,9 @@ PubChem, and no property value was taken from a prediction service.
 % 실제 규칙(spaces.pick)은 caret findCorrelation 이다. 코드가 하는 일을
 % 적는다.
 Within each space the filter runs in three stages, in this order. Constant
-columns are removed. Then, while any retained pair exceeds an absolute Pearson
-correlation of 0.95, the strongest such pair is taken and the member with the
-higher mean absolute correlation to the other retained coordinates is dropped,
-after which the correlation matrix is recomputed; a protected coordinate is
-kept against an unprotected one regardless of that comparison, and a tie is
-broken on the coordinate name. Then
+columns are removed. Then pairs above an absolute Pearson correlation of 0.95
+are resolved by the order-invariant rule and tie-breaks of Supporting
+Information Section~\ref{S-meth:orderinvariance}. Then
 any column that remains an exact algebraic function of others still present
 is dropped.
 The third stage overrides the protected set where the determining columns
@@ -1046,18 +1028,21 @@ sources and every figure script are deposited in a public Git repository at
 % 2026-11-07 (12차 A-1). 종전에는 acs-submission-20261107 을 적었고 그
 % 태그는 로컬에만 있었다. 원고가 존재하지 않는 공개 상태를 주장한 채로
 % verify 500건을 전부 통과했다. 태그 보류 결정에 맞춰 뺀다.
+% 2026-11-07 (12차 7단계, 분량). 예치물이 README 로 싣는 것을 본문이 다시
+% 세고 있었다. 라이선스 예외·파이프라인 순서·관문 범위·선적 파일은 저장소가
+% 적는다. 본문은 인용되지 않은 값의 처우만 남긴다. 주석을 문장 안에 끼우면
+% 주입시험 앵커가 끊긴다 (2026-11-07 적발).
 \url{https://github.com/bisu9082/simulant-designation-evidence}, on branch
 \texttt{b\_acs}.\cite{simulantrepo} The code is under the MIT
-licence and the data, tables and text under CC~BY~4.0; the deposit names the
-two exceptions, the pipeline order, the files that are shipped rather than
-regenerated and the scope of the descriptor reproduction gate. Every number we
-computed can be regenerated from it. Three classes
-are quoted rather than recomputed and are marked as such where they appear:
-values from the three source studies, values from regulatory registers, and the
+licence and the data, tables and text under CC~BY~4.0, with the exceptions,
+the pipeline order and the scope of the descriptor reproduction gate stated
+there. Every number we computed can be regenerated from it. Three classes
+are quoted rather than recomputed and are marked where they appear: values
+from the three source studies, values from regulatory registers, and the
 two cross-validated accuracies the deposited tables do not reproduce. The
-colorimetric input is the deposited $\Delta E_{00}$ table published with the
-source studies, and the conversion from plate images to those colour
-differences was performed there, outside this deposit.
+colorimetric input is the deposited $\Delta E_{00}$ table, and the conversion
+from plate images to those colour differences was performed in the source
+studies, outside this deposit.
 
 \begin{acknowledgement}
 The colorimetric response data reanalysed here were measured in three earlier

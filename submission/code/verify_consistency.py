@@ -1594,6 +1594,24 @@ def load_facts():
     _byname = {c['name']: c for c in _dp['components']}
     f['dye_anthracene_ratio'] = _byname['Anthracene']['ratio_max']
     f['dye_pyrene_ratio'] = _byname['Pyrene']['ratio_max']
+    # 2026-11-07 (12차 R1-F9). 1차 런의 잡음 수준 채널.
+    _dc = _dp['dead_channels']
+    f['dead_d1_uv'] = _dc['d1.uv']['n_dead']
+    f['dead_d1_normal'] = _dc['d1.normal']['n_dead']
+
+    # 2026-11-07 (12차 R2-F3). 패널 교체가 바꾸는 양.
+    _ps = json.load(open('outputs/match_rule_audit.json'))['panel_swap']
+    f['swap_n_added'] = _ps['n_added']
+    f['swap_pair_med'] = _ps['common_pair_rel_change_median'] * 100
+    f['swap_far_med'] = _ps['far_quartile_rel_change_median'] * 100
+    f['swap_inc_med'] = _ps['incumbent_rel_change_median'] * 100
+    f['swap_inc_max'] = _ps['incumbent_rel_change_max'] * 100
+    f['swap_common_pairs'] = _ps['common_pairs']
+
+    # 2026-11-07 (12차 R3-A2). 역치별 결손 개수.
+    _mj = json.load(open('outputs/mde.json'))['panel35_incumbent3']
+    f['mde_below_alpha'] = _mj['n_below_alpha_mde']
+    f['mde_below_bh'] = _mj['n_below_bh_mde']
 
     # 양수 가상궤도 (2026-11-07 신설, 12차 A-5).
     _pl = json.load(open('outputs/dft_electronic_space.json'))['positive_lumo']
@@ -2654,6 +2672,16 @@ CHECKS = [
     ('dye_top_ratio', [r'a ratio of ([\d.]+), the largest'], 0.05),
     ('dye_anthracene_ratio', [r'pyrene follow at ([\d.]+) and [\d.]+'], 0.05),
     ('dye_pyrene_ratio', [r'pyrene follow at [\d.]+ and ([\d.]+)'], 0.05),
+    # 2026-11-07 (12차) 신설 수치.
+    ('dead_d1_uv', [r'(\w+) components of the first run\'s\s*\n?ultraviolet channel'], 0),
+    ('swap_n_added', [r'Adding back the (\w+) compounds'], 0),
+    ('swap_common_pairs', [r'Over the (\d+) pairs the two panels share'], 0),
+    ('swap_pair_med', [r'the normalised distance moves by a\s*\n?median of ([\d.]+)\\%'], 0.05),
+    ('swap_far_med', [r'and by ([\d.]+)\\% over the quartile'], 0.05),
+    ('swap_inc_med', [r'moves by a median of\s*\n?([\d.]+)\\% and by'], 0.05),
+    ('swap_inc_max', [r'and by ([\d.]+)\\% for tabun'], 0.05),
+    ('mde_below_alpha', [r'(\w+) agents fall below even the uncorrected'], 0),
+    ('mde_below_bh', [r'of 0\.43, which is the one\s*\n?this paper is entitled to use, (\w+) do'], 0),
     # 2026-11-07 (12차 A-5) 양수 가상궤도.
     ('lumo_b3lyp_pos',
      [r'In (\w+) of the twenty-eight compounds the B3LYP LUMO'], 0),
@@ -3892,6 +3920,14 @@ def main():
                     continue
             except Exception:
                 pass
+            # 2026-11-07 (12차). 단위가 붙은 수는 다른 양이다. 표의
+            # '6900 & ppm' (DOE PAC 농도)이 본문 단어수 6,907 과 0.101%
+            # 차이라는 이유로 잡혔다. 근사 검사는 같은 양끼리만 뜻이 있다.
+            _after = body[m.end():m.end() + 16]
+            if re.match(r'\s*(?:&\s*)?(?:~)?\\?(?:ppm|ppb|mg|µ|\$\\mu\$|'
+                        r'um|uM|nm|mL|L\b|g\b|kg|cm|mm|Hz|eV|K\b|min|'
+                        r'hours?|days?|years?|mmHg|Pa\b)', _after, re.I):
+                continue
             d = abs(v - t) / t
             if 0 < d <= 0.005:
                 near.append(f'  근사 불일치 {k}: 본문 {v:,.4g} vs 산출물 {t:,.4g} '

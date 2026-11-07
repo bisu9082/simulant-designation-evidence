@@ -520,7 +520,7 @@ ACS_CASES = [
     # 2026-11-02. Conclusions 가 2.4·2.5 의 수치를 다시 센다. 두 자리가
     # 어긋나면(한쪽만 갱신되면) 잡혀야 한다. 과거 실패 계열이 바로 이것이다.
     ('결론부 BH 보정값이 2.4 와 어긋남 (정본 0.6299)',
-     'an incumbent simulant, at a\nBenjamini--Hochberg adjusted value of 0.6299',
+     'an incumbent,\nat a Benjamini--Hochberg adjusted value of 0.6299',
      'an incumbent simulant, at a\nBenjamini--Hochberg adjusted value of 0.1695'),
     ('결론부 AEGL 훈련 화합물 수 오기 (정본 230)',
      'random forest trained on 230 AEGL chemicals is wrong in one direction',
@@ -560,6 +560,31 @@ ACS_CASES = [
     # 검사 A-tag 자체를 시험한다. 로컬에도 원격에도 없는 태그를 Data
     # Availability 에 심으면 잡혀야 한다. 망이 없는 환경에서도 로컬 확인
     # 만으로 잡히도록 존재하지 않는 날짜를 쓴다 (2026-11-07, 12차 A-1).
+    # --- 2026-11-07 (12차 후속) 신설분 ---
+    ('패널 추가 화합물 수를 구판 다섯으로 되돌림 (정본 seven)',
+     'Adding back the seven compounds',
+     'Adding back the five compounds'),
+    ('공통 쌍 수를 오기 (정본 378)',
+     'Over the 378 pairs the two panels share',
+     'Over the 278 pairs the two panels share'),
+    ('패널 교체 거리변화를 오기 (정본 8.6)',
+     'the normalised distance moves by a\nmedian of 8.6\\%',
+     'the normalised distance moves by a\nmedian of 2.6\\%'),
+    ('원거리 사분위 변화를 오기 (정본 10.5)',
+     'and by 10.5\\% over the quartile',
+     'and by 1.5\\% over the quartile'),
+    ('지정모사체 이동을 구판 0 으로 되돌림 (정본 6.2)',
+     'moves by a median of\n6.2\\% and by',
+     'moves by a median of\n0.0\\% and by'),
+    ('타분 이동을 오기 (정본 26.4)',
+     'and by 26.4\\% for tabun',
+     'and by 6.4\\% for tabun'),
+    ('1차 런 잡음 채널 수를 오기 (정본 two)',
+     "two components of the first run's\nultraviolet channel",
+     "six components of the first run's\nultraviolet channel"),
+    ('열 순서를 다시 자유도로 되돌림',
+     'the panel, the correlation filter rule, the conformer embedding',
+     'the panel, the order of the filter columns, the conformer embedding'),
     ('없는 예치 태그를 Data Availability 에 심음',
      'on branch\n\\texttt{b\\_acs}.\\cite{simulantrepo}',
      'and the state this paper reports is the tag\n'
@@ -755,6 +780,24 @@ ACS_SUPP_CASES = [
     ('블록균등 서술자쪽 최소값을 구판으로 되돌림 (정본 0.192)',
      'smallest nominal value from 0.192 to 0.061',
      'smallest nominal value from 0.151 to 0.061'),
+    # --- 2026-11-07 (12차 후속) SI 신설분 ---
+    ('MDE 비보정 역치 아래 수를 구판 하나로 되돌림 (정본 Two)',
+     'Two agents fall below even the uncorrected',
+     'One agent falls below even the uncorrected'),
+    ('MDE 보정 역치 아래 수를 오기 (정본 four)',
+     'this paper is entitled to use, four do',
+     'this paper is entitled to use, two do'),
+    ('루이사이트 결손을 오기 (정본 0.221)',
+     'and lewisite at 0.221', 'and lewisite at 0.421'),
+    ('휘발성 중위차 통계량을 오기 (정본 0.0426)',
+     'the median difference gives 0.0426',
+     'the median difference gives 0.0826'),
+    ('색공간 상쇄 주장을 구판으로 되돌림',
+     'It does not follow that the convention cancels from the cosine.',
+     'The convention therefore cancels from the cosine.'),
+    ('카보닐 기질 런 수를 오기 (정본 only one)',
+     'a\ncarbonyl substrate appears in only one of the three runs',
+     'a\ncarbonyl substrate appears in all three of the runs'),
 
 ]
 # 2026-10-24. 공저자 심사가 SI 의 검증 문장 두 개를 반박했고 둘 다 사실이었다.
