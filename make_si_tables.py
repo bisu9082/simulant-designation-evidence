@@ -507,16 +507,23 @@ def dyepanel():
     for i in range(half):
         a = left[i]
         b = right[i] if i < len(right) else {'index': '', 'name': ''}
-        mark = '$^{a}$' if a['note'] else ''
-        markb = '$^{a}$' if b.get('note') else ''
+        # 2026-11-07 (10차). 종전에는 note 가 있는 행 전부에 $^{a}$ 를
+        # 달았다. 염료 15 의 note 는 용매 불일치인데 캡션이 그 마커를
+        # '비염료' 로 설명하고 있어 표가 캡션을 거짓으로 만들었다.
+        # note_kind 로 비염료만 a, 그 밖은 b 를 단다.
+        _m = {'nondye': '$^{a}$', 'other': '$^{b}$'}
+        mark = _m.get(a.get('note_kind', ''), '')
+        markb = _m.get(b.get('note_kind', ''), '')
         lines.append(f"{a['index']} & {a['name']}{mark} & "
                      f"{b['index']} & {b['name']}{markb} \\\\")
     head = (r'\begin{tabular}{rlrl}' '\n' r'\hline' '\n'
             r'\# & Compound & \# & Compound \\' '\n' r'\hline' '\n')
-    notes = [f"{r['index']} {r['name']}: {r['note']}" for r in rows if r['note']]
+    notes = [(('$^{a}$ ' if r['note_kind'] == 'nondye' else '$^{b}$ ')
+              + f"{r['index']} {r['name']}: {r['note']}")
+             for r in rows if r['note']]
     foot = '\n'.join(
-        r'\multicolumn{4}{p{13cm}}{\footnotesize $^{a}$ ' + n + r'}\\'
-        if j == 0 else
+        r'\multicolumn{4}{p{13cm}}{\footnotesize ' + n + r'}\\'
+        if True else
         r'\multicolumn{4}{p{13cm}}{\footnotesize ' + n + r'}\\'
         for j, n in enumerate(notes))
     return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
@@ -588,8 +595,9 @@ every interferent; count of valid matches.}\\
     open('outputs/tab_dyepanel.tex', 'w').write(
         hdr + '% 출처: sources/dye_panel_20261106.csv\n'
         + '\\begin{table}[htb]\n\\centering\n\\caption{The 29-component '
-        'array, in the order the three source studies number it. Six entries '
-        'are not chromogenic dyes and are marked.}\n'
+        'array, in the order the three source studies number it. Five entries '
+        'marked $^{a}$ are not chromogenic dyes; $^{b}$ marks a component '
+        'whose stock solvent differs between the source studies.}\n'
         '\\label{tab:dyepanel}\n\\small\n'
         + dyepanel() + '\n\\end{table}\n')
     print('-> outputs/tab_dyepanel.tex')
