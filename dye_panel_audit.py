@@ -23,6 +23,8 @@ import pandas as pd
 
 PANEL = 'sources/dye_panel_20261106.csv'
 RUNS = ('d1', 'd2', 'd3')
+# 한 셀에서 최대 ΔE00 가 이 값 아래면 사실상 응답이 없는 채널로 센다.
+DEAD_CUT = 1.0
 
 
 def main():
@@ -53,6 +55,29 @@ def main():
             d['normal_max'] = max(d['normal_max'], mn)
             d['ratio_max'] = max(d['ratio_max'], r)
             d['runs'].append(tag)
+
+    # 2026-11-07 (12차 R1-F9). 셀별로 거의 응답하지 않는 채널을 센다.
+    # 원고는 29 성분을 한 덩어리로 서술하는데, 어떤 셀에서는 그 가운데
+    # 여럿이 측정 잡음 수준의 신호만 낸다.
+    dead = {}
+    for tag in RUNS:
+        for mode in ('uv', 'normal'):
+            try:
+                d = pd.read_csv(f'deltaE/{tag}.{mode}_deltaE_pivot.csv')
+            except OSError:
+                continue
+            cs = [c for c in d.columns if c.lower().startswith('dye')]
+            # 정확히 0 인 열은 SI res:arraydetail 이 이미 보고하고
+            # 축약이 제거한다. 보탬이 되는 것은 0 은 아니면서 잡음
+            # 수준인 열이다. 그쪽은 축약에 걸리지 않고 코사인에 들어간다.
+            zz = [int(c.lower().replace('dye', '')) for c in cs
+                  if float(d[c].abs().max()) == 0.0]
+            dd = [int(c.lower().replace('dye', '')) for c in cs
+                  if 0.0 < float(d[c].max()) < DEAD_CUT]
+            dead[f'{tag}.{mode}'] = dict(
+                n_channels=len(cs), n_zero=len(zz), n_dead=len(dd),
+                zero=[name.get(i, str(i)) for i in sorted(zz)],
+                dead=[name.get(i, str(i)) for i in sorted(dd)])
 
     rows = sorted(per.values(), key=lambda d: -d['ratio_max'])
     marked = [d for d in rows if d['note_kind'] == 'nondye']
@@ -86,6 +111,12 @@ def main():
         marked_fluorophore_max_ratio=marked_fluor_max,
         n_fluorophores=len(fluor),
         fluorophores=[d['name'] for d in fluor],
+        dead_cut=DEAD_CUT,
+        dead_channels=dead,
+        n_dead_max=max((v['n_dead'] for v in dead.values()),
+                       default=0),
+        n_dead_max_cell=max(dead, key=lambda k: dead[k]['n_dead'])
+        if dead else None,
         components=rows)
     os.makedirs('outputs', exist_ok=True)
     json.dump(out, open('outputs/dye_panel_audit.json', 'w'),
@@ -97,6 +128,10 @@ def main():
     print(f'  표시된 형광체의 최대 비: {marked_fluor_max:.1f}')
     if not out['highest_ratio']['marked']:
         print('  [주의] 가장 큰 비를 내는 성분이 비염료로 표시돼 있지 않다.')
+    print(f'  셀별 채널: 정확히 0 / 0 은 아니고 최대 < {DEAD_CUT}')
+    for k, v in dead.items():
+        print(f"    {k:<12} 0인열 {v['n_zero']}  잡음열 {v['n_dead']}  "
+              f"{', '.join(v['dead'])}")
     print('\n[done] outputs/dye_panel_audit.json')
 
 

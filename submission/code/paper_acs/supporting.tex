@@ -911,8 +911,19 @@ array is listed compound by compound in Table~\ref{tab:dyepanel}.
 Six of the
 twenty-nine are not chromogenic dyes: three are fluorophores, one is a thiol
 reducing agent and two are carbonyl derivatising reagents, so part of the
-pattern is covalent derivatisation or emission rather than a solvatochromic
-shift. The three fluorophores are quinine, anthracene and pyrene, and they are
+pattern is emission or covalent chemistry rather than a solvatochromic
+shift.
+% 2026-11-07 (12차 R1-F5). 종전 문장은 공유결합 유도체화를 세 런 모두에
+% 걸리는 메커니즘으로 적었다. 1차 런의 분석물은 유기인 작용제 넷과 VX 와
+% DMMP 이고 카보닐이 하나도 없다. 메커니즘을 주장하지 않는다.
+The two carbonyl reagents are selective for aldehydes and ketones, and a
+carbonyl substrate appears in only one of the three runs, phosgene in the
+second. The first run contains four organophosphorus agents, VX and dimethyl
+methylphosphonate, none of which carries a carbonyl, so whatever response those
+two components give there is not carbonyl derivatisation. The source studies do
+not identify the reaction and neither do we; the component chemistry is named
+to say that the array is not uniformly solvatochromic, not to assign a
+mechanism to any cell. The three fluorophores are quinine, anthracene and pyrene, and they are
 the components whose response is most asymmetric between the two channels:
 quinine reaches a maximum $\Delta E_{00}$ of 90.2 in the ultraviolet channel
 against 3.6 in reflectance, a ratio of 79.6, the largest of the
@@ -926,11 +937,22 @@ $\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
 the same dye in the same channel. The source studies do not state the working
 colour space, the reference white or the transfer function used to reach
 CIELAB from the camera output, and we did not have the plate images, so that
+% 2026-11-07 (12차 R1-F7). 종전 문장은 그 관례가 '코사인에서 상쇄된다'
+% 고 적었다. 상쇄되려면 벡터 전체에 걸린 하나의 스칼라배여야 하는데,
+% CIELAB 변환과 CIEDE2000 은 염료마다 비선형으로 작용하므로 방향 자체를
+% 바꾼다. 공통이라는 것과 상쇄된다는 것은 다른 말이다.
 conversion is an input to this reanalysis rather than part of it. Every
-comparison made here is within one run and one channel, where whatever
-convention was used is common to the vectors being compared and cancels from
-the cosine; no comparison in this paper puts a $\Delta E_{00}$ from one run
-beside one from another. The values are given given per dye for three compound sets at
+comparison made here is within one run and one channel, so the convention is
+common to the vectors being compared and is not a difference between them; no
+comparison in this paper puts a $\Delta E_{00}$ from one run beside one from
+another. It does not follow that the convention cancels from the cosine. A
+cosine is invariant to one scale factor applied to a whole vector, and the
+conversion to CIELAB and then to $\Delta E_{00}$ is neither single nor linear:
+it acts on each dye separately and nonlinearly, so a different working colour
+space or transfer function would move the twenty-nine components by different
+factors and could move the cosine with them. We cannot bound that without the
+plate images, and we state it as an unquantified limit rather than as an
+invariance. The values are given per dye for three compound sets at
 solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
 acetonitrile, in two imaging channels: ultraviolet-excited emission and
 reflectance. An earlier version of this section called these nominal vapour

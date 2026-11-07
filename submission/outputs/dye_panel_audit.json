@@ -25,6 +25,71 @@
   "Anthracene",
   "Pyrene"
  ],
+ "dead_cut": 1.0,
+ "dead_channels": {
+  "d1.uv": {
+   "n_channels": 29,
+   "n_zero": 0,
+   "n_dead": 2,
+   "zero": [],
+   "dead": [
+    "Nile Red",
+    "Rhodamine 6G"
+   ]
+  },
+  "d1.normal": {
+   "n_channels": 29,
+   "n_zero": 0,
+   "n_dead": 1,
+   "zero": [],
+   "dead": [
+    "Pyrene"
+   ]
+  },
+  "d2.uv": {
+   "n_channels": 29,
+   "n_zero": 2,
+   "n_dead": 1,
+   "zero": [
+    "Methyl Orange",
+    "Eriochrome Black T"
+   ],
+   "dead": [
+    "Rhodamine 6G"
+   ]
+  },
+  "d2.normal": {
+   "n_channels": 29,
+   "n_zero": 0,
+   "n_dead": 0,
+   "zero": [],
+   "dead": []
+  },
+  "d3.uv": {
+   "n_channels": 29,
+   "n_zero": 5,
+   "n_dead": 1,
+   "zero": [
+    "Quinine",
+    "Methyl Blue",
+    "Methyl Orange",
+    "2,4-Dinitrophenylhydrazine",
+    "Rhodamine 6G"
+   ],
+   "dead": [
+    "Nile Red"
+   ]
+  },
+  "d3.normal": {
+   "n_channels": 29,
+   "n_zero": 0,
+   "n_dead": 0,
+   "zero": [],
+   "dead": []
+  }
+ },
+ "n_dead_max": 2,
+ "n_dead_max_cell": "d1.uv",
  "components": [
   {
    "index": 4,

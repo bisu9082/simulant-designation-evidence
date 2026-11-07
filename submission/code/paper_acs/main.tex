@@ -889,7 +889,18 @@ Six are not chromogenic dyes: quinine, anthracene and
 pyrene are fluorophores, reduced L-glutathione is a thiol reducing agent, and
 2,4-dinitrophenylhydrazine and 2-hydrazinobenzothiazole are carbonyl
 derivatising reagents, so part of the array responds by covalent derivatisation
-or emission and part by solvatochromic shift. The sources agree on the identities and the
+or emission and part by solvatochromic shift.
+% 2026-11-07 (12차 R1-F9). 29 성분을 한 덩어리로 서술하고 있었다. 정확히
+% 0 인 열은 SI res:arraydetail 이 이미 보고하고 축약이 제거하지만, 0 은
+% 아니면서 잡음 수준인 열은 축약에 걸리지 않고 코사인에 들어간다. 1차
+% 런이 그 경우다. 수치는 outputs/dye_panel_audit.json.
+Not every component responds in every cell. Over and above the columns that are
+identically zero, which the collapse of Supporting Information
+Section~\ref{S-res:arraydetail} removes, two components of the first run's
+ultraviolet channel and one of its reflectance channel reach a maximum
+$\Delta E_{00}$ below one across every compound and concentration. Those are
+not identical to anything and so survive the collapse, entering the cosine as
+directions carrying no response. The sources agree on the identities and the
 order and disagree on one stock solvent, dimethyl sulfoxide for dye 15 in the
 first two runs and water in the third, which we report as published. Stock
 solutions at 100~mM in ethanol, methanol, dimethyl sulfoxide, water,
