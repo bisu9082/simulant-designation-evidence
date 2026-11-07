@@ -1034,11 +1034,14 @@ over all $6! = 720$ relabellings of the six compounds each cell carries, and
 comparing the observed Spearman
 coefficient against $|\rho|$ of the permuted matrices. The enumeration over
 this family of twelve cells is exhaustive, so these twelve tests are exact and
-carry no sampling seed. The analyses in this document that are sampled rather
+carry no sampling seed. % 2026-11-07 (12차). 종전 목록에 축약 민감도를 넣었는데 그 스크립트는
+% 전수열거다 (collapse_sensitivity.py:85). 실제 표집은 여섯이고
+% README 의 목록과 같다.
+The analyses in this document that are sampled rather
 than enumerated, the Mantel power curve, the null match expectation, the
-premise null in its four larger cells, the collapse sensitivity and the
-reversal audit, are declared with their seeds and their numbers of draws where
-they appear. Both the Mantel value and
+premise null in its four larger cells, the random-subspace control, the
+descriptor resampling and the reversal audit, are declared with their seeds and
+their numbers of draws where they appear. Both the Mantel value and
 the value that treating pairs as independent would have given are reported, so
 the size of the error is visible.
 

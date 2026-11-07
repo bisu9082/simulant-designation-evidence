@@ -91,11 +91,12 @@ the failure mode this project hit repeatedly before the order was written down.
 
 The designation and Mantel tests are exhaustive rather than sampled:
 C(17,3) = 680, C(24,3) = 2024 and C(24,8) = 735,471 designations and 6! = 720
-or 4!^3 = 13,824 relabellings, enumerated in full. Five analyses are sampled
+or 4!^3 = 13,824 relabellings, enumerated in full. Six analyses are sampled
 instead, and each is seeded and declared where it is used: the Mantel power
 simulation, the null match expectation, the premise label-permutation null in
-four of its six cells, the random-subspace control and the descriptor
-resampling. The rest is deterministic given the seed `0xC0DE`.
+four of its six cells, the random-subspace control, the descriptor
+resampling and the reversal audit, which draws 10,000 relabellings under each
+of five seeds. The rest is deterministic given the seed `0xC0DE`.
 
 ## Verification
 

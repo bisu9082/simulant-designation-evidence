@@ -254,7 +254,11 @@ def collapse_free_counts():
 
 def main():
     os.makedirs('outputs', exist_ok=True)
+    # n_draws 는 검증기의 표집 탐지가 보는 이름이다 (2026-11-07,
+    # 12차). n_draws_per_seed 로만 적으면 이 산출물이 전수열거로
+    # 오인되고, '전수' 주장 가드가 그만큼 헐거워진다.
     report = dict(generated_by='reversal_audit.py', seeds=SEEDS,
+                  n_seeds=len(SEEDS), n_draws=NDRAW,
                   n_draws_per_seed=NDRAW, cells=[])
     tot = {'uncentred': 0, 'centred': 0}
     inst = 0
