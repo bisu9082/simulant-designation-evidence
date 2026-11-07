@@ -21,12 +21,48 @@
    "n_sig_q": 0
   },
   {
+   "variant": "drop_binary_nonzero_le_2",
+   "n_dropped": 5,
+   "n_dims": 33,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.3,
+   "n_sig_q": 0
+  },
+  {
    "variant": "drop_binary_nonzero_le_3",
    "n_dropped": 8,
    "n_dims": 30,
    "n_cells": 12,
    "min_p": 0.044444444444444446,
    "min_q": 0.3888888888888889,
+   "n_sig_q": 0
+  },
+  {
+   "variant": "drop_binary_nonzero_le_4",
+   "n_dropped": 10,
+   "n_dims": 28,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.29444444444444445,
+   "n_sig_q": 0
+  },
+  {
+   "variant": "drop_binary_nonzero_le_5",
+   "n_dropped": 11,
+   "n_dims": 27,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.29444444444444445,
+   "n_sig_q": 0
+  },
+  {
+   "variant": "drop_cardinality_le_5",
+   "n_dropped": 14,
+   "n_dims": 24,
+   "n_cells": 12,
+   "min_p": 0.044444444444444446,
+   "min_q": 0.32222222222222224,
    "n_sig_q": 0
   }
  ],
