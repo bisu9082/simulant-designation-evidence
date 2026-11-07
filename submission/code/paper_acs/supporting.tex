@@ -1179,6 +1179,21 @@ use. And the count of valid matches, the criterion this paper argues a
 designation has to meet, returns one match with a $p$ of 0.4647, ranking 316th
 of 680 and therefore indistinguishable from chance.
 
+% 2026-11-07 (12차 R3-A8). 이 검정은 여섯 통계량을 전부 계산하는데
+% 원고는 사전지정 하나와 n_valid 하나만 싣고 있었다. 이 논문의 규칙은
+% 통과하는 것 하나가 아니라 쓸어본 것 전부를 적는 것이다. 나머지 넷을
+% 적는다. 방향은 지정에 유리한 쪽이므로, 빼면 유리한 쪽을 숨긴 것이
+% 아니라 불리한 쪽을 숨긴 것이 된다. 수치는
+% outputs/volatility_space.json 의 designation.statistics 실측.
+The enumeration computes all six distance statistics, and we give them rather
+than the two the argument needs. Besides the pre-specified mean difference at
+0.0206 and the valid-match count at 0.4647, the median difference gives 0.0426,
+the mean distance ratio 0.0235, the count of agents closer to an incumbent
+0.0221 and the mean log ratio 0.0765. Four of the six fall below 0.05, so the
+sweep points the same way the pre-specified statistic does and the selection
+we report is the conservative one; the margin of 0.0015 in standardised units
+bounds all of them alike.
+
 That single match is dipropylene glycol monomethyl ether to soman, and it
 rests on a gap of 0.0107 decades between a measurement at 26~$^{\circ}$C and a
 measurement at 25~$^{\circ}$C. The gap is smaller than the temperature
@@ -1518,8 +1533,16 @@ threshold is $\delta = 0.18$ against a median gap of 0.074, a ratio of 0.41,
 so on that panel the design cannot resolve the deficit the compounds carry and
 we do not read its null as a statement about the data.
 
-Sarin is the one agent whose deficit, 0.125, falls below even the uncorrected
-threshold. It is not the agent at which the descriptor resampling of
+% 2026-11-07 (12차 R3-A2). 종전 문장은 'Sarin is the one agent whose
+% deficit falls below even the uncorrected threshold' 였다. 전체 최소값만
+% 산출물에 있었고 작용제별 결손이 없었으므로 그 문장은 어느 검사도 받지
+% 않았다. mde.py 에 gap_per_agent 를 신설해 재니 비보정 역치 아래가 둘,
+% 보정 역치 아래가 넷이다. 수치는 outputs/mde.json.
+Two agents fall below even the uncorrected threshold of 0.23: sarin at 0.125
+and lewisite at 0.221. At the corrected threshold of 0.43, which is the one
+this paper is entitled to use, four do, chloropicrin at 0.331 and phosgene at
+0.422 joining them. Sarin, the smallest of
+them, is not the agent at which the descriptor resampling of
 Section~\ref{M-res:panels} is weakest: DMMP recovers sarin as its nearest
 agent in 89.8\% of 1000 bootstrap replicates, the highest of the three
 incumbents, where DPGME recovers sulfur mustard in 41.0\% and dichloromethane

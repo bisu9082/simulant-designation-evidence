@@ -616,12 +616,24 @@ about the flexibility of the comparison and not about proximity to the agents
 (Supporting Information Sections~\ref{S-res:dimdetail},
 \ref{S-res:subspacenull} and~\ref{S-res:blockbalance}).
 
-Panel composition decides the answer as well. Adding back the five compounds
-the sensing literature also treats as simulants moves the count from three
+% 2026-11-07 (12차 R2-F3). 두 문장이 실측과 달랐다. (1) 28종 -> 35종은
+% 일곱 종을 더한다. 문헌 모사체 다섯에 간섭물 둘(dichlorvos, malathion)이
+% 붙고, 간섭물은 비교군이므로 후보와 무관하게 기준을 바꾼다. SI 생성표는
+% 이미 'omits the seven' 으로 적고 있었다. (2) 'The incumbents do not move'
+% 는 거짓이다. 표준화와 유지 좌표가 모두 패널의 함수이므로 거리가 움직인다.
+% 수치는 outputs/match_rule_audit.json 의 panel_swap 실측.
+Panel composition decides the answer as well. Adding back the seven compounds
+the reduced panel omits moves the count from three
 valid matches to zero, because diisopropyl fluorophosphate is nearer to three G
 agents than any incumbent is and 2-chloroethyl ethyl sulfide is nearer to
-sulfur mustard than dichloromethane is. The incumbents do not move; what moves
-is whether anything closer is allowed into the comparison. Resampling the
+sulfur mustard than dichloromethane is. What the incumbents lose is standing
+rather than position. The nearest incumbent to each of the eleven agents is the
+same compound on both panels, while the distance to it moves by a median of
+6.2\% and by 26.4\% for tabun, because the standardisation and the retained
+coordinate set are both properties of the panel rather than of the compounds.
+Over the 378 pairs the two panels share, the normalised distance moves by a
+median of 8.6\%, and by 10.5\% over the quartile of pairs furthest from the
+seven compounds added, so the effect is not confined to their neighbourhood. Resampling the
 descriptor columns a thousand times says the same distributionally
 (Figure~\ref{fig:descriptor}b): the incumbents return a median of zero valid
 matches, no match at all in 61.2\% of replicates and at most one in 85.6\%,
@@ -662,10 +674,22 @@ takes the twenty-eight-compound count from three to zero and the
 literature-augmented count from five to two. We use the narrower set that
 excludes the other agents, because a criterion requiring a simulant to beat the
 agents themselves tests whether the agents resemble each other rather than
-whether the simulant resembles its agent. Seven analyst choices therefore move the count of
-valid matches: the panel, the order in which the correlation filter is handed
-its columns, the conformer embedding seed, the descriptor encoding, the shape
-block, the threshold and the comparison set. None of them moves the result of
+whether the simulant resembles its agent. % 2026-11-07 (12차 R2-F4). 종전 목록은 '상관필터에 열이 넘겨지는 순서'
+% 를 현행 자유도로 셌다. SI meth:orderinvariance 가 적듯 그 의존은 구판
+% 필터의 성질이고, 교체한 결정적 필터는 입력을 이름순으로 정렬해 시작
+% 하므로 순서가 결과를 바꾸지 않는다 (spaces.pick docstring). 움직이는
+% 것은 규칙 선택이고, 그 선택은 28종 패널에서 3과 4를 오간다
+% (outputs/match_rule_audit.json 의 deterministic 대 legacy).
+Seven analyst choices therefore move the count of
+valid matches: the panel, the correlation filter rule, the conformer embedding
+seed, the descriptor encoding, the shape
+block, the threshold and the comparison set. The filter rule is on that list
+because the superseded rule made the retained coordinate set a function of the
+column order in the descriptor file, which took the reduced-panel count to
+three in twenty-four of forty orderings and to four in the other sixteen; the
+rule we use removes that dependence and returns three, and the choice between
+the two rules is what remains
+(Supporting Information Section~\ref{S-meth:orderinvariance}). None of them moves the result of
 Section~\ref{res:mantel}. Recomputing the twelve Mantel tests under all seven
 encodings leaves the smallest Benjamini--Hochberg value between 0.1167 and
 0.4722, and dropping the derived shape coordinates raises it to 0.1708 with the
@@ -933,9 +957,20 @@ PubChem, and no property value was taken from a prediction service.
 
 \subsection{Distances and tests}
 \label{meth:spaces}
-Within each space the filter runs in three stages, in this order: constant
-columns are removed, then one of each pair correlated at $|r| > 0.95$, then
-any column that remains an exact algebraic function of others still present.
+% 2026-11-07 (12차 R2-F5). 종전 문장 'one of each pair correlated at
+% |r| > 0.95' 은 교체 전 규칙의 서술이다. 그 어법은 쌍을 한 번 훑으며
+% 한쪽을 버리는 절차를 가리키고, 그것이 열 순서 의존의 원인이었다.
+% 실제 규칙(spaces.pick)은 caret findCorrelation 이다. 코드가 하는 일을
+% 적는다.
+Within each space the filter runs in three stages, in this order. Constant
+columns are removed. Then, while any retained pair exceeds an absolute Pearson
+correlation of 0.95, the strongest such pair is taken and the member with the
+higher mean absolute correlation to the other retained coordinates is dropped,
+after which the correlation matrix is recomputed; a protected coordinate is
+kept against an unprotected one regardless of that comparison, and a tie is
+broken on the coordinate name. Then
+any column that remains an exact algebraic function of others still present
+is dropped.
 The third stage overrides the protected set where the determining columns
 survive (Supporting Information Section~\ref{S-meth:orderinvariance}).
 Remaining descriptors were standardised and distances taken as Euclidean,

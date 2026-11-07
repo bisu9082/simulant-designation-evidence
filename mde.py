@@ -136,6 +136,19 @@ def run(label, path, sim_cls):
                 thresholds=thresholds,
                 observed_at_zero=float(null[ti]),
                 gap_median=_med, gap_min=float(gap.min()),
+                # 2026-11-07 (12차 R3-A2). 작용제별 결손과 역치별 개수를
+                # 낸다. SI 가 'Sarin is the one agent whose deficit falls
+                # below even the uncorrected threshold' 라고 적었는데,
+                # 비보정 역치 아래는 둘이고 보정 역치 아래는 넷이다.
+                # 전체 최소값만 산출물에 있었던 탓에 그 문장이 어느
+                # 검사도 받지 않았다.
+                gap_per_agent=[
+                    {'agent': name[i_real[k]], 'gap': float(gap[k])}
+                    for k in np.argsort(gap)],
+                n_below_alpha_mde=int((gap < (mde if mde is not None
+                                              else 0.0)).sum()),
+                n_below_bh_mde=int((gap < (mde_bh if mde_bh is not None
+                                           else 0.0)).sum()),
                 curve=rows)
 
 
