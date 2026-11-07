@@ -98,8 +98,15 @@ Korea}
 % 관측 최대는 0.57 이다. (2) 'Tested Against Sixteen' 은 중심 검정이 셀당
 % 4~7종, 1차 패널 11종으로 돌아간다는 사실과 어긋났다. 측정한 것으로
 % 내린다. 편집장·리뷰어 1 이 독립으로 같은 지적을 했다.
-\title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
-Array Response: A Reanalysis of Authentic Chemical Warfare Agent Measurements}
+% 2026-11-07 (10차 -> 11차, 방향 A). 편집장이 세 회차 연속으로 같은 것을
+% 지적했다: 제목이 검정력 미달 귀무에 걸려 있고, 이 독자층에 실제로 가닿는
+% 측정 결과가 셋째 소절에 묻혀 있다. 귀무를 버리는 것이 아니라 머리를
+% 측정으로 바꾸고 귀무는 설계 한계 진술로 내린다. 수치는 모두
+% outputs/deltaE_premise.json 의 dmmp 블록 실측이며 두 채널에서 부호가
+% 일치하는 셋(GD·GF·VX)만 제목에 올린다. 타분은 채널 사이에서 뒤집히므로
+% 올리지 않는다.
+\title{Dimethyl Methylphosphonate Responds Opposite to Soman, Cyclosarin and
+VX in a Colorimetric Array of Authentic Chemical Warfare Agents}
 
 \keywords{chemical warfare agents, simulants, colorimetric sensor array,
 surrogate validation, permutation test, applicability domain}
@@ -136,31 +143,27 @@ surrogate validation, permutation test, applicability domain}
 % 네 가지 열거를 양 끝만 남김, DMMP 문장의 channel 삭제. 삭제한 것은
 % 모두 본문·SI 에 그대로 있다.
 \begin{abstract}
-Chemical warfare agent detection is qualified on simulants, and we asked
-what measurement establishes that one reproduces its agent.
-We reanalyse the colorimetric tables of three published runs of one
-29-component array, which measured sixteen authentic agents at four
-concentrations in two optical channels, and compare the response patterns
-with the molecular-descriptor distances on which simulant selection rests.
-All descriptor calculations and tests are new. The array discriminates on
-average: in all six run-channel cells every compound agrees with itself
-across concentrations more closely than with any other compound of that
-cell, and all six clear $q=0.05$ against a label-permutation null. Descriptor distance
-does not track response distance at any
-resolvable effect size. Twelve exact Mantel tests and six combinations of
-them leave nothing below $q=0.05$, against a design that resolves a rank
-correlation of 0.85 at 80\% power at the corrected threshold the conclusions
-use, and 0.67 at a nominal $\alpha$, where the largest observed is 0.57.
-That null holds under every analyst choice we enumerated, while the count
-of valid matches is moved by all five and is not a measurement. Measured
-vapour pressure, tested separately, reaches $q=0.0430$ in the reflectance
-channel within a two-channel family adopted after the prespecified statistic
-for that test returned $p=0.0809$ and was withdrawn; read as one family of four
-cells it is 0.1389, and jointly with the twelve descriptor cells 0.1556. It
-returns one valid match at $p=0.4647$.
-Dimethyl methylphosphonate, the standard G-agent simulant, is
-anti-correlated with soman and cyclosarin in the ultraviolet. Across the
-three runs, one designated simulant has been measured beside the agents.
+Chemical warfare agent detection is qualified on simulants, and we asked what
+measurement establishes that one reproduces its agent. We reanalyse the
+colorimetric tables of three published runs of one 29-component array, which
+measured sixteen authentic agents at four concentrations in two optical
+channels. Dimethyl methylphosphonate, the standard nerve agent simulant, gives a
+response pattern positively correlated
+with sarin, $+0.65$ and $+0.57$ in the two channels, and anti-correlated with
+soman, $-0.49$ and $-0.48$, with cyclosarin, $-0.72$ and $-0.49$, and with VX,
+$-0.70$ and $-0.27$; tabun changes sign between channels. The two channels are
+read from the same wells and are not independent replicates, the comparison
+comes from one run, and the tables carry no repeats, so we report this as a
+measurement and not as a test. The array does discriminate on average: in all
+six run-channel cells every compound agrees with itself across concentrations
+more closely than with the mean of the other compounds, and all six clear
+$q=0.05$ against a label-permutation null. Descriptor distance, the
+basis on which simulants are selected, does not resolve the difference. Twelve
+exact Mantel tests and six combinations of them leave nothing below $q=0.05$,
+but the design resolves a rank correlation of 0.85 at 80\% power at the
+corrected threshold and the largest observed is 0.57, so that is a limit on the design, not a
+demonstration of absence. Across the three runs, one
+designated simulant has been measured beside the agents.
 \end{abstract}
 
 \section{Introduction}
@@ -399,86 +402,20 @@ cell and 25 in the ultraviolet pivot of the third run. Supporting Information
 Section~\ref{S-res:arraydetail} sets out what the array does and does not
 establish in more detail.
 
-\subsection{Descriptor distance does not predict response distance}
-\label{res:mantel}
-% 예산 700단어. 현재 약 650단어.
-
-Simulant selection rests on an implicit transfer: that a compound close to
-an agent in descriptor space will be close to it in whatever the detector
-measures. We tested the transfer directly, as the agreement between two
-distance matrices over the same compounds, one built from descriptors and
-one from response patterns. Agreement was measured by Mantel correlation
-and referred to a null built by enumerating every relabelling of the
-compounds, so the test is exact rather than sampled.
-
-The test is run within each run and never across runs. The three runs share
-no compound, so the dye-wise sensitivity of one plate cannot be calibrated
-against another, and pooling responses across them would require a
-commutability assumption we cannot support. That restriction sets the
-power. Six compounds in the first run and six in the second carry both a
-response pattern and a descriptor vector, giving fifteen pairs in each,
-and the third run drops out because the A-series compounds are not in the
-descriptor panel, which follows from the source itself: it reports the four
-as the codes A-230, A-232, A-234 and A-242, gives their structures as
-representative rather than assigned, and does not state which compound each
-code denotes\cite{group3ref}. Nitrogen mustard drops out of the second run for the same
-reason.
-
-Across the twelve cells, three spaces by two channels by two runs, nothing
-survives correction (Figure~\ref{fig:response}b). Three cells reach a
-nominal $p$ below 0.05, all of them in the second run: the structural space
-in the ultraviolet channel at 0.0167, the merged space in the same channel
-at 0.0194, and the electronic space in the reflectance channel at 0.0444.
-Benjamini--Hochberg correction over the twelve leaves a smallest adjusted
-value of 0.1167. The pattern of the three is itself uninformative about
-transfer, because the two ultraviolet cells implicate the structural and
-merged spaces while the reflectance cell implicates the electronic space,
-and the same space does not reproduce across channels of the same plate.
-
-% 2026-11-03 (T1-2). 리뷰어 지적. 명목 유의 세 셀이 전부 2차 런인데,
-% 2차 런에는 지정 모사체가 없다. 즉 셋은 작용제 사이의 일치이고 모사체
-% 충실도에 대한 증거가 아니다. 이것이 SI 에만 있었다.
-There is a further asymmetry in where those three cells sit, and it matters
-more than their size. The second run contains seven authentic agents and no
-designated simulant. Whatever agreement those three cells carry is
-agreement between one agent and another, measured on one plate, and it is
-not evidence that a simulant reproduces an agent. The only run that
-contains a designated simulant beside the agents is the first, and the
-first run gives nothing in any space or channel, with $|\rho| \le 0.225$ and
-every $p$ at or above 0.229. The one run that could speak to simulant
-fidelity is silent, and the run that speaks is not about simulants.
-
-Combining runs does not change the answer. The first and second runs share
-neither compounds nor plates, so their exact Mantel $p$ values are
-independent and can be combined by Fisher's method. We report all six
-combinations of three spaces and two channels rather than selecting one,
-which would reintroduce the analyst freedom the test is meant to remove.
-The smallest adjusted value over the six is 0.2373, and none reaches 0.05.
-Section~\ref{S-res:permfull} of the Supporting Information gives the full
-permutation family, and Section~\ref{S-meth:multiplicity} the six
-multiplicity schemes under which it was read.
-
-What this does not license is the claim that no transfer exists. Fifteen
-pairs is a weak test, and the pooled rank correlations are correspondingly
-imprecise: the structural space in the ultraviolet channel gives
-$\rho=+0.31$ with a 95\% interval from $-0.45$ to $+0.81$, which excludes
-neither zero nor a strong association. The defensible statement is that the
-transfer on which simulant selection depends has not been established, in
-the one body of authentic-agent response data where it could be tested, and
-that the experiment which would settle it is a run containing a compound
-already measured in an existing run. Such a bridge would fix the plate
-correction and open the 136 cross-run pairs that are closed today.
-
-\subsection{The standard G-agent simulant against the G agents}
+\subsection{The standard simulant responds opposite to three of the five
+agents measured with it}
 \label{res:dmmp}
 % 예산 700단어. 현재 약 690단어.
 % 귀무 대조에서 죽은 소견 둘을 여기서 전부 보고한다. 삭제하지 말 것.
 
-The transfer test above treats all compounds alike. One compound deserves
-to be named, because the field treats it as the G-agent surrogate and
-because decontamination efficiency is quantified against it. The first run
-contains DMMP together with the four G agents and VX, so its response can
-be set against theirs directly.
+The array resolves the compounds, so the measurement can be put to the one
+compound the field uses in their place. DMMP is named here rather than
+treated as one of many, because the field treats it as the G-agent surrogate
+and because decontamination efficiency is quantified against it. The first
+run contains DMMP together with the four G agents and VX, which is the only
+place in the three runs where a designated simulant was measured beside the
+agents it stands in for, so its response can be set against theirs
+directly.
 
 In the ultraviolet channel DMMP correlates with tabun at $+0.764$ and with
 sarin at $+0.645$, and anti-correlates with soman at $-0.492$, cyclosarin
@@ -564,6 +501,77 @@ and one structural fact. The first run contains no candidate simulant other
 than DMMP, so the designation cannot be contrasted against an alternative
 in response space at all. The permutation null that the descriptor analysis
 of the next section relies on is, in response space, empty.
+
+\subsection{Descriptor distance does not resolve the difference}
+\label{res:mantel}
+% 예산 700단어. 현재 약 650단어.
+
+One compound is one compound. The practice that put DMMP there is a general
+one, and it rests on an implicit transfer: that a compound close to an agent
+in descriptor space will be close to it in whatever the detector measures. We
+tested that transfer directly, as the agreement between two distance matrices
+over the same compounds, one built from descriptors and one from response
+patterns. Agreement was measured by Mantel correlation
+and referred to a null built by enumerating every relabelling of the
+compounds, so the test is exact rather than sampled.
+
+The test is run within each run and never across runs. The three runs share
+no compound, so the dye-wise sensitivity of one plate cannot be calibrated
+against another, and pooling responses across them would require a
+commutability assumption we cannot support. That restriction sets the
+power. Six compounds in the first run and six in the second carry both a
+response pattern and a descriptor vector, giving fifteen pairs in each,
+and the third run drops out because the A-series compounds are not in the
+descriptor panel, which follows from the source itself: it reports the four
+as the codes A-230, A-232, A-234 and A-242, gives their structures as
+representative rather than assigned, and does not state which compound each
+code denotes\cite{group3ref}. Nitrogen mustard drops out of the second run for the same
+reason.
+
+Across the twelve cells, three spaces by two channels by two runs, nothing
+survives correction (Figure~\ref{fig:response}b). Three cells reach a
+nominal $p$ below 0.05, all of them in the second run: the structural space
+in the ultraviolet channel at 0.0167, the merged space in the same channel
+at 0.0194, and the electronic space in the reflectance channel at 0.0444.
+Benjamini--Hochberg correction over the twelve leaves a smallest adjusted
+value of 0.1167. The pattern of the three is itself uninformative about
+transfer, because the two ultraviolet cells implicate the structural and
+merged spaces while the reflectance cell implicates the electronic space,
+and the same space does not reproduce across channels of the same plate.
+
+% 2026-11-03 (T1-2). 리뷰어 지적. 명목 유의 세 셀이 전부 2차 런인데,
+% 2차 런에는 지정 모사체가 없다. 즉 셋은 작용제 사이의 일치이고 모사체
+% 충실도에 대한 증거가 아니다. 이것이 SI 에만 있었다.
+There is a further asymmetry in where those three cells sit, and it matters
+more than their size. The second run contains seven authentic agents and no
+designated simulant. Whatever agreement those three cells carry is
+agreement between one agent and another, measured on one plate, and it is
+not evidence that a simulant reproduces an agent. The only run that
+contains a designated simulant beside the agents is the first, and the
+first run gives nothing in any space or channel, with $|\rho| \le 0.225$ and
+every $p$ at or above 0.229. The one run that could speak to simulant
+fidelity is silent, and the run that speaks is not about simulants.
+
+Combining runs does not change the answer. The first and second runs share
+neither compounds nor plates, so their exact Mantel $p$ values are
+independent and can be combined by Fisher's method. We report all six
+combinations of three spaces and two channels rather than selecting one,
+which would reintroduce the analyst freedom the test is meant to remove.
+The smallest adjusted value over the six is 0.2373, and none reaches 0.05.
+Section~\ref{S-res:permfull} of the Supporting Information gives the full
+permutation family, and Section~\ref{S-meth:multiplicity} the six
+multiplicity schemes under which it was read.
+
+What this does not license is the claim that no transfer exists. Fifteen
+pairs is a weak test, and the pooled rank correlations are correspondingly
+imprecise: the structural space in the ultraviolet channel gives
+$\rho=+0.31$ with a 95\% interval from $-0.45$ to $+0.81$, which excludes
+neither zero nor a strong association. The defensible statement is that the
+transfer on which simulant selection depends has not been established, in
+the one body of authentic-agent response data where it could be tested, and
+that the experiment which would settle it is a run containing a compound
+already measured in an existing run. Such a bridge would fix the plate
+correction and open the 136 cross-run pairs that are closed today.
 
 \subsection{Descriptor space cannot supply the missing validation}
 \label{res:panels}
@@ -850,10 +858,14 @@ into a recommendation.
 % 가교 런 설계로 닫는다. 대체 화합물은 제안하지 않는다.
 % 2026-11-02 집필. 수치는 전부 본문에 이미 있는 것만 다시 센다.
 
-Simulant validity is not a property of a compound. It is a claim about a
-measurement, and the practice of designating chemical warfare agent
-simulants records neither the measurement a compound was validated against
-nor the comparison in which its validity was tested. The criterion the
+The compound this field uses to stand in for the G agents responds opposite
+to three of the five agents it was measured beside, in both optical channels.
+That is one run and one array, and we report it as a measurement rather than
+as a test, but it is the measurement the practice has been missing. Simulant
+validity is not a property of a compound. It is a claim about a measurement,
+and the practice of designating chemical warfare agent simulants records
+neither the measurement a compound was validated against nor the comparison
+in which its validity was tested. The criterion the
 literature does state is physicochemical alignment with the
 agent,\cite{webb2025} which is a property of the compound and not of the
 measurement.
@@ -865,10 +877,11 @@ searched; we state that as the limit of our search rather than as a claim
 about every measurement ever made. Twelve exact Mantel tests and six
 combinations of them leave no agreement between descriptor distance and
 response distance below $q=0.05$, against a design that resolves a rank
-correlation of 0.85 at 80\% power at that corrected threshold; Supporting
-Information
-Section~\ref{S-res:mde} gives what the design could have detected at each
-displacement, read against the corrected multiplicity threshold. On the
+correlation of 0.85 at 80\% power at that corrected threshold, so that count
+bounds the design rather than the chemistry; Supporting Information
+Section~\ref{S-meth:deltaE} gives the power simulation behind 0.85, and
+Section~\ref{S-res:mde} the separate displacement analysis for the
+designation tests. On the
 primary panel no agent of the
 eleven has a valid match to an incumbent simulant, at a
 Benjamini--Hochberg adjusted value of 0.6299, and the compounds that
