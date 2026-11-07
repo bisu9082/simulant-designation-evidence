@@ -3494,6 +3494,55 @@ def main():
                          'sh build_paper_acs.sh 를 돌릴 것 — 올라가는 '
                          'PDF 가 원고와 다르다')
 
+    # (A-tag) 원고가 가리키는 예치 태그가 실제로 공개돼 있는지
+    # (2026-11-07 신설, 12차 A-1).
+    #
+    # 왜 필요한가. 11차에 Data Availability 를 GitHub 태그로 확정했는데,
+    # 그 태그와 그것이 가리키는 커밋이 로컬에만 있었다. 즉 원고가 존재하지
+    # 않는 공개 상태와 존재하지 않는 라이선스를 주장하는 채로 verify 500건을
+    # 전부 통과했다. 어느 검사도 '이 태그가 원격에 있는가' 를 묻지 않았기
+    # 때문이다. 산문을 고치는 것으로는 다음 번에 또 난다.
+    #
+    # 망 없이 돌리는 재현자를 막지 않으려고, 원격을 물을 수 없을 때는
+    # 로컬 태그만 확인하고 그 사실을 적는다.
+    import re as _r3
+    import subprocess as _sp
+    _tagm = _r3.search(r'\\texttt\{(acs-submission-[\w-]+)\}',
+                       open(TEX).read())
+    if not _tagm:
+        print('[verify] 검사 A-tag: 원고가 예치 태그를 적지 않는다. 투고 '
+              '직전에 태그를 만들어 푸시하고 Data Availability 에 적을 것 '
+              '(main.tex 의 [확인 필요] 주석).')
+    if _tagm:
+        _tag = _tagm.group(1)
+        try:
+            _loc = _sp.run(['git', 'tag', '-l', _tag], capture_output=True,
+                           text=True, timeout=20).stdout.split()
+        except Exception:
+            _loc = []
+        if _tag not in _loc:
+            fails.append(
+                f'원고가 가리키는 예치 태그 {_tag} 가 로컬에 없다 '
+                '(검사 A-tag): Data Availability 가 존재하지 않는 상태를 '
+                '주장한다. 태그를 만들거나 원고에서 태그명을 뺄 것')
+        else:
+            try:
+                _rem = _sp.run(['git', 'ls-remote', '--tags', 'origin'],
+                               capture_output=True, text=True,
+                               timeout=60)
+                _ok = _rem.returncode == 0
+            except Exception:
+                _ok = False
+            if not _ok:
+                print('[verify] 검사 A-tag: 원격을 물을 수 없어 로컬 태그만 '
+                      '확인했다. 투고 전에 git ls-remote --tags origin 으로 '
+                      '직접 확인할 것')
+            elif f'refs/tags/{_tag}' not in _rem.stdout:
+                fails.append(
+                    f'예치 태그 {_tag} 가 원격에 없다 (검사 A-tag): '
+                    '원고 Data Availability 가 공개돼 있지 않은 상태를 '
+                    '가리킨다. 태그를 푸시하거나 원고에서 뺄 것')
+
     # (B2d) 투고 패키지 사본이 작업본과 어긋났는지 (2026-11-07 신설).
     #
     # 왜 필요한가. submission/ 은 sync_submission.sh 가 채우는 사본이고,

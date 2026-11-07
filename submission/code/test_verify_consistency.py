@@ -557,6 +557,13 @@ ACS_CASES = [
     ('문자 그대로 판독의 28종 계수를 오기 (정본 three to zero)',
      'takes the twenty-eight-compound count from three to zero',
      'takes the twenty-eight-compound count from three to two'),
+    # 검사 A-tag 자체를 시험한다. 로컬에도 원격에도 없는 태그를 Data
+    # Availability 에 심으면 잡혀야 한다. 망이 없는 환경에서도 로컬 확인
+    # 만으로 잡히도록 존재하지 않는 날짜를 쓴다 (2026-11-07, 12차 A-1).
+    ('없는 예치 태그를 Data Availability 에 심음',
+     'on branch\n\\texttt{b\\_acs}.\\cite{simulantrepo}',
+     'and the state this paper reports is the tag\n'
+     '\\texttt{acs-submission-19990101}.\\cite{simulantrepo}'),
 ]
 
 # 2026-11-02. ACS SI (paper_acs/supporting.tex) 전용.
