@@ -251,14 +251,20 @@ per cent of its own magnitude. The cause is that the selection is an
 difference between runs moves it to a different conformer.
 
 We therefore replaced the selection with a Boltzmann-weighted mean over the
-whole ensemble at 298~K. Every RDKit-derived numeric column of the cache now
-reproduces from the code, 53 of the 61 numeric columns, and the descriptor
+whole ensemble at 298~K. Every RDKit-derived numeric column now reproduces
+from the code, and the descriptor
 build script checks them under a \texttt{--verify} flag that the analysis
 pipeline requires before it will run. The scope of that gate is worth stating,
-because it is narrower than the pipeline's pass message once implied. The eight
-columns it does not recompute are the semiempirical electronic coordinates and
-their derivatives, which need the GFN2-xTB binary whose version was not
-recorded when the cache was built, so the gate names them on every run rather
+% 2026-11-07 (12차 A-4). 종전에는 반경험 아닌 세 캐시만 재계산했고 분석이
+% 실제로 읽는 _xtb 두 개는 존재 확인만 받았다. 그 둘을 기본 범위에 넣었다.
+% 한 기록열(_n_conf_xtb)이 면제에 없어 관문이 중단되던 것이 원인이었다.
+because it was narrower than the pipeline's pass message once implied. It now
+covers the five caches the analysis reads, checking 53 columns in each, out of
+53 to 62 numeric columns depending on the cache. The nine
+columns it does not recompute are the eight semiempirical electronic
+coordinates and their derivatives, which need the GFN2-xTB binary whose version
+was not recorded when the cache was built, together with the record of how many
+conformers that binary used, so the gate names them on every run rather
 than counting them as checked, and fails if any other column falls outside that
 declared list. Those eight are checked instead by the independent
 density-functional recomputation of Section~\ref{meth:dft}. A missing cache
@@ -691,14 +697,35 @@ $f^{+}(\mathrm{P})$ values in Table~\ref{tab:plocal} are therefore GFN2 values
 with no independent check, and the ratio between DMMP and VX that the main text
 quotes should be read within that limit.
 
-\section{The six analyst freedoms in full}
+\section{The seven analyst freedoms in full}
 \label{res:freedoms}
 
 % 2026-11-07 (11차 6단계). 본문 res:panels 에서 세 단락을 옮겨 왔다. 본문은
 % 같은 세 자유도를 수치 없이 한 단락으로 요약하고 이 절을 가리킨다.
-The main text reports that six analyst choices move the count of valid matches
-and keeps only the summary. The three that are not the panel, the filter order
-or the threshold are given here as they stood in the body.
+The main text reports that seven analyst choices move the count of valid
+matches and keeps only the summary. The three that are not the panel, the
+filter order, the threshold or the comparison set are given here as they stood
+in the body, followed by the comparison set, which was added in this revision.
+
+% 2026-11-07 (12차 A-2). 비교군 판독을 신설한다. 종전 감사(match_rule_audit)
+% 는 wide/narrow 두 판독만 셌고 둘 다 작용제를 비교군에서 뺐으므로, 실험절이
+% 적는 문자 그대로의 판독은 어느 쪽도 아니었다. 수치는
+% outputs/match_rule_audit.json 의 literal 블록 실측이다.
+The comparison set is the one the second condition is tested against. The
+Experimental Section of the main article names every compound outside the
+designated set, and the agents are outside it, so the literal reading places
+the other agents in the comparison set and asks whether an agent's nearest
+designated simulant is nearer to it than every other agent is. The deposited
+audit now reports three readings. The wide reading, every compound that is
+neither an agent nor a designated simulant, is what the primary analysis uses
+and gives three valid matches on the twenty-eight-compound panel, none on the
+primary panel and five on the panel that adds the five literature candidates.
+The narrow reading, interferents only, agrees with it on the
+twenty-eight-compound panel, where the two sets coincide, and gives three on
+the primary panel. The literal reading gives zero, zero and two. Under the
+legacy filter the twenty-eight-compound count is four, four and one. The
+literal reading is the largest single move in this list, and the direction is
+against the designations in every case.
 
 One analyst freedom we did not enumerate at the outset moved the answer
 further than any we did. Recomputing the three electronic coordinates at

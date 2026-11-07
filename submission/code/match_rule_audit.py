@@ -55,6 +55,12 @@ def run(df, sim_cls, reading, rule):
     if reading == 'wide':
         i_cmp = [i for i, k in enumerate(kl)
                  if k != 'real_agent' and k not in sim_cls]
+    elif reading == 'literal':
+        # 2026-11-07 (12차 A-2). 세 번째 판독이다. 본문 실험절은 '지정집합
+        # 밖의 모든 화합물' 이라고 적고, 작용제도 지정집합 밖이다. 종전의
+        # wide/narrow 는 둘 다 작용제를 비교군에서 뺐으므로 문자 그대로의
+        # 판독은 어느 쪽도 아니었고 감사되지 않았다. 자기 자신은 뺀다.
+        i_cmp = [i for i, k in enumerate(kl) if k not in sim_cls]
     else:
         i_cmp = [i for i, k in enumerate(kl) if k == 'interferent']
 
@@ -62,10 +68,11 @@ def run(df, sim_cls, reading, rule):
     for i in i_agent:
         js = min(i_sim, key=lambda j: D[i, j])
         d_norm = float(D[i, js] / nn_med)
-        beats = all(D[i, js] < D[i, j] for j in i_cmp)
+        cmp_i = [j for j in i_cmp if j != i]
+        beats = all(D[i, js] < D[i, j] for j in cmp_i)
         blocker = None
         if not beats:
-            jb = min(i_cmp, key=lambda j: D[i, j])
+            jb = min(cmp_i, key=lambda j: D[i, j])
             blocker = name[jb]
         out.append({'agent': name[i], 'nearest_simulant': name[js],
                     'd_norm': round(d_norm, 4),
@@ -83,7 +90,7 @@ def main():
         df = pd.read_csv(path)
         rep[label] = {}
         for rname, rule in (('deterministic', pick), ('legacy', _pick_legacy)):
-            for reading in ('wide', 'narrow'):
+            for reading in ('wide', 'narrow', 'literal'):
                 r = run(df, sim_cls, reading, rule)
                 rep[label][f'{rname}/{reading}'] = r
                 print(f'{label:<30} {rname:<14} {reading:<7} '
