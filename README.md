@@ -165,7 +165,10 @@ document under `sources/`, and the colorimetric Delta E_00 tables under
 `deltaE/`, which were measured and published in the three source studies cited
 in the manuscript. `LICENSE` states this in full.
 
-The state the manuscript reports is the tag `acs-submission-20261107`. Branches
+The manuscript cites this repository on branch `b_acs`. The submission
+state will be tagged immediately before submission, and
+`verify_consistency.py` check A-tag confirms that any tag the manuscript
+names is present on the remote. Branches
 move; cite the tag.
 
 ## Citation
