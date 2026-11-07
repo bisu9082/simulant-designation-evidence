@@ -148,10 +148,31 @@ def main():
     m_gfn2 = run_merged(df.copy(), 'merged-GFN2')
     m_b3lyp = run_merged(fu.copy(), 'merged-B3LYP')
 
+    # 2026-11-07 (12차 A-5). 양수 LUMO 를 센다. 중성 닫힌껍질 분자에서
+    # 양의 가상궤도 에너지는 속박 준위가 아니라 이산화된 연속상태이고,
+    # 그 값은 화학이 아니라 기저에 따라 움직인다. E_LUMO_eV 는 전자공간
+    # 세 좌표 중 하나이므로 이 개수는 그 공간의 한계를 직접 가리킨다.
+    _dv = pd.read_csv('outputs/dft_vs_gfn2.csv')
+    _pos = dict(
+        n_compounds=int(len(_dv)),
+        b3lyp_positive_lumo=sorted(
+            _dv.loc[_dv.lumo_eV > 0, 'name'].tolist()),
+        gfn2_positive_lumo=sorted(
+            _dv.loc[_dv.E_LUMO_eV > 0, 'name'].tolist()))
+    _pos['n_b3lyp_positive'] = len(_pos['b3lyp_positive_lumo'])
+    _pos['n_gfn2_positive'] = len(_pos['gfn2_positive_lumo'])
+    _pos['b3lyp_max'] = float(_dv.lumo_eV.max())
+    _pos['gfn2_max'] = float(_dv.E_LUMO_eV.max())
+    print(f'\n[LUMO] 양수 가상궤도: B3LYP {_pos["n_b3lyp_positive"]}/'
+          f'{_pos["n_compounds"]}, GFN2-xTB {_pos["n_gfn2_positive"]}/'
+          f'{_pos["n_compounds"]}')
+    print(f'       GFN2 양수: {", ".join(_pos["gfn2_positive_lumo"])}')
+
     out = dict(
         panel=PANEL, cols=COLS, threshold=THRESHOLD,
         gfn2=base, b3lyp=swap, b3lyp_full=full,
         merged_gfn2=m_gfn2, merged_b3lyp=m_b3lyp,
+        positive_lumo=_pos,
         caveat=('B3LYP 기하는 RDKit ETKDG+MMFF94 이고 GFN2 기하가 아니다. '
                 '차이에 방법과 기하가 함께 들어 있다. b3lyp 배치는 쌍극자를 '
                 'GFN2 로 남긴 2좌표 교체이고, b3lyp_full 은 세 좌표 전부 '

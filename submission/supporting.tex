@@ -606,10 +606,37 @@ parameterised for geometries and energies rather than for virtual orbital
 energies, so any quantity built from its LUMO carries a question we cannot
 answer from inside the method. We therefore recomputed the frontier orbital
 energies of all twenty-eight compounds of the smaller panel at
-B3LYP/def2-SVPD, a basis chosen because it carries diffuse functions, which
-virtual orbitals need, and covers arsenic, which lewisite needs. From those we
+% 2026-11-07 (12차 A-5). 종전 문장은 확산함수를 'which virtual orbitals
+% need' 로 적었다. 방향이 거꾸로다. 확산함수는 점유밀도를 낫게 하지만
+% 가상궤도를 속박시키지 않는다. 실제로 28종 중 9종의 B3LYP LUMO 가
+% 양수다 (outputs/dft_electronic_space.json 의 positive_lumo).
+B3LYP/def2-SVPD, a basis chosen because it covers arsenic, which lewisite
+needs, and because its diffuse functions describe the diffuse valence density
+of these polar molecules. From those we
 formed $\mu$, $\eta$ and $\omega = \mu^{2}/2\eta$ by the same definitions used
-throughout. The same converged calculations also give the dipole moment, which
+throughout.
+
+Diffuse functions improve the occupied density; they do not make a virtual
+orbital bound. In nine of the twenty-eight compounds the B3LYP LUMO energy
+comes out positive, the largest $n$-hexane at $+0.54$~eV and the smallest
+acetonitrile at $+0.04$~eV, with dimethyl methylphosphonate at $+0.076$~eV and
+cyclosarin at $+0.055$~eV among them. A positive virtual orbital energy in a
+neutral closed-shell molecule is a discretised continuum state rather than a
+bound level, and its value follows the basis rather than the chemistry, so for
+those nine the quantities built from the LUMO do not carry the meaning the rest
+of this section gives them.
+
+The same check applies to the primary descriptors and does not clear them. Six
+of the twenty-eight GFN2-xTB LUMO energies are positive: dipropylene glycol
+monomethyl ether, tetrahydrofuran, ethanol, methanol, $n$-hexane and water.
+$E_{\mathrm{LUMO}}$ is one of the three coordinates of the electronic space
+used throughout this work, so for those six compounds one coordinate in three
+is an unbound virtual rather than a bound level. None of the sixteen agents is
+among them and one designated simulant is, so every electronic-space distance
+from an agent to dipropylene glycol monomethyl ether carries this. We report it
+rather than repair it, because repairing it would mean choosing a different
+electronic space after seeing what each one answers, and the counts are in
+\texttt{outputs/dft\_electronic\_space.json}. The same converged calculations also give the dipole moment, which
 the third paragraph of this section uses.
 
 The comparison is not clean, and we say so rather than letting it read as one.

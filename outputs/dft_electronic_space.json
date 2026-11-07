@@ -383,5 +383,31 @@
    }
   ]
  },
+ "positive_lumo": {
+  "n_compounds": 28,
+  "b3lyp_positive_lumo": [
+   "DMMP",
+   "DMSO",
+   "DPGME",
+   "THF",
+   "acetonitrile",
+   "cyclosarin (GF)",
+   "ethanol",
+   "methanol",
+   "n-hexane"
+  ],
+  "gfn2_positive_lumo": [
+   "DPGME",
+   "THF",
+   "ethanol",
+   "methanol",
+   "n-hexane",
+   "water"
+  ],
+  "n_b3lyp_positive": 9,
+  "n_gfn2_positive": 6,
+  "b3lyp_max": 0.5426260676947475,
+  "gfn2_max": 2.2266
+ },
  "caveat": "B3LYP 기하는 RDKit ETKDG+MMFF94 이고 GFN2 기하가 아니다. 차이에 방법과 기하가 함께 들어 있다. b3lyp 배치는 쌍극자를 GFN2 로 남긴 2좌표 교체이고, b3lyp_full 은 세 좌표 전부 B3LYP 이다."
 }
