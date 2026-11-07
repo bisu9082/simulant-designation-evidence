@@ -28,18 +28,22 @@ import pandas as pd
 # 종전에는 paper/main.tex 가 TEX 였고 paper_acs/ 가 추가본이었다. JHM
 # 평행본은 archive/jhm_v1/ 로 동결했으므로 축을 뒤집는다. 동결 사유와
 # 되살리는 조건은 archive/jhm_v1/FROZEN.md 에 있다.
+import glob as _glob
+
 TEX = 'paper_acs/main.tex'
 # 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
 # 2026-11-02. paper_acs/supporting.tex 를 넣는다. 내용이
 # paper/supplementary.tex 와 거의 같은 평행 사본이라, 한쪽만 고치면 조용히
 # 갈라진다. 둘 다 같은 산출물에 대조하면 어느 쪽에 구판 값이 남아도 걸린다.
+# 생성된 표 파일도 대조 대상에 넣는다. 넣지 않으면 그 표의 셀을 가리키는
+# 앵커들이 '문맥 미발견' 으로 조용히 빠진다.
+# 2026-11-07 (11차 6단계). 종전에는 여덟 개를 손으로 적어 두었고, 뒤에
+# 생긴 tab_registers / tab_designations / tab_dyepanel 셋은 이 목록과 아래
+# 신선도 검사 양쪽에서 빠져 있었다. 본문에서 레지스터 수치를 SI 표로
+# 내리는 순간 그 수치가 무검증 상태가 되는 구조였으므로 글롭으로 바꾼다.
+_TAB_TEX = sorted(_glob.glob('paper_acs/tab_*.tex'))
 EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
-             # 생성된 표 파일도 대조 대상에 넣는다. 넣지 않으면 그 표의
-             # 셀을 가리키는 앵커들이 '문맥 미발견' 으로 조용히 빠진다.
-             'paper_acs/tab_ablation.tex', 'paper_acs/tab_family.tex',
-             'paper_acs/tab_blockbalance.tex', 'paper_acs/tab_sparse.tex',
-             'paper_acs/tab_plocal.tex', 'paper_acs/tab_volatility.tex',
-             'paper_acs/tab_vpairing.tex', 'paper_acs/tab_premisenull.tex')
+             *_TAB_TEX)
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -141,7 +145,10 @@ def _dropped_periods():
                         r'vspace|\\author|\\affiliation|\\email|'
                         r'Republic of Korea')
     out = []
-    for f in (TEX,) + EXTRA_TEX:
+    # 2026-11-07. 이 가드는 산문용이다. 생성된 표(tab_*.tex)의 셀과 각주는
+    # 숫자 뒤에 대문자가 정상적으로 오므로(예: '1 Anthracene') 제외한다.
+    # 표의 수치 검증은 앵커와 신선도 검사가 따로 맡는다.
+    for f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
         if not _o.path.exists(f):
             continue
         raw = open(f).read()
@@ -234,9 +241,7 @@ def _generated_table_sync():
     """
     import os as _o
     bad = []
-    for name in ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
-                 'tab_sparse.tex', 'tab_plocal.tex', 'tab_volatility.tex',
-                 'tab_vpairing.tex', 'tab_premisenull.tex'):
+    for name in [_o.path.basename(t) for t in _TAB_TEX]:
         src = f'outputs/{name}'
         if not _o.path.exists(src):
             bad.append(f'  생성 표 없음 [{src}]: make_si_tables.py 를 돌릴 것')
@@ -2015,6 +2020,7 @@ CHECKS = [
     ('omega_distrank', [r'0\.934 on the primary panel, ([\d.]+) on the smaller one'], 0.0005),
     ('omega_pc3_var', [r'account for ([\d.]+)\\% of its variance'], 0.05),
     ('bh_q28', [r'over the eighteen tests gives ([\d.]+),\s+correcting within',
+     r'([\d.]+) for Benjamini--Hochberg over the\s*\n?eighteen tests',
      r'eighteen-test family\s*\n?gives a smallest adjusted value '
                 r'of ([\d.]+), correcting',
                 r'Benjamini-Hochberg \$q =\s*\n?([\d.]+)\$'], 0.0005),
@@ -2053,7 +2059,8 @@ CHECKS = [
     ('gvx_uv', [r'excluding tabun, is \$\+([\d.]+)\$ in the\s*\n?ultraviolet channel'], 0.0015),
     ('gvx_uv_lo', [r'with them, \$\+([\d.]+)\$ to'], 0.0015),
     ('gvx_uv_hi', [r'with them, \$\+[\d.]+\$ to \$\+([\d.]+)\$ and'], 0.0015),
-    ('gvx_nor', [r'ultraviolet channel and \$\+([\d.]+)\$ in the reflectance'], 0.0015),
+    ('gvx_nor', [r'ultraviolet channel and \$\+([\d.]+)\$ in the reflectance',
+                 r'ultraviolet\s*\n?channel and \$\+([\d.]+)\$ in reflectance'], 0.0015),
     ('gvx_nor_lo', [r'and \$([-][\d.]+)\$ to \$\+[\d.]+\$, come from'], 0.0015),
     ('gvx_nor_hi',
      [r'and \$[-][\d.]+\$ to \$\+([\d.]+)\$, come from'], 0.0015),
@@ -2065,7 +2072,8 @@ CHECKS = [
     ('conc_gf_lo', [r'falls monotonically from \$-([\d.]+)\$'], 0.0015),
     ('conc_gf_hi', [r'falls monotonically from \$-[\d.]+\$ to \$-([\d.]+)\$'], 0.0015),
     ('trend_monotone',
-     [r'Monotonicity is perfect in (\w+) of the ten'], 0),
+     [r'Monotonicity is perfect in (\w+) of the ten',
+      r'monotonicity perfect in\s*\n?(\w+) of the ten'], 0),
     ('trend_bh_q',
      [r'over the ten leaves a smallest adjusted\s+value of ([\d.]+)'], 0.0015),
     # 2026-11-06 (9차 분량). 세 앵커가 접속사까지 글자로 박고 있어 문장을
@@ -2106,7 +2114,8 @@ CHECKS = [
     # 2026-11-04 (작업 D). 본문이 '0.0824' 를 싣고 있었고 어느 산출물에도
     # 없는 값이었다. 생성표 tab_family 는 같은 양을 0.077 로 적는다.
     # R2·R5 가 같은 자리를 지적했다. 앵커가 없어서 통과했다.
-    ('q_by_space28', [r'correcting within each space gives (0\.\d+)'],
+    ('q_by_space28', [r'correcting within each space gives (0\.\d+)',
+                      r'tests, (0\.\d+) within each space'],
      0.00005),
     ('h1_safer7', [r'only ([a-z]+) of the \d+ candidate compounds are'], 0),
     ('h1_ncand', [r'only [a-z]+ of the (\d+) candidate compounds are',
@@ -2164,15 +2173,18 @@ CHECKS = [
     # 시드 수다. 두 앵커를 섞지 않는다.
     # 2026-11-03 (T1-14). 본문 2.4 의 인코딩 단락과 안정성 단락.
     ('sp_n_singleton',
-     [r'(\w+) of the thirty-eight retained coordinates are'], 0),
+     [r'(\w+) of the thirty-eight retained coordinates'
+      r'(?:[^.]{0,90}?)are binary indicators'], 0),
     ('sp_pedestal', [r'here (\d+), to the squared distance'], 0),
-    ('sp_tabun_share', [r'for tabun it is ([\d.]+)\\% of the'], 0.05),
+    ('sp_tabun_share',
+     [r'[Ff]or tabun (?:it is|that addition is) ([\d.]+)\\%'], 0.05),
     ('sp_tabun_base', [r'moves tabun from\s*\n?([\d.]+) to [\d.]+ and the count'],
      0.0005),
     ('sp_tabun_drop1', [r'moves tabun from\s*\n?[\d.]+ to ([\d.]+) and the count'],
      0.0005),
-    ('sp_match_drop1', [r'from three valid matches to (\w+)\. Dropping'], 0),
-    ('sp_match_drop3', [r'three compounds or fewer gives (\w+), and'], 0),
+    ('sp_match_drop1',
+     [r'from three valid matches to (\w+)[.;] [Dd]ropping'], 0),
+    ('sp_match_drop3', [r'three compounds or fewer gives (\w+)[,;]'], 0),
     ('sp_match_lowcard', [r'five or fewer distinct values gives (\w+),'], 0),
     ('sp_p_base', [r'one-sided \$p\$ falling from ([\d.]+) to [\d.]+'], 0.0005),
     ('sp_p_lowcard', [r'one-sided \$p\$ falling from [\d.]+ to ([\d.]+)'], 0.0005),
@@ -2280,11 +2292,12 @@ CHECKS = [
     ('mt_dft_gfn2_p',
      [r'eleven and a one-sided \$p\$ of (\d+\.\d+) to \w+ matches'], 0.0005),
     ('mt_dft_full_p',
-     [r'of \d+\.\d+ to \w+ matches and (\d+\.\d+)\.'], 0.0005),
+     [r'of \d+\.\d+ to \w+ matches and (\d+\.\d+)[.,]'], 0.0005),
     ('mt_dft_full_match',
-     [r'of \d+\.\d+ to (\w+) matches and \d+\.\d+\.'], 0),
+     [r'of \d+\.\d+ to (\w+) matches and \d+\.\d+[.,]'], 0),
     ('mt_dft_mg_match',
-     [r'coordinates, (\w+) valid matches and a one-sided'], 0),
+     [r'coordinates, (\w+) valid matches and a one-sided',
+      r'keeps (\w+) valid matches and a one-sided'], 0),
     ('mt_dft_mg_p',
      [r'valid matches and a one-sided \$p\$ of\s*\n?(\d+\.\d+) under both'],
      0.0005),
@@ -2372,7 +2385,8 @@ CHECKS = [
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     # 2026-11-04 (J-C). ACS본 어법으로 교정.
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
-                            r'observed value at the (\d+\.\d+)th percentile'], 0.06),
+                            r'observed value at the (\d+\.\d+)th percentile',
+                            r'place it at the\s*\n?(\d+\.\d+)th percentile'], 0.06),
     ('pct_struct', [r'observed value at the ([\d.]+)(?:st|nd|rd|th) percentile of that',
      r'-dimensional value of [\d.]+ sits at the ([\d.]+)(?:nd|th|st|rd)\s*\n?percentile'], 0.06),
     ('pct_elec', [r'electronic value of [\d.]+ (?:sits )?at the ([\d.]+)(?:nd|th|st|rd)'], 0.06),
@@ -2386,6 +2400,7 @@ CHECKS = [
     # 같은 값을 검사한다.
     ('q_by_space28', [r'over 6, per space & [\d.]+ & [\d.]+ & ([\d.]+)'], 0.0005),
     ('q_prespec28', [r'returns a value below 0\.05, at ([\d.]+)',
+     r'and ([\d.]+) for the only scheme that fixes',
      r'would survive at\s*\n?\$q=([\d.]+)\$'], 0.0005),
     ('meff28', [r'estimates ([\d.]+) effective tests'], 0.005),
     ('meff_p28', [r'and gives\s*\n?([\d.]+), conservative here by a factor'], 0.0005),

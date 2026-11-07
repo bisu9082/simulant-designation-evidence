@@ -661,7 +661,58 @@ $f^{+}(\mathrm{P})$ values in Table~\ref{tab:plocal} are therefore GFN2 values
 with no independent check, and the ratio between DMMP and VX that the main text
 quotes should be read within that limit.
 
+\section{The five analyst freedoms in full}
+\label{res:freedoms}
+
+% 2026-11-07 (11차 6단계). 본문 res:panels 에서 세 단락을 옮겨 왔다. 본문은
+% 같은 세 자유도를 수치 없이 한 단락으로 요약하고 이 절을 가리킨다.
+The main text reports that five analyst choices move the count of valid
+matches and keeps only the summary. The three that are not the panel and the
+filter order are given here as they stood in the body.
+
+One analyst freedom we did not enumerate at the outset moved the answer
+further than any we did. Recomputing the three electronic coordinates at
+B3LYP/def2-SVPD instead of GFN2-xTB moves that space from one valid match of
+eleven and a one-sided $p$ of 0.275 to five matches and 0.0368, and only one
+of the five is a pairing the designation record makes. We do not promote it:
+one uncorrected statistic in one space, reached by changing a method after
+seeing the first answer, on different geometries. What it establishes is that
+the space in which the incumbents did worst is the space the choice of
+electronic-structure method decides. The merged space keeps three valid
+matches and a one-sided $p$ of 0.0250 under both methods while its individual
+distances move (Section~\ref{meth:dft}).
+
+So does the way the descriptors are encoded, and that freedom is the largest
+of the five. Four of the thirty-eight retained coordinates on the
+twenty-eight-compound panel are binary indicators carried by exactly one
+compound, and standardising such a column adds exactly $n$, here 28, to the
+squared distance between its carrier and every other compound. For tabun that
+addition is 47.6\% of the squared distance to DMMP. Dropping those four moves
+tabun from 2.0038 to 1.4509 and the count from three valid matches to four;
+dropping every indicator carried by three compounds or fewer gives five, and
+every coordinate with five or fewer distinct values gives six, with the
+merged-space one-sided $p$ falling from 0.0250 to 0.0074. We kept the encoding
+that produces the smallest count and report the sweep, because that is the
+only evidence that we did not select the encoding for its answer. Section~\ref{meth:sparse} gives the column-by-column accounting.
+
+A fifth choice is the shape block: nine retained coordinates on each panel are
+functions of the three principal moments of inertia, which the correlation
+filter does not remove because the relations are ratios rather than linear.
+Dropping the seven derived ones, as a declared sensitivity rather than a
+replacement, takes the twenty-eight-compound count from three to zero, and the
+primary panel is zero either way (Section~\ref{res:shapeblock}).
+
 \section{Multiplicity and the accounting schemes}
+
+% 2026-11-07 (11차 6단계). 본문 Experimental 에서 옮겨 왔다. 이 여섯 수치는
+% 다른 어디에도 없었다.
+The designation tests of the main text are one-sided, because the hypothesis
+is directional. The two-sided values matter on the twenty-eight-compound panel,
+where the convention decides the answer: the structural space moves from 0.0279
+one-sided to 0.0559 at twice the smaller tail and 0.0441 scored as distance
+from the null mean, and the merged space from 0.0250 to 0.0500 and 0.0279.
+Under the first of those conventions neither space reaches 0.05.
+
 \label{meth:multiplicity}
 Multiplicity is corrected within each panel configuration. The six distance
 statistics applied to the three descriptor spaces form one family of eighteen
@@ -1042,7 +1093,7 @@ carries them from the Hazardous Substances Data Bank and from the government
 compendia named in the source column; the adoption rule and the tier
 definitions are in the text. No value was converted between temperatures.}
 \label{tab:volatility}
-\small
+\footnotesize
 \input{tab_volatility}
 \end{table}
 
@@ -1650,6 +1701,60 @@ electronic space governs sensor response, do not place it above the structural
 space, and do not show it to be irrelevant. The claims in the rest of this paper
 are written to that limit.
 
+\section{Two readings that did not survive their own controls}
+\label{res:deadcontrols}
+
+% 2026-11-07. 본문 res:dmmp 에서 옮겨 왔다. 두 소견 모두 자기 대조에서
+% 죽었고, 보고 의무가 있으나 본문 8면 예산을 넘겼다.
+Two further readings suggested themselves and did not survive their own
+controls. We report both, because the alternative is to present artefacts as
+results. The first was a ranking. DMMP is the nearest of the five candidates
+to tabun in the ultraviolet channel and to sarin in the reflectance channel
+and to nothing else, which reads as evidence that the optical channel decides
+which agent the standard simulant stands in for. It is not. With five
+candidates the expected number of first places over ten agent-channel cells
+is 2.0, the observed number is two, and the one-sided binomial $p$ is 0.62.
+The ten cells share DMMP's two response vectors, so they are not ten
+independent trials and the binomial is an approximation; the observed count
+sits on the expectation, where no correction could move the reading.
+
+The second was a channel decomposition. The cosine is a sum over dye
+channels, and the DMMP-to-tabun value of $+0.764$ turns out to rest on two
+of the 29 channels, with the largest single channel carrying 44\% of the
+positive mass. Read alone, that makes the resemblance look fragile. Two
+controls show it is not a property of DMMP. Agent-to-agent pairs in the
+same run concentrate identically, with median two channels in the
+ultraviolet and one in the reflectance channel, and a null built by
+permuting the dye labels of the DMMP vector gives a mean of 2.00 and 2.26.
+Concentration of this kind is what the product of two centred unit vectors
+in 29 dimensions does, and it says nothing about this compound.
+
+Neither reading enters any conclusion. They are set out here so that the
+record of what was looked at is complete.
+
+\section{What the dose direction does and does not carry}
+\label{res:doselimits}
+
+% 2026-11-07 (11차 6단계). 본문 res:dmmp 와 res:premise 에서 옮겨 왔다.
+Two limits sit on that direction. The concentrations are of analyte in a dye
+solution, not of vapour at an inlet, so we do not translate the range into
+the operating band of a point detector. And the mean response magnitude rises
+with concentration at a Spearman correlation of exactly $+1.000$ in every one
+of the six run-channel cells, so a similarity that grows with concentration
+cannot be separated here from one that grows with signal-to-noise ratio;
+distinguishing them needs a repeat-level noise estimate the deposited tables
+do not carry. What the direction supports is that the resemblance between
+this simulant and this agent is not constant over the range at which the
+array was characterised.
+
+These tables hold one value per compound, concentration, dye and channel, so
+the within-compound term is agreement of a compound with itself at a different
+dose and not between repeated measurements. Repeats were reported in the source
+work for selected dye-analyte combinations in the second
+run\cite{multiplexref} and for all experiments in the third,\cite{group3ref}
+but the repeat-level values are not in these tables, so no repeatability
+estimate enters any analysis below.
+
 \section{The measured safety axis, and the holes in it}
 \label{res:safetyaxis}
 
@@ -1797,9 +1902,9 @@ the safety axis, that Section~\ref{M-res:panels} documents in the fidelity axis.
 A distance in one space is being used to vouch for a property that lives in
 another.
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{Fig_h1.png}
+\includegraphics[width=0.93\textwidth]{Fig_h1.png}
 \caption{Fidelity and safety are not monotonically associated. (a) Electronic-space distance to
 the nearest authentic agent against measured AEGL-3 for the 207 candidates
 carrying both axes; crosses are compounds excluded by the structural filter. The
