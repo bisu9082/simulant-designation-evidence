@@ -36,9 +36,8 @@ Ministry of National Defense, Seoul, Republic of Korea\\
 Dear Editors,
 
 % 2026-11-03. 본문 제목 교체에 맞춰 동기화.
-We submit \textit{No Resolvable Agreement Between Descriptor Distance and
-Colorimetric Array Response: A Reanalysis of Authentic Chemical Warfare
-Agent Measurements} for consideration as an Article.
+We submit \textit{Dimethyl Methylphosphonate Responds Opposite to Soman, Cyclosarin and
+VX in a Colorimetric Array of Authentic Chemical Warfare Agents} for consideration as an Article.
 
 \textbf{What the paper is about, and why we bring it here.} Chemical warfare
 agent detection is almost always developed and qualified on simulants, because
@@ -57,8 +56,9 @@ designated simulant was measured beside the agents, in one run of one array,
 and we found no second co-measurement in the literature we searched. Twelve
 exact Mantel tests and six Fisher combinations of them leave no agreement
 between descriptor distance and response distance below $q = 0.05$, against a
-design that resolves a rank correlation of 0.67 at 80\% power where the largest
-observed is 0.57. On the thirty-five-compound panel, no agent of eleven has a
+design that resolves a rank correlation of 0.85 at 80\% power at the corrected
+threshold the conclusions use, and 0.67 at a nominal $\alpha$, where the
+largest observed is 0.57. On the thirty-five-compound panel, no agent of eleven has a
 valid match to an incumbent simulant, at a Benjamini--Hochberg adjusted value of
 0.6299, and the compounds that displace the incumbents are themselves
 literature-proposed simulants. The array discriminates: in all six
@@ -67,14 +67,15 @@ closely than with the other compounds in that cell. What fails is the transfer
 from descriptor space to response space.
 
 \textbf{The specific case will interest sensor developers.} Dimethyl
-methylphosphonate is the standard G-agent simulant and the benchmark compound
-for decontamination efficiency. Measured beside the agents in the ultraviolet
+methylphosphonate is the standard G-agent simulant. Measured beside the agents
+in the ultraviolet
 channel, its response pattern correlates at $+0.76$ with tabun and $+0.65$ with
 sarin but at $-0.49$ with soman, $-0.72$ with cyclosarin and $-0.70$ with VX. A
 compound whose measured response is positively correlated with two G agents and
 negatively with the other two is not reproducing the series it stands in for.
-We draw no conclusion about its suitability for decontamination testing, which
-is the measurement it was designated against and which we did not perform.
+We draw no conclusion about its suitability for the measurements it was
+designated against, respirator filtration and fabric penetration, neither of
+which we performed.
 
 \textbf{What this paper is not, stated plainly.} It reports no new sensor, no
 demonstration in a complex matrix, and no correlation against an established
@@ -131,15 +132,41 @@ distance between a simulant and its agent measured under identical conditions,
 which no amount of descriptor work can supply. It needs no new chemistry and
 no new instrument.
 
-\textbf{Reporting and availability.} All agents were produced and handled at an
-Organisation for the Prohibition of Chemical Weapons designated laboratory
-under Chemical Weapons Convention procedures. Analysis code, descriptor tables,
+% 2026-11-07 (11차 6단계). 저자안내의 분량 조항이 "a convincing
+% justification for the extra length must be made by the authors in their
+% cover letter" 이므로 단락을 신설한다. 환산은 규정의 방식 그대로
+% (1000단어/면, double-column 도판 500단어, 참고문헌 포함, TOC 제외) 이고
+% wordcount.py 가 같은 식으로 센다.
+\textbf{Length.} The manuscript runs to 9.3 journal pages against the
+recommended eight, counted the way the author guidelines specify: 6,622 words
+of text, three double-column figures at 500 words each, and 1,137 words of
+references. We ask for the extra page for a specific reason. The
+paper's claim is that a quantity in common use moves with the conventions used
+to compute it, and the only evidence that we did not select a convention for
+its answer is the reported sweep. So the manuscript reports six multiplicity
+schemes rather than the one that passes, five enumerated analyst freedoms with
+the count each produces, both readings of a two-part match criterion where they
+disagree, and three statistics we prespecified and then withdrew, with the
+reason for each withdrawal. Removing any of that would leave a shorter paper
+making a stronger claim than its evidence supports. We have already moved every
+reducible block to the Supporting Information, which is where the per-cell
+values, the full permutation family, the five freedoms in detail and the two
+withdrawn controls now sit; the main text was 10.8 pages before that move. The
+Experimental Section is retained in the main article as the guidelines require.
+
+\textbf{Reporting and availability.} This work is a reanalysis of published
+tables. We made no measurement and handled no agent. Each of the three source
+papers reports that its measurements were made at an Organisation for the
+Prohibition of Chemical Weapons designated laboratory under Chemical Weapons
+Convention procedures. Analysis code, descriptor tables,
 parsed regulatory values with their sources and every figure script are
 deposited in a public repository cited in the manuscript, and all permutation
 % 2026-11-03. 범위 한정. 8종 지정 귀무와 부분공간 대조는 표집이다.
 designation and Mantel tests are exhaustive rather than sampled, with the
-two sampled controls declared and seeded, so that every number reported can be
-reproduced from the deposit. The manuscript has not been published elsewhere
+two sampled controls declared and seeded, so that every number we computed can
+be reproduced from the deposit; values quoted from the source studies, from
+regulatory registers, and two cross-validated accuracies we could not reproduce
+are marked as quoted where they appear. The manuscript has not been published elsewhere
 and is not under consideration at another journal. The authors declare no
 competing financial interest.
 

@@ -188,18 +188,60 @@ def gate_verify():
     for _a in _s.argv[1:]:
         if _a.startswith('--ref='):
             refs = [_a.split('=', 1)[1]]
+    # 2026-11-07 (10차 R5-B5). 종전에는 없는 캐시를 continue 로 넘겼다.
+    # 캐시가 없는 패키지에서 관문이 조용히 건너뛰고도 '전 수치열 재현' 을
+    # 찍었고, 풀어 돌린 사람에게는 통과로 보였다. 없는 것은 중단 사유이고,
+    # 재계산(28종 x 수십 초)보다 먼저 확인한다. 반경험 캐시는 이 관문이
+    # 재계산하지 못하지만, 없으면 거리 계산이 전자공간을 조용히 빼고
+    # 돌아가므로 존재만이라도 확인한다.
+    missing = [_r for _r in refs if not _os.path.exists(_r)]
+    missing += [_x for _x in ('descriptor_cache_xtb.csv',
+                              'descriptor_cache_xtb_35.csv',
+                              'descriptor_cache_xtb_36.csv',
+                              'descriptor_cache_xtb_ascl3.csv')
+                if not _os.path.exists(_x)]
+    if missing:
+        print(f'[중단] 서술자 캐시 {len(missing)}개가 없다: '
+              + ', '.join(missing)
+              + '\n  관문이 건너뛰면 통과로 보이지만 아무것도 대조하지 않은 '
+                '것이다. 예치 패키지에서 누락된 파일을 받을 것.')
+        return 1
     bad = []
     for _r in refs:
-        if not _os.path.exists(_r):
-            continue
         print(f'\n[gate] {_r}')
         bad += [f'{_r}:{c}' for c in verify(_r)]
     if bad:
         print(f'\n[중단] 재현되지 않는 열 {len(bad)}개. 거리 계산에 들어가는 '
               '열이 코드에서 재생성되지 않으면 분석을 신뢰할 수 없다.')
         return 1
-    print('\n[gate] 전 수치열 재현. 통과.')
+    # 2026-11-07. 관문의 범위를 산출물로 남긴다. SI 가 '53 of the 61' 이라고
+    # 적으므로 그 두 수가 손으로 적힌 값이 아니라 이 실행의 결과여야 한다.
+    # verify_consistency.py 가 이 파일을 읽어 본문과 대조한다.
+    import json as _j
+    _R = pd.read_csv(refs[0])
+    _META = ('compound_name', 'compound_class', 'agent_series', 'input_smiles',
+             'canonical_smiles', 'formula', 'leaving_group',
+             'conformer_forcefield')
+    _all = [c for c in _R.columns
+            if _R[c].dtype.kind in 'if' and c not in _META]
+    _os.makedirs('outputs', exist_ok=True)
+    _j.dump({'ref': refs[0], 'n_numeric': len(_all),
+             'n_checked': len([c for c in _all if c not in XTB_EXEMPT]),
+             'exempt': list(XTB_EXEMPT)},
+            open('outputs/descriptor_gate_scope.json', 'w'), indent=1)
+    print('\n[gate] RDKit 서술자 전 수치열 재현. 통과.')
+    print('[gate] 범위: 반경험 전자 좌표 8열은 이 관문이 재계산하지 않는다 '
+          '(xtb 바이너리 필요, 버전 미기록). SI meth:dft 의 B3LYP 대조가 '
+          '그 축을 따로 검사한다.')
     return 0
+
+
+# 2026-11-07 (10차 R5-B5). 서술자 관문이 재계산하지 못하는 열. 전부
+# GFN2-xTB 또는 그 파생이고, descriptors() 는 RDKit 경로만 돈다. 여기에
+# 열을 더하려면 왜 재계산할 수 없는지를 함께 적을 것.
+XTB_EXEMPT = ('E_HOMO_eV', 'E_LUMO_eV', 'dipole_moment_D',
+              'electrophilicity_index_eV', 'fukui_f_plus_P',
+              'q_P', 'q_phosphoryl_O', 'wiberg_PO')
 
 
 def verify(ref_path='descriptor_cache.csv'):
@@ -216,7 +258,29 @@ def verify(ref_path='descriptor_cache.csv'):
     num = [c for c in R.columns
            if R[c].dtype.kind in 'if' and c in N.columns
            and pd.to_numeric(N[c], errors='coerce').notna().any()]
-    print(f'[verify] {len(R)}종, 수치열 {len(num)}개 대조')
+    # 2026-11-07 (10차 R5-B5). 종전에는 대조한 열 수만 찍고 '전 수치열 재현'
+    # 이라고 통과를 선언했다. 그런데 캐시의 수치열은 61개이고 descriptors()
+    # 가 내놓는 것은 53개다. 빠진 8개는 전부 반경험·전자 좌표이고, 그 셋은
+    # 본문 electronic space 의 전부다. 즉 관문은 '전 수치열' 을 본 적이
+    # 없는데 그렇게 적고 있었다. 빠진 열을 이름으로 찍고, 선언한 면제
+    # 목록에 없는 열이 빠지면 중단한다.
+    # 식별·메타 열은 서술자가 아니다. descriptor_cache_ascl3.csv 는 1행이고
+    # agent_series 가 비어 있어 pandas 가 float NaN 열로 읽는다(위 주석과 같은
+    # 자리). 그것까지 '미대조 서술자' 로 세면 거짓 중단이 난다.
+    META = ('compound_name', 'compound_class', 'agent_series', 'input_smiles',
+            'canonical_smiles', 'formula', 'leaving_group',
+            'conformer_forcefield')
+    allnum = [c for c in R.columns
+              if R[c].dtype.kind in 'if' and c not in META]
+    uncov = sorted(set(allnum) - set(num))
+    print(f'[verify] {len(R)}종, 수치열 {len(allnum)}개 중 {len(num)}개 대조')
+    if uncov:
+        print(f'  미대조 {len(uncov)}열 (재계산에 xtb 바이너리가 필요): '
+              + ', '.join(uncov))
+        extra = [c for c in uncov if c not in XTB_EXEMPT]
+        if extra:
+            print(f'  [중단] 면제 목록에 없는 미대조 열: {", ".join(extra)}')
+            return extra
     ok, bad = [], []
     for c in num:
         a, b = R[c].to_numpy(float), N[c].to_numpy(float)

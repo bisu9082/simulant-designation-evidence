@@ -68,8 +68,8 @@ Korea}
 % achemso 의 suppinfo 모드가 제목 앞에 'Supporting Information:' 를 스스로
 % 붙인다. 제목에 또 쓰면 두 번 찍힌다 (2026-11-02 렌더에서 확인).
 % 2026-11-03. 본문 제목 교체에 맞춰 동기화.
-\title{No Resolvable Agreement Between Descriptor Distance and Colorimetric
-Array Response: A Reanalysis of Authentic Chemical Warfare Agent Measurements}
+\title{Dimethyl Methylphosphonate Responds Opposite to Soman, Cyclosarin and
+VX in a Colorimetric Array of Authentic Chemical Warfare Agents}
 
 \begin{document}
 
@@ -199,6 +199,7 @@ related to the open-set problem of recognising an input as unfamiliar rather tha
 assigning it to a known class \cite{openset}.
 
 \section{Decoupling test}
+\label{meth:decoupling}
 Candidates were the AEGL compounds for which structure, electronic descriptors
 and a measured AEGL-3 were all available, excluding the authentic agents
 themselves ($n=207$). Eight further records were set aside under four rules
@@ -249,15 +250,24 @@ per cent of its own magnitude. The cause is that the selection is an
 difference between runs moves it to a different conformer.
 
 We therefore replaced the selection with a Boltzmann-weighted mean over the
-whole ensemble at 298~K. Every numeric column of the cache now reproduces from
-the code. The descriptor build script checks this under a
-\texttt{--verify} flag, and the analysis pipeline requires it before it will
-run.
+whole ensemble at 298~K. Every RDKit-derived numeric column of the cache now
+reproduces from the code, 53 of the 61 numeric columns, and the descriptor
+build script checks them under a \texttt{--verify} flag that the analysis
+pipeline requires before it will run. The scope of that gate is worth stating,
+because it is narrower than the pipeline's pass message once implied. The eight
+columns it does not recompute are the semiempirical electronic coordinates and
+their derivatives, which need the GFN2-xTB binary whose version was not
+recorded when the cache was built, so the gate names them on every run rather
+than counting them as checked, and fails if any other column falls outside that
+declared list. Those eight are checked instead by the independent
+density-functional recomputation of Section~\ref{meth:dft}. A missing cache
+file now stops the gate as well, because a skipped file previously left it
+reporting a pass with nothing compared.
 
 The seed moves one of the eleven agents and nothing else. Repeating the
 embedding under six seeds and rebuilding only the nine shape coordinates, the
 thirty-five-compound panel returns no valid match in any of the twelve runs and
-the retained merged space is thirty-eight coordinates in all twelve. On the
+the retained merged space is forty-one coordinates in all twelve. On the
 twenty-eight-compound panel the count is three under all six single-conformer
 seeds, and three under three of the six ensemble seeds against four under the
 other three. The agent that moves is tabun in every case. Its normalised
@@ -279,12 +289,49 @@ correlation filter is handed its columns
 (Section~\ref{meth:orderinvariance}). We report tabun as a borderline case
 throughout rather than counting it on either side.
 
+\section{The shape block as a declared sensitivity}
+\label{res:shapeblock}
+
+Nine of the thirty-eight coordinates retained on the twenty-eight-compound
+panel, and nine of the forty-one on the primary panel, are functions of the
+three principal moments of inertia. Because the relations are ratios rather
+than linear, the correlation filter at $|r| > 0.95$ does not remove them: the
+largest pairwise correlation inside the block is 0.9364 on the
+twenty-eight-compound panel and 0.9359 on the primary panel. The one shape
+coordinate the filter does remove is the third principal moment itself,
+dropped against the second at $|r| = 0.998$ on both panels, while nine
+coordinates built from the same three moments are kept. They are not exact
+functions of one another either, since each descriptor is Boltzmann averaged
+over conformers independently, which leaves relative discrepancies of 1.4 to
+15.3\% in the three identities we checked.
+
+We therefore kept the full block and recomputed everything with the seven
+derived coordinates dropped, as a declared sensitivity rather than a
+replacement. On the twenty-eight-compound panel the shape contribution to
+mean squared pairwise distance falls from 23.7 to 6.5\%, and for the two
+agents whose nearest-match rule acetonitrile blocks it falls from 69.8 and
+61.9\% to 0.20 and 0.12\%. The count of valid matches there falls from
+three to zero. On the primary panel it is zero under both encodings, and the
+smallest Benjamini--Hochberg value over the twelve Mantel cells rises from
+0.1167 to 0.1708 with the largest rank correlation unchanged at 0.571.
+
 \section{Column order in the correlation filter}
 \label{meth:orderinvariance}
 
-The descriptor spaces are built by dropping one coordinate from every pair whose
+The descriptor spaces are built in three stages, not one, and the order is
+the order the code runs them. The first drops any coordinate that is constant
+across the panel. The second drops one coordinate from every pair whose
 absolute Pearson correlation exceeds 0.95, so that no retained pair sits above
-that cut. More than one retained set satisfies that constraint, and until this
+that cut. The third drops any coordinate that is still an exact algebraic
+function of others present after that cut. On the primary panel the third
+stage removes nothing, because the four Abraham-parameter proxies it would
+otherwise catch are perfectly correlated with their determining columns and
+the second stage has already taken them. On the twenty-eight-compound panel it
+removes exactly two, \texttt{lser\_S\_proxy} and
+\texttt{is\_organophosphorus}. The first of those is on the protected list
+and is removed anyway, because it is computed from the molar refractivity and
+the polar surface area and both survive; we record that the protected list
+does not override this stage. More than one retained set satisfies that constraint, and until this
 revision the set we used was chosen by the order in which the columns happened
 to sit in the descriptor file. The filter walked the pairs in that order and
 dropped the later member of each supra-threshold pair, which means the surviving
@@ -292,9 +339,9 @@ coordinates were a function of a variable no analyst had selected.
 
 The cost is measurable. Permuting the input column order forty times under a
 fixed seed and rebuilding everything downstream, the old filter returned
-thirty-seven distinct retained sets on the twenty-eight-compound panel, with
-dimensions between 36 and 39, and a valid-match count of three in twenty-five
-of the forty orderings and four in the remaining fifteen. The value we had
+thirty-four distinct retained sets on the twenty-eight-compound panel, with
+dimensions between 36 and 39, and a valid-match count of three in twenty-four
+of the forty orderings and four in the remaining sixteen. The value we had
 reported was the minority outcome. The thirty-five-compound panel behaved
 differently: thirty-six distinct retained sets and dimensions between 39 and 41,
 but a valid-match count of zero in all forty orderings. The headline negative
@@ -324,7 +371,8 @@ Under the new rule the same forty permutations return a single retained set on
 every panel: thirty-eight coordinates and three valid matches on the
 twenty-eight-compound panel, forty-one coordinates and no valid match on the
 thirty-five-compound panel, and forty-one coordinates with five valid matches
-when the eight literature simulants are admitted as candidates. The maximum
+when the five literature-proposed simulants are admitted alongside the three
+incumbents, eight candidates in all. The maximum
 retained $|r|$ is 0.9470, as it was before. The counts are in
 \texttt{order\_invariance.json} under \texttt{outputs/} and are regenerated by
 \texttt{order\_invariance.py}, which reports both rules side by side.
@@ -392,13 +440,103 @@ reader who repeats this analysis with a different descriptor set will get a
 different count.
 
 The agreement test between descriptor distance and measured response does not
-behave this way. Recomputing the twelve Mantel tests of
-Section~\ref{M-res:mantel} under the first, second and fourth encodings of
-Table~\ref{tab:sparse} leaves the smallest Benjamini--Hochberg value at 0.1167,
-0.4722 and 0.3889 respectively, with no cell below 0.05 under any of them.
-Removing the single-carrier indicators makes the agreement weaker, not
-stronger. The paper's result is in that test, and it is the one quantity here
-that no analyst choice we enumerated has moved.
+behave this way. An earlier version of this section recomputed the twelve
+Mantel tests of Section~\ref{M-res:mantel} under three of the encodings of
+Table~\ref{tab:sparse} and then wrote that the result survives every choice we
+enumerated, which was a claim about four encodings it had not tested, including
+the one that moves the match count furthest. All seven are now recomputed. The
+smallest Benjamini--Hochberg value is 0.1167 under the baseline encoding and
+0.4722, 0.3000, 0.3889, 0.2944, 0.2944 and 0.3222 under the six reduced ones,
+so the baseline is the most favourable of the seven and no cell reaches 0.05
+under any. Removing the single-carrier indicators makes the agreement weaker,
+not stronger. The paper's result is in that test, and it is the one quantity
+here that no analyst choice we enumerated has moved.
+
+\section{How the designating record was searched}
+\label{meth:docsearch}
+
+Section~\ref{M-res:docs} reports that we found no designating document for
+dichloromethane. An absence is only as good as the search behind it, so we
+state the search.
+
+% 2026-11-07 (11차 6단계). 본문 res:docs 에서 옮겨 왔다.
+The NIOSH document's own reasons are worth quoting, because they are not what
+a detection user would assume. DMMP is called a good filtration simulant
+because it is relatively non-toxic, is easily detectable, and has a volatility
+intermediate between GB and HD, and the properties that carry the choice are
+mass transfer and absorbent capacity. The National Research Council assessment
+of the Man-in-Simulant Test programme, which designates DMMP a second time as
+the fabric-testing simulant for VX, gives di-isopropyl methyl phosphonate for
+GB and records that the chemical structure may be quite
+different.\cite{nrc1997mist}
+
+We looked for a document that names the compound as a simulant for a named
+agent class and states the property or measurement the choice was made
+against. Three sources were searched on 4 November 2026. The first is the
+NIOSH CBRN air-purifying respirator simulant programme, which is the
+document that designates dimethyl methylphosphonate\cite{niosh2002simulant};
+it names DMMP, carbon tetrachloride and cyclohexane as filtration simulants
+for GB and for HD. The latter two are not on the descriptor panel. The panel
+was assembled from the compounds the three source studies measured and the
+interferents the sensing literature names, before we traced the designation
+record, and we did not rebuild it afterwards; a panel that carried them would
+test a different question, whether the filtration designations hold on a
+detection axis, which no measurement here can answer. Dichloromethane is not
+among them. The second is the patent literature, through Google Patents and
+Justia, for patents naming dichloromethane as a chemical agent simulant;
+the training-composition patents returned name other compounds, and the one
+that designates dipropylene glycol monomethyl ether is
+\cite{seitzinger2006simulant}. Its full text is the second limit of this
+search. Google Patents, Justia and the USPTO full-text service all refused
+retrieval from our environment, so the bibliographic record is established and
+the document's own wording is not; nothing in this paper rests on what that
+patent requires. The third is the most recent critical review
+of low-toxicity liquid simulants\cite{webb2025}, which does not list
+dichloromethane as a simulant for any agent and names it only as the
+extraction solvent recommended by the Organisation for the Prohibition of
+Chemical Weapons. The fourth is the National Research Council assessment of
+the Man-in-Simulant Test programme\cite{nrc1997mist}, whose chapter on
+simulant selection names methyl salicylate, dimethyl methylphosphonate and
+di-isopropyl methyl phosphonate for fabric testing and does not name
+dichloromethane.
+
+Table~\ref{tab:designations} lists every designation we located, with the
+document, the agent it names, the measurement it was made against, and the
+basis the document itself states. We tabulate rather than narrate because an
+earlier version of this section narrated it and two errors survived that
+would not have survived a table: it summarised the National Research Council
+designation of DMMP for VX as a designation for the nerve agent class, and it
+said elsewhere that the designating documents name no agent class for these
+compounds, which is false for DMMP in both documents.
+
+\input{tab_designations}
+
+One classification in the panel is contestable and we record it rather than
+settle it. Malathion enters the panel as an interferent, because that is how
+the sensing literature uses it, but the critical review cited in the
+Introduction assesses it as a low-toxicity simulant on the physicochemical
+criterion.\cite{webb2025} Dichlorvos is in the same position. Neither
+reading changes a count. In the narrowed comparison set the only two agents
+either pesticide blocks are tabun, blocked by dichlorvos, and VX, blocked by
+malathion, and both of those agents already fail the distance threshold at
+2.5320 and 3.0364, so moving the two compounds out of the comparison set
+leaves the three valid matches and the wider reading's zero exactly where
+they are.
+
+Three limits apply and we state them rather than claim coverage we do not
+have. The search covers the public record reachable without clearance or a
+subscription, so a designation in a restricted or unindexed document would
+not be found. US Army Test Operations Procedure 08-2-196, \emph{Simulant
+Selection for Laboratory, Chamber, and Field Testing}, is the one further
+document we identified as likely to carry a designation of this
+kind.\cite{top082196} We know of it only through the citation in TOP
+08-2-188 CN1, which is also where its title comes from; a revision 08-2-196A
+is held by the Defense Technical Information Center under accession
+AD1167884. We obtained neither, so we report the procedure as unexamined
+rather than as absent, and we do not characterise what it contains. And the search was for a
+designating document, not for usage: dichloromethane is used as a simulant
+in the sensing literature, which is why it is an incumbent here, and that
+usage is not in dispute.
 
 \section{Lewisite purity and what depends on it}
 \label{meth:purity}
@@ -406,15 +544,43 @@ that no analyst choice we enumerated has moved.
 The second run reports GC--MS purities above 95\% for hydrogen cyanide,
 cyanogen chloride, phosgene, chloropicrin, sulfur mustard and nitrogen
 mustard, and 67\% for lewisite~1.\cite{multiplexref} The first and third runs
-report no purity values; we searched the methods of both and found none, and we
-do not estimate them.
+report no purity values. We read the Materials section of each. The first
+states only that the agents were obtained from the CBRN Defense Research
+Institute\cite{hazref}; the third states only that the work was carried out
+at an Organisation for the Prohibition of Chemical Weapons designated
+laboratory and gives no provenance for the agents at all\cite{group3ref}.
+Neither reports an assay, a supplier grade or a confirmatory analysis. We do
+not estimate the missing values.
+
+Two things follow from the 67\% and we state both. The first is the isomer.
+Lewisite~1 has geometric isomers and the technical material is predominantly
+the \textit{trans} form. We compute it as the $E$ isomer, with input SMILES
+\texttt{Cl/C=C/[As](Cl)Cl}, and the descriptor code assigns that double bond
+\texttt{STEREOE}. Recomputing the compound as the $Z$ isomer and leaving the
+rest of the panel untouched moves its normalised distance in the structural
+space of the primary panel from 2.4769 to 2.4892, leaves CEES as its nearest
+candidate simulant and \textit{para}-dichlorobenzene as its nearest
+non-simulant, and does not change the match verdict, which is negative under
+both. The comparison is of the structural space only: the electronic
+descriptors are produced by a semiempirical step that we did not re-run for
+the alternative isomer, so we do not report a merged-space figure for it.
+Values are in \texttt{outputs/lewisite\_isomer.json}.
+
+The second is the other 33\%. The source does not say what it is, and we do
+not assume. Technical lewisite can carry the bis and tris homologues and
+arsenic trichloride, and of those the one that the sensing literature also
+treats as a simulant is arsenic trichloride; Section~\ref{sec:si-ascl3} adds
+it to the panel and reports what changes. We do not extend that to the
+homologues, because adding a compound the source does not place in the vial
+would be an assumption dressed as a control.
 
 A 67\% sample is a mixture, and lewisite enters both the descriptor panels, as
 one of the eleven agents, and the second run's premise test, as one of seven
 compounds. Removing it changes neither. On the twenty-eight-compound panel the
 count stays at three valid matches with the dimension falling from 38 to 37; on
 the primary panel it stays at zero with the dimension falling from 41 to 39;
-admitting the eight literature simulants it stays at five. In the second run's
+admitting the five literature-proposed simulants, eight candidates in all, it
+stays at five. In the second run's
 premise test the mean difference moves from $+0.558$ to $+0.529$ in the
 ultraviolet channel and from $+0.619$ to $+0.625$ in reflectance. The
 sign-flip $p$ recorded at the time rose from 0.0078 to 0.0156 in both, which
@@ -486,13 +652,14 @@ dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
 five valid matches and 0.0368. Four of those five are sarin, soman and tabun
 matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
 supports. The fifth is sulfur mustard matched to DPGME, about
-which the designation record says nothing either way: the patent that names
-DPGME requires detectability by ion mobility spectrometry of the composition
-and assigns the compound to no agent class (Section~\ref{M-res:docs}). An
-earlier version of this section wrote that the patent calls DPGME a preferred
-G-agent simulant and rejected this pairing on that ground. We withdraw that
-statement because we could not verify the wording against the patent
-itself. The single match under GFN2 was hydrogen cyanide to
+which the designation record says nothing either way. An earlier version of
+this section wrote that the patent calls DPGME a preferred G-agent simulant and
+rejected this pairing on that ground, and a later one wrote that the patent
+requires detectability by ion mobility spectrometry and assigns the compound to
+no agent class. We withdraw both, for the same reason: we were not able to
+retrieve the text of that patent, so nothing about its internal requirements is
+established here and neither its agent class nor its detection instrument
+enters any argument (Section~\ref{M-res:docs}). The single match under GFN2 was hydrogen cyanide to
 dichloromethane.
 
 Three things have to be said about that. The first is that the sign of the
@@ -507,7 +674,7 @@ because the alternative is to leave standing a negative claim that our own check
 does not support. The second is that the merged space does not move the same
 way. Rebuilt from the same three density-functional coordinates it retains the
 thirty-eight coordinates of the main analysis and returns three valid matches and
-a one-sided $p$ of 0.0250, against four and 0.0250 for the GFN2 control, so the
+a one-sided $p$ of 0.0250, against three and 0.0250 for the GFN2 control, so the
 value the main text carries is not an artefact of the semiempirical method. The
 third is that the analyst freedoms this paper is about therefore include one we
 did not enumerate when we set the comparison up, and it is the freedom that
@@ -523,7 +690,70 @@ $f^{+}(\mathrm{P})$ values in Table~\ref{tab:plocal} are therefore GFN2 values
 with no independent check, and the ratio between DMMP and VX that the main text
 quotes should be read within that limit.
 
+\section{The six analyst freedoms in full}
+\label{res:freedoms}
+
+% 2026-11-07 (11차 6단계). 본문 res:panels 에서 세 단락을 옮겨 왔다. 본문은
+% 같은 세 자유도를 수치 없이 한 단락으로 요약하고 이 절을 가리킨다.
+The main text reports that six analyst choices move the count of valid matches
+and keeps only the summary. The three that are not the panel, the filter order
+or the threshold are given here as they stood in the body.
+
+One analyst freedom we did not enumerate at the outset moved the answer
+further than any we did. Recomputing the three electronic coordinates at
+B3LYP/def2-SVPD instead of GFN2-xTB moves that space from one valid match of
+eleven and a one-sided $p$ of 0.275 to five matches and 0.0368, and only one
+of the five is a pairing the designation record makes. We do not promote it:
+one uncorrected statistic in one space, reached by changing a method after
+seeing the first answer, on different geometries. What it establishes is that
+the space in which the incumbents did worst is the space the choice of
+electronic-structure method decides. The merged space keeps three valid
+matches and a one-sided $p$ of 0.0250 under both methods while its individual
+distances move (Section~\ref{meth:dft}).
+
+So does the way the descriptors are encoded, and that freedom is the largest
+of the six. Four of the thirty-eight retained coordinates on the
+twenty-eight-compound panel are binary indicators carried by exactly one
+compound, and standardising such a column adds exactly $n$, here 28, to the
+squared distance between its carrier and every other compound. For tabun that
+addition is 47.6\% of the squared distance to DMMP. Dropping those four moves
+tabun from 2.0038 to 1.4509 and the count from three valid matches to four;
+dropping every indicator carried by three compounds or fewer gives five, and
+every coordinate with five or fewer distinct values gives six, with the
+merged-space one-sided $p$ falling from 0.0250 to 0.0074. We kept the encoding
+that produces the smallest count and report the sweep, because that is the
+only evidence that we did not select the encoding for its answer. Section~\ref{meth:sparse} gives the column-by-column accounting.
+
+A fifth choice is the shape block: nine retained coordinates on each panel are
+functions of the three principal moments of inertia, which the correlation
+filter does not remove because the relations are ratios rather than linear.
+Dropping the seven derived ones, as a declared sensitivity rather than a
+replacement, takes the twenty-eight-compound count from three to zero, and the
+primary panel is zero either way (Section~\ref{res:shapeblock}).
+
+The sixth freedom is the match threshold. The criterion of
+Section~\ref{M-meth:descriptors} has two parts, a normalised distance of 2 or
+less and a distance smaller than that to every compound outside the designated
+set. Removing the first part and keeping the second takes the
+twenty-eight-compound count from three valid matches to five, while the primary
+panel stays at zero; the null expectation of the number of agents with
+something outside the designated set nearer than any incumbent is 9.06 of
+eleven on the twenty-eight-compound panel and 9.63 of eleven on the primary
+one, so what the count is sensitive to is the threshold and not the ordering
+the second part encodes. The values are in
+\texttt{outputs/stat\_supplement.json} under \texttt{threshold\_free}.
+
 \section{Multiplicity and the accounting schemes}
+
+% 2026-11-07 (11차 6단계). 본문 Experimental 에서 옮겨 왔다. 이 여섯 수치는
+% 다른 어디에도 없었다.
+The designation tests of the main text are one-sided, because the hypothesis
+is directional. The two-sided values matter on the twenty-eight-compound panel,
+where the convention decides the answer: the structural space moves from 0.0279
+one-sided to 0.0559 at twice the smaller tail and 0.0441 scored as distance
+from the null mean, and the merged space from 0.0250 to 0.0500 and 0.0279.
+Under the first of those conventions neither space reaches 0.05.
+
 \label{meth:multiplicity}
 Multiplicity is corrected within each panel configuration. The six distance
 statistics applied to the three descriptor spaces form one family of eighteen
@@ -580,12 +810,48 @@ are reported. That draw count carries a Monte Carlo
 standard error near one percentage point on a proportion and resolves a
 percentile to 0.05.
 
+\section{How the sixteen agents were classified under the Convention}
+\label{meth:cwc}
+
+% 2026-11-07 (10차 R4-D5). 본문이 'twelve Schedule 1 and four Schedule 3' 를
+% 적으면서 출처가 없었다. OPCW 일람과 2019 개정 결정문으로 확인했다.
+The main text states that twelve of the sixteen measured agents are Chemical
+Weapons Convention Schedule~1 compounds and four are Schedule~3 industrial
+chemicals. The assignment is read from the Annex on Chemicals as the
+Organisation for the Prohibition of Chemical Weapons publishes
+it.\cite{opcwschedules} Sarin and soman fall under 1A(1), tabun under 1A(2), VX
+under 1A(3), sulfur mustard under 1A(4), lewisite under 1A(5) and nitrogen
+mustard under 1A(6); cyclosarin is not named individually and falls under
+1A(1), whose R$_2$ position admits a cycloalkyl group. Phosgene, cyanogen
+chloride, hydrogen cyanide and chloropicrin are 3A(1) to 3A(4). The four
+A-series compounds fall under the entries 1A(13) to 1A(16) added by the 2019
+amendment, which entered into force on 7 June 2020.\cite{opcwnovichok} One
+caveat belongs with that last group: the source study reports them as the codes
+A-230, A-232, A-234 and A-242 and gives their structures as representative
+rather than assigned (Section~\ref{M-meth:array}), so their Schedule~1
+membership is stated at the level of those families and not of a named
+compound.
+
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
-Measured response was taken from a 29-dye colorimetric array reported in earlier
-work from this laboratory \cite{hazref,multiplexref,group3ref}. Colour difference
+Measured response was taken from a 29-component colorimetric array reported in
+earlier work from this laboratory \cite{hazref,multiplexref,group3ref}. The
+array is listed compound by compound in Table~\ref{tab:dyepanel}. Five of the
+twenty-nine are not chromogenic dyes: two are fluorophores, one is a thiol
+reducing agent and two are carbonyl derivatising reagents, so part of the
+pattern is covalent derivatisation rather than a solvatochromic shift. The
+stock solvent of one component, Quinoline Yellow, differs between the source
+studies, dimethyl sulfoxide in the first two runs and water in the third; we
+report that as published and do not resolve it. Colour difference
 $\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
-the same dye in the same channel, given per dye for three compound sets at
+the same dye in the same channel. The source studies do not state the working
+colour space, the reference white or the transfer function used to reach
+CIELAB from the camera output, and we did not have the plate images, so that
+conversion is an input to this reanalysis rather than part of it. Every
+comparison made here is within one run and one channel, where whatever
+convention was used is common to the vectors being compared and cancels from
+the cosine; no comparison in this paper puts a $\Delta E_{00}$ from one run
+beside one from another. The values are given given per dye for three compound sets at
 solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
 acetonitrile, in two imaging channels: ultraviolet-excited emission and
 reflectance. An earlier version of this section called these nominal vapour
@@ -600,7 +866,14 @@ exception being nitrogen mustard HN, which the descriptor panel does not carry.
 The third set is excluded entirely and the criterion is arithmetic rather than
 editorial: none of its four compounds appears in the descriptor panel, so no
 pair of a measured pattern and a descriptor distance can be formed from it. It
-contributes to no analysis in this paper.
+contributes to no analysis in this paper. The exclusion is not a judgement we
+had to make on chemical grounds, because the source does not supply the
+identities that such a judgement would need: it carries the four as the codes
+A-230, A-232, A-234 and A-242, labels its structure figure representative, and
+does not map any code to a named compound\cite{group3ref}. We therefore do not
+assign structures to those codes anywhere in this work.
+
+\input{tab_dyepanel}
 
 The three sets are different compounds measured on different plates, not
 replicates, so no $\Delta E$ value is compared across sets; every analysis is run
@@ -614,8 +887,11 @@ reproducibility rather than averaged away.
 Each compound's 29-dimensional response at each concentration was scaled to unit
 length, so that pattern rather than magnitude is compared. The compound-axis mean
 was then subtracted at each concentration to remove the common non-negative
-response component, and the resulting vectors were averaged over concentrations
-and renormalised to give one pattern per compound per channel. Similarity is the
+response component, and each centred vector was scaled to unit length again.
+Those three steps, in that order, are what the code performs, and the second
+scaling is load-bearing for the argument two paragraphs below. The resulting
+vectors were averaged over concentrations and renormalised to give one pattern
+per compound per channel. Similarity is the
 cosine between patterns and dissimilarity is one minus that. Confidence intervals
 are bootstrapped over concentrations with 10\,000 resamples, which means they
 describe variation across the four concentrations of one plate set and not
@@ -636,7 +912,7 @@ vector is renormalised to unit length before any cosine is taken, and
 renormalisation does not preserve $\sum_i u_i = 0$ unless the norms happen to
 be equal. Measured on the vectors this work actually uses,
 $\lVert\sum_i u_i\rVert/\sqrt{n}$ is $7.2\times10^{-16}$ immediately after
-the subtraction and between 0.1292 and 0.7430 after the renormalisation. The
+the subtraction and between 0.0445 and 0.7430 after the renormalisation. The
 premise of the identity is not merely perturbed, it is gone.
 
 The second is that $-1/(n-1)$ is not a floor even for vectors that do sum to
@@ -699,7 +975,7 @@ reaches 0.05 under any of the four schemes that correct what was actually run.
 
 \begin{table}[!htb]
 \centering
-\caption{Five ways of accounting for the search, applied to the eighteen tests
+\caption{Six ways of accounting for the search, applied to the eighteen tests
 of each panel configuration. The Westfall-Young min-$P$ value
 \cite{westfall1993} is exact for the dependence among the tests, since all
 eighteen share one enumeration of designations; $m_{\mathrm{eff}}$ approximates
@@ -827,29 +1103,40 @@ field treats as the G-agent surrogate, sits 0.473 decades from sarin while
 \textit{para}-dichlorobenzene, an interferent, sits 0.216. For three of the
 eleven agents the nearest compound in the pool is an interferent rather than a
 simulant. VX has nothing within 2.659 decades. We state these as distances and
-not as departures from designated pairings, because Section~\ref{M-res:docs}
-finds that the designating documents assign these compounds no agent class:
-the one that names dimethyl methylphosphonate measures filter breakthrough,
-the one that names dipropylene glycol monomethyl ether requires detectability
-by ion mobility spectrometry, and for dichloromethane we found no designating
-document at all.
+not as departures from designated pairings, because the designating documents do not
+pair these compounds with agents on anything a volatility distance can be
+read against. Dimethyl methylphosphonate is the one exception and it points
+two ways at once: the NIOSH programme names it for GB and for HD against a
+filtration measurement, and the National Research Council assessment
+names it for VX against a fabric test. Dipropylene glycol monomethyl ether appears in a
+training-composition patent whose text we could not retrieve, so it pairs with
+no agent here either, and for dichloromethane we found no designating document
+at all. A distance to sarin is therefore not a departure from a designated
+pairing for two of the three, and for the third it would have to be read
+against two different agents at once.
 
 The second test asks whether volatility distance tracks response distance.
 Exact Mantel permutation in each run-channel cell with at least four mapped
 agents gives four evaluable cells, and the rank correlation is positive in all
 four: $+0.043$ and $+0.254$ in the ultraviolet channel, $+0.389$ and $+0.546$
 in the reflectance channel. A single Fisher combination over all four cells was
-fixed in advance as the statistic for this test, and we withdraw it. The two
-optical channels of one plate are read from the same wells and are not
-independent, with a mean inter-channel cosine of 0.584 across the array, so the
-four $p$ values do not satisfy the assumption that combination requires. Runs
-do. We therefore combine across runs within each channel and correct across the
-two channels with Benjamini-Hochberg. The reflectance channel gives
-$p = 0.0215$ and $q = 0.0430$; the ultraviolet channel gives $p = 0.6389$ and
-$q = 0.6389$. One of the two channels clears 0.05, which no descriptor space
-reached on either panel, where the smallest adjusted value on the primary panel
-was 0.354 and the smallest nominal value 0.192. The withdrawn pooled statistic
-is recorded in \texttt{outputs/volatility\_space.json} for comparison.
+fixed in advance as the statistic for this test. It returns $p = 0.0809$, and
+we withdraw it, but the order of those two facts has to be stated plainly
+because it bears on everything below: the prespecified statistic did not clear
+0.05, and the family we report instead was chosen afterwards. The ground for
+withdrawing it is methodological and not the value. The two optical channels of
+one plate are read from the same wells and are not independent, with a mean
+inter-channel cosine of 0.584 across the array, so the four $p$ values do not
+satisfy the assumption that combination requires. Runs do. We therefore combine
+across runs within each channel and correct across the two channels with
+Benjamini-Hochberg. The reflectance channel gives $p = 0.0215$ and
+$q = 0.0430$; the ultraviolet channel gives $p = 0.6389$ and $q = 0.6389$.
+Read as one family of four cells instead, the smallest adjusted value is
+0.1389, and corrected jointly with the twelve descriptor cells it is 0.1556.
+The $q = 0.0430$ is therefore a property of one post-hoc family out of three we
+can define on the same four numbers, and we report all three rather than the
+one that clears. The withdrawn pooled statistic is recorded in
+\texttt{outputs/volatility\_space.json}.
 
 Taken together the two tests say something narrower and more useful than the
 descriptor result alone. The axis practitioners name first does carry
@@ -869,7 +1156,7 @@ carries them from the Hazardous Substances Data Bank and from the government
 compendia named in the source column; the adoption rule and the tier
 definitions are in the text. No value was converted between temperatures.}
 \label{tab:volatility}
-\small
+\footnotesize
 \input{tab_volatility}
 \end{table}
 
@@ -918,7 +1205,7 @@ evidence.
 \section{The subspace share needs a null, and we did not give it one}
 \label{res:subspacenull}
 
-An earlier version of this paper reported the 36.0\% alongside the percentile
+An earlier version of this paper reported the share alongside the percentile
 and read both as showing that the twenty-eight-compound structural result is an
 ordinary draw. The percentile supports that reading. The share does not, and the
 reason is that we never asked what the share would be if the designation carried
@@ -927,13 +1214,17 @@ nothing.
 In a fixed three-descriptor subspace the permutation $p$ of a designated set is
 its rank among all 680 ways of designating three of the seventeen non-agents. If
 the designation were arbitrary that rank is uniform, so the expected share of
-subspaces reaching $p<0.05$ is 0.05. The observed 36.0\% is seven times that.
+subspaces reaching $p<0.05$ is 0.05. The observed 27.4\% is 5.5 times that.
 
 One enumeration of a subspace yields the statistic for all 680 designations at
 once, so the null costs nothing beyond the run already made. Over 500 subspaces
-drawn the same way, the share below 0.05 averages 4.7\% across the 680
-designations, with a median of 2.0\%, a 95th percentile of 17.8\% and a maximum
-of 52.8\%. The incumbent designation's 36.0\% ranks fifth of 680, $p=0.0074$.
+drawn the same way, the share below 0.05 averages 4.5\% across the 680
+designations, with a median of 2.4\%, a 95th percentile of 17.8\% and a maximum
+of 44.6\%. The incumbent designation's 27.4\% ranks seventh of 680, $p=0.0103$.
+The subspaces are drawn from the thirty-five structural coordinates the
+correlation filter of Section~\ref{meth:orderinvariance} retains. An earlier
+version of this section reported this family from a thirty-seven-coordinate
+space that predated that filter, and the share there was 36.0\% at rank five.
 Values are in the deposited \texttt{subspace\_null.json} under
 \texttt{outputs/}.
 
@@ -1016,7 +1307,7 @@ Benjamini--Hochberg adjusted value of that family.}
 % 수치는 outputs/blockbalance.json 실측.
 The valid-match counts do not move under either weighting, on any panel
 construction: zero of eleven on the primary panel with the incumbent three,
-five with the literature eight admitted, and three on the
+five with all eight candidates admitted, and three on the
 twenty-eight-compound panel. The paper's headline is therefore invariant to
 the weighting, and
 so is the pre-specified-statistic counterfactual of Table~\ref{tab:family},
@@ -1056,9 +1347,9 @@ with Cl--As--Cl angles of $98.8^\circ$ against a reported $98.4^\circ$.
 
 \begin{table}[htbp]
 \centering
-\caption{Valid matches and the lewisite row across panel configurations.
-A match requires a normalised distance of at most two \emph{and} that no
-non-simulant lies closer.}
+\caption{Valid matches and the lewisite row across panel configurations
+(Section~\ref{sec:si-ascl3}). A match requires a normalised distance of at
+most two \emph{and} that no non-simulant lies closer.}
 \label{tab:si-ascl3}
 \small
 \begin{tabular}{@{}lccc@{}}
@@ -1068,9 +1359,9 @@ Configuration & matches & to lewisite & distance \\
 \hline
 Twenty-eight, incumbent three & 3/11 & dichloromethane & 2.14 \\
 Thirty-five, incumbent three & 0/11 & dichloromethane & 2.35 \\
-Thirty-five, plus literature eight & 5/11 & CEES & 2.34 \\
+Thirty-five, incumbent 3 + literature 5 & 5/11 & CEES & 2.34 \\
 Thirty-six, incumbent three & 0/11 & dichloromethane & 2.04 \\
-Thirty-six, plus literature & 6/11 & AsCl$_3$ & 1.25 \\
+Thirty-six, incumbent 3 + literature 6 & 6/11 & AsCl$_3$ & 1.25 \\
 \hline
 \end{tabular}
 \end{table}
@@ -1098,8 +1389,8 @@ identically to every compound in the panel, so relative positions remain
 comparable, but absolute electronic descriptors for heavy main-group compounds
 should not be read on their own.
 
-\subsection{What the test could have detected}
-
+% 2026-11-04 (G3). 같은 제목의 빈 \subsection 이 바로 위에 있었다.
+% 조판에서 빈 표제로 찍히고 목차에 두 번 나온다. 제거했다.
 \section{What the test could have detected}
 \label{res:mde}
 
@@ -1403,20 +1694,28 @@ association. Restoring it moves the smallest adjusted value from 0.133 to
 Not every declared channel is a separate measurement, and in one plate set six of
 them are not. In the second set's ultraviolet channel, dyes 22 to 27 return
 values identical to the last decimal place in every row. The images behind them
-are distinct files, so this is not a naming collision; the six dyes do not
-fluoresce under ultraviolet illumination and the region of interest read plate
-background instead. One background channel was therefore entering the unit-
-normalised pattern six times. Two further columns in the same channel, and five
+are distinct files, so this is not a naming collision. What the deposited
+tables establish is the identity, not its cause: the most likely reading is
+that those regions of interest read plate background rather than a dye
+response, which would make one background channel enter the unit-normalised
+pattern six times, but the tables begin at $\Delta E_{00}$ and the source
+reports no per-channel diagnostic, so we record that as our inference and not
+as a finding. The consequence for the analysis is the same either way, because
+six identical columns carry one channel's information whatever produced them. Two further columns in the same channel, and five
 in the third set's, are identically zero. We collapse columns that are equal in
 every row to a single occurrence, a rule declared once and applied to all six
 plate-channel combinations, which leaves 23 effective channels in the second
-set's ultraviolet data and 25 in the third set's, against 29 elsewhere. The
-collapse weakens the two cells it touches, from $\rho = +0.568$ and $+0.539$ to
-$+0.518$ and $+0.496$, and moves the smallest adjusted value over the twelve
-cells from 0.067 to 0.124. We report the collapsed values throughout, because a
-paper arguing that analyst choices inflate results cannot keep a sixfold
-duplicate that happens to fall in its two strongest cells. Which columns were
-collapsed is recorded in the deposited output.
+set's ultraviolet data and 25 in the third set's, against 29 elsewhere. The collapse
+touches the three cells of the second set's ultraviolet channel and weakens the
+two of them that carry the largest coefficients, the merged space from
+$\rho = +0.5500$ to $+0.5000$ and the structural space from $+0.5464$ to
+$+0.5107$, and it moves the smallest adjusted value over the twelve cells from
+0.0583 to 0.1167. We report the collapsed values throughout, because a paper
+arguing that analyst choices inflate results cannot keep a sixfold duplicate
+that happens to fall in its two strongest cells. An earlier version of this
+section gave six numbers here that no run reproduces; they are replaced by the
+measurement, which is in \texttt{outputs/collapse\_sensitivity.json} of the
+deposit together with the columns that were collapsed.
 
 Treating the fifteen pairs as independent observations, which the first version
 of this analysis did, moves these values by up to 0.038 and in both directions:
@@ -1436,6 +1735,16 @@ it criticises two paragraphs above and which narrowed every interval by roughly
 a factor of two. Every interval contains zero. The electronic space is the
 better predictor in one of the four cells.
 
+Two of the twelve cells are exact duplicates of two others. On the first
+compound set the correlation filter leaves the merged space identical to the
+structural space in both channels, so \texttt{d1.uv/merged} reproduces
+\texttt{d1.uv/structural} and \texttt{d1.normal/merged} reproduces
+\texttt{d1.normal/structural}, to the digit. Counting them separately
+enlarges the correction family and therefore moves the result towards the
+null we report, which is the conservative direction. Removing them and
+correcting over the remaining ten gives a smallest adjusted value of 0.0972
+against the 0.1167 we report, and changes no conclusion.
+
 Six compounds per set bound how much that null can carry, and bounding it
 correctly took us two attempts. A Fisher $z$ calculation on the fifteen pairs
 returns $|\rho| \ge 0.669$ at 80\% power; the same calculation with the six
@@ -1447,7 +1756,15 @@ rather than ignoring it. A narrow null compensates for a small sample, so the
 approximation at the correct unit understates the power of the procedure. We
 therefore simulated the procedure itself (Section~\ref{meth:deltaE}): at
 $\alpha = 0.05$, 80\% power is reached at $|\rho| = 0.67$, with the type~I rate
-of the simulated test at 0.049 against a nominal 0.05. The smallest attainable
+of the simulated test at 0.05 against a nominal 0.05, measured on two
+independent configurations over 20,000 null replicates with a standard error of
+0.0015. That figure is for a single test at the nominal level, and it is not
+the threshold the conclusions use. The twelve cells are corrected by
+Benjamini--Hochberg, so the smallest-ranked cell has to clear $0.05/12 =
+0.00417$, and at that threshold the same simulation puts 80\% power at
+$|\rho| = 0.85$. We quote both, and read the null against 0.85, for the same
+reason the designation test is read against its corrected displacement in
+Section~\ref{res:mde} rather than its nominal one. The smallest attainable
 $p$ is $1/720$, so the resolution is coarse but not as coarse as the
 compound-unit approximation suggests. These data exclude a strong association
 between either descriptor space and the measured response and nothing weaker. They do not show that the
@@ -1455,7 +1772,71 @@ electronic space governs sensor response, do not place it above the structural
 space, and do not show it to be irrelevant. The claims in the rest of this paper
 are written to that limit.
 
+\section{Two readings that did not survive their own controls}
+\label{res:deadcontrols}
+
+% 2026-11-07. 본문 res:dmmp 에서 옮겨 왔다. 두 소견 모두 자기 대조에서
+% 죽었고, 보고 의무가 있으나 본문 8면 예산을 넘겼다.
+Two further readings suggested themselves and did not survive their own
+controls. We report both, because the alternative is to present artefacts as
+results. The first was a ranking. DMMP is the nearest of the five candidates
+to tabun in the ultraviolet channel and to sarin in the reflectance channel
+and to nothing else, which reads as evidence that the optical channel decides
+which agent the standard simulant stands in for. It is not. With five
+candidates the expected number of first places over ten agent-channel cells
+is 2.0, the observed number is two, and the one-sided binomial $p$ is 0.62.
+The ten cells share DMMP's two response vectors, so they are not ten
+independent trials and the binomial is an approximation; the observed count
+sits on the expectation, where no correction could move the reading.
+
+The second was a channel decomposition. The cosine is a sum over dye
+channels, and the DMMP-to-tabun value of $+0.764$ turns out to rest on two
+of the 29 channels, with the largest single channel carrying 44\% of the
+positive mass. Read alone, that makes the resemblance look fragile. Two
+controls show it is not a property of DMMP. Agent-to-agent pairs in the
+same run concentrate identically, with median two channels in the
+ultraviolet and one in the reflectance channel, and a null built by
+permuting the dye labels of the DMMP vector gives a mean of 2.00 and 2.26.
+Concentration of this kind is what the product of two centred unit vectors
+in 29 dimensions does, and it says nothing about this compound.
+
+Neither reading enters any conclusion. They are set out here so that the
+record of what was looked at is complete.
+
+\section{What the dose direction does and does not carry}
+\label{res:doselimits}
+
+% 2026-11-07 (11차 6단계). 본문 res:dmmp 와 res:premise 에서 옮겨 왔다.
+Three limits sit on that direction. The concentrations are of analyte in a dye
+solution, not of vapour at an inlet, so we do not translate the range into the
+operating band of a point detector. The mean response magnitude rises with
+concentration at a Spearman correlation of exactly $+1.000$ in every one of the
+six run-channel cells, so a similarity that grows with concentration cannot be
+separated here from one that grows with signal-to-noise ratio; distinguishing
+them needs a repeat-level noise estimate the deposited tables do not carry.
+% 2026-11-07 (10차 R4-P2). 원논문 직독: "dissolving each nerve agent in THF
+% to create 1 M stock solutions, which were then further diluted with
+% acetonitrile" (JHM 501 (2026) 140703, 2.2절). 원고는 MeCN 만 적고 있었다.
+% 잔류 THF 는 최종 농도에 정비례하므로 농도추세의 세 번째 교란 후보다.
+And the agent stock of the first run was 1~M in tetrahydrofuran, diluted with
+acetonitrile, so the residual tetrahydrofuran in the vial is proportional to
+the final analyte concentration, rising from roughly 0.001 to 0.05 per cent by
+volume across the four levels. A solvent gradient of that shape is a third
+candidate for anything that varies monotonically with dose, and these tables
+cannot separate it from the other two either. What the direction supports is
+that the resemblance between this simulant and this agent is not constant over
+the range at which the array was characterised.
+
+These tables hold one value per compound, concentration, dye and channel, so
+the within-compound term is agreement of a compound with itself at a different
+dose and not between repeated measurements. Repeats were reported in the source
+work for selected dye-analyte combinations in the second
+run\cite{multiplexref} and for all experiments in the third,\cite{group3ref}
+but the repeat-level values are not in these tables, so no repeatability
+estimate enters any analysis below.
+
 \section{The measured safety axis, and the holes in it}
+\label{res:safetyaxis}
 
 Nineteen of the twenty-eight compounds have an AEGL-3 at 10~min
 (Fig.~\ref{M-fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
@@ -1510,11 +1891,44 @@ our conversion from the published parts-per-million value gives
 compound names rather than on registry numbers can miss it;
 Section~\ref{meth:aegl} describes the CAS-keyed procedure used here.
 
+\section{What each register holds for the three incumbents}
+\label{res:registers}
+
+The toxicity axis of the main text is the EPA acute exposure guideline level,
+because that is the register on which the eleven agents are placed. Two of the
+three incumbents are absent from it. They are not absent from every register,
+and an earlier version of this work said that they were; the correction is
+recorded here with its sources.
+
+Table~\ref{tab:registers} lists what we found. The US Department of Energy
+protective action criteria hold values for DMMP, derived as temporary
+emergency exposure limits from a rat one-hour LC$_{50}$ rather than from a
+human-health assessment, and NIOSH holds an immediately dangerous to life or
+health value and a recommended exposure limit for DPGME. These are real
+regulator-derived numbers and we do not discount them. They are also not the
+quantity the agents carry. An AEGL-3 is a ten-minute, three-tier, lethality
+threshold set by a federal advisory committee from a documented weight of
+evidence; a PAC-3 is a sixty-minute value that falls back to a formula on an
+animal LC$_{50}$ when no AEGL or ERPG exists; an IDLH is a thirty-minute
+escape criterion. Placing a PAC-3 for the simulant beside an AEGL-3 for the
+agent would put two different quantities on one axis and report the difference
+between them as a difference between compounds.
+
+A single-register axis that reaches more of the panel would be the better
+instrument, and the protective action criteria are the obvious candidate: they
+cover compounds the AEGL list does not, including DMMP and cyanogen chloride.
+We did not build it. The values have to come from the register's own tables
+and we were not able to obtain them for every panel compound, so a PAC axis
+here would have had worse coverage than the AEGL axis it replaced. We record
+it as the measurement this comparison still needs.
+
+\input{tab_registers}
+
 \section{A QSAR cannot fill the gaps}
 \label{res:qsar}
 
 On the training distribution the model works. The random forest
-(Fig.~\ref{M-fig:tox}c and d) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
+(Fig.~\ref{M-fig:tox}b) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
 $\log_{10}$ units (95\% CI 0.830--1.020) against a training-mean baseline of
 1.271 (1.175--1.365) and a logP-plus-molecular-weight linear baseline of 1.225.
 The intervals for the model and the mean baseline do not overlap, and the
@@ -1522,7 +1936,8 @@ out-of-fold error over the whole training set is unbiased, averaging $+0.001$ lo
 units. Nothing in the cross-validated statistics would warn a user off.
 
 On the twenty agents held out of training it failed, in one direction and without
-exception. Every one was predicted safer than measured, by between 0.40 and 3.42
+exception. The mean error over the twenty is $+1.68$ log units, with
+Cohen's $d_{z}=+1.96$ over the held-out set. Every one was predicted safer than measured, by between 0.40 and 3.42
 log units, a factor of 2.5 to 2600. Sarin was placed at 29~mg~m$^{-3}$ against a
 measured 0.367 and VX at 2.4 against 0.0295, errors of 79-fold and 80-fold.
 Fourteen of the twenty lie inside the applicability domain, so for those the
@@ -1568,9 +1983,9 @@ the safety axis, that Section~\ref{M-res:panels} documents in the fidelity axis.
 A distance in one space is being used to vouch for a property that lives in
 another.
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
-\includegraphics[width=\textwidth]{Fig_h1.png}
+\includegraphics[width=0.93\textwidth]{Fig_h1.png}
 \caption{Fidelity and safety are not monotonically associated. (a) Electronic-space distance to
 the nearest authentic agent against measured AEGL-3 for the 207 candidates
 carrying both axes; crosses are compounds excluded by the structural filter. The
@@ -1668,6 +2083,7 @@ electronic axis, methanol at 2.00 against the 0.71 boundary, well outside the
 top quartile that defines a faithful candidate.
 
 \section{The structural filter}
+\label{meth:alerts}
 
 Applied to the 28-compound set (Fig.~\ref{fig:h1}b), the filter assigns Tier~A to nine of the eleven
 authentic agents and Tier~B to phosgene, catching ten of eleven; chloropicrin
@@ -1702,9 +2118,10 @@ measured, the
 pursuit of a simulant that is both faithful and safe is not a pursuit along a
 trade-off curve, and the screen bears that out. Against the incumbent's own
 safety value the quadrant is empty, which says more about dichloromethane than
-about the chemistry: it is safer than all but seven of the 207 compounds in the
-pool, and not itself faithful enough to fill the quadrant it empties. One order
-of magnitude below that bar there are eight candidates, all of
+about the chemistry: only seven of the 207 candidate compounds are
+safer than it, and it is not itself faithful enough to fill the quadrant it
+empties. One order of magnitude below that bar a different count applies:
+there are eight compounds, all of
 them clearing the structural-alert gate and all of them more faithful than the
 incumbent, with trichloroethylene 3.1 times closer to the nearest agent in the
 electronic space at 1.3 times the acute inhalation toxicity.
@@ -1716,8 +2133,8 @@ narrower and, we think, more useful: the field's incumbent choice is not on the
 efficient frontier of the two axes it is usually defended on, and better points
 on those axes are already present among compounds with measured toxicity. That
 the pool consists of chemicals assessed because they are hazardous depresses
-every count reported here, so the seven are a lower bound rather than an
-inventory. The constructive reading is that designing candidates and then
+every count reported here, so both counts are lower bounds rather than
+inventories. The constructive reading is that designing candidates and then
 measuring them remains worthwhile, and that the filter excluding agent-class
 motifs by construction can be applied from the start.
 

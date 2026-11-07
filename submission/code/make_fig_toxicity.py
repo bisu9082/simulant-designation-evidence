@@ -5,6 +5,10 @@
 (d) 오차 대 적용영역 거리. 2026-10-20 에 make_fig_qsar.py 를 흡수했다.
 본문 도판을 세 장, 각 네 패널로 맞추기 위한 통합이다.
 """
+# 2026-11-07 (11차). n_jobs=-1 을 1 로 고정했다. 230행 학습셋에서
+# 병렬 이득은 측정되지 않는데, 병렬 축약 순서가 실행마다 달라져 저장된
+# 요약 JSON 의 마지막 자리가 흔들렸다. README 가 '정확히 재현된다' 고
+# 적으므로 비트 재현성을 택한다.
 import json
 import textwrap
 import numpy as np
@@ -178,13 +182,13 @@ for _sd in Q.SEEDS:
         sc = StandardScaler().fit(X[tr])
         m = RandomForestRegressor(n_estimators=600, min_samples_leaf=2,
                                   max_features=0.4, random_state=_sd,
-                                  n_jobs=-1).fit(sc.transform(X[tr]), y[tr])
+                                  n_jobs=1).fit(sc.transform(X[tr]), y[tr])
         o[te] = m.predict(sc.transform(X[te]))
     oof += o / len(Q.SEEDS)
 
 sc_all = StandardScaler().fit(X)
 rf = RandomForestRegressor(n_estimators=600, min_samples_leaf=2, max_features=0.4,
-                           random_state=11, n_jobs=-1).fit(sc_all.transform(X), y)
+                           random_state=11, n_jobs=1).fit(sc_all.transform(X), y)
 Hz = sc_all.transform(HO[FEAT].to_numpy(float))
 hp, ht = rf.predict(Hz), HO.y.to_numpy()
 hd = Q.knn_dist(Hz)

@@ -71,13 +71,28 @@ def resolve(a, b, src):
         return None, None
     found = ms[0].group(0)
     na, nb = re.findall(_NUM, a), re.findall(_NUM, b)
-    if len(na) != len(nb) or na == nb:
-        return None, None            # 숫자 아닌 곳이 달라졌다. 손으로.
-    pf = re.split(f'({_NUM})', found)
-    for i, (x, y) in enumerate(zip(na, nb)):
-        if x != y:
-            pf[2 * i + 1] = y
-    return found, ''.join(pf)
+    if len(na) == len(nb) and na != nb:
+        # 정상 경로. 어법은 같고 숫자만 바뀌었다. b 의 숫자를 현행 글에 옮긴다.
+        pf = re.split(f'({_NUM})', found)
+        for i, (x, y) in enumerate(zip(na, nb)):
+            if x != y:
+                pf[2 * i + 1] = y
+        return found, ''.join(pf)
+
+    # 2026-11-07. 종전에는 여기서 손들었다. 그래서 b 의 숫자 개수가 a 와
+    # 다른 사례(틀린 글을 다른 꼴로 적은 경우)는 a 가 글자 그대로 남아
+    # 있을 때만 작동했고, 본문을 되쓰면 조용히 SKIP 되었다. 11차 삭감에서
+    # 그 꼴로 15건이 한꺼번에 꺼졌다.
+    #
+    # b 는 '틀린 글' 이므로 a 의 숫자 배치를 따라야 할 이유가 없다. 다만
+    # b 의 숫자가 현행 글에 이미 있으면 주입이 올바른 값을 넣는 셈이 되어
+    # 시험이 무효가 된다. 그 경우에만 손으로 넘긴다.
+    nf = set(re.findall(_NUM, found))
+    if nb and (set(nb) & nf):
+        return None, None
+    if b.strip() and b != found:
+        return found, b
+    return None, None
 
 # 2026-11-02. 이 시험이 타임아웃으로 중단되었을 때 주입값(0.0221 자리에
 # 0.0321)이 paper/main.tex 에 그대로 남았다. finally 는 SIGTERM 을 막지
@@ -212,9 +227,10 @@ CASES = [
      ' & 0.1132',
      '28 cpd., incumbent 3   & structural  & 35 & \\textbf{0.1279} & 0.1103'
      ' & 0.1132'),
-    ('표 1 네 번째 블록 병합공간 행이 틀림 (0.005 대 0.055)',
-     '+ pesticides 2   & merged      & 42 & \\textbf{0.006}',
-     '+ pesticides 2   & merged      & 42 & \\textbf{0.056}'),
+    # 2026-11-04 (작업 D). 라벨 통일과 차원 교정(42 -> 41)에 맞춰 갱신.
+    ('표 1 네 번째 블록 병합공간 행이 틀림 (0.004756 대 0.04756)',
+     '+ 2 pesticides)  & merged      & 41 & \\textbf{0.004756}',
+     '+ 2 pesticides)  & merged      & 41 & \\textbf{0.04756}'),
     ('네 번째 구성 BH q 를 비유의로 오기 (0.0006 대 0.0600) — 결론이 뒤집힌다',
      'Benjamini-Hochberg value of 0.0008 over the same',
      'Benjamini-Hochberg value of 0.0600 over the same'),
@@ -344,9 +360,32 @@ ACS = 'paper_acs/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # --- 2026-11-04 (E1/E3/E6) 신설분 ---
+    ('원논문이 말하지 않는 생산 주장으로 되돌림',
+     'We made no measurement of our own and handled no\nagent',
+     'All agents were produced and handled at'),
+    ('A계열 코드에 동정을 부여',
+     'does not state which\ncompound each code denotes',
+     'states that A-230 is the methyl ethoxy member and each\ncode denotes'),
+
+    # --- 2026-11-04 (작업 D) 신설분. 구판 수치 3건 ---
+    ('공간내 보정값을 구판으로 되돌림 (정본 0.0772, 구판 0.0824)',
+     '0.0772\nwithin each space',
+     '0.0824\nwithin each space'),
+    ('Fisher 최소 q 를 구판 p 로 합성한 값으로 되돌림 (정본 0.2373)',
+     'over the six is 0.2373', 'over the six is 0.204'),
+    ('부분공간 실제지정 비율을 37좌표 구판으로 되돌림 (정본 27.4%)',
+     'reaches $p<0.05$ in 27.4\\% of them',
+     'reaches $p<0.05$ in 36.0\\% of them'),
+    ('부분공간 순위를 구판으로 되돌림 (정본 seventh)',
+     'ranks seventh of 680',
+     'designation ranks fifth of 680'),
+
     # --- 2026-11-03 (작업 C) 신설분. 바닥 논증 대체 ---
     ('바닥 논증을 본문에 되살림',
-     'renormalises each vector to unit length, which destroys the zero-sum',
+     # 2026-11-06 (9차 분량). 본문의 바닥 논거 서술을 SI 로 줄이면서
+     # 종전 앵커가 사라졌다. 같은 논거를 담은 SI 문장으로 다시 건다.
+     'renormalisation does not preserve $\\sum_i u_i = 0$ unless',
      'forces the mean between-compound cosine towards an algebraic floor'),
     ('귀무 평균 상한 오기 (정본 +0.3138) — 중심화 기여를 축소한다',
      'difference of $+0.1024$ to\n$+0.3138$',
@@ -355,22 +394,22 @@ ACS_CASES = [
      'observed differences of $+0.5578$',
      'observed differences of $+0.7578$'),
     ('전수열거 수 오기 (정본 13,824)',
-     'exact enumeration of all 13,824 relabellings',
+     'by enumeration of all 13,824 relabellings',
      'exact enumeration of all 13,284 relabellings'),
     ('부호뒤집기를 유효한 검정으로 되돌림',
-     'not of the data: centring leaves the per-compound difference',
-     'and the four-compound cell cannot reach 0.05 under any test'),
+     'and not of the data, and we withdraw it',
+     'and of the data, and we keep it as the prespecified test'),
 
     # --- 2026-11-03 (작업 B) 신설분 ---
     ('초록의 전제검정 셀 수 오기 (정본 six)',
-     'all six clear $q=0.05$ against a null',
-     'all four clear $q=0.05$ against a null'),
+     'all six clear\n$q=0.05$ against a label-permutation null',
+     'all four clear\n$q=0.05$ against a null'),
     ('초록의 휘발성 반사 q 오기 (정본 0.0430) — 비유의로 뒤집힌다',
-     'the reflectance\nchannel at $q=0.0430$',
-     'the reflectance\nchannel at $q=0.1430$'),
+     'reaches $q = 0.0430$, in the\nreflectance channel',
+     'reaches $q = 0.1430$, in the\nreflectance channel'),
     ('초록의 휘발성 유효매칭 p 오기 (정본 0.4647)',
-     'one valid match at $p=0.4647$',
-     'one valid match at $p=0.0647$'),
+     'returns one match at $p = 0.4647$',
+     'returns one match at $p = 0.0647$'),
     ('형태블록 최대 상관을 R_CUT 위로 오기 (정본 0.9364) — 필터가 잡았어야 한다',
      'block is 0.9364 on the twenty-eight',
      'block is 0.9764 on the twenty-eight'),
@@ -378,23 +417,24 @@ ACS_CASES = [
      'distance falls from 23.7 to 6.5\\%',
      'distance falls from 23.7 to 16.5\\%'),
     ('형태 축소 후 매칭 수 오기 (정본 zero) — 민감도 결론이 뒤집힌다',
-     'matches there falls from three to zero',
-     'matches there falls from three to three'),
+     'valid matches there falls from\nthree to zero',
+     'valid matches there falls from\nthree to three'),
     ('형태 축소 Mantel q 오기 (정본 0.1708)',
      'shape coordinates raises it to 0.1708',
      'shape coordinates raises it to 0.0708'),
     ('병합공간 차원 오기 (정본 thirty-eight)',
      'Nine of the thirty-eight coordinates',
      'Nine of the thirty-nine coordinates'),
-    ('분석선택 수를 넷으로 되돌림 (정본 Five)',
-     'Five analyst choices therefore move',
-     'Four analyst choices therefore move'),
+    # 2026-11-07. 역치가 여섯째 자유도로 편입됐다. 이제 구판 다섯이 결함이다.
+    ('분석선택 수를 다섯으로 되돌림 (정본 Six — 역치 포함)',
+     'Six analyst choices therefore move',
+     'Five analyst choices therefore move'),
     ('매칭 범위를 구판으로 되돌림 (정본 zero and six)',
-     'can move between\nzero and six',
-     'can move between\nthree and six'),
+     'six arbitrary choices move between zero and\nsix',
+     'six arbitrary choices move between three and\nsix'),
     ('제목에 Sixteen 을 되돌림',
-     'A Reanalysis of Authentic Chemical Warfare Agent Measurements',
-     'A Reanalysis of Sixteen Authentic Chemical Warfare Agents'),
+     'VX in a Colorimetric Array of Authentic Chemical Warfare Agents',
+     'VX in a Colorimetric Array of Sixteen Chemical Warfare Agents'),
     # --- 2026-11-03 (2차). 리뷰어 1 이 적발한 분모·범위 오류 계열.
     #     숫자가 산출물과 맞는데 그 숫자를 설명하는 말이 틀린 경우다.
     ('DMMP 4종 평균 부호 오기 (정본 +0.049, 자외)',
@@ -405,7 +445,9 @@ ACS_CASES = [
      'other than tabun it is $-0.289$ and'),
     # 철회한 주장은 B2 블랙리스트가 잡는다. 주입 시험도 그 경로를 확인한다.
     ('초록을 철회한 DPGME 계열 주장으로 되돌림',
-     'on a gap\nsmaller than the temperature mismatch',
+     # 2026-11-06 (9차 분량). 초록·본문에서 이 구절을 덜어내 SI 에만
+     # 남았다. SI 문장으로 다시 건다.
+     'The gap is smaller than the temperature\nmismatch',
      'which pairs a blister-agent simulant with a nerve agent'),
     # --- 휘발성 축 (2026-11-03 신설). 본문 res:panels 말미 단락.
     #     새 절을 가드 없이 들이는 것이 이 프로젝트의 반복 실패 경로다.
@@ -417,37 +459,37 @@ ACS_CASES = [
      'one match with a $p$ of 0.0647'),
     # 2026-11-03 (작업 A-3). 4셀 일괄 Fisher 철회에 따라 교체.
     ('휘발성 반사 채널 q 오기 (정본 0.0430) — 유의가 비유의로 뒤집힌다',
-     'reflectance\nchannel reaches $q = 0.0430$',
+     'reflectance channel gives\n$p = 0.0215$ and $q = 0.0430$',
      'reflectance\nchannel reaches $q = 0.1430$'),
     ('휘발성 자외 채널 q 오기 (정본 0.6389) — 비유의가 유의로 뒤집힌다',
-     'ultraviolet channel does not\n($q = 0.6389$)',
+     'ultraviolet channel gives $p = 0.6389$ and\n$q = 0.6389$',
      'ultraviolet channel does not\n($q = 0.0389$)'),
     ('휘발성 DPGME-소만 간격 오기 (정본 0.0107)',
-     'a gap of 0.0107 decades between measurements',
+     'rests on a gap of 0.0107 decades between a measurement',
      'a gap of 0.0507 decades between measurements'),
     ('휘발성 VX 간격 오기 (정본 2.659)',
-     'within 2.659 decades of VX',
+     'VX has nothing within 2.659 decades',
      'within 1.659 decades of VX'),
     ('휘발성 DMMP-사린 대 간섭물 비교 오기 (정본 0.216)',
-     'while an interferent sits 0.216',
+     'an interferent, sits 0.216',
      'while an interferent sits 0.616'),
     # 2026-11-03. 종전 앵커는 표지서신의 농도 추세 문장이었고 그 주장을
     # 뺐으므로 자리가 없어졌다. 단위가 틀리면 가장 치명적인 자리, 즉
     # 실험절의 노출 농도 목록으로 옮긴다.
     ('어레이 농도를 ppm 으로 되돌림 (정본 µM)',
-     'final concentrations of 0, 10, 50, 100 and\n500~$\\mu$M',
-     'final concentrations of 0, 10, 50, 100 and\n500~ppm'),
+     'final concentrations of 0, 10,\n50, 100 and 500~$\\mu$M',
+     'final concentrations of 0, 10,\n50, 100 and 500~ppm'),
     ('농도축 추세를 ppm 으로 되돌림 (정본 µM)',
      'from $+0.363$ at 10~$\\mu$M to\n$+0.771$ at 500~$\\mu$M',
      'from $+0.363$ at 10~ppm to\n$+0.771$ at 500~ppm'),
     ('수행하지 않은 반복측정 주장 (본문)',
-     "One compound's patterns at two\nconcentrations correlate at",
+     "One compound's patterns at\ntwo concentrations correlate at",
      'Replicates of one compound correlate at'),
     # 2026-11-02 재집필로 방법 문장이 2.1 에서 Experimental 로 옮겨갔다.
     # 앵커를 현행 본문에 다시 건다.
     ('수행하지 않은 반복측정 주장 (전제 문단)',
-     'itself at a different dose and not agreement between repeated\nmeasurements',
-     'itself at a different dose, that is between repeated\nmeasurements'),
+     'itself at a different\ndose and not between repeated measurements',
+     'itself at a different\ndose, that is between repeated measurements'),
     ('수행하지 않은 반복측정 주장 (도판 캡션)',
      'within one compound across concentrations\n  and between different compounds',
      'within replicates of the same compound and\n  between different compounds'),
@@ -505,6 +547,43 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper_acs/supporting.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-04 (E1/E2) 신설분 ---
+    ('루이사이트 Z 이성질체 거리 오기 (정본 2.4892)',
+     'from 2.4769 to 2.4892, leaves CEES',
+     'from 2.4769 to 3.4892, leaves CEES'),
+    ('이성질체가 판정을 바꾼다고 되돌림 (정본 둘 다 음성)',
+     'does not change the match verdict, which is negative under\nboth',
+     'changes the match verdict, which is positive under the $Z$ form'),
+    ('런 1·3 순도 부재 서술을 뭉갬',
+     'Neither reports an assay, a supplier grade or a confirmatory analysis',
+     'Both report supplier grades above 95\\%'),
+
+    # --- 2026-11-04 (G3) 신설분 ---
+    ('207종 중 더 안전한 수 오기 (정본 seven)',
+     'only seven of the 207 candidate compounds are',
+     'only eight of the 207 candidate compounds are'),
+    ('한 자릿수 아래 후보 수 오기 (정본 eight)',
+     'there are eight compounds, all of',
+     'there are seven compounds, all of'),
+    ('두 수의 지시대상을 다시 뭉갬 (정본 both counts)',
+     'so both counts are lower bounds rather than',
+     'so the seven are a lower bound rather than'),
+
+    # --- 2026-11-04 (작업 D, 2차) 신설분 ---
+    ('없는 도판 패널 인용으로 되돌림 (fig:tox 는 a·b 뿐)',
+     '(Fig.~\\ref{M-fig:tox}b) reached',
+     '(Fig.~\\ref{M-fig:tox}c and d) reached'),
+    ('패널 구성 명명을 구판으로 되돌림 (8 은 문헌 수가 아니다)',
+     'the five literature-proposed simulants are admitted alongside the three',
+     'the eight literature simulants are admitted as candidates to the three'),
+
+    # --- 2026-11-04 (작업 D) 신설분 ---
+    ('SI 부분공간 최대값을 37좌표 구판으로 되돌림 (정본 44.6%)',
+     'a maximum\nof 44.6\\%', 'a maximum\nof 52.8\\%'),
+    ('SI 부분공간 p 를 구판으로 되돌림 (정본 0.0103)',
+     "27.4\\% ranks seventh of 680, $p=0.0103$",
+     "27.4\\% ranks seventh of 680, $p=0.0074$"),
+
     # --- 2026-11-04 (J-C) 신설분. AEGL-3 순서 다섯 값 ---
     ('AEGL-3 VX 오기 (정본 0.0295)',
      'VX (0.0295~mg~m$^{-3}$),',
@@ -648,14 +727,20 @@ ANNOT_CASES = [
      'Fig_toxicity', 'panel_b_header',
      'no regulator-grade acute inhalation value exists for any of these 15'),
     # 2026-10-22. 그래픽 초록이 구판 수치를 들고 투고 직전까지 남아 있었다.
-    ('그래픽 초록의 보정값이 구판이다',
-     'graphical_abstract', 'panel_a',
-     'corrected over the 18 tests: $q$ = 0.212'),
-    ('그래픽 초록의 Spearman 이 구판이다',
-     'graphical_abstract', 'panel_c',
-     'Spearman $r$ = -0.022   95% CI [-0.156, +0.111]   $n$ = 214\n'
-     "faithful + safe: 0 at the incumbent simulant's own bar,\n"
-     '8 one order of magnitude below it'),
+    # 2026-11-07 (11차). graphical_abstract 는 구판 make_ga.py (JHM 판)
+    # 의 첨부이고 ACS 빌드가 그 스크립트를 부르지 않는다. 빈 저장소를
+    # 클론하면 그 등재가 없으므로 이 두 사례가 통째로 꺼졌다. ACS 의
+    # TOC 로 옮긴다. TOC 는 9차에 실제로 구판 주장을 들고 있던 자리다.
+    ('TOC 의 UV 코사인이 구판이다',
+     'toc_acs', 'panel_a',
+     'cosine to DMMP, UV channel: GA +0.864, GB +0.645, GD -0.492, '
+     'GF -0.721, VX -0.702'),
+    ('TOC 의 순위상관 범위가 구판이다',
+     'toc_acs', 'panel_b',
+     'rank correlation, 12 cells: -0.225 to +0.671; none below q = 0.05'),
+    ('TOC 머리글이 제목과 다른 작용제를 거명한다',
+     'toc_acs', 'headline',
+     'DMMP responds opposite to soman, sarin and VX'),
 ]
 
 
@@ -806,14 +891,14 @@ SUPP_CASES_DIPOLE = [
      'return 0.0368. The permutation test is still not\nsignificant at any '
      'conventional level. We do not promote'),
     ('병합공간 B3LYP p 오기 (0.0221 대 0.1221)',
-     'a one-sided $p$ of 0.0250, against four and',
-     'a one-sided $p$ of 0.1221, against four and'),
+     'a one-sided $p$ of 0.0250, against three and',
+     'a one-sided $p$ of 0.1221, against three and'),
     ('병합공간 B3LYP 매칭 수 오기 (three 대 five)',
      'analysis and returns three valid matches and\na one-sided',
      'analysis and returns five valid matches and\na one-sided'),
     ('병합공간 GFN2 대조값 오기 (0.0250 대 0.0350)',
-     'against four and 0.0250 for the GFN2 control',
-     'against four and 0.0350 for the GFN2 control'),
+     'against three and 0.0250 for the GFN2 control',
+     'against three and 0.0350 for the GFN2 control'),
     ('5건 전부 기록 지지 짝이라고 서술 (정본 4/5)',
      'Four of those five are sarin',
      'The five are pairings the designation record supports. Those five '
@@ -1100,23 +1185,37 @@ def main():
         finally:
             open(ACS_SUPP, 'w').write(qbak)
 
+        # 2026-11-06 (9차 분량). 본문을 줄이면서 여러 서술이 SI 로 옮겨갔고,
+        # 그 자리를 겨냥하던 주입 사례 16건이 '원문을 찾지 못함' 으로 빠졌다.
+        # 이 시험의 목적은 '이 오염을 검증기가 잡는가' 이지 '어느 파일에
+        # 있는가' 가 아니다. 검증기는 main 과 SI 를 합쳐 훑으므로, 본문에서
+        # 못 찾으면 SI 에서 찾아 같은 주입을 한다. 어디에 주입했는지는
+        # 출력에 적어 이동 사실이 보이게 둔다.
         abak = open(ACS).read()
+        qbak2 = open(ACS_SUPP).read()
         try:
             for desc, a, b in ACS_CASES:
+                tgt, bak = ACS, abak
                 ra, rb = resolve(a, b, abak)
                 if not ra:
-                    print(f'  SKIP {desc}: ACS 원문을 찾지 못함 ({a[:40]!r})')
+                    ra, rb = resolve(a, b, qbak2)
+                    tgt, bak = ACS_SUPP, qbak2
+                if not ra:
+                    print(f'  SKIP {desc}: ACS 본문에도 SI 에도 원문이 없다 '
+                          f'({a[:40]!r})')
                     bad += 1
                     continue
-                open(ACS, 'w').write(abak.replace(ra, rb, 1))
+                where = 'ACS' if tgt is ACS else 'ACS->SI'
+                open(tgt, 'w').write(bak.replace(ra, rb, 1))
                 if run() == 0:
-                    print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS)')
+                    print(f'  FAIL {desc}: 주입했는데 통과했다 ({where})')
                     bad += 1
                 else:
-                    print(f'  ok   {desc}: 잡았다 (ACS)')
-                open(ACS, 'w').write(abak)
+                    print(f'  ok   {desc}: 잡았다 ({where})')
+                open(tgt, 'w').write(bak)
         finally:
             open(ACS, 'w').write(abak)
+            open(ACS_SUPP, 'w').write(qbak2)
 
         sbak = open(SIDECAR).read()
         try:

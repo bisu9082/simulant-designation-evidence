@@ -14,6 +14,10 @@ AEGL-3 (10분, mg/m3) 예측 QSAR — simulant 안전성 축 보간용.
 통계 기준 (프로젝트 GATE): 시드 5개 × 5-fold 반복 CV, bootstrap 10,000, 95% CI,
 baseline 2종 대비.
 """
+# 2026-11-07 (11차). n_jobs=-1 을 1 로 고정했다. 230행 학습셋에서
+# 병렬 이득은 측정되지 않는데, 병렬 축약 순서가 실행마다 달라져 저장된
+# 요약 JSON 의 마지막 자리가 흔들렸다. README 가 '정확히 재현된다' 고
+# 적으므로 비트 재현성을 택한다.
 import json
 import numpy as np
 import pandas as pd
@@ -139,7 +143,7 @@ results.append(summarise(cv_scores(lambda s: LinearRegression(), X[:, ia], y),
                          y, 'baseline-2 logP+MW 선형'))
 oof_rf = cv_scores(lambda s: RandomForestRegressor(
     n_estimators=600, min_samples_leaf=2, max_features=0.4,
-    random_state=s, n_jobs=-1), X, y)
+    random_state=s, n_jobs=1), X, y)
 results.append(summarise(oof_rf, y, 'RandomForest (전체 서술자)'))
 
 # out-of-fold 예측을 내보낸다. 꼬리 회귀 진단(minority_regression.py)이 이 파일을
@@ -171,7 +175,7 @@ print(f'\n[G-2] 적용영역 경계 = 학습셋 자체 kNN(k=5) 거리의 95퍼�
 
 rf_full = RandomForestRegressor(n_estimators=600, min_samples_leaf=2,
                                 max_features=0.4, random_state=11,
-                                n_jobs=-1).fit(Xz, y)
+                                n_jobs=1).fit(Xz, y)
 
 # held-out CWA 평가
 if len(HO):

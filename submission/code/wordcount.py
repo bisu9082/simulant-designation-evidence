@@ -53,18 +53,33 @@ def sections(body):
     return out
 
 
+def acs_sections():
+    """원고의 \\section 제목을 정본으로 쓴다 (2026-11-06 재작성).
+
+    종전 구현은 JHM 양식을 전제로 'Keywords' 와 '1. Introduction' 을 찾았다.
+    achemso 본에는 둘 다 없어서 ValueError 로 죽었고, 9차 채점 때까지 분량
+    예산 도구가 현행 원고에서 한 번도 돌지 않았다. 본문이 자체 예산 5,000
+    단어를 53% 넘긴 것을 아무도 못 본 이유다. 양식에 의존하지 않도록
+    제목 목록을 main.tex 에서 직접 읽는다.
+    """
+    src = open('paper_acs/main.tex').read()
+    return [m.group(1) for m in re.finditer(r'^\\section\*?\{([^}]+)\}', src, re.M)]
+
+
 def main():
     txt = pdftext('paper_acs/main.pdf')
-    a = txt.index('Chemical warfare agent detection is developed')
-    b = txt.index('Keywords')
-    n_abs = len(words(txt[a:b]))
+    heads = acs_sections()
+    if not heads:
+        raise SystemExit('[wordcount] main.tex 에서 \\section 을 찾지 못했다.')
 
-    s = txt.index('1. Introduction')
+    first = txt.index(heads[0])
+    a = txt.index('Abstract')
+    n_abs = len(words(txt[a + len('Abstract'):first]))
+
     e = txt.index('References')
-    body = txt[s:e]
+    body = txt[first:e]
     n_body = len(words(body))
 
-    # 캡션 제외분. 캡션은 'Table N.' / 'Figure N.' 로 시작해 빈 줄까지.
     cap = sum(len(words(m.group(0))) for m in
               re.finditer(r'^\s*(?:Table|Figure|Fig\.)\s*\d+[.:][\s\S]*?\n\s*\n',
                           body, re.M))
@@ -73,8 +88,36 @@ def main():
     print(f'본문 (전체)     {n_body:>6} 단어')
     print(f'본문 (캡션 제외){n_body - cap:>6} 단어   [캡션 {cap}]')
     print()
-    for name, n in sections(body):
-        print(f'  {name[:52]:<54} {n:>5}')
+    pos = [(h, body.index(h)) for h in heads if h in body]
+    for i, (h, j) in enumerate(pos):
+        k = pos[i + 1][1] if i + 1 < len(pos) else len(body)
+        print(f'  {h[:52]:<54} {len(words(body[j + len(h):k])):>5}')
+
+    # ACS Article 환산 (2026-11-07 정정). 저자안내는 총 분량에 본문·그림·
+    # 표·참고문헌을 전부 포함하고 TOC 그래픽만 제외한다. 종전 구현은
+    # 거꾸로였다 — TOC 를 도판으로 세고 참고문헌을 빼서 면수를 과소·과대
+    # 양쪽으로 틀리게 냈다. 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
+    src = open('paper_acs/main.tex').read()
+    figs = [m.group(1) for m in
+            re.finditer(r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', src)]
+    figs = [f for f in figs if 'toc' not in f.lower()]
+    refs = len(words(txt[txt.index('References'):]))
+    pages = (n_body - cap) / 1000.0 + len(figs) * 0.5 + refs / 1000.0
+    print(f'\n  참고문헌      {refs:>6} 단어')
+    print(f'  ACS 환산 {pages:.1f}면 = 본문 {(n_body-cap)/1000:.1f}'
+          f' + 도판 {len(figs)}장 x 0.5 + 참고문헌 {refs/1000:.1f}'
+          f'   (TOC 제외, 권장 8면)')
+
+    # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
+    # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.
+    import json as _j
+    import os as _o
+    _o.makedirs('outputs', exist_ok=True)
+    _j.dump({'body_words': n_body - cap, 'caption_words': cap,
+             'ref_words': refs, 'n_figures': len(figs),
+             'acs_pages': round(pages, 2)},
+            open('outputs/length_audit.json', 'w'), indent=1)
+    print('  -> outputs/length_audit.json')
 
     sup = pdftext('paper_acs/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
