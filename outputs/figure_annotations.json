@@ -30,8 +30,9 @@
   "p_at_zero35": "0.2979",
   "p_at_zero28": "0.0250"
  },
- "graphical_abstract": {
-  "panel_a": "corrected over the 18 tests: $q$ = 0.163",
-  "panel_c": "Spearman $r$ = +0.062   95% CI [-0.077, +0.199]   $n$ = 207\nfaithful + safe: 0 at the incumbent simulant's own bar,\n8 one order of magnitude below it"
+ "toc_acs": {
+  "headline": "DMMP responds opposite to soman, cyclosarin and VX",
+  "panel_a": "cosine to DMMP, UV channel: GA +0.764, GB +0.645, GD -0.492, GF -0.721, VX -0.702",
+  "panel_b": "rank correlation, 12 cells: -0.225 to +0.571; none below q = 0.05"
  }
 }

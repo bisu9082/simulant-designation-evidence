@@ -727,14 +727,20 @@ ANNOT_CASES = [
      'Fig_toxicity', 'panel_b_header',
      'no regulator-grade acute inhalation value exists for any of these 15'),
     # 2026-10-22. 그래픽 초록이 구판 수치를 들고 투고 직전까지 남아 있었다.
-    ('그래픽 초록의 보정값이 구판이다',
-     'graphical_abstract', 'panel_a',
-     'corrected over the 18 tests: $q$ = 0.212'),
-    ('그래픽 초록의 Spearman 이 구판이다',
-     'graphical_abstract', 'panel_c',
-     'Spearman $r$ = -0.022   95% CI [-0.156, +0.111]   $n$ = 214\n'
-     "faithful + safe: 0 at the incumbent simulant's own bar,\n"
-     '8 one order of magnitude below it'),
+    # 2026-11-07 (11차). graphical_abstract 는 구판 make_ga.py (JHM 판)
+    # 의 첨부이고 ACS 빌드가 그 스크립트를 부르지 않는다. 빈 저장소를
+    # 클론하면 그 등재가 없으므로 이 두 사례가 통째로 꺼졌다. ACS 의
+    # TOC 로 옮긴다. TOC 는 9차에 실제로 구판 주장을 들고 있던 자리다.
+    ('TOC 의 UV 코사인이 구판이다',
+     'toc_acs', 'panel_a',
+     'cosine to DMMP, UV channel: GA +0.864, GB +0.645, GD -0.492, '
+     'GF -0.721, VX -0.702'),
+    ('TOC 의 순위상관 범위가 구판이다',
+     'toc_acs', 'panel_b',
+     'rank correlation, 12 cells: -0.225 to +0.671; none below q = 0.05'),
+    ('TOC 머리글이 제목과 다른 작용제를 거명한다',
+     'toc_acs', 'headline',
+     'DMMP responds opposite to soman, sarin and VX'),
 ]
 
 

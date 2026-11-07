@@ -105,7 +105,8 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #                          10열 24수치를 손으로 유지하고 있었고, 그래서
 #                          T2-1·T2-8 을 전부 통과해 구판으로 살아남았다.
 #   sparse_indicators      희소 지시자 인코딩 민감도 + 논지 안정성 대조
-# sparse_indicators 는 Mantel 전수열거를 세 변종에 돌리므로 약 10분 걸린다.
+# sparse_indicators 는 Mantel 전수열거를 일곱 변종에 돌리므로 약 25분 걸린다
+# (2026-11-07, 10차 R3: 세 변종만 돌던 자리를 전 변종으로 넓혔다).
 #   conformer_sensitivity  RDKit 매장 시드 6종 x 단일/앙상블. SI 가 두 예치물을
 #                          이름 대어 인용하는데 2026-11-06 (9차) 까지 이 목록에
 #                          없었다. 빈 outputs/ 로 클론하면 검증기 사전 점검에서
@@ -122,6 +123,12 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            volatility_fetch.py volatility_space.py \
            shape_reduction.py premise_null.py conformer_sensitivity.py \
            collapse_sensitivity.py
+# 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
+# conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가
+# 인용하는 두 예치물 중 하나가 파이프라인에서 아예 생성되지 않았고,
+# 빈 outputs/ 로 클론해 돌리면 검증기가 그 자리에서 멈춘다. 같은 종류의
+# 결함이 이 프로젝트에서 세 번째다(생성기 미등록, make_si_tables 순서).
+run_strict "conformer_sensitivity.py --single"
 
 # 2026-11-07 (10차 R5-B3). 제외 목록에 outputs/dft_vs_gfn2.csv 가 빠져
 # 있었다. dft_electronic_space.py 가 읽는데 저장소의 어떤 스크립트도

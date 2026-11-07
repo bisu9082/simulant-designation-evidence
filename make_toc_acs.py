@@ -67,7 +67,8 @@ fig = plt.figure(figsize=(3.25, 1.75), dpi=600)
 # 2026-11-07 (방향 A). 머리글을 제목과 함께 측정 소견으로 옮긴다. 종전
 # 머리글은 귀무였고, 그것이 세 회차 연속 편집장 지적의 핵심이었다.
 # 폭 실측: FS_TITLE 6.4 에서 2.72 in (그림 3.25 in, 상한 3.10 in).
-fig.text(0.5, 0.955, 'DMMP responds opposite to soman, cyclosarin and VX',
+HEADLINE = 'DMMP responds opposite to soman, cyclosarin and VX'
+fig.text(0.5, 0.955, HEADLINE,
          ha='center', va='top', fontsize=FS_TITLE, fontweight='bold',
          color='#2B2B2B')
 
@@ -121,6 +122,24 @@ axB.set_title('descriptor distance against\nresponse distance, 12 cells',
 # 맨 아래 행 밑에 완전히 빈 띠를 만들고 거기 한 줄로 둔다.
 axB.text(0.02, 0.015, 'none below $q$ = 0.05', transform=axB.transAxes,
          ha='left', va='bottom', fontsize=4.8, color=C_GREY, style='italic')
+
+# 2026-11-07 (11차). TOC 주석을 등재부에 기록한다.
+#
+# 왜. 9차에서 TOC 머리글이 본문이 이미 철회한 주장('does not predict')을
+# 들고 있었고, 독자가 가장 먼저 보는 자리인데 어느 검사도 보지 않았다.
+# 그때는 눈으로 발견했다. 종전에는 구판 make_ga.py 의 graphical_abstract
+# 주석만 등재돼 있었고, 그 스크립트는 ACS 빌드가 부르지 않으므로 빈
+# 저장소를 클론하면 그 앵커가 통째로 꺼진다(11차 냉클론 시험에서 확인).
+# TOC 자신의 글자를 등재해 앵커를 이 도판으로 옮긴다.
+import fig_annot
+
+fig_annot.record('toc_acs', 'headline', HEADLINE)
+fig_annot.record('toc_acs', 'panel_a',
+                 'cosine to DMMP, UV channel: '
+                 + ', '.join(f'{a} {c:+.3f}' for a, c in zip(AG, cos)))
+fig_annot.record('toc_acs', 'panel_b',
+                 f'rank correlation, 12 cells: {min(rho):+.3f} to '
+                 f'{max(rho):+.3f}; none below q = 0.05')
 
 fig.savefig('outputs/toc_acs.png', dpi=600, facecolor='white')
 fig.savefig('outputs/toc_acs.pdf', facecolor='white')

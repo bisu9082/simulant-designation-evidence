@@ -42,8 +42,12 @@ TEX = 'paper_acs/main.tex'
 # 신선도 검사 양쪽에서 빠져 있었다. 본문에서 레지스터 수치를 SI 표로
 # 내리는 순간 그 수치가 무검증 상태가 되는 구조였으므로 글롭으로 바꾼다.
 _TAB_TEX = sorted(_glob.glob('paper_acs/tab_*.tex'))
+# 2026-11-07 (11차). README 도 대조 대상에 넣는다. README 의 재현 약속
+# 단락이 '최소 p 0.1512 / BH 0.159' 같은 구판 수치를 들고 있었고(실측은
+# 0.1917 / 0.1632), 그것을 보고 돌린 사람은 코드가 틀렸다고 판단하게 된다.
+# 원고만 검사하고 재현 지시서를 검사하지 않으면 같은 종류의 거짓이 남는다.
 EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
-             *_TAB_TEX)
+             'README.md', *_TAB_TEX)
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -543,15 +547,19 @@ def preflight():
     stale = []
     if os.path.exists('outputs/figure_annotations.json'):
         import fig_annot as _fa
-        # graphical_abstract 는 원고에 실리는 도판이 아니라 투고 시스템에
-        # 따로 올리는 첨부다. FIGURES 에는 없지만 등재부는 쓴다 (2026-10-22).
+        # 2026-11-07 (11차 냉클론 시험). graphical_abstract 는 구판
+        # make_ga.py (JHM 판) 의 첨부였고 ACS 빌드는 그 스크립트를 부르지
+        # 않는다. 그래서 빈 저장소를 클론하면 그 등재가 아예 없고, 그
+        # 등재에 걸려 있던 앵커(ga_q28)가 통째로 꺼졌다. make_ga.py 를
+        # archive/jhm_v1/ 로 옮기고 등재를 지웠다. ACS 의 TOC 도판은
+        # make_toc_acs.py 가 자기 글자를 'toc_acs' 로 등재한다.
         # 2026-11-04 (J-C). 종전에는 FIGURES(현 원고가 싣는 도판)와
         # 비교했다. JHM 평행본을 동결하고 FIGURES 를 ACS 집합으로 줄이자
         # Fig_spaces·Fig_toxicity 가 폐기로 걸렸는데, 그 둘은 생성기가
         # 여전히 만들고 있다(make_fig_main.py, make_fig_toxicity.py).
         # 이 검사의 목적은 '만드는 곳이 없어진 주석' 을 잡는 것이므로
         # outputs/ 에 실제로 생성된 도판 전부와 비교한다.
-        live = ({f[:-4] for f in FIGURES} | {'graphical_abstract'}
+        live = ({f[:-4] for f in FIGURES} | {'toc_acs'}
                 | {os.path.basename(x)[:-4]
                    for x in glob.glob('outputs/Fig_*.png')})
         stale = sorted(set(_fa.load()) - live)
@@ -749,8 +757,17 @@ def preflight():
 def load_facts():
     """산출물에서만 읽는다. 여기에 손으로 적은 수치는 없다."""
     f = {}
-    f['ga_q28'] = json.load(open('outputs/stat_supplement.json'))['family'][
-        'panel28_incumbent3']['bh_all_min_q']
+    # 2026-11-07. ga_q28 (구판 그래픽 초록 주석) 을 폐기하고 TOC 주석으로
+    # 옮긴다. TOC 는 독자가 가장 먼저 보는 자리이고 9차에 철회한 주장을
+    # 들고 있었다.
+    _tc = json.load(open('outputs/deltaE_premise.json'))
+    _tuv = next(r for r in _tc['dmmp'] if r['mode'] == 'uv')
+    for _ag in ('GA', 'GB', 'GD', 'GF', 'VX'):
+        f[f'toc_cos_{_ag}'] = _tuv[f'cos_{_ag}']
+    _trho = [r['spearman'] for r in _tc['space_test']]
+    f['toc_rho_min'] = min(_trho)
+    f['toc_rho_max'] = max(_trho)
+    f['toc_cells'] = len(_trho)
     NE = json.load(open('outputs/null_match_expectation.json'))['sets']
     f['nullexp_k3'] = NE['incumbent3']['null_mean']
     f['nullexp_k8'] = NE['incumbent_plus_lit8']['null_mean']
@@ -1447,6 +1464,15 @@ def load_facts():
     # 3 -> 5, panel35 0, 귀무기대 9.06/9.63 을 산출물에서 읽는다.
     # 2026-11-07 (10차 R3). 붕괴 문단의 여섯 수치를 collapse_sensitivity.py
     # 실측에서 읽는다. 종전 값은 어느 실행에서도 나오지 않았다.
+    # 2026-11-07 (11차). README 재현 약속 6수치. 구판을 들고 있었다.
+    _mc = {r[0]: r for r in json.load(open('outputs/multiplicity_c.json'))}
+    f['rm_p28'] = _mc['panel28_designated3'][2]
+    f['rm_p35'] = _mc['panel35_designated3'][2]
+    f['rm_p35lit'] = _mc['panel35_designated_plus_literature8'][2]
+    f['rm_q28'] = _mc['panel28_designated3'][4]
+    f['rm_q35'] = _mc['panel35_designated3'][4]
+    f['rm_q35lit'] = _mc['panel35_designated_plus_literature8'][4]
+
     # 2026-11-07. 커버레터의 분량 숫자. wordcount.py 실측이다.
     _la = json.load(open('outputs/length_audit.json'))
     f['len_body'] = _la['body_words']
@@ -2025,7 +2051,14 @@ CHECKS = [
     ('na_dpgme_top',
      [r'DPGME divides evenly, sulfur mustard in\s*\n?(\d+\.\d+)\\%'], 0.05),
     ('na_dpgme_g', [r'and the\s*\n?G series in (\d+\.\d+)\\%'], 0.05),
-    ('ga_q28', [r'corrected over the 18 tests: \$q\$ = (\d+\.\d+)'], 0.0005),
+    ('toc_cos_GA', [r'UV channel: GA ([-+][\d.]+)'], 0.0005),
+    ('toc_cos_GB', [r'GA [-+][\d.]+, GB ([-+][\d.]+)'], 0.0005),
+    ('toc_cos_GD', [r'GB [-+][\d.]+, GD ([-+][\d.]+)'], 0.0005),
+    ('toc_cos_GF', [r'GD [-+][\d.]+, GF ([-+][\d.]+)'], 0.0005),
+    ('toc_cos_VX', [r'GF [-+][\d.]+, VX ([-+][\d.]+)'], 0.0005),
+    ('toc_rho_min', [r'12 cells: ([-+][\d.]+) to'], 0.0005),
+    ('toc_rho_max', [r'12 cells: [-+][\d.]+ to ([-+][\d.]+)'], 0.0005),
+    ('toc_cells', [r'rank correlation, (\d+) cells'], 0),
     ('fig3_from_panel', [r"name the (ten|nine|eleven) agents of this paper's panel"], 0),
     ('fig3_other_labelled',
      [r'the\s*\n?(three|two|four) nitrogen mustards'], 0),
@@ -2465,6 +2498,13 @@ CHECKS = [
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     # 2026-11-04 (J-C). ACS본 어법으로 교정.
+    ('rm_p28', [r'`p` of ([\d.]+) on the twenty-eight-compound panel'], 0.00005),
+    ('rm_p35', [r'([\d.]+) on the primary\s*\n?thirty-five-compound panel'],
+     0.00005),
+    ('rm_p35lit', [r'([\d.]+) on the panel with eight simulants'], 0.00005),
+    ('rm_q28', [r'Hochberg minima of ([\d.]+), [\d.]+ and [\d.]+'], 0.00005),
+    ('rm_q35', [r'Hochberg minima of [\d.]+, ([\d.]+) and [\d.]+'], 0.00005),
+    ('rm_q35lit', [r'Hochberg minima of [\d.]+, [\d.]+ and ([\d.]+)'], 0.00005),
     ('len_pages', [r'runs to ([\d.]+) journal pages against'], 0.05),
     ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
     ('len_refs', [r'and ([\d,]+) words of\s*\n?references'], 0),
@@ -3333,6 +3373,39 @@ def main():
     if superseded:
         fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
         fails.extend(superseded)
+
+    # (B2c) TOC 머리글이 제목과 같은 주장을 하는지 (2026-11-07 신설).
+    #
+    # 왜 필요한가. 9차에서 제목을 'does not predict' 에서 'no resolvable
+    # agreement' 로 내렸는데 TOC 머리글만 구판으로 남았다. 독자가 가장
+    # 먼저 보는 자리에 철회한 주장이 있었고, 눈으로 보고서야 찾았다.
+    # 두 문장이 거명하는 작용제 집합이 같아야 한다.
+    # 2026-11-07. 처음 쓸 때 _fa 를 지역 import 없이 썼고 try/except 가
+    # 그 NameError 를 먹어 가드가 조용히 꺼졌다. 손으로 머리글을 틀리게
+    # 바꿔 보고서야 알았다. 예외를 먹지 않고, 등재가 없으면 실패로 본다.
+    import fig_annot as _fa2
+    import re as _r2
+    _ann = _fa2.load()
+    _hl = (_ann.get('toc_acs') or {}).get('headline', '')
+    if not _hl:
+        fails.append('TOC 머리글이 등재부에 없다 (검사 B2c): '
+                     'python3 make_toc_acs.py 를 돌릴 것')
+    else:
+        _ttl = _r2.search(r'\\title\{(.+?)\}', open(TEX).read(), _r2.S)
+        _ttl = ' '.join(_ttl.group(1).split()) if _ttl else ''
+        # 2026-11-07. 'cyclosarin' 이 'sarin' 을 품으므로 부분문자열로
+        # 세면 둘을 구별하지 못한다. 단어 경계를 요구한다.
+        _AG = ('cyclosarin', 'sarin', 'soman', 'tabun', 'VX')
+
+        def _agents(_t):
+            return {_a for _a in _AG
+                    if _r2.search(rf'\b{_a}\b', _t, _r2.I)}
+
+        _in_hl, _in_ttl = _agents(_hl), _agents(_ttl)
+        if _in_hl != _in_ttl:
+            fails.append(
+                'TOC 머리글과 제목이 다른 작용제를 거명한다 (검사 B2c): '
+                f'머리글 {sorted(_in_hl)} vs 제목 {sorted(_in_ttl)}')
 
     # (B2b) 철회한 검정이 유효한 것으로 되살아나는지 (2026-11-07 신설).
     #

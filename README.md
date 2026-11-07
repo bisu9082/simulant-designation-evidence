@@ -20,7 +20,6 @@ that dependence is the result.
 | Path | Contents |
 |---|---|
 | `*.py`, `*.sh` | Analysis, figure and verification scripts |
-| `sources/` | EPA compiled AEGL document, the primary source for every toxicity value used here |
 | `descriptor_cache_xtb*.csv` | Structural (RDKit) and electronic (GFN2-xTB) descriptors |
 | `panel_all.csv`, `panel_new.csv` | Compound panels and class labels |
 | `inchikeys.csv` | Chemical identity resolution input |
@@ -50,6 +49,12 @@ parse of the EPA document.
 The version of the `xtb` binary that produced `descriptor_cache_xtb*.csv` was
 not recorded, so that axis is not version-pinned. `requirements.txt` says so.
 
+One step in `run_analysis.sh` needs the network and is slow:
+`build_tox_trainset.py` resolves about 3,900 compound names against the PubChem
+REST service at four requests a second, so a cold clone spends roughly twenty
+minutes there. It is the only step that leaves the machine. Nothing else in the
+pipeline does.
+
 ## Reproducing
 
 ```sh
@@ -61,11 +66,15 @@ python3 test_verify_consistency.py      # does the verifier catch injected defec
 python3 ai_style_scan.py                # prose style scan
 ```
 
-Run from a clone with the two shipped files above in `outputs/` and the rest of
-`outputs/` empty, this reproduces the reported values exactly: smallest nominal
-`p` of 0.0250 on the twenty-eight-compound panel, 0.1512 on the primary
-thirty-five-compound panel, 0.0393 on the panel with eight simulants, and
-Benjamini-Hochberg minima of 0.159, 0.617 and 0.212.
+Run from a clone with the five shipped files above in `outputs/` and the rest
+of `outputs/` empty, this reproduces the reported values exactly: smallest
+nominal `p` of 0.0250 on the twenty-eight-compound panel, 0.1917 on the primary
+thirty-five-compound panel and 0.0386 on the panel with eight simulants, with
+Benjamini-Hochberg minima of 0.1632, 0.6299 and 0.2122. These six numbers are
+checked against `outputs/multiplicity_c.json` by `verify_consistency.py`, which
+reads this file, so a stale promise here fails the build rather than misleading
+a reproducer. An earlier version of this paragraph said "the two shipped files"
+and gave four of the six wrongly.
 
 `run_analysis.sh` fixes the dependency order. Two constraints in it are not
 obvious and were found by running a cold clone rather than by reading the code:
@@ -80,9 +89,13 @@ obvious and were found by running a cold clone rather than by reading the code:
 Running the scripts in another order leaves stale downstream outputs, which is
 the failure mode this project hit repeatedly before the order was written down.
 
-The exact permutation tests are exhaustive rather than sampled:
-C(17,3) = 680, C(24,3) = 2024 and C(24,8) = 735,471 designations, enumerated in
-full. The remaining analyses are deterministic given the seed `0xC0DE`.
+The designation and Mantel tests are exhaustive rather than sampled:
+C(17,3) = 680, C(24,3) = 2024 and C(24,8) = 735,471 designations and 6! = 720
+or 4!^3 = 13,824 relabellings, enumerated in full. Five analyses are sampled
+instead, and each is seeded and declared where it is used: the Mantel power
+simulation, the null match expectation, the premise label-permutation null in
+four of its six cells, the random-subspace control and the descriptor
+resampling. The rest is deterministic given the seed `0xC0DE`.
 
 ## Verification
 
@@ -93,6 +106,16 @@ injects historical and synthetic defects into the manuscript or the Supporting
 Information and confirms the verifier catches each one. Both print their
 current counts; we do not repeat the counts here, because a number in a README
 is one more thing that goes stale.
+
+The descriptor reproduction gate has a stated scope and prints it on every run.
+`build_descriptors.py --verify` recomputes the RDKit-derived columns of each
+cache and compares them to the deposited values; that is 53 of the 61 numeric
+columns. The eight it does not recompute are the semiempirical electronic
+coordinates and their derivatives, which need the `xtb` binary whose version
+was not recorded. The gate names those eight rather than counting them as
+checked, fails if any other column falls outside that declared list, and fails
+if a cache file is missing instead of skipping it. The eight are checked
+separately by the B3LYP/def2-SVPD recomputation in the Supporting Information.
 
 Both are part of the deliverable. The manuscript reports four audits that each
 changed its numbers, and these scripts are what closed the propagation paths
