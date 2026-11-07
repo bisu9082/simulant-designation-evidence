@@ -1539,6 +1539,13 @@ def load_facts():
     f['dye_anthracene_ratio'] = _byname['Anthracene']['ratio_max']
     f['dye_pyrene_ratio'] = _byname['Pyrene']['ratio_max']
 
+    # 양수 가상궤도 (2026-11-07 신설, 12차 A-5).
+    _pl = json.load(open('outputs/dft_electronic_space.json'))['positive_lumo']
+    f['lumo_n'] = _pl['n_compounds']
+    f['lumo_b3lyp_pos'] = _pl['n_b3lyp_positive']
+    f['lumo_gfn2_pos'] = _pl['n_gfn2_positive']
+    f['lumo_b3lyp_max'] = _pl['b3lyp_max']
+
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
     # 2026-10-27. 28종 구조공간 명목 p 가 어떤 어법으로도 등록돼 있지 않았다.
@@ -2587,6 +2594,12 @@ CHECKS = [
     ('dye_top_ratio', [r'a ratio of ([\d.]+), the largest'], 0.05),
     ('dye_anthracene_ratio', [r'pyrene follow at ([\d.]+) and [\d.]+'], 0.05),
     ('dye_pyrene_ratio', [r'pyrene follow at [\d.]+ and ([\d.]+)'], 0.05),
+    # 2026-11-07 (12차 A-5) 양수 가상궤도.
+    ('lumo_b3lyp_pos',
+     [r'In (\w+) of the twenty-eight compounds the B3LYP LUMO'], 0),
+    ('lumo_gfn2_pos',
+     [r'(\w+)\s*\n?of the twenty-eight GFN2-xTB LUMO energies are positive'], 0),
+    ('lumo_b3lyp_max', [r'\$n\$-hexane at \$\+([\d.]+)\$~eV'], 0.005),
     ('gate_exempt', [r'The (\w+)\s*\n?columns it does not recompute'], 0),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
                             r'observed value at the (\d+\.\d+)th percentile',
