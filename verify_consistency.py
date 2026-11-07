@@ -3382,14 +3382,28 @@ def main():
     # 신설 — 가 빠진 PDF 가 투고될 상태였다. 검증기는 .tex 를 읽으므로
     # 글은 맞았고 올라가는 파일만 틀렸다. 도판에는 시차 검사가 있었는데
     # PDF 에는 없었다.
+    # mtime 이 아니라 내용 해시로 본다. 주입시험은 원고를 스냅샷으로
+    # 되돌리므로 mtime 이 새로워지지만 내용은 같다 (2026-11-07 실측).
+    import hashlib as _hl
     import os as _o2
+    _stamp = {}
+    if _o2.path.exists('paper_acs/.buildstamp'):
+        for _ln in open('paper_acs/.buildstamp'):
+            _h, _, _n = _ln.strip().partition(' ')
+            _stamp[_o2.path.basename(_n.strip())] = _h
     for _b in ('main', 'supporting', 'cover_letter'):
         _t, _p = f'paper_acs/{_b}.tex', f'paper_acs/{_b}.pdf'
         if not _o2.path.exists(_p):
             fails.append(f'{_p} 가 없다 (검사 A-pdf): '
                          'sh build_paper_acs.sh 를 돌릴 것')
-        elif _o2.path.getmtime(_p) < _o2.path.getmtime(_t) - 1:
-            fails.append(f'{_p} 가 {_b}.tex 보다 오래됐다 (검사 A-pdf): '
+            continue
+        if not _stamp:
+            fails.append('paper_acs/.buildstamp 가 없다 (검사 A-pdf): '
+                         'sh build_paper_acs.sh 를 돌릴 것')
+            break
+        _cur = _hl.sha256(open(_t, 'rb').read()).hexdigest()
+        if _stamp.get(f'{_b}.tex') != _cur:
+            fails.append(f'{_p} 가 {_b}.tex 와 다른 판본이다 (검사 A-pdf): '
                          'sh build_paper_acs.sh 를 돌릴 것 — 올라가는 '
                          'PDF 가 원고와 다르다')
 
