@@ -15,9 +15,23 @@ ROOT=$(pwd)
 # png 는 구판으로 남았다. verify_consistency 의 ACS 도판 시차 검사가 이것을
 # 잡아냈다. --figs 를 주면 생성기까지 다시 돌린다.
 if [ "$1" = '--figs' ]; then
+  # 2026-11-07 (11차). 이 목록에 둘이 빠져 있었다.
+  #   make_fig_talk_extra.py  -> outputs/Fig_talk_tox.png = 원고의 Figure 3.
+  #     아래 복사 목록에는 있는데 생성기가 없었으므로, 빈 저장소를 클론한
+  #     사람은 Figure 3 을 만들 수 없고 경고 한 줄만 본다.
+  #   make_fig_toxicity.py    -> outputs/fig_label_counts.json.
+  #     검증기 REQUIRED_OUTPUTS 에 있어서, 없으면 사전 점검에서 멈춘다.
+  #     파이프라인도 빌드도 부르지 않았다.
   for s in make_fig_main.py make_fig_h1.py make_fig_mde.py \
-           make_fig_plocal.py make_fig_talk_response.py make_toc_acs.py; do
-    [ -f "$s" ] || continue
+           make_fig_talk_response.py \
+           make_fig_talk_extra.py make_fig_toxicity.py make_toc_acs.py; do
+    # 2026-11-07. 종전 목록에 make_fig_plocal.py 가 있었는데 그런 파일은
+    # 없다. Fig_plocal.png 은 make_fig_main.py 가 쓴다. [ -f ] 로 조용히
+    # 건너뛰고 있었으므로, 목록이 틀렸다는 사실이 드러나지 않았다. 이제
+    # 없는 파일은 중단 사유다.
+    if [ ! -f "$s" ]; then
+      echo "[fig] $s 없음 — 목록이 저장소와 어긋났다"; exit 1
+    fi
     printf '[fig] %-28s ' "$s"
     if python3 "$s" >/dev/null 2>&1; then echo ok; else echo FAIL; exit 1; fi
   done
