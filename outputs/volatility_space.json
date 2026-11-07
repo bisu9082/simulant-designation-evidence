@@ -434,7 +434,7 @@
    "n_channels": 2,
    "min_q": 0.04296857084975769,
    "n_sig_q": 1,
-   "rationale": "The two channels of one plate are not independent (mean inter-channel cosine 0.584), so they cannot enter one Fisher combination. Runs can."
+   "rationale": "The two channels of one plate are not independent (mean inter-channel cosine is reported in outputs/reversal_audit.json), so they cannot enter one Fisher combination. Runs can."
   },
   "superseded_pooled_four_cells": {
    "statistic": 14.032034180187779,

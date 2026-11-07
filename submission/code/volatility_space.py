@@ -330,7 +330,10 @@ def agreement():
     # 2026-11-03 (작업 A-3). 1차에서 4셀 = 2런 x 2채널을 한꺼번에 Fisher 로
     # 묶었다. 그것은 논문 자신의 규칙을 깬다. 본문 res:mantel 은 "첫째·둘째
     # 런은 화합물도 플레이트도 공유하지 않으므로 독립" 이라고 적고 런만
-    # 독립으로 본다. 같은 플레이트 두 채널의 평균 상호 코사인은 0.584 다.
+    # 독립으로 본다. 같은 플레이트 두 채널의 상호 코사인은 reversal_audit.py
+    # 가 낸다 (중심화 후 0.353, 전 0.584). 2026-11-07 (12차 A-6) 이전에는
+    # 그 값이 여기 주석과 아래 rationale 문자열에 리터럴로만 있었고 계산
+    # 하는 코드가 없었다. 숫자를 이 스크립트에서 적지 않는다.
     # 채널 내에서 런을 합성하고, 두 채널을 BH 로 보정한다. 종전 4셀 값은
     # 기록으로 남긴다.
     pv = [c['p_mantel'] for c in cells]
@@ -361,9 +364,10 @@ def agreement():
                 'min_q': float(_q[0]) if _q else None,
                 'n_sig_q': int(sum(1 for x in _q if x < 0.05)),
                 'rationale': 'The two channels of one plate are not '
-                             'independent (mean inter-channel cosine '
-                             '0.584), so they cannot enter one Fisher '
-                             'combination. Runs can.'},
+                             'independent (mean inter-channel cosine is '
+                             'reported in outputs/reversal_audit.json), so '
+                             'they cannot enter one Fisher combination. '
+                             'Runs can.'},
             'superseded_pooled_four_cells': {
                 'statistic': float(pooled4.statistic) if pv else None,
                 'p_value': float(pooled4.pvalue) if pv else None,
