@@ -120,10 +120,15 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            purity_sensitivity.py channel_classification.py \
            sparse_indicators.py multiplicity_panels.py \
            volatility_fetch.py volatility_space.py \
-           shape_reduction.py premise_null.py conformer_sensitivity.py \
-           make_si_tables.py
+           shape_reduction.py premise_null.py conformer_sensitivity.py
 
-# dft_electronic_space.py 는 outputs/dft_omega.csv 와 outputs/dft_dipole.csv 를
+# 2026-11-07 (10차 R5-B3). 제외 목록에 outputs/dft_vs_gfn2.csv 가 빠져
+# 있었다. dft_electronic_space.py 가 읽는데 저장소의 어떤 스크립트도
+# 쓰지 않아 생성기 없는 예치물로 남아 있었고, 원고가 파일명을 대지
+# 않으므로 검증기의 고아 가드도 보지 못했다. 세 파일 모두 같은
+# B3LYP 실행의 산출물이다.
+# dft_electronic_space.py 는 outputs/dft_omega.csv, outputs/dft_dipole.csv,
+# outputs/dft_vs_gfn2.csv 를
 # 읽는다. 둘은 B3LYP/def2-SVPD 28종 계산의 산출물이고 한 번에 약 54분 걸리므로
 # 이 파이프라인에 넣지 않고 저장소에 커밋해 둔다. 재생성 명령을 여기 적는 것은
 # 2026-10-25 에 겪은 고아 파일 사고를 되풀이하지 않기 위해서다.
@@ -184,5 +189,12 @@ for lab, sp in r['panels'].items():
           f'{min(1, o[0]*m):.3f}  최소q {bh[0]:.3f}  q<0.05 {int((bh<0.05).sum())}건')
 json.dump(rows, open('outputs/multiplicity_c.json', 'w'), indent=1)
 PY
+
+# 2026-11-07 (10차 R5-B2). make_si_tables 는 위 두 번째 블록 끝에
+# 있었는데 outputs/multiplicity_c.json 을 읽고 그 파일은 바로 위 BH
+# 블록이 만든다. 빈 outputs/ 로 클론하면 FileNotFoundError 로 set -e 에
+# 걸려 파이프라인이 여기서 끊겼고 아래가 전부 미실행으로 남았다.
+# 의존 순서대로 옮긴다.
+run_strict make_si_tables.py
 
 echo '[run] 완료. 다음: sh build_paper_acs.sh --figs && python3 verify_consistency.py'

@@ -10,9 +10,22 @@ Z="simulant_repo_update_$(date +%Y%m%d).zip"
 rm -f "$Z"
 
 zip -q -X "$Z" *.py *.sh
+# 2026-11-07 (10차 R5-B4). README 와 requirements.txt 가 빠져 있었다.
+# README 의 첫 명령이 pip install -r requirements.txt 인데 그 파일이
+# 패키지에 없었다.
+zip -q -X "$Z" README.md requirements.txt
+# 2026-11-07. 서술자 캐시 목록이 불완전했다. match_by_panel_ascl3.py 와
+# 서술자 관문이 읽는 세 파일이 빠져 있어, 푼 패키지에서 관문이 조용히
+# 건너뛰고도 '전 수치열 재현' 을 찍었다.
 zip -q -X "$Z" descriptor_cache.csv descriptor_cache_35.csv \
     descriptor_cache_xtb.csv descriptor_cache_xtb_35.csv \
-    inchikeys.csv panel_all.csv panel_new.csv
+    descriptor_cache_xtb_36.csv descriptor_cache_ascl3.csv \
+    descriptor_cache_xtb_ascl3.csv \
+    inchikeys.csv panel_all.csv panel_new.csv panel_ascl3.csv
+# 2026-11-07 (10차 R5-B4). deltaE/ 는 원고가 'the deposited Delta E_00
+# table' 이라고 가리키는 측정 입력인데 패키지에 한 건도 없었다. 푼 패키지
+# 에서 deltaE_premise.py 가 첫 줄에서 죽는다.
+zip -q -X "$Z" deltaE/*.csv
 # 2026-11-04 (J-C). ACS본이 정본. JHM 평행본은 archive/jhm_v1/ 동결.
 zip -q -X "$Z" paper_acs/main.tex paper_acs/supporting.tex \
     paper_acs/cover_letter.tex paper_acs/refs.bib paper_acs/tab_*.tex
@@ -29,7 +42,9 @@ zip -q -X -r "$Z" outputs -i 'outputs/*.json' 'outputs/*.csv' 'outputs/*.png' \
 # 규제값과 그 출처뿐이므로 1차 사료만 넣는다. 새 1차 사료를 받으면 여기에
 # 확장자나 파일명을 더할 것. 와일드카드를 열어 두면 메모가 다시 샌다.
 zip -q -X "$Z" sources/compiled_aegls_27jul2018.pdf \
-    sources/registers_20261106.csv
+    sources/registers_20261106.csv \
+    sources/designations_20261106.csv \
+    sources/dye_panel_20261106.csv
 
 n=$(unzip -l "$Z" | tail -1 | awk '{print $2}')
 printf '[repo] %s  (%s개 파일, %s)\n' "$Z" "$n" "$(du -h "$Z" | cut -f1)"

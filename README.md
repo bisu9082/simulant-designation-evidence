@@ -26,28 +26,36 @@ that dependence is the result.
 | `inchikeys.csv` | Chemical identity resolution input |
 | `deltaE/` | Measured 29-dye colorimetric array response, three compound sets, two imaging channels |
 | `outputs/` | Permutation results, distance tables, parsed AEGL values, figure annotations |
-| `paper/` | Manuscript, Supplementary Material, cover letter, figures, PDFs |
+| `paper_acs/` | Manuscript, Supporting Information, cover letter, figures, PDFs (ACS submission, canonical) |
+| `archive/jhm_v1/` | Frozen parallel version for a different journal; not maintained |
+| `sources/` | Primary sources: the parsed EPA AEGL document, the collected register and designation records, the array component list |
 
 The layout is flat rather than split into `src/` and `data/` because the scripts
 address their inputs and `outputs/` by relative path. A clone runs as it stands.
 
-Two files in `outputs/` are shipped rather than regenerated, because
-regenerating them requires the `xtb` binary to recompute GFN2-xTB descriptors
-for the roughly 230 AEGL training compounds:
+Five files in `outputs/` are shipped rather than regenerated, because
+regenerating them needs either the `xtb` binary or a B3LYP/def2-SVPD run of
+about an hour:
 
-- `aegl_electronic.csv`
-- `xtb_fast_vs_slow.csv`
+- `aegl_electronic.csv` and `xtb_fast_vs_slow.csv` (GFN2-xTB over the
+  roughly 230 AEGL training compounds)
+- `dft_omega.csv`, `dft_dipole.csv` and `dft_vs_gfn2.csv`
+  (B3LYP/def2-SVPD over the twenty-eight-compound panel)
 
-`run_analysis.sh` therefore does not call `xtb_fast.py`. Everything downstream
-of those two files is regenerated from the sources in this repository,
-including the parse of the EPA document.
+`run_analysis.sh` therefore calls neither `xtb_fast.py` nor `dft_omega.py`;
+both commands are written out in its comments. Everything downstream of those
+five files is regenerated from the sources in this repository, including the
+parse of the EPA document.
+
+The version of the `xtb` binary that produced `descriptor_cache_xtb*.csv` was
+not recorded, so that axis is not version-pinned. `requirements.txt` says so.
 
 ## Reproducing
 
 ```sh
 pip install -r requirements.txt
 sh run_analysis.sh                      # analysis, in dependency order
-sh build_paper.sh --figs                # figures, then LaTeX
+sh build_paper_acs.sh --figs            # figures, then LaTeX
 python3 verify_consistency.py           # manuscript against outputs
 python3 test_verify_consistency.py      # does the verifier catch injected defects
 python3 ai_style_scan.py                # prose style scan
@@ -78,12 +86,13 @@ full. The remaining analyses are deterministic given the seed `0xC0DE`.
 
 ## Verification
 
-`verify_consistency.py` reads every numerical claim in `paper/main.tex`,
-`paper/supplementary.tex`, the cover letter, the highlights and the figure
-annotations, and checks each against the generator output it came from. It
-currently performs 137 context checks, all passing. `test_verify_consistency.py`
-injects 34 historical and synthetic defects into the manuscript or the
-Supplementary Material and confirms the verifier catches all 34.
+`verify_consistency.py` reads every numerical claim in `paper_acs/main.tex`,
+`paper_acs/supporting.tex`, the cover letter and the figure annotations, and
+checks each against the generator output it came from. `test_verify_consistency.py`
+injects historical and synthetic defects into the manuscript or the Supporting
+Information and confirms the verifier catches each one. Both print their
+current counts; we do not repeat the counts here, because a number in a README
+is one more thing that goes stale.
 
 Both are part of the deliverable. The manuscript reports four audits that each
 changed its numbers, and these scripts are what closed the propagation paths
