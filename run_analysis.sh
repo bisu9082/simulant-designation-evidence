@@ -120,7 +120,8 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            purity_sensitivity.py channel_classification.py \
            sparse_indicators.py multiplicity_panels.py \
            volatility_fetch.py volatility_space.py \
-           shape_reduction.py premise_null.py conformer_sensitivity.py
+           shape_reduction.py premise_null.py conformer_sensitivity.py \
+           collapse_sensitivity.py
 
 # 2026-11-07 (10차 R5-B3). 제외 목록에 outputs/dft_vs_gfn2.csv 가 빠져
 # 있었다. dft_electronic_space.py 가 읽는데 저장소의 어떤 스크립트도

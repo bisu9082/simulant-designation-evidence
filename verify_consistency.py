@@ -55,6 +55,7 @@ EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
 REQUIRED_OUTPUTS = [
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
+    'outputs/collapse_sensitivity.json',
     'outputs/descriptor_gate_scope.json',
     'outputs/dim_percentiles.json',
     'outputs/distance_table_normalized.csv',
@@ -579,7 +580,9 @@ def preflight():
         'volatility_candidates.json': 'volatility_fetch.py',
         'volatility_space.json': 'volatility_space.py',
         'shape_reduction.json': 'shape_reduction.py',
+        'collapse_sensitivity.json': 'collapse_sensitivity.py',
         'premise_null.json': 'premise_null.py',
+        'stat_supplement.json': 'stat_supplement.py',
         'lewisite_isomer.json': 'lewisite_isomer.py',
         'subspace_null.json': 'subspace_null.py',
         'dft_dipole.csv': 'dft_omega.py',
@@ -1049,10 +1052,19 @@ def load_facts():
         f['sp_match_lowcard'] = _V['drop_cardinality_le_5']['n_match']
         f['sp_p_base'] = _V['baseline']['p_one_sided']
         f['sp_p_lowcard'] = _V['drop_cardinality_le_5']['p_one_sided']
+        # 2026-11-07 (10차 R3). 종전에는 세 변종만 키였다. sparse_indicators
+        # 가 일곱 전부를 돌므로 일곱 전부에 앵커를 붙인다. SI 가 여섯 수를
+        # 나란히 적으므로 자리별로 따로 검사한다.
         _ms = {r['variant']: r for r in _sp['mantel_stability']}
         f['sp_mantel_q_base'] = _ms['baseline']['min_q']
         f['sp_mantel_q_drop1'] = _ms['drop_binary_nonzero_le_1']['min_q']
+        f['sp_mantel_q_drop2'] = _ms['drop_binary_nonzero_le_2']['min_q']
         f['sp_mantel_q_drop3'] = _ms['drop_binary_nonzero_le_3']['min_q']
+        f['sp_mantel_q_drop4'] = _ms['drop_binary_nonzero_le_4']['min_q']
+        f['sp_mantel_q_drop5'] = _ms['drop_binary_nonzero_le_5']['min_q']
+        f['sp_mantel_q_lowcard'] = _ms['drop_cardinality_le_5']['min_q']
+        f['sp_mantel_q_max'] = max(r['min_q'] for r in _sp['mantel_stability'])
+        f['sp_mantel_nvar'] = len(_sp['mantel_stability'])
 
     # 전제 검정의 쌍별 위반. 초록이 '평균' 표현을 쓰는 근거이자 그 한계.
     if _os.path.exists('outputs/deltaE_premise.json'):
@@ -1429,6 +1441,25 @@ def load_facts():
     # 2026-11-07 (10차 R5-B5). SI meth:conformer 가 관문의 범위를 '53 of the
     # 61 numeric columns' 과 'eight columns' 로 적는다. 손으로 적힌 수가
     # 아니라 관문 실행의 결과여야 한다.
+    # 2026-11-07 (10차 R2/R3). 역치가 여섯째 자유도다. 본문과 SI 가 적는
+    # 3 -> 5, panel35 0, 귀무기대 9.06/9.63 을 산출물에서 읽는다.
+    # 2026-11-07 (10차 R3). 붕괴 문단의 여섯 수치를 collapse_sensitivity.py
+    # 실측에서 읽는다. 종전 값은 어느 실행에서도 나오지 않았다.
+    _cs = json.load(open('outputs/collapse_sensitivity.json'))
+    f['coll_q_off'] = _cs['bh_min_q_uncollapsed']
+    f['coll_q_on'] = _cs['bh_min_q_collapsed']
+    _cm = {(c['dataset'], c['mode'], c['space']): c for c in _cs['cells']}
+    f['coll_merged_off'] = _cm[('d2', 'uv', 'merged')]['rho_uncollapsed']
+    f['coll_merged_on'] = _cm[('d2', 'uv', 'merged')]['rho_collapsed']
+    f['coll_struct_off'] = _cm[('d2', 'uv', 'structural')]['rho_uncollapsed']
+    f['coll_struct_on'] = _cm[('d2', 'uv', 'structural')]['rho_collapsed']
+
+    _ts = json.load(open('outputs/stat_supplement.json'))['threshold_free']
+    f['thr_free_28'] = _ts['panel28_incumbent3']['n_match_unbounded']
+    f['thr_free_35'] = _ts['panel35_incumbent3']['n_match_unbounded']
+    f['thr_null_28'] = _ts['panel28_incumbent3']['null_expectation_outside_closer']
+    f['thr_null_35'] = _ts['panel35_incumbent3']['null_expectation_outside_closer']
+
     _gs = json.load(open('outputs/descriptor_gate_scope.json'))
     f['gate_numeric'] = _gs['n_numeric']
     f['gate_checked'] = _gs['n_checked']
@@ -2198,14 +2229,31 @@ CHECKS = [
     ('sp_p_base', [r'one-sided \$p\$ falling from ([\d.]+) to [\d.]+'], 0.0005),
     ('sp_p_lowcard', [r'one-sided \$p\$ falling from [\d.]+ to ([\d.]+)'], 0.0005),
     ('sp_mantel_q_base',
-     [r'smallest Benjamini--Hochberg value at\s*\n?([\d.]+), [\d.]+ and [\d.]+'],
-     0.0005),
+     [r'value is ([\d.]+) under the baseline encoding',
+      r'value between ([\d.]+) and [\d.]+'], 0.0005),
     ('sp_mantel_q_drop1',
-     [r'smallest Benjamini--Hochberg value at\s*\n?[\d.]+, ([\d.]+) and [\d.]+'],
-     0.0005),
+     [r'baseline encoding and\s*\n?([\d.]+), [\d.]+, [\d.]+, [\d.]+, '
+      r'[\d.]+ and [\d.]+ under the six'], 0.0005),
+    ('sp_mantel_q_drop2',
+     [r'baseline encoding and\s*\n?[\d.]+, ([\d.]+), [\d.]+, [\d.]+, '
+      r'[\d.]+ and [\d.]+ under the six'], 0.0005),
     ('sp_mantel_q_drop3',
-     [r'smallest Benjamini--Hochberg value at\s*\n?[\d.]+, [\d.]+ and ([\d.]+)'],
-     0.0005),
+     [r'baseline encoding and\s*\n?[\d.]+, [\d.]+, ([\d.]+), [\d.]+, '
+      r'[\d.]+ and [\d.]+ under the six'], 0.0005),
+    ('sp_mantel_q_drop4',
+     [r'baseline encoding and\s*\n?[\d.]+, [\d.]+, [\d.]+, ([\d.]+), '
+      r'[\d.]+ and [\d.]+ under the six'], 0.0005),
+    ('sp_mantel_q_drop5',
+     [r'baseline encoding and\s*\n?[\d.]+, [\d.]+, [\d.]+, [\d.]+, '
+      r'([\d.]+) and [\d.]+ under the six'], 0.0005),
+    ('sp_mantel_q_lowcard',
+     [r'baseline encoding and\s*\n?[\d.]+, [\d.]+, [\d.]+, [\d.]+, '
+      r'[\d.]+ and ([\d.]+) under the six'], 0.0005),
+    ('sp_mantel_q_max',
+     [r'value between [\d.]+ and ([\d.]+)'], 0.0005),
+    ('sp_mantel_nvar',
+     [r'Mantel tests under all (\w+)\s*\n?encodings',
+      r'All (\w+) are now recomputed'], 0),
     # 2026-11-03. 신설 문장들의 수치. 자리별 맹점을 만들지 않기 위해
     # 새로 쓴 모든 수치에 앵커를 붙인다.
     ('mantel_bh12_main',
@@ -2393,6 +2441,25 @@ CHECKS = [
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     # 2026-11-04 (J-C). ACS본 어법으로 교정.
+    ('coll_merged_off',
+     [r'the merged space from\s*\n?\$\\rho = \+([\d.]+)\$ to'], 0.00005),
+    ('coll_merged_on',
+     [r'\$\\rho = \+[\d.]+\$ to \$\+([\d.]+)\$ and the structural'], 0.00005),
+    ('coll_struct_off',
+     [r'the structural space from \$\+([\d.]+)\$ to'], 0.00005),
+    ('coll_struct_on',
+     [r'the structural space from \$\+[\d.]+\$ to\s*\n?\$\+([\d.]+)\$'],
+     0.00005),
+    ('coll_q_off',
+     [r'over the twelve cells from\s*\n?([\d.]+) to [\d.]+\.'], 0.00005),
+    ('coll_q_on',
+     [r'over the twelve cells from\s*\n?[\d.]+ to ([\d.]+)\.'], 0.00005),
+    ('thr_free_28',
+     [r'twenty-eight-compound count from three valid matches to (\w+)',
+      r'takes the twenty-eight-compound count from three to (\w+), while'], 0),
+    ('thr_null_28', [r'any incumbent is ([\d.]+) of\s*\n?eleven on the '
+                     r'twenty-eight-compound panel'], 0.005),
+    ('thr_null_35', [r'and ([\d.]+) of eleven on the primary\s*\n?one'], 0.006),
     ('gate_checked', [r'reproduces from the code, (\d+) of the \d+ numeric'], 0),
     ('gate_numeric', [r'reproduces from the code, \d+ of the (\d+) numeric'], 0),
     ('gate_exempt', [r'The (\w+)\s*\n?columns it does not recompute'], 0),

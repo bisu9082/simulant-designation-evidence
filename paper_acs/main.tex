@@ -592,15 +592,19 @@ zero. We kept the choice that produces the smallest count in each case, and
 report the sweeps because that is the only evidence that we did not select a
 convention for its answer.
 
-Five analyst choices therefore move the count of valid matches: the panel, the
-order in which the correlation filter is handed its columns, the conformer
-embedding seed, the descriptor encoding and the shape block. None of them moves
-the result of Section~\ref{res:mantel}. Recomputing the twelve Mantel tests
-under the three encodings leaves the smallest Benjamini--Hochberg value at
-0.1167, 0.4722 and 0.3889, and dropping the derived shape coordinates raises it
-to 0.1708 with the largest rank correlation unchanged at 0.571. A quantity that
-five arbitrary choices move between zero and six is not a measurement of
-anything, which is why we do not report a match count as a finding.
+A sixth choice is the match threshold itself. Removing the normalised distance
+of 2 and keeping only the requirement that nothing outside the designated set
+be nearer takes the twenty-eight-compound count from three to five, while the
+primary panel stays at zero. Six analyst choices therefore move the count of
+valid matches: the panel, the order in which the correlation filter is handed
+its columns, the conformer embedding seed, the descriptor encoding, the shape
+block and the threshold. None of them moves the result of
+Section~\ref{res:mantel}. Recomputing the twelve Mantel tests under all seven
+encodings leaves the smallest Benjamini--Hochberg value between 0.1167 and
+0.4722, and dropping the derived shape coordinates raises it to 0.1708 with the
+largest rank correlation unchanged at 0.571. A quantity that six arbitrary choices move between zero and
+six is not a measurement of anything, which is why we do not report a match
+count as a finding.
 
 % 2026-11-03 신설. 리뷰어 1: 서론이 휘발성을 제일 먼저 드는데 서술자
 % 패널에 없다. 그 반론은 '서술자를 잘못 골랐다'로 논문을 읽게 만들므로
@@ -942,7 +946,7 @@ The Supporting Information is available free of charge at
   conformer dependence of the shape descriptors; the
   density-functional check on the electronic coordinates; the full permutation
   family under all six multiplicity schemes; the dimensionality, subspace and
-  block-weighting controls with their nulls; the five analyst freedoms in full;
+  block-weighting controls with their nulls; the six analyst freedoms in full;
   the measured array response and what it does and does not establish;
   phosphorus-local reactivity; and the structural filter
   (Section~\ref{S-meth:alerts}) (PDF)

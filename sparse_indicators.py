@@ -267,10 +267,14 @@ def main():
         print(f'{k:<34}{a["sq_total"]:>10.2f}'
               f'{100*a["share"]:>8.1f}%{100*b["share"]:>8.1f}%')
 
-    # 논지 안정성. 전수 열거가 비싸므로 세 변종만 본다.
-    mv = [(lab, dr) for lab, dr in variants
-          if lab in ('baseline', 'drop_binary_nonzero_le_1',
-                     'drop_binary_nonzero_le_3')]
+    # 논지 안정성.
+    # 2026-11-07 (10차 R3). 종전에는 '전수 열거가 비싸므로' 세 변종만 돌았고,
+    # 그 셋에 매칭을 가장 크게 움직이는 drop_cardinality_le_5 (매칭 6건) 가
+    # 빠져 있었다. 그런데 원고는 그 상태로 "survives every choice we
+    # enumerated" 라고 적었다. 즉 가장 큰 자유도에서 Mantel 을 돌린 적이
+    # 없는데 전부 견딘다고 주장하고 있었다. Mantel 은 6!=720 전수이고 12셀
+    # 이라 변종 하나당 8640 회, 비싸지 않다. 전 변종을 돈다.
+    mv = list(variants)
     ms = mantel_stability(df, keep0, mv)
     print('\n논지 안정성 — Mantel 12셀 BH (서술자 거리 대 응답 거리)')
     print(f'{"변종":<28}{"차원":>5}{"최소 p":>9}{"최소 q":>9}{"q<0.05":>8}')
