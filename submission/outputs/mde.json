@@ -25,6 +25,54 @@
   "observed_at_zero": 1.9338575791109014,
   "gap_median": 0.4925564594908311,
   "gap_min": 0.12473514072899886,
+  "gap_per_agent": [
+   {
+    "agent": "sarin (GB)",
+    "gap": 0.12473514072899886
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "gap": 0.22102251463869677
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "gap": 0.33056694532387465
+   },
+   {
+    "agent": "phosgene (CG)",
+    "gap": 0.42228236994124524
+   },
+   {
+    "agent": "soman (GD)",
+    "gap": 0.45313030460877946
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "gap": 0.4925564594908311
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "gap": 0.5525293172444717
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "gap": 0.7154697760439672
+   },
+   {
+    "agent": "tabun (GA)",
+    "gap": 0.7634426295364631
+   },
+   {
+    "agent": "VX",
+    "gap": 0.8445920987254695
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "gap": 1.0560407178423383
+   }
+  ],
+  "n_below_alpha_mde": 2,
+  "n_below_bh_mde": 4,
   "curve": [
    {
     "delta": 0.0,
@@ -809,6 +857,54 @@
   "observed_at_zero": 0.02343700603521553,
   "gap_median": 0.07441561346901936,
   "gap_min": -0.5456997658107252,
+  "gap_per_agent": [
+   {
+    "agent": "soman (GD)",
+    "gap": -0.5456997658107252
+   },
+   {
+    "agent": "sarin (GB)",
+    "gap": -0.5422845293621051
+   },
+   {
+    "agent": "VX",
+    "gap": -0.49066437297030485
+   },
+   {
+    "agent": "cyclosarin (GF)",
+    "gap": -0.3434175473102771
+   },
+   {
+    "agent": "tabun (GA)",
+    "gap": -0.2954491944537827
+   },
+   {
+    "agent": "sulfur mustard (HD)",
+    "gap": 0.07441561346901936
+   },
+   {
+    "agent": "chloropicrin (PS)",
+    "gap": 0.2164617931704965
+   },
+   {
+    "agent": "lewisite 1 (L)",
+    "gap": 0.2531292819941852
+   },
+   {
+    "agent": "phosgene (CG)",
+    "gap": 0.4862396187465268
+   },
+   {
+    "agent": "cyanogen chloride (CK)",
+    "gap": 0.5497361451550269
+   },
+   {
+    "agent": "hydrogen cyanide (AC)",
+    "gap": 0.7048647664385546
+   }
+  ],
+  "n_below_alpha_mde": 5,
+  "n_below_bh_mde": 6,
   "curve": [
    {
     "delta": 0.0,

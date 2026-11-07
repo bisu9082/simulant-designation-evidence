@@ -499,6 +499,26 @@ def _label_scope_guards():
             bad.append(f'  내부 문서가 예치물에 있다 [outputs/{fn}]: '
                        f'{hit} — 공개 저장소에서 제거할 것')
 
+    # (B0c) 과잉 이스케이프된 명령 (2026-11-07 신설, 12차).
+    #
+    # 왜 필요한가. 파이썬에서 .tex 를 생성·치환할 때 f-string 이나
+    # 정규식 치환을 거치면서 백슬래시가 한 번 더 붙는 일이 반복됐다.
+    # '\\textbf{Length.}' 는 줄바꿈 뒤 textbf 로 읽혀 'There's no line
+    # here to end' 로 빌드를 깬다. 11차와 12차에 같은 자리에서 두 번
+    # 났다. LaTeX 의 정상 줄바꿈 \\ 는 뒤에 글자가 오지 않는다.
+    _ESC = _r.compile(r'\\\\[a-zA-Z]{2,}')
+    for _f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
+        if not _o.path.exists(_f):
+            continue
+        for _i, _ln in enumerate(open(_f, encoding='utf8'), 1):
+            if _ln.lstrip().startswith('%'):
+                continue
+            _m = _ESC.search(_ln)
+            if _m:
+                bad.append(f'  과잉 이스케이프 명령 [{_f}:{_i}] '
+                           f'{_m.group(0)} — 백슬래시 하나여야 한다 '
+                           '(검사 B0c)')
+
     # (B0b) 내부 심의 문서와 폐기본이 추적되고 있는지 (2026-11-07 신설,
     #       12차 R5-A5/A6).
     #
@@ -3727,6 +3747,17 @@ def main():
         _d = pd.read_csv(_dt)
         for _r in _d.itertuples():
             allowed.setdefault(_r.real_agent, set()).add(round(_r.d_sim_norm, 3))
+    # 2026-11-07 (12차 R3-A2). SI 가 작용제별 MDE 결손을 적는다. 그 값은
+    # 거리가 아니라 결손이므로 거리 표와는 맞지 않는다. 같은 자격으로
+    # 허용 집합에 넣되, 출처는 outputs/mde.json 하나다.
+    try:
+        _mj = json.load(open('outputs/mde.json'))
+        for _pan in _mj.values():
+            for _g in _pan.get('gap_per_agent', []):
+                allowed.setdefault(_g['agent'], set()).add(
+                    round(_g['gap'], 3))
+    except (OSError, ValueError, KeyError):
+        pass
     # 거리로 읽힐 수 있는 꼴만 본다. 괄호 안의 수와 'at N' 꼴.
     NEAR = re.compile(
         r'\b(' + '|'.join(sorted(AGENT_ALIASES, key=len, reverse=True)) +
