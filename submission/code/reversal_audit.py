@@ -49,8 +49,26 @@ def consensus_of(pat):
             for a in pat}
 
 
-def reversals(pat):
-    """(역전수, 사례수, 화합물별 상세)."""
+def reversals(pat, level='mixed'):
+    """(역전수, 사례수, 화합물별 상세).
+
+    level 은 두 항을 어느 평균 수준에서 재는가를 고른다. 이것이
+    여덟째 분석자 자유도이고, 2026-11-07 GATE8 13차에서 편집장과
+    리뷰어 1·3 이 각각 독립으로 적발했다.
+
+      'mixed'    within 은 농도별 원벡터끼리, between 은 합의벡터끼리.
+                 종전 원고가 쓴 정의다. 한쪽만 4농도 평균으로 잡음이
+                 억제되므로 부등식이 역전 쪽으로 기운다.
+      'raw_mean' 두 항 모두 농도별 원벡터 수준. between 은 농도쌍
+                 전체의 평균 코사인.
+      'raw_max'  두 항 모두 농도별 원벡터 수준. between 은 농도쌍
+                 전체의 최대 코사인.
+
+    'mixed' 를 기본값으로 둔 것은 종전 산출물과의 동일성을 지키기
+    위해서다. 수준을 맞춘 값은 어느 쪽도 'mixed' 를 지지하지 않는다.
+    """
+    if level not in ('mixed', 'raw_mean', 'raw_max'):
+        raise ValueError(f'level: {level}')
     P = consensus_of(pat)
     names = sorted(P)
     hit, det = 0, []
@@ -65,7 +83,15 @@ def reversals(pat):
         for b in names:
             if b == a:
                 continue
-            c = float(np.dot(P[a], P[b]))
+            if level == 'mixed':
+                c = float(np.dot(P[a], P[b]))
+            else:
+                xs = [float(np.dot(pat[a][i], pat[b][j]))
+                      for i in cs for j in sorted(pat[b])]
+                if not xs:
+                    continue
+                c = float(np.mean(xs)) if level == 'raw_mean' \
+                    else float(max(xs))
             if c > best_v:
                 best_v, best_o = c, b
         rev = bool(best_v > within)
@@ -431,6 +457,41 @@ def main():
     report['collapse_free_totals'] = dict(n_instances=cfn,
                                           reversals_uncentred=cfu,
                                           reversals_centred=cfc)
+
+    # [자유도 8] 추정량 수준. 두 항을 같은 평균 수준에서 재면 계수가
+    # 어디로 가는지. 2026-11-07 GATE8 13차 신설. 이 팔이 없었기 때문에
+    # 12차 헤드라인이 선언되지 않은 관례 하나에 올라앉아 있었다.
+    lv = {}
+    for level in ('mixed', 'raw_mean', 'raw_max'):
+        acc = {'reversals_uncentred': 0, 'reversals_centred': 0,
+               'n_instances': 0}
+        per = {}
+        for tag, mode in CELLS:
+            try:
+                D, dy = m.load(tag, mode)
+            except Exception as e:
+                per[f'{tag}.{mode}'] = dict(unavailable=str(e))
+                continue
+            raw = m.raw_patterns(D, dy)
+            cen = m.centred(raw)
+            hu, nu, _ = reversals(raw, level=level)
+            hc, _, _ = reversals(cen, level=level)
+            acc['reversals_uncentred'] += hu
+            acc['reversals_centred'] += hc
+            acc['n_instances'] += nu
+            per[f'{tag}.{mode}'] = dict(n_instances=nu,
+                                        reversals_uncentred=hu,
+                                        reversals_centred=hc)
+        lv[level] = dict(totals=acc, cells=per)
+    report['estimator_level'] = lv
+    print('\n  [자유도] 추정량 수준 (within 과 between 을 같은 평균'
+          ' 수준에서 재면)')
+    for level in ('mixed', 'raw_mean', 'raw_max'):
+        t = lv[level]['totals']
+        note = '   (12차 원고가 쓴 정의)' if level == 'mixed' else ''
+        print(f'    {level:<9} 전 {t["reversals_uncentred"]:>2}'
+              f'/{t["n_instances"]}   후 {t["reversals_centred"]:>2}'
+              f'/{t["n_instances"]}{note}')
 
     ok = [c for c in report['cells'] if 'unavailable' not in c]
     report['totals'] = dict(
