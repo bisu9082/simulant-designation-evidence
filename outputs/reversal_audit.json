@@ -1741,6 +1741,247 @@
    }
   }
  },
+ "f1_grid": {
+  "collapse=True/mixed": {
+   "collapse_applied": true,
+   "level": "mixed",
+   "n_cells": 6,
+   "n_cells_q_below_05": 4,
+   "min_q": 0.0,
+   "cells": [
+    {
+     "cell": "d2.normal",
+     "p": 0.0,
+     "q": 0.0
+    },
+    {
+     "cell": "d2.uv",
+     "p": 0.0003,
+     "q": 0.0009
+    },
+    {
+     "cell": "d1.uv",
+     "p": 0.0044,
+     "q": 0.0088
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.008,
+     "q": 0.012
+    },
+    {
+     "cell": "d3.normal",
+     "p": 0.1154,
+     "q": 0.13848
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.1513,
+     "q": 0.1513
+    }
+   ]
+  },
+  "collapse=True/raw_mean": {
+   "collapse_applied": true,
+   "level": "raw_mean",
+   "n_cells": 6,
+   "n_cells_q_below_05": 5,
+   "min_q": 0.00030000000000000003,
+   "cells": [
+    {
+     "cell": "d1.uv",
+     "p": 0.0001,
+     "q": 0.00030000000000000003
+    },
+    {
+     "cell": "d2.normal",
+     "p": 0.0001,
+     "q": 0.00030000000000000003
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.0007,
+     "q": 0.0014
+    },
+    {
+     "cell": "d2.uv",
+     "p": 0.0011,
+     "q": 0.00165
+    },
+    {
+     "cell": "d3.normal",
+     "p": 0.0106,
+     "q": 0.01272
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.0545,
+     "q": 0.0545
+    }
+   ]
+  },
+  "collapse=True/raw_max": {
+   "collapse_applied": true,
+   "level": "raw_max",
+   "n_cells": 6,
+   "n_cells_q_below_05": 3,
+   "min_q": 0.0006000000000000001,
+   "cells": [
+    {
+     "cell": "d2.normal",
+     "p": 0.0001,
+     "q": 0.0006000000000000001
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.0051,
+     "q": 0.015300000000000001
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.0186,
+     "q": 0.0372
+    },
+    {
+     "cell": "d1.uv",
+     "p": 1.0,
+     "q": 1.0
+    },
+    {
+     "cell": "d2.uv",
+     "p": 1.0,
+     "q": 1.0
+    },
+    {
+     "cell": "d3.normal",
+     "p": 1.0,
+     "q": 1.0
+    }
+   ]
+  },
+  "collapse=False/mixed": {
+   "collapse_applied": false,
+   "level": "mixed",
+   "n_cells": 6,
+   "n_cells_q_below_05": 4,
+   "min_q": 0.0,
+   "cells": [
+    {
+     "cell": "d2.normal",
+     "p": 0.0,
+     "q": 0.0
+    },
+    {
+     "cell": "d2.uv",
+     "p": 0.0027,
+     "q": 0.0081
+    },
+    {
+     "cell": "d1.uv",
+     "p": 0.0044,
+     "q": 0.0088
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.008,
+     "q": 0.012
+    },
+    {
+     "cell": "d3.normal",
+     "p": 0.1154,
+     "q": 0.13848
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.1513,
+     "q": 0.1513
+    }
+   ]
+  },
+  "collapse=False/raw_mean": {
+   "collapse_applied": false,
+   "level": "raw_mean",
+   "n_cells": 6,
+   "n_cells_q_below_05": 5,
+   "min_q": 0.00030000000000000003,
+   "cells": [
+    {
+     "cell": "d1.uv",
+     "p": 0.0001,
+     "q": 0.00030000000000000003
+    },
+    {
+     "cell": "d2.normal",
+     "p": 0.0001,
+     "q": 0.00030000000000000003
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.0007,
+     "q": 0.0014
+    },
+    {
+     "cell": "d2.uv",
+     "p": 0.0012,
+     "q": 0.0018
+    },
+    {
+     "cell": "d3.normal",
+     "p": 0.0106,
+     "q": 0.01272
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.0545,
+     "q": 0.0545
+    }
+   ]
+  },
+  "collapse=False/raw_max": {
+   "collapse_applied": false,
+   "level": "raw_max",
+   "n_cells": 6,
+   "n_cells_q_below_05": 3,
+   "min_q": 0.0006000000000000001,
+   "cells": [
+    {
+     "cell": "d2.normal",
+     "p": 0.0001,
+     "q": 0.0006000000000000001
+    },
+    {
+     "cell": "d1.normal",
+     "p": 0.0051,
+     "q": 0.015300000000000001
+    },
+    {
+     "cell": "d3.uv",
+     "p": 0.0186,
+     "q": 0.0372
+    },
+    {
+     "cell": "d1.uv",
+     "p": 1.0,
+     "q": 1.0
+    },
+    {
+     "cell": "d2.uv",
+     "p": 1.0,
+     "q": 1.0
+    },
+    {
+     "cell": "d3.normal",
+     "p": 1.0,
+     "q": 1.0
+    }
+   ]
+  }
+ },
+ "f1_grid_summary": {
+  "n_settings": 6,
+  "q_below_05_min": 3,
+  "q_below_05_max": 5
+ },
  "totals": {
   "n_instances": 34,
   "reversals_uncentred": 28,

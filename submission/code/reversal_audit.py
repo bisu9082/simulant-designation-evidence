@@ -255,13 +255,18 @@ def inter_channel():
                 per_plate=per_plate)
 
 
-def collapse_free_counts():
+def collapse_free_counts(level='mixed', with_nulls=False):
     """중복 채널 축약을 끈 상태에서 같은 계수를 낸다.
 
     이 논문의 다른 통계는 전부 분석자 자유도에서 움직였다. 응답공간
     통계에 영향을 주는 자유도는 축약 하나이므로 (패널 구성·서술자 집합·
     임계값·부호화는 서술자 쪽이고 응답 패턴을 건드리지 않는다) 그것만
     끈다. collapse_sensitivity.py 와 같은 자리바꿈을 쓴다.
+
+    [확장 2026-11-09, 에디터 게이트 3회차] level 과 with_nulls 를
+    받는다. 3회차가 F2 에는 역치를 감사 축에 넣고 F1 에는 추정량 수준과
+    축약을 넣지 않았다고 적발했다. 둘 다 헤드라인 수치(BH 4/6)를
+    움직이므로 축약 × 수준 격자에서 셀별 p 와 BH 를 내야 한다.
     """
     _orig = m.collapse_duplicate_channels
     m.collapse_duplicate_channels = lambda D, dy, key: list(dy)
@@ -274,11 +279,38 @@ def collapse_free_counts():
                 out[f'{tag}.{mode}'] = dict(unavailable=str(e))
                 continue
             raw = m.raw_patterns(D, dy)
-            hu, nu, _ = reversals(raw)
-            hc, nc, _ = reversals(m.centred(raw))
-            out[f'{tag}.{mode}'] = dict(n_channels=len(dy), n_instances=nu,
-                                        reversals_uncentred=hu,
-                                        reversals_centred=hc)
+            cen = m.centred(raw)
+            hu, nu, _ = reversals(raw, level=level)
+            hc, nc, _ = reversals(cen, level=level)
+            ent = dict(n_channels=len(dy), n_instances=nu,
+                       reversals_uncentred=hu, reversals_centred=hc)
+            if with_nulls:
+                for lab, pat, obs in (('uncentred', raw, hu),
+                                      ('centred', cen, hc)):
+                    nsp, do_exact = exact_space(pat)
+                    if do_exact:
+                        nn = null_counts(pat, exact=True, level=level)
+                        ent[f'null_{lab}'] = dict(
+                            mode='exact', n_relabellings=nsp,
+                            mean=float(np.mean(nn)),
+                            p_le_observed=float(
+                                np.mean(np.asarray(nn) <= obs)))
+                    else:
+                        ms, ps = [], []
+                        for s in SEEDS:
+                            nn = null_counts(
+                                pat, rng=np.random.default_rng(s),
+                                level=level)
+                            ms.append(float(np.mean(nn)))
+                            ps.append(float(np.mean(
+                                np.asarray(nn) <= obs)))
+                        ent[f'null_{lab}'] = dict(
+                            mode='sampled', n_seeds=len(SEEDS),
+                            n_draws_per_seed=NDRAW,
+                            mean=float(np.mean(ms)),
+                            p_le_observed=float(np.mean(ps)),
+                            p_le_observed_max=float(max(ps)))
+            out[f'{tag}.{mode}'] = ent
     finally:
         m.collapse_duplicate_channels = _orig
     return out
@@ -536,6 +568,51 @@ def main():
               f' (귀무 {t["null_mean_sum_centred"]:>5.2f}){note}')
     print('    관측을 귀무에 대고 읽어야 한다. 수준이 바뀌면 둘이 같이'
           ' 움직인다.')
+
+    # [F1 격자] 축약 2설정 × 추정량 3수준에서 셀별 BH 를 낸다.
+    # 2026-11-09 게이트 3회차 R4/N-2. 헤드라인을 수치 하나로 고르지
+    # 않고 범위로 보고하기 위한 자료다. bh_over_cells 는 mixed·축약적용
+    # 하나만 계산하므로 그 수(4/6)가 두 자유도의 함수인지 알 수 없었다.
+    grid = {}
+    for collapse in (True, False):
+        for level in ('mixed', 'raw_mean', 'raw_max'):
+            if collapse:
+                # 축약 적용 쪽은 estimator_level 이 이미 들고 있다.
+                src = lv[level]['cells']
+            else:
+                src = collapse_free_counts(level=level, with_nulls=True)
+            # _p 와 _bh 를 그대로 쓴다. _p 는 표집 셀에 p_le_observed_max
+            # 를 쓰는 보수적 선택이고, 예치된 bh_over_cells 와 같은
+            # 기준이어야 4/6 과 비교가 된다. _bh 는 입력을 내부에서
+            # 정렬하고 (q목록, 최소q) 를 돌려주므로 먼저 정렬해 짝을 맞춘다.
+            rows = [(cn, _p(c['null_centred']))
+                    for cn, c in src.items()
+                    if 'unavailable' not in c and 'null_centred' in c]
+            if not rows:
+                continue
+            rows.sort(key=lambda r: r[1])
+            qs, mn = _bh([p for _, p in rows])
+            grid[f'collapse={collapse}/{level}'] = dict(
+                collapse_applied=collapse, level=level,
+                n_cells=len(rows),
+                n_cells_q_below_05=int(sum(1 for q in qs if q < 0.05)),
+                min_q=mn,
+                cells=[dict(cell=cn, p=p, q=q)
+                       for (cn, p), q in zip(rows, qs)])
+    report['f1_grid'] = grid
+    gv = [v['n_cells_q_below_05'] for v in grid.values()]
+    report['f1_grid_summary'] = dict(
+        n_settings=len(grid),
+        q_below_05_min=min(gv) if gv else None,
+        q_below_05_max=max(gv) if gv else None)
+    print('\n  [F1 격자] 축약 × 추정량 수준에서 BH (중심화 후, 6셀)')
+    for k in sorted(grid):
+        v = grid[k]
+        print(f'    {k:<26} q<0.05 셀 {v["n_cells_q_below_05"]}/'
+              f'{v["n_cells"]}   최소 q {v["min_q"]:.4f}')
+    if gv:
+        print(f'    범위: {min(gv)} ~ {max(gv)} / 6셀. 헤드라인은 수치'
+              f' 하나가 아니라 이 범위다.')
 
     ok = [c for c in report['cells'] if 'unavailable' not in c]
     report['totals'] = dict(
