@@ -135,7 +135,8 @@
     ],
     "mean": 5.955,
     "p_le_observed_min": 0.0431,
-    "p_le_observed_max": 0.0467
+    "p_le_observed_max": 0.0467,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -169,7 +170,8 @@
     ],
     "mean": 5.49388,
     "p_le_observed_min": 0.0034,
-    "p_le_observed_max": 0.0044
+    "p_le_observed_max": 0.0044,
+    "p_floor_max": 0.0
    }
   },
   {
@@ -298,7 +300,8 @@
     ],
     "mean": 5.9904,
     "p_le_observed_min": 0.0088,
-    "p_le_observed_max": 0.0106
+    "p_le_observed_max": 0.0106,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -332,7 +335,8 @@
     ],
     "mean": 5.43824,
     "p_le_observed_min": 0.0062,
-    "p_le_observed_max": 0.008
+    "p_le_observed_max": 0.008,
+    "p_floor_max": 0.0
    }
   },
   {
@@ -475,7 +479,8 @@
     ],
     "mean": 6.98392,
     "p_le_observed_min": 0.015,
-    "p_le_observed_max": 0.0176
+    "p_le_observed_max": 0.0176,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -509,7 +514,8 @@
     ],
     "mean": 6.613199999999999,
     "p_le_observed_min": 0.0,
-    "p_le_observed_max": 0.0003
+    "p_le_observed_max": 0.0003,
+    "p_floor_max": 0.0
    }
   },
   {
@@ -652,7 +658,8 @@
     ],
     "mean": 6.9922200000000005,
     "p_le_observed_min": 0.0,
-    "p_le_observed_max": 0.0001
+    "p_le_observed_max": 0.0001,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -686,7 +693,8 @@
     ],
     "mean": 6.4823,
     "p_le_observed_min": 0.0,
-    "p_le_observed_max": 0.0
+    "p_le_observed_max": 0.0,
+    "p_floor_max": 0.0
    }
   },
   {
@@ -787,7 +795,8 @@
     ],
     "mean": 3.83992,
     "p_le_observed_min": 0.1477,
-    "p_le_observed_max": 0.1626
+    "p_le_observed_max": 0.1626,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -821,7 +830,8 @@
     ],
     "mean": 3.1581400000000004,
     "p_le_observed_min": 0.1349,
-    "p_le_observed_max": 0.1513
+    "p_le_observed_max": 0.1513,
+    "p_floor_max": 0.0001
    }
   },
   {
@@ -922,7 +932,8 @@
     ],
     "mean": 4.0,
     "p_le_observed_min": 1.0,
-    "p_le_observed_max": 1.0
+    "p_le_observed_max": 1.0,
+    "p_floor_max": 0.0
    },
    "null_centred": {
     "mode": "sampled",
@@ -956,10 +967,113 @@
     ],
     "mean": 2.6259000000000006,
     "p_le_observed_min": 0.1087,
-    "p_le_observed_max": 0.1154
+    "p_le_observed_max": 0.1154,
+    "p_floor_max": 0.0349
    }
   }
  ],
+ "bh_over_cells": {
+  "uncentred": {
+   "n_cells": 6,
+   "min_q": 0.0006000000000000001,
+   "cells": [
+    {
+     "dataset": "d2",
+     "mode": "normal",
+     "p": 0.0001,
+     "q": 0.0006000000000000001,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d1",
+     "mode": "normal",
+     "p": 0.0106,
+     "q": 0.0318,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d2",
+     "mode": "uv",
+     "p": 0.0176,
+     "q": 0.0352,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d1",
+     "mode": "uv",
+     "p": 0.0467,
+     "q": 0.07005,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d3",
+     "mode": "uv",
+     "p": 0.1626,
+     "q": 0.19512000000000002,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d3",
+     "mode": "normal",
+     "p": 1.0,
+     "q": 1.0,
+     "p_floor": 0.0
+    }
+   ],
+   "n_cells_q_below_05": 3,
+   "n_cells_floor_above_05": 0
+  },
+  "centred": {
+   "n_cells": 6,
+   "min_q": 0.0,
+   "cells": [
+    {
+     "dataset": "d2",
+     "mode": "normal",
+     "p": 0.0,
+     "q": 0.0,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d2",
+     "mode": "uv",
+     "p": 0.0003,
+     "q": 0.0009,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d1",
+     "mode": "uv",
+     "p": 0.0044,
+     "q": 0.0088,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d1",
+     "mode": "normal",
+     "p": 0.008,
+     "q": 0.012,
+     "p_floor": 0.0
+    },
+    {
+     "dataset": "d3",
+     "mode": "normal",
+     "p": 0.1154,
+     "q": 0.13848,
+     "p_floor": 0.0349
+    },
+    {
+     "dataset": "d3",
+     "mode": "uv",
+     "p": 0.1513,
+     "q": 0.1513,
+     "p_floor": 0.0001
+    }
+   ],
+   "n_cells_q_below_05": 4,
+   "n_cells_floor_above_05": 0
+  }
+ },
  "collapse_free": {
   "d1.uv": {
    "n_channels": 29,

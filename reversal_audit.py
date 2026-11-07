@@ -194,19 +194,24 @@ def main():
                     p95=float(np.percentile(nn, 95)),
                     p_le_observed=float(np.mean(np.asarray(nn) <= obs)))
             else:
-                per_seed = []
+                per_seed, floors = [], []
                 for s in SEEDS:
                     nn = null_counts(pat, rng=np.random.default_rng(s))
+                    arr = np.asarray(nn)
                     per_seed.append(dict(
-                        seed=s, mean=float(np.mean(nn)),
-                        p_le_observed=float(np.mean(np.asarray(nn) <= obs))))
+                        seed=s, mean=float(np.mean(arr)),
+                        p_le_observed=float(np.mean(arr <= obs))))
+                    # 도달 가능한 최소 p. 역전수는 0..n 의 이산값만 갖는다.
+                    # 관측이 0 이었다 해도 p 는 P(귀무 = 0) 아래로 못 간다.
+                    floors.append(float(np.mean(arr <= 0)))
                 nulls[label] = dict(
                     mode='sampled', n_relabellings=nsp, per_seed=per_seed,
                     mean=float(np.mean([p['mean'] for p in per_seed])),
                     p_le_observed_min=float(
                         min(p['p_le_observed'] for p in per_seed)),
                     p_le_observed_max=float(
-                        max(p['p_le_observed'] for p in per_seed)))
+                        max(p['p_le_observed'] for p in per_seed)),
+                    p_floor_max=float(max(floors)))
         null_block = nulls['centred']
 
         print(f'\n  {tag} {mode}  사례 {nu}건')
@@ -226,6 +231,48 @@ def main():
             reversals_uncentred=hu, reversals_centred=hc,
             detail_uncentred=du, detail_centred=dc,
             null_uncentred=nulls['uncentred'], null_centred=null_block))
+
+    # 6셀 BH 보정. 표집 셀은 시드 간 최대 p 를 쓴다 (보수적).
+    def _p(block):
+        if block['mode'] == 'exact':
+            return block['p_le_observed']
+        return block['p_le_observed_max']
+
+    def _bh(pv):
+        pv = np.sort(np.asarray(pv, float))
+        k = len(pv)
+        adj = np.minimum.accumulate(
+            (pv * k / np.arange(1, k + 1))[::-1])[::-1]
+        return [float(x) for x in adj], float(adj[0])
+
+    bh = {}
+    for label in ('uncentred', 'centred'):
+        rows = [(c['dataset'], c['mode'], _p(c['null_' + label]),
+                 c['null_' + label].get('p_floor_max'))
+                for c in report['cells'] if 'unavailable' not in c]
+        rows.sort(key=lambda r: r[2])
+        adj, mn = _bh([r[2] for r in rows])
+        bh[label] = dict(
+            n_cells=len(rows), min_q=mn,
+            cells=[dict(dataset=d, mode=md, p=p, q=q, p_floor=fl)
+                   for (d, md, p, fl), q in zip(rows, adj)],
+            n_cells_q_below_05=int(sum(1 for q in adj if q < 0.05)),
+            n_cells_floor_above_05=int(
+                sum(1 for r in rows if r[3] is not None and r[3] >= 0.05)))
+    report['bh_over_cells'] = bh
+    print('\n  [BH 보정, 6셀]')
+    for label in ('uncentred', 'centred'):
+        b = bh[label]
+        print(f'    중심화 {"전" if label == "uncentred" else "후"}  '
+              f'최소 q {b["min_q"]:.4f}   q<0.05 인 셀 '
+              f'{b["n_cells_q_below_05"]}/{b["n_cells"]}')
+        for r in b['cells']:
+            fl = r.get('p_floor')
+            fs = '[수집 불가]' if fl is None else f'{fl:.4f}'
+            reach = '' if fl is None else (
+                '  도달가능' if fl < 0.05 else '  **0.05 도달 불가**')
+            print(f'      {r["dataset"]} {r["mode"]:<7} '
+                  f'p {r["p"]:.4f}  q {r["q"]:.4f}  최소달성p {fs}{reach}')
 
     cf = collapse_free_counts()
     report['collapse_free'] = cf
