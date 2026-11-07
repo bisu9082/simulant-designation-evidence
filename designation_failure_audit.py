@@ -90,6 +90,30 @@ def load_cells():
     return cells
 
 
+def _threshold_free(rec):
+    """역치를 뺀 판정. (통과, 실패, 미정) 을 셈한다.
+
+    분모는 n_match 와 같은 전체 셀 수여야 한다. 통과 + 실패 + 미정 =
+    len(rec) 를 항등식으로 지킨다. 2026-11-09 게이트 3회차 교정.
+    """
+    ok = und = 0
+    for _, a in rec:
+        if a['match']:
+            ok += 1                       # 두 조건 다 통과했으므로 비교군도 통과
+            continue
+        if a.get('blocker_recorded', True):
+            # match_rule 셀. beats_comparison_set 이 blocker 로 표현돼 있다.
+            if a.get('blocker') is None:
+                ok += 1                   # 비교군은 통과, 역치에서만 실패
+        else:
+            # sparse 셀. 역치가 구속이 아니었다면 비교군에서 실패한 것.
+            if a.get('within_threshold') is False:
+                und += 1                  # 역치 초과라 비교군 조건을 알 수 없다
+    return dict(n_match_no_threshold=ok,
+                n_fail_no_threshold=len(rec) - ok - und,
+                n_undetermined_no_threshold=und)
+
+
 def verdict_vectors(cells):
     """25구성을 '같은 판정을 내는 묶음' 으로 접는다.
 
@@ -175,13 +199,20 @@ def main():
             fail_mode=mode,
             # [자유도: 역치] 역치 2.0 을 제거하고 '비교군에 더 가까운
             # 것이 없다' 만 요구하면 어떻게 되는가. 본문 652-655 가
-            # 이미 28종 패널에서 3 -> 5 로 보고하는 축인데 25구성에는
-            # 들어 있지 않았다. beats_comparison_set 이 예치돼 있으므로
-            # 새 계산 없이 센다. 2026-11-07 에디터 게이트 2회차 지적.
-            n_match_no_threshold=sum(
-                1 for _, a in rec
-                if a.get('blocker') is None
-                and a.get('blocker_recorded', True)),
+            # 이미 28종 패널에서 3 -> 5 로 보고하는 축인데 당초 감사에는
+            # 들어 있지 않았다. 2026-11-07 게이트 2회차 지적.
+            #
+            # [교정 게이트 3회차] 첫 구현이 틀렸다. 차단자가 기록된
+            # 18셀만 분모로 삼아 25셀 분모의 n_match 와 나란히 냈고,
+            # 그래서 11종 중 6종에서 단조성이 깨졌다 (PS 가 1 -> 0).
+            # 제약을 제거하면 매칭은 줄 수 없다. 셀마다 비교군 조건만
+            # 따로 판정한다.
+            #   match_rule 셀: beats_comparison_set 이 그 조건이다.
+            #   sparse 셀: match 는 두 조건의 연접이므로
+            #     match=True            -> 비교군 조건 통과
+            #     match=False, 역치 이내 -> 비교군 조건에서 실패
+            #     match=False, 역치 초과 -> 비교군 조건 미정
+            **_threshold_free(rec),
             blockers=bl,
             nearest_designated=sorted({a['nearest'] for _, a in rec
                                        if a.get('nearest')}))
