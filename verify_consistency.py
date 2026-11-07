@@ -62,6 +62,7 @@ REQUIRED_OUTPUTS = [
     'outputs/collapse_sensitivity.json',
     'outputs/length_audit.json',
     'outputs/reversal_audit.json',
+    'outputs/dye_panel_audit.json',
     'outputs/descriptor_gate_scope.json',
     'outputs/dim_percentiles.json',
     'outputs/distance_table_normalized.csv',
@@ -593,6 +594,7 @@ def preflight():
         'collapse_sensitivity.json': 'collapse_sensitivity.py',
         'length_audit.json': 'wordcount.py',
         'reversal_audit.json': 'reversal_audit.py',
+        'dye_panel_audit.json': 'dye_panel_audit.py',
         'premise_null.json': 'premise_null.py',
         'stat_supplement.json': 'stat_supplement.py',
         'lewisite_isomer.json': 'lewisite_isomer.py',
@@ -1522,6 +1524,20 @@ def load_facts():
     # '각 캐시' 라는 서술을 어느 검사도 받지 않았다.
     f['gate_caches'] = _gs['n_caches']
     f['gate_numeric_max'] = _gs['n_numeric_max']
+
+    # 염료 패널 분류 (2026-11-07 신설, 12차 A-9). SI meth:deltaE 가 적는
+    # 비염료 개수와 채널 비를 산출물에 건다. 종전에는 '다섯' 이 손으로만
+    # 적혀 있었고 어느 측정에도 걸려 있지 않았다.
+    _dp = json.load(open('outputs/dye_panel_audit.json'))
+    f['dye_n_components'] = _dp['n_components']
+    f['dye_n_nondye'] = _dp['n_marked_nondye']
+    f['dye_n_fluor'] = _dp['n_fluorophores']
+    f['dye_top_ratio'] = _dp['highest_ratio']['ratio']
+    f['dye_top_uv'] = _dp['highest_ratio']['uv_max']
+    f['dye_top_normal'] = _dp['highest_ratio']['normal_max']
+    _byname = {c['name']: c for c in _dp['components']}
+    f['dye_anthracene_ratio'] = _byname['Anthracene']['ratio_max']
+    f['dye_pyrene_ratio'] = _byname['Pyrene']['ratio_max']
 
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
@@ -2563,6 +2579,14 @@ CHECKS = [
                       r'reproduces from the code, \d+ of the (\d+) numeric'], 0),
     ('gate_numeric_max', [r'out of \d+ to (\d+) numeric columns'], 0),
     ('gate_caches', [r'the (\w+) caches the analysis reads'], 0),
+    # 2026-11-07 (12차 A-9) 염료 패널.
+    ('dye_n_nondye', [r'(\w+) of the\s*\n?twenty-nine are not chromogenic'], 0),
+    ('dye_n_fluor', [r'twenty-nine are not chromogenic dyes: (\w+) are'], 0),
+    ('dye_top_uv', [r'maximum \$\\Delta E_\{00\}\$ of ([\d.]+) in the'], 0.05),
+    ('dye_top_normal', [r'against ([\d.]+) in reflectance, a ratio'], 0.05),
+    ('dye_top_ratio', [r'a ratio of ([\d.]+), the largest'], 0.05),
+    ('dye_anthracene_ratio', [r'pyrene follow at ([\d.]+) and [\d.]+'], 0.05),
+    ('dye_pyrene_ratio', [r'pyrene follow at [\d.]+ and ([\d.]+)'], 0.05),
     ('gate_exempt', [r'The (\w+)\s*\n?columns it does not recompute'], 0),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
                             r'observed value at the (\d+\.\d+)th percentile',

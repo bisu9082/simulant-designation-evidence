@@ -1,0 +1,407 @@
+{
+ "generated_by": "dye_panel_audit.py",
+ "n_components": 29,
+ "n_marked_nondye": 6,
+ "marked_nondye": [
+  "Quinine",
+  "Anthracene",
+  "Pyrene",
+  "2-Hydrazinobenzothiazole",
+  "L-Glutathione (reduced)",
+  "2,4-Dinitrophenylhydrazine"
+ ],
+ "highest_ratio": {
+  "index": 4,
+  "name": "Quinine",
+  "uv_max": 90.24682488,
+  "normal_max": 3.619430902,
+  "ratio": 79.58684639717923,
+  "marked": true
+ },
+ "marked_fluorophore_max_ratio": 79.58684639717923,
+ "n_fluorophores": 3,
+ "fluorophores": [
+  "Quinine",
+  "Anthracene",
+  "Pyrene"
+ ],
+ "components": [
+  {
+   "index": 4,
+   "name": "Quinine",
+   "note_kind": "nondye",
+   "uv_max": 90.24682488,
+   "normal_max": 3.619430902,
+   "ratio_max": 79.58684639717923,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 1,
+   "name": "Anthracene",
+   "note_kind": "nondye",
+   "uv_max": 25.12982287,
+   "normal_max": 9.982150694,
+   "ratio_max": 24.706601431091755,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 2,
+   "name": "Pyrene",
+   "note_kind": "nondye",
+   "uv_max": 18.50909117,
+   "normal_max": 8.708894004,
+   "ratio_max": 14.704292261398777,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 18,
+   "name": "Eosin Y",
+   "note_kind": "",
+   "uv_max": 96.1417995,
+   "normal_max": 24.12822258,
+   "ratio_max": 4.6821217779343725,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 24,
+   "name": "Ethyl viologen dibromide",
+   "note_kind": "",
+   "uv_max": 13.05406967,
+   "normal_max": 19.73315806,
+   "ratio_max": 4.396243187662313,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 7,
+   "name": "Fluorescein",
+   "note_kind": "",
+   "uv_max": 92.42189243,
+   "normal_max": 29.57936103,
+   "ratio_max": 4.173351218512483,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 15,
+   "name": "Quinoline Yellow",
+   "note_kind": "other",
+   "uv_max": 8.644837344,
+   "normal_max": 15.49695385,
+   "ratio_max": 4.158568765047871,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 28,
+   "name": "2-Hydrazinobenzothiazole",
+   "note_kind": "nondye",
+   "uv_max": 5.447863673,
+   "normal_max": 2.360701588,
+   "ratio_max": 3.889765028344198,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 11,
+   "name": "Toluidine Blue O",
+   "note_kind": "",
+   "uv_max": 7.169090853,
+   "normal_max": 36.27029775,
+   "ratio_max": 3.8715136719004195,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 19,
+   "name": "Indigo Carmine",
+   "note_kind": "",
+   "uv_max": 26.00463413,
+   "normal_max": 18.25971154,
+   "ratio_max": 3.760912621014806,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 5,
+   "name": "Rhodamine B",
+   "note_kind": "",
+   "uv_max": 55.1677616,
+   "normal_max": 39.60957629,
+   "ratio_max": 2.8920080208147483,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 20,
+   "name": "Phenol Red",
+   "note_kind": "",
+   "uv_max": 19.20967968,
+   "normal_max": 19.57010867,
+   "ratio_max": 2.6993207552177356,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 17,
+   "name": "Neutral Red",
+   "note_kind": "",
+   "uv_max": 48.62707951,
+   "normal_max": 47.76964936,
+   "ratio_max": 2.5457519923658496,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 22,
+   "name": "L-Glutathione (reduced)",
+   "note_kind": "nondye",
+   "uv_max": 5.346457073,
+   "normal_max": 3.895728487,
+   "ratio_max": 2.40028965208298,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 23,
+   "name": "2,7-Dibromofluorene",
+   "note_kind": "",
+   "uv_max": 4.610001356,
+   "normal_max": 2.20633515,
+   "ratio_max": 2.3956432262142564,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 13,
+   "name": "Cresol Red",
+   "note_kind": "",
+   "uv_max": 10.49001196,
+   "normal_max": 20.24388183,
+   "ratio_max": 1.954231063317182,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 6,
+   "name": "Methyl Blue",
+   "note_kind": "",
+   "uv_max": 4.037800173,
+   "normal_max": 3.200502341,
+   "ratio_max": 1.9418945530632492,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 10,
+   "name": "Safranin O",
+   "note_kind": "",
+   "uv_max": 4.131597623,
+   "normal_max": 3.510776915,
+   "ratio_max": 1.7336408282263938,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 26,
+   "name": "2,4-Dinitrophenylhydrazine",
+   "note_kind": "nondye",
+   "uv_max": 4.610001356,
+   "normal_max": 3.468832762,
+   "ratio_max": 1.4743149296275628,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 25,
+   "name": "4,4'-Dihydroxybenzophenone",
+   "note_kind": "",
+   "uv_max": 4.610001356,
+   "normal_max": 3.740478804,
+   "ratio_max": 1.4539035720967664,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 27,
+   "name": "2,5-Diaminobenzene-1,4-dithiol dihydrochloride",
+   "note_kind": "",
+   "uv_max": 5.516057676,
+   "normal_max": 8.184435565,
+   "ratio_max": 1.3137584352984557,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 21,
+   "name": "Crystal Violet",
+   "note_kind": "",
+   "uv_max": 2.946129724,
+   "normal_max": 5.301046534,
+   "ratio_max": 1.223449360201679,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 12,
+   "name": "Nile Blue A",
+   "note_kind": "",
+   "uv_max": 18.76384831,
+   "normal_max": 42.36837065,
+   "ratio_max": 1.1208070674096025,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 3,
+   "name": "Allura Red AC",
+   "note_kind": "",
+   "uv_max": 3.721681552,
+   "normal_max": 8.607222478,
+   "ratio_max": 0.6166531924616869,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 9,
+   "name": "Nile Red",
+   "note_kind": "",
+   "uv_max": 1.049572637,
+   "normal_max": 8.167757424,
+   "ratio_max": 0.39004292835461346,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 16,
+   "name": "Bromophenol Blue",
+   "note_kind": "",
+   "uv_max": 4.194792589,
+   "normal_max": 77.42874421,
+   "ratio_max": 0.31755959480531254,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 29,
+   "name": "Rhodamine 6G",
+   "note_kind": "",
+   "uv_max": 0.202597768,
+   "normal_max": 2.011491293,
+   "ratio_max": 0.184900053296978,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 14,
+   "name": "Eriochrome Black T",
+   "note_kind": "",
+   "uv_max": 2.530878164,
+   "normal_max": 43.00451241,
+   "ratio_max": 0.11848737784234643,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  },
+  {
+   "index": 8,
+   "name": "Methyl Orange",
+   "note_kind": "",
+   "uv_max": 2.189740235,
+   "normal_max": 46.5916205,
+   "ratio_max": 0.09869058741271401,
+   "runs": [
+    "d1",
+    "d2",
+    "d3"
+   ]
+  }
+ ]
+}

@@ -851,23 +851,47 @@ it.\cite{opcwschedules} Sarin and soman fall under 1A(1), tabun under 1A(2), VX
 under 1A(3), sulfur mustard under 1A(4), lewisite under 1A(5) and nitrogen
 mustard under 1A(6); cyclosarin is not named individually and falls under
 1A(1), whose R$_2$ position admits a cycloalkyl group. Phosgene, cyanogen
-chloride, hydrogen cyanide and chloropicrin are 3A(1) to 3A(4). The four
-A-series compounds fall under the entries 1A(13) to 1A(16) added by the 2019
-amendment, which entered into force on 7 June 2020.\cite{opcwnovichok} One
-caveat belongs with that last group: the source study reports them as the codes
+chloride, hydrogen cyanide and chloropicrin are 3A(1) to 3A(4).
+
+% 2026-11-07 (12차 A-8). 종전 문장은 'fall under the entries 1A(13) to
+% 1A(16)' 였고 4대4 대응으로 읽힌다. 1A(16) 은 카바메이트(4급·이중4급
+% 디메틸카바모일옥시피리딘염)이고 1A(15) 는 단일 명명 화합물이므로 그
+% 대응은 성립하지 않는다. 게다가 원고 자신이 3차 런 구조를 'representative
+% rather than assigned' 라고 적는다. 항목 배정을 철회한다.
+The four A-series compounds fall under Schedule~1 entries added by the 2019
+amendment, which entered into force on 7 June 2020.\cite{opcwnovichok} We
+assign no particular entry to any of them, for two reasons. The amendment added
+entries 1A(13) to 1A(16), and those four do not stand in one-to-one
+correspondence with these four codes: 1A(15) names a single compound and
+1A(16) covers a family of carbamates rather than organophosphorus compounds.
+The source study moreover reports the compounds as the codes
 A-230, A-232, A-234 and A-242 and gives their structures as representative
-rather than assigned (Section~\ref{M-meth:array}), so their Schedule~1
-membership is stated at the level of those families and not of a named
-compound.
+rather than assigned (Section~\ref{M-meth:array}), so the entry that applies to
+each code is not fixed by anything available to this reanalysis. Their
+Schedule~1 membership is stated at the level of the amendment and not of a
+named entry.
 
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
 Measured response was taken from a 29-component colorimetric array reported in
 earlier work from this laboratory \cite{hazref,multiplexref,group3ref}. The
-array is listed compound by compound in Table~\ref{tab:dyepanel}. Five of the
-twenty-nine are not chromogenic dyes: two are fluorophores, one is a thiol
+array is listed compound by compound in Table~\ref{tab:dyepanel}.
+% 2026-11-07 (12차 A-9). 종전에는 다섯이었고 퀴닌이 빠져 있었다. 퀴닌은
+% 형광 양자수율 표준물질이고, 자외 최대 응답 대 반사 최대 응답의 비가
+% 79.6 으로 29개 성분 가운데 가장 크다. 이미 형광체로 표시돼 있던
+% 안트라센(24.7) 과 피렌(14.7) 보다도 크다. 분류가 손으로만 적혀 있어
+% 어느 측정에도 걸려 있지 않았으므로 dye_panel_audit.py 를 신설했다.
+Six of the
+twenty-nine are not chromogenic dyes: three are fluorophores, one is a thiol
 reducing agent and two are carbonyl derivatising reagents, so part of the
-pattern is covalent derivatisation rather than a solvatochromic shift. The
+pattern is covalent derivatisation or emission rather than a solvatochromic
+shift. The three fluorophores are quinine, anthracene and pyrene, and they are
+the components whose response is most asymmetric between the two channels:
+quinine reaches a maximum $\Delta E_{00}$ of 90.2 in the ultraviolet channel
+against 3.6 in reflectance, a ratio of 79.6, the largest of the
+twenty-nine, and anthracene and pyrene follow at 24.7 and 14.7. The ratio is
+computed for every component in \texttt{outputs/dye\_panel\_audit.json}, so
+where the line falls is visible rather than asserted. The
 stock solvent of one component, Quinoline Yellow, differs between the source
 studies, dimethyl sulfoxide in the first two runs and water in the third; we
 report that as published and do not resolve it. Colour difference
