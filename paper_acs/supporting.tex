@@ -328,9 +328,9 @@ coordinates were a function of a variable no analyst had selected.
 
 The cost is measurable. Permuting the input column order forty times under a
 fixed seed and rebuilding everything downstream, the old filter returned
-thirty-seven distinct retained sets on the twenty-eight-compound panel, with
-dimensions between 36 and 39, and a valid-match count of three in twenty-five
-of the forty orderings and four in the remaining fifteen. The value we had
+thirty-four distinct retained sets on the twenty-eight-compound panel, with
+dimensions between 36 and 39, and a valid-match count of three in twenty-four
+of the forty orderings and four in the remaining sixteen. The value we had
 reported was the minority outcome. The thirty-five-compound panel behaved
 differently: thirty-six distinct retained sets and dimensions between 39 and 41,
 but a valid-match count of zero in all forty orderings. The headline negative
@@ -449,8 +449,13 @@ agent class and states the property or measurement the choice was made
 against. Three sources were searched on 4 November 2026. The first is the
 NIOSH CBRN air-purifying respirator simulant programme, which is the
 document that designates dimethyl methylphosphonate\cite{niosh2002simulant};
-it names a set of compounds for GB and for HD, each with the breakthrough,
-crazing or volatility measurement behind it, and dichloromethane is not
+it names DMMP, carbon tetrachloride and cyclohexane as filtration simulants
+for GB and for HD. The latter two are not on the descriptor panel. The panel
+was assembled from the compounds the three source studies measured and the
+interferents the sensing literature names, before we traced the designation
+record, and we did not rebuild it afterwards; a panel that carried them would
+test a different question, whether the filtration designations hold on a
+detection axis, which no measurement here can answer. Dichloromethane is not
 among them. The second is the patent literature, through Google Patents and
 Justia, for patents naming dichloromethane as a chemical agent simulant;
 the training-composition patents returned name other compounds, and the one
@@ -986,7 +991,7 @@ not as departures from designated pairings, because the designating documents do
 pair these compounds with agents on anything a volatility distance can be
 read against. Dimethyl methylphosphonate is the one exception and it points
 two ways at once: the NIOSH programme names it for GB and for HD against a
-filter breakthrough measurement, and the National Research Council assessment
+filtration measurement, and the National Research Council assessment
 names it for VX against a fabric test. Dipropylene glycol monomethyl ether is
 named with no agent class, against detectability by ion mobility
 spectrometry, and for dichloromethane we found no designating document at
@@ -999,17 +1004,23 @@ Exact Mantel permutation in each run-channel cell with at least four mapped
 agents gives four evaluable cells, and the rank correlation is positive in all
 four: $+0.043$ and $+0.254$ in the ultraviolet channel, $+0.389$ and $+0.546$
 in the reflectance channel. A single Fisher combination over all four cells was
-fixed in advance as the statistic for this test, and we withdraw it. The two
-optical channels of one plate are read from the same wells and are not
-independent, with a mean inter-channel cosine of 0.584 across the array, so the
-four $p$ values do not satisfy the assumption that combination requires. Runs
-do. We therefore combine across runs within each channel and correct across the
-two channels with Benjamini-Hochberg. The reflectance channel gives
-$p = 0.0215$ and $q = 0.0430$; the ultraviolet channel gives $p = 0.6389$ and
-$q = 0.6389$. One of the two channels clears 0.05, which no descriptor space
-reached on either panel, where the smallest adjusted value on the primary panel
-was 0.6299 and the smallest nominal value 0.1917. The withdrawn pooled statistic
-is recorded in \texttt{outputs/volatility\_space.json} for comparison.
+fixed in advance as the statistic for this test. It returns $p = 0.0809$, and
+we withdraw it, but the order of those two facts has to be stated plainly
+because it bears on everything below: the prespecified statistic did not clear
+0.05, and the family we report instead was chosen afterwards. The ground for
+withdrawing it is methodological and not the value. The two optical channels of
+one plate are read from the same wells and are not independent, with a mean
+inter-channel cosine of 0.584 across the array, so the four $p$ values do not
+satisfy the assumption that combination requires. Runs do. We therefore combine
+across runs within each channel and correct across the two channels with
+Benjamini-Hochberg. The reflectance channel gives $p = 0.0215$ and
+$q = 0.0430$; the ultraviolet channel gives $p = 0.6389$ and $q = 0.6389$.
+Read as one family of four cells instead, the smallest adjusted value is
+0.1389, and corrected jointly with the twelve descriptor cells it is 0.1556.
+The $q = 0.0430$ is therefore a property of one post-hoc family out of three we
+can define on the same four numbers, and we report all three rather than the
+one that clears. The withdrawn pooled statistic is recorded in
+\texttt{outputs/volatility\_space.json}.
 
 Taken together the two tests say something narrower and more useful than the
 descriptor result alone. The axis practitioners name first does carry

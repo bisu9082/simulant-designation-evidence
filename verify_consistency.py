@@ -1564,6 +1564,20 @@ def load_facts():
     f['vol_range'] = _vd['sanity']['log10_range']
     f['vol_t1'] = _vd['sanity']['tiers']['T1']
     f['vol_tx'] = _vd['sanity']['tiers']['TX']
+    # 2026-11-07 (10차 C3-2). 철회된 사전지정 통계량의 값과 4셀 단일가족
+    # BH 를 원고에 실으면서 둘 다 묶는다. 10차 R3 가 'q=0.0430 이 사전지정
+    # 실패 뒤 채택된 가족에 있는데 초록이 prespecified 라 부른다'를 잡았고,
+    # 0.0809 는 그때까지 원고 어디에도 없었다.
+    f['vol_withdrawn_p'] = _vol['agreement']['superseded_pooled_four_cells']['p_value']
+    # BH 최소 q 를 순수 파이썬으로 센다. 여기서 numpy 를 지역 import 하면
+    # 위쪽 중첩함수가 닫고 있는 _np 를 가려 NameError 가 난다 (2026-11-07).
+    _vps = sorted(c['p_mantel'] for c in _vol['agreement']['cells'])
+    _vn = len(_vps)
+    _run, _vq = 1.0, []
+    for _i in range(_vn - 1, -1, -1):
+        _run = min(_run, _vps[_i] * _vn / (_i + 1))
+        _vq.append(_run)
+    f['vol_four_cell_bh'] = _vq[-1]
     _lw = _vol['lewisite_isomer_sensitivity']
     f['vol_lew_cis_p'] = _lw['cis']['p']
     f['vol_lew_cis_rank'] = _lw['cis']['rank']
@@ -1639,6 +1653,18 @@ def load_facts():
     _dn = json.load(open('outputs/deltaE_noise.json'))
     if 'concentration_vs_norm_all_cells' in _dn:
         f['conc_norm_cells'] = len(_dn['concentration_vs_norm_all_cells'])
+
+    # 2026-11-07 (10차 C3-1). SI 가 37/25/15 를 적고 있었는데 예치물은
+    # 34/24/16 이다. 9차에서 --n 40 을 호출부에 고정하면서 그 고정이
+    # 맞춰야 할 본문 수치를 대조하지 않은 구멍이다. 세 수치를 묶는다.
+    if _os.path.exists('outputs/order_invariance.json'):
+        _oi = json.load(open('outputs/order_invariance.json'))
+        _lg = _oi['cases']['legacy/panel28_incumbent3']
+        f['oi_legacy28_sets'] = _lg['n_distinct_kept_sets']
+        f['oi_legacy28_m3'] = _lg['n_match']['3']
+        f['oi_legacy28_m4'] = _lg['n_match']['4']
+        f['oi_legacy35_sets'] = (
+            _oi['cases']['legacy/panel35_incumbent3']['n_distinct_kept_sets'])
 
     _md = json.load(open('outputs/mde.json'))
     f['mde_bh18_35'] = _md['panel35_incumbent3']['thresholds']['bh18']['mde_delta']
@@ -2307,6 +2333,16 @@ CHECKS = [
     ('mantel_power_perm', [r'all \$6! = (\d+)\$ relabellings',
                            r'exact Mantel over all (\d+) relabellings'], 0),
     ('mantel_type_i', [r'type~I rate of the simulated test at ([\d.]+)'], 0.0),
+    ('oi_legacy28_sets', [r'the old filter returned\s+([\w-]+) distinct retained sets'], 0),
+    ('oi_legacy28_m3', [r'valid-match count of three in ([\w-]+)\s*\n?of the forty orderings'], 0),
+    ('oi_legacy28_m4', [r'four in the remaining ([\w-]+)\.'], 0),
+    ('oi_legacy35_sets', [r'differently: ([\w-]+) distinct retained sets'], 0),
+    ('vol_withdrawn_p', [r'returned\s*\n?\$?p ?= ?(\d+\.\d+)\$? and was withdrawn',
+                         r'It returns \$p = (\d+\.\d+)\$, and',
+                         r'which returned\s*\n?\$p = (\d+\.\d+)\$'], 0.0005),
+    ('vol_four_cell_bh', [r'one family of four\s*\n?cells it is (\d+\.\d+)',
+                          r'read as one family give (\d+\.\d+)',
+                          r'as one family of four cells instead, the smallest adjusted value is\s*\n?(\d+\.\d+)'], 0.0005),
     ('mantel_type_i_nrep', [r'over ([\d,\\\s]+) null replicates'], 0),
     ('mantel_d2nor_elec', [r'reflectance channel \(\$\\rho = \+\d+\.\d+\$,\s*\n?Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_merged_rho',
