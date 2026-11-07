@@ -97,6 +97,13 @@ echo '[7/7] cover letter'
 pass cover_letter
 pass cover_letter
 
+# 2026-11-07. 빌드 지문. 검사 A-pdf 가 이 파일과 현재 .tex 의 해시를
+# 비교한다. mtime 으로 비교했더니 주입시험이 원고를 스냅샷으로 되돌릴 때
+# 내용은 같고 mtime 만 새로워져서 거짓 실패가 났다. 내용으로 본다.
+for f in main supporting cover_letter; do
+    sha256sum "$f.tex"
+done > .buildstamp
+
 fail=0
 for f in main supporting cover_letter; do
     log="$f.log"
