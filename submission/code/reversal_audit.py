@@ -113,8 +113,14 @@ def relabel(pat, perms_by_conc):
     return {a: d for a, d in out.items() if d}
 
 
-def null_counts(pat, rng=None, exact=False):
-    """귀무에서의 역전수 분포."""
+def null_counts(pat, rng=None, exact=False, level='mixed', ndraw=None):
+    """귀무에서의 역전수 분포.
+
+    level 은 reversals() 와 같은 뜻이다. 라벨순열 귀무는 추정량의
+    함수이므로 관측값과 같은 level 로 재야 한다. 2026-11-07 에디터
+    게이트가 이 누락을 적발했다. 종전에는 level 을 넘기지 않아
+    관측은 세 수준으로 재고 귀무는 mixed 하나만 있었다.
+    """
     names = sorted(pat)
     concs = sorted({c for a in names for c in pat[a]})
     sizes = {c: sum(1 for a in names if c in pat[a]) for c in concs}
@@ -123,12 +129,12 @@ def null_counts(pat, rng=None, exact=False):
         out = []
         for combo in itertools.product(*[pools[c] for c in concs]):
             pb = {c: combo[i] for i, c in enumerate(concs)}
-            out.append(reversals(relabel(pat, pb))[0])
+            out.append(reversals(relabel(pat, pb), level=level)[0])
         return out
     out = []
-    for _ in range(NDRAW):
+    for _ in range(ndraw or NDRAW):
         pb = {c: tuple(rng.permutation(sizes[c])) for c in concs}
-        out.append(reversals(relabel(pat, pb))[0])
+        out.append(reversals(relabel(pat, pb), level=level)[0])
     return out
 
 
@@ -461,10 +467,17 @@ def main():
     # [자유도 8] 추정량 수준. 두 항을 같은 평균 수준에서 재면 계수가
     # 어디로 가는지. 2026-11-07 GATE8 13차 신설. 이 팔이 없었기 때문에
     # 12차 헤드라인이 선언되지 않은 관례 하나에 올라앉아 있었다.
+    #
+    # 귀무도 수준마다 따로 센다. 라벨순열 귀무는 추정량의 함수이므로
+    # 세 관측값을 mixed 의 귀무 하나에 댈 수 없다. 2026-11-07 에디터
+    # 게이트가 이 누락을 적발했다. raw_max 는 농도쌍의 최대를 쓰므로
+    # 귀무 역전수도 구조적으로 높고, 그 사실을 세어 보이지 않으면
+    # '30 은 우연과 같다' 같은 문장을 쓸 수 없다.
     lv = {}
     for level in ('mixed', 'raw_mean', 'raw_max'):
         acc = {'reversals_uncentred': 0, 'reversals_centred': 0,
-               'n_instances': 0}
+               'n_instances': 0, 'null_mean_sum_uncentred': 0.0,
+               'null_mean_sum_centred': 0.0}
         per = {}
         for tag, mode in CELLS:
             try:
@@ -479,19 +492,50 @@ def main():
             acc['reversals_uncentred'] += hu
             acc['reversals_centred'] += hc
             acc['n_instances'] += nu
-            per[f'{tag}.{mode}'] = dict(n_instances=nu,
-                                        reversals_uncentred=hu,
-                                        reversals_centred=hc)
+            ent = dict(n_instances=nu, reversals_uncentred=hu,
+                       reversals_centred=hc)
+            for lab, pat, obs in (('uncentred', raw, hu),
+                                  ('centred', cen, hc)):
+                nsp, do_exact = exact_space(pat)
+                if do_exact:
+                    nn = null_counts(pat, exact=True, level=level)
+                    ent[f'null_{lab}'] = dict(
+                        mode='exact', n_relabellings=nsp,
+                        mean=float(np.mean(nn)),
+                        p_le_observed=float(
+                            np.mean(np.asarray(nn) <= obs)))
+                else:
+                    means, ps = [], []
+                    for s in SEEDS:
+                        nn = null_counts(pat, rng=np.random.default_rng(s),
+                                         level=level)
+                        means.append(float(np.mean(nn)))
+                        ps.append(float(np.mean(np.asarray(nn) <= obs)))
+                    ent[f'null_{lab}'] = dict(
+                        mode='sampled', n_seeds=len(SEEDS),
+                        n_draws_per_seed=NDRAW,
+                        mean=float(np.mean(means)),
+                        mean_min=float(min(means)),
+                        mean_max=float(max(means)),
+                        p_le_observed=float(np.mean(ps)),
+                        p_le_observed_max=float(max(ps)))
+                acc[f'null_mean_sum_{lab}'] += ent[f'null_{lab}']['mean']
+            per[f'{tag}.{mode}'] = ent
         lv[level] = dict(totals=acc, cells=per)
     report['estimator_level'] = lv
     print('\n  [자유도] 추정량 수준 (within 과 between 을 같은 평균'
-          ' 수준에서 재면)')
+          ' 수준에서 재면). 귀무는 수준마다 따로 셌다.')
+    print(f'    {"수준":<9} {"중심화 전":>18}  {"중심화 후":>18}')
     for level in ('mixed', 'raw_mean', 'raw_max'):
         t = lv[level]['totals']
-        note = '   (12차 원고가 쓴 정의)' if level == 'mixed' else ''
-        print(f'    {level:<9} 전 {t["reversals_uncentred"]:>2}'
-              f'/{t["n_instances"]}   후 {t["reversals_centred"]:>2}'
-              f'/{t["n_instances"]}{note}')
+        note = '  (12차 원고의 정의)' if level == 'mixed' else ''
+        print(f'    {level:<9} '
+              f'{t["reversals_uncentred"]:>3}/{t["n_instances"]}'
+              f' (귀무 {t["null_mean_sum_uncentred"]:>5.2f})   '
+              f'{t["reversals_centred"]:>3}/{t["n_instances"]}'
+              f' (귀무 {t["null_mean_sum_centred"]:>5.2f}){note}')
+    print('    관측을 귀무에 대고 읽어야 한다. 수준이 바뀌면 둘이 같이'
+          ' 움직인다.')
 
     ok = [c for c in report['cells'] if 'unavailable' not in c]
     report['totals'] = dict(
