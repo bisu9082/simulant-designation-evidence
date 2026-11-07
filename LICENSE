@@ -1,0 +1,65 @@
+This deposit contains two kinds of material and they are licensed separately.
+
+================================================================================
+CODE  (*.py, *.sh)                                   MIT License
+================================================================================
+
+Copyright (c) 2026 Ku Kang
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+================================================================================
+DATA, TABLES, TEXT AND FIGURES                       CC BY 4.0
+================================================================================
+
+The descriptor tables (descriptor_cache*.csv, panel*.csv, inchikeys.csv), the
+colorimetric input tables (deltaE/), the collected source records (sources/),
+the generated outputs (outputs/), the manuscript sources and figures
+(paper_acs/, submission/) and the documentation (README.md) are licensed under
+the Creative Commons Attribution 4.0 International licence:
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt this material for any purpose, including commercially,
+provided you give appropriate credit. Cite as:
+
+    Kang, K. simulant-designation-evidence.
+    https://github.com/bisu9082/simulant-designation-evidence
+
+================================================================================
+MATERIAL THAT IS NOT OURS TO LICENSE
+================================================================================
+
+Two classes of file in this deposit were produced elsewhere, and this licence
+does not extend to them.
+
+1. sources/compiled_aegls_27jul2018.pdf is a United States Environmental
+   Protection Agency document, reproduced here unmodified because the parse of
+   it is the primary source for every toxicity value in the manuscript. It
+   carries whatever terms the agency applies to it.
+
+2. The colorimetric Delta E_00 tables under deltaE/ were measured and published
+   in three earlier studies, cited in the manuscript, and are reproduced here
+   as the input this reanalysis consumes. The measurements are those studies';
+   the reanalysis is ours.
+
+The regulatory values parsed into sources/registers_20261106.csv and
+sources/designations_20261106.csv are facts taken from government documents,
+with the source URL recorded for each row. The compilation is ours; the
+underlying values are not copyrightable.

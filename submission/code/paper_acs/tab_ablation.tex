@@ -1,0 +1,45 @@
+% 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.
+% 수치 출처: outputs/rollback_c.json (패널 3구성),
+%            outputs/pesticide_family.json + pesticide_panel.json (농약 구성),
+%            outputs/multiplicity_across_panels.json (구성별 최소 q).
+\begin{table}[htb]
+\centering
+\caption{Every exact permutation test across panel constructions, descriptor
+spaces and statistics. Values are one-sided $p$. Bold marks $p<0.05$ before
+correction. The last column is the smallest Benjamini--Hochberg value over the
+eighteen tests of that panel construction. Dimensions are the retained
+coordinate counts after the correlation filter of
+Section~\ref{meth:orderinvariance}.}
+\label{tab:ablation}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llcccccccc}
+\hline
+Panel / simulant set & Space & Dim. & $\Delta\bar{d}$ & $\Delta\tilde{d}$ &
+$\overline{\ln r}$ & $\bar{d}_\mathrm{sim}$ & $n_\mathrm{closer}$ &
+$n_\mathrm{valid}$ & min $q$ \\
+\hline
+\textbf{35 cpd., incumbent 3} & structural  & 38 & 0.3508 & 0.3261 & 0.42 & 0.2569 & 1 & 1 &  \\
+\textbf{(primary)}     & electronic  &  3 & 0.3859 & 0.3735 & 0.4116 & 0.3439 & 0.7233 & 0.664 &  \\
+                       & merged      & 41 & 0.2979 & 0.2465 & 0.3735 & 0.1917 & 1 & 1 & 0.6299 \\
+\hline
+35 cpd., eight designated & structural  & 38 & 0.06869 & 0.2986 & \textbf{0.04966} & 0.1578 & 0.3191 & 0.1594 &  \\
+\quad (3 incumbent + 5 literature) & electronic  &  3 & 0.1215 & 0.08624 & 0.1232 & 0.1271 & 0.1651 & 0.07991 &  \\
+                       & merged      & 41 & 0.05826 & 0.3064 & \textbf{0.03864} & 0.1276 & 0.3191 & 0.1594 & 0.2122 \\
+\hline
+28 cpd., incumbent 3   & structural  & 35 & \textbf{0.02794} & 0.1103 & 0.1132 & 0.05441 & 0.1103 & 0.2162 &  \\
+\quad (omits the seven) & electronic  &  3 & 0.275 & 0.175 & 0.2926 & 0.2353 & 0.7574 & 0.7574 &  \\
+                       & merged      & 38 & \textbf{0.025} & \textbf{0.04265} & 0.05147 & \textbf{0.03382} & 0.1103 & 0.2353 & 0.1632 \\
+\hline
+35 cpd., ten designated & structural  & 38 & \textbf{0.01149} & \textbf{$<$0.001} & 0.05495 & 0.2144 & 0.3176 & 0.2678 &  \\
+\quad (3 incumbent + 5 literature & electronic  &  3 & 0.08917 & 0.05262 & 0.05889 & 0.08556 & 0.06638 & 0.05495 &  \\
+\quad + 2 pesticides)  & merged      & 41 & \textbf{0.004756} & \textbf{$<$0.001} & \textbf{0.03517} & 0.1435 & 0.3176 & 0.2678 & \textbf{$<$0.001} \\
+\hline
+\hline
+\multicolumn{10}{l}{\footnotesize Statistics, in order: mean and median of
+$d_\mathrm{sim}-d_\mathrm{intf}$; mean $\ln(d_\mathrm{sim}/d_\mathrm{intf})$;
+mean $d_\mathrm{sim}$;}\\
+\multicolumn{10}{l}{\footnotesize count of agents with a simulant closer than
+every interferent; count of valid matches.}\\
+\end{tabular}
+\end{table}
