@@ -2560,7 +2560,9 @@ CHECKS = [
     ('len_pages', [r'runs to ([\d.]+) journal pages against'], 0.05),
     ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
     ('len_refs', [r'and ([\d,]+) words of\s*\n?references'], 0),
-    ('len_figs', [r'([a-z]+) double-column figures at 500 words'], 0),
+    # 2026-11-07 (12차 7단계). 커버레터가 산출물 수치를 그대로 찍으므로
+    # 숫자도 받는다.
+    ('len_figs', [r'([a-z]+|\d+) double-column figures at 500 words'], 0),
     ('coll_merged_off',
      [r'the merged space from\s*\n?\$\\rho = \+([\d.]+)\$ to'], 0.00005),
     ('coll_merged_on',
@@ -2587,7 +2589,9 @@ CHECKS = [
     ('gate_numeric_max', [r'out of \d+ to (\d+) numeric columns'], 0),
     ('gate_caches', [r'the (\w+) caches the analysis reads'], 0),
     # 2026-11-07 (12차 A-9) 염료 패널.
-    ('dye_n_nondye', [r'(\w+) of the\s*\n?twenty-nine are not chromogenic'], 0),
+    # 2026-11-07 (12차 A-9). 본문과 SI 가 어법이 다르다. 둘 다 건다.
+    ('dye_n_nondye', [r'(\w+) of the\s*\n?twenty-nine are not chromogenic',
+                      r'(\w+) are not chromogenic dyes: quinine'], 0),
     ('dye_n_fluor', [r'twenty-nine are not chromogenic dyes: (\w+) are'], 0),
     ('dye_top_uv', [r'maximum \$\\Delta E_\{00\}\$ of ([\d.]+) in the'], 0.05),
     ('dye_top_normal', [r'against ([\d.]+) in reflectance, a ratio'], 0.05),
@@ -2936,10 +2940,12 @@ CHECKS = [
      0.0005),
     ('dmmp_g4mean_nor',
      [r'ultraviolet channel and \$(-[\d.]+)\$\s*\n?in reflectance'], 0.0005),
+    # 2026-11-07 (12차 7단계). 분량 조정에서 'it is' 를 뺐다.
     ('dmmp_gmean_uv_3',
-     [r'three G agents other than tabun it is \$(-[\d.]+)\$'], 0.0005),
+     [r'other than tabun(?: it is)? \$(-[\d.]+)\$'], 0.0005),
     ('dmmp_gmean_nor_3',
-     [r'other than tabun it is \$-[\d.]+\$ and\s*\n?\$(-[\d.]+)\$'], 0.0005),
+     [r'other than tabun(?: it is)? \$-[\d.]+\$ and\s*\n?\$(-[\d.]+)\$'],
+     0.0005),
     ('vol_lew_cis_p',
      [r'from \$p = [\d.]+\$ at rank\s*\n?fourteen to \$p = ([\d.]+)\$'],
      0.00005),
