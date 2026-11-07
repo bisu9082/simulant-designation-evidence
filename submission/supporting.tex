@@ -1765,10 +1765,13 @@ it, and the failure is in the data rather than in the test. Collapsing the
 duplicate dye channels moves the count after centring to 14 of 34 and leaves
 the count before it unchanged at 28. The per-cell counts, the nulls with their
 five seeds, the Benjamini--Hochberg table and the attainable minima are in
-\texttt{outputs/reversal\_audit.json}. And the
-sampled cells give a resolution of $10^{-4}$ in $p$, so the four sampled
-values are upper bounds on how small those values are rather than estimates of
-them. All results below use the centred patterns, with those caveats attached.
+\texttt{outputs/reversal\_audit.json}. % 2026-11-07 (12차 7단계). 본문 압축에서 전수열거 규모 문장이 빠졌다.
+% 'exact rather than sampled' 주장이 쓰는 수이므로 여기에 적는다.
+And four of the six cells are
+sampled, at a resolution of $10^{-4}$ in $p$, so those four values are upper
+bounds on how small they are rather than estimates of them; the two
+four-compound cells are exact, by enumeration of all 13,824 relabellings, and
+give one-sided values of 0.0046 and 0.0033. All results below use the centred patterns, with those caveats attached.
 
 % 2026-11-03 (T1-13). 종전에는 바닥이 네 셀에서만 계산되어 있었다. d3 두
 % 셀이 Mantel 관문 뒤에 있어 빠졌고, 빠진 셀 하나가 여유 최소값이다.
