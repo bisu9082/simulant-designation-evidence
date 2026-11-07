@@ -22,3 +22,16 @@ paper_acs/*.blg
 paper_acs/*.spl
 paper_acs/*.synctex.gz
 paper_acs/acs-*.bib
+
+# 2026-11-07 (12차 R5-A5/A6). 공개 예치물에서 빼되 디스크에는 남긴다.
+# - outputs/_superseded/ 는 파이프라인이 만들지 않는 폐기본이다. 재현자가
+#   현행 산출물과 구별할 방법이 없고, 9차 메모가 이미 이것이 패키지로
+#   새어 나갔다고 적었는데 저장소 쪽은 그대로였다.
+# - sources/ 의 GATE8·T1·T2·NOTE 문서는 내부 심의 기록이다. 원고가
+#   저장소를 예치물로 인용하므로 심사자가 저자의 내부 채점을 읽게 된다.
+#   Data Availability 가 선언하는 예치물 내용에도 들어 있지 않다.
+outputs/_superseded/
+sources/GATE8_*.md
+sources/T1_*.md
+sources/T2_*.md
+sources/NOTE_*.md
