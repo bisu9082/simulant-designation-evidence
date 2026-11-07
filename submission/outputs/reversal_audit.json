@@ -1,0 +1,1011 @@
+{
+ "generated_by": "reversal_audit.py",
+ "seeds": [
+  49374,
+  1,
+  2,
+  7,
+  1234
+ ],
+ "n_draws_per_seed": 10000,
+ "cells": [
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "n_instances": 6,
+   "reversals_uncentred": 5,
+   "reversals_centred": 3,
+   "detail_uncentred": [
+    {
+     "compound": "DMMP",
+     "within": 0.9574024378963734,
+     "nearest_other": "GA",
+     "nearest_cos": 0.9624197917321511,
+     "reversed": true
+    },
+    {
+     "compound": "GA",
+     "within": 0.8501883208658686,
+     "nearest_other": "GB",
+     "nearest_cos": 0.9708020830879356,
+     "reversed": true
+    },
+    {
+     "compound": "GB",
+     "within": 0.9175609130527546,
+     "nearest_other": "GA",
+     "nearest_cos": 0.9708020830879356,
+     "reversed": true
+    },
+    {
+     "compound": "GD",
+     "within": 0.6944876056413575,
+     "nearest_other": "GF",
+     "nearest_cos": 0.9000867667216841,
+     "reversed": true
+    },
+    {
+     "compound": "GF",
+     "within": 0.6634587707707871,
+     "nearest_other": "GD",
+     "nearest_cos": 0.9000867667216841,
+     "reversed": true
+    },
+    {
+     "compound": "VX",
+     "within": 0.8628223010618776,
+     "nearest_other": "GF",
+     "nearest_cos": 0.8521955010152059,
+     "reversed": false
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "DMMP",
+     "within": 0.7775090648667637,
+     "nearest_other": "GA",
+     "nearest_cos": 0.7641071211995062,
+     "reversed": false
+    },
+    {
+     "compound": "GA",
+     "within": 0.3524424102997192,
+     "nearest_other": "DMMP",
+     "nearest_cos": 0.7641071211995062,
+     "reversed": true
+    },
+    {
+     "compound": "GB",
+     "within": 0.652890329276354,
+     "nearest_other": "GA",
+     "nearest_cos": 0.7192762424005696,
+     "reversed": true
+    },
+    {
+     "compound": "GD",
+     "within": 0.5258639500694953,
+     "nearest_other": "GF",
+     "nearest_cos": 0.4142085688254262,
+     "reversed": false
+    },
+    {
+     "compound": "GF",
+     "within": 0.3192331139779457,
+     "nearest_other": "VX",
+     "nearest_cos": 0.48469031644949073,
+     "reversed": true
+    },
+    {
+     "compound": "VX",
+     "within": 0.6218252661484361,
+     "nearest_other": "GF",
+     "nearest_cos": 0.48469031644949073,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 268738560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 5.9561,
+      "p_le_observed": 0.0432
+     },
+     {
+      "seed": 1,
+      "mean": 5.9544,
+      "p_le_observed": 0.0448
+     },
+     {
+      "seed": 2,
+      "mean": 5.9563,
+      "p_le_observed": 0.0431
+     },
+     {
+      "seed": 7,
+      "mean": 5.9555,
+      "p_le_observed": 0.044
+     },
+     {
+      "seed": 1234,
+      "mean": 5.9527,
+      "p_le_observed": 0.0467
+     }
+    ],
+    "mean": 5.955,
+    "p_le_observed_min": 0.0431,
+    "p_le_observed_max": 0.0467
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 268738560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 5.495,
+      "p_le_observed": 0.0038
+     },
+     {
+      "seed": 1,
+      "mean": 5.4949,
+      "p_le_observed": 0.0044
+     },
+     {
+      "seed": 2,
+      "mean": 5.4981,
+      "p_le_observed": 0.0041
+     },
+     {
+      "seed": 7,
+      "mean": 5.4941,
+      "p_le_observed": 0.0035
+     },
+     {
+      "seed": 1234,
+      "mean": 5.4873,
+      "p_le_observed": 0.0034
+     }
+    ],
+    "mean": 5.49388,
+    "p_le_observed_min": 0.0034,
+    "p_le_observed_max": 0.0044
+   }
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "n_instances": 6,
+   "reversals_uncentred": 5,
+   "reversals_centred": 3,
+   "detail_uncentred": [
+    {
+     "compound": "DMMP",
+     "within": 0.831825125450106,
+     "nearest_other": "GB",
+     "nearest_cos": 0.9372882383357191,
+     "reversed": true
+    },
+    {
+     "compound": "GA",
+     "within": 0.7681144297495245,
+     "nearest_other": "GD",
+     "nearest_cos": 0.907862729980849,
+     "reversed": true
+    },
+    {
+     "compound": "GB",
+     "within": 0.8087650671195763,
+     "nearest_other": "DMMP",
+     "nearest_cos": 0.9372882383357191,
+     "reversed": true
+    },
+    {
+     "compound": "GD",
+     "within": 0.7112926271858999,
+     "nearest_other": "GF",
+     "nearest_cos": 0.9690158790209852,
+     "reversed": true
+    },
+    {
+     "compound": "GF",
+     "within": 0.7523304379676693,
+     "nearest_other": "GD",
+     "nearest_cos": 0.9690158790209852,
+     "reversed": true
+    },
+    {
+     "compound": "VX",
+     "within": 0.8767143319539815,
+     "nearest_other": "GB",
+     "nearest_cos": 0.7066606510428212,
+     "reversed": false
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "DMMP",
+     "within": 0.5581691578370822,
+     "nearest_other": "GB",
+     "nearest_cos": 0.5686170540105187,
+     "reversed": true
+    },
+    {
+     "compound": "GA",
+     "within": 0.3874224191899738,
+     "nearest_other": "GD",
+     "nearest_cos": 0.2931040384298876,
+     "reversed": false
+    },
+    {
+     "compound": "GB",
+     "within": 0.576561674863412,
+     "nearest_other": "DMMP",
+     "nearest_cos": 0.5686170540105187,
+     "reversed": false
+    },
+    {
+     "compound": "GD",
+     "within": 0.38891151120534934,
+     "nearest_other": "GF",
+     "nearest_cos": 0.8200977159672886,
+     "reversed": true
+    },
+    {
+     "compound": "GF",
+     "within": 0.5615260684406183,
+     "nearest_other": "GD",
+     "nearest_cos": 0.8200977159672886,
+     "reversed": true
+    },
+    {
+     "compound": "VX",
+     "within": 0.6870463384188671,
+     "nearest_other": "GB",
+     "nearest_cos": -0.11159685089127908,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 268738560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 5.9902,
+      "p_le_observed": 0.0098
+     },
+     {
+      "seed": 1,
+      "mean": 5.9911,
+      "p_le_observed": 0.0089
+     },
+     {
+      "seed": 2,
+      "mean": 5.9912,
+      "p_le_observed": 0.0088
+     },
+     {
+      "seed": 7,
+      "mean": 5.9901,
+      "p_le_observed": 0.0099
+     },
+     {
+      "seed": 1234,
+      "mean": 5.9894,
+      "p_le_observed": 0.0106
+     }
+    ],
+    "mean": 5.9904,
+    "p_le_observed_min": 0.0088,
+    "p_le_observed_max": 0.0106
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 268738560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 5.4376,
+      "p_le_observed": 0.0062
+     },
+     {
+      "seed": 1,
+      "mean": 5.4398,
+      "p_le_observed": 0.008
+     },
+     {
+      "seed": 2,
+      "mean": 5.445,
+      "p_le_observed": 0.0068
+     },
+     {
+      "seed": 7,
+      "mean": 5.4374,
+      "p_le_observed": 0.0062
+     },
+     {
+      "seed": 1234,
+      "mean": 5.4314,
+      "p_le_observed": 0.0065
+     }
+    ],
+    "mean": 5.43824,
+    "p_le_observed_min": 0.0062,
+    "p_le_observed_max": 0.008
+   }
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "n_instances": 7,
+   "reversals_uncentred": 6,
+   "reversals_centred": 3,
+   "detail_uncentred": [
+    {
+     "compound": "AC",
+     "within": 0.9553630240031535,
+     "nearest_other": "HN",
+     "nearest_cos": 0.961264756740383,
+     "reversed": true
+    },
+    {
+     "compound": "CG",
+     "within": 0.7250209075677246,
+     "nearest_other": "CK",
+     "nearest_cos": 0.9377930407223004,
+     "reversed": true
+    },
+    {
+     "compound": "CK",
+     "within": 0.8049838122112934,
+     "nearest_other": "AC",
+     "nearest_cos": 0.9414300517430931,
+     "reversed": true
+    },
+    {
+     "compound": "HD",
+     "within": 0.8950624030662562,
+     "nearest_other": "HN",
+     "nearest_cos": 0.9411403540815126,
+     "reversed": true
+    },
+    {
+     "compound": "HN",
+     "within": 0.8066338356657079,
+     "nearest_other": "AC",
+     "nearest_cos": 0.961264756740383,
+     "reversed": true
+    },
+    {
+     "compound": "L",
+     "within": 0.7580240972632306,
+     "nearest_other": "PS",
+     "nearest_cos": 0.7501846057051376,
+     "reversed": false
+    },
+    {
+     "compound": "PS",
+     "within": 0.7192167894965439,
+     "nearest_other": "CG",
+     "nearest_cos": 0.8291317439732993,
+     "reversed": true
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "AC",
+     "within": 0.6634313229276586,
+     "nearest_other": "HN",
+     "nearest_cos": 0.6041153969820019,
+     "reversed": false
+    },
+    {
+     "compound": "CG",
+     "within": 0.17749987396518016,
+     "nearest_other": "CK",
+     "nearest_cos": 0.4029236661419162,
+     "reversed": true
+    },
+    {
+     "compound": "CK",
+     "within": 0.2849304868181374,
+     "nearest_other": "AC",
+     "nearest_cos": 0.5247427309022712,
+     "reversed": true
+    },
+    {
+     "compound": "HD",
+     "within": 0.6178050600385815,
+     "nearest_other": "HN",
+     "nearest_cos": 0.5689261934298909,
+     "reversed": false
+    },
+    {
+     "compound": "HN",
+     "within": 0.21883962580679484,
+     "nearest_other": "AC",
+     "nearest_cos": 0.6041153969820019,
+     "reversed": true
+    },
+    {
+     "compound": "L",
+     "within": 0.7325211409938973,
+     "nearest_other": "PS",
+     "nearest_cos": 0.36467784291087524,
+     "reversed": false
+    },
+    {
+     "compound": "PS",
+     "within": 0.4914333384651612,
+     "nearest_other": "L",
+     "nearest_cos": 0.36467784291087524,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 645241282560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 6.9849,
+      "p_le_observed": 0.015
+     },
+     {
+      "seed": 1,
+      "mean": 6.9834,
+      "p_le_observed": 0.0163
+     },
+     {
+      "seed": 2,
+      "mean": 6.9845,
+      "p_le_observed": 0.0153
+     },
+     {
+      "seed": 7,
+      "mean": 6.9844,
+      "p_le_observed": 0.0156
+     },
+     {
+      "seed": 1234,
+      "mean": 6.9824,
+      "p_le_observed": 0.0176
+     }
+    ],
+    "mean": 6.98392,
+    "p_le_observed_min": 0.015,
+    "p_le_observed_max": 0.0176
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 645241282560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 6.6189,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 1,
+      "mean": 6.6127,
+      "p_le_observed": 0.0002
+     },
+     {
+      "seed": 2,
+      "mean": 6.6209,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 7,
+      "mean": 6.6009,
+      "p_le_observed": 0.0003
+     },
+     {
+      "seed": 1234,
+      "mean": 6.6126,
+      "p_le_observed": 0.0
+     }
+    ],
+    "mean": 6.613199999999999,
+    "p_le_observed_min": 0.0,
+    "p_le_observed_max": 0.0003
+   }
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "n_instances": 7,
+   "reversals_uncentred": 5,
+   "reversals_centred": 1,
+   "detail_uncentred": [
+    {
+     "compound": "AC",
+     "within": 0.845846051846849,
+     "nearest_other": "CK",
+     "nearest_cos": 0.9463194195465771,
+     "reversed": true
+    },
+    {
+     "compound": "CG",
+     "within": 0.6992450531563996,
+     "nearest_other": "CK",
+     "nearest_cos": 0.9341137033269643,
+     "reversed": true
+    },
+    {
+     "compound": "CK",
+     "within": 0.8726034396904215,
+     "nearest_other": "AC",
+     "nearest_cos": 0.9463194195465771,
+     "reversed": true
+    },
+    {
+     "compound": "HD",
+     "within": 0.8296773637884343,
+     "nearest_other": "AC",
+     "nearest_cos": 0.8687366315165502,
+     "reversed": true
+    },
+    {
+     "compound": "HN",
+     "within": 0.8870362017035102,
+     "nearest_other": "AC",
+     "nearest_cos": 0.882232634822343,
+     "reversed": false
+    },
+    {
+     "compound": "L",
+     "within": 0.8191531221268313,
+     "nearest_other": "CG",
+     "nearest_cos": 0.7314611244406627,
+     "reversed": false
+    },
+    {
+     "compound": "PS",
+     "within": 0.8408005694000326,
+     "nearest_other": "CG",
+     "nearest_cos": 0.9328170124520767,
+     "reversed": true
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "AC",
+     "within": 0.47905130201841023,
+     "nearest_other": "CK",
+     "nearest_cos": 0.4624036044455377,
+     "reversed": false
+    },
+    {
+     "compound": "CG",
+     "within": 0.07769326736888846,
+     "nearest_other": "CK",
+     "nearest_cos": 0.46804594951754797,
+     "reversed": true
+    },
+    {
+     "compound": "CK",
+     "within": 0.5102706052088352,
+     "nearest_other": "CG",
+     "nearest_cos": 0.46804594951754797,
+     "reversed": false
+    },
+    {
+     "compound": "HD",
+     "within": 0.5758495062292711,
+     "nearest_other": "AC",
+     "nearest_cos": 0.12273731531822538,
+     "reversed": false
+    },
+    {
+     "compound": "HN",
+     "within": 0.7062350737185552,
+     "nearest_other": "AC",
+     "nearest_cos": 0.03832962033064402,
+     "reversed": false
+    },
+    {
+     "compound": "L",
+     "within": 0.6913722536338117,
+     "nearest_other": "PS",
+     "nearest_cos": -0.05888250556972361,
+     "reversed": false
+    },
+    {
+     "compound": "PS",
+     "within": 0.4744410402764319,
+     "nearest_other": "CG",
+     "nearest_cos": 0.27737392567032315,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 645241282560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 6.9911,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 1,
+      "mean": 6.9922,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 2,
+      "mean": 6.993,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 7,
+      "mean": 6.9923,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 1234,
+      "mean": 6.9925,
+      "p_le_observed": 0.0001
+     }
+    ],
+    "mean": 6.9922200000000005,
+    "p_le_observed_min": 0.0,
+    "p_le_observed_max": 0.0001
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 645241282560000,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 6.4849,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 1,
+      "mean": 6.4811,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 2,
+      "mean": 6.4865,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 7,
+      "mean": 6.477,
+      "p_le_observed": 0.0
+     },
+     {
+      "seed": 1234,
+      "mean": 6.482,
+      "p_le_observed": 0.0
+     }
+    ],
+    "mean": 6.4823,
+    "p_le_observed_min": 0.0,
+    "p_le_observed_max": 0.0
+   }
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "n_instances": 4,
+   "reversals_uncentred": 3,
+   "reversals_centred": 2,
+   "detail_uncentred": [
+    {
+     "compound": "A",
+     "within": 0.7920240587505293,
+     "nearest_other": "B",
+     "nearest_cos": 0.9790530896470364,
+     "reversed": true
+    },
+    {
+     "compound": "B",
+     "within": 0.7928072483009866,
+     "nearest_other": "A",
+     "nearest_cos": 0.9790530896470364,
+     "reversed": true
+    },
+    {
+     "compound": "C",
+     "within": 0.6738653977475435,
+     "nearest_other": "A",
+     "nearest_cos": 0.6306011051474796,
+     "reversed": false
+    },
+    {
+     "compound": "D",
+     "within": 0.9261431337173134,
+     "nearest_other": "B",
+     "nearest_cos": 0.9507780626599619,
+     "reversed": true
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "A",
+     "within": 0.26956703230933565,
+     "nearest_other": "B",
+     "nearest_cos": 0.686586412737194,
+     "reversed": true
+    },
+    {
+     "compound": "B",
+     "within": 0.11258248118757334,
+     "nearest_other": "A",
+     "nearest_cos": 0.686586412737194,
+     "reversed": true
+    },
+    {
+     "compound": "C",
+     "within": 0.6632460412110834,
+     "nearest_other": "A",
+     "nearest_cos": -0.6059653338099865,
+     "reversed": false
+    },
+    {
+     "compound": "D",
+     "within": 0.5191569901223373,
+     "nearest_other": "B",
+     "nearest_cos": 0.47312143133588525,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 331776,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 3.8348,
+      "p_le_observed": 0.1626
+     },
+     {
+      "seed": 1,
+      "mean": 3.8371,
+      "p_le_observed": 0.1609
+     },
+     {
+      "seed": 2,
+      "mean": 3.8399,
+      "p_le_observed": 0.1582
+     },
+     {
+      "seed": 7,
+      "mean": 3.8503,
+      "p_le_observed": 0.1477
+     },
+     {
+      "seed": 1234,
+      "mean": 3.8375,
+      "p_le_observed": 0.1606
+     }
+    ],
+    "mean": 3.83992,
+    "p_le_observed_min": 0.1477,
+    "p_le_observed_max": 0.1626
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 331776,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 3.154,
+      "p_le_observed": 0.1484
+     },
+     {
+      "seed": 1,
+      "mean": 3.1507,
+      "p_le_observed": 0.1503
+     },
+     {
+      "seed": 2,
+      "mean": 3.1477,
+      "p_le_observed": 0.1513
+     },
+     {
+      "seed": 7,
+      "mean": 3.1791,
+      "p_le_observed": 0.1349
+     },
+     {
+      "seed": 1234,
+      "mean": 3.1592,
+      "p_le_observed": 0.1478
+     }
+    ],
+    "mean": 3.1581400000000004,
+    "p_le_observed_min": 0.1349,
+    "p_le_observed_max": 0.1513
+   }
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "n_instances": 4,
+   "reversals_uncentred": 4,
+   "reversals_centred": 1,
+   "detail_uncentred": [
+    {
+     "compound": "A",
+     "within": 0.8042819598367211,
+     "nearest_other": "B",
+     "nearest_cos": 0.9318846540155517,
+     "reversed": true
+    },
+    {
+     "compound": "B",
+     "within": 0.7681098300689353,
+     "nearest_other": "A",
+     "nearest_cos": 0.9318846540155517,
+     "reversed": true
+    },
+    {
+     "compound": "C",
+     "within": 0.7824610029054501,
+     "nearest_other": "D",
+     "nearest_cos": 0.9166411351815427,
+     "reversed": true
+    },
+    {
+     "compound": "D",
+     "within": 0.7939826187287635,
+     "nearest_other": "C",
+     "nearest_cos": 0.9166411351815427,
+     "reversed": true
+    }
+   ],
+   "detail_centred": [
+    {
+     "compound": "A",
+     "within": 0.38249409590177036,
+     "nearest_other": "B",
+     "nearest_cos": 0.316226258926935,
+     "reversed": false
+    },
+    {
+     "compound": "B",
+     "within": 0.27210629925171564,
+     "nearest_other": "A",
+     "nearest_cos": 0.316226258926935,
+     "reversed": true
+    },
+    {
+     "compound": "C",
+     "within": 0.47782981905721483,
+     "nearest_other": "D",
+     "nearest_cos": 0.2062757129418629,
+     "reversed": false
+    },
+    {
+     "compound": "D",
+     "within": 0.24808344035990304,
+     "nearest_other": "C",
+     "nearest_cos": 0.2062757129418629,
+     "reversed": false
+    }
+   ],
+   "null_uncentred": {
+    "mode": "sampled",
+    "n_relabellings": 331776,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 4.0,
+      "p_le_observed": 1.0
+     },
+     {
+      "seed": 1,
+      "mean": 4.0,
+      "p_le_observed": 1.0
+     },
+     {
+      "seed": 2,
+      "mean": 4.0,
+      "p_le_observed": 1.0
+     },
+     {
+      "seed": 7,
+      "mean": 4.0,
+      "p_le_observed": 1.0
+     },
+     {
+      "seed": 1234,
+      "mean": 4.0,
+      "p_le_observed": 1.0
+     }
+    ],
+    "mean": 4.0,
+    "p_le_observed_min": 1.0,
+    "p_le_observed_max": 1.0
+   },
+   "null_centred": {
+    "mode": "sampled",
+    "n_relabellings": 331776,
+    "per_seed": [
+     {
+      "seed": 49374,
+      "mean": 2.6344,
+      "p_le_observed": 0.1123
+     },
+     {
+      "seed": 1,
+      "mean": 2.6224,
+      "p_le_observed": 0.1119
+     },
+     {
+      "seed": 2,
+      "mean": 2.6188,
+      "p_le_observed": 0.1154
+     },
+     {
+      "seed": 7,
+      "mean": 2.6208,
+      "p_le_observed": 0.1111
+     },
+     {
+      "seed": 1234,
+      "mean": 2.6331,
+      "p_le_observed": 0.1087
+     }
+    ],
+    "mean": 2.6259000000000006,
+    "p_le_observed_min": 0.1087,
+    "p_le_observed_max": 0.1154
+   }
+  }
+ ],
+ "collapse_free": {
+  "d1.uv": {
+   "n_channels": 29,
+   "n_instances": 6,
+   "reversals_uncentred": 5,
+   "reversals_centred": 3
+  },
+  "d1.normal": {
+   "n_channels": 29,
+   "n_instances": 6,
+   "reversals_uncentred": 5,
+   "reversals_centred": 3
+  },
+  "d2.uv": {
+   "n_channels": 29,
+   "n_instances": 7,
+   "reversals_uncentred": 6,
+   "reversals_centred": 4
+  },
+  "d2.normal": {
+   "n_channels": 29,
+   "n_instances": 7,
+   "reversals_uncentred": 5,
+   "reversals_centred": 1
+  },
+  "d3.uv": {
+   "n_channels": 29,
+   "n_instances": 4,
+   "reversals_uncentred": 3,
+   "reversals_centred": 2
+  },
+  "d3.normal": {
+   "n_channels": 29,
+   "n_instances": 4,
+   "reversals_uncentred": 4,
+   "reversals_centred": 1
+  }
+ },
+ "collapse_free_totals": {
+  "n_instances": 34,
+  "reversals_uncentred": 28,
+  "reversals_centred": 14
+ },
+ "totals": {
+  "n_instances": 34,
+  "reversals_uncentred": 28,
+  "reversals_centred": 13
+ }
+}

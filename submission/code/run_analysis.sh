@@ -105,6 +105,7 @@ run_strict analysis_main.py perm_sidedness.py sanity_checks.py \
 #                          10열 24수치를 손으로 유지하고 있었고, 그래서
 #                          T2-1·T2-8 을 전부 통과해 구판으로 살아남았다.
 #   sparse_indicators      희소 지시자 인코딩 민감도 + 논지 안정성 대조
+#   reversal_audit         자기보다 남이 가까운 사례의 계수 + 라벨순열 귀무
 # sparse_indicators 는 Mantel 전수열거를 일곱 변종에 돌리므로 약 25분 걸린다
 # (2026-11-07, 10차 R3: 세 변종만 돌던 자리를 전 변종으로 넓혔다).
 #   conformer_sensitivity  RDKit 매장 시드 6종 x 단일/앙상블. SI 가 두 예치물을
@@ -122,7 +123,7 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            sparse_indicators.py multiplicity_panels.py \
            volatility_fetch.py volatility_space.py \
            shape_reduction.py premise_null.py conformer_sensitivity.py \
-           collapse_sensitivity.py
+           collapse_sensitivity.py reversal_audit.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가
 # 인용하는 두 예치물 중 하나가 파이프라인에서 아예 생성되지 않았고,
