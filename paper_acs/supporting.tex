@@ -250,10 +250,19 @@ per cent of its own magnitude. The cause is that the selection is an
 difference between runs moves it to a different conformer.
 
 We therefore replaced the selection with a Boltzmann-weighted mean over the
-whole ensemble at 298~K. Every numeric column of the cache now reproduces from
-the code. The descriptor build script checks this under a
-\texttt{--verify} flag, and the analysis pipeline requires it before it will
-run.
+whole ensemble at 298~K. Every RDKit-derived numeric column of the cache now
+reproduces from the code, 53 of the 61 numeric columns, and the descriptor
+build script checks them under a \texttt{--verify} flag that the analysis
+pipeline requires before it will run. The scope of that gate is worth stating,
+because it is narrower than the pipeline's pass message once implied. The eight
+columns it does not recompute are the semiempirical electronic coordinates and
+their derivatives, which need the GFN2-xTB binary whose version was not
+recorded when the cache was built, so the gate names them on every run rather
+than counting them as checked, and fails if any other column falls outside that
+declared list. Those eight are checked instead by the independent
+density-functional recomputation of Section~\ref{meth:dft}. A missing cache
+file now stops the gate as well, because a skipped file previously left it
+reporting a pass with nothing compared.
 
 The seed moves one of the eleven agents and nothing else. Repeating the
 embedding under six seeds and rebuilding only the nine shape coordinates, the

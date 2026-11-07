@@ -55,6 +55,7 @@ EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
 REQUIRED_OUTPUTS = [
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
+    'outputs/descriptor_gate_scope.json',
     'outputs/dim_percentiles.json',
     'outputs/distance_table_normalized.csv',
     'outputs/experiment_summary.json',
@@ -1425,6 +1426,14 @@ def load_facts():
             if _code == 'CG':
                 f[f'{_tag}_CG_rival'] = float(_r.d_interferent) / _nn
 
+    # 2026-11-07 (10차 R5-B5). SI meth:conformer 가 관문의 범위를 '53 of the
+    # 61 numeric columns' 과 'eight columns' 로 적는다. 손으로 적힌 수가
+    # 아니라 관문 실행의 결과여야 한다.
+    _gs = json.load(open('outputs/descriptor_gate_scope.json'))
+    f['gate_numeric'] = _gs['n_numeric']
+    f['gate_checked'] = _gs['n_checked']
+    f['gate_exempt'] = len(_gs['exempt'])
+
     pc = json.load(open('outputs/dim_percentiles.json'))
     f['pct_struct'] = pc['struct_full']
     # 2026-10-27. 28종 구조공간 명목 p 가 어떤 어법으로도 등록돼 있지 않았다.
@@ -2384,6 +2393,9 @@ CHECKS = [
                     r'from \$p=(\d+\.\d+)\$ to\s*\n?\$p=[\d.]+\$ on the twenty-eight',
                     r'structural \$p\$ of (\d+\.\d+),'], 0.0005),
     # 2026-11-04 (J-C). ACS본 어법으로 교정.
+    ('gate_checked', [r'reproduces from the code, (\d+) of the \d+ numeric'], 0),
+    ('gate_numeric', [r'reproduces from the code, \d+ of the (\d+) numeric'], 0),
+    ('gate_exempt', [r'The (\w+)\s*\n?columns it does not recompute'], 0),
     ('pct_struct_caption', [r'is the (\d+)th percentile of those draws',
                             r'observed value at the (\d+\.\d+)th percentile',
                             r'place it at the\s*\n?(\d+\.\d+)th percentile'], 0.06),

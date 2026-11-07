@@ -1,0 +1,15 @@
+{
+ "ref": "descriptor_cache.csv",
+ "n_numeric": 61,
+ "n_checked": 53,
+ "exempt": [
+  "E_HOMO_eV",
+  "E_LUMO_eV",
+  "dipole_moment_D",
+  "electrophilicity_index_eV",
+  "fukui_f_plus_P",
+  "q_P",
+  "q_phosphoryl_O",
+  "wiberg_PO"
+ ]
+}
