@@ -39,7 +39,9 @@
    "d_norm_max": 3.0597,
    "n_cells_over_threshold": 25,
    "n_cells_blocked": 14,
-   "fail_mode": "threshold_only",
+   "n_cells_blocker_unrecorded": 7,
+   "fail_mode": "threshold_in_every_failing_cell",
+   "n_match_no_threshold": 4,
    "blockers": [
     "malathion",
     "sulfur mustard (HD)"
@@ -60,7 +62,9 @@
    "d_norm_max": 1.7076,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 18,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 7,
+   "fail_mode": "blocker_only_where_recorded",
+   "n_match_no_threshold": 0,
    "blockers": [
     "acetonitrile",
     "hydrogen cyanide (AC)"
@@ -78,7 +82,9 @@
    "d_norm_max": 1.8663,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 18,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 7,
+   "fail_mode": "blocker_only_where_recorded",
+   "n_match_no_threshold": 0,
    "blockers": [
     "acetonitrile",
     "cyanogen chloride (CK)"
@@ -96,7 +102,9 @@
    "d_norm_max": 2.3591,
    "n_cells_over_threshold": 19,
    "n_cells_blocked": 18,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 7,
+   "fail_mode": "mixed",
+   "n_match_no_threshold": 0,
    "blockers": [
     "p-dichlorobenzene"
    ],
@@ -115,7 +123,9 @@
    "d_norm_max": 1.6901,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 18,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 7,
+   "fail_mode": "blocker_only_where_recorded",
+   "n_match_no_threshold": 0,
    "blockers": [
     "ethyl acetate"
    ],
@@ -132,7 +142,9 @@
    "d_norm_max": 2.8216,
    "n_cells_over_threshold": 22,
    "n_cells_blocked": 18,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 6,
+   "fail_mode": "mixed",
+   "n_match_no_threshold": 0,
    "blockers": [
     "chloroform"
    ],
@@ -150,7 +162,9 @@
    "d_norm_max": 1.7404,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 12,
-   "fail_mode": "both",
+   "n_cells_blocker_unrecorded": 5,
+   "fail_mode": "blocker_only_where_recorded",
+   "n_match_no_threshold": 6,
    "blockers": [
     "CEES",
     "n-hexane"
@@ -170,7 +184,9 @@
    "d_norm_max": 2.5485,
    "n_cells_over_threshold": 10,
    "n_cells_blocked": 6,
-   "fail_mode": "threshold_only",
+   "n_cells_blocker_unrecorded": 1,
+   "fail_mode": "threshold_in_every_failing_cell",
+   "n_match_no_threshold": 12,
    "blockers": [
     "DCNP",
     "dichlorvos"
@@ -190,7 +206,9 @@
    "d_norm_max": 1.6041,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 8,
+   "n_cells_blocker_unrecorded": 0,
    "fail_mode": "blocker_only",
+   "n_match_no_threshold": 10,
    "blockers": [
     "DFP",
     "soman (GD)"
@@ -210,7 +228,9 @@
    "d_norm_max": 1.187,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 8,
+   "n_cells_blocker_unrecorded": 0,
    "fail_mode": "blocker_only",
+   "n_match_no_threshold": 10,
    "blockers": [
     "DFP",
     "soman (GD)"
@@ -229,7 +249,9 @@
    "d_norm_max": 1.4583,
    "n_cells_over_threshold": 0,
    "n_cells_blocked": 8,
+   "n_cells_blocker_unrecorded": 0,
    "fail_mode": "blocker_only",
+   "n_match_no_threshold": 10,
    "blockers": [
     "DFP",
     "cyclosarin (GF)",
@@ -248,6 +270,110 @@
   "lewisite 1 (L)",
   "phosgene (CG)"
  ],
+ "invariant_failures_threshold_in_audit": [
+  "cyanogen chloride (CK)",
+  "hydrogen cyanide (AC)",
+  "lewisite 1 (L)",
+  "phosgene (CG)"
+ ],
  "n_agents": 11,
- "n_invariant_failures": 5
+ "n_invariant_failures": 5,
+ "n_invariant_failures_threshold_in_audit": 4,
+ "n_distinct_verdict_vectors": 7,
+ "verdict_vectors": [
+  {
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "tabun (GA)"
+   ],
+   "n_cells": 6,
+   "cells": [
+    "match_rule/panel28_incumbent3/legacy/narrow",
+    "match_rule/panel28_incumbent3/legacy/wide",
+    "sparse/drop_binary_nonzero_le_1",
+    "sparse/drop_binary_nonzero_le_2",
+    "sparse/drop_binary_nonzero_le_4",
+    "sparse/drop_binary_nonzero_le_5"
+   ]
+  },
+  {
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)"
+   ],
+   "n_cells": 5,
+   "cells": [
+    "match_rule/panel28_incumbent3/deterministic/narrow",
+    "match_rule/panel28_incumbent3/deterministic/wide",
+    "match_rule/panel35_incumbent3/deterministic/narrow",
+    "match_rule/panel35_incumbent3/legacy/narrow",
+    "sparse/baseline"
+   ]
+  },
+  {
+   "matched": [],
+   "n_cells": 5,
+   "cells": [
+    "match_rule/panel28_incumbent3/deterministic/literal",
+    "match_rule/panel35_incumbent3/deterministic/literal",
+    "match_rule/panel35_incumbent3/deterministic/wide",
+    "match_rule/panel35_incumbent3/legacy/literal",
+    "match_rule/panel35_incumbent3/legacy/wide"
+   ]
+  },
+  {
+   "matched": [
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "sulfur mustard (HD)",
+    "tabun (GA)"
+   ],
+   "n_cells": 5,
+   "cells": [
+    "match_rule/panel35_incumbent_plus_lit8/deterministic/narrow",
+    "match_rule/panel35_incumbent_plus_lit8/deterministic/wide",
+    "match_rule/panel35_incumbent_plus_lit8/legacy/narrow",
+    "match_rule/panel35_incumbent_plus_lit8/legacy/wide",
+    "sparse/drop_binary_nonzero_le_3"
+   ]
+  },
+  {
+   "matched": [
+    "sulfur mustard (HD)",
+    "tabun (GA)"
+   ],
+   "n_cells": 2,
+   "cells": [
+    "match_rule/panel35_incumbent_plus_lit8/deterministic/literal",
+    "match_rule/panel35_incumbent_plus_lit8/legacy/literal"
+   ]
+  },
+  {
+   "matched": [
+    "tabun (GA)"
+   ],
+   "n_cells": 1,
+   "cells": [
+    "match_rule/panel28_incumbent3/legacy/literal"
+   ]
+  },
+  {
+   "matched": [
+    "chloropicrin (PS)",
+    "cyclosarin (GF)",
+    "sarin (GB)",
+    "soman (GD)",
+    "sulfur mustard (HD)",
+    "tabun (GA)"
+   ],
+   "n_cells": 1,
+   "cells": [
+    "sparse/drop_cardinality_le_5"
+   ]
+  }
+ ]
 }
