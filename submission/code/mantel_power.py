@@ -23,6 +23,7 @@ from scipy.stats import rankdata
 
 SEED = 0xC0DE
 N_REP = 2000
+N_REP_NULL = 20000
 ALPHA = 0.05
 N = 6
 
@@ -56,7 +57,7 @@ def mantel_p(dr, pr):
 
 
 def run(noise, rng):
-    rejects, rhos = 0, np.empty(N_REP)
+    rejects, rejects_bh, rhos = 0, 0, np.empty(N_REP)
     for r in range(N_REP):
         X = rng.normal(size=(N, 3))
         D = np.sqrt(((X[:, None] - X[None]) ** 2).sum(-1))
@@ -65,25 +66,83 @@ def run(noise, rng):
         p, obs = mantel_p(rankdata(d), rankdata(v))
         rhos[r] = obs
         rejects += (p <= ALPHA)
-    return float(rhos.mean()), rejects / N_REP
+        # 2026-11-06 (9차 R3-2). 논문이 실제로 판정에 쓰는 임계는 명목
+        # alpha 가 아니라 12셀 BH 다. 지정검정에서는 이미 보정 임계의 MDE
+        # 를 싣고 있었는데(mde.json 의 bh18) 헤드라인인 Mantel 에만
+        # 적용하지 않았다. 같은 격자에서 두 임계의 검정력을 함께 센다.
+        rejects_bh += (p <= ALPHA_BH)
+    return float(rhos.mean()), rejects / N_REP, rejects_bh / N_REP
+
+
+def run_null(n_rep, rng):
+    """귀무 조건의 1종오류율 (2026-11-06 신설).
+
+    왜 신설했는가. SI 가 'the type I rate of the simulated test at 0.049'
+    이라고 적고 있었는데, 이 스크립트에는 귀무 조건이 없었고 어느 예치물에도
+    그 수가 없었다. 수행하지 않은 결과를 적은 것이므로 [C-3] 위반이다.
+    문장을 지우는 대신 실제로 돌려서 나온 수로 교체한다.
+
+    귀무의 모양. '두 거리행렬이 무관하다'이므로 잡음을 쌍에 직접 얹으면 안
+    된다. 그건 거리행렬이 아니다. 독립한 배치 Y 에서 두 번째 거리행렬을
+    만들어야 삼각부등식 같은 거리행렬 고유의 종속구조가 보존된다.
+
+    기대값. 검정이 720 전수 치환이고 항등치환을 귀무분포에 포함하므로
+    p >= 1/720 이고 검정은 보수적으로 타당하다. 즉 1종오류율은 0.05 를
+    넘지 않아야 하고, 넘으면 절차에 버그가 있는 것이다.
+    """
+    rejects = 0
+    for _ in range(n_rep):
+        X = rng.normal(size=(N, 3))
+        Y = rng.normal(size=(N, 3))
+        d = np.sqrt(((X[:, None] - X[None]) ** 2).sum(-1))[IU]
+        v = np.sqrt(((Y[:, None] - Y[None]) ** 2).sum(-1))[IU]
+        p, _ = mantel_p(rankdata(d), rankdata(v))
+        rejects += (p <= ALPHA)
+    rate = rejects / n_rep
+    se = float(np.sqrt(rate * (1 - rate) / n_rep))
+    return rate, se
+
+
+BH_FAMILY = 12                    # 서술자 Mantel 셀 수 (rollback_c.deltaE.mantel_bh)
+ALPHA_BH = 0.05 / BH_FAMILY       # BH 에서 최소순위가 통과해야 하는 임계
 
 
 def main():
     rng = np.random.default_rng(SEED)
     rows = []
-    print('잡음폭   평균 관측 |rho|   기각률(검정력)')
+    print('잡음폭   평균 관측 |rho|   기각률 @a=0.05   기각률 @a=0.05/12')
     for noise in (0.10, 0.20, 0.30, 0.40, 0.50, 0.65, 0.85, 1.10, 1.50):
-        rho, pw = run(noise, rng)
-        rows.append(dict(noise=noise, mean_abs_rho=rho, power=pw))
-        print(f'  {noise:.2f}        {rho:.3f}            {pw:.3f}')
+        rho, pw, pw_bh = run(noise, rng)
+        rows.append(dict(noise=noise, mean_abs_rho=rho, power=pw, power_bh=pw_bh))
+        print(f'  {noise:.2f}        {rho:.3f}          {pw:.3f}            {pw_bh:.3f}')
+
+    print()
+    t1, t1_se = run_null(N_REP_NULL, rng)
+    print(f'[mantel_power] 귀무 1종오류율 = {t1:.4f} +- {t1_se:.4f} '
+          f'(명목 {ALPHA}, 반복 {N_REP_NULL})')
+    if t1 > ALPHA + 3 * t1_se:
+        print('[mantel_power] 경고: 명목 수준을 유의하게 초과한다. 절차 재점검.')
+    print()
 
     rows.sort(key=lambda r: r['mean_abs_rho'])
-    mde = None
-    for a, b in zip(rows, rows[1:]):
-        if a['power'] <= 0.8 <= b['power']:
-            t = (0.8 - a['power']) / (b['power'] - a['power'])
-            mde = a['mean_abs_rho'] + t * (b['mean_abs_rho'] - a['mean_abs_rho'])
-            break
+
+    def interp(field):
+        for a, b in zip(rows, rows[1:]):
+            if a[field] <= 0.8 <= b[field]:
+                t = (0.8 - a[field]) / (b[field] - a[field])
+                return a['mean_abs_rho'] + t * (b['mean_abs_rho']
+                                                - a['mean_abs_rho'])
+        return None
+
+    mde = interp('power')
+    mde_bh = interp('power_bh')
+    if mde_bh is None:
+        print('[mantel_power] 보정 임계의 80% 구간이 격자 밖이다 — '
+              f'최대 격자점에서도 검정력 {rows[-1]["power_bh"]:.3f}. '
+              '격자를 넓히거나 상한으로 보고할 것.')
+    else:
+        print(f'[mantel_power] BH 임계(a={ALPHA_BH:.5f}) 80% 검정력 '
+              f'최소탐지 |rho| = {mde_bh:.3f}')
     print()
     if mde is None:
         print('[mantel_power] 80% 구간이 격자 밖이다. 격자를 넓힐 것.')
@@ -91,7 +150,19 @@ def main():
         print(f'[mantel_power] 정확 Mantel 80% 검정력 최소탐지 |rho| = {mde:.3f}')
     json.dump(dict(seed=SEED, n_compounds=N, n_perm=len(PAIRPERM),
                    n_rep=N_REP, alpha=ALPHA, grid=rows,
-                   mde_rho_mantel=(None if mde is None else round(float(mde), 3))),
+                   mde_rho_mantel=(None if mde is None else round(float(mde), 3)),
+                   bh_family=BH_FAMILY, alpha_bh=ALPHA_BH,
+                   mde_rho_mantel_bh=(None if mde_bh is None
+                                      else round(float(mde_bh), 3)),
+                   null=dict(n_rep=N_REP_NULL,
+                             type_i_rate=round(float(t1), 5),
+                             type_i_se=round(float(t1_se), 5),
+                             nominal_alpha=ALPHA,
+                             p_min_attainable=1.0 / len(PAIRPERM),
+                             note='독립한 두 배치에서 거리행렬 2개를 만들어 '
+                                  '실제 절차(720 전수 치환, 양측)를 그대로 돌린 '
+                                  '기각률. 항등치환을 귀무분포에 포함하므로 '
+                                  'p >= 1/720 이고 검정은 보수적으로 타당하다.')),
               open('outputs/mantel_power.json', 'w'), indent=1)
     print('[done] outputs/mantel_power.json')
 

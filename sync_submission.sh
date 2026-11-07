@@ -7,6 +7,11 @@
 set -e
 cd "$(dirname "$0")"
 
+# 2026-11-07 (11차). code/ 와 outputs/ 를 비우고 다시 채운다. 종전에는
+# 덮어쓰기만 했으므로, 루트에서 사라진 스크립트의 사본이 패키지에 계속
+# 남았다. make_ga.py 를 archive/jhm_v1/ 로 옮겼는데 submission/code/ 에는
+# 그대로 있었고, 그런 사본은 아무도 갱신하지 않는다.
+rm -rf submission/code submission/outputs
 mkdir -p submission/code submission/outputs
 
 # 2026-11-04 (결정 J-C). 투고 패키지는 ACS Sensors 판본이다. JHM 평행본은
@@ -34,6 +39,11 @@ for f in *.py *.sh; do
   cp -p "$f" submission/code/
 done
 cp -p descriptor_cache*.csv submission/code/ 2>/dev/null || true
+# 2026-11-07 (11차). README.md 와 requirements.txt 가 빠져 있었다. README 는
+# 재현 지시서이고 검증기가 그 안의 재현 약속 수치를 대조하므로(키 rm_*),
+# 없으면 패키지 자기검증이 '검사 누락 6건' 으로 떨어진다. 공개 zip 은
+# 10차에 이미 둘을 담게 고쳤는데 이쪽만 빠져 있었다.
+cp -p README.md requirements.txt submission/code/
 
 # 산출물: 본문이 인용하는 수치의 출처. 2026-10-23 이전에는 여덟 개만 손으로
 # 골라 복사했고, 그 목록이 갱신되지 않아 h1_summary.json 을 비롯해 헤드라인

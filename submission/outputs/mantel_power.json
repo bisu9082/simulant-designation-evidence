@@ -8,48 +8,68 @@
   {
    "noise": 1.5,
    "mean_abs_rho": 0.5321910714285714,
-   "power": 0.529
+   "power": 0.529,
+   "power_bh": 0.124
   },
   {
    "noise": 1.1,
    "mean_abs_rho": 0.6527607142857142,
-   "power": 0.7775
+   "power": 0.7775,
+   "power_bh": 0.299
   },
   {
    "noise": 0.85,
    "mean_abs_rho": 0.7414642857142858,
-   "power": 0.9245
+   "power": 0.9245,
+   "power_bh": 0.484
   },
   {
    "noise": 0.65,
    "mean_abs_rho": 0.8175,
-   "power": 0.9825
+   "power": 0.9825,
+   "power_bh": 0.7025
   },
   {
    "noise": 0.5,
    "mean_abs_rho": 0.8760089285714284,
-   "power": 0.998
+   "power": 0.998,
+   "power_bh": 0.8775
   },
   {
    "noise": 0.4,
    "mean_abs_rho": 0.9073446428571429,
-   "power": 0.999
+   "power": 0.999,
+   "power_bh": 0.933
   },
   {
    "noise": 0.3,
    "mean_abs_rho": 0.9389624999999999,
-   "power": 1.0
+   "power": 1.0,
+   "power_bh": 0.9775
   },
   {
    "noise": 0.2,
    "mean_abs_rho": 0.9657982142857142,
-   "power": 1.0
+   "power": 1.0,
+   "power_bh": 0.995
   },
   {
    "noise": 0.1,
    "mean_abs_rho": 0.9858625,
-   "power": 1.0
+   "power": 1.0,
+   "power_bh": 0.9995
   }
  ],
- "mde_rho_mantel": 0.666
+ "mde_rho_mantel": 0.666,
+ "bh_family": 12,
+ "alpha_bh": 0.004166666666666667,
+ "mde_rho_mantel_bh": 0.85,
+ "null": {
+  "n_rep": 20000,
+  "type_i_rate": 0.05,
+  "type_i_se": 0.00154,
+  "nominal_alpha": 0.05,
+  "p_min_attainable": 0.001388888888888889,
+  "note": "\ub3c5\ub9bd\ud55c \ub450 \ubc30\uce58\uc5d0\uc11c \uac70\ub9ac\ud589\ub82c 2\uac1c\ub97c \ub9cc\ub4e4\uc5b4 \uc2e4\uc81c \uc808\ucc28(720 \uc804\uc218 \uce58\ud658, \uc591\uce21)\ub97c \uadf8\ub300\ub85c \ub3cc\ub9b0 \uae30\uac01\ub960. \ud56d\ub4f1\uce58\ud658\uc744 \uadc0\ubb34\ubd84\ud3ec\uc5d0 \ud3ec\ud568\ud558\ubbc0\ub85c p >= 1/720 \uc774\uace0 \uac80\uc815\uc740 \ubcf4\uc218\uc801\uc73c\ub85c \ud0c0\ub2f9\ud558\ub2e4."
+ }
 }

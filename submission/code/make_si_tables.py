@@ -36,14 +36,21 @@ SPACE_LABEL = {'structural': 'structural', 'electronic3': 'electronic',
 ROWS = [
     ('\\textbf{35 cpd., incumbent 3}', '\\textbf{(primary)}', '',
      'panel35_designated3'),
-    ('35 cpd., incumbent', '\\quad + literature 8', '',
+    ('35 cpd., eight designated', '\\quad (3 incumbent + 5 literature)', '',
      'panel35_designated_plus_literature8'),
     ('28 cpd., incumbent 3', '\\quad (omits the seven)', '',
      'panel28_designated3'),
-    ('35 cpd., incumbent 3', '\\quad + literature 5',
-     '\\quad + pesticides 2', 'pesticide'),
+    ('35 cpd., ten designated', '\\quad (3 incumbent + 5 literature',
+     '\\quad + 2 pesticides)', 'pesticide'),
 ]
 
+
+# 2026-11-04 (작업 D). 패널 명명 규칙. 종전에는 같은 구성을 'literature 8',
+# 'literature eight', 'the eight literature simulants' 로 적었다. 8 은 문헌이
+# 제안한 화합물 수가 아니라 **지정 후보의 총수**다: 기존 3종(DMMP, DPGME,
+# 디클로로메탄) + 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 아래 라벨은
+# 문헌 쪽 수(5)만 적고, 총수 8 은 본문이 문장으로 말한다.
+#   28종 구성 = 35종에서 7종을 뺀 것 (문헌 5 + 농약 2)
 
 def fmt(p, dp=4):
     """p 를 SI 관례로 쓴다. 0.001 미만은 <0.001, 0.05 미만은 굵게."""
@@ -111,10 +118,11 @@ def ablation(rc, mq, pf, pp, mc):
 
 # ---------------------------------------------------------------- tab:family
 FAM_COLS = [('panel35_incumbent3', '35 cpd.,', 'incumbent 3', '(primary)'),
-            ('panel35_incumbent_plus_lit8', '35 cpd.,', '+ literature 8', ''),
+            ('panel35_incumbent_plus_lit8', '35 cpd.,',
+             'eight designated', ''),
             ('panel28_incumbent3', '28 cpd.,', 'incumbent 3',
              '(omits the seven)'),
-            ('pesticide', '35 cpd.,', 'relabelled 10', '(pesticides in)')]
+            ('pesticide', '35 cpd.,', 'ten designated', '(pesticides in)')]
 FAM_ROWS = [('Smallest nominal $p$ (18 tests)', 'min_p'),
             ('Benjamini-Hochberg over 18', 'bh_all_min_q'),
             ('Benjamini-Hochberg over 6, per space', 'bh_by_space_min_q'),
@@ -167,7 +175,8 @@ Accounting scheme & """ + ' & '.join(c[1] for c in FAM_COLS) + r""" \\
 
 # ------------------------------------------------------ tab:blockbalance
 BB_ROWS = [('Thirty-five, incumbent three', 'panel35_incumbent3'),
-           ('Thirty-five, plus literature 8', 'panel35_incumbent_plus_lit8'),
+           ('Thirty-five, incumbent 3 + literature 5',
+            'panel35_incumbent_plus_lit8'),
            ('Twenty-eight, incumbent three', 'panel28_incumbent3')]
 
 
@@ -347,7 +356,21 @@ def volatility():
             r'temperature. Source strings are as returned by PubChem; '
             r'the}\\' '\n'
             r'\multicolumn{5}{l}{\footnotesize full strings and every '
-            r'candidate value are in the deposited JSON.}\\')
+            r'candidate value are in the deposited JSON. Tier X is a '
+            r'compilation}\\' '\n'
+            # 2026-11-06 (9차 P-10). TX 가 각주에 정의돼 있지 않았다. 그리고
+            # 축 자체에 불확도가 없어서 0.473 대 0.216 의 0.257 여유를
+            # 온도차가 만들 수 있는지 독자가 판단할 수 없었다.
+            r'\multicolumn{5}{l}{\footnotesize value without a stated '
+            r'measurement temperature, used only for solvents. Over this '
+            r'compound}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize class the '
+            r'Clausius--Clapeyron slope is of order 0.03 to 0.05 '
+            r'decades per $^{\circ}$C, so a}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize 5~$^{\circ}$C mismatch '
+            r'moves a value by roughly 0.15 to 0.25 decades. No value was '
+            r'converted}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize between temperatures.}\\')
     return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
             + '\n' + r'\end{tabular}')
 
@@ -401,6 +424,118 @@ def premisenull():
             + '\n' + r'\end{tabular}')
 
 
+def registers():
+    """세 인컴번트의 규제 레지스터 보유 현황 (2026-11-06 신설).
+
+    GATE 8 9차에서 본문이 'DMMP 는 어떤 종류의 규제 흡입값도 갖지 않는다'
+    고 적은 것이 DOE PAC 과 NIOSH IDLH 로 반증됐다. 공백은 규제값의 공백이
+    아니라 EPA AEGL 한 레지스터의 공백이다. 수집분은 sources 에 출처 URL
+    과 함께 예치했고 이 표는 그 파일에서 생성한다.
+    """
+    import csv
+    SRC = 'sources/registers_20261106.csv'
+    KEEP = ('DMMP', 'DPGME', 'dichloromethane')
+    rows = []
+    with open(SRC, newline='') as fh:
+        for r in csv.DictReader(fh):
+            if r['compound_name'] not in KEEP:
+                continue
+            rows.append(r)
+    order = {n: i for i, n in enumerate(KEEP)}
+    rows.sort(key=lambda r: (order[r['compound_name']], r['register'], r['tier']))
+    lines = []
+    for r in rows:
+        reg = r['register'].replace('_', ' ')
+        lines.append(f"{r['compound_name']} & {reg} & {r['tier']} & "
+                     f"{r['value']} & {r['unit'].replace('mg/m3', 'mg m$^{-3}$')}"
+                     f" & {r['basis'] or '--'} \\\\")
+    head = (r'\begin{tabular}{lllrll}' '\n' r'\hline' '\n'
+            r'Compound & Register & Tier & Value & Unit & Basis \\' '\n'
+            r'\hline' '\n')
+    return head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + r'\end{tabular}'
+
+
+def designations():
+    """지정 기록 6열 표 (2026-11-06 신설).
+
+    9차에서 지적받은 자리다. 지정 귀속이 산문 두 단락에만 있었고, 그래서
+    'NRC 가 VX 에 지정' 을 'the nerve agent class' 로 요약하는 오기와,
+    'designating documents assign these compounds no agent class' 라는
+    거짓 서술이 동시에 살아남았다. 문서/작용제/측정/선정근거/출처를
+    한 줄에 놓으면 그런 요약이 불가능해진다.
+    """
+    import csv
+    rows = []
+    with open('sources/designations_20261106.csv', newline='') as fh:
+        for r in csv.DictReader(fh):
+            rows.append(r)
+
+    def esc(t):
+        return (t.replace('&', r'\&').replace('%', r'\%')
+                 .replace('[수집 불가', '[not obtained')
+                 .replace('특허 본문 미열람 — Google Patents, Justia, USPTO '
+                          '전문 서비스 모두 접근 거부. 서지사항만 확인',
+                          'patent text not retrieved; Google Patents, Justia '
+                          'and the USPTO full-text service all refused; '
+                          'bibliographic record only')
+                 .replace('특허 본문 미열람 — Google Patents 및 Justia 접근 거부',
+                          'patent text not read; Google Patents and Justia refused')
+                 .replace('특허 본문 미열람', 'patent text not retrieved')
+                 .replace('공개 기록에서 지정 문서를 찾지 못함',
+                          'no designating document found in the public record'))
+
+    lines = []
+    for r in rows:
+        lines.append(' & '.join(esc(r[k]) for k in
+                                ('compound', 'document', 'agent',
+                                 'measurement', 'stated_basis')) + r' \\')
+    head = (r'\begin{tabular}{p{1.9cm}p{3.4cm}p{1.5cm}p{2.3cm}p{4.2cm}}' '\n'
+            r'\hline' '\n'
+            r'Compound & Document & Agent & Measurement & Basis the document '
+            r'states \\' '\n' r'\hline' '\n')
+    return head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + r'\end{tabular}'
+
+
+def dyepanel():
+    """29종 어레이 구성 (2026-11-06 신설).
+
+    9차 지적. 본문이 '같은 29종을 같은 순서로' 라고만 적고 어느 화합물인지
+    어디에도 없었다. 선행 세 편의 Table 1 을 직독해 목록을 예치하고,
+    (a) 염료 15 의 용매가 세 번째 런에서 다르게 적혀 있다는 것과
+    (b) 여섯 항목이 발색단이 아니라 형광체 또는 유도체화 시약이라는 것을
+    함께 공시한다. 종전에는 둘 다 공시되지 않았다.
+    """
+    import csv
+    rows = list(csv.DictReader(open('sources/dye_panel_20261106.csv')))
+    half = (len(rows) + 1) // 2
+    left, right = rows[:half], rows[half:]
+    lines = []
+    for i in range(half):
+        a = left[i]
+        b = right[i] if i < len(right) else {'index': '', 'name': ''}
+        # 2026-11-07 (10차). 종전에는 note 가 있는 행 전부에 $^{a}$ 를
+        # 달았다. 염료 15 의 note 는 용매 불일치인데 캡션이 그 마커를
+        # '비염료' 로 설명하고 있어 표가 캡션을 거짓으로 만들었다.
+        # note_kind 로 비염료만 a, 그 밖은 b 를 단다.
+        _m = {'nondye': '$^{a}$', 'other': '$^{b}$'}
+        mark = _m.get(a.get('note_kind', ''), '')
+        markb = _m.get(b.get('note_kind', ''), '')
+        lines.append(f"{a['index']} & {a['name']}{mark} & "
+                     f"{b['index']} & {b['name']}{markb} \\\\")
+    head = (r'\begin{tabular}{rlrl}' '\n' r'\hline' '\n'
+            r'\# & Compound & \# & Compound \\' '\n' r'\hline' '\n')
+    notes = [(('$^{a}$ ' if r['note_kind'] == 'nondye' else '$^{b}$ ')
+              + f"{r['index']} {r['name']}: {r['note']}")
+             for r in rows if r['note']]
+    foot = '\n'.join(
+        r'\multicolumn{4}{p{13cm}}{\footnotesize ' + n + r'}\\'
+        if True else
+        r'\multicolumn{4}{p{13cm}}{\footnotesize ' + n + r'}\\'
+        for j, n in enumerate(notes))
+    return (head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + foot
+            + '\n' + r'\end{tabular}')
+
+
 def main():
     rc, mq, pf, pp, mc = load()
     body = ablation(rc, mq, pf, pp, mc)
@@ -441,6 +576,37 @@ every interferent; count of valid matches.}\\
 
     hdr = ('% 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.\n')
     open('outputs/tab_family.tex', 'w').write(hdr + family(mq) + '\n')
+    open('outputs/tab_registers.tex', 'w').write(
+        hdr + '% 출처: sources/registers_20261106.csv (URL 포함)\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{Regulatory acute '
+        'inhalation values held for the three incumbent simulants, by '
+        'register. Sources and collection dates are in '
+        '\\texttt{sources/registers\\_20261106.csv} of the deposit. EPA '
+        'AEGL is the axis the agents are placed on in the main text; the '
+        'other registers use different averaging times and severity '
+        'definitions and are not interchangeable with it.}\n'
+        '\\label{tab:registers}\n\\small\n'
+        + registers() + '\n\\end{table}\n')
+    print('-> outputs/tab_registers.tex')
+    open('outputs/tab_designations.tex', 'w').write(
+        hdr + '% 출처: sources/designations_20261106.csv (URL 포함)\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{Every simulant '
+        'designation we located, with the agent it names, the measurement it '
+        'was made against, and the basis the designating document itself '
+        'states. Source URLs and the search date are in '
+        '\\texttt{sources/designations\\_20261106.csv} of the deposit.}\n'
+        '\\label{tab:designations}\n\\footnotesize\n'
+        + designations() + '\n\\end{table}\n')
+    print('-> outputs/tab_designations.tex')
+    open('outputs/tab_dyepanel.tex', 'w').write(
+        hdr + '% 출처: sources/dye_panel_20261106.csv\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{The 29-component '
+        'array, in the order the three source studies number it. Five entries '
+        'marked $^{a}$ are not chromogenic dyes; $^{b}$ marks a component '
+        'whose stock solvent differs between the source studies.}\n'
+        '\\label{tab:dyepanel}\n\\small\n'
+        + dyepanel() + '\n\\end{table}\n')
+    print('-> outputs/tab_dyepanel.tex')
     print('-> outputs/tab_family.tex')
     open('outputs/tab_blockbalance.tex', 'w').write(hdr + blockbalance() + '\n')
     print('-> outputs/tab_blockbalance.tex')

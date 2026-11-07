@@ -1,0 +1,19 @@
+# 원고 Reproducibility 절에 기재한 버전. 이 조합에서 산출물이 재현된다.
+numpy==2.5.3
+scipy==1.18.1
+pandas==3.0.5
+scikit-learn==1.9.1
+matplotlib==3.11.2
+rdkit==2026.3.6
+# 아래 둘은 run_analysis.sh 가 호출하지 않는다. dft_omega.py 와 xtb_fast.py
+# 의 산출물은 계산 시간 때문에 저장소에 커밋해 두고 파이프라인에서 제외했다
+# (run_analysis.sh 의 제외 사유 주석 참조). 그 두 축을 재생성하려면 필요하다.
+# 2026-11-06 (9차 R5-8): 원고 Software 절이 PySCF 2.14.0 을 적는데 이 파일에
+# 없었고, GFN2-xTB 는 본문·SI·이 파일 어디에도 버전이 없었다.
+pyscf==2.14.0
+# xtb 는 pip 패키지가 아니라 바이너리다. descriptor_cache_xtb*.csv 를 만든
+# xtb 바이너리의 버전은 [수집 불가: 생성 당시 기록이 없고 xtb_fast.py 가
+# 버전을 남기지 않는다]. 재생성 전에 Ku 가 생성 환경에서 `xtb --version` 을
+# 확인해 이 줄을 채워야 한다. 그때까지 이 축은 버전 고정이 안 된 값이다.
+pdfplumber==0.11.10
+adjustText==1.4.0

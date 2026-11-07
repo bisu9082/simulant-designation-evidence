@@ -3374,6 +3374,57 @@ def main():
         fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
         fails.extend(superseded)
 
+    # (B2d) 투고 패키지 사본이 작업본과 어긋났는지 (2026-11-07 신설).
+    #
+    # 왜 필요한가. submission/ 은 sync_submission.sh 가 채우는 사본이고,
+    # 그 스크립트를 돌리는 것은 사람이 기억해야 하는 일이었다. 11차 푸시
+    # 뒤에 확인해 보니 submission/ 은 9차 스냅샷이었고, main.tex 가
+    # 11차에 철회한 제목을 들고 있었다. 스크립트 82개 중 17개가 구판이고
+    # 루트에서 archive 로 옮긴 make_ga.py 의 사본이 남아 있었다.
+    # 저장소를 여는 사람이 둘 중 어느 쪽을 열지는 우리가 정하지 못한다.
+    #
+    # 이 프로젝트에서 '두 번째 사본이 조용히 늙는' 실패가 네 번째다
+    # (paper/ 대 paper_acs/, 생성표 목록, 도판 생성기 목록, README).
+    # 한 번 맞추는 것으로는 닫히지 않으므로 어긋나면 멈추게 한다.
+    #
+    # submission/ 이 없는 상태(공개 zip 을 푼 경우)는 정상이므로 건너뛴다.
+    import os as _o2
+    if _o2.path.isdir('submission'):
+        import filecmp as _fc
+        _sd = []
+        for _n in ('main.tex', 'supporting.tex', 'cover_letter.tex',
+                   'refs.bib'):
+            _a, _b = f'paper_acs/{_n}', f'submission/{_n}'
+            if not _o2.path.exists(_b):
+                _sd.append(f'  submission/{_n} 없음')
+            elif not _fc.cmp(_a, _b, shallow=False):
+                _sd.append(f'  submission/{_n} 가 paper_acs/{_n} 와 다르다')
+        if _o2.path.isdir('submission/code'):
+            _root = {_o2.path.basename(x) for x in
+                     _glob.glob('*.py') + _glob.glob('*.sh')
+                     if _o2.path.basename(x) != 'sync_submission.sh'}
+            _root |= {'README.md', 'requirements.txt'}
+            _pkg = {_o2.path.basename(x) for x in
+                    _glob.glob('submission/code/*.py')
+                    + _glob.glob('submission/code/*.sh')}
+            _pkg |= {_n for _n in ('README.md', 'requirements.txt')
+                     if _o2.path.exists(f'submission/code/{_n}')}
+            for _n in sorted(_root - _pkg):
+                _sd.append(f'  submission/code/{_n} 없음 (루트에 있다)')
+            for _n in sorted(_pkg - _root):
+                _sd.append(f'  submission/code/{_n} 가 루트에 없다 '
+                           f'(옮겼거나 지운 파일의 사본)')
+            _nd = [_n for _n in sorted(_root & _pkg)
+                   if not _fc.cmp(_n, f'submission/code/{_n}', shallow=False)]
+            if _nd:
+                _sd.append(f'  submission/code 의 스크립트 {len(_nd)}개가 '
+                           f'루트와 다르다: ' + ', '.join(_nd[:6])
+                           + (' 등' if len(_nd) > 6 else ''))
+        if _sd:
+            fails.append('투고 패키지 사본이 작업본과 어긋났다 (검사 B2d): '
+                         'sh sync_submission.sh 를 돌릴 것')
+            fails.extend(_sd[:10])
+
     # (B2c) TOC 머리글이 제목과 같은 주장을 하는지 (2026-11-07 신설).
     #
     # 왜 필요한가. 9차에서 제목을 'does not predict' 에서 'no resolvable

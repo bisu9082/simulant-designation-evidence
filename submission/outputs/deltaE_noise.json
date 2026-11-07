@@ -1737,5 +1737,110 @@
    "rho_conc_vs_norm": 1.0,
    "separable": false
   }
- ]
+ ],
+ "concentration_vs_norm_all_cells": [
+  {
+   "cell": "d1.uv",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    21.83,
+    28.692,
+    37.795,
+    78.47
+   ],
+   "rho_conc_vs_norm": 1.0
+  },
+  {
+   "cell": "d1.normal",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    11.154,
+    19.528,
+    26.359,
+    37.057
+   ],
+   "rho_conc_vs_norm": 1.0
+  },
+  {
+   "cell": "d2.uv",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    14.673,
+    26.57,
+    30.504,
+    60.2
+   ],
+   "rho_conc_vs_norm": 1.0
+  },
+  {
+   "cell": "d2.normal",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    12.301,
+    16.003,
+    18.472,
+    27.693
+   ],
+   "rho_conc_vs_norm": 1.0
+  },
+  {
+   "cell": "d3.uv",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    10.144,
+    24.807,
+    33.562,
+    68.693
+   ],
+   "rho_conc_vs_norm": 1.0
+  },
+  {
+   "cell": "d3.normal",
+   "n_points": 4,
+   "concentrations": [
+    10,
+    50,
+    100,
+    500
+   ],
+   "mean_response_norm": [
+    14.344,
+    28.408,
+    36.851,
+    75.193
+   ],
+   "rho_conc_vs_norm": 1.0
+  }
+ ],
+ "concentration_vs_norm_all_unity": true
 }

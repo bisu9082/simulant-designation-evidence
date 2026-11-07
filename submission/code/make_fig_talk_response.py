@@ -44,6 +44,11 @@ def main():
     pre = json.load(open('outputs/deltaE_premise.json'))
     roll = json.load(open('outputs/rollback_c.json'))['deltaE']
     ext = json.load(open('outputs/deltaE_extended.json'))
+    # 2026-11-07 (10차 R1-1). 이 패널이 본문이 철회한 두 통계를 그리고
+    # 있었다 — 부호뒤집기 p 와 -1/(n-1) 바닥선. 본문이 지금 의지하는
+    # 라벨순열 귀무로 바꾼다.
+    pn = {(c['dataset'], c['mode']): c
+          for c in json.load(open('outputs/premise_null.json'))['cells']}
 
     fig = plt.figure(figsize=(14.5, 4.5))
     gs = fig.add_gridspec(1, 3, width_ratios=[1.0, 1.0, 1.25],
@@ -65,22 +70,26 @@ def main():
     ax.barh(y - w / 2, [d['between'] for d in disc], w, color=C_TAN,
             edgecolor='white', lw=0.6)
     ax.axvline(0, color='0.35', lw=0.9)
-    # 2026-11-02 (GATE 8 7차). 염료축 중심화는 화합물간 평균 코사인을
-    # -1/(n-1) 로 끌어내린다. 바닥을 그리지 않으면 갈색 막대가 '분리'로
-    # 읽히는데, 본문은 겉보기 분리의 대부분이 중심화의 성질이라고 적는다.
-    # 특히 3차 런 반사채널은 바닥에서 0.003 밖에 안 떨어져 있다.
-    N_CPD = {'d1': 6, 'd2': 7, 'd3': 4}
+    # 2026-11-07. 종전에는 -1/(n-1) 바닥선을 그렸는데 본문이 그 논거를
+    # 철회했다 (재정규화가 영합을 깨므로 바닥이 아니다). 올바른 기준은
+    # 라벨순열 귀무가 같은 between 에서 기대하는 within 이다. 그 값을
+    # mean_between + null_mean 으로 그린다.
     for i, d in enumerate(disc):
-        fl = -1.0 / (N_CPD[d['dataset']] - 1)
-        ax.plot([fl, fl], [i - w, i], color=C_RED, lw=1.5,
+        c = pn[(d['dataset'], d['mode'])]
+        exp_within = c['mean_between'] + c['null_mean']
+        ax.plot([exp_within, exp_within], [i, i + w], color=C_RED, lw=1.5,
                 solid_capstyle='butt', zorder=5)
     ax.plot([], [], color=C_RED, lw=1.5,
-            label=r'centring floor $-1/(n-1)$')
+            label='within expected under\nlabel permutation')
     # 범례를 축 영역 안 왼쪽아래에 두었더니 x 눈금과 겹쳤다 (렌더 확인).
     # y 하한을 내려 맨 아래 막대 밑에 빈 띠를 만들고 거기 둔다.
     # p 값을 한 열에 정렬한다. 막대 끝에 붙이면 열이 들쭉날쭉해 읽기 어렵다.
     for i, d in enumerate(disc):
-        ax.text(0.60, i, f"p = {d['p']:.1e}", va='center', ha='left',
+        c = pn[(d['dataset'], d['mode'])]
+        # 표집 셀은 바닥에 검열돼 있으므로 점추정으로 적지 않는다.
+        txt = (f"p = {c['p_one_sided']:.4f}" if c['enumerated']
+               else f"p < {1.0 / c['n_null']:.0e}")
+        ax.text(0.60, i, txt, va='center', ha='left',
                 fontsize=8.6, color=C_DARK_TEAL)
     # 색 키를 왼쪽 빈 영역에 둔다. 윗행에 직접 붙였더니 축 눈금과 겹쳤고,
     # 범례 상자로 두었더니 p 열을 가렸다. 여기는 어느 막대도 닿지 않는다.
@@ -102,8 +111,10 @@ def main():
     ax.set_xlabel('mean cosine between response patterns')
     # 제목이 본문의 유보와 충돌했다. 본문: "Most of the apparent separation
     # is therefore a property of the centring". 측정한 것만 적는다.
-    ax.set_title('(a)  a compound agrees with itself\n'
-                 '      across doses more than with others',
+    # 2026-11-07. 'more than with others' 는 짝별 전칭으로 읽힌다. 본문은
+    # 34개 중 13개에서 그것이 거짓임을 적으므로 평균 진술로 맞춘다.
+    ax.set_title('(a)  a compound agrees with itself across doses\n'
+                 '      more than with the mean of the others',
                  loc='left', fontweight='bold')
 
     # ---------------------------------------------------------- (b) 전이
@@ -132,7 +143,7 @@ def main():
     ax.set_xticks([])
     ax.set_ylabel('adjusted $p$')
     ax.set_xlabel('tests of descriptor distance against response distance')
-    ax.set_title('(b)  but descriptor distance does not transfer',
+    ax.set_title('(b)  descriptor distance does not resolve it',
                  loc='left', fontweight='bold')
     ax.legend(loc='upper left', frameon=False, handlelength=1.1)
 

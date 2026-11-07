@@ -187,6 +187,34 @@ def concentration_vs_magnitude():
     return rows
 
 
+def concentration_vs_norm_all_cells():
+    """농도와 응답 크기의 Spearman — 여섯 셀 전부 (2026-11-06 신설).
+
+    본문이 '농도와 응답 크기의 Spearman 은 모든 런-채널 셀에서 정확히
+    +1.000' 이라고 적는데, 예치물에는 두 셀밖에 없었다. 위
+    concentration_vs_magnitude() 가 DMMP 없는 런을 건너뛰기 때문이다.
+    이 양은 DMMP 와 무관하므로 여섯 셀 전부에서 따로 잰다.
+    """
+    rows = []
+    for tag, mode in cells():
+        D, dy = m.load(tag, mode)
+        nm, cs = [], []
+        for c in CONC_NZ:
+            sub = D[D.Concentration == c]
+            if len(sub):
+                V = sub[dy].to_numpy(float)
+                cs.append(int(c))
+                nm.append(float(np.linalg.norm(V, axis=1).mean()))
+        if len(cs) < 3:
+            continue
+        rows.append(dict(cell=f'{tag}.{mode}', n_points=len(cs),
+                         concentrations=cs,
+                         mean_response_norm=[round(x, 3) for x in nm],
+                         rho_conc_vs_norm=float(
+                             stats.spearmanr(cs, nm).statistic)))
+    return rows
+
+
 def main():
     print('=' * 78)
     print('[T2-5] ΔE 응답 크기, 잡음 바닥 가용성, 농도 추세의 SNR 교란')
@@ -222,6 +250,12 @@ def main():
               f'정확p {r["p_exact"]:.4f}{extra}')
 
     cv = concentration_vs_magnitude()
+    cvn = concentration_vs_norm_all_cells()
+    print('\n(2b) 농도 대 응답 크기 Spearman — 여섯 셀 전부')
+    for r in cvn:
+        print(f'  {r["cell"]:<12} n={r["n_points"]}  rho={r["rho_conc_vs_norm"]:+.4f}')
+    _all1 = all(abs(r['rho_conc_vs_norm'] - 1.0) < 1e-12 for r in cvn)
+    print(f'  -> 전 셀 +1.000 여부: {_all1}  (셀 {len(cvn)}개)')
     print('\n(4) 농도 대 응답크기 — 유사도는 어느 쪽을 따르는가')
     for r in cv:
         print(f'  {r["cell"]:<12} DMMP-{r["target"]:<3} n={r["n_points"]}  '
@@ -236,7 +270,9 @@ def main():
                                '촬상이 예치물에 없다. 0 µM 행은 정의상 0.]',
                    blank_audit=ba, dye_magnitudes=dm,
                    drop_weak_sensitivity=ds,
-                   concentration_vs_magnitude=cv),
+                   concentration_vs_magnitude=cv,
+                   concentration_vs_norm_all_cells=cvn,
+                   concentration_vs_norm_all_unity=_all1),
               open('outputs/deltaE_noise.json', 'w'), indent=1,
               ensure_ascii=False)
     print('\n-> outputs/deltaE_noise.json')
