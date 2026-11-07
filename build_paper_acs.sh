@@ -82,11 +82,23 @@ pass main
 echo '[5/6] supporting (2차 — 확정된 main.aux 를 읽는다)'
 pass supporting
 pass supporting
-echo '[6/6] main (최종)'
+echo '[6/7] main (최종)'
 pdflatex -interaction=nonstopmode main > main_build.log 2>&1 || true
 
+# 2026-11-07 (11차). 커버레터를 빌드 목록에 넣는다.
+#
+# 왜. 이 스크립트는 본문과 SI 만 빌드했고 커버레터는 아예 부르지 않았다.
+# 그래서 paper_acs/cover_letter.pdf 가 11-03 자로 멈춰 있었다 — 11차 교정
+# 전체(제목 교체, 분량 사유 단락 신설)가 반영되지 않은 판본이다. 그대로
+# 올리면 철회한 헤드라인 프레임의 커버레터를 투고하게 된다. 검증기는
+# cover_letter.tex 를 읽으므로 글은 맞았고, 올라가는 PDF 만 틀렸다.
+# 아래 시차 검사(검사 A)가 같은 자리를 다시 막는다.
+echo '[7/7] cover letter'
+pass cover_letter
+pass cover_letter
+
 fail=0
-for f in main supporting; do
+for f in main supporting cover_letter; do
     log="$f.log"
     if grep -q '^!' "$log" 2>/dev/null; then
         echo "  [$f] 치명 오류:"; grep -A2 '^!' "$log" | head -12; fail=1
@@ -103,7 +115,7 @@ done
 
 echo
 echo '--- 산출 ---'
-for f in main supporting; do
+for f in main supporting cover_letter; do
     if [ -f "$f.pdf" ]; then
         printf '  %-12s %s쪽\n' "$f.pdf" \
             "$(pdfinfo "$f.pdf" | awk '/^Pages/{print $2}')"

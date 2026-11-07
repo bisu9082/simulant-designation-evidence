@@ -372,7 +372,8 @@ Ertl,~P.; Rohde,~B.; Selzer,~P. Fast Calculation of Molecular Polar Surface
 Kang,~K. simulant-designation-evidence: analysis code, descriptor tables and
   figure scripts for this work.
   \url{https://github.com/bisu9082/simulant-designation-evidence}, 2026; Public
-  Git repository\relax
+  Git repository, tag \texttt{acs-submission-20261107}. Code under the MIT
+  licence, data and text under CC~BY~4.0\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

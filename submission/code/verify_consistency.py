@@ -3374,6 +3374,25 @@ def main():
         fails.append('폐기값이 원고에 남아 있다 (검사 B2):')
         fails.extend(superseded)
 
+    # (A-pdf) 올라가는 PDF 가 원고보다 오래됐는지 (2026-11-07 신설).
+    #
+    # 왜 필요한가. build_paper_acs.sh 가 본문과 SI 만 빌드하고 커버레터는
+    # 부르지 않았다. 그래서 paper_acs/cover_letter.pdf 가 나흘 전(11-03)
+    # 판본으로 멈춰 있었고, 11차 교정 전체 — 제목 교체와 분량 사유 단락
+    # 신설 — 가 빠진 PDF 가 투고될 상태였다. 검증기는 .tex 를 읽으므로
+    # 글은 맞았고 올라가는 파일만 틀렸다. 도판에는 시차 검사가 있었는데
+    # PDF 에는 없었다.
+    import os as _o2
+    for _b in ('main', 'supporting', 'cover_letter'):
+        _t, _p = f'paper_acs/{_b}.tex', f'paper_acs/{_b}.pdf'
+        if not _o2.path.exists(_p):
+            fails.append(f'{_p} 가 없다 (검사 A-pdf): '
+                         'sh build_paper_acs.sh 를 돌릴 것')
+        elif _o2.path.getmtime(_p) < _o2.path.getmtime(_t) - 1:
+            fails.append(f'{_p} 가 {_b}.tex 보다 오래됐다 (검사 A-pdf): '
+                         'sh build_paper_acs.sh 를 돌릴 것 — 올라가는 '
+                         'PDF 가 원고와 다르다')
+
     # (B2d) 투고 패키지 사본이 작업본과 어긋났는지 (2026-11-07 신설).
     #
     # 왜 필요한가. submission/ 은 sync_submission.sh 가 채우는 사본이고,
@@ -3388,7 +3407,6 @@ def main():
     # 한 번 맞추는 것으로는 닫히지 않으므로 어긋나면 멈추게 한다.
     #
     # submission/ 이 없는 상태(공개 zip 을 푼 경우)는 정상이므로 건너뛴다.
-    import os as _o2
     if _o2.path.isdir('submission'):
         import filecmp as _fc
         _sd = []

@@ -154,6 +154,18 @@ no procedure, and no predictive model of toxicity for structures that do not
 already exist. The toxicity model included here is deliberately not extended to
 the organophosphorus class; the manuscript explains why.
 
+## Licence
+
+Code (`*.py`, `*.sh`) is under the MIT licence; data, tables, manuscript
+sources and this file are under CC BY 4.0. Two classes of file in this deposit
+were produced elsewhere and are not ours to license: the reproduced EPA AEGL
+document under `sources/`, and the colorimetric Delta E_00 tables under
+`deltaE/`, which were measured and published in the three source studies cited
+in the manuscript. `LICENSE` states this in full.
+
+The state the manuscript reports is the tag `acs-submission-20261107`. Branches
+move; cite the tag.
+
 ## Citation
 
 Please cite the paper. For the code and data, cite this repository at the
