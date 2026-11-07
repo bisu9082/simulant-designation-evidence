@@ -548,6 +548,45 @@ def _label_scope_guards():
                        f'{", ".join(_leak[:3])} — .gitignore 에 넣고 '
                        'git rm --cached 할 것')
 
+    # (B0d) 교신저자 아닌 사람의 연락처가 추적되고 있는지 (2026-11-07 신설,
+    #       13차 R5).
+    #
+    # 왜 필요한가. 공저자 다섯의 메일주소가 archive/jhm_v1/main.tex 의
+    # 주석에 남아 origin/b_acs 에 공개돼 있었다. paper_acs/main.tex 쪽은
+    # 같은 블록을 지웠는데 사본을 두었다. 사본을 지우는 것으로는 다음에
+    # 또 생긴다. 주석까지 포함해 추적 파일 전부를 훑고, 투고본에 실리는
+    # 교신저자 주소 하나만 통과시킨다. 본인 아닌 분들 정보라 수치 오류와
+    # 같은 급으로 두지 않는다.
+    _ALLOWED_MAIL = ('yjjangchem@korea.kr',)
+    _MAIL = _r.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
+    if _files is None:
+        print('[verify] 검사 B0d: git 을 쓸 수 없어 건너뛴다.')
+    else:
+        _hits = []
+        for _f in _files:
+            if _r.search(r'\.(png|pdf|jpg|jpeg|gif|zip|bundle|xlsx)$', _f,
+                         _r.I):
+                continue
+            try:
+                _txt = open(_f, encoding='utf-8', errors='replace').read()
+            except OSError:
+                continue
+            for _m in set(_MAIL.findall(_txt)):
+                if _m in _ALLOWED_MAIL:
+                    continue
+                # 저널·학회 안내문에 인용된 편집부 주소는 연구진 연락처가
+                # 아니다. refs.bib 의 URL 안에 들어간 토큰도 아니다.
+                _ctx = _txt[max(0, _txt.find(_m) - 120):_txt.find(_m) + 120]
+                if _r.search(r'https?://|doi\.org|@article|@misc', _ctx):
+                    continue
+                _hits.append(f'{_f}: {_m.split("@")[0][:3]}...@'
+                             f'{_m.split("@")[1]}')
+        if _hits:
+            bad.append(f'  교신저자 아닌 연락처가 예치물에 추적되고 있다 '
+                       f'(검사 B0d): {len(_hits)}건, 예: '
+                       f'{"; ".join(_hits[:3])} — 주석까지 지우고 투고 '
+                       '시스템에만 입력할 것')
+
     # (B) tier 주장 대 출처 문자열. #8 이 이 경로였다.
     vp = 'outputs/volatility_space.json'
     if _o.path.exists(vp):
