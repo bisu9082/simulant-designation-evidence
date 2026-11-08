@@ -29,10 +29,5 @@
   "gap_min35": "0.125",
   "p_at_zero35": "0.2979",
   "p_at_zero28": "0.0250"
- },
- "toc_acs": {
-  "headline": "13 of 34 cases are nearest a different compound",
-  "panel_a": "nearest neighbour is a different compound in 28 of 34 cases before centring and 13 of 34 after; label-permutation chance 33.8 and 29.8",
-  "panel_b": "rank correlation, 12 cells: -0.225 to +0.571; none below q = 0.05"
  }
 }

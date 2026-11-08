@@ -2,11 +2,12 @@
 
 Analysis code, descriptor tables and permutation results for:
 
-> **In a Colorimetric Array of Authentic Chemical Warfare Agents, One Compound
-> in Three Is Nearer Another Compound Than Its Own Repeat Measurement**
+> **No Public Designation Names a Detection Measurement for the Simulants
+> Chemical Warfare Agent Sensing Is Built On, and Descriptor Comparison Cannot
+> Supply the Missing Validation**
 > Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee, Jin Yoo, Yoon Jeong Jang.
 > CBRN Defense Research Institute, Ministry of National Defense, Republic of Korea.
-> Submitted to *ACS Sensors*.
+> Target journal under review as of 2026-11-08.
 
 A designation says one compound stands in for another, which is a claim about a
 nearest neighbour. The paper counts how often this array supplies one: in 13 of
@@ -29,7 +30,8 @@ reported rather than resolved.
 | `inchikeys.csv` | Chemical identity resolution input |
 | `deltaE/` | Measured 29-dye colorimetric array response, three compound sets, two imaging channels |
 | `outputs/` | Permutation results, distance tables, parsed AEGL values, figure annotations |
-| `paper_acs/` | Manuscript, Supporting Information, cover letter, figures, PDFs (ACS submission, canonical) |
+| `paper/` | Manuscript, Supplementary Material, cover letter, highlights, figures, PDFs (canonical) |
+| `archive/acs_v1/` | Retired ACS Sensors parallel manuscript, frozen 2026-11-08 (see its `FROZEN.md`) |
 | `archive/jhm_v1/` | Frozen parallel version for a different journal; not maintained |
 | `sources/` | Primary sources: the parsed EPA AEGL document, the collected register and designation records, the array component list |
 
@@ -66,7 +68,7 @@ needs no network at all.
 ```sh
 pip install -r requirements.txt
 sh run_analysis.sh                      # analysis, in dependency order
-sh build_paper_acs.sh --figs            # figures, then LaTeX
+sh build_paper.sh --figs                # figures, then LaTeX
 python3 verify_consistency.py           # manuscript against outputs
 python3 test_verify_consistency.py      # does the verifier catch injected defects
 python3 ai_style_scan.py                # prose style scan
@@ -106,8 +108,8 @@ of five seeds. The rest is deterministic given the seed `0xC0DE`.
 
 ## Verification
 
-`verify_consistency.py` reads every numerical claim in `paper_acs/main.tex`,
-`paper_acs/supporting.tex`, the cover letter and the figure annotations, and
+`verify_consistency.py` reads every numerical claim in `paper/main.tex`,
+`paper/supplementary.tex`, the cover letter and the figure annotations, and
 checks each against the generator output it came from. `test_verify_consistency.py`
 injects historical and synthetic defects into the manuscript or the Supporting
 Information and confirms the verifier catches each one. Both print their
@@ -179,5 +181,5 @@ A-tag confirms that any tag the manuscript names is present on the remote.
 
 Please cite the paper. For the code and data, cite this repository at the tag
 the manuscript names once that tag exists. Branches move, so do not cite
-`b_acs` itself. The earlier tag `v1.0` predates the ACS Sensors rewrite and is
-not the state this manuscript reports.
+`b_acs` itself. The earlier tag `v1.0` predates the corrections this
+manuscript reports and is not the state it describes.

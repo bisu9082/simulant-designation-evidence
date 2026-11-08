@@ -1,0 +1,209 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{epaaegl2018}
+{U.S. Environmental Protection Agency}, {Compiled AEGL Values, 27 July 2018},
+  \url{https://www.epa.gov/sites/default/files/2018-08/documents/compiled_aegls_update_27jul2018.pdf},
+  accessed 2026-10-09 (2018).
+
+\bibitem{watson2006}
+A.~Watson, D.~Opresko, R.~Young, V.~Hauschild, Development and application of
+  acute exposure guideline levels ({AEGLs}) for chemical warfare nerve and
+  sulfur mustard agents, Journal of Toxicology and Environmental Health, Part B
+  9~(3) (2006) 173--263.
+\newblock \href {https://doi.org/10.1080/15287390500194441}
+  {\path{doi:10.1080/15287390500194441}}.
+
+\bibitem{tenberge1986}
+W.~F. {ten Berge}, A.~Zwart, L.~M. Appelman, Concentration---time mortality
+  response relationship of irritant and systemically acting vapours and gases,
+  Journal of Hazardous Materials 13~(3) (1986) 301--309.
+\newblock \href {https://doi.org/10.1016/0304-3894(86)85003-8}
+  {\path{doi:10.1016/0304-3894(86)85003-8}}.
+
+\bibitem{munro1999}
+N.~B. Munro, S.~S. Talmage, G.~D. Griffin, L.~C. Waters, A.~P. Watson, J.~F.
+  King, V.~Hauschild, The sources, fate, and toxicity of chemical warfare agent
+  degradation products, Environmental Health Perspectives 107~(12) (1999)
+  933--974.
+\newblock \href {https://doi.org/10.1289/ehp.99107933}
+  {\path{doi:10.1289/ehp.99107933}}.
+
+\bibitem{gramatica2007}
+P.~Gramatica, Principles of {QSAR} models validation: internal and external,
+  QSAR \& Combinatorial Science 26~(5) (2007) 694--701.
+\newblock \href {https://doi.org/10.1002/qsar.200610151}
+  {\path{doi:10.1002/qsar.200610151}}.
+
+\bibitem{tropsha2010}
+A.~Tropsha, Best practices for {QSAR} model development, validation, and
+  exploitation, Molecular Informatics 29~(6-7) (2010) 476--488.
+\newblock \href {https://doi.org/10.1002/minf.201000061}
+  {\path{doi:10.1002/minf.201000061}}.
+
+\bibitem{sheridan2004}
+R.~P. Sheridan, B.~P. Feuston, V.~N. Maiorov, S.~K. Kearsley, Similarity to
+  molecules in the training set is a good discriminator for prediction accuracy
+  in {QSAR}, Journal of Chemical Information and Computer Sciences 44~(6)
+  (2004) 1912--1928.
+\newblock \href {https://doi.org/10.1021/ci049782w}
+  {\path{doi:10.1021/ci049782w}}.
+
+\bibitem{netzeva2005}
+T.~I. Netzeva, A.~P. Worth, T.~Aldenberg, R.~Benigni, M.~T. Cronin,
+  P.~Gramatica, J.~S. Jaworska, S.~Kahn, G.~Klopman, C.~A. Marchant, G.~Myatt,
+  N.~Nikolova-Jeliazkova, G.~Y. Patlewicz, R.~Perkins, D.~W. Roberts, T.~W.
+  Schultz, D.~T. Stanton, J.~J. v.~d. Sandt, W.~Tong, G.~Veith, C.~Yang,
+  Current status of methods for defining the applicability domain of
+  (quantitative) structure-activity relationships, Alternatives to Laboratory
+  Animals 33~(2) (2005) 155--173.
+\newblock \href {https://doi.org/10.1177/026119290503300209}
+  {\path{doi:10.1177/026119290503300209}}.
+
+\bibitem{roy2015}
+K.~Roy, S.~Kar, P.~Ambure, On a simple approach for determining applicability
+  domain of {QSAR} models, Chemometrics and Intelligent Laboratory Systems 145
+  (2015) 22--29.
+\newblock \href {https://doi.org/10.1016/j.chemolab.2015.04.013}
+  {\path{doi:10.1016/j.chemolab.2015.04.013}}.
+
+\bibitem{dbpcarto}
+K.~Kang, D.-H. Lee, J.~Kim, J.~Yoo, Condition-dependent risk cartography of
+  brominated disinfection by-products in seawater desalination, Journal of
+  Environmental Chemical Engineering 14~(5) (2026) 125179.
+\newblock \href {https://doi.org/10.1016/j.jece.2026.125179}
+  {\path{doi:10.1016/j.jece.2026.125179}}.
+
+\bibitem{openset}
+K.~Kang, J.~Kim, Y.~J. Jang, M.~Shin, S.~Kim, J.~Yoo, Open-set
+  combustion-fingerprint classification with out-of-distribution alerting for
+  environmental fire-hazard screening, Journal of Hazardous Materials 516
+  (2026) 143199.
+\newblock \href {https://doi.org/10.1016/j.jhazmat.2026.143199}
+  {\path{doi:10.1016/j.jhazmat.2026.143199}}.
+
+\bibitem{efron1986}
+B.~Efron, R.~Tibshirani, Bootstrap methods for standard errors, confidence
+  intervals, and other measures of statistical accuracy, Statistical Science
+  1~(1) (1986).
+\newblock \href {https://doi.org/10.1214/ss/1177013815}
+  {\path{doi:10.1214/ss/1177013815}}.
+
+\bibitem{nakagawa2007}
+S.~Nakagawa, I.~C. Cuthill, Effect size, confidence interval and statistical
+  significance: a practical guide for biologists, Biological Reviews 82~(4)
+  (2007) 591--605.
+\newblock \href {https://doi.org/10.1111/j.1469-185x.2007.00027.x}
+  {\path{doi:10.1111/j.1469-185x.2007.00027.x}}.
+
+\bibitem{shapiro1965}
+S.~S. Shapiro, M.~B. Wilk, An analysis of variance test for normality (complete
+  samples), Biometrika 52~(3/4) (1965) 591.
+\newblock \href {https://doi.org/10.2307/2333709} {\path{doi:10.2307/2333709}}.
+
+\bibitem{wilcoxon1945}
+F.~Wilcoxon, Individual comparisons by ranking methods, Biometrics Bulletin
+  1~(6) (1945) 80.
+\newblock \href {https://doi.org/10.2307/3001968} {\path{doi:10.2307/3001968}}.
+
+\bibitem{caretref}
+M.~Kuhn, Building predictive models in {R} using the caret package, Journal of
+  Statistical Software 28~(5) (2008).
+\newblock \href {https://doi.org/10.18637/jss.v028.i05}
+  {\path{doi:10.18637/jss.v028.i05}}.
+
+\bibitem{multiplexref}
+S.~Kim, J.~Yoo, K.~Kang, J.~Kim, M.~Shin, Y.~K. Cha, D.~G. Churchill, M.-K.
+  Kim, D.-H. Lee, A multiplex chromogenic--fluorogenic sensor array for
+  comprehensive optical discrimination of chemical warfare agents, Discover
+  Sensors 1~(1) (2025) 29.
+\newblock \href {https://doi.org/10.1007/s44397-025-00032-y}
+  {\path{doi:10.1007/s44397-025-00032-y}}.
+
+\bibitem{benjamini1995}
+Y.~Benjamini, Y.~Hochberg, Controlling the false discovery rate: A practical
+  and powerful approach to multiple testing, Journal of the Royal Statistical
+  Society: Series B (Methodological) 57~(1) (1995) 289--300.
+\newblock \href {https://doi.org/10.1111/j.2517-6161.1995.tb02031.x}
+  {\path{doi:10.1111/j.2517-6161.1995.tb02031.x}}.
+
+\bibitem{westfall1993}
+P.~H. Westfall, S.~S. Young, Resampling-Based Multiple Testing: Examples and
+  Methods for $p$-Value Adjustment, Wiley, New York, 1993.
+
+\bibitem{liji2005}
+J.~Li, L.~Ji, Adjusting multiple testing in multilocus analyses using the
+  eigenvalues of a correlation matrix, Heredity 95~(3) (2005) 221--227.
+\newblock \href {https://doi.org/10.1038/sj.hdy.6800717}
+  {\path{doi:10.1038/sj.hdy.6800717}}.
+
+\bibitem{hazref}
+J.~Kim, K.~Kang, M.~Shin, S.~Kim, J.~Yoo, M.-K. Kim, W.~B. Lee, D.-H. Lee,
+  Machine learning-enhanced colorimetric sensor array for rapid detection of
+  nerve agents, Journal of Hazardous Materials 501 (2026) 140703.
+\newblock \href {https://doi.org/10.1016/j.jhazmat.2025.140703}
+  {\path{doi:10.1016/j.jhazmat.2025.140703}}.
+
+\bibitem{group3ref}
+M.~Shin, K.~Kang, J.~Kim, S.~Kim, J.~Yoo, Y.~J. Jang, M.-K. Kim, E.~V. Anslyn,
+  D.-H. Lee, Portable machine learning--integrated optical sensor array for
+  rapid and selective detection of authentic {Novichok} nerve agents, Sensors
+  and Actuators B: Chemical 457 (2026) 139706.
+\newblock \href {https://doi.org/10.1016/j.snb.2026.139706}
+  {\path{doi:10.1016/j.snb.2026.139706}}.
+
+\bibitem{mantel1967}
+N.~Mantel, The detection of disease clustering and a generalized regression
+  approach, Cancer Research 27~(2) (1967) 209--220, pMID: 6018555.
+
+\bibitem{lee2016lewisite}
+D.-H. Lee, D.-N. Lee, J.-I. Hong, A fluorescent probe for a lewisite simulant,
+  New Journal of Chemistry 40~(11) (2016) 9021--9024.
+\newblock \href {https://doi.org/10.1039/C6NJ01658H}
+  {\path{doi:10.1039/C6NJ01658H}}.
+
+\bibitem{domingo2016}
+L.~Domingo, M.~R{\'i}os-Guti{\'e}rrez, P.~P{\'e}rez, Applications of the
+  conceptual density functional theory indices to organic chemistry reactivity,
+  Molecules 21~(6) (2016) 748.
+\newblock \href {https://doi.org/10.3390/molecules21060748}
+  {\path{doi:10.3390/molecules21060748}}.
+
+\bibitem{parr1999}
+R.~G. Parr, L.~v. Szentp{\'a}ly, S.~Liu, Electrophilicity index, Journal of the
+  American Chemical Society 121~(9) (1999) 1922--1924.
+\newblock \href {https://doi.org/10.1021/ja983494x}
+  {\path{doi:10.1021/ja983494x}}.
+
+\bibitem{epapprtv2006}
+{U.S. Environmental Protection Agency}, Provisional peer reviewed toxicity
+  values for dimethyl methylphosphonate ({CASRN} 756-79-6), Tech. Rep.
+  EPA/690/R-06/014F, National Center for Environmental Assessment, Office of
+  Research and Development,
+  \url{https://cfpub.epa.gov/ncea/pprtv/documents/Dimethylmethylphosphonate.pdf},
+  accessed 2026-10-09 (2006).
+
+\bibitem{bajgar2004}
+J.~Bajgar, Organophosphates/nerve agent poisoning: Mechanism of action,
+  diagnosis, prophylaxis, and treatment, 2004, pp. 151--216.
+\newblock \href {https://doi.org/10.1016/s0065-2423(04)38006-6}
+  {\path{doi:10.1016/s0065-2423(04)38006-6}}.
+
+\bibitem{thiermann2013}
+H.~Thiermann, F.~Worek, K.~Kehe, Limitations and challenges in treatment of
+  acute chemical warfare agent poisoning, Chemico-Biological Interactions
+  206~(3) (2013) 435--443.
+\newblock \href {https://doi.org/10.1016/j.cbi.2013.09.015}
+  {\path{doi:10.1016/j.cbi.2013.09.015}}.
+
+\bibitem{worek2020}
+F.~Worek, H.~Thiermann, T.~Wille, Organophosphorus compounds and oximes: a
+  critical review, Archives of Toxicology 94~(7) (2020) 2275--2292.
+\newblock \href {https://doi.org/10.1007/s00204-020-02797-0}
+  {\path{doi:10.1007/s00204-020-02797-0}}.
+
+\end{thebibliography}

@@ -427,6 +427,14 @@ def _title_sync():
             continue
         # README 는 인용블록이라 줄이 이어지면 '> ' 가 끼어든다.
         got = ' '.join(t for t in m.group(1).split() if t != '>')
+        # 2026-11-08. JHM 본의 SI 제목은 'Supplementary Material\\[4pt]
+        # \large <제목>' 꼴이다. 접두를 벗기지 않으면 같은 제목인데도
+        # 영원히 다르다고 보고한다. 조판 명령과 그 접두만 벗긴다.
+        got = _re.sub(r'\\\\\[[^\]]*\]', ' ', got)
+        got = _re.sub(r'\\(?:large|Large|LARGE|normalsize|bfseries|'
+                      r'textbf|huge|Huge)\b', ' ', got)
+        got = _re.sub(r'^\s*Supplementary Material\s*', '', got)
+        got = ' '.join(got.split())
         if want is None:
             want = got
         elif got != want:
@@ -801,7 +809,10 @@ def preflight():
     for _p in sorted(glob.glob('paper/*.png')):
         if os.path.basename(_p) not in set(_acs_figs):
             acsbad.append(f'{_p} 는 어느 문서도 쓰지 않는다 — 지우거나 쓸 것')
-    _toc, _TOCPX = 'paper/toc_acs.png', (1950, 1050)
+    # 2026-11-08 라인 전환. JHM 은 ACS TOC 규격이 아니라 graphical
+    # abstract 를 요구한다 (저자안내: 최소 1328 px 폭, 가장 긴 변이 수평,
+    # 13 cm 폭에서 읽힐 것). 규격 검사 대상을 바꾼다.
+    _toc, _TOCPX = 'paper/graphical_abstract.png', (1328, 0)
     if os.path.exists(_toc):
         try:
             from PIL import Image as _Im
@@ -3469,8 +3480,10 @@ def main():
     # 복사되는데 그 복사가 수작업이었다. 분석을 다시 돌린 뒤 복사를 잊으면
     # 원고에 옛 그림이 박히고, 수치 대조는 전부 통과한다. GATE 8 3차에서
     # 도판과 본문이 어긋난 경로가 이것이므로 시각을 직접 비교한다.
-    FIGS = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
-            'Fig_talk_response.png', 'Fig_talk_tox.png']
+    # 2026-11-08 라인 전환: JHM 본의 여섯으로. Fig_talk_* 는 ACS 발표용
+    # 도판이고 JHM 원고에 들어가지 않는다.
+    FIGS = ['Fig_main.png', 'Fig_spaces.png', 'Fig_plocal.png',
+            'Fig_h1.png', 'Fig_mde.png', 'Fig_toxicity.png']
     for fig in FIGS:
         # 2026-11-04 (J-C). 사본 대상을 paper_acs/ 로 옮긴다.
         src, dst = f'outputs/{fig}', f'paper/{fig}'
@@ -3623,7 +3636,8 @@ def main():
         for _ln in open('paper/.buildstamp'):
             _h, _, _n = _ln.strip().partition(' ')
             _stamp[_o2.path.basename(_n.strip())] = _h
-    for _b in ('main', 'supporting', 'cover_letter'):
+    # 2026-11-08: JHM 본은 supplementary.tex 이고 highlights 도 올라간다.
+    for _b in ('main', 'supplementary', 'cover_letter', 'highlights'):
         _t, _p = f'paper/{_b}.tex', f'paper/{_b}.pdf'
         if not _o2.path.exists(_p):
             fails.append(f'{_p} 가 없다 (검사 A-pdf): '
@@ -3751,10 +3765,13 @@ def main():
     import fig_annot as _fa2
     import re as _r2
     _ann = _fa2.load()
-    _hl = (_ann.get('toc_acs') or {}).get('headline', '')
+    # 2026-11-08 라인 전환: TOC 가 아니라 graphical abstract 를 본다.
+    # 가드의 목적(머리글 도판이 제목과 다른 주장을 하지 않는지)은 그대로다.
+    _hl = (_ann.get('graphical_abstract') or {}).get('headline', '')
     if not _hl:
-        fails.append('TOC 머리글이 등재부에 없다 (검사 B2c): '
-                     'python3 make_toc_acs.py 를 돌릴 것')
+        fails.append('graphical abstract 머리글이 등재부에 없다 '
+                     '(검사 B2c): make_ga.py 가 headline 을 등재하도록 '
+                     '고치고 다시 돌릴 것')
     else:
         _ttl = _r2.search(r'\\title\{(.+?)\}', open(TEX).read(), _r2.S)
         _ttl = ' '.join(_ttl.group(1).split()) if _ttl else ''

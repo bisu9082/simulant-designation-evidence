@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: supplementary.aux
+The style file: elsarticle-num.bst
+Database file #1: refs.bib
+Warning--empty booktitle in bajgar2004
+Warning--empty publisher in bajgar2004
+You've used 30 entries,
+            2952 wiz_defined-function locations,
+            889 strings with 11924 characters,
+and the built_in function-call counts, 9883 in all, are:
+= -- 974
+> -- 369
+< -- 2
++ -- 143
+- -- 113
+* -- 848
+:= -- 1383
+add.period$ -- 56
+call.type$ -- 30
+change.case$ -- 32
+chr.to.int$ -- 0
+cite$ -- 32
+duplicate$ -- 248
+empty$ -- 1024
+format.name$ -- 135
+if$ -- 2472
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 29
+newline$ -- 124
+num.names$ -- 30
+pop$ -- 134
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 613
+stack$ -- 0
+substring$ -- 558
+swap$ -- 90
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 73
+width$ -- 32
+write$ -- 304
+(There were 2 warnings)

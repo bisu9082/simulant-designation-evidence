@@ -119,7 +119,7 @@ def main():
             open('outputs/length_audit.json', 'w'), indent=1)
     print('  -> outputs/length_audit.json')
 
-    sup = pdftext('paper/supporting.pdf')
+    sup = pdftext('paper/supplementary.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
 
 
