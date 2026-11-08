@@ -1535,6 +1535,9 @@ def load_facts():
     f['dmmp_gd_35'] = _inc['soman (GD)']['d_norm']
     f['dmmp_gf_35'] = _inc['cyclosarin (GF)']['d_norm']
     f['cees_hd'] = _lit['sulfur mustard (HD)']['d_norm']
+    # 2026-11-08. 본문 4.4 가 적는 DCNP-타분 거리가 사실표에 없었다.
+    # 그래서 1.79 라고 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
+    f['dcnp_ga'] = _lit['tabun (GA)']['d_norm']
 
     # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
     # 없었다. 144건 검사를 통과하는 동안 11행 중 9행이 구판 값이었다. 동료
@@ -3036,6 +3039,9 @@ CHECKS = [
     ('dmmp_gd_35', [r'from DMMP, soman ([\d.]+) and'], 0.005),
     ('dmmp_gf_35', [r'soman [\d.]+ and cyclosarin ([\d.]+)\.'], 0.005),
     ('cees_hd', [r'sulfide at ([\d.]+) from sulfur mustard'], 0.005),
+    # 2026-11-08. 본문 4.4 의 DCNP-타분 거리. 사실표에 없어서 1.79 로
+    # 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
+    ('dcnp_ga', [r'cyanophosphonate taking tabun at ([\d.]+)'], 0.005),
     # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
     ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
                      r'returns \$p<0\.05\$ at\s*\n?\$\\delta = ([\d.]+)\$',
@@ -3440,6 +3446,14 @@ JHM_EXTRA_PATS = {
     'sp_tabun_base':    [r'normalised distance is ([\d.]+) against a threshold'],
     'sp_tabun_share':   [r'single-carrier columns are ([\d.]+)\\% of the squared'],
     'thr_null_28':      [r'on the primary panel and ([\d.]+) on the smaller one'],
+    # 2026-11-08 (4차). 본문 4.3 ·4.4 의 작용제 거리. 이 자리에서 수치
+    # 결함 여섯 건이 나왔다. 아래 앵커로 전부 검사된다.
+    't3_GF':            [r'cyclosarin \(([\d.]+)\) are matched'],
+    't3_GA':            [r'tabun at ([\d.]+) and VX at'],
+    't3_VX':            [r'tabun at [\d.]+ and VX at ([\d.]+)'],
+    't3_GA_legacy':     [r'put tabun at ([\d.]+) and counted four matches'],
+    'dfp_gd':           [r'cyclosarin at [\d.]+, ([\d.]+) and [\d.]+'],
+    'cees_hd':          [r'taking sulfur mustard at ([\d.]+), the closest'],
     'bh_q28':           [r'value over its eighteen tests is ([\d.]+)',
                          r'eighteen tests whose smallest adjusted value is ([\d.]+)',
                          r'eighteen-test family gives a smallest adjusted '
@@ -4273,6 +4287,53 @@ def main():
                      f'맞지 않는 값 {len(stray)}건')
         for _t in sorted(set(stray))[:8]:
             fails.append('  ' + _t)
+
+    # (B3b) 표 3 (tab:match) 의 '유효 일치' 열 (2026-11-08 신설).
+    #
+    # 왜 필요한가. 이 표는 손으로 유지한다. 11행의 거리 열은 2026-10-17 에
+    # t3_* 사실로 등록해 전수 대조가 걸렸지만, yes/no 열은 숫자가 아니므로
+    # 어느 검사도 보지 않았다. 그래서 GA 행이 '2.004 & yes' 로 남아 있었다.
+    # 2.004 는 문턱 2 를 넘으므로 산출물의 match 는 거짓이고, SI 는 네 곳에서
+    # 'three valid matches' 라고 적는다. 본문 표 한 곳만 넷을 세고 있었다.
+    # 판정 열을 거리 열과 같은 자격으로 검사한다.
+    try:
+        _mbp = json.load(open('outputs/match_by_panel.json'))
+        _p28m = {a['agent']: a for a in _mbp['panel28_incumbent3']['agents']}
+        _CODE = {'GB': 'sarin (GB)', 'GD': 'soman (GD)', 'GA': 'tabun (GA)',
+                 'GF': 'cyclosarin (GF)', 'HD': 'sulfur mustard (HD)',
+                 'L': 'lewisite 1 (L)', 'AC': 'hydrogen cyanide (AC)',
+                 'CK': 'cyanogen chloride (CK)', 'CG': 'phosgene (CG)',
+                 'PS': 'chloropicrin (PS)', 'VX': 'VX'}
+        _tabm = re.search(r'\\label\{tab:match\}(.*?)\\end\{tabular\}',
+                          tex, re.S)
+        if _tabm:
+            _bad, _seen = [], set()
+            for _r in re.finditer(r'^\s*([A-Z]{1,2})\s*&[^&]*&\s*([\d.]+)\s*&\s*'
+                                  r'(yes|no)\s*\\\\', _tabm.group(1), re.M):
+                _code, _d, _verdict = _r.group(1), _r.group(2), _r.group(3)
+                if _code not in _CODE:
+                    continue
+                _seen.add(_code)
+                _want = _p28m[_CODE[_code]]['match']
+                if (_verdict == 'yes') != bool(_want):
+                    _bad.append(f'  {_code} 행: 표는 {_verdict}, 산출물은 '
+                                f'{"yes" if _want else "no"} '
+                                f'(d_norm {_p28m[_CODE[_code]]["d_norm"]}, '
+                                f'문턱 내 '
+                                f'{_p28m[_CODE[_code]]["within_threshold"]})')
+            _missing = sorted(set(_CODE) - _seen)
+            if _missing:
+                _bad.append('  표에서 읽지 못한 행: ' + ', '.join(_missing))
+            _nyes = sum(1 for a in _p28m.values() if a['match'])
+            if _nyes != _mbp['panel28_incumbent3']['n_match']:
+                _bad.append(f'  산출물 자체가 어긋난다: match 참 {_nyes}개 vs '
+                            f'n_match {_mbp["panel28_incumbent3"]["n_match"]}')
+            if _bad:
+                fails.append('표 3 의 유효 일치 열이 산출물과 어긋났다 '
+                             '(검사 B3b)')
+                fails.extend(_bad)
+    except (OSError, KeyError, ValueError) as _e:
+        fails.append(f'표 3 유효 일치 열 검사를 돌릴 수 없다 (검사 B3b): {_e}')
 
     # (B4) 표 2 의 최근접 모사체 이름 (2026-10-27 신설).
     #
