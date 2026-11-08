@@ -2110,6 +2110,251 @@ UNQUOTED = {
     'j21_discounted': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_suitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_possible': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+
+    # ======================================================================
+    # 2026-11-08 (라인 전환, 안 1-B 선별 이식). JHM 판본 면제 145건.
+    #
+    # 왜 필요한가. CHECKS 의 패턴은 ACS 판본 문장에 맞춰 쓰여 있었다.
+    # 본문을 JHM 판본으로 되돌리자 191건이 '문맥 미발견' 으로 떠올랐다.
+    # 그 가운데 50건은 값이 JHM 문서에 실려 있었고 패턴만 어긋난 것이어서
+    # JHM_EXTRA_PATS 로 앵커를 보강했다(검사 427 -> 477건). 6건은 같은 키를
+    # 형제 항목이 이미 검사하고 있었다. 남은 145건이 아래다.
+    #
+    # 분류 근거는 세 가지 검사를 모두 돌린 결과다.
+    #   (1) 사실값을 유효숫자 3자리 이상으로 표기해 네 문서 전문에서 찾기
+    #   (2) 각 사실의 기존 패턴에서 14자 이상 리터럴 조각을 뽑아 찾기
+    #   (3) 2자리 표기 + 패턴 낱말 동시 출현 (반올림 방향 누락 대비)
+    # (3) 에서 걸린 10건은 전부 우연 일치였다(alpha=0.05, 2.5th percentile,
+    # 0.5~eV bar, 상관필터 |r|=1.00, 문턱 3.0). 확인하고 버렸다.
+    #
+    # 중요한 점은 종전 J-C 면제 주석과 같다: 이 항목들이 틀렸다는 뜻이
+    # 아니다. 투고되는 문서가 그 수치를 말하지 않으므로 대조할 문장이
+    # 없다는 뜻이다. 어느 것을 JHM 본문에 실어야 하는지는 편집 판단이고,
+    # 검증기가 답할 수 있는 물음이 아니다.
+    #
+    # 경고. 이 목록을 늘리는 쪽으로 기울면 안 된다. 이 작업에서 본문 수치
+    # 결함 세 건(Figure 1 주석 BH 0.165, 본문 842행 0.074, 844행 0.078)이
+    # 드러났고, 세 건 모두 '앵커가 없어 어느 검사도 보지 않은' 자리였다.
+    # 면제는 검사를 끄는 것이다. 문장이 생기면 앵커를 달고 여기서 뺄 것.
+    # ======================================================================
+    # --------------------------------------------------------------
+    # ACS 본문 중복 서술의 별칭 키 — 12건
+    # 원 키(dmmp_*_uv, dft_es_*, dft_mg_*, bh_q35)가 SI 어법에서 검사되고 있다.
+    # 이 별칭은 ACS 본문 2.4 가 SI 수치를 한 번 더 세던 자리를 따로 잡기 위한
+    # 것이었다. JHM 본문은 그 수치를 다시 세지 않으므로 대조할 문장이 없다.
+    'bh_q35_concl': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_ga': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gb': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gd': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gf': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_vx': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_full_match': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_full_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_gfn2_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_gfn2_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_match': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_p': '별칭 키, 원 키가 SI 에서 검사됨',
+
+    # --------------------------------------------------------------
+    # 휘발도축 (vol_) — 33건
+    # ACS 심사 대응으로 신설한 절이다. JHM 판본은 그 절을 싣지 않고, 본문은
+    # 휘발도를 일반 물성으로만 세 곳에서 언급한다(162, 194, 1134행). 끓는점과
+    # 증기압 수치는 네 문서 어디에도 없다.
+    'vol_bp_closer_gap': '휘발도축 절 JHM 미수록',
+    'vol_bp_closer_vp': '휘발도축 절 JHM 미수록',
+    'vol_bp_ratio_gap': '휘발도축 절 JHM 미수록',
+    'vol_bp_ratio_vp': '휘발도축 절 JHM 미수록',
+    'vol_fisher_minq': '휘발도축 절 JHM 미수록',
+    'vol_fisher_minq_main': '휘발도축 절 JHM 미수록',
+    'vol_fisher_nor': '휘발도축 절 JHM 미수록',
+    'vol_fisher_uv': '휘발도축 절 JHM 미수록',
+    'vol_four_cell_bh': '휘발도축 절 JHM 미수록',
+    'vol_gap': '휘발도축 절 JHM 미수록',
+    'vol_gap_ac': '휘발도축 절 JHM 미수록',
+    'vol_gap_cg': '휘발도축 절 JHM 미수록',
+    'vol_gap_gb': '휘발도축 절 JHM 미수록',
+    'vol_gap_gb_pool': '휘발도축 절 JHM 미수록',
+    'vol_gap_hd': '휘발도축 절 JHM 미수록',
+    'vol_gap_vx': '휘발도축 절 JHM 미수록',
+    'vol_lew_cis_p': '휘발도축 절 JHM 미수록',
+    'vol_lew_cis_rank': '휘발도축 절 JHM 미수록',
+    'vol_n_int_nearest': '휘발도축 절 JHM 미수록',
+    'vol_nperm': '휘발도축 절 JHM 미수록',
+    'vol_obs_md': '휘발도축 절 JHM 미수록',
+    'vol_p_md': '휘발도축 절 JHM 미수록',
+    'vol_p_nvalid': '휘발도축 절 JHM 미수록',
+    'vol_p_nvalid_main': '휘발도축 절 JHM 미수록',
+    'vol_range': '휘발도축 절 JHM 미수록',
+    'vol_rank_md': '휘발도축 절 JHM 미수록',
+    'vol_rank_nvalid': '휘발도축 절 JHM 미수록',
+    'vol_rho_d1_normal': '휘발도축 절 JHM 미수록',
+    'vol_rho_d1_uv': '휘발도축 절 JHM 미수록',
+    'vol_rho_d2_normal': '휘발도축 절 JHM 미수록',
+    'vol_rho_d2_uv': '휘발도축 절 JHM 미수록',
+    'vol_t1': '휘발도축 절 JHM 미수록',
+    'vol_withdrawn_p': '휘발도축 절 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 서술자 재표집 차원축소 대조 (sr_) — 17건
+    # ACS 심사 대응 확장이다. JHM 은 재표집 민감도 자체는 싣되(본문 2.6),
+    # 축소 차원수·항등성 감사·부분공간 점유율 수치는 싣지 않는다.
+    'sr_acn_hi_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_hi_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_lo_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_lo_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_dims28': '차원축소 대조 수치 JHM 미수록',
+    'sr_dims35': '차원축소 대조 수치 JHM 미수록',
+    'sr_id_hi': '차원축소 대조 수치 JHM 미수록',
+    'sr_id_lo': '차원축소 대조 수치 JHM 미수록',
+    'sr_mantel_q_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_match_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_match_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_maxr28': '차원축소 대조 수치 JHM 미수록',
+    'sr_maxr35': '차원축소 대조 수치 JHM 미수록',
+    'sr_nderived': '차원축소 대조 수치 JHM 미수록',
+    'sr_nshape': '차원축소 대조 수치 JHM 미수록',
+    'sr_share_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_share_red': '차원축소 대조 수치 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 희소 지시열 부호화 잔여 (sp_) — 5건
+    # JHM SI 는 일곱 부호화 중 첫째·둘째·넷째만 산문으로 적고(345행),
+    # tab_sparse 에도 Mantel q 열이 없다. 부호화 개수도 숫자로 세지 않는다.
+    'sp_mantel_nvar': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop2': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop4': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop5': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_lowcard': '부호화 변형 Mantel q JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 짝교환 분석 (swap_) — 6건
+    # JHM 네 문서에 swap 이라는 말이 없다.
+    'swap_common_pairs': '짝교환 분석 JHM 미수록',
+    'swap_far_med': '짝교환 분석 JHM 미수록',
+    'swap_inc_max': '짝교환 분석 JHM 미수록',
+    'swap_inc_med': '짝교환 분석 JHM 미수록',
+    'swap_n_added': '짝교환 분석 JHM 미수록',
+    'swap_pair_med': '짝교환 분석 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 퇴역 TOC 도판 (toc_) — 5건
+    # ACS TOC 도판의 수치다. 그 도판은 철회한 헤드라인을 싣고 있었고,
+    # figure_annotations.json 의 toc_acs 항목을 지웠다. JHM 은 GA 를 요구한다.
+    'toc_cells': '퇴역한 ACS TOC 도판 수치',
+    'toc_rev_centred': '퇴역한 ACS TOC 도판 수치',
+    'toc_rev_uncentred': '퇴역한 ACS TOC 도판 수치',
+    'toc_rho_max': '퇴역한 ACS TOC 도판 수치',
+    'toc_rho_min': '퇴역한 ACS TOC 도판 수치',
+
+    # --------------------------------------------------------------
+    # 선행논문 분류성능 (lit_) — 5건
+    # LITERATURE 사전에 출처와 원문 한 문장까지 붙어 있으나 load_facts 는
+    # 산출물만 읽으므로 사실표에 들어가지 않는다. ACS 2.1 은 전제를 세 원논문
+    # 자신의 성능으로 세웠으나, JHM 서론(147행)은 네 논문을 묶어 인용만 하고
+    # 성능 수치를 인용하지 않는다. 병합할 이유가 없다.
+    'lit_d1_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d1_vis': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d2_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d3_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d3_lod': '선행논문 성능, JHM 서론은 인용만 함',
+
+    # --------------------------------------------------------------
+    # 염료 패널 구성 (dye_) — 9건
+    # JHM 은 염료를 언급하되 패널 구성을 숫자로 공시하지 않는다.
+    'dye_anthracene_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_n_fluor': '염료 패널 구성 공시 JHM 미수록',
+    'dye_n_nondye': '염료 패널 구성 공시 JHM 미수록',
+    'dye_null_normal': '염료 패널 구성 공시 JHM 미수록',
+    'dye_null_uv': '염료 패널 구성 공시 JHM 미수록',
+    'dye_pyrene_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_normal': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_uv': '염료 패널 구성 공시 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 보정 후 최소검출효과 (mde_) — 8건
+    # JHM SI 는 비보정 문턱 $\delta = 0.23$ 만 싣는다(884, 905행). 18검정
+    # 보정 문턱과 설계 대비 비율은 싣지 않는다.
+    'mde_below_alpha': '보정 문턱·비율 JHM 미수록',
+    'mde_below_bh': '보정 문턱·비율 JHM 미수록',
+    'mde_bh18_28': '보정 문턱·비율 JHM 미수록',
+    'mde_bh18_35': '보정 문턱·비율 JHM 미수록',
+    'mde_gap_median_28': '보정 문턱·비율 JHM 미수록',
+    'mde_ratio_bh28': '보정 문턱·비율 JHM 미수록',
+    'mde_ratio_bh35': '보정 문턱·비율 JHM 미수록',
+    'mde_rho_mantel_bh': '보정 문턱·비율 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 농도별 추세 구간값 (conc_) — 5건
+    # JHM SI 는 GB 대비 비교와 반사 채널 구간만 싣고 GB·GF 개별 구간값과
+    # 정규화 셀 수는 싣지 않는다.
+    'conc_gb_hi': '농도 추세 구간값 JHM 미수록',
+    'conc_gb_lo': '농도 추세 구간값 JHM 미수록',
+    'conc_gf_hi': '농도 추세 구간값 JHM 미수록',
+    'conc_norm_cells': '농도 추세 구간값 JHM 미수록',
+    'conc_norm_rho': '농도 추세 구간값 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 쌍극자·LUMO 검증 (dip_, lumo_) — 8건
+    # JHM SI 의 밀도함수 점검 절(377행)은 친전자성축만 다룬다. 쌍극자 회귀
+    # 통계와 LUMO 양수 개수는 싣지 않는다.
+    'dip_dmmp_b3lyp': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_dmmp_gfn2': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_mae': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_maxdev': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_r': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_b3lyp_max': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_b3lyp_pos': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_gfn2_pos': '쌍극자·LUMO 통계 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 분량 감사 (len_) — 4건
+    # ACS 커버레터가 분량을 숫자로 적었고 검증기가 그것을 length_audit.json
+    # 과 대조했다. JHM 커버레터는 분량을 적지 않는다.
+    'len_body': '분량 수치 JHM 커버레터 미수록',
+    'len_figs': '분량 수치 JHM 커버레터 미수록',
+    'len_pages': '분량 수치 JHM 커버레터 미수록',
+    'len_refs': '분량 수치 JHM 커버레터 미수록',
+
+    # --------------------------------------------------------------
+    # AEGL 보유 개수 (aegl_) — 3건
+    # aegl_n_with 는 panel_with_aegl3 와 같은 양이고 그 키가 SI 1208행
+    # ("Nineteen of the twenty-eight compounds have an AEGL-3")에서 검사되고
+    # 있다. Final/Interim 분해는 JHM 이 싣지 않는다.
+    'aegl_n_final': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+    'aegl_n_interim': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+    'aegl_n_with': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+
+    # --------------------------------------------------------------
+    # 그 밖의 ACS 전용 단건 — 25건
+    # 아래는 ACS 판본 본문·SI 에만 있던 서술이다. 값이 틀렸다는 뜻이 아니라
+    # JHM 판본에 대조할 문장이 없다는 뜻이다. d1_p_min 은 JHM SI 가 상한으로만
+    # 적어($p \ge 0.22$) 등식 대조가 성립하지 않는다.
+    'ascl3_a36l_match': 'JHM 판본 미수록',
+    'boot_inc_le1': 'JHM 판본 미수록',
+    'coll_merged_off': 'JHM 판본 미수록',
+    'coll_struct_off': 'JHM 판본 미수록',
+    'd1_p_min': 'JHM 판본 미수록',
+    'dead_d1_uv': 'JHM 판본 미수록',
+    'dmmp_g4mean_nor': 'JHM 판본 미수록',
+    'dmmp_g4mean_uv': 'JHM 판본 미수록',
+    'dmmp_gmean_nor_3': 'JHM 판본 미수록',
+    'dmmp_gmean_uv_3': 'JHM 판본 미수록',
+    'fisher_minq': 'JHM 판본 미수록',
+    'h1_relaxed10': 'JHM 판본 미수록',
+    'h1_safer7': 'JHM 판본 미수록',
+    'lew_dnorm_E': 'JHM 판본 미수록',
+    'lew_dnorm_Z': 'JHM 판본 미수록',
+    'match_range_hi': 'JHM 판본 미수록',
+    'n_freedoms': 'JHM 판본 미수록',
+    'nb_dcm': 'JHM 판본 미수록',
+    'pn_exact_n': 'JHM 판본 미수록',
+    'rank_exp': 'JHM 판본 미수록',
+    'rank_obs': 'JHM 판본 미수록',
+    'rank_p': 'JHM 판본 미수록',
+    'thr_free_28': 'JHM 판본 미수록',
+    'trend_bh_q': 'JHM 판본 미수록',
+    'trend_monotone': 'JHM 판본 미수록',
 }
 
 
@@ -3217,6 +3462,24 @@ JHM_EXTRA_PATS = {
                              r'Mantel \$p = ([\d.]+)\$'],
     # 9.625 를 본문이 반올림 올림으로 9.63 이라 적었다. 값은 맞다.
     'thr_null_35':      [r'([\d.]+) of 11 on the primary panel'],
+
+    # 2026-11-08 (3차). sparse indicator 군. JHM 은 이 수치들을 산문이
+    # 아니라 paper/tab_sparse.tex 에 싣는다. 그 표는 make_si_tables.py 가
+    # outputs/ 에서 생성하므로, 표 행을 앵커로 두면 사실표 -> 표 전파가
+    # 검사된다. 산문 검사보다 약하지만(틀린 산문 주장은 못 잡는다)
+    # 표에만 있는 값에는 이것이 맞는 검사다.
+    'sp_n_singleton':   [r'Drop single-carrier binaries & (\d+) &'],
+    'sp_match_drop1':   [r'Drop single-carrier binaries & \d+ & \d+ & (\d+) &'],
+    'sp_tabun_drop1':   [r'Drop single-carrier binaries & \d+ & \d+ & \d+ '
+                         r'& ([\d.]+) &'],
+    'sp_match_drop3':   [r'Drop binaries with \$\\le 3\$ & \d+ & \d+ & (\d+) &'],
+    'sp_match_lowcard': [r'Drop cardinality \$\\le 5\$ & \d+ & \d+ & (\d+) &'],
+    'sp_p_lowcard':     [r'Drop cardinality \$\\le 5\$ & \d+ & \d+ & \d+ '
+                         r'& [\d.]+ & ([\d.]+)'],
+    # 단일 보유 이진열이 거리제곱에 더하는 상수. SI 가 산문으로 적는다.
+    'sp_pedestal':      [r'which is (\d+) here, from that one column'],
+    # 'between 0.40 and 3.42 log units' 의 아래쪽 값.
+    'heldout_err_min':  [r'by between ([\d.]+) and [\d.]+ log units'],
 }
 _merged, _hit = [], set()
 for _k, _p, _t in CHECKS:
