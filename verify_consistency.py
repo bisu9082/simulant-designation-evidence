@@ -3196,7 +3196,27 @@ JHM_EXTRA_PATS = {
     'sp_tabun_share':   [r'single-carrier columns are ([\d.]+)\\% of the squared'],
     'thr_null_28':      [r'on the primary panel and ([\d.]+) on the smaller one'],
     'bh_q28':           [r'value over its eighteen tests is ([\d.]+)',
-                         r'eighteen tests whose smallest adjusted value is ([\d.]+)'],
+                         r'eighteen tests whose smallest adjusted value is ([\d.]+)',
+                         r'eighteen-test family gives a smallest adjusted '
+                         r'value of ([\d.]+)'],
+    # 2026-11-08 (2차). 본문 5.3 의 다중성 단락 세 수치. 같은 양을
+    # paper/tab_family.tex 가 '28 cpd., incumbent 3' 열에 생성하고 있는데
+    # 본문만 어긋나 있었다. 셋 다 앵커가 없어 어느 검사도 보지 않았다.
+    #   per space : 본문 0.074 -> 0.077 (q_by_space28 = 0.0772059, 표 0.077)
+    #   Westfall-Young : 본문 0.078 -> 0.079 (wy28 = 0.0794118, 표 0.079)
+    # 0.163 은 맞게 적혀 있었으나 역시 앵커가 없었으므로 함께 둔다.
+    'q_by_space28':     [r'correcting the six statistics within each space '
+                         r'gives ([\d.]+)'],
+    'wy28':             [r'rather than approximating it, gives ([\d.]+)'],
+    'fam_wy_p28':       [r'rather than approximating it, gives ([\d.]+)'],
+    # Mantel 셀 두 건. 세 셀을 한 문장이 말하는데 ACS 판본은 셋을 따로
+    # 적었으므로 패턴이 빗나갔다.
+    'mantel_d2uv_struct_p': [r'that same set and channel \(\$\\rho = \+[\d.]+\$, '
+                             r'Mantel \$p = ([\d.]+)\$'],
+    'mantel_d2nor_elec_p':  [r"same set's reflectance channel \(\$\\rho = \+[\d.]+\$, "
+                             r'Mantel \$p = ([\d.]+)\$'],
+    # 9.625 를 본문이 반올림 올림으로 9.63 이라 적었다. 값은 맞다.
+    'thr_null_35':      [r'([\d.]+) of 11 on the primary panel'],
 }
 _merged, _hit = [], set()
 for _k, _p, _t in CHECKS:
@@ -3535,6 +3555,7 @@ def main():
     # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
     body_flat = '\x00'.join(_segs)
     fails, checked, unseen = [], 0, []
+    matched_keys = set()
     for _g, _why in ((_ordinal_typos(), '서수 접미사 오류'),
                      (_handmade_tables(), '생성기 없는 수치 표'),
                      (_generated_table_sync(), '생성 표 사본 시차'),
@@ -3610,6 +3631,7 @@ def main():
         if not found:
             unseen.append(f'{key}: 본문에서 문맥을 찾지 못함 (값 {want:g})')
             continue
+        matched_keys.add(key)
         for got, ctx, raw in found:
             checked += 1
             # 2026-10-27. 절대 허용오차만 쓰면 반올림 오류가 빠져나간다.
@@ -4095,6 +4117,18 @@ def main():
     # 꺼지고 화면에는 통과가 찍혔다. 이 세션에서만 그 경로로 세 번 빠뜨렸다.
     # 꺼진 검사는 없는 검사보다 나쁘다. 실패로 올린다. 본문에 싣지 않기로
     # 한 사실은 UNQUOTED 에 이유와 함께 적어 명시적으로 면제한다.
+    # 2026-11-08. 미발견 판정을 키 단위로 본다.
+    #
+    # 왜. CHECKS 에 같은 키가 두세 번 올라온 항목이 여덟 개 있다 (문장이
+    # 여럿이라 어구별로 나눠 적은 결과다). 한 항목이 맞고 다른 항목이
+    # 빗나가면 종전 코드는 그 키를 미발견으로 올렸다. 그러면 그 양은
+    # 이미 검사되고 있는데도 '검사 누락' 으로 집계되어, 진짜 누락이
+    # 그 소음에 묻힌다. mde_rho_mantel 이 그 사례다: 'design detects
+    # $|\rho| \ge 0.67$ at 80% power' 가 맞고 있는데도 누락으로 찍혔다.
+    #
+    # 한 키라도 어딘가에서 맞았으면 그 양은 검사되고 있다. 그 키는
+    # 미발견에서 뺀다. 아무 항목도 맞지 않은 키만 남긴다.
+    unseen = [u for u in unseen if u.split(':')[0] not in matched_keys]
     unexpected = [u for u in unseen
                   if u.split(':')[0] not in UNQUOTED and '도판' not in u]
     if unseen:
