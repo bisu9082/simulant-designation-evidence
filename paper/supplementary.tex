@@ -349,6 +349,44 @@ Removing the single-carrier indicators makes the agreement weaker, not
 stronger. The paper's result is in that test, and it is the one quantity here
 that no analyst choice we enumerated has moved.
 
+\section{Which agents fail under every analyst choice we enumerated}
+\label{meth:failaudit}
+
+The reading of the comparison set (Section~\ref{M-meth:match}), the correlation
+filter (Section~\ref{meth:orderinvariance}), the panel (Section~\ref{M-res:panels})
+and the sparse-indicator encoding (Section~\ref{meth:sparse}) are four choices
+we can enumerate rather than argue about. Crossing them gives twenty-five
+cells: three readings by two filters by three panels, plus the seven encodings
+of Table~\ref{tab:sparse}. Each cell yields a set of agents with a valid match.
+Across the twenty-five the sets take seven distinct values, which is the
+measurement of analyst freedom this paper is about, stated on our own analysis.
+
+Table~\ref{tab:failaudit} gives the count per agent. Five agents, VX, cyanogen
+chloride, hydrogen cyanide, lewisite~1 and phosgene, have no valid simulant in
+any of the twenty-five cells. That is the part of the result no choice we
+enumerated can move, and it is the part we rely on. At the other end sarin,
+soman and cyclosarin match in seventeen of the twenty-five and tabun in
+fifteen, so a reader who reports a G-series match is reporting a cell rather
+than a fact about the chemistry. Sulfur mustard sits between, at eight.
+
+The threshold of 2 is held fixed across these cells because it is a declared
+convention rather than an implementation choice; the sweep over it is in
+Section~\ref{M-res:match}. Removing it from the fixed set as well takes the
+invariant failures from five to four, because VX acquires a match in four of
+the panel-28 cells once no bar applies. Values are in the deposited
+\texttt{designation\_failure\_audit.json}.
+
+\begin{table}[htbp]
+\centering
+\caption{Agents with a valid simulant across the twenty-five enumerated
+analyst choices (three readings of the comparison set, two correlation
+filters, three panels, and the seven sparse-indicator encodings of
+Table~\ref{tab:sparse}). The threshold of 2 is held fixed.}
+\label{tab:failaudit}
+\small
+\input{tab_failaudit}
+\end{table}
+
 \section{Lewisite purity and what depends on it}
 \label{meth:purity}
 
@@ -883,7 +921,12 @@ unmodified distances. The reading is conditional: on this panel, with only the
 designated three made more faithful, the test returns $p<0.05$ at
 $\delta = 0.23$ (Figure~\ref{fig:mde}). At $\delta = 0$ it returns 0.2979 on
 the primary panel and 0.0250 on the twenty-eight-compound panel, reproducing
-Table~\ref{tab:ablation}.
+Table~\ref{tab:ablation}. That threshold is the uncorrected one. The inference
+this paper draws is made under Benjamini--Hochberg over the eighteen tests, and
+at that level the detectable shift is $\delta = 0.43$ on the primary panel and
+$\delta = 0.18$ on the twenty-eight-compound one. We give both because
+reporting the uncorrected figure beside a corrected inference would understate
+the bar by roughly a factor of two.
 
 The comparison that matters is between that value and the deficit the incumbent
 compounds actually carry. Across the eleven agents the normalised difference

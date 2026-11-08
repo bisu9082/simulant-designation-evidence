@@ -700,6 +700,8 @@ def preflight():
     GENERATED_BY = {
         # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
         'threshold_sweep.json': 'threshold_sweep.py',
+        # 2026-11-08. SI 의 25셀 감사표 출처.
+        'designation_failure_audit.json': 'designation_failure_audit.py',
         'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',
         'conformer_sensitivity_single.json': 'conformer_sensitivity.py',
         'multiplicity_across_panels.json': 'multiplicity_panels.py',
@@ -1546,6 +1548,34 @@ def load_facts():
     # 수치가 어느 예치물에도 없다고 걸렸다. threshold_sweep.py 를 신설해
     # 예치하고 여기에 올린다. 병합공간 열한 값이 match_by_panel 과 일치하는
     # 것으로 같은 계산 경로임을 확인했다.
+    # 2026-11-08 (에디터 게이트 1회차, (c)항). 비교군 판독 선언을 방법절에
+    # 넣었다. 세 판독의 매칭 수와 비교군 크기를 전부 본문이 말하므로
+    # 사실표에 올려 대조한다. 이 자유도를 선언하지 않은 것이 게이트의
+    # 핵심 지적이었다.
+    _mra = json.load(open('outputs/match_rule_audit.json'))
+    for _pan, _tag in (('panel35_incumbent3', '35'),
+                       ('panel28_incumbent3', '28'),
+                       ('panel35_incumbent_plus_lit8', 'lit')):
+        for _rd in ('wide', 'narrow', 'literal'):
+            _c = _mra[_pan][f'deterministic/{_rd}']
+            f[f'mr_{_rd}_{_tag}'] = _c['n_match']
+            f[f'mr_ncomp_{_rd}_{_tag}'] = _c['n_comparison']
+
+    # 2026-11-08 ((c)항). 25셀 감사와 보정 검출력을 원고가 싣게 되었다.
+    _fa = json.load(open('outputs/designation_failure_audit.json'))
+    f['fa_n_cells'] = _fa['n_cells']
+    f['fa_n_vectors'] = _fa['n_distinct_verdict_vectors']
+    f['fa_n_invariant'] = len(_fa['invariant_failures'])
+    f['fa_n_invariant_thr'] = len(_fa['invariant_failures_threshold_in_audit'])
+    f['fa_gb'] = _fa['agents']['sarin (GB)']['n_match']
+    f['fa_ga'] = _fa['agents']['tabun (GA)']['n_match']
+    f['fa_hd'] = _fa['agents']['sulfur mustard (HD)']['n_match']
+    _md = json.load(open('outputs/mde.json'))
+    f['mde_bh18_35b'] = _md['panel35_incumbent3']['mde_delta_bh18']
+    f['mde_bh18_28b'] = _md['panel28_incumbent3']['mde_delta_bh18']
+    f['mde_rho_bh'] = json.load(open('outputs/mantel_power.json'))[
+        'mde_rho_mantel_bh']
+
     _ts = json.load(open('outputs/threshold_sweep.json'))
     _tsa = {sp: {r['code']: r for r in b['agents']}
             for sp, b in _ts['spaces'].items()}
@@ -3059,6 +3089,39 @@ CHECKS = [
     # 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
     ('dcnp_ga', [r'cyanophosphonate taking tabun at ([\d.]+)'], 0.005),
     # 2026-11-08. 임계값 스윕 문단. ts_max_count 는 영문 수사로 적힌다.
+    # 2026-11-08. 방법절의 판독 선언. 수는 영문 수사로 적힌다.
+    ('mr_ncomp_wide_35', [r'designated simulant, (\w+[\w-]*)\s*\n?compounds '
+                          r'on the primary panel'], 0),
+    ('mr_ncomp_wide_28', [r'on the primary panel and (\w+) on the\s*\n?'
+                          r'twenty-eight-compound one'], 0),
+    ('mr_ncomp_narrow_35', [r'restricts it to the (\w+)\s*\n?compounds we '
+                            r'labelled interferents'], 0),
+    ('mr_ncomp_literal_35', [r'other ten agents as well, ([\w-]+) compounds'], 0),
+    ('mr_wide_35', [r'readings give (\w+), \w+ and \w+ valid matches on the'], 0),
+    ('mr_narrow_35', [r'readings give \w+, (\w+) and \w+ valid matches on the'], 0),
+    ('mr_literal_35', [r'readings give \w+, \w+ and (\w+) valid matches on the'], 0),
+    ('mr_wide_28', [r'primary panel; (\w+),\s*\n?\w+ and \w+ on the '
+                    r'twenty-eight-compound panel'], 0),
+    ('mr_literal_28', [r'\w+ and (\w+) on the twenty-eight-compound panel; and'], 0),
+    ('mr_wide_lit', [r'panel; and (\w+), \w+ and \w+ once'], 0),
+    ('mr_literal_lit', [r'and \w+, \w+ and (\w+) once\s*\n?the five literature'], 0),
+    # 2026-11-08 ((c)항). 25셀 감사표와 보정 검출력.
+    ('fa_n_cells', [r'gives (\w+[\w-]*) cells in which the matched set',
+                    r'Crossing them gives ([\w-]+)\s*\n?cells'], 0),
+    ('fa_n_vectors', [r'matched set takes (\w+)\s*\n?distinct values',
+                      r'the sets take (\w+) distinct values'], 0),
+    ('fa_n_invariant', [r'(\w+) agents have no valid simulant in any of them',
+                        r'(\w+) agents, VX, cyanogen'], 0),
+    ('fa_n_invariant_thr', [r'invariant failures from five to (\w+)'], 0),
+    ('fa_gb', [r'cyclosarin match in (\w+) of the twenty-five'], 0),
+    ('fa_ga', [r'and tabun in\s*\n?(\w+), so a reader'], 0),
+    ('fa_hd', [r'Sulfur mustard sits between, at (\w+)\.'], 0),
+    ('mde_bh18_35b', [r'detectable shift is \$\\delta = ([\d.]+)\$ on the '
+                      r'primary panel'], 0.0005),
+    ('mde_bh18_28b', [r'and\s*\n?\$\\delta = ([\d.]+)\$ on the '
+                      r'twenty-eight-compound one'], 0.0005),
+    ('mde_rho_bh', [r'\$\|\\rho\| \\ge ([\d.]+)\$ at the '
+                    r'Benjamini--Hochberg level'], 0.0005),
     ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
     ('ts_elec_ac', [r'dichloromethane at ([\d.]+), because acetonitrile'],
      0.0005),

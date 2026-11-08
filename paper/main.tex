@@ -475,7 +475,26 @@ normalised each distance by the median nearest-neighbour distance of the same
 space and define a valid match as a normalised distance $\le 2$ together with a
 distance smaller than that to every compound outside the designated set. The two
 conditions are not equally fragile: the threshold is a convention, the second
-condition is not. The criterion is a statement about proximity in this descriptor
+condition is not.
+
+The comparison set named in the second condition can be read three ways and the
+reading changes the count, so we declare ours. We take it to be every compound
+that is neither an authentic agent nor a designated simulant, twenty-one
+compounds on the primary panel and fourteen on the twenty-eight-compound one. A
+narrower reading restricts it to the sixteen compounds we labelled interferents,
+which on the primary panel drops the five literature compounds from the
+comparison. A literal reading of ``outside the designated set'' would admit the
+other ten agents as well, thirty-two compounds, which asks whether a simulant is
+nearer to its agent than other agents are and is a different question. The three
+readings give zero, three and zero valid matches on the primary panel; three,
+three and zero on the twenty-eight-compound panel; and five, five and two once
+the five literature compounds are themselves designated
+(\texttt{outputs/match\_rule\_audit.json}). The narrower reading raises the
+primary-panel count from zero to three only because it removes those five from
+the comparison, which is the panel-composition effect of
+Section~\ref{res:panels} acting on the criterion rather than on the chemistry.
+We use the first reading throughout and report the other two so that the choice
+is visible. The criterion is a statement about proximity in this descriptor
 space and nothing further. It does not certify that a simulant reproduces an
 agent's response on a given instrument, and a compound that fails it may still
 suit a measurement governed by one descriptor rather than by their aggregate.
@@ -1003,7 +1022,12 @@ space is the exception, and it is the informative one: there the count is one at
 every threshold tested, hydrogen cyanide matched by dichloromethane at 1.407,
 because acetonitrile sits closer to sarin, soman and cyclosarin than DMMP does
 and all three fail the threshold-free condition outright. Over the thresholds
-tested the count does not exceed four of eleven in any space.
+tested the count does not exceed four of eleven in any space. Crossing the
+threshold-independent choices instead, three readings of the comparison set by
+two correlation filters by three panels plus the seven sparse-indicator
+encodings, gives twenty-five cells in which the matched set takes seven
+distinct values; five agents have no valid simulant in any of them
+(Section~\ref{S-meth:failaudit}).
 
 The dependence on the panel is sharper than the dependence on the threshold. On
 the thirty-five-compound panel, with the incumbent three still the only
@@ -1052,8 +1076,10 @@ those cells lie in the plate set that contains no simulant, so they compare one
 agent with another and not a simulant with an agent. The six cells that bear on
 the premise are the six in the set that holds DMMP, and all six are null.
 Simulating the test actually run, the exact Mantel over all 720 relabellings of
-six compounds, the design detects $|\rho| \ge 0.67$ at 80\% power, so these data
-exclude a strong association and nothing weaker. The premise is therefore
+six compounds, the design detects $|\rho| \ge 0.67$ at 80\% power against a nominal
+$\alpha$, and $|\rho| \ge 0.85$ at the Benjamini--Hochberg level these twelve
+cells are judged against, so these data exclude a strong association and
+nothing weaker. The premise is therefore
 untested rather than supported, and every distance-based claim in this paper
 inherits that. Three artifacts are
 reported there because our own
