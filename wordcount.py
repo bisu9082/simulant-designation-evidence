@@ -62,12 +62,12 @@ def acs_sections():
     단어를 53% 넘긴 것을 아무도 못 본 이유다. 양식에 의존하지 않도록
     제목 목록을 main.tex 에서 직접 읽는다.
     """
-    src = open('paper_acs/main.tex').read()
+    src = open('paper/main.tex').read()
     return [m.group(1) for m in re.finditer(r'^\\section\*?\{([^}]+)\}', src, re.M)]
 
 
 def main():
-    txt = pdftext('paper_acs/main.pdf')
+    txt = pdftext('paper/main.pdf')
     heads = acs_sections()
     if not heads:
         raise SystemExit('[wordcount] main.tex 에서 \\section 을 찾지 못했다.')
@@ -97,7 +97,7 @@ def main():
     # 표·참고문헌을 전부 포함하고 TOC 그래픽만 제외한다. 종전 구현은
     # 거꾸로였다 — TOC 를 도판으로 세고 참고문헌을 빼서 면수를 과소·과대
     # 양쪽으로 틀리게 냈다. 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
-    src = open('paper_acs/main.tex').read()
+    src = open('paper/main.tex').read()
     figs = [m.group(1) for m in
             re.finditer(r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', src)]
     figs = [f for f in figs if 'toc' not in f.lower()]
@@ -119,7 +119,7 @@ def main():
             open('outputs/length_audit.json', 'w'), indent=1)
     print('  -> outputs/length_audit.json')
 
-    sup = pdftext('paper_acs/supporting.pdf')
+    sup = pdftext('paper/supporting.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
 
 

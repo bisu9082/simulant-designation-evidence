@@ -30,7 +30,13 @@ import pandas as pd
 # 되살리는 조건은 archive/jhm_v1/FROZEN.md 에 있다.
 import glob as _glob
 
-TEX = 'paper_acs/main.tex'
+# 2026-11-08 (라인 전환). 검증 축을 ACS본에서 JHM본으로 되돌린다.
+# 왜. GATE 8 채점 이력에서 +3 과 +6 은 전부 JHM 라인이고 0 이하는 전부
+# ACS 라인이다. ACS 라인은 11-01 에 새로 쓴 뒤 한 번도 0 을 넘은 적이
+# 없고, 제목의 'repeat measurement'(데이터에 없음), 역전 계수,
+# 'sixteen authentic agents'(서술자 축 N=11), 원격에 없는 예치 태그 넷을
+# 들고 있었다. 그 넷은 JHM 라인에 하나도 없다. Ku 승인 2026-11-08.
+TEX = 'paper/main.tex'
 # 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
 # 2026-11-02. paper_acs/supporting.tex 를 넣는다. 내용이
 # paper/supplementary.tex 와 거의 같은 평행 사본이라, 한쪽만 고치면 조용히
@@ -41,13 +47,13 @@ TEX = 'paper_acs/main.tex'
 # 생긴 tab_registers / tab_designations / tab_dyepanel 셋은 이 목록과 아래
 # 신선도 검사 양쪽에서 빠져 있었다. 본문에서 레지스터 수치를 SI 표로
 # 내리는 순간 그 수치가 무검증 상태가 되는 구조였으므로 글롭으로 바꾼다.
-_TAB_TEX = sorted(_glob.glob('paper_acs/tab_*.tex'))
+_TAB_TEX = sorted(_glob.glob('paper/tab_*.tex'))
 # 2026-11-07 (11차). README 도 대조 대상에 넣는다. README 의 재현 약속
 # 단락이 '최소 p 0.1512 / BH 0.159' 같은 구판 수치를 들고 있었고(실측은
 # 0.1917 / 0.1632), 그것을 보고 돌린 사람은 코드가 틀렸다고 판단하게 된다.
 # 원고만 검사하고 재현 지시서를 검사하지 않으면 같은 종류의 거짓이 남는다.
-EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
-             'README.md', *_TAB_TEX)
+EXTRA_TEX = ('paper/supplementary.tex', 'paper/cover_letter.tex',
+             'paper/highlights.tex', 'README.md', *_TAB_TEX)
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
 #
@@ -117,8 +123,12 @@ REQUIRED_FOR_FIGURES = [
 # 2026-11-04 (J-C). ACS본의 도판 집합. 종전 목록은 JHM 평행본의 것이어서
 # Fig_spaces·Fig_toxicity 를 요구했는데, ACS본은 그 둘을 Fig_talk_response·
 # Fig_talk_tox 로 바꿨다. build_paper_acs.sh 가 복사하는 목록과 맞춘다.
-FIGURES = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
-           'Fig_talk_response.png', 'Fig_talk_tox.png', 'toc_acs.png']
+# 2026-11-08 라인 전환. JHM 본이 실제로 \includegraphics 하는 여섯으로
+# 되돌린다. 종전 목록은 ACS 전용이었다 — Fig_talk_* 는 발표용이고
+# toc_acs.png 는 ACS TOC 규격 도판이라 JHM 본에 들어가지 않는다.
+# JHM 은 TOC 가 아니라 graphical abstract 를 쓴다 (make_ga.py).
+FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_plocal.png',
+           'Fig_h1.png', 'Fig_mde.png', 'Fig_toxicity.png']
 
 # 도판 신선도 검사의 mtime 허용오차(초). 2026-10-22. 종전 1초 기준은 갓 클론한
 # 저장소에서 거짓으로 걸린다. git clone 은 모든 파일의 mtime 을 체크아웃 시각으로
@@ -157,7 +167,7 @@ def _dropped_periods():
     # 2026-11-07. 이 가드는 산문용이다. 생성된 표(tab_*.tex)의 셀과 각주는
     # 숫자 뒤에 대문자가 정상적으로 오므로(예: '1 Anthracene') 제외한다.
     # 표의 수치 검증은 앵커와 신선도 검사가 따로 맡는다.
-    for f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
+    for f in (TEX, 'paper/supplementary.tex', 'paper/cover_letter.tex'):
         if not _o.path.exists(f):
             continue
         raw = open(f).read()
@@ -241,7 +251,7 @@ def _generated_table_sync():
     r"""생성된 표의 원고 사본이 outputs/ 와 어긋나지 않는지 본다.
 
     왜 필요한가 (2026-11-03 신설). 손표를 생성으로 돌리는 것만으로는
-    전파 실패가 사라지지 않는다. 생성기를 다시 돌려도 paper_acs/ 와
+    전파 실패가 사라지지 않는다. 생성기를 다시 돌려도 paper/ 와
     paper/ 의 사본이 구판이면 원고에 박히는 수치는 그대로다. 도판에서
     같은 일이 이미 두 번 있었고(GATE 8 3차, 7차), 표에서도 같은 구멍이
     난다. 빌드 스크립트가 복사하지만, 빌드를 거치지 않고 검증기만 돌린
@@ -257,14 +267,14 @@ def _generated_table_sync():
             continue
         ref = open(src).read()
         # 2026-11-04 (J-C). paper/ 는 archive/jhm_v1/ 로 동결했다.
-        for d in ('paper_acs',):
+        for d in ('paper',):
             dst = f'{d}/{name}'
             if not _o.path.exists(dst):
                 bad.append(f'  생성 표 사본 없음 [{dst}]: '
-                           'sh build_paper_acs.sh 를 돌릴 것')
+                           'sh build_paper.sh 를 돌릴 것')
             elif open(dst).read() != ref:
                 bad.append(f'  생성 표 사본이 구판 [{dst}]: {src} 와 다르다. '
-                           'sh build_paper_acs.sh 로 동기화할 것')
+                           'sh build_paper.sh 로 동기화할 것')
     return sorted(set(bad))
 
 
@@ -322,7 +332,7 @@ def _si_section_labels():
     """
     import os as _o
     import re as _re
-    f_si, f_mn = 'paper_acs/supporting.tex', 'paper_acs/main.tex'
+    f_si, f_mn = 'paper/supplementary.tex', 'paper/main.tex'
     if not (_o.path.exists(f_si) and _o.path.exists(f_mn)):
         return []
     strip = lambda t: '\n'.join(_re.sub(r'(?<!\\)%.*$', '', l)
@@ -363,7 +373,7 @@ def _figure_panel_refs():
     import os as _o
     import re as _re
     caps = {}
-    for f in ('paper_acs/main.tex',):
+    for f in ('paper/main.tex',):
         if not _o.path.exists(f):
             continue
         txt = open(f, encoding='utf8').read()
@@ -374,7 +384,7 @@ def _figure_panel_refs():
                 continue
             caps[lab.group(1)] = set(_re.findall(r'\((\w)\)', blk))
     bad = []
-    for f in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for f in ('paper/main.tex', 'paper/supplementary.tex'):
         if not _o.path.exists(f):
             continue
         txt = open(f, encoding='utf8').read()
@@ -399,9 +409,9 @@ def _title_sync():
     import os as _o
     want, bad = None, []
     for path, pat in [
-            ('paper_acs/main.tex', r'\\title\{(.+?)\}'),
-            ('paper_acs/supporting.tex', r'\\title\{(.+?)\}'),
-            ('paper_acs/cover_letter.tex',
+            ('paper/main.tex', r'\\title\{(.+?)\}'),
+            ('paper/supplementary.tex', r'\\title\{(.+?)\}'),
+            ('paper/cover_letter.tex',
              r'We submit \\textit\{(.+?)\} for consideration'),
             # 2026-11-07 (12차 R5-B3). README 머리말도 제목을 싣는다.
             # 세 tex 만 보던 탓에 README 가 구판 제목·저자 2인·JHM 투고를
@@ -507,7 +517,7 @@ def _label_scope_guards():
     # here to end' 로 빌드를 깬다. 11차와 12차에 같은 자리에서 두 번
     # 났다. LaTeX 의 정상 줄바꿈 \\ 는 뒤에 글자가 오지 않는다.
     _ESC = _r.compile(r'\\\\[a-zA-Z]{2,}')
-    for _f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
+    for _f in (TEX, 'paper/supplementary.tex', 'paper/cover_letter.tex'):
         if not _o.path.exists(_f):
             continue
         for _i, _ln in enumerate(open(_f, encoding='utf8'), 1):
@@ -621,7 +631,7 @@ def preflight():
     import os
     missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
     figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
-    nofig = [f for f in FIGURES if not os.path.exists(f'paper_acs/{f}')]
+    nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
     # 그래픽 초록은 build_paper.sh 바깥에 있어서 분석을 다시 돌려도 갱신되지
     # 않았다. 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
     # 그대로 들고 있는 10-11 판이 발견됐다. 산출물보다 오래되면 멈춘다.
@@ -708,7 +718,7 @@ def preflight():
     }
     orphan = []
     _cited = set()
-    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for _doc in ('paper/main.tex', 'paper/supplementary.tex'):
         if not os.path.exists(_doc):
             continue
         _t = '\n'.join(l for l in open(_doc).read().split('\n')
@@ -751,8 +761,8 @@ def preflight():
     SIMULANTS = {'DMMP', 'DPGME', 'DCM'}
     n_cpd, n_agent = len(agents), len(agents - SIMULANTS)
     if agents and n_cpd == 17 and n_agent == 16:
-        for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
-                     'paper_acs/cover_letter.tex'):
+        for _doc in ('paper/main.tex', 'paper/supplementary.tex',
+                     'paper/cover_letter.tex'):
             if not os.path.exists(_doc):
                 continue
             body = '\n'.join(l for l in open(_doc).read().split('\n')
@@ -779,19 +789,19 @@ def preflight():
     # 이라 실척으로 만들어 두었고, 픽셀 수가 바뀌면 규격이 깨진다.
     acsbad = []
     _acs_figs = []
-    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for _doc in ('paper/main.tex', 'paper/supplementary.tex'):
         if os.path.exists(_doc):
             _acs_figs += re.findall(
                 r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', open(_doc).read())
     for _f in sorted(set(_acs_figs)):
-        if not os.path.exists(f'paper_acs/{_f}'):
-            acsbad.append(f'paper_acs/{_f} 없음')
+        if not os.path.exists(f'paper/{_f}'):
+            acsbad.append(f'paper/{_f} 없음')
     # 투고 디렉터리에 쓰이지 않는 도판이 남아 있으면 알린다. 구판 TOC 가
     # 남아 본문 도판처럼 보이던 일이 있었다 (2026-11-02).
-    for _p in sorted(glob.glob('paper_acs/*.png')):
+    for _p in sorted(glob.glob('paper/*.png')):
         if os.path.basename(_p) not in set(_acs_figs):
             acsbad.append(f'{_p} 는 어느 문서도 쓰지 않는다 — 지우거나 쓸 것')
-    _toc, _TOCPX = 'paper_acs/toc_acs.png', (1950, 1050)
+    _toc, _TOCPX = 'paper/toc_acs.png', (1950, 1050)
     if os.path.exists(_toc):
         try:
             from PIL import Image as _Im
@@ -843,11 +853,11 @@ def preflight():
         for p in figless:
             print(f'   도판 생성 필수 누락: {p}')
         for f in nofig:
-            print(f'   원고 도판 누락: paper_acs/{f}')
+            print(f'   원고 도판 누락: paper/{f}')
         for f in stale:
             print(f'   도판 주석 등재부에 폐기 항목: {f} '
                   f'(outputs/figure_annotations.json 을 지우고 도판 재생성)')
-        print('[verify] sh run_analysis.sh && sh build_paper_acs.sh --figs 를 먼저 '
+        print('[verify] sh run_analysis.sh && sh build_paper.sh --figs 를 먼저 '
               '실행하거나, 저장소에서 빠진 파일을 추가할 것.')
         return False
     return True
@@ -3463,16 +3473,16 @@ def main():
             'Fig_talk_response.png', 'Fig_talk_tox.png']
     for fig in FIGS:
         # 2026-11-04 (J-C). 사본 대상을 paper_acs/ 로 옮긴다.
-        src, dst = f'outputs/{fig}', f'paper_acs/{fig}'
+        src, dst = f'outputs/{fig}', f'paper/{fig}'
         if not os.path.exists(src):
             unseen.append(f'{fig}: outputs/ 에 없음 (도판 스크립트 미실행)')
             continue
         if not os.path.exists(dst):
-            fails.append(f'  도판 누락 {fig}: paper_acs/ 에 없다')
+            fails.append(f'  도판 누락 {fig}: paper/ 에 없다')
             continue
         if os.path.getmtime(dst) < os.path.getmtime(src) - MTIME_TOL:
-            fails.append(f'  도판 구판 {fig}: paper_acs/ 사본이 outputs/ 보다 '
-                         f'오래됐다 (sh build_paper_acs.sh 로 복사할 것)')
+            fails.append(f'  도판 구판 {fig}: paper/ 사본이 outputs/ 보다 '
+                         f'오래됐다 (sh build_paper.sh 로 복사할 것)')
         checked += 1
     # 분석 산출물보다 도판이 오래되면 그림이 낡은 수치를 그리고 있다.
     newest = max(os.path.getmtime(x) for x in
@@ -3482,7 +3492,7 @@ def main():
         src = f'outputs/{fig}'
         if os.path.exists(src) and os.path.getmtime(src) < newest - MTIME_TOL:
             fails.append(f'  도판 구판 {fig}: 분석 산출물보다 오래됐다 '
-                         f'(sh build_paper_acs.sh --figs 로 재생성할 것)')
+                         f'(sh build_paper.sh --figs 로 재생성할 것)')
 
     for key, pats, tol in CHECKS:
         if key not in f:
@@ -3609,24 +3619,24 @@ def main():
     import hashlib as _hl
     import os as _o2
     _stamp = {}
-    if _o2.path.exists('paper_acs/.buildstamp'):
-        for _ln in open('paper_acs/.buildstamp'):
+    if _o2.path.exists('paper/.buildstamp'):
+        for _ln in open('paper/.buildstamp'):
             _h, _, _n = _ln.strip().partition(' ')
             _stamp[_o2.path.basename(_n.strip())] = _h
     for _b in ('main', 'supporting', 'cover_letter'):
-        _t, _p = f'paper_acs/{_b}.tex', f'paper_acs/{_b}.pdf'
+        _t, _p = f'paper/{_b}.tex', f'paper/{_b}.pdf'
         if not _o2.path.exists(_p):
             fails.append(f'{_p} 가 없다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것')
+                         'sh build_paper.sh 를 돌릴 것')
             continue
         if not _stamp:
-            fails.append('paper_acs/.buildstamp 가 없다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것')
+            fails.append('paper/.buildstamp 가 없다 (검사 A-pdf): '
+                         'sh build_paper.sh 를 돌릴 것')
             break
         _cur = _hl.sha256(open(_t, 'rb').read()).hexdigest()
         if _stamp.get(f'{_b}.tex') != _cur:
             fails.append(f'{_p} 가 {_b}.tex 와 다른 판본이다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것 — 올라가는 '
+                         'sh build_paper.sh 를 돌릴 것 — 올라가는 '
                          'PDF 가 원고와 다르다')
 
     # (A-tag) 원고가 가리키는 예치 태그가 실제로 공개돼 있는지
@@ -3695,13 +3705,14 @@ def main():
     if _o2.path.isdir('submission'):
         import filecmp as _fc
         _sd = []
-        for _n in ('main.tex', 'supporting.tex', 'cover_letter.tex',
+        # 2026-11-08: JHM 본은 SI 파일명이 supplementary.tex 다.
+        for _n in ('main.tex', 'supplementary.tex', 'cover_letter.tex',
                    'refs.bib'):
-            _a, _b = f'paper_acs/{_n}', f'submission/{_n}'
+            _a, _b = f'paper/{_n}', f'submission/{_n}'
             if not _o2.path.exists(_b):
                 _sd.append(f'  submission/{_n} 없음')
             elif not _fc.cmp(_a, _b, shallow=False):
-                _sd.append(f'  submission/{_n} 가 paper_acs/{_n} 와 다르다')
+                _sd.append(f'  submission/{_n} 가 paper/{_n} 와 다르다')
         if _o2.path.isdir('submission/code'):
             _root = {_o2.path.basename(x) for x in
                      _glob.glob('*.py') + _glob.glob('*.sh')

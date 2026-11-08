@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: supporting.aux
+The style file: achemso.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: acs-supporting.bib
+Database file #2: refs.bib
+You're missing a field name---line 867 of file refs.bib
+ : 
+ : % 표기 확인 (2026-11-07): DRAFT FOR DISCUSSION 머리글은 원 HTML 쪽
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+achemso 2024-01-30 v3.13g
+You've used 42 entries,
+            2538 wiz_defined-function locations,
+            1041 strings with 16025 characters,
+and the built_in function-call counts, 13737 in all, are:
+= -- 1164
+> -- 770
+< -- 27
++ -- 301
+- -- 259
+* -- 1427
+:= -- 1865
+add.period$ -- 76
+call.type$ -- 42
+change.case$ -- 4
+chr.to.int$ -- 1
+cite$ -- 42
+duplicate$ -- 762
+empty$ -- 957
+format.name$ -- 317
+if$ -- 2724
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 274
+num.names$ -- 123
+pop$ -- 78
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 38
+stack$ -- 0
+substring$ -- 671
+swap$ -- 763
+text.length$ -- 83
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 285
+warning$ -- 0
+while$ -- 136
+width$ -- 0
+write$ -- 545
+(There was 1 error message)

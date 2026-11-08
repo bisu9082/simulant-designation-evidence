@@ -207,4 +207,4 @@ PY
 # 의존 순서대로 옮긴다.
 run_strict make_si_tables.py
 
-echo '[run] 완료. 다음: sh build_paper_acs.sh --figs && python3 verify_consistency.py'
+echo '[run] 완료. 다음: sh build_paper.sh --figs && python3 verify_consistency.py'

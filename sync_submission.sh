@@ -16,15 +16,15 @@ mkdir -p submission/code submission/outputs
 
 # 2026-11-04 (결정 J-C). 투고 패키지는 ACS Sensors 판본이다. JHM 평행본은
 # archive/jhm_v1/ 로 동결했다 (사유와 되살리는 절차는 그쪽 FROZEN.md).
-cp -p paper_acs/main.tex paper_acs/refs.bib paper_acs/cover_letter.tex \
-      paper_acs/supporting.tex submission/
+cp -p paper/main.tex paper/refs.bib paper/cover_letter.tex \
+      paper/supplementary.tex submission/
 for f in acs-main.bib acs-supporting.bib; do
-  [ -f "paper_acs/$f" ] && cp -p "paper_acs/$f" "submission/$f"
+  [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done
 for f in main.pdf cover_letter.pdf supporting.pdf; do
-  [ -f "paper_acs/$f" ] && cp -p "paper_acs/$f" "submission/$f"
+  [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done
-[ -f paper_acs/main.pdf ] && cp -p paper_acs/main.pdf \
+[ -f paper/main.pdf ] && cp -p paper/main.pdf \
     submission/simulant_manuscript.pdf
 
 for f in Fig_main.png Fig_plocal.png Fig_h1.png Fig_mde.png \
@@ -64,10 +64,10 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
 # 패키지 안의 원고와 산출물이 서로 맞는지 확인한다.
 ( cd submission/code \
   && ln -sfn ../../outputs outputs 2>/dev/null \
-  && mkdir -p paper_acs \
-  && cp -p ../main.tex ../supporting.tex ../cover_letter.tex paper_acs/ \
-  && cp -p ../../paper_acs/tab_*.tex paper_acs/ \
-  && cp -p ../Fig_*.png ../toc_acs.png paper_acs/ 2>/dev/null \
+  && mkdir -p paper \
+  && cp -p ../main.tex ../supporting.tex ../cover_letter.tex paper/ \
+  && cp -p ../../paper/tab_*.tex paper/ \
+  && cp -p ../Fig_*.png ../toc_acs.png paper/ 2>/dev/null \
   && python3 verify_consistency.py ) || {
   echo '[sync] 패키지 자기검증 실패'; exit 1; }
-rm -rf submission/code/paper_acs submission/code/outputs
+rm -rf submission/code/paper submission/code/outputs

@@ -19,7 +19,7 @@ import tempfile
 # 2026-11-04 (결정 J-C). JHM 평행본을 archive/jhm_v1/ 로 동결했으므로
 # 주입 대상을 ACS본으로 옮긴다. 종전 JHM 전용 사례는 ACS본에 같은 문장이
 # 있으면 그대로 살고, 없으면 SKIP 으로 보고된다. 조용히 꺼지지는 않는다.
-TEX = 'paper_acs/main.tex'
+TEX = 'paper/main.tex'
 
 _NUM = r'\d+(?:\.\d+)?'
 
@@ -335,7 +335,7 @@ GEN_TABLES = ('tab_ablation.tex', 'tab_family.tex', 'tab_blockbalance.tex',
 
 
 def gen_paths(name):
-    return (f'outputs/{name}', f'paper_acs/{name}')
+    return (f'outputs/{name}', f'paper/{name}')
 
 
 def find_gen(a, b):
@@ -351,8 +351,8 @@ def find_gen(a, b):
     return None
 
 
-SIDECAR = 'paper_acs/cover_letter.tex'
-ACS = 'paper_acs/main.tex'
+SIDECAR = 'paper/cover_letter.tex'
+ACS = 'paper/main.tex'
 
 # 2026-11-02. ACS 판본 전용 주입 사례. 둘 다 실제로 발생한 결함이다.
 # 세 원논문(hazref, multiplexref, group3ref)의 Methods 를 직접 읽기 전에,
@@ -600,7 +600,7 @@ ACS_CASES = [
 # 2026-11-02. ACS SI (paper_acs/supporting.tex) 전용.
 # 이 파일은 paper/supplementary.tex 의 평행 사본이다. 한쪽만 고치면 조용히
 # 갈라지므로 ACS 쪽 단독 오기도 잡히는지 확인한다.
-ACS_CL = 'paper_acs/cover_letter.tex'
+ACS_CL = 'paper/cover_letter.tex'
 
 # 2026-11-02. ACS 커버레터 전용. 커버레터가 본문 수치를 다시 세므로 한쪽만
 # 바뀌면 투고 패키지 안에서 모순이 난다. 처음 앵커를 달기 전에는 네 자리
@@ -622,7 +622,7 @@ ACS_CL_CASES = [
      'where the largest\nobserved is 0.57', 'where the largest\nobserved is 0.87'),
 ]
 
-ACS_SUPP = 'paper_acs/supporting.tex'
+ACS_SUPP = 'paper/supplementary.tex'
 ACS_SUPP_CASES = [
     # --- 2026-11-04 (E1/E2) 신설분 ---
     ('루이사이트 Z 이성질체 거리 오기 (정본 2.4892)',
@@ -876,7 +876,7 @@ ANNOT_CASES = [
 # 아래 8건은 2026-10-14 분량 재배치로 supplementary.tex 로 옮겨간 문장이다.
 # main.tex 에만 주입하던 종전 설계로는 전부 SKIP 되어, 검증기가 SI 를 덮는지
 # 확인할 수 없었다. 주입 대상을 SI 로 돌린다.
-SUPP = 'paper_acs/supporting.tex'
+SUPP = 'paper/supplementary.tex'
 SUPP_CASES = [
     ('천단위 환산값 반올림 분기 (41,685 대 41,683)',
      r'dichloromethane (41\,685)', r'dichloromethane (41\,683)'),

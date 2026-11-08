@@ -241,9 +241,9 @@ coordinates were a function of a variable no analyst had selected.
 
 The cost is measurable. Permuting the input column order forty times under a
 fixed seed and rebuilding everything downstream, the old filter returned
-thirty-seven distinct retained sets on the twenty-eight-compound panel, with
-dimensions between 36 and 39, and a valid-match count of three in twenty-five
-of the forty orderings and four in the remaining fifteen. The value we had
+thirty-four distinct retained sets on the twenty-eight-compound panel, with
+dimensions between 36 and 39, and a valid-match count of three in twenty-four
+of the forty orderings and four in the remaining sixteen. The value we had
 reported was the minority outcome. The thirty-five-compound panel behaved
 differently: thirty-six distinct retained sets and dimensions between 39 and 41,
 but a valid-match count of zero in all forty orderings. The headline negative
@@ -439,7 +439,7 @@ because the alternative is to leave standing a negative claim that our own check
 does not support. The second is that the merged space does not move the same
 way. Rebuilt from the same three density-functional coordinates it retains the
 thirty-eight coordinates of the main analysis and returns three valid matches and
-a one-sided $p$ of 0.0250, against four and 0.0250 for the GFN2 control, so the
+a one-sided $p$ of 0.0250, against three and 0.0250 for the GFN2 control, so the
 value the main text carries is not an artefact of the semiempirical method. The
 third is that the analyst freedoms this paper is about therefore include one we
 did not enumerate when we set the comparison up, and it is the freedom that
@@ -567,7 +567,7 @@ vector is renormalised to unit length before any cosine is taken, and
 renormalisation does not preserve $\sum_i u_i = 0$ unless the norms happen to
 be equal. Measured on the vectors this work uses,
 $\lVert\sum_i u_i\rVert/\sqrt{n}$ is $7.2\times10^{-16}$ immediately after
-the subtraction and between 0.1292 and 0.7430 after the renormalisation.
+the subtraction and between 0.0445 and 0.7430 after the renormalisation.
 
 The second is that $-1/(n-1)$ is not a floor even for vectors that do sum to
 zero. From $\lVert\sum_i u_i\rVert^2 = 0$ one has
@@ -611,7 +611,7 @@ finding. Main-text Section~\ref{M-res:panels} states what holds across it.
 Two further values belong with Table~\ref{tab:family}. Weighting the 35
 structural and 3 electronic descriptors as two equal blocks, instead of the
 per-descriptor standardisation used throughout, lowers the primary panel's
-smallest nominal value from 0.151 to 0.061, which still survives no correction
+smallest nominal value from 0.192 to 0.061, which still survives no correction
 and leaves the primary panel's valid-match count unchanged at zero. On the
 twenty-eight-compound panel the two weightings do not agree, four matches per
 descriptor against three per block, which is one more way the smaller panel's
@@ -701,9 +701,9 @@ subspaces reaching $p<0.05$ is 0.05. The observed 36.0\% is seven times that.
 
 One enumeration of a subspace yields the statistic for all 680 designations at
 once, so the null costs nothing beyond the run already made. Over 500 subspaces
-drawn the same way, the share below 0.05 averages 4.7\% across the 680
-designations, with a median of 2.0\%, a 95th percentile of 17.8\% and a maximum
-of 52.8\%. The incumbent designation's 36.0\% ranks fifth of 680, $p=0.0074$.
+drawn the same way, the share below 0.05 averages 4.5\% across the 680
+designations, with a median of 2.4\%, a 95th percentile of 17.8\% and a maximum
+of 44.6\%. The incumbent designation's 27.4\% ranks seventh of 680, $p=0.0103$.
 Values are in the deposited \texttt{subspace\_null.json} under
 \texttt{outputs/}.
 
@@ -799,7 +799,7 @@ Benjamini--Hochberg adjusted value below 0.05 under either weighting.
 Every nominal $p$ falls, however, and that is why the main text states the
 primary-panel result as a conclusion about significance rather than as a
 numerical floor. The smallest value of the eighteen-test family there is 0.192
-with equal weight per descriptor and 0.076 with equal weight per block, so a
+with equal weight per descriptor and 0.061 with equal weight per block, so a
 floor quoted from either weighting would not hold under the other. The direction
 is away from the designations: equalising the blocks makes the incumbent
 simulants look better on the nominal scale while leaving them with no agent
@@ -1161,7 +1161,7 @@ plate-channel combinations, which leaves 23 effective channels in the second
 set's ultraviolet data and 25 in the third set's, against 29 elsewhere. The
 collapse weakens the two cells it touches, from $\rho = +0.568$ and $+0.539$ to
 $+0.518$ and $+0.496$, and moves the smallest adjusted value over the twelve
-cells from 0.067 to 0.124. We report the collapsed values throughout, because a
+cells from 0.058 to 0.117. We report the collapsed values throughout, because a
 paper arguing that analyst choices inflate results cannot keep a sixfold
 duplicate that happens to fall in its two strongest cells. Which columns were
 collapsed is recorded in the deposited output.
@@ -1195,7 +1195,7 @@ rather than ignoring it. A narrow null compensates for a small sample, so the
 approximation at the correct unit understates the power of the procedure. We
 therefore simulated the procedure itself (Section~\ref{meth:deltaE}): at
 $\alpha = 0.05$, 80\% power is reached at $|\rho| = 0.67$, with the type~I rate
-of the simulated test at 0.049 against a nominal 0.05. The smallest attainable
+of the simulated test at 0.050 against a nominal 0.05. The smallest attainable
 $p$ is $1/720$, so the resolution is coarse but not as coarse as the
 compound-unit approximation suggests. These data exclude a strong association
 between either descriptor space and the measured response and nothing weaker. They do not show that the
