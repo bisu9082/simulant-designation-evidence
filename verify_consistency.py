@@ -3137,6 +3137,81 @@ CHECKS = [
     ('struct_kept_28_2', [r'The structural space has (\d+) coordinates'], 0),
 ]
 
+# ----------------------------------------------------------------------
+# 2026-11-08 (라인 전환, 안 1 선별 이식). JHM 어투 앵커 보강.
+#
+# 왜. 위 CHECKS 의 패턴들은 ACS 판본의 문장에 맞춰 쓰여 있다. 본문을 JHM
+# 판본으로 되돌리자 같은 수치를 다른 문장이 말하게 되었고, 패턴이 빗나가
+# 검사가 조용히 꺼졌다 (문맥 미발견 191건). 아래는 '값은 JHM 문서에
+# 식별 가능한 정밀도로 실려 있는데 패턴만 어긋난' 항목이다. 값을 옮긴
+# 것이 아니라 가리키는 문장을 하나 더 적는 것이므로, 패턴이 틀리면
+# 반올림/불일치 검사가 즉시 실패로 드러난다. 끄는 방향이 아니라
+# 켜는 방향의 수정이다.
+#
+# 분류 근거: 각 사실값을 유효숫자 3자리 이상으로 표기해 JHM 네 문서
+# 전문에서 찾고, 걸린 자리의 문장이 같은 양을 말하는지 하나씩 대조했다.
+# 숫자만 같고 다른 양을 가리키던 11건(coll_merged_off, conc_norm_rho,
+# vol_bp_closer_gap, vol_lew_cis_p, vol_lew_cis_rank, vol_nperm,
+# dye_null_uv, rank_exp, sp_tabun_drop1, sr_id_lo, sr_mantel_q_red,
+# mde_ratio_bh35)은 여기 넣지 않고 면제 쪽으로 보냈다.
+#
+# bh_q28 은 이 작업에서 드러난 결함의 수정이다. 본문 Figure 1 주석이
+# '여덟 테스트 BH 0.165' 라고 적고 있었으나 실측은 0.163 이다(SI 가 맞게
+# 적고 있었다). 1000 미만 수치는 앵커가 없으면 어느 검사도 보지 않으므로
+# 통과했다. 값을 고치고 그 자리에 앵커를 둔다.
+JHM_EXTRA_PATS = {
+    'ascl3_a35l_dist':  [r'sulfur mustard simulant, at ([\d.]+) and outside'],
+    'coll_merged_on':   [r"compound set's ultraviolet channel "
+                         r"\(\$\\rho = \+([\d.]+)\$, Mantel"],
+    'coll_struct_on':   [r'that same set and channel \(\$\\rho = \+([\d.]+)\$'],
+    'conc_gf_lo':       [r'in reflectance \(([\d.]+) to [\d.]+\), and closer to GB'],
+    'd1_rho_max_abs':   [r'in any space or channel \(\$\|\\rho\| \\le ([\d.]+)\$'],
+    'dmmp_gd_uv':       [r'cyclosarin following at \$(-[\d.]+)\$'],
+    'dmmp_vx_uv':       [r'cyclosarin following at \$-[\d.]+\$, \$(-[\d.]+)\$'],
+    'dmmp_gf_uv':       [r'cyclosarin following at \$-[\d.]+\$, \$-[\d.]+\$ '
+                         r'and \$(-[\d.]+)\$'],
+    'gvx_uv':           [r'against VX gives ([\d.]+) \('],
+    'gvx_uv_lo':        [r'against VX gives [\d.]+ \(([\d.]+) to'],
+    'gvx_uv_hi':        [r'against VX gives [\d.]+ \([\d.]+ to ([\d.]+)\)'],
+    'gvx_nor':          [r'channel but ([\d.]+) \(-[\d.]+ to [\d.]+\) in reflectance'],
+    'gvx_nor_lo':       [r'channel but [\d.]+ \((-[\d.]+) to'],
+    'gvx_nor_hi':       [r'channel but [\d.]+ \(-[\d.]+ to ([\d.]+)\) in reflectance'],
+    'heldout_err_max':  [r'by between [\d.]+ and ([\d.]+) log units'],
+    'mantel_bh12_main': [r'corrected across the twelve, the smallest '
+                         r'adjusted value is ([\d.]+)'],
+    'sp_mantel_q_base': [r'Benjamini--Hochberg value at ([\d.]+), [\d.]+ and [\d.]+'],
+    'sp_mantel_q_drop1':[r'Benjamini--Hochberg value at [\d.]+, ([\d.]+) and [\d.]+'],
+    'sp_mantel_q_drop3':[r'Benjamini--Hochberg value at [\d.]+, [\d.]+ and ([\d.]+)'],
+    'sp_mantel_q_max':  [r'Benjamini--Hochberg value at [\d.]+, ([\d.]+) and [\d.]+'],
+    'mantel_rho_max_abs':[r"same set's reflectance channel \(\$\\rho = \+([\d.]+)\$"],
+    'mantel_type_i_nrep':[r'are sampled, at (\d+) and \d+ draws'],
+    'nb_dmmp':          [r'DMMP is nearest sarin in ([\d.]+)\\%'],
+    'nb_dpgme':         [r'DPGME divides evenly, sulfur mustard in ([\d.]+)\\%'],
+    'nb_nboot':         [r'with replacement (\d+) times \(seed'],
+    'p_merged':         [r'rebuilt the same way, holds at ([\d.]+)'],
+    'sp_p_base':        [r'one-sided \$p\$ of ([\d.]+), against three'],
+    'pct_struct_caption':[r'is the (\d+\.\d+)th percentile of those draws'],
+    'sn_actual':        [r"incumbent designation's ([\d.]+)\\% ranks seventh"],
+    'sp_tabun_base':    [r'normalised distance is ([\d.]+) against a threshold'],
+    'sp_tabun_share':   [r'single-carrier columns are ([\d.]+)\\% of the squared'],
+    'thr_null_28':      [r'on the primary panel and ([\d.]+) on the smaller one'],
+    'bh_q28':           [r'value over its eighteen tests is ([\d.]+)',
+                         r'eighteen tests whose smallest adjusted value is ([\d.]+)'],
+}
+_merged, _hit = [], set()
+for _k, _p, _t in CHECKS:
+    if _k in JHM_EXTRA_PATS:
+        _p = list(_p) + JHM_EXTRA_PATS[_k]
+        _hit.add(_k)
+    _merged.append((_k, _p, _t))
+_absent = sorted(set(JHM_EXTRA_PATS) - _hit)
+if _absent:
+    raise SystemExit('JHM_EXTRA_PATS 에 CHECKS 에 없는 키가 있다: '
+                     + ', '.join(_absent))
+CHECKS = _merged
+# ----------------------------------------------------------------------
+
+
 WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
