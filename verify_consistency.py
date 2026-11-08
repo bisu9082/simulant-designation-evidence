@@ -63,6 +63,7 @@ EXTRA_TEX = ('paper/supplementary.tex', 'paper/cover_letter.tex',
 # 빠진 것을 한 번에 전부 보고한다. 이 목록은 '저장소가 담아야 하는 산출물'의
 # 계약서 구실도 한다.
 REQUIRED_OUTPUTS = [
+    'outputs/threshold_sweep.json',
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
     'outputs/collapse_sensitivity.json',
@@ -697,6 +698,8 @@ def preflight():
     # 새 파일을 인용하면 여기에 생성자를 등록해야 통과한다. 등록을 강제하는
     # 것이 이 검사의 요점이다.
     GENERATED_BY = {
+        # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
+        'threshold_sweep.json': 'threshold_sweep.py',
         'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',
         'conformer_sensitivity_single.json': 'conformer_sensitivity.py',
         'multiplicity_across_panels.json': 'multiplicity_panels.py',
@@ -1539,6 +1542,21 @@ def load_facts():
     # 그래서 1.79 라고 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
     f['dcnp_ga'] = _lit['tabun (GA)']['d_norm']
 
+    # 2026-11-08. 본문 4.3 임계값 스윕. 에디터 게이트 1회차에서 이 문단의
+    # 수치가 어느 예치물에도 없다고 걸렸다. threshold_sweep.py 를 신설해
+    # 예치하고 여기에 올린다. 병합공간 열한 값이 match_by_panel 과 일치하는
+    # 것으로 같은 계산 경로임을 확인했다.
+    _ts = json.load(open('outputs/threshold_sweep.json'))
+    _tsa = {sp: {r['code']: r for r in b['agents']}
+            for sp, b in _ts['spaces'].items()}
+    f['ts_struct_gf'] = _tsa['structural']['GF']['d_norm']
+    f['ts_elec_ac'] = _tsa['electronic3']['AC']['d_norm']
+    # '시험한 임계값' 은 1.5~3.0 이다. unbounded 는 그 범위 밖이므로 뺀다
+    # (무한대에서는 VX 가 들어와 5가 된다). 검증기가 이것을 잡았다.
+    f['ts_max_count'] = max(c for b in _ts['spaces'].values()
+                            for k, c in b['counts'].items()
+                            if k != 'unbounded')
+
     # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
     # 없었다. 144건 검사를 통과하는 동안 11행 중 9행이 구판 값이었다. 동료
     # 검토에서 지적돼 전수 대조로 돌린다. 같은 이유로 res:match 산문의
@@ -2335,8 +2353,6 @@ UNQUOTED = {
     # 적어($p \ge 0.22$) 등식 대조가 성립하지 않는다.
     'ascl3_a36l_match': 'JHM 판본 미수록',
     'boot_inc_le1': 'JHM 판본 미수록',
-    'coll_merged_off': 'JHM 판본 미수록',
-    'coll_struct_off': 'JHM 판본 미수록',
     'd1_p_min': 'JHM 판본 미수록',
     'dead_d1_uv': 'JHM 판본 미수록',
     'dmmp_g4mean_nor': 'JHM 판본 미수록',
@@ -3042,6 +3058,11 @@ CHECKS = [
     # 2026-11-08. 본문 4.4 의 DCNP-타분 거리. 사실표에 없어서 1.79 로
     # 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
     ('dcnp_ga', [r'cyanophosphonate taking tabun at ([\d.]+)'], 0.005),
+    # 2026-11-08. 임계값 스윕 문단. ts_max_count 는 영문 수사로 적힌다.
+    ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
+    ('ts_elec_ac', [r'dichloromethane at ([\d.]+), because acetonitrile'],
+     0.0005),
+    ('ts_max_count', [r'count does not exceed (\w+) of eleven'], 0),
     # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
     ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
                      r'returns \$p<0\.05\$ at\s*\n?\$\\delta = ([\d.]+)\$',
@@ -3492,6 +3513,18 @@ JHM_EXTRA_PATS = {
                          r'& [\d.]+ & ([\d.]+)'],
     # 단일 보유 이진열이 거리제곱에 더하는 상수. SI 가 산문으로 적는다.
     'sp_pedestal':      [r'which is (\d+) here, from that one column'],
+    # 2026-11-08 (5차). SI 의 collapse 문단을 다시 썼다 (종전 문장은
+    # +0.568 / +0.539 -> +0.518 / +0.496 이라 적었으나 그 네 수는 어느
+    # 예치물에도 없었다. collapse_sensitivity.json 이 실제로 바꾸는 셀은
+    # 셋이고 그 가운데 유의미한 둘이 0.550 -> 0.500 과 0.546 -> 0.511 이다).
+    # 새 문구에 맞춰 앵커를 다시 걸고, 종전에 면제했던 두 건을 면제에서
+    # 뺀다. 문장이 생기면 앵커를 달고 면제에서 빼라고 적어 둔 그대로다.
+    'coll_q_off':       [r'over the twelve cells moves from ([\d.]+) to'],
+    'coll_q_on':        [r'over the twelve cells moves from [\d.]+ to ([\d.]+)\.'],
+    'coll_merged_off':  [r'weaken, from \$\\rho = \+([\d.]+)\$ and'],
+    'coll_struct_off':  [r'weaken, from \$\\rho = \+[\d.]+\$ and \$\+([\d.]+)\$ to'],
+    'coll_merged_on':   [r'\$\+([\d.]+)\$ and \$\+[\d.]+\$; the third is an'],
+    'coll_struct_on':   [r'and \$\+([\d.]+)\$; the third is an'],
     # 'between 0.40 and 3.42 log units' 의 아래쪽 값.
     'heldout_err_min':  [r'by between ([\d.]+) and [\d.]+ log units'],
 }
@@ -3724,7 +3757,17 @@ SUPERSEDED = [
     ('B3LYP 3좌표 매칭 5건을 전부 기록 지지 짝이라고 서술 (정본 4/5)',
      [r'[Tt]he five are pairings the designation',
       r'all five are pairings', r'five of them pairings the designation'], []),
-    ('28종 구조공간 유의 통계량 수 (정본 2)', [r'one of six statistics in the structural'], []),
+    # 2026-11-08 (에디터 게이트 1회차). 이 항목을 뒤집었다. 종전에는 정본이
+    # 2 라고 보고 'one of six' 를 금지했다. 그러나 예치물 둘이 일치해서
+    # 하나라고 말한다: permutation_statistics panel28_designated/A_rdkit 와
+    # rollback_c panels/panel28_designated3/structural 의 여섯 통계량 p 는
+    # 0.0279 / 0.1103 / 0.1132 / 0.0544 / 0.1103 / 0.2162 이고 0.05 미만은
+    # mean_diff 하나다 (mean_dsim 은 0.0544 로 바깥). 병합공간은 세 개가
+    # 맞으므로 문장의 기준이 p<0.05 인 것도 확인된다.
+    # SUPERSEDED 가 낡으면 정본이 실패를 받는다고 B2a 주석에 적어 둔 그
+    # 상황이다. 금지 대상을 'two of six' 로 바꾼다.
+    ('28종 구조공간 유의 통계량 수 (정본 1)',
+     [r'two of six statistics in the structural'], []),
     ('28종 구조좌표 수 (정본 36)',
      [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),
     # 2026-11-02 (T2-1). 종전 항목은 정본이 1.989 일 때 2.003 을 금지했다.

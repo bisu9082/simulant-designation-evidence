@@ -1,0 +1,408 @@
+{
+ "generated_by": "threshold_sweep.py",
+ "panel": "descriptor_cache_xtb.csv",
+ "reading": "wide",
+ "thresholds": [
+  1.5,
+  1.75,
+  2.0,
+  2.5,
+  3.0
+ ],
+ "spaces": {
+  "structural": {
+   "n_descriptors": 35,
+   "nn_median": 3.3991,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "code": "GB",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.3069,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "soman (GD)",
+     "code": "GD",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.6018,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "tabun (GA)",
+     "code": "GA",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.1592,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "code": "HD",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.8382,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane"
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "code": "L",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.3907,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene"
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "code": "AC",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7655,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "code": "CK",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5629,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "phosgene (CG)",
+     "code": "CG",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.7565,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate"
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "code": "PS",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.6254,
+     "beats_comparison_set": false,
+     "blocker": "chloroform"
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "code": "GF",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.7763,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "VX",
+     "code": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.3544,
+     "beats_comparison_set": true,
+     "blocker": null
+    }
+   ],
+   "matched_sets": {
+    "1.5": [
+     "GB"
+    ],
+    "1.75": [
+     "GB",
+     "GD"
+    ],
+    "2.0": [
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "2.5": [
+     "GA",
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "3.0": [
+     "GA",
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "unbounded": [
+     "GA",
+     "GB",
+     "GD",
+     "GF",
+     "VX"
+    ]
+   },
+   "counts": {
+    "1.5": 1,
+    "1.75": 2,
+    "2.0": 3,
+    "2.5": 4,
+    "3.0": 4,
+    "unbounded": 5
+   }
+  },
+  "electronic3": {
+   "n_descriptors": 3,
+   "nn_median": 0.6522,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "code": "GB",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.4726,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "soman (GD)",
+     "code": "GD",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5403,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "tabun (GA)",
+     "code": "GA",
+     "nearest_simulant": "DMMP",
+     "d_norm": 3.4279,
+     "beats_comparison_set": false,
+     "blocker": "DMSO"
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "code": "HD",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.6958,
+     "beats_comparison_set": false,
+     "blocker": "acetone"
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "code": "L",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4485,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene"
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "code": "AC",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4066,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "code": "CK",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.4876,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "phosgene (CG)",
+     "code": "CG",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.2469,
+     "beats_comparison_set": false,
+     "blocker": "chloroform"
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "code": "PS",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.6444,
+     "beats_comparison_set": false,
+     "blocker": "chloroform"
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "code": "GF",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.3843,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "VX",
+     "code": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 4.0464,
+     "beats_comparison_set": false,
+     "blocker": "DMSO"
+    }
+   ],
+   "matched_sets": {
+    "1.5": [
+     "AC"
+    ],
+    "1.75": [
+     "AC"
+    ],
+    "2.0": [
+     "AC"
+    ],
+    "2.5": [
+     "AC"
+    ],
+    "3.0": [
+     "AC"
+    ],
+    "unbounded": [
+     "AC"
+    ]
+   },
+   "counts": {
+    "1.5": 1,
+    "1.75": 1,
+    "2.0": 1,
+    "2.5": 1,
+    "3.0": 1,
+    "unbounded": 1
+   }
+  },
+  "merged": {
+   "n_descriptors": 38,
+   "nn_median": 3.8289,
+   "agents": [
+    {
+     "agent": "sarin (GB)",
+     "code": "GB",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.187,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "soman (GD)",
+     "code": "GD",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.446,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "tabun (GA)",
+     "code": "GA",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.0038,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "sulfur mustard (HD)",
+     "code": "HD",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6953,
+     "beats_comparison_set": false,
+     "blocker": "n-hexane"
+    },
+    {
+     "agent": "lewisite 1 (L)",
+     "code": "L",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 2.1366,
+     "beats_comparison_set": false,
+     "blocker": "p-dichlorobenzene"
+    },
+    {
+     "agent": "hydrogen cyanide (AC)",
+     "code": "AC",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.5855,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "cyanogen chloride (CK)",
+     "code": "CK",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.4507,
+     "beats_comparison_set": false,
+     "blocker": "acetonitrile"
+    },
+    {
+     "agent": "phosgene (CG)",
+     "code": "CG",
+     "nearest_simulant": "dichloromethane",
+     "d_norm": 1.6056,
+     "beats_comparison_set": false,
+     "blocker": "ethyl acetate"
+    },
+    {
+     "agent": "chloropicrin (PS)",
+     "code": "PS",
+     "nearest_simulant": "DMMP",
+     "d_norm": 2.4291,
+     "beats_comparison_set": false,
+     "blocker": "chloroform"
+    },
+    {
+     "agent": "cyclosarin (GF)",
+     "code": "GF",
+     "nearest_simulant": "DMMP",
+     "d_norm": 1.5944,
+     "beats_comparison_set": true,
+     "blocker": null
+    },
+    {
+     "agent": "VX",
+     "code": "VX",
+     "nearest_simulant": "DPGME",
+     "d_norm": 3.0566,
+     "beats_comparison_set": true,
+     "blocker": null
+    }
+   ],
+   "matched_sets": {
+    "1.5": [
+     "GB",
+     "GD"
+    ],
+    "1.75": [
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "2.0": [
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "2.5": [
+     "GA",
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "3.0": [
+     "GA",
+     "GB",
+     "GD",
+     "GF"
+    ],
+    "unbounded": [
+     "GA",
+     "GB",
+     "GD",
+     "GF",
+     "VX"
+    ]
+   },
+   "counts": {
+    "1.5": 2,
+    "1.75": 3,
+    "2.0": 3,
+    "2.5": 4,
+    "3.0": 4,
+    "unbounded": 5
+   }
+  }
+ }
+}
