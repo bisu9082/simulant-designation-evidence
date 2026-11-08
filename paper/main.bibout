@@ -1,8 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 The top-level auxiliary file: main.aux
-The style file: elsarticle-num.bst
-Database file #1: refs.bib
-Warning--there's a number but no volume in royo2007
-Warning--empty booktitle in mckinney2010
-Warning--empty publisher in mckinney2010
-(There were 3 warnings)
+The style file: achemso.bst
+Database file #1: acs-main.bib
+Database file #2: refs.bib
+achemso 2024-01-30 v3.13g

@@ -1,498 +1,638 @@
-\begin{thebibliography}{10}
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{\texttt{#1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
-\expandafter\ifx\csname href\endcsname\relax
-  \def\href#1#2{#2} \def\path#1{#1}\fi
+\providecommand{\latin}[1]{#1}
+\makeatletter
+\providecommand{\doi}
+  {\begingroup\let\do\@makeother\dospecials
+  \catcode`\{=1 \catcode`\}=2 \doi@aux}
+\providecommand{\doi@aux}[1]{\endgroup\texttt{#1}}
+\makeatother
+\providecommand*\mcitethebibliography{\thebibliography}
+\csname @ifundefined\endcsname{endmcitethebibliography}
+  {\let\endmcitethebibliography\endthebibliography}{}
+\begin{mcitethebibliography}{67}
+\providecommand*\natexlab[1]{#1}
+\providecommand*\mciteSetBstSublistMode[1]{}
+\providecommand*\mciteSetBstMaxWidthForm[2]{}
+\providecommand*\mciteBstWouldAddEndPuncttrue
+  {\def\EndOfBibitem{\unskip.}}
+\providecommand*\mciteBstWouldAddEndPunctfalse
+  {\let\EndOfBibitem\relax}
+\providecommand*\mciteSetBstMidEndSepPunct[3]{}
+\providecommand*\mciteSetBstSublistLabelBeginEnd[3]{}
+\providecommand*\EndOfBibitem{}
+\mciteSetBstSublistMode{f}
+\mciteSetBstMaxWidthForm{subitem}{(\alph{mcitesubitemcount})}
+\mciteSetBstSublistLabelBeginEnd
+  {\mcitemaxwidthsubitemform\space}
+  {\relax}
+  {\relax}
 
-\bibitem{ebeam}
-H.~S. Chi, J.-m. Park, J.~Yoo, G.~J. Choi, S.~H. Hong, J.~Son, J.-G. Lee,
-  K.~Kang, Feasibility study of electron beam irradiation for decontamination
-  of chemical and biological warfare agent simulants: Dosimetric and
-  operational evaluation, Applied Radiation and Isotopes 232 (2026) 112582.
-\newblock \href {https://doi.org/10.1016/j.apradiso.2026.112582}
-  {\path{doi:10.1016/j.apradiso.2026.112582}}.
-
-\bibitem{nrc1997mist}
-{National Research Council}, Technical Assessment of the Man-in-Simulant Test
-  Program, The National Academies Press, Washington, DC, 1997.
-\newblock \href {https://doi.org/10.17226/5936} {\path{doi:10.17226/5936}}.
-
-\bibitem{astmf2588}
-{ASTM International}, Standard test method for man-in-simulant test {(MIST)}
-  for protective ensembles, ASTM F2588-12(2020), designation F2588-12,
-  reapproved 2020 (2020).
-
-\bibitem{top102022a}
-{US Army Test and Evaluation Command}, Test operations procedure (top)
-  10-2-022a: Chemical vapor and aerosol system-level testing of
-  chemical/biological protective suits, Tech. Rep. TOP 10-2-022A, US Army Test
-  and Evaluation Command (Dec. 2013).
-
-\bibitem{top082188}
-{US Army Test and Evaluation Command}, Test operations procedure (top) 08-2-188
-  cn1: Chemical point detector vapor testing, Tech. Rep. TOP 08-2-188 CN1, US
-  Army Test and Evaluation Command, approved for public release; Defense
-  Technical Information Center AD1072837 (2019).
-
-\bibitem{top082196}
-{US Army Test and Evaluation Command}, Test operations procedure (top)
-  08-2-196: Simulant selection for laboratory, chamber, and field testing,
-  Tech. Rep. TOP 08-2-196, US Army Test and Evaluation Command, cited in TOP
-  08-2-188 CN1 as the governing simulant-selection procedure; the document
-  itself was not obtainable for this work (Apr. 2011).
-
-\bibitem{kim2011}
-K.~Kim, O.~G. Tsay, D.~A. Atwood, D.~G. Churchill, Destruction and detection of
-  chemical warfare agents, Chemical Reviews 111~(9) (2011) 5345--5403.
-\newblock \href {https://doi.org/10.1021/cr100193y}
-  {\path{doi:10.1021/cr100193y}}.
-
-\bibitem{jang2015}
-Y.~J. Jang, K.~Kim, O.~G. Tsay, D.~A. Atwood, D.~G. Churchill, Update 1 of:
-  Destruction and detection of chemical warfare agents, Chemical Reviews
-  115~(24) (2015) PR1--PR76.
-\newblock \href {https://doi.org/10.1021/acs.chemrev.5b00402}
-  {\path{doi:10.1021/acs.chemrev.5b00402}}.
-
-\bibitem{royo2007}
-S.~Royo, R.~Mart{\'i}nez-M{\'a}{\~n}ez, F.~Sancen{\'o}n, A.~M. Costero,
-  M.~Parra, S.~Gil, Chromogenic and fluorogenic reagents for chemical warfare
-  nerve agents' detection, Chemical Communications~(46) (2007) 4839.
-\newblock \href {https://doi.org/10.1039/b707063b}
-  {\path{doi:10.1039/b707063b}}.
-
-\bibitem{sambrook2013}
-M.~R. Sambrook, S.~Notman, Supramolecular chemistry and chemical warfare
-  agents: from fundamentals of recognition to catalysis and sensing, Chemical
-  Society Reviews 42~(24) (2013) 9251.
-\newblock \href {https://doi.org/10.1039/c3cs60230c}
-  {\path{doi:10.1039/c3cs60230c}}.
-
-\bibitem{eubanks2007}
-L.~M. Eubanks, T.~J. Dickerson, K.~D. Janda, Technological advancements for the
-  detection of and protection against biological and chemical warfare agents,
-  Chemical Society Reviews 36~(3) (2007) 458.
-\newblock \href {https://doi.org/10.1039/b615227a}
-  {\path{doi:10.1039/b615227a}}.
-
-\bibitem{rakow2000}
-N.~A. Rakow, K.~S. Suslick, A colorimetric sensor array for odour
-  visualization, Nature 406~(6797) (2000) 710--713.
-\newblock \href {https://doi.org/10.1038/35021028}
-  {\path{doi:10.1038/35021028}}.
-
-\bibitem{lin2011}
-H.~Lin, M.~Jang, K.~S. Suslick, Preoxidation for colorimetric sensor array
-  detection of {VOCs}, Journal of the American Chemical Society 133~(42) (2011)
-  16786--16789.
-\newblock \href {https://doi.org/10.1021/ja207718t}
-  {\path{doi:10.1021/ja207718t}}.
-
-\bibitem{askim2013}
-J.~R. Askim, M.~Mahmoudi, K.~S. Suslick, Optical sensor arrays for chemical
-  sensing: the optoelectronic nose, Chemical Society Reviews 42~(22) (2013)
-  8649.
-\newblock \href {https://doi.org/10.1039/c3cs60179j}
-  {\path{doi:10.1039/c3cs60179j}}.
-
-\bibitem{hazref}
-J.~Kim, K.~Kang, M.~Shin, S.~Kim, J.~Yoo, M.-K. Kim, W.~B. Lee, D.-H. Lee,
-  Machine learning-enhanced colorimetric sensor array for rapid detection of
-  nerve agents, Journal of Hazardous Materials 501 (2026) 140703.
-\newblock \href {https://doi.org/10.1016/j.jhazmat.2025.140703}
-  {\path{doi:10.1016/j.jhazmat.2025.140703}}.
-
-\bibitem{multiplexref}
-S.~Kim, J.~Yoo, K.~Kang, J.~Kim, M.~Shin, Y.~K. Cha, D.~G. Churchill, M.-K.
-  Kim, D.-H. Lee, A multiplex chromogenic--fluorogenic sensor array for
-  comprehensive optical discrimination of chemical warfare agents, Discover
-  Sensors 1~(1) (2025) 29.
-\newblock \href {https://doi.org/10.1007/s44397-025-00032-y}
-  {\path{doi:10.1007/s44397-025-00032-y}}.
-
-\bibitem{ondeviceref}
-S.~Bae, K.~Kang, Y.~K. Kim, Y.~J. Jang, D.-H. Lee, Field-deployable real-time
-  {AI} system for chemical warfare agent detection using {YOLOv8} and
-  colorimetric sensors, Chemometrics and Intelligent Laboratory Systems 261
-  (2025) 105365.
-\newblock \href {https://doi.org/10.1016/j.chemolab.2025.105365}
-  {\path{doi:10.1016/j.chemolab.2025.105365}}.
-
-\bibitem{group3ref}
-M.~Shin, K.~Kang, J.~Kim, S.~Kim, J.~Yoo, Y.~J. Jang, M.-K. Kim, E.~V. Anslyn,
-  D.-H. Lee, Portable machine learning--integrated optical sensor array for
-  rapid and selective detection of authentic {Novichok} nerve agents, Sensors
-  and Actuators B: Chemical 457 (2026) 139706.
-\newblock \href {https://doi.org/10.1016/j.snb.2026.139706}
-  {\path{doi:10.1016/j.snb.2026.139706}}.
-
-\bibitem{bartelthunt2008}
-S.~L. Bartelt-Hunt, D.~R.~U. Knappe, M.~A. Barlaz, A review of chemical warfare
-  agent simulants for the study of environmental behavior, Critical Reviews in
-  Environmental Science and Technology 38~(2) (2008) 112--136.
-\newblock \href {https://doi.org/10.1080/10643380701643650}
-  {\path{doi:10.1080/10643380701643650}}.
-
-\bibitem{mondloch2015}
-J.~E. Mondloch, M.~J. Katz, W.~C.~I. III, P.~Ghosh, P.~Liao, W.~Bury, G.~W.
-  Wagner, M.~G. Hall, J.~B. DeCoste, G.~W. Peterson, R.~Q. Snurr, C.~J. Cramer,
-  J.~T. Hupp, O.~K. Farha, Destruction of chemical warfare agents using
-  metal--organic frameworks, Nature Materials 14~(5) (2015) 512--516.
-\newblock \href {https://doi.org/10.1038/nmat4238}
-  {\path{doi:10.1038/nmat4238}}.
-
-\bibitem{moon2015}
-S.-Y. Moon, Y.~Liu, J.~T. Hupp, O.~K. Farha, Instantaneous hydrolysis of
-  nerve-agent simulants with a six-connected zirconium-based metal--organic
-  framework, Angewandte Chemie International Edition 54~(23) (2015) 6795--6799.
-\newblock \href {https://doi.org/10.1002/anie.201502155}
-  {\path{doi:10.1002/anie.201502155}}.
-
-\bibitem{webb2025}
-S.~Webb, F.~Coulon, T.~Temple, A critical review of liquid, low toxicity
+\bibitem[Kim \latin{et~al.}(2011)Kim, Tsay, Atwood, and Churchill]{kim2011}
+Kim,~K.; Tsay,~O.~G.; Atwood,~D.~A.; Churchill,~D.~G. Destruction and Detection
+  of Chemical Warfare Agents. \emph{Chemical Reviews} \textbf{2011},
+  \emph{111}, 5345--5403\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jang \latin{et~al.}(2015)Jang, Kim, Tsay, Atwood, and
+  Churchill]{jang2015}
+Jang,~Y.~J.; Kim,~K.; Tsay,~O.~G.; Atwood,~D.~A.; Churchill,~D.~G. Update 1 of:
+  Destruction and Detection of Chemical Warfare Agents. \emph{Chemical Reviews}
+  \textbf{2015}, \emph{115}, PR1--PR76\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Royo \latin{et~al.}(2007)Royo, Mart{\'i}nez-M{\'a}{\~n}ez,
+  Sancen{\'o}n, Costero, Parra, and Gil]{royo2007}
+Royo,~S.; Mart{\'i}nez-M{\'a}{\~n}ez,~R.; Sancen{\'o}n,~F.; Costero,~A.~M.;
+  Parra,~M.; Gil,~S. Chromogenic and fluorogenic reagents for chemical warfare
+  nerve agents' detection. \emph{Chemical Communications} \textbf{2007},
+  4839\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Sambrook and Notman(2013)Sambrook, and Notman]{sambrook2013}
+Sambrook,~M.~R.; Notman,~S. Supramolecular chemistry and chemical warfare
+  agents: from fundamentals of recognition to catalysis and sensing.
+  \emph{Chemical Society Reviews} \textbf{2013}, \emph{42}, 9251\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Eubanks \latin{et~al.}(2007)Eubanks, Dickerson, and
+  Janda]{eubanks2007}
+Eubanks,~L.~M.; Dickerson,~T.~J.; Janda,~K.~D. Technological advancements for
+  the detection of and protection against biological and chemical warfare
+  agents. \emph{Chemical Society Reviews} \textbf{2007}, \emph{36}, 458\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rakow and Suslick(2000)Rakow, and Suslick]{rakow2000}
+Rakow,~N.~A.; Suslick,~K.~S. A colorimetric sensor array for odour
+  visualization. \emph{Nature} \textbf{2000}, \emph{406}, 710--713\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lin \latin{et~al.}(2011)Lin, Jang, and Suslick]{lin2011}
+Lin,~H.; Jang,~M.; Suslick,~K.~S. Preoxidation for Colorimetric Sensor Array
+  Detection of {VOCs}. \emph{Journal of the American Chemical Society}
+  \textbf{2011}, \emph{133}, 16786--16789\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Askim \latin{et~al.}(2013)Askim, Mahmoudi, and Suslick]{askim2013}
+Askim,~J.~R.; Mahmoudi,~M.; Suslick,~K.~S. Optical sensor arrays for chemical
+  sensing: the optoelectronic nose. \emph{Chemical Society Reviews}
+  \textbf{2013}, \emph{42}, 8649\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2026)Kim, Kang, Shin, Kim, Yoo, Kim, Lee, and
+  Lee]{hazref}
+Kim,~J.; Kang,~K.; Shin,~M.; Kim,~S.; Yoo,~J.; Kim,~M.-K.; Lee,~W.~B.;
+  Lee,~D.-H. Machine learning-enhanced colorimetric sensor array for rapid
+  detection of nerve agents. \emph{Journal of Hazardous Materials}
+  \textbf{2026}, \emph{501}, 140703\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2025)Kim, Yoo, Kang, Kim, Shin, Cha, Churchill,
+  Kim, and Lee]{multiplexref}
+Kim,~S.; Yoo,~J.; Kang,~K.; Kim,~J.; Shin,~M.; Cha,~Y.~K.; Churchill,~D.~G.;
+  Kim,~M.-K.; Lee,~D.-H. A multiplex chromogenic--fluorogenic sensor array for
+  comprehensive optical discrimination of chemical warfare agents.
+  \emph{Discover Sensors} \textbf{2025}, \emph{1}, 29\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bae \latin{et~al.}(2025)Bae, Kang, Kim, Jang, and Lee]{ondeviceref}
+Bae,~S.; Kang,~K.; Kim,~Y.~K.; Jang,~Y.~J.; Lee,~D.-H. Field-deployable
+  real-time {AI} System for chemical warfare agent detection using {YOLOv8} and
+  colorimetric sensors. \emph{Chemometrics and Intelligent Laboratory Systems}
+  \textbf{2025}, \emph{261}, 105365\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Shin \latin{et~al.}(2026)Shin, Kang, Kim, Kim, Yoo, Jang, Kim, Anslyn,
+  and Lee]{group3ref}
+Shin,~M.; Kang,~K.; Kim,~J.; Kim,~S.; Yoo,~J.; Jang,~Y.~J.; Kim,~M.-K.;
+  Anslyn,~E.~V.; Lee,~D.-H. Portable machine learning--integrated optical
+  sensor array for rapid and selective detection of authentic {Novichok} nerve
+  agents. \emph{Sensors and Actuators B: Chemical} \textbf{2026}, \emph{457},
+  139706\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bartelt-Hunt \latin{et~al.}(2008)Bartelt-Hunt, Knappe, and
+  Barlaz]{bartelthunt2008}
+Bartelt-Hunt,~S.~L.; Knappe,~D. R.~U.; Barlaz,~M.~A. A Review of Chemical
+  Warfare Agent Simulants for the Study of Environmental Behavior.
+  \emph{Critical Reviews in Environmental Science and Technology}
+  \textbf{2008}, \emph{38}, 112--136\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Mondloch \latin{et~al.}(2015)Mondloch, Katz, III, Ghosh, Liao, Bury,
+  Wagner, Hall, DeCoste, Peterson, Snurr, Cramer, Hupp, and
+  Farha]{mondloch2015}
+Mondloch,~J.~E.; Katz,~M.~J.; III,~W. C.~I.; Ghosh,~P.; Liao,~P.; Bury,~W.;
+  Wagner,~G.~W.; Hall,~M.~G.; DeCoste,~J.~B.; Peterson,~G.~W.; Snurr,~R.~Q.;
+  Cramer,~C.~J.; Hupp,~J.~T.; Farha,~O.~K. Destruction of chemical warfare
+  agents using metal--organic frameworks. \emph{Nature Materials}
+  \textbf{2015}, \emph{14}, 512--516\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Moon \latin{et~al.}(2015)Moon, Liu, Hupp, and Farha]{moon2015}
+Moon,~S.-Y.; Liu,~Y.; Hupp,~J.~T.; Farha,~O.~K. Instantaneous Hydrolysis of
+  Nerve-Agent Simulants with a Six-Connected Zirconium-Based Metal--Organic
+  Framework. \emph{Angewandte Chemie International Edition} \textbf{2015},
+  \emph{54}, 6795--6799\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Chi \latin{et~al.}(2026)Chi, Park, Yoo, Choi, Hong, Son, Lee, and
+  Kang]{ebeam}
+Chi,~H.~S.; Park,~J.-m.; Yoo,~J.; Choi,~G.~J.; Hong,~S.~H.; Son,~J.;
+  Lee,~J.-G.; Kang,~K. Feasibility study of electron beam irradiation for
+  decontamination of chemical and biological warfare agent simulants:
+  Dosimetric and operational evaluation. \emph{Applied Radiation and Isotopes}
+  \textbf{2026}, \emph{232}, 112582\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Webb \latin{et~al.}(2025)Webb, Coulon, and Temple]{webb2025}
+Webb,~S.; Coulon,~F.; Temple,~T. A critical review of liquid, low toxicity
   chemical warfare agent simulants: Enhancing accuracy, safety, and
-  methodological approaches for sampling, Journal of Hazardous Materials 492
-  (2025) 138021.
-\newblock \href {https://doi.org/10.1016/j.jhazmat.2025.138021}
-  {\path{doi:10.1016/j.jhazmat.2025.138021}}.
-
-\bibitem{agrawal2018}
-M.~Agrawal, D.~F. Sava~Gallis, J.~A. Greathouse, D.~S. Sholl, How useful are
-  common simulants of chemical warfare agents at predicting adsorption
-  behavior?, The Journal of Physical Chemistry C 122~(45) (2018) 26061--26069.
-\newblock \href {https://doi.org/10.1021/acs.jpcc.8b08856}
-  {\path{doi:10.1021/acs.jpcc.8b08856}}.
-
-\bibitem{lavoie2011}
-J.~Lavoie, S.~Srinivasan, R.~Nagarajan, Using cheminformatics to find simulants
-  for chemical warfare agents, Journal of Hazardous Materials 194 (2011)
-  85--91.
-\newblock \href {https://doi.org/10.1016/j.jhazmat.2011.07.077}
-  {\path{doi:10.1016/j.jhazmat.2011.07.077}}.
-
-\bibitem{ppesuit}
-H.~S. Chi, E.~Kim, J.~Kim, K.-D. Byun, K.~Kang, Chemical protective suit
+  methodological approaches for sampling. \emph{Journal of Hazardous Materials}
+  \textbf{2025}, \emph{492}, 138021\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Agrawal \latin{et~al.}(2018)Agrawal, Sava~Gallis, Greathouse, and
+  Sholl]{agrawal2018}
+Agrawal,~M.; Sava~Gallis,~D.~F.; Greathouse,~J.~A.; Sholl,~D.~S. How Useful Are
+  Common Simulants of Chemical Warfare Agents at Predicting Adsorption
+  Behavior? \emph{The Journal of Physical Chemistry C} \textbf{2018},
+  \emph{122}, 26061--26069\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lavoie \latin{et~al.}(2011)Lavoie, Srinivasan, and
+  Nagarajan]{lavoie2011}
+Lavoie,~J.; Srinivasan,~S.; Nagarajan,~R. Using cheminformatics to find
+  simulants for chemical warfare agents. \emph{Journal of Hazardous Materials}
+  \textbf{2011}, \emph{194}, 85--91\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Chi \latin{et~al.}(2025)Chi, Kim, Kim, Byun, and Kang]{ppesuit}
+Chi,~H.~S.; Kim,~E.; Kim,~J.; Byun,~K.-D.; Kang,~K. Chemical protective suit
   performance against {TICs} and {CWAs}: permeation resistance and {PPE} safety
-  evaluation, Next Research 2~(3) (2025) 100688.
-\newblock \href {https://doi.org/10.1016/j.nexres.2025.100688}
-  {\path{doi:10.1016/j.nexres.2025.100688}}.
-
-\bibitem{james2018}
-T.~James, S.~Wyke, T.~Marczylo, S.~Collins, T.~Gaulton, K.~Foxall,
-  R.~Aml{\^o}t, R.~Duarte-Davidson, Chemical warfare agent simulants for human
-  volunteer trials of emergency decontamination: A systematic review, Journal
-  of Applied Toxicology 38~(1) (2018) 113--121.
-\newblock \href {https://doi.org/10.1002/jat.3527}
-  {\path{doi:10.1002/jat.3527}}.
-
-\bibitem{james2021}
-T.~James, S.~Collins, T.~Marczylo, Identification of novel simulants for toxic
-  industrial chemicals and chemical warfare agents for human decontamination
-  studies: A systematic review and categorisation of physicochemical
-  characteristics, International Journal of Environmental Research and Public
-  Health 18~(16) (2021) 8681.
-\newblock \href {https://doi.org/10.3390/ijerph18168681}
-  {\path{doi:10.3390/ijerph18168681}}.
-
-\bibitem{gfnxtb2017}
-S.~Grimme, C.~Bannwarth, P.~Shushkov, A robust and accurate tight-binding
-  quantum chemical method for structures, vibrational frequencies, and
-  noncovalent interactions of large molecular systems parametrized for all
-  {spd}-block elements ( z = 1--86), Journal of Chemical Theory and Computation
-  13~(5) (2017) 1989--2009.
-\newblock \href {https://doi.org/10.1021/acs.jctc.7b00118}
-  {\path{doi:10.1021/acs.jctc.7b00118}}.
-
-\bibitem{bannwarth2019}
-C.~Bannwarth, S.~Ehlert, S.~Grimme, {GFN2-xTB}---an accurate and broadly
-  parametrized self-consistent tight-binding quantum chemical method with
-  multipole electrostatics and density-dependent dispersion contributions,
-  Journal of Chemical Theory and Computation 15~(3) (2019) 1652--1671.
-\newblock \href {https://doi.org/10.1021/acs.jctc.8b01176}
-  {\path{doi:10.1021/acs.jctc.8b01176}}.
-
-\bibitem{xtbreview2021}
-C.~Bannwarth, E.~Caldeweyher, S.~Ehlert, A.~Hansen, P.~Pracht, J.~Seibert,
-  S.~Spicher, S.~Grimme, Extended tight-binding quantum chemistry methods,
-  WIREs Computational Molecular Science 11~(2) (2020) e1493.
-\newblock \href {https://doi.org/10.1002/wcms.1493}
-  {\path{doi:10.1002/wcms.1493}}.
-
-\bibitem{watson2006}
-A.~Watson, D.~Opresko, R.~Young, V.~Hauschild, Development and application of
-  acute exposure guideline levels ({AEGLs}) for chemical warfare nerve and
-  sulfur mustard agents, Journal of Toxicology and Environmental Health, Part B
-  9~(3) (2006) 173--263.
-\newblock \href {https://doi.org/10.1080/15287390500194441}
-  {\path{doi:10.1080/15287390500194441}}.
-
-\bibitem{dbpcarto}
-K.~Kang, D.-H. Lee, J.~Kim, J.~Yoo, Condition-dependent risk cartography of
-  brominated disinfection by-products in seawater desalination, Journal of
-  Environmental Chemical Engineering 14~(5) (2026) 125179.
-\newblock \href {https://doi.org/10.1016/j.jece.2026.125179}
-  {\path{doi:10.1016/j.jece.2026.125179}}.
-
-\bibitem{urbina2022}
-F.~Urbina, F.~Lentzos, C.~Invernizzi, S.~Ekins, Dual use of
-  artificial-intelligence-powered drug discovery, Nature Machine Intelligence
-  4~(3) (2022) 189--191.
-\newblock \href {https://doi.org/10.1038/s42256-022-00465-9}
-  {\path{doi:10.1038/s42256-022-00465-9}}.
-
-\bibitem{cbrndisclose}
-D.~Kim, J.~Yoo, K.~Kang, Exposure and disclosure in countering {CBRN} threats:
-  implications for nonproliferation strategy, The Nonproliferation Review
-  33~(4-6) (2026) 283--306.
-\newblock \href {https://doi.org/10.1080/10736700.2026.2685340}
-  {\path{doi:10.1080/10736700.2026.2685340}}.
-
-\bibitem{qsarld50}
-Y.~Jang, J.~Kim, D.-H. Lee, J.~Yoo, J.~Park, K.~Kang, Hybrid {QSAR} modeling of
-  {LD50} in organophosphorus nerve agents: a mechanistic approach using {DFT}
-  and molecular docking, Computational Toxicology 35 (2025) 100363.
-\newblock \href {https://doi.org/10.1016/j.comtox.2025.100363}
-  {\path{doi:10.1016/j.comtox.2025.100363}}.
-
-\bibitem{lee2011sno2}
-S.~C. Lee, S.~Y. Kim, W.~S. Lee, S.~Y. Jung, B.~W. Hwang, D.~Ragupathy, D.~D.
-  Lee, S.~Y. Lee, J.~C. Kim, Effects of textural properties on the response of
-  a {SnO$_2$}-based gas sensor for the detection of chemical warfare agents,
-  Sensors 11~(7) (2011) 6893--6904.
-\newblock \href {https://doi.org/10.3390/s110706893}
-  {\path{doi:10.3390/s110706893}}.
-
-\bibitem{seitzinger2006simulant}
-A.~T. Seitzinger, J.~A. Genovese,
-  \href{https://patents.google.com/patent/US7129094B1/en}{Chemical agent
-  simulant training composition}, {U.S. Patent US 7,129,094 B1}, assigned to
-  the United States Department of the Army. Filed 16 May 2003; granted 31
-  October 2006 (2006).
-\newline\urlprefix\url{https://patents.google.com/patent/US7129094B1/en}
-
-\bibitem{lee2021tabun}
-D.-H. Lee, S.~A. Valenzuela, M.~N. Dominguez, M.~Otsuka, D.~J. Milliron, E.~V.
-  Anslyn, A self-degradable hydrogel sensor for a nerve agent tabun surrogate
-  through a self-propagating cascade, Cell Reports Physical Science 2~(9)
-  (2021) 100552.
-\newblock \href {https://doi.org/10.1016/j.xcrp.2021.100552}
-  {\path{doi:10.1016/j.xcrp.2021.100552}}.
-
-\bibitem{jang2014tabun}
-Y.~J. Jang, O.~G. Tsay, D.~P. Murale, J.~A. Jeong, A.~Segev, D.~G. Churchill,
-  Novel and selective detection of tabun mimics, Chemical Communications
-  50~(56) (2014) 7531--7534.
-\newblock \href {https://doi.org/10.1039/C4CC02689F}
-  {\path{doi:10.1039/C4CC02689F}}.
-
-\bibitem{rdkit}
-G.~Landrum, et~al., {RDKit}: Open-source cheminformatics,
-  \url{https://www.rdkit.org}, version 2026.03.6. Cited by name, version and
-  project URL: the Zenodo {DOI}s registered for {RDKit} identify individual
+  evaluation. \emph{Next Research} \textbf{2025}, \emph{2}, 100688\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[James \latin{et~al.}(2018)James, Wyke, Marczylo, Collins, Gaulton,
+  Foxall, Aml{\^o}t, and Duarte-Davidson]{james2018}
+James,~T.; Wyke,~S.; Marczylo,~T.; Collins,~S.; Gaulton,~T.; Foxall,~K.;
+  Aml{\^o}t,~R.; Duarte-Davidson,~R. Chemical warfare agent simulants for human
+  volunteer trials of emergency decontamination: A systematic review.
+  \emph{Journal of Applied Toxicology} \textbf{2018}, \emph{38}, 113--121\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[James \latin{et~al.}(2021)James, Collins, and Marczylo]{james2021}
+James,~T.; Collins,~S.; Marczylo,~T. Identification of novel simulants for
+  toxic industrial chemicals and chemical warfare agents for human
+  decontamination studies: A systematic review and categorisation of
+  physicochemical characteristics. \emph{International Journal of Environmental
+  Research and Public Health} \textbf{2021}, \emph{18}, 8681\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Grimme \latin{et~al.}(2017)Grimme, Bannwarth, and
+  Shushkov]{gfnxtb2017}
+Grimme,~S.; Bannwarth,~C.; Shushkov,~P. A Robust and Accurate Tight-Binding
+  Quantum Chemical Method for Structures, Vibrational Frequencies, and
+  Noncovalent Interactions of Large Molecular Systems Parametrized for All
+  {spd}-Block Elements ( Z = 1--86). \emph{Journal of Chemical Theory and
+  Computation} \textbf{2017}, \emph{13}, 1989--2009\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bannwarth \latin{et~al.}(2019)Bannwarth, Ehlert, and
+  Grimme]{bannwarth2019}
+Bannwarth,~C.; Ehlert,~S.; Grimme,~S. {GFN2-xTB}---An Accurate and Broadly
+  Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with
+  Multipole Electrostatics and Density-Dependent Dispersion Contributions.
+  \emph{Journal of Chemical Theory and Computation} \textbf{2019}, \emph{15},
+  1652--1671\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bannwarth \latin{et~al.}(2020)Bannwarth, Caldeweyher, Ehlert, Hansen,
+  Pracht, Seibert, Spicher, and Grimme]{xtbreview2021}
+Bannwarth,~C.; Caldeweyher,~E.; Ehlert,~S.; Hansen,~A.; Pracht,~P.;
+  Seibert,~J.; Spicher,~S.; Grimme,~S. Extended tight-binding quantum chemistry
+  methods. \emph{WIREs Computational Molecular Science} \textbf{2020},
+  \emph{11}, e1493\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Watson \latin{et~al.}(2006)Watson, Opresko, Young, and
+  Hauschild]{watson2006}
+Watson,~A.; Opresko,~D.; Young,~R.; Hauschild,~V. Development and Application
+  of Acute Exposure Guideline Levels ({AEGLs}) for Chemical Warfare Nerve and
+  Sulfur Mustard Agents. \emph{Journal of Toxicology and Environmental Health,
+  Part B} \textbf{2006}, \emph{9}, 173--263\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kang \latin{et~al.}(2026)Kang, Lee, Kim, and Yoo]{dbpcarto}
+Kang,~K.; Lee,~D.-H.; Kim,~J.; Yoo,~J. Condition-dependent risk cartography of
+  brominated disinfection by-products in seawater desalination. \emph{Journal
+  of Environmental Chemical Engineering} \textbf{2026}, \emph{14}, 125179\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Urbina \latin{et~al.}(2022)Urbina, Lentzos, Invernizzi, and
+  Ekins]{urbina2022}
+Urbina,~F.; Lentzos,~F.; Invernizzi,~C.; Ekins,~S. Dual use of
+  artificial-intelligence-powered drug discovery. \emph{Nature Machine
+  Intelligence} \textbf{2022}, \emph{4}, 189--191\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2026)Kim, Yoo, and Kang]{cbrndisclose}
+Kim,~D.; Yoo,~J.; Kang,~K. Exposure and disclosure in countering {CBRN}
+  threats: implications for nonproliferation strategy. \emph{The
+  Nonproliferation Review} \textbf{2026}, \emph{33}, 283--306\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jang \latin{et~al.}(2025)Jang, Kim, Lee, Yoo, Park, and
+  Kang]{qsarld50}
+Jang,~Y.; Kim,~J.; Lee,~D.-H.; Yoo,~J.; Park,~J.; Kang,~K. Hybrid {QSAR}
+  modeling of {LD50} in organophosphorus nerve agents: a mechanistic approach
+  using {DFT} and molecular docking. \emph{Computational Toxicology}
+  \textbf{2025}, \emph{35}, 100363\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lee \latin{et~al.}(2011)Lee, Kim, Lee, Jung, Hwang, Ragupathy, Lee,
+  Lee, and Kim]{lee2011sno2}
+Lee,~S.~C.; Kim,~S.~Y.; Lee,~W.~S.; Jung,~S.~Y.; Hwang,~B.~W.; Ragupathy,~D.;
+  Lee,~D.~D.; Lee,~S.~Y.; Kim,~J.~C. Effects of Textural Properties on the
+  Response of a {SnO$_2$}-Based Gas Sensor for the Detection of Chemical
+  Warfare Agents. \emph{Sensors} \textbf{2011}, \emph{11}, 6893--6904\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Seitzinger and Genovese(2006)Seitzinger, and
+  Genovese]{seitzinger2006simulant}
+Seitzinger,~A.~T.; Genovese,~J.~A. Chemical Agent Simulant Training
+  Composition. 2006; \url{https://patents.google.com/patent/US7129094B1/en},
+  {U.S. Patent US 7,129,094 B1}, assigned to the United States Department of
+  the Army. Filed 16 May 2003; granted 31 October 2006\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lee \latin{et~al.}(2021)Lee, Valenzuela, Dominguez, Otsuka, Milliron,
+  and Anslyn]{lee2021tabun}
+Lee,~D.-H.; Valenzuela,~S.~A.; Dominguez,~M.~N.; Otsuka,~M.; Milliron,~D.~J.;
+  Anslyn,~E.~V. A self-degradable hydrogel sensor for a nerve agent tabun
+  surrogate through a self-propagating cascade. \emph{Cell Reports Physical
+  Science} \textbf{2021}, \emph{2}, 100552\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jang \latin{et~al.}(2014)Jang, Tsay, Murale, Jeong, Segev, and
+  Churchill]{jang2014tabun}
+Jang,~Y.~J.; Tsay,~O.~G.; Murale,~D.~P.; Jeong,~J.~A.; Segev,~A.;
+  Churchill,~D.~G. Novel and selective detection of Tabun mimics.
+  \emph{Chemical Communications} \textbf{2014}, \emph{50}, 7531--7534\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Research Council}(1997)]{nrc1997mist}
+{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
+  Test Program}; The National Academies Press: Washington, DC, 1997\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{ASTM International}(2020)]{astmf2588}
+{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
+  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
+  reapproved 2020\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
+Landrum,~G.; others {RDKit}: Open-source cheminformatics.
+  \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
+  and project URL: the Zenodo {DOI}s registered for {RDKit} identify individual
   releases (10.5281/zenodo.10398 is release 2014.03.1) and no
-  version-independent concept {DOI} could be verified, so none is given here
-  (2026).
-
-\bibitem{wildman1999}
-S.~A. Wildman, G.~M. Crippen, Prediction of physicochemical parameters by
-  atomic contributions, Journal of Chemical Information and Computer Sciences
-  39~(5) (1999) 868--873.
-\newblock \href {https://doi.org/10.1021/ci990307l}
-  {\path{doi:10.1021/ci990307l}}.
-
-\bibitem{ertl2000}
-P.~Ertl, B.~Rohde, P.~Selzer, Fast calculation of molecular polar surface area
-  as a sum of fragment-based contributions and its application to the
-  prediction of drug transport properties, Journal of Medicinal Chemistry
-  43~(20) (2000) 3714--3717.
-\newblock \href {https://doi.org/10.1021/jm000942e}
-  {\path{doi:10.1021/jm000942e}}.
-
-\bibitem{kier1985}
-L.~B. Kier, Shape indexes of orders one and three from molecular graphs,
-  Quantitative Structure-Activity Relationships 5~(1) (1986) 1--7.
-\newblock \href {https://doi.org/10.1002/qsar.19860050102}
-  {\path{doi:10.1002/qsar.19860050102}}.
-
-\bibitem{rogers2010}
-D.~Rogers, M.~Hahn, Extended-connectivity fingerprints, Journal of Chemical
-  Information and Modeling 50~(5) (2010) 742--754.
-\newblock \href {https://doi.org/10.1021/ci100050t}
-  {\path{doi:10.1021/ci100050t}}.
-
-\bibitem{pubchem2025}
-S.~Kim, J.~Chen, T.~Cheng, A.~Gindulyte, J.~He, S.~He, Q.~Li, B.~A. Shoemaker,
-  P.~A. Thiessen, B.~Yu, L.~Zaslavsky, J.~Zhang, E.~E. Bolton, {PubChem} 2025
-  update, Nucleic Acids Research 53~(D1) (2024) D1516--D1525.
-\newblock \href {https://doi.org/10.1093/nar/gkae1059}
-  {\path{doi:10.1093/nar/gkae1059}}.
-
-\bibitem{williams2017}
-A.~J. Williams, C.~M. Grulke, J.~Edwards, A.~D. McEachran, K.~Mansouri, N.~C.
-  Baker, G.~Patlewicz, I.~Shah, J.~F. Wambaugh, R.~S. Judson, A.~M. Richard,
-  The {CompTox} chemistry dashboard: a community data resource for
-  environmental chemistry, Journal of Cheminformatics 9~(1) (2017) 61.
-\newblock \href {https://doi.org/10.1186/s13321-017-0247-6}
-  {\path{doi:10.1186/s13321-017-0247-6}}.
-
-\bibitem{ehlert2021}
-S.~Ehlert, M.~Stahn, S.~Spicher, S.~Grimme, Robust and efficient implicit
-  solvation model for fast semiempirical methods, Journal of Chemical Theory
-  and Computation 17~(7) (2021) 4250--4261.
-\newblock \href {https://doi.org/10.1021/acs.jctc.1c00471}
-  {\path{doi:10.1021/acs.jctc.1c00471}}.
-
-\bibitem{wang2020}
-S.~Wang, J.~Witek, G.~A. Landrum, S.~Riniker, Improving conformer generation
-  for small rings and macrocycles based on distance geometry and experimental
-  torsional-angle preferences, Journal of Chemical Information and Modeling
-  60~(4) (2020) 2044--2058.
-\newblock \href {https://doi.org/10.1021/acs.jcim.0c00025}
-  {\path{doi:10.1021/acs.jcim.0c00025}}.
-
-\bibitem{riniker2015}
-S.~Riniker, G.~A. Landrum, Better informed distance geometry: Using what we
-  know to improve conformation generation, Journal of Chemical Information and
-  Modeling 55~(12) (2015) 2562--2574.
-\newblock \href {https://doi.org/10.1021/acs.jcim.5b00654}
-  {\path{doi:10.1021/acs.jcim.5b00654}}.
-
-\bibitem{halgren1996}
-T.~A. Halgren, Merck molecular force field. {I}. basis, form, scope,
-  parameterization, and performance of {MMFF94}, Journal of Computational
-  Chemistry 17~(5-6) (1996) 490--519.
-\newblock \href
-  {https://doi.org/10.1002/(sici)1096-987x(199604)17:5/6<490::aid-jcc1>3.0.co;2-p}
-  {\path{doi:10.1002/(sici)1096-987x(199604)17:5/6<490::aid-jcc1>3.0.co;2-p}}.
-
-\bibitem{rappe1992}
-A.~K. Rappe, C.~J. Casewit, K.~S. Colwell, W.~A. Goddard, W.~M. Skiff, {UFF}, a
-  full periodic table force field for molecular mechanics and molecular
-  dynamics simulations, Journal of the American Chemical Society 114~(25)
-  (1992) 10024--10035.
-\newblock \href {https://doi.org/10.1021/ja00051a040}
-  {\path{doi:10.1021/ja00051a040}}.
-
-\bibitem{pracht2020}
-P.~Pracht, F.~Bohle, S.~Grimme, Automated exploration of the low-energy
-  chemical space with fast quantum chemical methods, Physical Chemistry
-  Chemical Physics 22~(14) (2020) 7169--7192.
-\newblock \href {https://doi.org/10.1039/c9cp06869d}
-  {\path{doi:10.1039/c9cp06869d}}.
-
-\bibitem{parr1999}
-R.~G. Parr, L.~v. Szentp{\'a}ly, S.~Liu, Electrophilicity index, Journal of the
-  American Chemical Society 121~(9) (1999) 1922--1924.
-\newblock \href {https://doi.org/10.1021/ja983494x}
-  {\path{doi:10.1021/ja983494x}}.
-
-\bibitem{wiberg1968}
-K.~Wiberg, Application of the {Pople--Santry--Segal} {CNDO} method to the
-  cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane, Tetrahedron
-  24~(3) (1968) 1083--1096.
-\newblock \href {https://doi.org/10.1016/0040-4020(68)88057-3}
-  {\path{doi:10.1016/0040-4020(68)88057-3}}.
-
-\bibitem{parryang1984}
-R.~G. Parr, W.~Yang, Density functional approach to the frontier-electron
-  theory of chemical reactivity, Journal of the American Chemical Society
-  106~(14) (1984) 4049--4050.
-\newblock \href {https://doi.org/10.1021/ja00326a036}
-  {\path{doi:10.1021/ja00326a036}}.
-
-\bibitem{yangmortier1986}
-W.~Yang, W.~J. Mortier, The use of global and local molecular parameters for
-  the analysis of the gas-phase basicity of amines, Journal of the American
-  Chemical Society 108~(19) (1986) 5708--5711.
-\newblock \href {https://doi.org/10.1021/ja00279a008}
-  {\path{doi:10.1021/ja00279a008}}.
-
-\bibitem{geerlings2003}
-P.~Geerlings, F.~D. Proft, W.~Langenaeker, Conceptual density functional
-  theory, Chemical Reviews 103~(5) (2003) 1793--1874.
-\newblock \href {https://doi.org/10.1021/cr990029p}
-  {\path{doi:10.1021/cr990029p}}.
-
-\bibitem{benigni2008}
-R.~BENIGNI, C.~BOSSA, Structure alerts for carcinogenicity, and the
+  version-independent concept {DOI} could be verified, so none is given
+  here\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wildman and Crippen(1999)Wildman, and Crippen]{wildman1999}
+Wildman,~S.~A.; Crippen,~G.~M. Prediction of Physicochemical Parameters by
+  Atomic Contributions. \emph{Journal of Chemical Information and Computer
+  Sciences} \textbf{1999}, \emph{39}, 868--873\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ertl \latin{et~al.}(2000)Ertl, Rohde, and Selzer]{ertl2000}
+Ertl,~P.; Rohde,~B.; Selzer,~P. Fast Calculation of Molecular Polar Surface
+  Area as a Sum of Fragment-Based Contributions and Its Application to the
+  Prediction of Drug Transport Properties. \emph{Journal of Medicinal
+  Chemistry} \textbf{2000}, \emph{43}, 3714--3717\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kier(1986)]{kier1985}
+Kier,~L.~B. Shape Indexes of Orders One and Three from Molecular Graphs.
+  \emph{Quantitative Structure-Activity Relationships} \textbf{1986}, \emph{5},
+  1--7\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rogers and Hahn(2010)Rogers, and Hahn]{rogers2010}
+Rogers,~D.; Hahn,~M. Extended-Connectivity Fingerprints. \emph{Journal of
+  Chemical Information and Modeling} \textbf{2010}, \emph{50}, 742--754\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2024)Kim, Chen, Cheng, Gindulyte, He, He, Li,
+  Shoemaker, Thiessen, Yu, Zaslavsky, Zhang, and Bolton]{pubchem2025}
+Kim,~S.; Chen,~J.; Cheng,~T.; Gindulyte,~A.; He,~J.; He,~S.; Li,~Q.;
+  Shoemaker,~B.~A.; Thiessen,~P.~A.; Yu,~B.; Zaslavsky,~L.; Zhang,~J.;
+  Bolton,~E.~E. {PubChem} 2025 update. \emph{Nucleic Acids Research}
+  \textbf{2024}, \emph{53}, D1516--D1525\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Williams \latin{et~al.}(2017)Williams, Grulke, Edwards, McEachran,
+  Mansouri, Baker, Patlewicz, Shah, Wambaugh, Judson, and
+  Richard]{williams2017}
+Williams,~A.~J.; Grulke,~C.~M.; Edwards,~J.; McEachran,~A.~D.; Mansouri,~K.;
+  Baker,~N.~C.; Patlewicz,~G.; Shah,~I.; Wambaugh,~J.~F.; Judson,~R.~S.;
+  Richard,~A.~M. The {CompTox} Chemistry Dashboard: a community data resource
+  for environmental chemistry. \emph{Journal of Cheminformatics} \textbf{2017},
+  \emph{9}, 61\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ehlert \latin{et~al.}(2021)Ehlert, Stahn, Spicher, and
+  Grimme]{ehlert2021}
+Ehlert,~S.; Stahn,~M.; Spicher,~S.; Grimme,~S. Robust and Efficient Implicit
+  Solvation Model for Fast Semiempirical Methods. \emph{Journal of Chemical
+  Theory and Computation} \textbf{2021}, \emph{17}, 4250--4261\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wang \latin{et~al.}(2020)Wang, Witek, Landrum, and Riniker]{wang2020}
+Wang,~S.; Witek,~J.; Landrum,~G.~A.; Riniker,~S. Improving Conformer Generation
+  for Small Rings and Macrocycles Based on Distance Geometry and Experimental
+  Torsional-Angle Preferences. \emph{Journal of Chemical Information and
+  Modeling} \textbf{2020}, \emph{60}, 2044--2058\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Riniker and Landrum(2015)Riniker, and Landrum]{riniker2015}
+Riniker,~S.; Landrum,~G.~A. Better Informed Distance Geometry: Using What We
+  Know To Improve Conformation Generation. \emph{Journal of Chemical
+  Information and Modeling} \textbf{2015}, \emph{55}, 2562--2574\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Halgren(1996)]{halgren1996}
+Halgren,~T.~A. Merck molecular force field. {I}. Basis, form, scope,
+  parameterization, and performance of {MMFF94}. \emph{Journal of Computational
+  Chemistry} \textbf{1996}, \emph{17}, 490--519\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rappe \latin{et~al.}(1992)Rappe, Casewit, Colwell, Goddard, and
+  Skiff]{rappe1992}
+Rappe,~A.~K.; Casewit,~C.~J.; Colwell,~K.~S.; Goddard,~W.~A.; Skiff,~W.~M.
+  {UFF}, a full periodic table force field for molecular mechanics and
+  molecular dynamics simulations. \emph{Journal of the American Chemical
+  Society} \textbf{1992}, \emph{114}, 10024--10035\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Pracht \latin{et~al.}(2020)Pracht, Bohle, and Grimme]{pracht2020}
+Pracht,~P.; Bohle,~F.; Grimme,~S. Automated exploration of the low-energy
+  chemical space with fast quantum chemical methods. \emph{Physical Chemistry
+  Chemical Physics} \textbf{2020}, \emph{22}, 7169--7192\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
+Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
+  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
+  1922--1924\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wiberg(1968)]{wiberg1968}
+Wiberg,~K. Application of the {Pople--Santry--Segal} {CNDO} method to the
+  cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane.
+  \emph{Tetrahedron} \textbf{1968}, \emph{24}, 1083--1096\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Parr and Yang(1984)Parr, and Yang]{parryang1984}
+Parr,~R.~G.; Yang,~W. Density functional approach to the frontier-electron
+  theory of chemical reactivity. \emph{Journal of the American Chemical
+  Society} \textbf{1984}, \emph{106}, 4049--4050\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Yang and Mortier(1986)Yang, and Mortier]{yangmortier1986}
+Yang,~W.; Mortier,~W.~J. The use of global and local molecular parameters for
+  the analysis of the gas-phase basicity of amines. \emph{Journal of the
+  American Chemical Society} \textbf{1986}, \emph{108}, 5708--5711\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Geerlings \latin{et~al.}(2003)Geerlings, Proft, and
+  Langenaeker]{geerlings2003}
+Geerlings,~P.; Proft,~F.~D.; Langenaeker,~W. Conceptual Density Functional
+  Theory. \emph{Chemical Reviews} \textbf{2003}, \emph{103}, 1793--1874\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[BENIGNI and BOSSA(2008)BENIGNI, and BOSSA]{benigni2008}
+BENIGNI,~R.; BOSSA,~C. Structure alerts for carcinogenicity, and the
   \emph{Salmonella} assay system: A novel insight through the chemical
-  relational databases technology, Mutation Research/Reviews in Mutation
-  Research 659~(3) (2008) 248--261.
-\newblock \href {https://doi.org/10.1016/j.mrrev.2008.05.003}
-  {\path{doi:10.1016/j.mrrev.2008.05.003}}.
-
-\bibitem{enoch2011}
-S.~J. Enoch, C.~M. Ellison, T.~W. Schultz, M.~T.~D. Cronin, A review of the
+  relational databases technology. \emph{Mutation Research/Reviews in Mutation
+  Research} \textbf{2008}, \emph{659}, 248--261\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Enoch \latin{et~al.}(2011)Enoch, Ellison, Schultz, and
+  Cronin]{enoch2011}
+Enoch,~S.~J.; Ellison,~C.~M.; Schultz,~T.~W.; Cronin,~M. T.~D. A review of the
   electrophilic reaction chemistry involved in covalent protein binding
-  relevant to toxicity, Critical Reviews in Toxicology 41~(9) (2011) 783--802.
-\newblock \href {https://doi.org/10.3109/10408444.2011.598141}
-  {\path{doi:10.3109/10408444.2011.598141}}.
-
-\bibitem{numpy2020}
-C.~R. Harris, K.~J. Millman, S.~J. v.~d. Walt, R.~Gommers, P.~Virtanen,
-  D.~Cournapeau, E.~Wieser, J.~Taylor, S.~Berg, N.~J. Smith, R.~Kern, M.~Picus,
-  S.~Hoyer, M.~H.~v. Kerkwijk, M.~Brett, A.~Haldane, J.~F.~d. R{\'i}o,
-  M.~Wiebe, P.~Peterson, P.~G{\'e}rard-Marchant, K.~Sheppard, T.~Reddy,
-  W.~Weckesser, H.~Abbasi, C.~Gohlke, T.~E. Oliphant, Array programming with
-  numpy, Nature 585~(7825) (2020) 357--362.
-\newblock \href {https://doi.org/10.1038/s41586-020-2649-2}
-  {\path{doi:10.1038/s41586-020-2649-2}}.
-
-\bibitem{scipy2020}
-P.~Virtanen, R.~Gommers, T.~E. Oliphant, M.~Haberland, T.~Reddy, D.~Cournapeau,
-  E.~Burovski, P.~Peterson, W.~Weckesser, J.~Bright, S.~J. v.~d. Walt,
-  M.~Brett, J.~Wilson, K.~J. Millman, N.~Mayorov, A.~R.~J. Nelson, E.~Jones,
-  R.~Kern, E.~Larson, C.~J. Carey, {\.I}.~Polat, Y.~Feng, E.~W. Moore,
-  J.~VanderPlas, D.~Laxalde, J.~Perktold, R.~Cimrman, I.~Henriksen, E.~A.
-  Quintero, C.~R. Harris, A.~M. Archibald, A.~H. Ribeiro, F.~Pedregosa, P.~v.
-  Mulbregt, A.~Vijaykumar, A.~P. Bardelli, A.~Rothberg, A.~Hilboll,
-  A.~Kloeckner, A.~Scopatz, A.~Lee, A.~Rokem, C.~N. Woods, C.~Fulton,
-  C.~Masson, C.~H{\"a}ggstr{\"o}m, C.~Fitzgerald, D.~A. Nicholson, D.~R. Hagen,
-  D.~V. Pasechnik, E.~Olivetti, E.~Martin, E.~Wieser, F.~Silva, F.~Lenders,
-  F.~Wilhelm, G.~Young, G.~A. Price, G.-L. Ingold, G.~E. Allen, G.~R. Lee,
-  H.~Audren, I.~Probst, J.~P. Dietrich, J.~Silterra, J.~T. Webber, J.~Slavi{\v
-  c}, J.~Nothman, J.~Buchner, J.~Kulick, J.~L. Sch{\"o}nberger, J.~V. d.~M.
-  Cardoso, J.~Reimer, J.~Harrington, J.~L.~C. Rodr{\'i}guez, J.~Nunez-Iglesias,
-  J.~Kuczynski, K.~Tritz, M.~Thoma, M.~Newville, M.~K{\"u}mmerer,
-  M.~Bolingbroke, M.~Tartre, M.~Pak, N.~J. Smith, N.~Nowaczyk, N.~Shebanov,
-  O.~Pavlyk, P.~A. Brodtkorb, P.~Lee, R.~T. McGibbon, R.~Feldbauer, S.~Lewis,
-  S.~Tygier, S.~Sievert, S.~Vigna, S.~Peterson, S.~More, T.~Pudlik, T.~Oshima,
-  T.~J. Pingel, T.~P. Robitaille, T.~Spura, T.~R. Jones, T.~Cera, T.~Leslie,
-  T.~Zito, T.~Krauss, U.~Upadhyay, Y.~O. Halchenko, Y.~V{\'a}zquez-Baeza, Scipy
-  1.0: fundamental algorithms for scientific computing in python, Nature
-  Methods 17~(3) (2020) 261--272.
-\newblock \href {https://doi.org/10.1038/s41592-019-0686-2}
-  {\path{doi:10.1038/s41592-019-0686-2}}.
-
-\bibitem{mckinney2010}
-W.~McKinney, Data structures for statistical computing in python, 2010, pp.
-  56--61.
-\newblock \href {https://doi.org/10.25080/majora-92bf1922-00a}
-  {\path{doi:10.25080/majora-92bf1922-00a}}.
-
-\bibitem{matplotlib2007}
-J.~D. Hunter, Matplotlib: A 2d graphics environment, Computing in Science \&
-  Engineering 9~(3) (2007) 90--95.
-\newblock \href {https://doi.org/10.1109/mcse.2007.55}
-  {\path{doi:10.1109/mcse.2007.55}}.
-
-\bibitem{niosh2002simulant}
-{National Institute for Occupational Safety and Health},
-  \href{https://archive.cdc.gov/www_cdc_gov/niosh/npptl/standardsdev/cbrn/apr/concepts/pdfs/simulantjul31-508.pdf}{Chemical
-  warfare agent {(CWA)} simulant program for respirator materials resistance
-  testing}, Tech. rep., National Personal Protective Technology Laboratory,
-  NIOSH, dated 31 July 2002 (Jul. 2002).
-\newline\urlprefix\url{https://archive.cdc.gov/www_cdc_gov/niosh/npptl/standardsdev/cbrn/apr/concepts/pdfs/simulantjul31-508.pdf}
-
-\bibitem{lawrence2025simulants}
-D.~S. Lawrence, K.~A. Van~Houten, Simulants for chemical and explosive threats,
-  Johns Hopkins APL Technical Digest 37~(4) (2025).
-
-\bibitem{lee2016lewisite}
-D.-H. Lee, D.-N. Lee, J.-I. Hong, A fluorescent probe for a lewisite simulant,
-  New Journal of Chemistry 40~(11) (2016) 9021--9024.
-\newblock \href {https://doi.org/10.1039/C6NJ01658H}
-  {\path{doi:10.1039/C6NJ01658H}}.
-
-\end{thebibliography}
+  relevant to toxicity. \emph{Critical Reviews in Toxicology} \textbf{2011},
+  \emph{41}, 783--802\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Harris \latin{et~al.}(2020)Harris, Millman, Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, Kerkwijk, Brett,
+  Haldane, R{\'i}o, Wiebe, Peterson, G{\'e}rard-Marchant, Sheppard, Reddy,
+  Weckesser, Abbasi, Gohlke, and Oliphant]{numpy2020}
+Harris,~C.~R. \latin{et~al.}  Array programming with NumPy. \emph{Nature}
+  \textbf{2020}, \emph{585}, 357--362\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Virtanen \latin{et~al.}(2020)Virtanen, Gommers, Oliphant, Haberland,
+  Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, Walt, Brett,
+  Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng,
+  Moore, VanderPlas, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris,
+  Archibald, Ribeiro, Pedregosa, Mulbregt, Vijaykumar, Bardelli, Rothberg,
+  Hilboll, Kloeckner, Scopatz, Lee, Rokem, Woods, Fulton, Masson,
+  H{\"a}ggstr{\"o}m, Fitzgerald, Nicholson, Hagen, Pasechnik, Olivetti, Martin,
+  Wieser, Silva, Lenders, Wilhelm, Young, Price, Ingold, Allen, Lee, Audren,
+  Probst, Dietrich, Silterra, Webber, Slavi{\v c}, Nothman, Buchner, Kulick,
+  Sch{\"o}nberger, Cardoso, Reimer, Harrington, Rodr{\'i}guez, Nunez-Iglesias,
+  Kuczynski, Tritz, Thoma, Newville, K{\"u}mmerer, Bolingbroke, Tartre, Pak,
+  Smith, Nowaczyk, Shebanov, Pavlyk, Brodtkorb, Lee, McGibbon, Feldbauer,
+  Lewis, Tygier, Sievert, Vigna, Peterson, More, Pudlik, Oshima, Pingel,
+  Robitaille, Spura, Jones, Cera, Leslie, Zito, Krauss, Upadhyay, Halchenko,
+  and V{\'a}zquez-Baeza]{scipy2020}
+Virtanen,~P. \latin{et~al.}  SciPy 1.0: fundamental algorithms for scientific
+  computing in Python. \emph{Nature Methods} \textbf{2020}, \emph{17},
+  261--272\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[McKinney(2010)]{mckinney2010}
+McKinney,~W. \emph{Data Structures for Statistical Computing in Python}; 2010;
+  pp 56--61\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Hunter(2007)]{matplotlib2007}
+Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
+  \& Engineering} \textbf{2007}, \emph{9}, 90--95\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Institute for Occupational Safety and
+  Health}(2002)]{niosh2002simulant}
+{National Institute for Occupational Safety and Health} \emph{Chemical Warfare
+  Agent {(CWA)} Simulant Program for Respirator Materials Resistance Testing};
+  2002; Dated 31 July 2002\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
+  2011; Cited in TOP 08-2-188 CN1 as the governing simulant-selection
+  procedure; the document itself was not obtainable for this work\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2019)]{top082188}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  08-2-188 CN1: Chemical Point Detector Vapor Testing}; 2019; Approved for
+  public release; Defense Technical Information Center AD1072837\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2013)]{top102022a}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  10-2-022A: Chemical Vapor and Aerosol System-Level Testing of
+  Chemical/Biological Protective Suits}; 2013\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lawrence and Van~Houten(2025)Lawrence, and
+  Van~Houten]{lawrence2025simulants}
+Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
+  Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025},
+  \emph{37}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lee \latin{et~al.}(2016)Lee, Lee, and Hong]{lee2016lewisite}
+Lee,~D.-H.; Lee,~D.-N.; Hong,~J.-I. A fluorescent probe for a lewisite
+  simulant. \emph{New Journal of Chemistry} \textbf{2016}, \emph{40},
+  9021--9024\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\end{mcitethebibliography}

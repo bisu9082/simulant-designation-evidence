@@ -1,5 +1,5 @@
 #!/bin/sh
-# JHM 판본 빌드.
+# Analytical Chemistry (achemso) 판본 빌드.
 #
 # 본문과 Supplementary 가 xr 로 서로를 가리킨다. 상호 의존이므로 한쪽만
 # 돌리면 상대 라벨이 undefined 로 남는다. 두 문서를 번갈아 돌려야 번호가
@@ -39,18 +39,20 @@ if [ "$1" = '--figs' ]; then
     fi
   done
   # Graphical abstract. JHM 은 TOC 도판이 아니라 GA 를 요구한다.
-  if [ -f make_ga.py ]; then
-    printf '[fig] %-26s ' make_ga.py
-    if python3 make_ga.py >"$ROOT/outputs/_log_make_ga.txt" 2>&1; then
+  if [ -f make_toc_acs.py ]; then
+    printf '[fig] %-26s ' make_toc_acs.py
+    if python3 make_toc_acs.py >"$ROOT/outputs/_log_make_toc_acs.txt" 2>&1; then
       echo ok
     else
-      echo FAIL; tail -20 "$ROOT/outputs/_log_make_ga.txt"; exit 1
+      echo FAIL; tail -20 "$ROOT/outputs/_log_make_toc_acs.txt"; exit 1
     fi
   fi
 fi
 
+# toc_acs.png 은 ACS 의 TOC 그래픽이다 (3.25 x 1.75 in 실척).
+# 종전 JHM 빌드는 TOC 를 paper/ 로 복사하지 않아 본문이 참조할 수 없었다.
 for f in Fig_main.png Fig_spaces.png Fig_plocal.png Fig_h1.png \
-         Fig_mde.png Fig_toxicity.png; do
+         Fig_mde.png Fig_toxicity.png toc_acs.png; do
   if [ -f "outputs/$f" ]; then
     cp -p "outputs/$f" "paper/$f"
   else
@@ -95,20 +97,19 @@ pass main
 echo '[5/6] supplementary (2차 — 확정된 main.aux 를 읽는다)'
 pass supplementary
 pass supplementary
-echo '[6/6] cover letter · highlights'
+echo '[6/6] cover letter'
 pass cover_letter
 pass cover_letter
-pass highlights
 
 # 빌드 지문. 검사 A-pdf 가 이 파일과 현재 .tex 의 해시를 비교한다.
 # mtime 으로 비교했더니 주입시험이 원고를 스냅샷으로 되돌릴 때 내용은
 # 같고 mtime 만 새로워져서 거짓 실패가 났다. 내용으로 본다.
-for f in main supplementary cover_letter highlights; do
+for f in main supplementary cover_letter; do
     sha256sum "$f.tex"
 done > .buildstamp
 
 fail=0
-for f in main supplementary cover_letter highlights; do
+for f in main supplementary cover_letter; do
     log="$f.log"
     if grep -q '^!' "$log" 2>/dev/null; then
         echo "  [$f] 치명 오류:"; grep -A2 '^!' "$log" | head -12; fail=1
@@ -121,7 +122,7 @@ done
 
 echo
 echo '--- 산출 ---'
-for f in main supplementary cover_letter highlights; do
+for f in main supplementary cover_letter; do
     if [ -f "$f.pdf" ]; then
         printf '  %-16s %s쪽  Overfull %s\n' "$f.pdf" \
             "$(pdfinfo "$f.pdf" | awk '/^Pages/{print $2}')" \

@@ -1,63 +1,64 @@
-% simulant — Journal of Hazardous Materials 투고본
-% Ku 표준 Elsevier 골격: \documentclass[1p,times]{elsarticle} + \address
-%   + highlights 는 본문 %% 주석 및 별도 highlights.tex (각 85자 이하)
-%   + cover_letter.tex 별도
-\documentclass[1p,times]{elsarticle}
-\usepackage{amsmath,amssymb,graphicx,booktabs,microtype}
-\usepackage[hidelinks]{hyperref}
+% simulant — Analytical Chemistry (ACS) 투고본
+%
+% 2026-11-08. 저널 전환. JHM 에서 Analytical Chemistry 로 옮겼다. 사유는
+% sources/NOTE_EditorGate_Step5_20261108.md 와 그 뒤의 스코프 조사다. JHM
+% 현행 스코프(2022-09-08 사설)는 관문이 둘이고, 둘째인 "is the study
+% conducted under an environmentally relevant condition?" 에 답할 데이터가
+% 이 원고에 없다. 관문을 맞추려고 증기압 축을 끌어올리는 것은 이 논문이
+% 비판하는 바로 그 행위이므로 하지 않고 저널을 옮겼다.
+%
+% 양식: achemso. 퇴역한 archive/acs_v1/ 의 골격을 가져왔으나 본문은
+% 그쪽을 되살린 것이 아니다. 그 라인만 지녔던 결함 네 개가 있고
+% 2026-11-08 교정 29건이 없다. 지금 교정본을 재타깃한 것이다.
+%
+% Analytical Chemistry 하드 게이트 (저자지침 2026-10-05 갱신본):
+%   Article 10,000 단어 / 초록 80~250 단어 / TOC 그래픽 8.25 x 4.45 cm
+%   커버레터 필수, 추천 심사위원 4인 이상 이메일 포함
+\documentclass[journal=ancham,manuscript=article,margin=1in]{achemso}
+
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx,booktabs}
+\usepackage{textcomp}
 \usepackage{xr}
-% 2026-10-20. 본문 도판 셋이 각 네 패널이 되면서 높이가 쪽의 70%를 넘는다.
-% LaTeX 기본값(\topfraction 0.7)은 그런 float 를 상단에 두지 못해 셋을 전부
-% 참고문헌 뒤로 밀어냈다. 한도를 올려 호출 지점 근처에 놓는다.
+\externaldocument[S-]{supplementary}
+% 본문 도판 셋이 각 네 패널이라 높이가 쪽의 70%를 넘는다. LaTeX 기본값
+% (\topfraction 0.7)은 그런 float 를 상단에 두지 못해 셋을 전부 참고문헌
+% 뒤로 밀어낸다. 한도를 올려 호출 지점 근처에 놓는다.
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.92}
 \renewcommand{\textfraction}{0.06}
 \renewcommand{\floatpagefraction}{0.72}
-\externaldocument[S-]{supplementary}
-\usepackage{lineno}
-\modulolinenumbers[1]
-\journal{Journal of Hazardous Materials}
-\bibliographystyle{elsarticle-num}
 \renewcommand{\arraystretch}{1.15}
-
-% Highlights 는 highlights.tex 한 곳에만 둔다. 2026-10-24 까지 이 자리에
-% %% 블록으로 사본이 있었고, 철회한 'DFP displaces DMMP ...' 문구가 거기
-% 남아 있었다. Elsevier 제작계가 %% 블록을 수집하므로 철회한 문구가 실릴 수
-% 있는 경로였다. 사본을 두지 않는다.
-
-\begin{document}
-\begin{frontmatter}
 
 \title{No Public Designation Names a Detection Measurement for the Simulants
 Chemical Warfare Agent Sensing Is Built On, and Descriptor Comparison Cannot
 Supply the Missing Validation}
 
-% elsarticle 는 \ead 를 전부 한 각주로 모아 '* Corresponding authors.' 바로
-% 아래에 붙인다. 비교신저자의 주소까지 실으면 여섯 명 모두가 교신인 것처럼
-% 읽힌다 (2026-10-24 적발). 본문에는 교신저자 둘만 싣고, 나머지는 투고
-% 시스템에 입력한다. 비교신저자 다섯의 주소는 공개 저장소에 둘 것이
-% 아니므로 2026-11-07 삭제했다 (GATE8 13차 R5 지적). 투고 시스템에만
-% 입력한다.
-%
-% 2026-11-01 Ku 지시로 저자 구성 변경. 종전(2026-10-24 확정)은
-%   Ku Kang·Jin Yoo 공동1저자 -> Jeongyun Kim -> Miae Kim ->
-%   Doo-Hee Lee·Yoon Jeong Jang 공동교신 (6인) 이었다.
-% 바뀐 점 넷: 공동1저자 해제(Ku 단독), Jeongyun Kim·Miae Kim 이 2·3저자로,
-% Doo-Hee Lee 가 4저자로(교신 해제), Jin Yoo 가 5저자로,
-% Yoon Jeong Jang 단독교신. 6인 구성은 그대로다.
-% Jeongyun Kim 소속은 이 원고 한정 CBRN 표기를 유지한다 (2026-11-01 Ku 재확인).
-\author[cbrn]{Ku Kang}
-\author[cbrn]{Jeongyun Kim}
-\author[cbrn]{Miae Kim}
-\author[kma]{Doo-Hee Lee}
-\author[cbrn]{Jin Yoo}
-\author[cbrn]{Yoon Jeong Jang\corref{cor1}}
-\ead{yjjangchem@korea.kr}
-\cortext[cor1]{Corresponding author.}
-\address[cbrn]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
+% 2026-11-01 Ku 지시 저자 구성. 공동1저자 해제(Ku 단독), Jeongyun Kim 과
+% Miae Kim 이 2·3저자, Doo-Hee Lee 4저자(교신 해제), Jin Yoo 5저자,
+% Yoon Jeong Jang 단독교신. 비교신저자 주소는 공개 저장소에 두지 않고
+% 투고 시스템에만 입력한다 (2026-11-07, GATE8 13차 R5 지적).
+\author{Ku Kang}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
 Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
-\address[kma]{Department of Civil Engineering and Environmental Sciences,
+\author{Jeongyun Kim}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
+Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\author{Miae Kim}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
+Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\author{Doo-Hee Lee}
+\affiliation[KMA]{Department of Civil Engineering and Environmental Sciences,
 Korea Military Academy, Seoul 01805, Republic of Korea}
+\author{Jin Yoo}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
+Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\author{Yoon Jeong Jang}
+\affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
+Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
+\email{yjjangchem@korea.kr}
+
 % ORCID (제출 시스템 입력용):
 %   Ku Kang          0000-0001-8739-218X
 %   Jeongyun Kim     0009-0004-1377-8572
@@ -65,6 +66,23 @@ Korea Military Academy, Seoul 01805, Republic of Korea}
 %   Doo-Hee Lee      0000-0002-5116-2064
 %   Jin Yoo          0000-0002-7738-8424
 %   Yoon Jeong Jang  0000-0002-5625-2528
+
+
+\keywords{chemical warfare agent simulant, descriptor space, DMMP,
+exact permutation test, acute exposure guideline level, dual-use}
+
+\begin{document}
+
+% TOC 그래픽. ACS 규격은 3.25 x 1.75 in 이고 make_toc_acs.py 가 600 dpi
+% 실척(1950 x 1050 px)으로 만든다. graphical_abstract.png 는 JHM 전용
+% 산출물이므로 쓰지 않는다.
+%
+% [확인 필요] make_toc_acs.py:78 의 HEADLINE 이 아직 철회한 ACS 헤드라인
+% '13 of 34 cases are nearest a different compound' 이다. 현행 논지로
+% 다시 쓰고 렌더해 눈으로 확인한 뒤 투고할 것 (STEP 2).
+\begin{tocentry}
+\includegraphics[width=3.25in]{toc_acs.png}
+\end{tocentry}
 
 \begin{abstract}
 \noindent
@@ -92,37 +110,6 @@ while relabelling the two pesticides as simulants produces an adjusted 0.0008. A
 measurement it rests on and fix panel, space, statistic and weighting in
 advance.
 \end{abstract}
-
-\begin{keyword}
-chemical warfare agent simulant \sep descriptor space \sep {DMMP} \sep
-exact permutation test \sep acute exposure guideline level \sep dual-use
-\end{keyword}
-
-\end{frontmatter}
-
-\linenumbers
-
-% JHM 은 Environmental Implication 문단을 요구한다. elsarticle 은 abstract 를
-% 하나만 찍으므로 초록 뒤 본문 머리에 둔다. 2026-10-24 기준 공식 Guide for
-% Authors 원문은 robots 로 막혀 양식과 분량 제한을 직접 확인하지 못했다.
-% 투고 전 저널 페이지에서 확인할 것.
-\section*{Environmental implication}
-
-Chemical warfare agents are
-among the most acutely toxic substances in commerce or in storage, and almost
-everything done to detect, contain or destroy them in the field is developed and
-qualified on substitutes. Decontamination efficiency is quantified against
-dimethyl methylphosphonate \cite{ebeam}, protective ensembles are qualified on
-vapour penetration by methyl salicylate \cite{nrc1997mist, astmf2588,
-top102022a}, and point detectors are tested against simulants chosen by a
-procedure that is not public \cite{top082188, top082196}. This work shows that
-the compounds carrying that weight in the sensing literature hold no public
-designation naming the measurement they are used for, that one of them has no
-regulator-derived acute inhalation value at all, and that a descriptor
-comparison of the kind the field uses to justify such choices does not settle
-the question either way. The practical consequence is for anyone who reads a
-simulant result as a statement about the agent: the measurement the compound was
-validated against, where one exists, is the limit of what that reading supports.
 
 \section{Introduction}
 
@@ -220,7 +207,7 @@ fidelity to the detection-relevant properties is to be maximised while
 phosphorus electrophilicity, acetylcholinesterase reactivity, alkylating
 capacity and predicted mammalian toxicity are to be minimised. No analysis here
 ranks compounds by predicted mammalian toxicity. One analysis does order
-compounds on a reactivity surrogate: Supplementary Section~\ref{S-res:plocal}
+compounds on a reactivity surrogate: Supporting Information Section~\ref{S-res:plocal}
 reports the condensed Fukui index at phosphorus for the six phosphorus-bearing
 compounds of the panel, which is defined with respect to attack on phosphorus
 and is therefore an acetylcholinesterase-relevant quantity. It covers only
@@ -229,7 +216,7 @@ show that the incumbent simulant sits closer to the agents on that axis than the
 fidelity argument assumes, and it is not extended to any novel structure. The
 structural filter in Section~\ref{sec:alerts} excludes candidates and never
 orders them. One ordering is published, in
-Supplementary Section~\ref{S-res:h1}, and it ranks compounds that have cleared
+Supporting Information Section~\ref{S-res:h1}, and it ranks compounds that have cleared
 that filter by resemblance to the agents in the electronic space. Every
 compound in it is an industrial chemical in commerce that already carries a
 published regulatory exposure value, which is how it entered the pool at all,
@@ -239,7 +226,7 @@ published structural-alert literature cited in Section~\ref{sec:alerts}, and
 Section~\ref{sec:alerts} states in prose what each tier covers, so releasing the
 patterns with the code adds no structure-activity information that the text does
 not already give. We did not extend the toxicity
-model of Supplementary Section~\ref{S-sec:qsar} to the organophosphorus class,
+model of Supporting Information Section~\ref{S-sec:qsar} to the organophosphorus class,
 because a model predicting mammalian lethality for structures not yet made would
 invert the direction of the work. That a predictive model trained for safety can
 be run in reverse is not hypothetical \cite{urbina2022}, and how much of such a
@@ -312,8 +299,8 @@ them under a stronger grade of standing than dichloromethane has. The
 merged space is reported alongside both component spaces throughout rather than
 selected among them. Six distance statistics were computed and none was
 nominated in advance, which Section~\ref{res:panels} reports the consequence of
-and Supplementary Table~\ref{S-tab:family} prices. Equal weight per descriptor was the default
-we inherited rather than one we chose, and Supplementary
+and Supporting Information Table~\ref{S-tab:family} prices. Equal weight per descriptor was the default
+we inherited rather than one we chose, and Supporting Information
 Section~\ref{S-res:blockbalance} reports the alternative.
 
 \subsection{Descriptors}
@@ -370,7 +357,7 @@ differences of 0.029 to 0.052~eV for the orbital quantities and 0.11~D for the
 dipole, the largest single dipole discrepancy being 0.95~D at tabun. Which
 protocol an analysis uses is fixed by what it compares. The descriptor-space comparison of
 Section~\ref{res:panels}, which stays inside the 28 compounds, uses the
-Boltzmann-averaged values. The decoupling analysis of Supplementary Section~\ref{S-res:h1}
+Boltzmann-averaged values. The decoupling analysis of Supporting Information Section~\ref{S-res:h1}
 places the 28 and the AEGL pool in one space, so it uses the single-conformer
 values for all of them, including the 28; mixing protocols within a distance
 calculation would put part of the systematic difference above into the
@@ -384,7 +371,7 @@ compounds: the Mulliken charges at phosphorus and at the phosphoryl oxygen, the
 Wiberg P=O bond order \cite{wiberg1968}, and the condensed Fukui index
 $f^{+}(\mathrm{P})$ for nucleophilic attack at that centre
 \cite{parryang1984,yangmortier1986,geerlings2003}. They are reported in
-Supplementary Section~\ref{S-res:plocal} and excluded from any analysis spanning
+Supporting Information Section~\ref{S-res:plocal} and excluded from any analysis spanning
 all 28 compounds.
 
 \subsection{Descriptor spaces and distances}
@@ -408,7 +395,7 @@ the standardised four-variable set account for 97.6\% of its variance, and
 removing $\omega$ leaves the rank order of pairwise distances almost unchanged
 (Spearman 0.934 on the primary panel, 0.932 on the smaller one). We therefore take $E_{\mathrm{HOMO}}$, $E_{\mathrm{LUMO}}$ and
 the dipole moment as the electronic space, and report $\omega$ and the condensed
-Fukui index in Supplementary Table~\ref{S-tab:plocal} without admitting them to
+Fukui index in Supporting Information Table~\ref{S-tab:plocal} without admitting them to
 any distance. The four reactivity descriptors localised at phosphorus
 are undefined for the twenty-two panel compounds that contain none, so they
 cannot enter a panel-wide distance either.
@@ -732,7 +719,7 @@ nearest-neighbour separation of that space; filled markers are valid matches.
 (d) Exact permutation null for that panel over all 680 ways of designating three
 of the seventeen non-agents as simulants, with the actual designation marked;
 the $p$ shown is the mean-difference statistic only, the other five and the
-adjusted values being in Supplementary Table~\ref{S-tab:ablation}, where the
+adjusted values being in Supporting Information Table~\ref{S-tab:ablation}, where the
 Benjamini-Hochberg value over its eighteen tests is 0.163.}
 \label{fig:main}
 \end{figure}
@@ -756,11 +743,11 @@ statistic for 2000 random three-descriptor subspaces of the structural space, be
 0.026 is the 22.4th percentile of those draws, and 27.4\% of them fall below 0.05
 as measured, 17\% after whitening. (d) Smallest adjusted value over the
 eighteen tests of each configuration under the five accounting schemes of
-Supplementary Table~\ref{S-tab:family}; on the twenty-eight-compound panel only the
+Supporting Information Table~\ref{S-tab:family}; on the twenty-eight-compound panel only the
 scheme that
 fixes the statistic in advance falls below 0.05, and the fourth configuration
 falls below it under every scheme. Local reactivity at phosphorus and the rank
-of the Parr index are in Supplementary Figure~\ref{S-fig:plocal}.}
+of the Parr index are in Supporting Information Figure~\ref{S-fig:plocal}.}
 \label{fig:spaces}
 \end{figure}
 
@@ -839,7 +826,7 @@ per-descriptor weighting the structural descriptors, thirty-five on the smaller
 panel and thirty-eight on the primary one, outvote three electronic ones.
 
 Every exact permutation test we can run, across four panel and designation
-configurations, three spaces and six statistics, is in Supplementary
+configurations, three spaces and six statistics, is in Supporting Information
 Table~\ref{S-tab:ablation}, in full rather than selected from, because the
 pattern across the cells is the finding. Three things hold across it. On the
 primary panel no test reaches nominal significance: in no space and under no
@@ -855,8 +842,8 @@ in the merged space.
 Correcting for the number of times we looked removes almost all of it, and the
 exception is instructive. On the primary panel the question does not arise,
 since the smallest nominal value is already 0.192 under the per-descriptor
-standardisation used throughout. The five accounting schemes of Supplementary
-Section~\ref{S-meth:multiplicity}, applied in Supplementary
+standardisation used throughout. The five accounting schemes of Supporting Information
+Section~\ref{S-meth:multiplicity}, applied in Supporting Information
 Table~\ref{S-tab:family}, matter only for the twenty-eight-compound panel. There the eighteen-test family
 gives a smallest adjusted value of 0.163, correcting the six statistics within
 each space gives 0.077, and the Westfall-Young min-$P$ procedure, which uses the
@@ -881,7 +868,7 @@ contestable. Classing them as simulants instead, which moves two labels and
 changes nothing else, gives a smallest nominal value of 0.00006 and a
 Benjamini-Hochberg value of 0.0008 over the same eighteen tests, and it is the
 only configuration in this work that survives every one of the five accounting
-schemes of Supplementary Table~\ref{S-tab:family}. The direction is
+schemes of Supporting Information Table~\ref{S-tab:family}. The direction is
 not surprising, since both pesticides carry the phosphoryl motif the agents
 carry, and that is the point: significance here is available to an analyst who
 moves two labels, and the practice records neither which labels were moved nor
@@ -938,7 +925,7 @@ nearest compound outside the designated set. What the test detects is that they
 are less far than a triple drawn at random from a pool assembled out of
 interferents and solvents, which were chosen for this panel because they are not
 like the agents. Against that reference class a single organophosphorus compound
-is close to sufficient. Supplementary Section~\ref{S-res:dimdetail} reports
+is close to sufficient. Supporting Information Section~\ref{S-res:dimdetail} reports
 both controls in full.
 
 \subsection{How many agents have a valid simulant depends on the panel}
@@ -1057,14 +1044,14 @@ simulant in the sensing literature \cite{lee2016lewisite}, though we found
 no designating document for it, leaves the incumbent-three count at zero of
 eleven and supplies lewisite's only match under the literature set, at 1.27
 where the best the five could previously offer was 2-chloroethyl ethyl
-sulfide at 2.35 (Supplementary Information).
+sulfide at 2.35 (Supporting Information).
 
 \subsection{What the array actually measures}
 \label{res:measured}
 
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a vapour-phase sensor reports is tested in
-Supplementary Section~\ref{S-res:arraydetail} against measured colorimetric
+Supporting Information Section~\ref{S-res:arraydetail} against measured colorimetric
 response for twelve panel compounds over 29 dyes, of which 23 are independent
 channels in the one plate set where that matters. It does not resolve the
 question, and it is worth being exact about why. Of twelve
@@ -1123,14 +1110,14 @@ where DMMP sits.}
 
 The criterion has a second half: that compounds chosen on physicochemical
 grounds present minimal toxicity risk \cite{webb2025}. We tested it on the same
-panel and report it in full in the Supplementary Material. Three results are
+panel and report it in full in the Supporting Information. Three results are
 needed here.
 
 Dichloromethane has a regulator-derived acute inhalation value and DMMP has
 neither an acute one nor a chronic one: it is absent from the AEGL list, and
 EPA's provisional assessment separately declined to derive a chronic inhalation
 reference concentration for want of data (Figure~\ref{fig:tox}a and b,
-Supplementary Section~\ref{S-meth:aegl}). The two incumbents
+Supporting Information Section~\ref{S-meth:aegl}). The two incumbents
 therefore differ in how well documented they are and not only in how hazardous,
 which matters because DMMP is also the compound against which decontamination
 efficiency is quantified \cite{ebeam}. Dichloromethane's value is favourable on
@@ -1142,7 +1129,7 @@ A model cannot fill the gap. A random forest trained on 230 AEGL chemicals
 reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
 agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
 of them as inside its applicability domain (Figure~\ref{fig:tox}c and d,
-Supplementary Section~\ref{S-sec:qsar}). The failure is not a missing mechanism, since
+Supporting Information Section~\ref{S-sec:qsar}). The failure is not a missing mechanism, since
 thirteen training compounds carry an acetylcholinesterase-inhibiting
 pharmacophore and one is more acutely toxic than sarin. It is tail regression, a bias in
 the response space that an input-space domain check cannot see.
@@ -1152,7 +1139,7 @@ compounds carrying both measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to
 $+0.199$). The interval excludes a trade-off strong enough to constrain
 selection, which is weaker than independence and is what the data support, so
 the two can be improved separately
-(Supplementary Section~\ref{S-res:h1}). We draw no candidate recommendation from
+(Supporting Information Section~\ref{S-res:h1}). We draw no candidate recommendation from
 that: one resting on a single panel and two axes would repeat the error this
 paper reports.
 
@@ -1244,18 +1231,18 @@ Three consequences follow for practice. DMMP is a surrogate for one G agent at a
 time rather than for the G series, and not a V-agent surrogate at all: the
 descriptor criterion assigns GB, GD and GF to it, while the measured array puts
 sarin first in reflectance and tabun, which fails that criterion, first in the
-ultraviolet channel (Supplementary Section~\ref{S-res:arraydetail}). The
+ultraviolet channel (Supporting Information Section~\ref{S-res:arraydetail}). The
 condensed Fukui index at phosphorus puts DMMP above VX by a factor of 2.7 in the
 semi-empirical treatment used here, which would sharpen the point, but we could
 not reproduce that index at a higher level of theory and we do not lean on it
-(Supplementary Section~\ref{S-meth:dft}). The global electrophilicity index
+(Supporting Information Section~\ref{S-meth:dft}). The global electrophilicity index
 should not enter a descriptor space, for an arithmetic rather than a chemical
 reason: where the frontier orbital energies are present it adds no information,
 and a correlation filter will not notice. It should not be read as a reactivity
 axis either, and that is a chemical reason: recomputing this panel with density
 functional theory leaves the qualitative picture but moves which agents sit
 lowest, so an ordering taken from it describes the method
-(Supplementary Section~\ref{S-res:plocal}). And
+(Supporting Information Section~\ref{S-res:plocal}). And
 the safety of a simulant is a question about evidence before it is one about
 hazard, since dichloromethane carries a regulator-derived acute inhalation value
 and DMMP carries none (Section~\ref{res:toxsummary}).
@@ -1283,7 +1270,7 @@ effect. On the primary panel the mean-difference statistic reaches $p<0.05$ once
 the incumbent simulants are moved 0.23 typical nearest-neighbour separations
 closer to the agents, while the deficit they actually carry has a median of
 0.493 and falls below that value only at sarin, where it is 0.125
-(Supplementary Section~\ref{S-res:mde}). The test is therefore sensitive to effects
+(Supporting Information Section~\ref{S-res:mde}). The test is therefore sensitive to effects
 smaller than the one at issue. The
 agent set is eleven compounds and the nearest-neighbour statistics inherit that:
 on the larger panel with eight simulants, leaving out one agent at a time moves
@@ -1296,7 +1283,7 @@ build from compounds carrying complete descriptor data; measured toxicity values
 exist for a subset only, DMMP among the compounds without one, so the two axes do
 not run over the same compounds. A fourth configuration,
 classing dichlorvos and malathion as simulants, is reported in
-Supplementary Table~\ref{S-tab:ablation} and Section~\ref{res:panels} because we
+Supporting Information Table~\ref{S-tab:ablation} and Section~\ref{res:panels} because we
 flagged that
 label decision as contestable; the four configurations sample the configuration
 space rather than census it. Accordingly, the present panels should be
@@ -1310,7 +1297,7 @@ could not have been admitted as a candidate in the toxicity screen either. The
 arsenical route to a lewisite simulant is therefore outside what is tested
 here, and lewisite's lack of a valid match in any space should be read against
 that. The measured-array intervals describe variation across concentrations within
-one plate set rather than agreement between preparations (Supplementary
+one plate set rather than agreement between preparations (Supporting Information
 Section~\ref{S-res:arraydetail}). GFN2-xTB is
 semi-empirical, and the quantities used here are relative within a consistent
 protocol rather than absolute. The virtual orbital energies make that concrete.
@@ -1366,16 +1353,16 @@ not move the answer here, but nothing in the design guaranteed that. Until those
 advance, a statement that a compound is a validated simulant reports a convention
 rather than a measurement.
 
-Findings from the toxicity axis are in the Supplementary Material and do not
+Findings from the toxicity axis are in the Supporting Information and do not
 depend on the contested comparison. The two incumbents differ in how well
 documented they are and not only in how hazardous, dichloromethane carrying a
 regulator-derived acute inhalation value and DMMP carrying none of any kind
 (Section~\ref{res:toxsummary}). A random forest trained
 on 230 AEGL chemicals predicts all twenty held-out military agents safer than
 measured, by factors of 2.5 to 2600, so predicted toxicity cannot stand in for
-the missing values (Supplementary Section~\ref{S-res:qsar}). Fidelity and acute
+the missing values (Supporting Information Section~\ref{S-res:qsar}). Fidelity and acute
 toxicity show no monotonic association across the 207 compounds carrying both axes
-(Supplementary Section~\ref{S-res:h1}). We propose no replacement compound,
+(Supporting Information Section~\ref{S-res:h1}). We propose no replacement compound,
 because proposing one would repeat the error this paper is about.
 
 \section*{Funding}

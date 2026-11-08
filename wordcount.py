@@ -88,7 +88,18 @@ def main():
     print(f'본문 (전체)     {n_body:>6} 단어')
     print(f'본문 (캡션 제외){n_body - cap:>6} 단어   [캡션 {cap}]')
     print()
-    pos = [(h, body.index(h)) for h in heads if h in body]
+    # 2026-11-08. 종전에는 body.index(h) 로 각 제목의 첫 출현을 썼다. 절
+    # 제목과 같은 문구가 산문에 먼저 나오면 그쪽이 잡힌다. 실제로
+    # 'Data and code availability' 가 Results 앞의 산문에서 먼저 걸려
+    # 마지막 절에 8,258 단어가 붙었고, 섹션 합이 본문 총계를 넘었다.
+    # 앞 절 뒤에서부터 순차로 찾아 순서를 강제한다.
+    pos, _at = [], 0
+    for h in heads:
+        j = body.find(h, _at)
+        if j < 0:
+            continue
+        pos.append((h, j))
+        _at = j + len(h)
     for i, (h, j) in enumerate(pos):
         k = pos[i + 1][1] if i + 1 < len(pos) else len(body)
         print(f'  {h[:52]:<54} {len(words(body[j + len(h):k])):>5}')
@@ -100,7 +111,11 @@ def main():
     src = open('paper/main.tex').read()
     figs = [m.group(1) for m in
             re.finditer(r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', src)]
-    figs = [f for f in figs if 'toc' not in f.lower()]
+    # TOC 그래픽은 분량 환산에서 제외된다. 파일명이 graphical_abstract
+    # 로 바뀌어 'toc' 필터를 빠져나가 도판으로 세어지고 있었다.
+    figs = [f for f in figs
+            if 'toc' not in f.lower()
+            and 'graphical_abstract' not in f.lower()]
     refs = len(words(txt[txt.index('References'):]))
     pages = (n_body - cap) / 1000.0 + len(figs) * 0.5 + refs / 1000.0
     print(f'\n  참고문헌      {refs:>6} 단어')
