@@ -756,7 +756,7 @@ nearest non-agent compound to any of the eleven agents, so the count stays at
 zero however far the threshold is relaxed.
 
 That count is sensitive to the descriptors, and the honest statement of it is
-the interval rather than the point. Resampling the 42 merged-space descriptors
+the interval rather than the point. Resampling the 41 merged-space descriptors
 with replacement (Section~\ref{meth:dboot}) gives the incumbent three a median
 of zero matched agents with a 2.5th to 97.5th percentile range of zero to
 three, and exactly zero
@@ -1073,10 +1073,12 @@ agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
 of them as inside its applicability domain. The failure is tail regression, a
 bias in the response space that an input-space domain check cannot see.
 
-Fidelity and acute toxicity show no monotonic association across the 207
-compounds carrying both measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to
-$+0.199$), which is weaker than independence and is what the data support, so
-the two can be improved separately. We draw no candidate recommendation from
+Fidelity and acute toxicity show no detectable monotonic association across
+the 207 compounds carrying both measured axes (Spearman $r=+0.062$, 95\% CI
+$-0.077$ to $+0.199$). The interval contains zero and excludes any association
+stronger than weak in either direction, which bounds the association rather
+than establishing independence, so over the range these data cover the two can
+be improved separately. We draw no candidate recommendation from
 that: one resting on a single panel and two axes would repeat the error this
 paper reports.
 
