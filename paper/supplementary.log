@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  8 NOV 2026 23:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  9 NOV 2026 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -556,60 +556,56 @@ Package hyperref Warning: Suppressing empty link on input line 1159.
 Package hyperref Warning: Suppressing empty link on input line 1183.
 
 [18]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1253
-.
-
-[19]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1309
-.
-
-
-Underfull \hbox (badness 1127) in paragraph at lines 1327--1339
+<Fig_toxicity.png, id=325, 844.47495pt x 865.0719pt>
+File: Fig_toxicity.png Graphic file (type png)
+<use Fig_toxicity.png>
+Package pdftex.def Info: Fig_toxicity.png  used on input line 1257.
+(pdftex.def)             Requested size: 460.935pt x 472.17424pt.
+ [19] [20 <./Fig_toxicity.png>]
+Underfull \hbox (badness 1127) in paragraph at lines 1356--1368
 \OT1/ptm/m/n/10.95 cause that was our first hy-poth-e-sis and it is wrong. Thir
 -teen of the 230 train-ing com-pounds
  []
 
 
-Underfull \hbox (badness 1442) in paragraph at lines 1327--1339
+Underfull \hbox (badness 1442) in paragraph at lines 1356--1368
 \OT1/ptm/m/n/10.95 carry an acetylcholinesterase-inhibiting phar-ma-cophore, id
 en-ti-fied by sub-struc-ture rather than by
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 1327--1339
+Underfull \hbox (badness 1577) in paragraph at lines 1356--1368
 \OT1/ptm/m/n/10.95 parathion, methyl parathion, methami-dophos, dichlor-vos, ma
 lathion) and three car-ba-mate es-ters
  []
 
 
-Underfull \hbox (badness 1038) in paragraph at lines 1327--1339
+Underfull \hbox (badness 1038) in paragraph at lines 1356--1368
 \OT1/ptm/m/n/10.95 the ser-ine hy-droxyl of acetyl-cholinesterase and the choli
 n-er-gic cri-sis that fol-lows [[],
  []
 
 
-Underfull \hbox (badness 4913) in paragraph at lines 1327--1339
+Underfull \hbox (badness 4913) in paragraph at lines 1356--1368
 []\OT1/ptm/m/n/10.95 , []],
  []
 
 
-Package hyperref Warning: Suppressing empty link on input line 1359.
+Package hyperref Warning: Suppressing empty link on input line 1388.
 
-[20]
-<Fig_h1.png, id=345, 777.26385pt x 834.35715pt>
+[21]
+<Fig_h1.png, id=354, 777.26385pt x 834.35715pt>
 File: Fig_h1.png Graphic file (type png)
 <use Fig_h1.png>
-Package pdftex.def Info: Fig_h1.png  used on input line 1365.
+Package pdftex.def Info: Fig_h1.png  used on input line 1394.
 (pdftex.def)             Requested size: 460.935pt x 494.79997pt.
 
-Underfull \hbox (badness 1424) in paragraph at lines 1442--1450
+Underfull \hbox (badness 1424) in paragraph at lines 1471--1479
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
  []
 
-[21] [22] (./supplementary.bbl
+[22] [23] (./supplementary.bbl
 Underfull \hbox (badness 4391) in paragraph at lines 30--38
 \OT1/ptm/m/n/10.95 Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https : / / www
  . epa . gov / sites / default / files / 2018-[]08 /
@@ -630,13 +626,13 @@ Overfull \hbox (518.44485pt too wide) in paragraph at lines 96--104
 []
  []
 
-[23]
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 255--263
 \OT1/pcr/m/n/10.95 / / cfpub . epa . gov / ncea / pprtv / documents / Dimethylm
 ethylphosphonate . pdf$[]\OT1/ptm/m/n/10.95 ,
  []
 
-[24]) [25] [26 <./Fig_h1.png>] (./supplementary.aux)
+[25]) [26] [27 <./Fig_h1.png>] (./supplementary.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -645,13 +641,13 @@ Package rerunfilecheck Info: File `supplementary.out' has not changed.
 (rerunfilecheck)             Checksum: 191DE785C7A6A6569D3021B80F4F6235;6508.
  ) 
 Here is how much of TeX's memory you used:
- 10648 strings out of 476106
- 160865 string characters out of 5793932
+ 10658 strings out of 476106
+ 161050 string characters out of 5793932
  1949975 words of memory out of 5000000
- 32389 multiletter control sequences out of 15000+600000
+ 32397 multiletter control sequences out of 15000+600000
  586087 words of font info for 101 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,11n,79p,1669b,561s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,1669b,559s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -669,10 +665,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (26 pages, 1166156 bytes).
+Output written on supplementary.pdf (27 pages, 1739518 bytes).
 PDF statistics:
- 490 PDF objects out of 1000 (max. 8388607)
- 406 compressed objects within 5 object streams
- 99 named destinations out of 1000 (max. 500000)
- 224 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 499 PDF objects out of 1000 (max. 8388607)
+ 412 compressed objects within 5 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

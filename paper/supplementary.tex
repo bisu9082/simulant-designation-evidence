@@ -1248,9 +1248,38 @@ space, and do not show it to be irrelevant. The claims in the rest of this paper
 are written to that limit.
 
 \section{The measured safety axis, and the holes in it}
+\label{res:safety}
+
+% 2026-11-09. 본문 Figure 3 을 여기로 옮겼다 (ACS 8면 한도). 본문
+% 3.5 는 수치 셋과 선언만 남기고 이 절을 가리킨다.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{Fig_toxicity.png}
+\caption{The second half of the criterion, measured and then modelled.
+(a) EPA AEGL-3 at 10~min on a logarithmic scale for the nineteen compounds that
+have one; the incumbent simulant dichloromethane sits near the safe end but is
+not the safest, methanol and n-hexane both scoring higher.
+Five of the nineteen values come from the agency's own footnotes rather than
+from the table cell, because they exceed half the lower explosive limit.
+(b) The nine compounds with no regulator-grade acute inhalation value, with the
+reason for each; DMMP, which supplies every valid match on the
+twenty-eight-compound panel and zero on the primary one, is among them.
+(c) Out-of-fold predictions for the 230 training chemicals (orange) with the
+twenty military agents held out of training (red) overlaid; arrows run from the
+measured
+value to the prediction, and every agent is predicted safer than it is. Labels
+name the ten agents of this paper's panel that the AEGL set also holds and the
+three nitrogen mustards; the remaining seven held-out agents are plotted
+unlabelled. (d) Prediction error against
+applicability-domain distance. Every one of the twenty is wrong by between 0.40
+and 3.42 log units, and fourteen of them pass the domain check, the
+worst of those fourteen being wrong by 2.68 log units. The dotted line marks
+where DMMP sits.}
+\label{fig:tox}
+\end{figure}
 
 Nineteen of the twenty-eight compounds have an AEGL-3 at 10~min
-(Fig.~\ref{M-fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
+(Fig.~\ref{fig:tox}a). The ordering runs VX (0.0295~mg~m$^{-3}$), soman (0.365),
 sarin (0.367), cyclosarin (0.391), tabun (0.729), sulfur mustard (3.84),
 lewisite~1 (3.9), chloropicrin (13.4), phosgene (14.6), hydrogen cyanide (29.8),
 acetonitrile (403), chloroform (19\,530), benzene (30\,990), p-xylene (31\,264),
@@ -1306,7 +1335,7 @@ Section~\ref{meth:aegl} describes the CAS-keyed procedure used here.
 \label{res:qsar}
 
 On the training distribution the model works. The random forest
-(Fig.~\ref{M-fig:tox}c and d) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
+(Fig.~\ref{fig:tox}c and d) reached $R^{2}=0.458 \pm 0.014$ and RMSE $0.935$ in
 $\log_{10}$ units (95\% CI 0.830--1.020) against a training-mean baseline of
 1.271 (1.175--1.365) and a logP-plus-molecular-weight linear baseline of 1.225.
 The intervals for the model and the mean baseline do not overlap, and the

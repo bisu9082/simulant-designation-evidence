@@ -1081,65 +1081,31 @@ descriptor criterion of Section~\ref{res:match} excludes.
 \subsection{The toxicity half of the criterion}
 \label{res:toxsummary}
 
-\begin{figure}[tp]
-\centering
-\includegraphics[width=\textwidth]{Fig_toxicity.png}
-\caption{The second half of the criterion, measured and then modelled.
-(a) EPA AEGL-3 at 10~min on a logarithmic scale for the nineteen compounds that
-have one; the incumbent simulant dichloromethane sits near the safe end but is
-not the safest, methanol and n-hexane both scoring higher.
-Five of the nineteen values come from the agency's own footnotes rather than
-from the table cell, because they exceed half the lower explosive limit.
-(b) The nine compounds with no regulator-grade acute inhalation value, with the
-reason for each; DMMP, which supplies every valid match on the
-twenty-eight-compound panel and zero on the primary one, is among them.
-(c) Out-of-fold predictions for the 230 training chemicals (orange) with the
-twenty military agents held out of training (red) overlaid; arrows run from the
-measured
-value to the prediction, and every agent is predicted safer than it is. Labels
-name the ten agents of this paper's panel that the AEGL set also holds and the
-three nitrogen mustards; the remaining seven held-out agents are plotted
-unlabelled. (d) Prediction error against
-applicability-domain distance. Every one of the twenty is wrong by between 0.40
-and 3.42 log units, and fourteen of them pass the domain check, the
-worst of those fourteen being wrong by 2.68 log units. The dotted line marks
-where DMMP sits.}
-\label{fig:tox}
-\end{figure}
 
 
 The criterion has a second half: that compounds chosen on physicochemical
 grounds present minimal toxicity risk \cite{webb2025}. We tested it on the same
-panel and report it in full in the Supporting Information. Three results are
-needed here.
+panel and report it in full in the Supporting Information
+(Sections~\ref{S-meth:aegl}, \ref{S-res:safety}, \ref{S-sec:qsar} and
+\ref{S-res:h1}). Three results are needed here.
 
 Dichloromethane has a regulator-derived acute inhalation value and DMMP has
-neither an acute one nor a chronic one: it is absent from the AEGL list, and
-EPA's provisional assessment separately declined to derive a chronic inhalation
-reference concentration for want of data (Figure~\ref{fig:tox}a and b,
-Supporting Information Section~\ref{S-meth:aegl}). The two incumbents
-therefore differ in how well documented they are and not only in how hazardous,
-which matters because DMMP is also the compound against which decontamination
-efficiency is quantified \cite{ebeam}. Dichloromethane's value is favourable on
-the acute axis, at the 96th percentile of a 207-compound pool, and
-says nothing about the chronic and carcinogenic classification now displacing it
-from solvent inventories.
+neither an acute one nor a chronic one, so the two incumbents differ in how well
+documented they are and not only in how hazardous. Dichloromethane's value sits
+at the 96th percentile of a 207-compound pool on the acute axis and says nothing
+about the chronic and carcinogenic classification now displacing it from solvent
+inventories (Supporting Information Figure~\ref{S-fig:tox}a and b).
 
 A model cannot fill the gap. A random forest trained on 230 AEGL chemicals
 reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
 agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
-of them as inside its applicability domain (Figure~\ref{fig:tox}c and d,
-Supporting Information Section~\ref{S-sec:qsar}). The failure is not a missing mechanism, since
-thirteen training compounds carry an acetylcholinesterase-inhibiting
-pharmacophore and one is more acutely toxic than sarin. It is tail regression, a bias in
-the response space that an input-space domain check cannot see.
+of them as inside its applicability domain. The failure is tail regression, a
+bias in the response space that an input-space domain check cannot see.
 
 Fidelity and acute toxicity show no monotonic association across the 207
 compounds carrying both measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to
-$+0.199$). The interval excludes a trade-off strong enough to constrain
-selection, which is weaker than independence and is what the data support, so
-the two can be improved separately
-(Supporting Information Section~\ref{S-res:h1}). We draw no candidate recommendation from
+$+0.199$), which is weaker than independence and is what the data support, so
+the two can be improved separately. We draw no candidate recommendation from
 that: one resting on a single panel and two axes would repeat the error this
 paper reports.
 
