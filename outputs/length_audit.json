@@ -1,9 +1,9 @@
 {
- "body_words": 11425,
- "caption_words": 583,
- "ref_words": 1806,
- "n_figures": 2,
+ "body_words": 11337,
+ "caption_words": 390,
+ "ref_words": 1805,
+ "n_figures": 1,
  "n_tables": 2,
  "table_words": 750,
- "acs_pages": 14.98
+ "acs_pages": 14.39
 }

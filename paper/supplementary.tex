@@ -527,6 +527,45 @@ The five answers are given in Table~\ref{tab:family} and they do not agree.
 
 \section{Dimensionality and subspace controls}
 \label{meth:dimdetail}
+
+% 2026-11-09. 본문 3.2 의 주성분 단락을 여기로 옮겼다 (ACS 8면 한도).
+Figure~\ref{fig:spaces}a and b give the spaces on the twenty-eight-compound
+panel. The leading structural component is a size axis carrying 32.8\% of the
+variance and the leading electronic component loads on the two orbital energies
+against the dipole moment, the first two carrying 70.4\%. The primary panel
+behaves the same way, at 34.7\% and 70.3\%. Merging the two blocks returns a
+size axis at lower cumulative variance over the first two components, 44.3\% on
+the smaller panel and 45.1\% on the primary one, for a dimensional rather than a
+chemical reason: at equal per-descriptor weighting the structural descriptors,
+thirty-five on the smaller panel and thirty-eight on the primary one, outvote
+three electronic ones.
+
+% 2026-11-09. 본문 Figure 2 를 여기로 옮겼다 (ACS 8면 한도). 본문
+% 3.2 는 수치를 산문으로 유지하고 이 도판을 가리킨다.
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{Fig_spaces.png}
+\caption{The spaces the comparison is made in, and what the nominal value is
+worth once the choices behind it are counted. Red marks the authentic agents,
+blue the three incumbent simulants and orange the interferents and solvents;
+only agents and simulants are labelled. (a) Principal components of the
+structural space and (b) of the three-coordinate GFN2-xTB electronic space,
+both on the twenty-eight-compound panel, so that the five literature simulants
+do not appear in them; the
+leading structural component is a size axis and the leading electronic component
+loads the two orbital energies against the dipole moment. (c) The mean-difference
+statistic for 2000 random three-descriptor subspaces of the structural space,
+before and after ZCA whitening, with the space used here marked: its 0.028 is
+the 22.4th percentile of those draws, and 28.95\% of them fall below 0.05 as
+measured, 17.25\% after whitening. (d) Smallest adjusted value over the
+eighteen tests of each configuration under the five accounting schemes of
+Table~\ref{tab:family}; on the twenty-eight-compound panel only the
+scheme that
+fixes the statistic in advance falls below 0.05, and the fourth configuration
+falls below it under every scheme. Local reactivity at phosphorus and the rank
+of the Parr index are in Figure~\ref{fig:plocal}.}
+\label{fig:spaces}
+\end{figure}
 The structural and electronic spaces differ in dimension by more than an order of
 magnitude, and the concentration of Euclidean distances depends on dimension, so
 a difference between the two spaces is not by itself a difference between
@@ -961,7 +1000,7 @@ electrophilicity index, an exact function of the orbital energies that enter the
 electronic space, which itself enters no distance anywhere in this work
 (Section~\ref{M-meth:spaces}) and on which the three nerve agents rank lowest of
 the eleven agents. The principal components of the two spaces are in
-Figure~\ref{M-fig:spaces}a and b.}
+Figure~\ref{fig:spaces}a and b.}
 \label{fig:plocal}
 \end{figure}
 
