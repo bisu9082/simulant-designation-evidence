@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  9 NOV 2026 11:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  10 NOV 2026 04:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -487,7 +487,7 @@ Package hyperref Warning: Suppressing empty link on input line 452.
 Package hyperref Warning: Suppressing empty link on input line 461.
 
 [7]
-Overfull \hbox (127.00815pt too wide) in paragraph at lines 498--507
+Overfull \hbox (127.00815pt too wide) in paragraph at lines 499--508
 \OT1/ptm/m/n/10.95 fam-ily rather than a se-lec-tion from it, so the Benjamini-
 Hochberg pro-ce-dure [[]]
  []
@@ -495,16 +495,16 @@ Hochberg pro-ce-dure [[]]
 <Fig_spaces.png, id=209, 722.33865pt x 658.01836pt>
 File: Fig_spaces.png Graphic file (type png)
 <use Fig_spaces.png>
-Package pdftex.def Info: Fig_spaces.png  used on input line 547.
+Package pdftex.def Info: Fig_spaces.png  used on input line 548.
 (pdftex.def)             Requested size: 460.935pt x 419.90536pt.
 [8] [9 <./Fig_spaces.png>]
-Overfull \hbox (182.54657pt too wide) in paragraph at lines 594--613
+Overfull \hbox (182.54657pt too wide) in paragraph at lines 595--614
 \OT1/ptm/m/n/10.95 tory [[], [],
  []
 
 [10]
 
-Package hyperref Warning: Suppressing empty link on input line 680.
+Package hyperref Warning: Suppressing empty link on input line 681.
 
 (./tab_ablation.tex
 Overfull \hbox (29.67078pt too wide) in paragraph at lines 16--45
@@ -513,26 +513,26 @@ Overfull \hbox (29.67078pt too wide) in paragraph at lines 16--45
 
 ) (./tab_family.tex) [11] [12] (./tab_blockbalance.tex) [13] [14]
 
-Package hyperref Warning: Suppressing empty link on input line 975.
+Package hyperref Warning: Suppressing empty link on input line 976.
 
 <Fig_mde.png, id=289, 603.4545pt x 372.1905pt>
 File: Fig_mde.png Graphic file (type png)
 <use Fig_mde.png>
-Package pdftex.def Info: Fig_mde.png  used on input line 982.
+Package pdftex.def Info: Fig_mde.png  used on input line 983.
 (pdftex.def)             Requested size: 460.935pt x 284.29318pt.
 <Fig_plocal.png, id=290, 841.9455pt x 499.74706pt>
 File: Fig_plocal.png Graphic file (type png)
 <use Fig_plocal.png>
-Package pdftex.def Info: Fig_plocal.png  used on input line 995.
+Package pdftex.def Info: Fig_plocal.png  used on input line 996.
 (pdftex.def)             Requested size: 460.935pt x 273.58826pt.
 
-Package hyperref Warning: Suppressing empty link on input line 1003.
+Package hyperref Warning: Suppressing empty link on input line 1004.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1003.
+Package hyperref Warning: Suppressing empty link on input line 1004.
 
 
-Overfull \hbox (128.82527pt too wide) in paragraph at lines 1021--1036
+Overfull \hbox (128.82527pt too wide) in paragraph at lines 1022--1037
 \OT1/ptm/m/n/10.95 cause they dis-agree. The com-pos-ite lo-cal elec-trophilic-
 ity of Domingo et al. [[]],
  []
@@ -543,60 +543,60 @@ Package hyperref Warning: Suppressing empty link on input line 17.
 
 ) [16 <./Fig_mde.png>] [17 <./Fig_plocal.png>] (./tab_premisenull.tex) [18]
 
-Package hyperref Warning: Suppressing empty link on input line 1174.
+Package hyperref Warning: Suppressing empty link on input line 1175.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1198.
+Package hyperref Warning: Suppressing empty link on input line 1199.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1222.
+Package hyperref Warning: Suppressing empty link on input line 1223.
 
 [19]
 <Fig_toxicity.png, id=340, 844.47495pt x 865.0719pt>
 File: Fig_toxicity.png Graphic file (type png)
 <use Fig_toxicity.png>
-Package pdftex.def Info: Fig_toxicity.png  used on input line 1296.
+Package pdftex.def Info: Fig_toxicity.png  used on input line 1297.
 (pdftex.def)             Requested size: 460.935pt x 472.17424pt.
  [20] [21 <./Fig_toxicity.png>]
-Underfull \hbox (badness 1127) in paragraph at lines 1395--1407
+Underfull \hbox (badness 1127) in paragraph at lines 1396--1408
 \OT1/ptm/m/n/10.95 cause that was our first hy-poth-e-sis and it is wrong. Thir
 -teen of the 230 train-ing com-pounds
  []
 
 
-Underfull \hbox (badness 1442) in paragraph at lines 1395--1407
+Underfull \hbox (badness 1442) in paragraph at lines 1396--1408
 \OT1/ptm/m/n/10.95 carry an acetylcholinesterase-inhibiting phar-ma-cophore, id
 en-ti-fied by sub-struc-ture rather than by
  []
 
 
-Underfull \hbox (badness 1577) in paragraph at lines 1395--1407
+Underfull \hbox (badness 1577) in paragraph at lines 1396--1408
 \OT1/ptm/m/n/10.95 parathion, methyl parathion, methami-dophos, dichlor-vos, ma
 lathion) and three car-ba-mate es-ters
  []
 
 
-Underfull \hbox (badness 1038) in paragraph at lines 1395--1407
+Underfull \hbox (badness 1038) in paragraph at lines 1396--1408
 \OT1/ptm/m/n/10.95 the ser-ine hy-droxyl of acetyl-cholinesterase and the choli
 n-er-gic cri-sis that fol-lows [[],
  []
 
 
-Underfull \hbox (badness 4913) in paragraph at lines 1395--1407
+Underfull \hbox (badness 4913) in paragraph at lines 1396--1408
 []\OT1/ptm/m/n/10.95 , []],
  []
 
 [22]
 
-Package hyperref Warning: Suppressing empty link on input line 1427.
+Package hyperref Warning: Suppressing empty link on input line 1428.
 
 <Fig_h1.png, id=368, 777.26385pt x 834.35715pt>
 File: Fig_h1.png Graphic file (type png)
 <use Fig_h1.png>
-Package pdftex.def Info: Fig_h1.png  used on input line 1433.
+Package pdftex.def Info: Fig_h1.png  used on input line 1434.
 (pdftex.def)             Requested size: 460.935pt x 494.79997pt.
 
-Underfull \hbox (badness 1424) in paragraph at lines 1510--1518
+Underfull \hbox (badness 1424) in paragraph at lines 1511--1519
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
  []
@@ -661,7 +661,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (28 pages, 2013042 bytes).
+Output written on supplementary.pdf (28 pages, 2013107 bytes).
 PDF statistics:
  514 PDF objects out of 1000 (max. 8388607)
  421 compressed objects within 5 object streams

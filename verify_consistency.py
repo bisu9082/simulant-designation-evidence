@@ -3642,6 +3642,28 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-10 ([C-3] 복구). DPGME 특허(US 7129094 B1) 본문은 열람하지
+    # 못했다. sources/designations_20261106.csv 7행과
+    # outputs/tab_designations.tex:18 이 measurement·stated_basis 를 모두
+    # '[수집 불가: 특허 본문 미열람]' 으로 적는다. 그런데 원고는 그 특허가
+    # IMS 검출성을 요구한다고 네 곳에서 사실로 서술했다. 읽지 못한 문서의
+    # 내용이다.
+    #
+    # 더구나 IMS 검출성은 탐지다. 제목이 'No Public Designation Names a
+    # Detection Measurement' 인 원고가 지정 문서 하나에 탐지 측정을
+    # 부여하면 제목과 모순된다. 저자들이 2026-11-02 에 잡았고
+    # (sources/GATE8_7차_지적사항_우선순위_20261102.md:291-294) 8일간
+    # 미반영이었다.
+    #
+    # 같은 특허의 '선호 G계열 모사체' 문언은 2026-11-04 에 '원문 대조
+    # 불가' 를 이유로 철회됐다. IMS 는 같은 이유로 철회돼야 했는데
+    # 그 회차를 통과했다. 그래서 문자열로 금지한다.
+    ('DPGME 특허가 IMS 검출성을 요구한다는 서술 (특허 본문 미열람)',
+     [r'detectability by ion mobility spectrometry',
+      r'ion-mobility detectability',
+      r'ion-mobility response in a training composition',
+      r'ion-mobility training composition'],
+     []),
     # 2026-11-04 (작업 D). 패널 구성 명명. 8 은 문헌이 제안한 화합물 수가
     # 아니라 지정 후보의 총수다 — 기존 3종(DMMP, DPGME, 디클로로메탄) +
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature
