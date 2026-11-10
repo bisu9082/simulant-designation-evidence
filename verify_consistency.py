@@ -4169,6 +4169,41 @@ def main():
                          'sh build_paper.sh 를 돌릴 것 — 올라가는 '
                          'PDF 가 원고와 다르다')
 
+    # (B2e) '이 저널' 주장이 실제 타깃 저널과 맞는지 (2026-11-10 신설).
+    #
+    # 왜 필요한가. 원고는 JHM 을 노리고 쓰였고 서론과 논의가 lavoie2011 을
+    # 'in this journal' 로 적었다. lavoie2011 은 Journal of Hazardous
+    # Materials 다. ACS Analytical Chemistry 로 타깃을 옮기면서 그 문장 둘이
+    # 거짓이 됐는데, 어느 검사도 묻지 않았다. 저널은 앞으로도 바뀔 수 있으므로
+    # 문장이 아니라 검사로 막는다. achemso 의 journal= 값에서 타깃을 읽고,
+    # 'this journal' 근처에 있는 인용의 bib journal 필드와 대조한다.
+    import re as _r4
+    _ms = open(TEX).read()
+    _jm = _r4.search(r'journal=(\w+)', _ms)
+    _JOURNAL_OF = {'ancham': 'analytical chemistry',
+                   'ascefj': 'acs sensors'}
+    _target = _JOURNAL_OF.get(_jm.group(1).lower()) if _jm else None
+    if _target:
+        _bibtxt = ''
+        for _bp in ('paper/refs.bib',):
+            if os.path.exists(_bp):
+                _bibtxt += open(_bp, encoding='utf8').read()
+        _bibj = {}
+        for _e in _r4.finditer(r'@\w+\{([^,]+),(.*?)\n\}', _bibtxt, _r4.S):
+            _jf = _r4.search(r'journal\s*=\s*\{(.+?)\}', _e.group(2), _r4.S)
+            if _jf:
+                _bibj[_e.group(1).strip()] = ' '.join(_jf.group(1).split()).lower()
+        for _m in _r4.finditer(r'this\s+journal', _ms):
+            _win = _ms[_m.start():_m.start() + 400]
+            for _c in _r4.finditer(r'\\cite\{([^}]+)\}', _win):
+                for _k in _c.group(1).split(','):
+                    _k = _k.strip()
+                    _j = _bibj.get(_k)
+                    if _j and _target not in _j:
+                        fails.append(
+                            f"원고가 '{_k}' 를 'this journal' 로 적는데 그 논문은 "
+                            f"{_j} 에 실렸다 (검사 B2e). 타깃은 {_target} 이다")
+
     # (A-tag) 원고가 가리키는 예치 태그가 실제로 공개돼 있는지
     # (2026-11-07 신설, 12차 A-1).
     #
