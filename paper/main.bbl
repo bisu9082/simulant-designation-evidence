@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{67}
+\begin{mcitethebibliography}{41}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -73,14 +73,6 @@ Eubanks,~L.~M.; Dickerson,~T.~J.; Janda,~K.~D. Technological advancements for
 \bibitem[Rakow and Suslick(2000)Rakow, and Suslick]{rakow2000}
 Rakow,~N.~A.; Suslick,~K.~S. A colorimetric sensor array for odour
   visualization. \emph{Nature} \textbf{2000}, \emph{406}, 710--713\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Lin \latin{et~al.}(2011)Lin, Jang, and Suslick]{lin2011}
-Lin,~H.; Jang,~M.; Suslick,~K.~S. Preoxidation for Colorimetric Sensor Array
-  Detection of {VOCs}. \emph{Journal of the American Chemical Society}
-  \textbf{2011}, \emph{133}, 16786--16789\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -155,15 +147,6 @@ Mondloch,~J.~E.; Katz,~M.~J.; III,~W. C.~I.; Ghosh,~P.; Liao,~P.; Bury,~W.;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Moon \latin{et~al.}(2015)Moon, Liu, Hupp, and Farha]{moon2015}
-Moon,~S.-Y.; Liu,~Y.; Hupp,~J.~T.; Farha,~O.~K. Instantaneous Hydrolysis of
-  Nerve-Agent Simulants with a Six-Connected Zirconium-Based Metal--Organic
-  Framework. \emph{Angewandte Chemie International Edition} \textbf{2015},
-  \emph{54}, 6795--6799\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Chi \latin{et~al.}(2026)Chi, Park, Yoo, Choi, Hong, Son, Lee, and
   Kang]{ebeam}
 Chi,~H.~S.; Park,~J.-m.; Yoo,~J.; Choi,~G.~J.; Hong,~S.~H.; Son,~J.;
@@ -203,24 +186,6 @@ Lavoie,~J.; Srinivasan,~S.; Nagarajan,~R. Using cheminformatics to find
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Chi \latin{et~al.}(2025)Chi, Kim, Kim, Byun, and Kang]{ppesuit}
-Chi,~H.~S.; Kim,~E.; Kim,~J.; Byun,~K.-D.; Kang,~K. Chemical protective suit
-  performance against {TICs} and {CWAs}: permeation resistance and {PPE} safety
-  evaluation. \emph{Next Research} \textbf{2025}, \emph{2}, 100688\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[James \latin{et~al.}(2018)James, Wyke, Marczylo, Collins, Gaulton,
-  Foxall, Aml{\^o}t, and Duarte-Davidson]{james2018}
-James,~T.; Wyke,~S.; Marczylo,~T.; Collins,~S.; Gaulton,~T.; Foxall,~K.;
-  Aml{\^o}t,~R.; Duarte-Davidson,~R. Chemical warfare agent simulants for human
-  volunteer trials of emergency decontamination: A systematic review.
-  \emph{Journal of Applied Toxicology} \textbf{2018}, \emph{38}, 113--121\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[James \latin{et~al.}(2021)James, Collins, and Marczylo]{james2021}
 James,~T.; Collins,~S.; Marczylo,~T. Identification of novel simulants for
   toxic industrial chemicals and chemical warfare agents for human
@@ -253,30 +218,12 @@ Bannwarth,~C.; Ehlert,~S.; Grimme,~S. {GFN2-xTB}---An Accurate and Broadly
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Bannwarth \latin{et~al.}(2020)Bannwarth, Caldeweyher, Ehlert, Hansen,
-  Pracht, Seibert, Spicher, and Grimme]{xtbreview2021}
-Bannwarth,~C.; Caldeweyher,~E.; Ehlert,~S.; Hansen,~A.; Pracht,~P.;
-  Seibert,~J.; Spicher,~S.; Grimme,~S. Extended tight-binding quantum chemistry
-  methods. \emph{WIREs Computational Molecular Science} \textbf{2020},
-  \emph{11}, e1493\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Watson \latin{et~al.}(2006)Watson, Opresko, Young, and
   Hauschild]{watson2006}
 Watson,~A.; Opresko,~D.; Young,~R.; Hauschild,~V. Development and Application
   of Acute Exposure Guideline Levels ({AEGLs}) for Chemical Warfare Nerve and
   Sulfur Mustard Agents. \emph{Journal of Toxicology and Environmental Health,
   Part B} \textbf{2006}, \emph{9}, 173--263\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Kang \latin{et~al.}(2026)Kang, Lee, Kim, and Yoo]{dbpcarto}
-Kang,~K.; Lee,~D.-H.; Kim,~J.; Yoo,~J. Condition-dependent risk cartography of
-  brominated disinfection by-products in seawater desalination. \emph{Journal
-  of Environmental Chemical Engineering} \textbf{2026}, \emph{14}, 125179\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -347,21 +294,6 @@ Jang,~Y.~J.; Tsay,~O.~G.; Murale,~D.~P.; Jeong,~J.~A.; Segev,~A.;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[{National Research Council}(1997)]{nrc1997mist}
-{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
-  Test Program}; The National Academies Press: Washington, DC, 1997\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{ASTM International}(2020)]{astmf2588}
-{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
-  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
-  reapproved 2020\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
 Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
@@ -369,171 +301,6 @@ Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   releases (10.5281/zenodo.10398 is release 2014.03.1) and no
   version-independent concept {DOI} could be verified, so none is given
   here\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Wildman and Crippen(1999)Wildman, and Crippen]{wildman1999}
-Wildman,~S.~A.; Crippen,~G.~M. Prediction of Physicochemical Parameters by
-  Atomic Contributions. \emph{Journal of Chemical Information and Computer
-  Sciences} \textbf{1999}, \emph{39}, 868--873\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Ertl \latin{et~al.}(2000)Ertl, Rohde, and Selzer]{ertl2000}
-Ertl,~P.; Rohde,~B.; Selzer,~P. Fast Calculation of Molecular Polar Surface
-  Area as a Sum of Fragment-Based Contributions and Its Application to the
-  Prediction of Drug Transport Properties. \emph{Journal of Medicinal
-  Chemistry} \textbf{2000}, \emph{43}, 3714--3717\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Kier(1986)]{kier1985}
-Kier,~L.~B. Shape Indexes of Orders One and Three from Molecular Graphs.
-  \emph{Quantitative Structure-Activity Relationships} \textbf{1986}, \emph{5},
-  1--7\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Rogers and Hahn(2010)Rogers, and Hahn]{rogers2010}
-Rogers,~D.; Hahn,~M. Extended-Connectivity Fingerprints. \emph{Journal of
-  Chemical Information and Modeling} \textbf{2010}, \emph{50}, 742--754\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Kim \latin{et~al.}(2024)Kim, Chen, Cheng, Gindulyte, He, He, Li,
-  Shoemaker, Thiessen, Yu, Zaslavsky, Zhang, and Bolton]{pubchem2025}
-Kim,~S.; Chen,~J.; Cheng,~T.; Gindulyte,~A.; He,~J.; He,~S.; Li,~Q.;
-  Shoemaker,~B.~A.; Thiessen,~P.~A.; Yu,~B.; Zaslavsky,~L.; Zhang,~J.;
-  Bolton,~E.~E. {PubChem} 2025 update. \emph{Nucleic Acids Research}
-  \textbf{2024}, \emph{53}, D1516--D1525\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Williams \latin{et~al.}(2017)Williams, Grulke, Edwards, McEachran,
-  Mansouri, Baker, Patlewicz, Shah, Wambaugh, Judson, and
-  Richard]{williams2017}
-Williams,~A.~J.; Grulke,~C.~M.; Edwards,~J.; McEachran,~A.~D.; Mansouri,~K.;
-  Baker,~N.~C.; Patlewicz,~G.; Shah,~I.; Wambaugh,~J.~F.; Judson,~R.~S.;
-  Richard,~A.~M. The {CompTox} Chemistry Dashboard: a community data resource
-  for environmental chemistry. \emph{Journal of Cheminformatics} \textbf{2017},
-  \emph{9}, 61\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Ehlert \latin{et~al.}(2021)Ehlert, Stahn, Spicher, and
-  Grimme]{ehlert2021}
-Ehlert,~S.; Stahn,~M.; Spicher,~S.; Grimme,~S. Robust and Efficient Implicit
-  Solvation Model for Fast Semiempirical Methods. \emph{Journal of Chemical
-  Theory and Computation} \textbf{2021}, \emph{17}, 4250--4261\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Wang \latin{et~al.}(2020)Wang, Witek, Landrum, and Riniker]{wang2020}
-Wang,~S.; Witek,~J.; Landrum,~G.~A.; Riniker,~S. Improving Conformer Generation
-  for Small Rings and Macrocycles Based on Distance Geometry and Experimental
-  Torsional-Angle Preferences. \emph{Journal of Chemical Information and
-  Modeling} \textbf{2020}, \emph{60}, 2044--2058\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Riniker and Landrum(2015)Riniker, and Landrum]{riniker2015}
-Riniker,~S.; Landrum,~G.~A. Better Informed Distance Geometry: Using What We
-  Know To Improve Conformation Generation. \emph{Journal of Chemical
-  Information and Modeling} \textbf{2015}, \emph{55}, 2562--2574\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Halgren(1996)]{halgren1996}
-Halgren,~T.~A. Merck molecular force field. {I}. Basis, form, scope,
-  parameterization, and performance of {MMFF94}. \emph{Journal of Computational
-  Chemistry} \textbf{1996}, \emph{17}, 490--519\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Rappe \latin{et~al.}(1992)Rappe, Casewit, Colwell, Goddard, and
-  Skiff]{rappe1992}
-Rappe,~A.~K.; Casewit,~C.~J.; Colwell,~K.~S.; Goddard,~W.~A.; Skiff,~W.~M.
-  {UFF}, a full periodic table force field for molecular mechanics and
-  molecular dynamics simulations. \emph{Journal of the American Chemical
-  Society} \textbf{1992}, \emph{114}, 10024--10035\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Pracht \latin{et~al.}(2020)Pracht, Bohle, and Grimme]{pracht2020}
-Pracht,~P.; Bohle,~F.; Grimme,~S. Automated exploration of the low-energy
-  chemical space with fast quantum chemical methods. \emph{Physical Chemistry
-  Chemical Physics} \textbf{2020}, \emph{22}, 7169--7192\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
-Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
-  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
-  1922--1924\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Wiberg(1968)]{wiberg1968}
-Wiberg,~K. Application of the {Pople--Santry--Segal} {CNDO} method to the
-  cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane.
-  \emph{Tetrahedron} \textbf{1968}, \emph{24}, 1083--1096\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Parr and Yang(1984)Parr, and Yang]{parryang1984}
-Parr,~R.~G.; Yang,~W. Density functional approach to the frontier-electron
-  theory of chemical reactivity. \emph{Journal of the American Chemical
-  Society} \textbf{1984}, \emph{106}, 4049--4050\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Yang and Mortier(1986)Yang, and Mortier]{yangmortier1986}
-Yang,~W.; Mortier,~W.~J. The use of global and local molecular parameters for
-  the analysis of the gas-phase basicity of amines. \emph{Journal of the
-  American Chemical Society} \textbf{1986}, \emph{108}, 5708--5711\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Geerlings \latin{et~al.}(2003)Geerlings, Proft, and
-  Langenaeker]{geerlings2003}
-Geerlings,~P.; Proft,~F.~D.; Langenaeker,~W. Conceptual Density Functional
-  Theory. \emph{Chemical Reviews} \textbf{2003}, \emph{103}, 1793--1874\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[BENIGNI and BOSSA(2008)BENIGNI, and BOSSA]{benigni2008}
-BENIGNI,~R.; BOSSA,~C. Structure alerts for carcinogenicity, and the
-  \emph{Salmonella} assay system: A novel insight through the chemical
-  relational databases technology. \emph{Mutation Research/Reviews in Mutation
-  Research} \textbf{2008}, \emph{659}, 248--261\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Enoch \latin{et~al.}(2011)Enoch, Ellison, Schultz, and
-  Cronin]{enoch2011}
-Enoch,~S.~J.; Ellison,~C.~M.; Schultz,~T.~W.; Cronin,~M. T.~D. A review of the
-  electrophilic reaction chemistry involved in covalent protein binding
-  relevant to toxicity. \emph{Critical Reviews in Toxicology} \textbf{2011},
-  \emph{41}, 783--802\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -593,6 +360,21 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[{National Research Council}(1997)]{nrc1997mist}
+{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
+  Test Program}; The National Academies Press: Washington, DC, 1997\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{ASTM International}(2020)]{astmf2588}
+{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
+  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
+  reapproved 2020\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
@@ -606,14 +388,6 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-188 CN1: Chemical Point Detector Vapor Testing}; 2019; Approved for
   public release; Defense Technical Information Center AD1072837\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{US Army Test and Evaluation Command}(2013)]{top102022a}
-{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
-  10-2-022A: Chemical Vapor and Aerosol System-Level Testing of
-  Chemical/Biological Protective Suits}; 2013\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

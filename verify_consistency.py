@@ -3099,7 +3099,10 @@ CHECKS = [
     # 2026-11-08. 방법절의 판독 선언. 수는 영문 수사로 적힌다.
     ('mr_ncomp_wide_35', [r'designated simulant, (\w+[\w-]*)\s*\n?compounds '
                           r'on the primary panel'], 0),
-    ('mr_ncomp_wide_28', [r'on the primary panel and (\w+) on the\s*\n?'
+    # 2026-11-10. 'on the primary panel and N on the twenty-eight-compound
+    # one' 은 서술자 좌표 수(38/35) 문장과 같은 모양이라 그쪽에 먼저
+    # 걸렸다. 비교집합 선언은 'compounds' 를 앞세우므로 그것을 요구한다.
+    ('mr_ncomp_wide_28', [r'compounds\s*\n?on the primary panel and (\w+) on the\s*\n?'
                           r'twenty-eight-compound one'], 0),
     ('mr_ncomp_narrow_35', [r'restricts it to the (\w+)\s*\n?compounds we '
                             r'labelled interferents'], 0),
@@ -3663,7 +3666,10 @@ SUPERSEDED = [
       r'ion-mobility detectability',
       r'ion-mobility response in a training composition',
       r'ion-mobility training composition'],
-     []),
+     # 철회문은 무엇을 철회하는지 명명해야 한다. SI 의 철회 단락만
+     # 면제한다. 면제는 '철회한다' 는 말이 같은 창 안에 있을 때만 적용되므로
+     # 주장으로 다시 적으면 그대로 걸린다.
+     [r'We withdraw both', r'Earlier versions of this section wrote']),
     # 2026-11-04 (작업 D). 패널 구성 명명. 8 은 문헌이 제안한 화합물 수가
     # 아니라 지정 후보의 총수다 — 기존 3종(DMMP, DPGME, 디클로로메탄) +
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature

@@ -333,7 +333,7 @@ def plocal():
         r'\multicolumn{7}{l}{\footnotesize DMMP ' + f'{abs(zk):.2f}'
         + r' SD below. $\omega$ and $\omega_k$ are' + '\n'
         r'reported here and used in no distance '
-        r'(Section~\ref{M-meth:spaces}).}\\' + '\n'
+        r'(Section~\ref{meth:spaces}).}\\' + '\n'
         r'\multicolumn{7}{l}{\footnotesize DMMP/VX = ' + f'{rf:.2f}'
         + r' by $f^{+}(\mathrm{P})$ but ' + f'{rk:.2f}' + r' by' + '\n'
         r'$\omega_k$. Values are GFN2-derived and relative within one '

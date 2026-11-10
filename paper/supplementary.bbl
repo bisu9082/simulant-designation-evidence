@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{30}
+\begin{mcitethebibliography}{54}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -156,6 +156,195 @@ Wilcoxon,~F. Individual Comparisons by Ranking Methods. \emph{Biometrics
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
+Landrum,~G.; others {RDKit}: Open-source cheminformatics.
+  \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
+  and project URL: the Zenodo {DOI}s registered for {RDKit} identify individual
+  releases (10.5281/zenodo.10398 is release 2014.03.1) and no
+  version-independent concept {DOI} could be verified, so none is given
+  here\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wildman and Crippen(1999)Wildman, and Crippen]{wildman1999}
+Wildman,~S.~A.; Crippen,~G.~M. Prediction of Physicochemical Parameters by
+  Atomic Contributions. \emph{Journal of Chemical Information and Computer
+  Sciences} \textbf{1999}, \emph{39}, 868--873\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ertl \latin{et~al.}(2000)Ertl, Rohde, and Selzer]{ertl2000}
+Ertl,~P.; Rohde,~B.; Selzer,~P. Fast Calculation of Molecular Polar Surface
+  Area as a Sum of Fragment-Based Contributions and Its Application to the
+  Prediction of Drug Transport Properties. \emph{Journal of Medicinal
+  Chemistry} \textbf{2000}, \emph{43}, 3714--3717\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kier(1986)]{kier1985}
+Kier,~L.~B. Shape Indexes of Orders One and Three from Molecular Graphs.
+  \emph{Quantitative Structure-Activity Relationships} \textbf{1986}, \emph{5},
+  1--7\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rogers and Hahn(2010)Rogers, and Hahn]{rogers2010}
+Rogers,~D.; Hahn,~M. Extended-Connectivity Fingerprints. \emph{Journal of
+  Chemical Information and Modeling} \textbf{2010}, \emph{50}, 742--754\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kim \latin{et~al.}(2024)Kim, Chen, Cheng, Gindulyte, He, He, Li,
+  Shoemaker, Thiessen, Yu, Zaslavsky, Zhang, and Bolton]{pubchem2025}
+Kim,~S.; Chen,~J.; Cheng,~T.; Gindulyte,~A.; He,~J.; He,~S.; Li,~Q.;
+  Shoemaker,~B.~A.; Thiessen,~P.~A.; Yu,~B.; Zaslavsky,~L.; Zhang,~J.;
+  Bolton,~E.~E. {PubChem} 2025 update. \emph{Nucleic Acids Research}
+  \textbf{2024}, \emph{53}, D1516--D1525\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Williams \latin{et~al.}(2017)Williams, Grulke, Edwards, McEachran,
+  Mansouri, Baker, Patlewicz, Shah, Wambaugh, Judson, and
+  Richard]{williams2017}
+Williams,~A.~J.; Grulke,~C.~M.; Edwards,~J.; McEachran,~A.~D.; Mansouri,~K.;
+  Baker,~N.~C.; Patlewicz,~G.; Shah,~I.; Wambaugh,~J.~F.; Judson,~R.~S.;
+  Richard,~A.~M. The {CompTox} Chemistry Dashboard: a community data resource
+  for environmental chemistry. \emph{Journal of Cheminformatics} \textbf{2017},
+  \emph{9}, 61\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bannwarth \latin{et~al.}(2019)Bannwarth, Ehlert, and
+  Grimme]{bannwarth2019}
+Bannwarth,~C.; Ehlert,~S.; Grimme,~S. {GFN2-xTB}---An Accurate and Broadly
+  Parametrized Self-Consistent Tight-Binding Quantum Chemical Method with
+  Multipole Electrostatics and Density-Dependent Dispersion Contributions.
+  \emph{Journal of Chemical Theory and Computation} \textbf{2019}, \emph{15},
+  1652--1671\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Grimme \latin{et~al.}(2017)Grimme, Bannwarth, and
+  Shushkov]{gfnxtb2017}
+Grimme,~S.; Bannwarth,~C.; Shushkov,~P. A Robust and Accurate Tight-Binding
+  Quantum Chemical Method for Structures, Vibrational Frequencies, and
+  Noncovalent Interactions of Large Molecular Systems Parametrized for All
+  {spd}-Block Elements ( Z = 1--86). \emph{Journal of Chemical Theory and
+  Computation} \textbf{2017}, \emph{13}, 1989--2009\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Bannwarth \latin{et~al.}(2020)Bannwarth, Caldeweyher, Ehlert, Hansen,
+  Pracht, Seibert, Spicher, and Grimme]{xtbreview2021}
+Bannwarth,~C.; Caldeweyher,~E.; Ehlert,~S.; Hansen,~A.; Pracht,~P.;
+  Seibert,~J.; Spicher,~S.; Grimme,~S. Extended tight-binding quantum chemistry
+  methods. \emph{WIREs Computational Molecular Science} \textbf{2020},
+  \emph{11}, e1493\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ehlert \latin{et~al.}(2021)Ehlert, Stahn, Spicher, and
+  Grimme]{ehlert2021}
+Ehlert,~S.; Stahn,~M.; Spicher,~S.; Grimme,~S. Robust and Efficient Implicit
+  Solvation Model for Fast Semiempirical Methods. \emph{Journal of Chemical
+  Theory and Computation} \textbf{2021}, \emph{17}, 4250--4261\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wang \latin{et~al.}(2020)Wang, Witek, Landrum, and Riniker]{wang2020}
+Wang,~S.; Witek,~J.; Landrum,~G.~A.; Riniker,~S. Improving Conformer Generation
+  for Small Rings and Macrocycles Based on Distance Geometry and Experimental
+  Torsional-Angle Preferences. \emph{Journal of Chemical Information and
+  Modeling} \textbf{2020}, \emph{60}, 2044--2058\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Riniker and Landrum(2015)Riniker, and Landrum]{riniker2015}
+Riniker,~S.; Landrum,~G.~A. Better Informed Distance Geometry: Using What We
+  Know To Improve Conformation Generation. \emph{Journal of Chemical
+  Information and Modeling} \textbf{2015}, \emph{55}, 2562--2574\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Halgren(1996)]{halgren1996}
+Halgren,~T.~A. Merck molecular force field. {I}. Basis, form, scope,
+  parameterization, and performance of {MMFF94}. \emph{Journal of Computational
+  Chemistry} \textbf{1996}, \emph{17}, 490--519\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rappe \latin{et~al.}(1992)Rappe, Casewit, Colwell, Goddard, and
+  Skiff]{rappe1992}
+Rappe,~A.~K.; Casewit,~C.~J.; Colwell,~K.~S.; Goddard,~W.~A.; Skiff,~W.~M.
+  {UFF}, a full periodic table force field for molecular mechanics and
+  molecular dynamics simulations. \emph{Journal of the American Chemical
+  Society} \textbf{1992}, \emph{114}, 10024--10035\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Pracht \latin{et~al.}(2020)Pracht, Bohle, and Grimme]{pracht2020}
+Pracht,~P.; Bohle,~F.; Grimme,~S. Automated exploration of the low-energy
+  chemical space with fast quantum chemical methods. \emph{Physical Chemistry
+  Chemical Physics} \textbf{2020}, \emph{22}, 7169--7192\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
+Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
+  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
+  1922--1924\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wiberg(1968)]{wiberg1968}
+Wiberg,~K. Application of the {Pople--Santry--Segal} {CNDO} method to the
+  cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane.
+  \emph{Tetrahedron} \textbf{1968}, \emph{24}, 1083--1096\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Parr and Yang(1984)Parr, and Yang]{parryang1984}
+Parr,~R.~G.; Yang,~W. Density functional approach to the frontier-electron
+  theory of chemical reactivity. \emph{Journal of the American Chemical
+  Society} \textbf{1984}, \emph{106}, 4049--4050\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Yang and Mortier(1986)Yang, and Mortier]{yangmortier1986}
+Yang,~W.; Mortier,~W.~J. The use of global and local molecular parameters for
+  the analysis of the gas-phase basicity of amines. \emph{Journal of the
+  American Chemical Society} \textbf{1986}, \emph{108}, 5708--5711\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Geerlings \latin{et~al.}(2003)Geerlings, Proft, and
+  Langenaeker]{geerlings2003}
+Geerlings,~P.; Proft,~F.~D.; Langenaeker,~W. Conceptual Density Functional
+  Theory. \emph{Chemical Reviews} \textbf{2003}, \emph{103}, 1793--1874\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Kuhn(2008)]{caretref}
 Kuhn,~M. Building Predictive Models in {R} Using the caret Package.
   \emph{Journal of Statistical Software} \textbf{2008}, \emph{28}\relax
@@ -226,6 +415,23 @@ Mantel,~N. The Detection of Disease Clustering and a Generalized Regression
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
+  2011; Cited in TOP 08-2-188 CN1 as the governing simulant-selection
+  procedure; the document itself was not obtainable for this work\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{US Army Test and Evaluation Command}(2019)]{top082188}
+{US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
+  08-2-188 CN1: Chemical Point Detector Vapor Testing}; 2019; Approved for
+  public release; Defense Technical Information Center AD1072837\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Lee \latin{et~al.}(2016)Lee, Lee, and Hong]{lee2016lewisite}
 Lee,~D.-H.; Lee,~D.-N.; Hong,~J.-I. A fluorescent probe for a lewisite
   simulant. \emph{New Journal of Chemistry} \textbf{2016}, \emph{40},
@@ -239,14 +445,6 @@ Lee,~D.-H.; Lee,~D.-N.; Hong,~J.-I. A fluorescent probe for a lewisite
 Domingo,~L.; R{\'i}os-Guti{\'e}rrez,~M.; P{\'e}rez,~P. Applications of the
   Conceptual Density Functional Theory Indices to Organic Chemistry Reactivity.
   \emph{Molecules} \textbf{2016}, \emph{21}, 748\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
-Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
-  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
-  1922--1924\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -280,6 +478,25 @@ Thiermann,~H.; Worek,~F.; Kehe,~K. Limitations and challenges in treatment of
 Worek,~F.; Thiermann,~H.; Wille,~T. Organophosphorus compounds and oximes: a
   critical review. \emph{Archives of Toxicology} \textbf{2020}, \emph{94},
   2275--2292\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[BENIGNI and BOSSA(2008)BENIGNI, and BOSSA]{benigni2008}
+BENIGNI,~R.; BOSSA,~C. Structure alerts for carcinogenicity, and the
+  \emph{Salmonella} assay system: A novel insight through the chemical
+  relational databases technology. \emph{Mutation Research/Reviews in Mutation
+  Research} \textbf{2008}, \emph{659}, 248--261\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Enoch \latin{et~al.}(2011)Enoch, Ellison, Schultz, and
+  Cronin]{enoch2011}
+Enoch,~S.~J.; Ellison,~C.~M.; Schultz,~T.~W.; Cronin,~M. T.~D. A review of the
+  electrophilic reaction chemistry involved in covalent protein binding
+  relevant to toxicity. \emph{Critical Reviews in Toxicology} \textbf{2011},
+  \emph{41}, 783--802\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
