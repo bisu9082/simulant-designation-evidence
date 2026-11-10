@@ -1580,6 +1580,21 @@ def load_facts():
     _md = json.load(open('outputs/mde.json'))
     f['mde_bh18_35b'] = _md['panel35_incumbent3']['mde_delta_bh18']
     f['mde_bh18_28b'] = _md['panel28_incumbent3']['mde_delta_bh18']
+
+    # 2026-11-10 (게이트 3차). 에디터 페르소나가 구판 수치 두 건을 찾았고
+    # 둘 다 앵커가 없었다. 검사기가 PASS 를 내면서 본문의 이 두 자리를
+    # 전혀 보지 않고 있었다. 앵커를 단다.
+    #   (1) 방법 '매칭 기준' 의 비정규화 최대 거리. ω 삭제로 병합공간이
+    #       39→38 차원이 된 뒤 전파되지 않아 11.8 로 남아 있었다 (실측 11.70).
+    #   (2) Limitations 의 작용제 제외 재검정 범위. 0.186 은 구판이다
+    #       (실측 0.1822).
+    import csv as _csv
+    _dt = list(_csv.DictReader(open('outputs/distance_table.csv')))
+    f['nn_max_merged28'] = max(float(_r['d_simulant']) for _r in _dt
+                               if _r['condition'] == 'C_merged')
+    _jk = json.load(open('outputs/permutation_statistics.json'))[
+        'jackknife_panel35_all']['A_rdkit']['range']
+    f['jack_p_lo'], f['jack_p_hi'] = _jk[0], _jk[1]
     f['mde_rho_bh'] = json.load(open('outputs/mantel_power.json'))[
         'mde_rho_mantel_bh']
 
@@ -3130,6 +3145,12 @@ CHECKS = [
                       r'primary panel'], 0.0005),
     ('mde_bh18_28b', [r'and\s*\n?\$\\delta = ([\d.]+)\$ on the '
                       r'twenty-eight-compound one'], 0.0005),
+    ('nn_max_merged28',
+     [r'at a distance of\s*\n?([\d.]+) is not a match'], 0.005),
+    ('jack_p_lo',
+     [r'structural \$p\$ between ([\d.]+) and [\d.]+'], 0.0005),
+    ('jack_p_hi',
+     [r'structural \$p\$ between [\d.]+ and ([\d.]+)'], 0.0005),
     ('mde_rho_bh', [r'\$\|\\rho\| \\ge ([\d.]+)\$ at the '
                     r'Benjamini--Hochberg level'], 0.0005),
     ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
@@ -4235,9 +4256,14 @@ def main():
             + ' — 그 태그는 이 원고의 산출물을 담지 않는다. Data '
               'Availability 를 acs-submission-* 로 바꿀 것')
     if not _tagm:
-        print('[verify] 검사 A-tag: 원고가 예치 태그를 적지 않는다. 투고 '
-              '직전에 태그를 만들어 푸시하고 Data Availability 에 적을 것 '
-              '(main.tex 의 [확인 필요] 주석).')
+        # 2026-11-10 (게이트 3차). 종전에는 경고만 찍고 PASS 를 냈다.
+        # 그래서 '예치물이 원고를 재현하지 못한다' 는 상태가 검사기 통과와
+        # 공존할 수 있었다. 원격 유일 태그 v1.0 은 본문이 이름으로 부르는
+        # 파일 19개가 없고 panel28 구조공간 mean_diff 부호가 반대다.
+        # 예치 태그 없이 투고 가능한 상태로 두지 않는다.
+        fails.append('원고가 예치 태그를 적지 않는다 (검사 A-tag): 투고 '
+                     '직전에 acs-submission-<날짜> 태그를 만들어 푸시하고 '
+                     'Data Availability 에 적을 것')
     if _tagm:
         _tag = _tagm.group(1)
         try:

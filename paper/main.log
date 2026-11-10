@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  10 NOV 2026 04:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  10 NOV 2026 04:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -270,7 +270,7 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 2023-07-04 v5.06 eXternal References (DPC)
 )
-Package xr Info: IMPORTING LABELS FROM supplementary.aux on input line 24.
+Package xr Info: IMPORTING LABELS FROM supplementary.aux on input line 30.
 
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
@@ -280,20 +280,20 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
-LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
+LaTeX Font Info:    ... okay on input line 80.
 \openout3 = `acs-main.bib'.
 
 
@@ -356,19 +356,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 7
-4.
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 8
+0.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 80.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 80.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -377,62 +377,62 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 3
-20.
+33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [8]
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+) [8] [9]
+Underfull \hbox (badness 10000) in paragraph at lines 405--407
 []\T1/cmr/m/n/10.95 NIOSH res-pi-ra-tor pro-
  []
 
 
-Underfull \hbox (badness 2158) in paragraph at lines 392--394
+Underfull \hbox (badness 2158) in paragraph at lines 405--407
 \T1/cmr/m/n/10.95 gramme;$[]$ also on that
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+Underfull \hbox (badness 10000) in paragraph at lines 405--407
 \T1/cmr/m/n/10.95 doc-u-ment's per-me-ation
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 410--412
+Underfull \hbox (badness 10000) in paragraph at lines 423--425
 []\T1/cmr/m/n/10.95 NIOSH res-pi-ra-tor pro-
  []
 
-[9] [10]
-<Fig_main.png, id=55, 900.4842pt x 881.33266pt>
+[10] [11]
+<Fig_main.png, id=58, 900.4842pt x 881.33266pt>
 File: Fig_main.png Graphic file (type png)
 <use Fig_main.png>
-Package pdftex.def Info: Fig_main.png  used on input line 463.
+Package pdftex.def Info: Fig_main.png  used on input line 476.
 (pdftex.def)             Requested size: 469.75539pt x 459.76146pt.
 
 
-LaTeX Warning: Float too large for page by 65.83107pt on input line 486.
+LaTeX Warning: Float too large for page by 65.83107pt on input line 499.
 
-[11] [12 <./Fig_main.png>] [13] [14] [15] [16] [17] [18] [19] [20] [21]
-(./main.bbl [22] [23] [24] [25] [26]) [27]
-<toc_acs.png, id=112, 234.8775pt x 126.4725pt>
+[12] [13 <./Fig_main.png>] [14] [15] [16] [17] [18] [19] [20] [21] [22]
+(./main.bbl [23] [24] [25] [26] [27]) [28]
+<toc_acs.png, id=115, 234.8775pt x 126.4725pt>
 File: toc_acs.png Graphic file (type png)
 <use toc_acs.png>
-Package pdftex.def Info: toc_acs.png  used on input line 824.
+Package pdftex.def Info: toc_acs.png  used on input line 846.
 (pdftex.def)             Requested size: 234.87749pt x 126.47218pt.
 
-Underfull \vbox (badness 10000) detected at line 824
+Underfull \vbox (badness 10000) detected at line 846
  []
 
-[28 <./toc_acs.png>] (./main.aux)
+[29 <./toc_acs.png>] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6677 strings out of 476106
- 106377 string characters out of 5793932
+ 6679 strings out of 476106
+ 106437 string characters out of 5793932
  1935975 words of memory out of 5000000
- 28588 multiletter control sequences out of 15000+600000
+ 28590 multiletter control sequences out of 15000+600000
  580740 words of font info for 92 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  84i,14n,131p,1679b,475s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -456,10 +456,10 @@ hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
 t/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (28 pages, 754079 bytes).
+Output written on main.pdf (29 pages, 757003 bytes).
 PDF statistics:
- 641 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
+ 648 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
