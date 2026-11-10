@@ -4182,8 +4182,23 @@ def main():
     # 로컬 태그만 확인하고 그 사실을 적는다.
     import re as _r3
     import subprocess as _sp
-    _tagm = _r3.search(r'\\texttt\{(acs-submission-[\w-]+)\}',
-                       open(TEX).read())
+    # 2026-11-10. 종전 정규식은 acs-submission-* 만 찾았다. 그래서 원고가
+    # 'at the tagged release \texttt{v1.0}' 을 적고 있는 동안 이 검사는
+    # '태그를 적지 않는다' 고만 알렸고, v1.0 이 원고의 산출물 19개 중 어느
+    # 것도 담지 않고 핵심 통계량의 부호가 반대라는 사실은 아무 검사도 묻지
+    # 않았다. 태그처럼 보이는 것은 전부 잡고, 투고 예치 태그가 아니면
+    # 실패시킨다.
+    _src = open(TEX).read()
+    _tagm = _r3.search(r'\\texttt\{(acs-submission-[\w-]+)\}', _src)
+    _other = [m.group(1) for m in
+              _r3.finditer(r'tagged release \\texttt\{([\w.\-]+)\}', _src)
+              if not m.group(1).startswith('acs-submission-')]
+    if _other:
+        fails.append(
+            '원고가 투고 예치 태그가 아닌 태그를 가리킨다 (검사 A-tag): '
+            + ', '.join(sorted(set(_other)))
+            + ' — 그 태그는 이 원고의 산출물을 담지 않는다. Data '
+              'Availability 를 acs-submission-* 로 바꿀 것')
     if not _tagm:
         print('[verify] 검사 A-tag: 원고가 예치 태그를 적지 않는다. 투고 '
               '직전에 태그를 만들어 푸시하고 Data Availability 에 적을 것 '

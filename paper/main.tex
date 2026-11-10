@@ -156,17 +156,16 @@ agents simulated across 2969 frameworks reproducing agent adsorption behaviour
 only partially \cite{agrawal2018}, while the analogous question for the
 electronic properties governing a chemical response has not been asked. A
 cheminformatic attempt at the selection problem predates this one, in this
-journal: Lavoie et al.\ applied the chemical similarity search used in
-pharmaceutical screening to simulant identification, with the stated aim of
-finding compounds close to the agents but less toxic \cite{lavoie2011}. That aim
-is the one the field still has, and what the present work adds is that the
+journal: Lavoie et al.\ applied the similarity search used in pharmaceutical
+screening to simulant identification, aiming to find compounds close to the
+agents but less toxic \cite{lavoie2011}. What the present work adds is that the
 compounds the detection literature settled on were not reached by that procedure
 or by any comparable one we could find. The second assumption is that a simulant
 is safe, usually supported by the absence of an agent-class hazard label rather
 than by a toxicity value. That is the practice in detection; the
 human-decontamination literature instead screens candidates against toxicity
-explicitly and reports the attrition, one review discounting 78 of 171 chemicals
-on the risk to volunteers \cite{james2021}.
+explicitly, one review discounting 78 of 171 chemicals on the risk to volunteers
+\cite{james2021}.
 
 Both assumptions can be checked against measurements that already exist: the
 electronic structure of small molecules is accessible at semi-empirical
@@ -184,35 +183,31 @@ others in the same space. What the data support is reported below as such, with
 the earlier reading alongside it, because the way a nominal result of this kind
 arises is part of what a reader of this literature needs.
 
-\paragraph{Dual-use statement.} Throughout, the optimisation direction is fixed:
-fidelity to the detection-relevant properties is to be maximised while
+\paragraph{Dual-use statement.} Throughout, the optimisation direction is
+fixed: fidelity to the detection-relevant properties is to be maximised while
 phosphorus electrophilicity, acetylcholinesterase reactivity, alkylating
 capacity and predicted mammalian toxicity are to be minimised. No analysis here
-ranks compounds by predicted mammalian toxicity. One analysis does order
-compounds on a reactivity surrogate: Supporting Information Section~\ref{S-res:plocal}
-reports the condensed Fukui index at phosphorus for the six phosphorus-bearing
-compounds of the panel, which is defined with respect to attack on phosphorus
-and is therefore an acetylcholinesterase-relevant quantity. It covers only
-compounds whose structures and agent status are already public, it is used to
-show that the incumbent simulant sits closer to the agents on that axis than the
-fidelity argument assumes, and it is not extended to any novel structure. The
-structural filter in Supporting Information Section~\ref{S-sec:alerts} excludes candidates and never
-orders them. One ordering is published, in
-Supporting Information Section~\ref{S-res:h1}, and it ranks compounds that have cleared
-that filter by resemblance to the agents in the electronic space. Every
-compound in it is an industrial chemical in commerce that already carries a
-published regulatory exposure value, which is how it entered the pool at all,
-and the selection that produced the list is a safety threshold rather than a
-reactivity one. The alert patterns themselves are the agent-class motifs of the
-published structural-alert literature cited in Supporting Information Section~\ref{S-sec:alerts}, and
-Supporting Information Section~\ref{S-sec:alerts} states in prose what each tier covers, so releasing the
-patterns with the code adds no structure-activity information that the text does
-not already give. We did not extend the toxicity
-model of Supporting Information Section~\ref{S-sec:qsar} to the organophosphorus class,
-because a model predicting mammalian lethality for structures not yet made would
-invert the direction of the work. That a predictive model trained for safety can
-be run in reverse is not hypothetical \cite{urbina2022}, and how much of such a
-method to disclose is itself a live problem \cite{cbrndisclose}. Mechanistic
+ranks compounds by predicted mammalian toxicity. One analysis orders compounds
+on a reactivity surrogate, the condensed Fukui index at phosphorus for the six
+phosphorus-bearing panel compounds (Supporting Information
+Section~\ref{S-res:plocal}); it covers only compounds whose structures and agent
+status are already public, shows that the incumbent simulant sits closer to the
+agents on that axis than the fidelity argument assumes, and is not extended to
+any novel structure. The structural filter of Supporting Information
+Section~\ref{S-sec:alerts} excludes candidates and never orders them. One
+ordering is published, in Supporting Information Section~\ref{S-res:h1}, and it
+ranks compounds that have cleared that filter by resemblance to the agents in
+the electronic space; every compound in it is an industrial chemical in commerce
+that already carries a published regulatory exposure value, which is how it
+entered the pool, so the selection behind the list is a safety threshold rather
+than a reactivity one. Because the Supporting Information states in prose what
+each tier of the filter covers, releasing the patterns with the code adds no
+structure-activity information the text does not already give. We did not extend
+the toxicity model of Supporting Information Section~\ref{S-sec:qsar} to the
+organophosphorus class, because a model predicting mammalian lethality for
+structures not yet made would invert the direction of the work; that a safety
+model can be run in reverse is not hypothetical \cite{urbina2022}, and how much
+of such a method to disclose is a live problem \cite{cbrndisclose}. Mechanistic
 modelling of organophosphorus lethality is established and separately published,
 including by the present authors \cite{qsarld50}; what is withheld is its use as
 a design objective over novel structures, not the literature's existence.
@@ -237,18 +232,17 @@ of this work rather than a premise of it.
 
 The two panels differ only in the non-agent pool, and the difference is the
 point. The twenty-eight-compound panel adds fourteen interferents and solvents
-routinely reported in sensor-array selectivity panels. The
-thirty-five-compound panel adds, to those, five further compounds used as
-simulants in the sensor, sorbent and decontamination literature (diisopropyl
-fluorophosphate DFP, diethyl chlorophosphate DCP, diethyl cyanophosphonate
+routinely reported in sensor-array selectivity panels. The thirty-five-compound
+panel adds, to those, five further compounds used as simulants in the sensor,
+sorbent and decontamination literature (diisopropyl fluorophosphate DFP, diethyl
+chlorophosphate DCP, diethyl cyanophosphonate
 DCNP\cite{lee2021tabun,jang2014tabun}, 2-chloroethyl ethyl sulfide CEES and
-methyl salicylate), classified as simulants rather than as interferents, and
-two organophosphorus pesticides, dichlorvos and malathion. We class the
-pesticides as interferents because the literature we surveyed does not use them
-to stand in for an agent, and flag the decision as contestable on two counts:
-malathion appears in the NIOSH document's barrier-breakthrough tables, and both
-carry the phosphoryl motif the structural filter of Supporting Information
-Section~\ref{S-meth:filter} treats as agent-class.
+methyl salicylate), classified as simulants rather than as interferents, and two
+organophosphorus pesticides, dichlorvos and malathion. We class the pesticides
+as interferents because the literature we surveyed does not use them to stand in
+for an agent, and flag the decision as contestable on two counts: malathion
+appears in the NIOSH document's barrier-breakthrough tables, and both carry the
+phosphoryl motif the structural filter treats as agent-class.
 Section~\ref{res:panels} reports how sensitive the result is to exactly this
 kind of decision. The thirty-five-compound panel is the primary one, because a
 comparison asking whether three compounds are close to the agents while
@@ -296,16 +290,12 @@ rank of the actual designation as an exact $p$-value: $\binom{24}{3}=2024$
 designations on the primary panel and $\binom{17}{3}=680$ on the
 twenty-eight-compound one. The null expectation for ``an interferent is closer''
 follows from the group sizes alone and is 9.63 of 11 on the primary panel and
-9.06 on the smaller one. The hypothesis under test is directional, since
-property matching is claimed to place simulants closer to the agents than
-arbitrary compounds would be, so the reported $p$ is one-sided. The choice is
-consequential and we give all three conventions: scored two-sided as distance
-from the null mean the same statistic gives 0.044, 0.482 and 0.028 for the
-structural, electronic and merged spaces, and at twice the smaller tail 0.056,
-0.550 and 0.050, so whether the structural value sits inside a conventional
-threshold depends on a choice a reader may make differently. This is the first
-of the analyst choices catalogued in Section~\ref{res:panels} and the only one
-with a defensible default.
+9.06 on the smaller one. The hypothesis under test is directional, so the
+reported $p$ is one-sided; the choice is consequential, and Supporting
+Information Section~\ref{S-res:paneldetail} gives both two-sided conventions,
+under one of which the structural value sits outside a conventional threshold.
+This is the first of the analyst choices catalogued in
+Section~\ref{res:panels} and the only one with a defensible default.
 
 \subsection{Match criterion}
 \label{meth:match}
@@ -358,9 +348,9 @@ scripts are in the repository cited under Data and code availability.
 Searching for an instrument that designates the three incumbent compounds as
 chemical warfare agent simulants, we found that two carry a documented
 designation for a purpose other than the one they now serve, and the third
-carries none. The record separates into three grades, set out in
-Table~\ref{tab:docs}: a compound named for a stated measurement, a compound
-recorded only as having been used, and a compound with no document at all.
+carries none. Table~\ref{tab:docs} grades the record: a compound named for a
+stated measurement, a compound recorded only as having been used, and a compound
+with no document at all.
 
 DMMP was identified as a test simulant for canister and cartridge filtration
 against GB and HD in a NIOSH respirator programme \cite{niosh2002simulant}, and
@@ -378,10 +368,9 @@ itself and we make no claim about either. For dichloromethane we found no
 designating document of any kind: it is absent from the NIOSH document and from
 the Man-in-Simulant Test programme, and present in this role, as far as we can
 establish, only in the research literature, where it is run as a simulant
-alongside DMMP and DPGME on metal-oxide gas sensors \cite{lee2011sno2}. That
-study puts a fourth compound in the same role, acetonitrile, which the panel
-used here classes as an interferent, so the literature usage does not resolve to
-a fixed set either.
+alongside DMMP and DPGME on metal-oxide gas sensors \cite{lee2011sno2}. That study puts a fourth compound
+in the same role, acetonitrile, classed here as an interferent, so the
+literature usage does not resolve to a fixed set either.
 
 \begin{table}[!htb]
 \centering
@@ -466,11 +455,10 @@ on prior use. That is the pattern of this section rather than an exception to
 it, and it is why Table~\ref{tab:docs} grades what a document does and not how
 authoritative it looks. A recent survey states the first half of this in general
 form, that simulants have generally been selected on the basis of their
-historical use \cite{lawrence2025simulants}; it records the absence of a
-development standard for \emph{explosive} simulants, not for chemical agent
-simulants, so the absence we report here rests on our own search and not on a
-prior claim. Supporting Information Section~\ref{S-res:paneldetail} lists the
-compounds the NIOSH document and the Man-in-Simulant Test name.
+historical use \cite{lawrence2025simulants}; the absence we report here rests on
+our own search and not on a prior claim. Supporting Information
+Section~\ref{S-res:paneldetail} lists the compounds the NIOSH document and the
+Man-in-Simulant Test name.
 
 \begin{figure}[tp]
 \centering
@@ -516,8 +504,8 @@ count stays at zero however far the threshold is relaxed. Resampling the
 merged-space descriptors gives the incumbent three a median of zero matched
 agents and the eight-compound set containing them a median of five, and neither
 count departs from a null built to resemble it ($p=0.479$ and $p=0.068$). Because
-zero is the smallest attainable count, $p=0.479$ is the smallest lower-tail
-value this comparison can ever return: it reports a comparison that cannot reach
+zero is the smallest attainable count, $p=0.479$ is the smallest value
+this comparison can ever return: it reports a comparison that cannot reach
 significance at any conventional level, whatever the data. Supporting Information
 Section~\ref{S-res:paneldetail} gives the intervals, the per-agent reliabilities,
 which reverse what the point estimates suggest, and the controls on dimension
@@ -527,13 +515,11 @@ Every exact permutation test we can run, across four panel and designation
 configurations, three spaces and six statistics, is in Supporting Information
 Table~\ref{S-tab:ablation}, in full rather than selected from, because the
 pattern across the cells is the finding. On the primary panel no test reaches
-nominal significance, so in no space and under no statistic are the incumbent
-simulants distinguishable from compounds drawn at random. Classing the five
+nominal significance in any space under any statistic; classing the five
 literature compounds as simulants recovers two nominal values below 0.05, so the
-difficulty is not that the test cannot detect anything on this panel. On the
-twenty-eight-compound panel, which differs only in omitting those five and the
-two pesticides, the incumbents beat random compounds under one of six statistics
-in the structural space and three of six in the merged space.
+difficulty is not that the test cannot detect anything here; and on the
+twenty-eight-compound panel the incumbents beat random compounds under one of
+six statistics in the structural space and three of six in the merged space.
 
 Correcting for the number of times we looked removes almost all of it, and the
 exception is instructive. On the primary panel the question does not arise, since
@@ -596,10 +582,7 @@ function of two others, put tabun at 1.9948 and counted four matches here instea
 of three. A count that moves when a redundant coordinate is removed should be
 read as marginal, which is the same lesson the rest of this paper draws about the
 panel. DPGME is nominally VX's nearest simulant in all three spaces, but 3.057
-typical separations is not a match in any useful sense, and its designating
-document is a patent whose text we could not
-obtain,\cite{seitzinger2006simulant} so there is no designated class for these
-spaces to resolve or fail to resolve.
+typical separations is not a match in any useful sense.
 
 The count is stable but not invariant, and the two spaces admit tabun at
 different bars: in the merged space the matched set runs from \{GB, GD\} at a
@@ -632,47 +615,37 @@ incumbent three. What the comparison establishes is narrower: the statement
 second, and replaced by a different list on a third, which is the same
 instability the permutation tests report and not an independent finding.
 
-\subsection{What the array actually measures}
+\subsection{What the two premises survive}
 \label{res:measured}
+\label{res:toxsummary}
 
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a vapour-phase sensor reports is tested in
 Supporting Information Section~\ref{S-res:arraydetail} against measured
 colorimetric response for twelve panel compounds over 29 dyes. It does not
-resolve the question. Of twelve panel-channel-space cells three reach a nominal
-$p<0.05$ and they do not agree on a space; correcting
-over the twelve leaves a smallest adjusted
-value of 0.117, and all three lie in the plate set containing
-no simulant, so they compare one agent with another. The six cells that bear on
-the premise are the six in the set holding DMMP, and all six are null. The exact
-Mantel over all 720 relabellings of six compounds detects $|\rho| \ge 0.85$ at
-the Benjamini--Hochberg level these cells are judged against, so these data
-exclude a strong association and nothing weaker. The premise is therefore
-untested rather than supported, and every distance-based claim in this paper
-inherits that. Three artifacts are reported there because our own first version
-contained all three.
+resolve the question: three of twelve panel-channel-space cells reach a nominal
+$p<0.05$ and disagree on a space, correcting over the twelve leaves a smallest
+adjusted value of 0.117, all three lie in the plate set containing no simulant,
+and the six cells that bear on the premise are all null while the design detects
+only $|\rho| \ge 0.85$ at that level. The premise is therefore untested rather
+than supported, and every distance-based claim in this paper inherits that;
+three artifacts are reported there because our own first version contained all
+three.
 
-\subsection{The toxicity half of the criterion}
-\label{res:toxsummary}
-
-
-
-The criterion has a second half: that compounds chosen on physicochemical
-grounds present minimal toxicity risk \cite{webb2025}. We tested it on the same
-panel and report it in full in the Supporting Information
-(Sections~\ref{S-meth:aegl}, \ref{S-res:safety}, \ref{S-sec:qsar} and
-\ref{S-res:h1}). Three results are needed here. The two incumbents differ in
-how well documented they are and not only in how hazardous: dichloromethane has
-a regulator-derived acute inhalation value at the 96th percentile of a
-207-compound pool, and DMMP has neither an acute value nor a chronic one. A
-model cannot fill that gap: a random forest trained on 230 AEGL chemicals
-reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
-agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
-of them as inside its applicability domain, a tail regression that an
-input-space domain check cannot see. And fidelity and acute toxicity show no
-detectable monotonic association across the 207 compounds carrying both measured
-axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$), an interval that
-bounds the association rather than establishing independence. We draw no
+The criterion has a second half, that compounds chosen on physicochemical
+grounds present minimal toxicity risk \cite{webb2025}, and we tested it on the
+same panel (Supporting Information Sections~\ref{S-meth:aegl},
+\ref{S-res:safety}, \ref{S-sec:qsar} and \ref{S-res:h1}). The two incumbents
+differ in how well documented they are and not only in how hazardous,
+dichloromethane carrying a regulator-derived acute inhalation value at the 96th
+percentile of a 207-compound pool and DMMP carrying neither an acute value nor a
+chronic one. A model cannot fill that gap: a random forest trained on 230 AEGL
+chemicals reaches $R^{2}=0.458$ and then predicts every one of twenty held-out
+military agents safer than measured, by factors of 2.5 to 2600, while certifying
+fourteen as inside its applicability domain. And fidelity and acute toxicity
+show no detectable monotonic association across the 207 compounds carrying both
+measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$), an interval
+that bounds the association rather than establishing independence. We draw no
 candidate recommendation from any of it.
 
 \section{Discussion}
@@ -685,10 +658,9 @@ the compounds the field itself uses as simulants, the three incumbents match no
 agent and no test reaches nominal significance; on a panel omitting them, three
 agents are matched and the smallest nominal value is 0.025. The mechanism is not
 a story about fidelity: on a single standardisation basis the incumbents do not
-move between the panels at all. What the larger panel supplies is diisopropyl
-fluorophosphate, so a criterion that asks a simulant to beat the alternatives
-returns nothing. A designation defended by a comparison that excludes the
-alternatives is not defended.
+move between the panels at all, and what the larger panel supplies is
+diisopropyl fluorophosphate. A designation defended by a comparison that
+excludes the alternatives is not defended.
 
 An earlier version of this work reported the twenty-eight-compound structural
 cell as the finding and built a thesis on the contrast between it and the
@@ -717,9 +689,9 @@ carelessness. One of the three was designated carefully for a measurement that
 is not the one it is now asked to support (Section~\ref{res:docs}): DMMP, for
 adsorptive breakthrough on a filter bed \cite{niosh2002simulant}. For the other
 two the public record establishes no measurement at all. The compounds then
-carried their status into sensor development, where the governing property is the
-response of a dye or an electrode rather than a breakthrough time, and nothing
-in the original validation speaks to that. The absence is specific rather than
+carried their status into sensor development, where the governing property is
+the response of a dye or an electrode rather than a breakthrough time. The
+absence is specific rather than
 general: a safety-screened repository of candidate simulants exists
 \cite{james2021} and a descriptor-based selection procedure appeared in this
 journal fifteen years ago \cite{lavoie2011}; what is missing is any route by
@@ -758,14 +730,12 @@ compounds and the nearest-neighbour statistics inherit that: leaving out one
 agent at a time moves the structural $p$ between 0.020 and 0.186. Measured
 toxicity values exist for a subset of the panel only, DMMP among the compounds
 without one, so the two axes do not run over the same compounds. The four
-configurations reported sample the configuration space rather than census it, so
-the panels should be read as demonstrations of panel dependence rather than as a
-census of compounds used as simulants. One omission is systematic: probe
-chemistries for lewisite are developed against arsenic trichloride
-\cite{lee2016lewisite}, which is in neither panel. GFN2-xTB is semi-empirical
-and the quantities used are relative within a consistent protocol rather than
-absolute; Supporting Information Section~\ref{S-disc:detail} gives the remaining
-limitations in full.
+configurations reported sample the configuration space rather than census it.
+One omission is systematic: probe chemistries for lewisite are developed against
+arsenic trichloride \cite{lee2016lewisite}, which is in neither panel.
+Supporting Information Section~\ref{S-disc:detail} gives the remaining
+limitations in full, including why the semi-empirical virtual orbital energies
+are coordinates rather than affinity estimates.
 
 \section{Conclusions}
 
@@ -791,32 +761,21 @@ into a new application.
 
 The absence of evidence is not evidence of unsuitability, and we draw no
 conclusion that the incumbents are poor choices. What we conclude is narrower
-and addressed to method. A simulant claim is testable, this field has the data to
-test it, and the test returns whatever the analyst's undeclared choices imply:
-moving two labels, from interferent to simulant, is enough to turn a result that
-survives no correction into one with an adjusted value of 0.0008. The practical
-form of that conclusion is a reporting rule. A simulant result should name the
-measurement the compound was validated against and the comparison set it was
-tested in, and should fix the panel, the descriptor space, the statistic and the
-descriptor weighting before the test is run, and should state how any
-conformer-dependent descriptor was taken. We add the last because we had not
-counted it ourselves until a reproduction check found it (Supporting Information
-Section~\ref{S-meth:conformer}); unlike the other four it does not move the
-answer here, but nothing in the design guaranteed that. Until those are declared
-in advance, a statement that a compound is a validated simulant reports a
-convention rather than a measurement.
-
-Findings from the toxicity axis are in the Supporting Information and do not
-depend on the contested comparison. The two incumbents differ in how well
-documented they are and not only in how hazardous, dichloromethane carrying a
-regulator-derived acute inhalation value and DMMP carrying none of any kind; a
-random forest trained on 230 AEGL chemicals predicts all twenty held-out
-military agents safer than measured, by factors of 2.5 to 2600, so predicted
-toxicity cannot stand in for the missing values; and fidelity and acute toxicity
-show no detectable monotonic association across the 207 compounds carrying both
-axes, an interval that bounds the association rather than establishing
-independence. We propose no replacement compound, because proposing one would
-repeat the error this paper is about.
+and addressed to method. A simulant claim is testable, this field has the data
+to test it, and the test returns whatever the analyst's undeclared choices
+imply: moving two labels, from interferent to simulant, is enough to turn a
+result that survives no correction into one with an adjusted value of 0.0008.
+The practical form of that conclusion is a reporting rule. A simulant result
+should name the measurement the compound was validated against and the
+comparison set it was tested in, and should fix the panel, the descriptor space,
+the statistic and the descriptor weighting before the test is run, and should
+state how any conformer-dependent descriptor was taken. We add the last because
+we had not counted it ourselves until a reproduction check found it (Supporting
+Information Section~\ref{S-meth:conformer}). Until those are declared in
+advance, a statement that a compound is a validated simulant reports a
+convention rather than a measurement. Findings from the toxicity axis point the
+same way and are in the Supporting Information. We propose no replacement
+compound, because proposing one would repeat the error this paper is about.
 
 \section*{Funding}
 This research did not receive any specific grant from funding agencies in the
@@ -839,25 +798,28 @@ The authors declare no competing financial interest.
 During the preparation of this work the authors used a large language model
 (Anthropic Claude) to assist in drafting and editing prose, in writing and
 auditing the analysis and figure scripts, and in building the
-internal-consistency checks described under Reproducibility. No numerical
-result was produced by the model: every value reported here is read from the
-output of the deposited scripts, which were executed to generate it. The
-authors reviewed and edited all content and take full responsibility for it.
+internal-consistency checks described under Reproducibility. No numerical result
+was produced by the model: every value reported here is read from the output of
+the deposited scripts. The authors reviewed and edited all content and take full
+responsibility for it.
 
 \section*{Data and code availability}
+% [확인 필요] 투고 직전에 acs-submission-<날짜> 태그를 만들어 푸시하고
+% 아래 태그명을 적을 것. v1.0 은 쓸 수 없다: 2026-10-24 커밋이고, 원고가
+% 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
+% panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
+% 검사 A-tag 가 acs-submission-* 이 아닌 태그를 적으면 실패시킨다.
 Descriptor tables, parsed AEGL values with their sources, permutation
 distributions, candidate tables and all analysis and figure scripts are in a
 public repository at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, at the tagged
-release \texttt{v1.0}, and are also provided with this article. The repository
-also carries the primary EPA source document from which every toxicity value
-here was parsed, so the parse can be checked against the original. The designation and Mantel
-permutation tests are exhaustive; the eight-simulant designation null and the
-random-subspace controls are sampled, at 20000 and 2000 draws, and the
-remaining analyses are deterministic given the stated seed. The descriptor cache is checked against the code rather
-than taken on trust: \texttt{build\_descriptors.py --verify} rebuilds every
-numeric column and the analysis pipeline stops if any column fails to
-reproduce. Section~\ref{S-meth:conformer} reports what that check caught.
+release made for this submission, and are also provided with this article. The
+repository also carries the primary EPA source document from which every
+toxicity value here was parsed, so the parse can be checked against the
+original. The descriptor cache is checked against the code rather than taken on
+trust: \texttt{build\_descriptors.py --verify} rebuilds every numeric column and
+the analysis pipeline stops if any column fails to reproduce.
+Section~\ref{S-meth:conformer} reports what that check caught.
 
 \bibliography{refs}
 

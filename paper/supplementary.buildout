@@ -192,92 +192,97 @@ Package hyperref Warning: Suppressing empty link on input line 900.
 
 Package hyperref Warning: Suppressing empty link on input line 901.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [13]
 
-Package hyperref Warning: Suppressing link with empty target on input line 935.
+Package hyperref Warning: Suppressing empty link on input line 910.
+
+
+Package hyperref Warning: Suppressing empty link on input line 921.
+
+[13] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
+
+Package hyperref Warning: Suppressing link with empty target on input line 952.
 
 
 [14]
 
-Package hyperref Warning: Suppressing link with empty target on input line 989.
-
+Package hyperref Warning: Suppressing link with empty target on input line 1006
+.
 
 [15]
 
-Package hyperref Warning: Suppressing empty link on input line 1071.
+Package hyperref Warning: Suppressing empty link on input line 1088.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1087.
+Package hyperref Warning: Suppressing empty link on input line 1104.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1116.
+Package hyperref Warning: Suppressing empty link on input line 1133.
 
 [16]
 
-Package hyperref Warning: Suppressing empty link on input line 1120.
+Package hyperref Warning: Suppressing empty link on input line 1137.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1136.
+Package hyperref Warning: Suppressing empty link on input line 1153.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1141.
+Package hyperref Warning: Suppressing empty link on input line 1158.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1175.
+Package hyperref Warning: Suppressing empty link on input line 1192.
 
 (./tab_ablation.tex
 Overfull \hbox (29.67078pt too wide) in paragraph at lines 16--45
  [][] 
-) (./tab_family.tex) [17] [18] [19] (./tab_blockbalance.tex) [20] [21]
+) [17] (./tab_family.tex) [18] [19] (./tab_blockbalance.tex) [20] [21]
 
-Package hyperref Warning: Suppressing empty link on input line 1468.
+Package hyperref Warning: Suppressing empty link on input line 1485.
 
-
-Overfull \hbox (128.82527pt too wide) in paragraph at lines 1514--1529
+[22 <./Fig_mde.png>]
+Overfull \hbox (128.82527pt too wide) in paragraph at lines 1531--1546
 \OT1/ptm/m/n/10.95 cause they dis-agree. The com-pos-ite lo-cal elec-trophilic-
 ity of Domingo et al. [[]],
-[22 <./Fig_mde.png>] (./tab_plocal.tex) [23 <./Fig_plocal.png>] [24]
-(./tab_premisenull.tex)
+(./tab_plocal.tex) [23 <./Fig_plocal.png>] [24] (./tab_premisenull.tex)
 
-Package hyperref Warning: Suppressing empty link on input line 1667.
+Package hyperref Warning: Suppressing empty link on input line 1684.
 
 [25]
 
-Package hyperref Warning: Suppressing empty link on input line 1691.
+Package hyperref Warning: Suppressing empty link on input line 1708.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1715.
+Package hyperref Warning: Suppressing empty link on input line 1732.
 
 [26] [27] [28 <./Fig_toxicity.png>]
-Underfull \hbox (badness 1127) in paragraph at lines 1888--1900
+Underfull \hbox (badness 1127) in paragraph at lines 1905--1917
 \OT1/ptm/m/n/10.95 cause that was our first hy-poth-e-sis and it is wrong. Thir
 -teen of the 230 train-ing com-pounds
 
-Underfull \hbox (badness 1442) in paragraph at lines 1888--1900
+Underfull \hbox (badness 1442) in paragraph at lines 1905--1917
 \OT1/ptm/m/n/10.95 carry an acetylcholinesterase-inhibiting phar-ma-cophore, id
 en-ti-fied by sub-struc-ture rather than by
 
-Underfull \hbox (badness 1577) in paragraph at lines 1888--1900
+Underfull \hbox (badness 1577) in paragraph at lines 1905--1917
 \OT1/ptm/m/n/10.95 parathion, methyl parathion, methami-dophos, dichlor-vos, ma
 lathion) and three car-ba-mate es-ters
 
-Underfull \hbox (badness 1038) in paragraph at lines 1888--1900
+Underfull \hbox (badness 1038) in paragraph at lines 1905--1917
 \OT1/ptm/m/n/10.95 the ser-ine hy-droxyl of acetyl-cholinesterase and the choli
 n-er-gic cri-sis that fol-lows [[],
 
-Underfull \hbox (badness 4913) in paragraph at lines 1888--1900
+Underfull \hbox (badness 4913) in paragraph at lines 1905--1917
 []\OT1/ptm/m/n/10.95 , []],
 
-Package hyperref Warning: Suppressing empty link on input line 1920.
+Package hyperref Warning: Suppressing empty link on input line 1937.
 
 [29]
-Underfull \hbox (badness 1424) in paragraph at lines 2003--2011
+Underfull \hbox (badness 1424) in paragraph at lines 2020--2028
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-
-Overfull \hbox (57.80573pt too wide) in paragraph at lines 2026--2040
+[30]
+Overfull \hbox (57.80573pt too wide) in paragraph at lines 2043--2057
 \OT1/ptm/m/n/10.95 screen [[], []];
-[30] [31] (./supplementary.bbl
+[31] (./supplementary.bbl
 Underfull \hbox (badness 4391) in paragraph at lines 30--38
 \OT1/ptm/m/n/10.95 Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https : / / www
  . epa . gov / sites / default / files / 2018-[]08 /
@@ -296,14 +301,14 @@ Overfull \hbox (59.9191pt too wide) in paragraph at lines 204--214
 
 Overfull \hbox (123.04439pt too wide) in paragraph at lines 215--225
 []
-
+[33]
 Overfull \hbox (2.80377pt too wide) in paragraph at lines 248--257
 []
-[33] [34]
+[34]
 Underfull \hbox (badness 10000) in paragraph at lines 453--461
 \OT1/pcr/m/n/10.95 / / cfpub . epa . gov / ncea / pprtv / documents / Dimethylm
 ethylphosphonate . pdf$[]\OT1/ptm/m/n/10.95 ,
-) [35] [36 <./Fig_h1.png>] (./supplementary.aux) )
+[35]) [36] [37 <./Fig_h1.png>] (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -322,5 +327,5 @@ ic/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier
 /ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
 sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (36 pages, 2052180 bytes).
+Output written on supplementary.pdf (37 pages, 2053272 bytes).
 Transcript written on supplementary.log.
