@@ -32,7 +32,10 @@ def pdftext(path):
                        capture_output=True, text=True)
     if r.returncode != 0:
         sys.exit(f'pdftotext 실패: {path}')
-    return r.stdout
+    # 2026-11-09. 줄바꿈 하이픈을 결합한다. 'mea-\nsurements' 가 TOKEN 에
+    # 두 토큰으로 잡혀 본문이 과대 집계되고 있었다 (본문 51건, 초록 4건,
+    # 참고문헌 21건). Word 가 세는 방식에 맞춘다.
+    return re.sub(r'(\w)-\n\s*(\w)', r'\1\2', r.stdout)
 
 
 def sections(body):
@@ -62,12 +65,12 @@ def acs_sections():
     단어를 53% 넘긴 것을 아무도 못 본 이유다. 양식에 의존하지 않도록
     제목 목록을 main.tex 에서 직접 읽는다.
     """
-    src = open('paper_acs/main.tex').read()
+    src = open('paper/main.tex').read()
     return [m.group(1) for m in re.finditer(r'^\\section\*?\{([^}]+)\}', src, re.M)]
 
 
 def main():
-    txt = pdftext('paper_acs/main.pdf')
+    txt = pdftext('paper/main.pdf')
     heads = acs_sections()
     if not heads:
         raise SystemExit('[wordcount] main.tex 에서 \\section 을 찾지 못했다.')
@@ -88,7 +91,18 @@ def main():
     print(f'본문 (전체)     {n_body:>6} 단어')
     print(f'본문 (캡션 제외){n_body - cap:>6} 단어   [캡션 {cap}]')
     print()
-    pos = [(h, body.index(h)) for h in heads if h in body]
+    # 2026-11-08. 종전에는 body.index(h) 로 각 제목의 첫 출현을 썼다. 절
+    # 제목과 같은 문구가 산문에 먼저 나오면 그쪽이 잡힌다. 실제로
+    # 'Data and code availability' 가 Results 앞의 산문에서 먼저 걸려
+    # 마지막 절에 8,258 단어가 붙었고, 섹션 합이 본문 총계를 넘었다.
+    # 앞 절 뒤에서부터 순차로 찾아 순서를 강제한다.
+    pos, _at = [], 0
+    for h in heads:
+        j = body.find(h, _at)
+        if j < 0:
+            continue
+        pos.append((h, j))
+        _at = j + len(h)
     for i, (h, j) in enumerate(pos):
         k = pos[i + 1][1] if i + 1 < len(pos) else len(body)
         print(f'  {h[:52]:<54} {len(words(body[j + len(h):k])):>5}')
@@ -97,16 +111,31 @@ def main():
     # 표·참고문헌을 전부 포함하고 TOC 그래픽만 제외한다. 종전 구현은
     # 거꾸로였다 — TOC 를 도판으로 세고 참고문헌을 빼서 면수를 과소·과대
     # 양쪽으로 틀리게 냈다. 1,000 단어 = 1면, 양단 도판 1장 = 500 단어.
-    src = open('paper_acs/main.tex').read()
+    src = open('paper/main.tex').read()
     figs = [m.group(1) for m in
             re.finditer(r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', src)]
-    figs = [f for f in figs if 'toc' not in f.lower()]
+    # 2026-11-09. 저자안내는 분량에 "all text, figures, tables and
+    # references" 를 넣고 TOC 그래픽만 뺀다. 종전 구현은 표를 아예 세지
+    # 않아 약 750 단어를 과소 집계했다. tabular 전문에 \textwidth 가
+    # 있으면 양단(500), 없으면 단단(250)으로 본다.
+    # 열 정의에 중첩 중괄호(@{} 나 p{0.27\textwidth})가 들어가므로
+    # [^}]* 로는 첫 } 에서 끊긴다. 줄 끝까지 본다.
+    tabs = []
+    for _m in re.finditer(r'\\begin\{tabular\}(.*)', src):
+        tabs.append(500 if 'textwidth' in _m.group(1) else 250)
+    # TOC 그래픽은 분량 환산에서 제외된다. 파일명이 graphical_abstract
+    # 로 바뀌어 'toc' 필터를 빠져나가 도판으로 세어지고 있었다.
+    figs = [f for f in figs
+            if 'toc' not in f.lower()
+            and 'graphical_abstract' not in f.lower()]
     refs = len(words(txt[txt.index('References'):]))
-    pages = (n_body - cap) / 1000.0 + len(figs) * 0.5 + refs / 1000.0
+    pages = ((n_body - cap) / 1000.0 + len(figs) * 0.5
+             + sum(tabs) / 1000.0 + refs / 1000.0)
     print(f'\n  참고문헌      {refs:>6} 단어')
     print(f'  ACS 환산 {pages:.1f}면 = 본문 {(n_body-cap)/1000:.1f}'
-          f' + 도판 {len(figs)}장 x 0.5 + 참고문헌 {refs/1000:.1f}'
-          f'   (TOC 제외, 권장 8면)')
+          f' + 도판 {len(figs)}장 {len(figs)*0.5:.1f}'
+          f' + 표 {len(tabs)}개 {sum(tabs)/1000:.2f}'
+          f' + 참고문헌 {refs/1000:.1f}   (TOC 제외, Article 한도 8면)')
 
     # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
     # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.
@@ -115,11 +144,12 @@ def main():
     _o.makedirs('outputs', exist_ok=True)
     _j.dump({'body_words': n_body - cap, 'caption_words': cap,
              'ref_words': refs, 'n_figures': len(figs),
+             'n_tables': len(tabs), 'table_words': sum(tabs),
              'acs_pages': round(pages, 2)},
             open('outputs/length_audit.json', 'w'), indent=1)
     print('  -> outputs/length_audit.json')
 
-    sup = pdftext('paper_acs/supporting.pdf')
+    sup = pdftext('paper/supplementary.pdf')
     print(f'\nSupplementary   {len(words(sup)):>6} 단어 (전체)')
 
 

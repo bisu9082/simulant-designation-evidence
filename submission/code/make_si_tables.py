@@ -260,6 +260,37 @@ def sparse():
     return head + '\n'.join(lines) + '\n' + r'    \hline' + '\n' + r'  \end{tabular}' 
 
 
+# ------------------------------------------------------- tab:failaudit
+# 2026-11-08 신설 (에디터 게이트 1회차, (c)항). designation_failure_audit.json
+# 은 판독 3종 x 필터 2종 x 패널 3종 + 희소 인코딩 7종, 모두 25셀에서
+# 매칭집합을 집계하는데 원고가 어디에서도 인용하지 않았다. 게이트는 이것을
+# "논지를 가장 강하게 지지하는 자료인데 빠져 있다" 로 지적했다. 손표로
+# 두지 않고 생성한다.
+FA_CODE = {'sarin (GB)': 'GB', 'soman (GD)': 'GD', 'tabun (GA)': 'GA',
+           'cyclosarin (GF)': 'GF', 'sulfur mustard (HD)': 'HD',
+           'lewisite 1 (L)': 'L', 'hydrogen cyanide (AC)': 'AC',
+           'cyanogen chloride (CK)': 'CK', 'phosgene (CG)': 'CG',
+           'chloropicrin (PS)': 'PS', 'VX': 'VX'}
+
+
+def failaudit():
+    fa = json.load(open('outputs/designation_failure_audit.json'))
+    n = fa['n_cells']
+    rows = sorted(fa['agents'].items(), key=lambda kv: -kv[1]['n_match'])
+    lines = []
+    for name, b in rows:
+        code = FA_CODE.get(name, name)
+        nm = b['n_match']
+        note = 'never' if nm == 0 else ('always' if nm == n else '')
+        lines.append(f'    {code:<4} & {name:<24} & {nm:>2} / {n} & '
+                     f'{note} \\\\')
+    head = (r'  \begin{tabular}{llrl}' '\n' r'    \hline' '\n'
+            r'    Agent & & Cells matched & \\' '\n'
+            r'    \hline' '\n')
+    return (head + '\n'.join(lines) + '\n' + r'    \hline' + '\n'
+            + r'  \end{tabular}')
+
+
 # ----------------------------------------------------------- tab:plocal
 # 2026-11-03 신설. 이 표의 44개 소수는 손으로 유지되고 있었고 어떤
 # 스크립트도 만들지 않았다. 여섯 화합물 x 네 열은 모두
@@ -302,7 +333,7 @@ def plocal():
         r'\multicolumn{7}{l}{\footnotesize DMMP ' + f'{abs(zk):.2f}'
         + r' SD below. $\omega$ and $\omega_k$ are' + '\n'
         r'reported here and used in no distance '
-        r'(Section~\ref{M-meth:spaces}).}\\' + '\n'
+        r'(Section~\ref{meth:spaces}).}\\' + '\n'
         r'\multicolumn{7}{l}{\footnotesize DMMP/VX = ' + f'{rf:.2f}'
         + r' by $f^{+}(\mathrm{P})$ but ' + f'{rk:.2f}' + r' by' + '\n'
         r'$\omega_k$. Values are GFN2-derived and relative within one '
@@ -611,6 +642,8 @@ every interferent; count of valid matches.}\\
     open('outputs/tab_blockbalance.tex', 'w').write(hdr + blockbalance() + '\n')
     print('-> outputs/tab_blockbalance.tex')
     open('outputs/tab_sparse.tex', 'w').write(hdr + sparse() + '\n')
+    open('outputs/tab_failaudit.tex', 'w').write(hdr + failaudit() + '\n')
+    print('-> outputs/tab_failaudit.tex')
     print('-> outputs/tab_sparse.tex')
     open('outputs/tab_plocal.tex', 'w').write(hdr + plocal() + '\n')
     print('-> outputs/tab_plocal.tex')

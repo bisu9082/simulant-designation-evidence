@@ -30,7 +30,13 @@ import pandas as pd
 # 되살리는 조건은 archive/jhm_v1/FROZEN.md 에 있다.
 import glob as _glob
 
-TEX = 'paper_acs/main.tex'
+# 2026-11-08 (라인 전환). 검증 축을 ACS본에서 JHM본으로 되돌린다.
+# 왜. GATE 8 채점 이력에서 +3 과 +6 은 전부 JHM 라인이고 0 이하는 전부
+# ACS 라인이다. ACS 라인은 11-01 에 새로 쓴 뒤 한 번도 0 을 넘은 적이
+# 없고, 제목의 'repeat measurement'(데이터에 없음), 역전 계수,
+# 'sixteen authentic agents'(서술자 축 N=11), 원격에 없는 예치 태그 넷을
+# 들고 있었다. 그 넷은 JHM 라인에 하나도 없다. Ku 승인 2026-11-08.
+TEX = 'paper/main.tex'
 # 투고 패키지에 들어가는 모든 글. 본문과 같은 산출물에 대조한다.
 # 2026-11-02. paper_acs/supporting.tex 를 넣는다. 내용이
 # paper/supplementary.tex 와 거의 같은 평행 사본이라, 한쪽만 고치면 조용히
@@ -41,12 +47,12 @@ TEX = 'paper_acs/main.tex'
 # 생긴 tab_registers / tab_designations / tab_dyepanel 셋은 이 목록과 아래
 # 신선도 검사 양쪽에서 빠져 있었다. 본문에서 레지스터 수치를 SI 표로
 # 내리는 순간 그 수치가 무검증 상태가 되는 구조였으므로 글롭으로 바꾼다.
-_TAB_TEX = sorted(_glob.glob('paper_acs/tab_*.tex'))
+_TAB_TEX = sorted(_glob.glob('paper/tab_*.tex'))
 # 2026-11-07 (11차). README 도 대조 대상에 넣는다. README 의 재현 약속
 # 단락이 '최소 p 0.1512 / BH 0.159' 같은 구판 수치를 들고 있었고(실측은
 # 0.1917 / 0.1632), 그것을 보고 돌린 사람은 코드가 틀렸다고 판단하게 된다.
 # 원고만 검사하고 재현 지시서를 검사하지 않으면 같은 종류의 거짓이 남는다.
-EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
+EXTRA_TEX = ('paper/supplementary.tex', 'paper/cover_letter.tex',
              'README.md', *_TAB_TEX)
 
 # 사실표가 읽는 산출물 전부 (2026-10-17 신설).
@@ -57,6 +63,7 @@ EXTRA_TEX = ('paper_acs/supporting.tex', 'paper_acs/cover_letter.tex',
 # 빠진 것을 한 번에 전부 보고한다. 이 목록은 '저장소가 담아야 하는 산출물'의
 # 계약서 구실도 한다.
 REQUIRED_OUTPUTS = [
+    'outputs/threshold_sweep.json',
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
     'outputs/collapse_sensitivity.json',
@@ -117,8 +124,12 @@ REQUIRED_FOR_FIGURES = [
 # 2026-11-04 (J-C). ACS본의 도판 집합. 종전 목록은 JHM 평행본의 것이어서
 # Fig_spaces·Fig_toxicity 를 요구했는데, ACS본은 그 둘을 Fig_talk_response·
 # Fig_talk_tox 로 바꿨다. build_paper_acs.sh 가 복사하는 목록과 맞춘다.
-FIGURES = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
-           'Fig_talk_response.png', 'Fig_talk_tox.png', 'toc_acs.png']
+# 2026-11-08 라인 전환. JHM 본이 실제로 \includegraphics 하는 여섯으로
+# 되돌린다. 종전 목록은 ACS 전용이었다 — Fig_talk_* 는 발표용이고
+# toc_acs.png 는 ACS TOC 규격 도판이라 JHM 본에 들어가지 않는다.
+# JHM 은 TOC 가 아니라 graphical abstract 를 쓴다 (make_ga.py).
+FIGURES = ['Fig_main.png', 'Fig_spaces.png', 'Fig_plocal.png',
+           'Fig_h1.png', 'Fig_mde.png', 'Fig_toxicity.png']
 
 # 도판 신선도 검사의 mtime 허용오차(초). 2026-10-22. 종전 1초 기준은 갓 클론한
 # 저장소에서 거짓으로 걸린다. git clone 은 모든 파일의 mtime 을 체크아웃 시각으로
@@ -157,7 +168,7 @@ def _dropped_periods():
     # 2026-11-07. 이 가드는 산문용이다. 생성된 표(tab_*.tex)의 셀과 각주는
     # 숫자 뒤에 대문자가 정상적으로 오므로(예: '1 Anthracene') 제외한다.
     # 표의 수치 검증은 앵커와 신선도 검사가 따로 맡는다.
-    for f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
+    for f in (TEX, 'paper/supplementary.tex', 'paper/cover_letter.tex'):
         if not _o.path.exists(f):
             continue
         raw = open(f).read()
@@ -241,7 +252,7 @@ def _generated_table_sync():
     r"""생성된 표의 원고 사본이 outputs/ 와 어긋나지 않는지 본다.
 
     왜 필요한가 (2026-11-03 신설). 손표를 생성으로 돌리는 것만으로는
-    전파 실패가 사라지지 않는다. 생성기를 다시 돌려도 paper_acs/ 와
+    전파 실패가 사라지지 않는다. 생성기를 다시 돌려도 paper/ 와
     paper/ 의 사본이 구판이면 원고에 박히는 수치는 그대로다. 도판에서
     같은 일이 이미 두 번 있었고(GATE 8 3차, 7차), 표에서도 같은 구멍이
     난다. 빌드 스크립트가 복사하지만, 빌드를 거치지 않고 검증기만 돌린
@@ -257,14 +268,14 @@ def _generated_table_sync():
             continue
         ref = open(src).read()
         # 2026-11-04 (J-C). paper/ 는 archive/jhm_v1/ 로 동결했다.
-        for d in ('paper_acs',):
+        for d in ('paper',):
             dst = f'{d}/{name}'
             if not _o.path.exists(dst):
                 bad.append(f'  생성 표 사본 없음 [{dst}]: '
-                           'sh build_paper_acs.sh 를 돌릴 것')
+                           'sh build_paper.sh 를 돌릴 것')
             elif open(dst).read() != ref:
                 bad.append(f'  생성 표 사본이 구판 [{dst}]: {src} 와 다르다. '
-                           'sh build_paper_acs.sh 로 동기화할 것')
+                           'sh build_paper.sh 로 동기화할 것')
     return sorted(set(bad))
 
 
@@ -322,7 +333,7 @@ def _si_section_labels():
     """
     import os as _o
     import re as _re
-    f_si, f_mn = 'paper_acs/supporting.tex', 'paper_acs/main.tex'
+    f_si, f_mn = 'paper/supplementary.tex', 'paper/main.tex'
     if not (_o.path.exists(f_si) and _o.path.exists(f_mn)):
         return []
     strip = lambda t: '\n'.join(_re.sub(r'(?<!\\)%.*$', '', l)
@@ -363,7 +374,7 @@ def _figure_panel_refs():
     import os as _o
     import re as _re
     caps = {}
-    for f in ('paper_acs/main.tex',):
+    for f in ('paper/main.tex',):
         if not _o.path.exists(f):
             continue
         txt = open(f, encoding='utf8').read()
@@ -374,7 +385,7 @@ def _figure_panel_refs():
                 continue
             caps[lab.group(1)] = set(_re.findall(r'\((\w)\)', blk))
     bad = []
-    for f in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for f in ('paper/main.tex', 'paper/supplementary.tex'):
         if not _o.path.exists(f):
             continue
         txt = open(f, encoding='utf8').read()
@@ -399,9 +410,9 @@ def _title_sync():
     import os as _o
     want, bad = None, []
     for path, pat in [
-            ('paper_acs/main.tex', r'\\title\{(.+?)\}'),
-            ('paper_acs/supporting.tex', r'\\title\{(.+?)\}'),
-            ('paper_acs/cover_letter.tex',
+            ('paper/main.tex', r'\\title\{(.+?)\}'),
+            ('paper/supplementary.tex', r'\\title\{(.+?)\}'),
+            ('paper/cover_letter.tex',
              r'We submit \\textit\{(.+?)\} for consideration'),
             # 2026-11-07 (12차 R5-B3). README 머리말도 제목을 싣는다.
             # 세 tex 만 보던 탓에 README 가 구판 제목·저자 2인·JHM 투고를
@@ -417,6 +428,16 @@ def _title_sync():
             continue
         # README 는 인용블록이라 줄이 이어지면 '> ' 가 끼어든다.
         got = ' '.join(t for t in m.group(1).split() if t != '>')
+        # 2026-11-08. JHM 본의 SI 제목은 'Supplementary Material\\[4pt]
+        # \large <제목>' 꼴이다. 접두를 벗기지 않으면 같은 제목인데도
+        # 영원히 다르다고 보고한다. 조판 명령과 그 접두만 벗긴다.
+        got = _re.sub(r'\\\\\[[^\]]*\]', ' ', got)
+        got = _re.sub(r'\\(?:large|Large|LARGE|normalsize|bfseries|'
+                      r'textbf|huge|Huge)\b', ' ', got)
+        # 2026-11-08 (ACS 전환). ACS 는 'Supporting Information' 이라 부른다.
+        got = _re.sub(r'^\s*Supp(?:lementary Material|orting Information)\s*',
+                      '', got)
+        got = ' '.join(got.split())
         if want is None:
             want = got
         elif got != want:
@@ -507,7 +528,7 @@ def _label_scope_guards():
     # here to end' 로 빌드를 깬다. 11차와 12차에 같은 자리에서 두 번
     # 났다. LaTeX 의 정상 줄바꿈 \\ 는 뒤에 글자가 오지 않는다.
     _ESC = _r.compile(r'\\\\[a-zA-Z]{2,}')
-    for _f in (TEX, 'paper_acs/supporting.tex', 'paper_acs/cover_letter.tex'):
+    for _f in (TEX, 'paper/supplementary.tex', 'paper/cover_letter.tex'):
         if not _o.path.exists(_f):
             continue
         for _i, _ln in enumerate(open(_f, encoding='utf8'), 1):
@@ -621,7 +642,7 @@ def preflight():
     import os
     missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
     figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
-    nofig = [f for f in FIGURES if not os.path.exists(f'paper_acs/{f}')]
+    nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
     # 그래픽 초록은 build_paper.sh 바깥에 있어서 분석을 다시 돌려도 갱신되지
     # 않았다. 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
     # 그대로 들고 있는 10-11 판이 발견됐다. 산출물보다 오래되면 멈춘다.
@@ -679,6 +700,10 @@ def preflight():
     # 새 파일을 인용하면 여기에 생성자를 등록해야 통과한다. 등록을 강제하는
     # 것이 이 검사의 요점이다.
     GENERATED_BY = {
+        # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
+        'threshold_sweep.json': 'threshold_sweep.py',
+        # 2026-11-08. SI 의 25셀 감사표 출처.
+        'designation_failure_audit.json': 'designation_failure_audit.py',
         'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',
         'conformer_sensitivity_single.json': 'conformer_sensitivity.py',
         'multiplicity_across_panels.json': 'multiplicity_panels.py',
@@ -708,7 +733,7 @@ def preflight():
     }
     orphan = []
     _cited = set()
-    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for _doc in ('paper/main.tex', 'paper/supplementary.tex'):
         if not os.path.exists(_doc):
             continue
         _t = '\n'.join(l for l in open(_doc).read().split('\n')
@@ -751,8 +776,8 @@ def preflight():
     SIMULANTS = {'DMMP', 'DPGME', 'DCM'}
     n_cpd, n_agent = len(agents), len(agents - SIMULANTS)
     if agents and n_cpd == 17 and n_agent == 16:
-        for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex',
-                     'paper_acs/cover_letter.tex'):
+        for _doc in ('paper/main.tex', 'paper/supplementary.tex',
+                     'paper/cover_letter.tex'):
             if not os.path.exists(_doc):
                 continue
             body = '\n'.join(l for l in open(_doc).read().split('\n')
@@ -779,19 +804,27 @@ def preflight():
     # 이라 실척으로 만들어 두었고, 픽셀 수가 바뀌면 규격이 깨진다.
     acsbad = []
     _acs_figs = []
-    for _doc in ('paper_acs/main.tex', 'paper_acs/supporting.tex'):
+    for _doc in ('paper/main.tex', 'paper/supplementary.tex'):
         if os.path.exists(_doc):
             _acs_figs += re.findall(
                 r'\\includegraphics\[[^\]]*\]\{([^}]+)\}', open(_doc).read())
     for _f in sorted(set(_acs_figs)):
-        if not os.path.exists(f'paper_acs/{_f}'):
-            acsbad.append(f'paper_acs/{_f} 없음')
+        if not os.path.exists(f'paper/{_f}'):
+            acsbad.append(f'paper/{_f} 없음')
     # 투고 디렉터리에 쓰이지 않는 도판이 남아 있으면 알린다. 구판 TOC 가
     # 남아 본문 도판처럼 보이던 일이 있었다 (2026-11-02).
-    for _p in sorted(glob.glob('paper_acs/*.png')):
+    for _p in sorted(glob.glob('paper/*.png')):
         if os.path.basename(_p) not in set(_acs_figs):
             acsbad.append(f'{_p} 는 어느 문서도 쓰지 않는다 — 지우거나 쓸 것')
-    _toc, _TOCPX = 'paper_acs/toc_acs.png', (1950, 1050)
+    # 2026-11-08 (ACS 재전환). 규격 검사 대상을 ACS TOC 로 되돌린다.
+    #
+    # 내 결함을 기록해 둔다. JHM 으로 옮길 때 이 줄을 (1328, 0) 으로 두고
+    # '최소 폭 1328' 을 뜻하게 했는데 비교는 아래에서 정확히 일치를
+    # 요구한다. 통과할 수 없는 검사였고, paper/graphical_abstract.png 가
+    # 빌드에서 복사되지 않아 터지지 않고 있었을 뿐이다. 통과할 수 없는
+    # 검사는 돌지 않는 검사와 같다. ACS 규격은 정확히 고정되어 있으므로
+    # 여기서는 일치 비교가 옳다 (3.25 x 1.75 in, 600 dpi = 1950 x 1050).
+    _toc, _TOCPX = 'paper/toc_acs.png', (1950, 1050)
     if os.path.exists(_toc):
         try:
             from PIL import Image as _Im
@@ -843,11 +876,11 @@ def preflight():
         for p in figless:
             print(f'   도판 생성 필수 누락: {p}')
         for f in nofig:
-            print(f'   원고 도판 누락: paper_acs/{f}')
+            print(f'   원고 도판 누락: paper/{f}')
         for f in stale:
             print(f'   도판 주석 등재부에 폐기 항목: {f} '
                   f'(outputs/figure_annotations.json 을 지우고 도판 재생성)')
-        print('[verify] sh run_analysis.sh && sh build_paper_acs.sh --figs 를 먼저 '
+        print('[verify] sh run_analysis.sh && sh build_paper.sh --figs 를 먼저 '
               '실행하거나, 저장소에서 빠진 파일을 추가할 것.')
         return False
     return True
@@ -1514,6 +1547,52 @@ def load_facts():
     f['dmmp_gd_35'] = _inc['soman (GD)']['d_norm']
     f['dmmp_gf_35'] = _inc['cyclosarin (GF)']['d_norm']
     f['cees_hd'] = _lit['sulfur mustard (HD)']['d_norm']
+    # 2026-11-08. 본문 4.4 가 적는 DCNP-타분 거리가 사실표에 없었다.
+    # 그래서 1.79 라고 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
+    f['dcnp_ga'] = _lit['tabun (GA)']['d_norm']
+
+    # 2026-11-08. 본문 4.3 임계값 스윕. 에디터 게이트 1회차에서 이 문단의
+    # 수치가 어느 예치물에도 없다고 걸렸다. threshold_sweep.py 를 신설해
+    # 예치하고 여기에 올린다. 병합공간 열한 값이 match_by_panel 과 일치하는
+    # 것으로 같은 계산 경로임을 확인했다.
+    # 2026-11-08 (에디터 게이트 1회차, (c)항). 비교군 판독 선언을 방법절에
+    # 넣었다. 세 판독의 매칭 수와 비교군 크기를 전부 본문이 말하므로
+    # 사실표에 올려 대조한다. 이 자유도를 선언하지 않은 것이 게이트의
+    # 핵심 지적이었다.
+    _mra = json.load(open('outputs/match_rule_audit.json'))
+    for _pan, _tag in (('panel35_incumbent3', '35'),
+                       ('panel28_incumbent3', '28'),
+                       ('panel35_incumbent_plus_lit8', 'lit')):
+        for _rd in ('wide', 'narrow', 'literal'):
+            _c = _mra[_pan][f'deterministic/{_rd}']
+            f[f'mr_{_rd}_{_tag}'] = _c['n_match']
+            f[f'mr_ncomp_{_rd}_{_tag}'] = _c['n_comparison']
+
+    # 2026-11-08 ((c)항). 25셀 감사와 보정 검출력을 원고가 싣게 되었다.
+    _fa = json.load(open('outputs/designation_failure_audit.json'))
+    f['fa_n_cells'] = _fa['n_cells']
+    f['fa_n_vectors'] = _fa['n_distinct_verdict_vectors']
+    f['fa_n_invariant'] = len(_fa['invariant_failures'])
+    f['fa_n_invariant_thr'] = len(_fa['invariant_failures_threshold_in_audit'])
+    f['fa_gb'] = _fa['agents']['sarin (GB)']['n_match']
+    f['fa_ga'] = _fa['agents']['tabun (GA)']['n_match']
+    f['fa_hd'] = _fa['agents']['sulfur mustard (HD)']['n_match']
+    _md = json.load(open('outputs/mde.json'))
+    f['mde_bh18_35b'] = _md['panel35_incumbent3']['mde_delta_bh18']
+    f['mde_bh18_28b'] = _md['panel28_incumbent3']['mde_delta_bh18']
+    f['mde_rho_bh'] = json.load(open('outputs/mantel_power.json'))[
+        'mde_rho_mantel_bh']
+
+    _ts = json.load(open('outputs/threshold_sweep.json'))
+    _tsa = {sp: {r['code']: r for r in b['agents']}
+            for sp, b in _ts['spaces'].items()}
+    f['ts_struct_gf'] = _tsa['structural']['GF']['d_norm']
+    f['ts_elec_ac'] = _tsa['electronic3']['AC']['d_norm']
+    # '시험한 임계값' 은 1.5~3.0 이다. unbounded 는 그 범위 밖이므로 뺀다
+    # (무한대에서는 VX 가 들어와 5가 된다). 검증기가 이것을 잡았다.
+    f['ts_max_count'] = max(c for b in _ts['spaces'].values()
+                            for k, c in b['counts'].items()
+                            if k != 'unbounded')
 
     # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
     # 없었다. 144건 검사를 통과하는 동안 11행 중 9행이 구판 값이었다. 동료
@@ -2089,6 +2168,249 @@ UNQUOTED = {
     'j21_discounted': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_suitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_possible': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
+
+    # ======================================================================
+    # 2026-11-08 (라인 전환, 안 1-B 선별 이식). JHM 판본 면제 145건.
+    #
+    # 왜 필요한가. CHECKS 의 패턴은 ACS 판본 문장에 맞춰 쓰여 있었다.
+    # 본문을 JHM 판본으로 되돌리자 191건이 '문맥 미발견' 으로 떠올랐다.
+    # 그 가운데 50건은 값이 JHM 문서에 실려 있었고 패턴만 어긋난 것이어서
+    # JHM_EXTRA_PATS 로 앵커를 보강했다(검사 427 -> 477건). 6건은 같은 키를
+    # 형제 항목이 이미 검사하고 있었다. 남은 145건이 아래다.
+    #
+    # 분류 근거는 세 가지 검사를 모두 돌린 결과다.
+    #   (1) 사실값을 유효숫자 3자리 이상으로 표기해 네 문서 전문에서 찾기
+    #   (2) 각 사실의 기존 패턴에서 14자 이상 리터럴 조각을 뽑아 찾기
+    #   (3) 2자리 표기 + 패턴 낱말 동시 출현 (반올림 방향 누락 대비)
+    # (3) 에서 걸린 10건은 전부 우연 일치였다(alpha=0.05, 2.5th percentile,
+    # 0.5~eV bar, 상관필터 |r|=1.00, 문턱 3.0). 확인하고 버렸다.
+    #
+    # 중요한 점은 종전 J-C 면제 주석과 같다: 이 항목들이 틀렸다는 뜻이
+    # 아니다. 투고되는 문서가 그 수치를 말하지 않으므로 대조할 문장이
+    # 없다는 뜻이다. 어느 것을 JHM 본문에 실어야 하는지는 편집 판단이고,
+    # 검증기가 답할 수 있는 물음이 아니다.
+    #
+    # 경고. 이 목록을 늘리는 쪽으로 기울면 안 된다. 이 작업에서 본문 수치
+    # 결함 세 건(Figure 1 주석 BH 0.165, 본문 842행 0.074, 844행 0.078)이
+    # 드러났고, 세 건 모두 '앵커가 없어 어느 검사도 보지 않은' 자리였다.
+    # 면제는 검사를 끄는 것이다. 문장이 생기면 앵커를 달고 여기서 뺄 것.
+    # ======================================================================
+    # --------------------------------------------------------------
+    # ACS 본문 중복 서술의 별칭 키 — 12건
+    # 원 키(dmmp_*_uv, dft_es_*, dft_mg_*, bh_q35)가 SI 어법에서 검사되고 있다.
+    # 이 별칭은 ACS 본문 2.4 가 SI 수치를 한 번 더 세던 자리를 따로 잡기 위한
+    # 것이었다. JHM 본문은 그 수치를 다시 세지 않으므로 대조할 문장이 없다.
+    'bh_q35_concl': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_ga': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gb': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gd': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_gf': '별칭 키, 원 키가 SI 에서 검사됨',
+    'cl_dmmp_vx': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_full_match': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_full_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_gfn2_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_gfn2_p': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_match': '별칭 키, 원 키가 SI 에서 검사됨',
+    'mt_dft_mg_p': '별칭 키, 원 키가 SI 에서 검사됨',
+
+    # --------------------------------------------------------------
+    # 휘발도축 (vol_) — 33건
+    # ACS 심사 대응으로 신설한 절이다. JHM 판본은 그 절을 싣지 않고, 본문은
+    # 휘발도를 일반 물성으로만 세 곳에서 언급한다(162, 194, 1134행). 끓는점과
+    # 증기압 수치는 네 문서 어디에도 없다.
+    'vol_bp_closer_gap': '휘발도축 절 JHM 미수록',
+    'vol_bp_closer_vp': '휘발도축 절 JHM 미수록',
+    'vol_bp_ratio_gap': '휘발도축 절 JHM 미수록',
+    'vol_bp_ratio_vp': '휘발도축 절 JHM 미수록',
+    'vol_fisher_minq': '휘발도축 절 JHM 미수록',
+    'vol_fisher_minq_main': '휘발도축 절 JHM 미수록',
+    'vol_fisher_nor': '휘발도축 절 JHM 미수록',
+    'vol_fisher_uv': '휘발도축 절 JHM 미수록',
+    'vol_four_cell_bh': '휘발도축 절 JHM 미수록',
+    'vol_gap': '휘발도축 절 JHM 미수록',
+    'vol_gap_ac': '휘발도축 절 JHM 미수록',
+    'vol_gap_cg': '휘발도축 절 JHM 미수록',
+    'vol_gap_gb': '휘발도축 절 JHM 미수록',
+    'vol_gap_gb_pool': '휘발도축 절 JHM 미수록',
+    'vol_gap_hd': '휘발도축 절 JHM 미수록',
+    'vol_gap_vx': '휘발도축 절 JHM 미수록',
+    'vol_lew_cis_p': '휘발도축 절 JHM 미수록',
+    'vol_lew_cis_rank': '휘발도축 절 JHM 미수록',
+    'vol_n_int_nearest': '휘발도축 절 JHM 미수록',
+    'vol_nperm': '휘발도축 절 JHM 미수록',
+    'vol_obs_md': '휘발도축 절 JHM 미수록',
+    'vol_p_md': '휘발도축 절 JHM 미수록',
+    'vol_p_nvalid': '휘발도축 절 JHM 미수록',
+    'vol_p_nvalid_main': '휘발도축 절 JHM 미수록',
+    'vol_range': '휘발도축 절 JHM 미수록',
+    'vol_rank_md': '휘발도축 절 JHM 미수록',
+    'vol_rank_nvalid': '휘발도축 절 JHM 미수록',
+    'vol_rho_d1_normal': '휘발도축 절 JHM 미수록',
+    'vol_rho_d1_uv': '휘발도축 절 JHM 미수록',
+    'vol_rho_d2_normal': '휘발도축 절 JHM 미수록',
+    'vol_rho_d2_uv': '휘발도축 절 JHM 미수록',
+    'vol_t1': '휘발도축 절 JHM 미수록',
+    'vol_withdrawn_p': '휘발도축 절 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 서술자 재표집 차원축소 대조 (sr_) — 17건
+    # ACS 심사 대응 확장이다. JHM 은 재표집 민감도 자체는 싣되(본문 2.6),
+    # 축소 차원수·항등성 감사·부분공간 점유율 수치는 싣지 않는다.
+    'sr_acn_hi_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_hi_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_lo_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_acn_lo_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_dims28': '차원축소 대조 수치 JHM 미수록',
+    'sr_dims35': '차원축소 대조 수치 JHM 미수록',
+    'sr_id_hi': '차원축소 대조 수치 JHM 미수록',
+    'sr_id_lo': '차원축소 대조 수치 JHM 미수록',
+    'sr_mantel_q_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_match_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_match_red': '차원축소 대조 수치 JHM 미수록',
+    'sr_maxr28': '차원축소 대조 수치 JHM 미수록',
+    'sr_maxr35': '차원축소 대조 수치 JHM 미수록',
+    'sr_nderived': '차원축소 대조 수치 JHM 미수록',
+    'sr_nshape': '차원축소 대조 수치 JHM 미수록',
+    'sr_share_full': '차원축소 대조 수치 JHM 미수록',
+    'sr_share_red': '차원축소 대조 수치 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 희소 지시열 부호화 잔여 (sp_) — 5건
+    # JHM SI 는 일곱 부호화 중 첫째·둘째·넷째만 산문으로 적고(345행),
+    # tab_sparse 에도 Mantel q 열이 없다. 부호화 개수도 숫자로 세지 않는다.
+    'sp_mantel_nvar': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop2': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop4': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_drop5': '부호화 변형 Mantel q JHM 미수록',
+    'sp_mantel_q_lowcard': '부호화 변형 Mantel q JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 짝교환 분석 (swap_) — 6건
+    # JHM 네 문서에 swap 이라는 말이 없다.
+    'swap_common_pairs': '짝교환 분석 JHM 미수록',
+    'swap_far_med': '짝교환 분석 JHM 미수록',
+    'swap_inc_max': '짝교환 분석 JHM 미수록',
+    'swap_inc_med': '짝교환 분석 JHM 미수록',
+    'swap_n_added': '짝교환 분석 JHM 미수록',
+    'swap_pair_med': '짝교환 분석 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 퇴역 TOC 도판 (toc_) — 5건
+    # ACS TOC 도판의 수치다. 그 도판은 철회한 헤드라인을 싣고 있었고,
+    # figure_annotations.json 의 toc_acs 항목을 지웠다. JHM 은 GA 를 요구한다.
+    'toc_cells': '퇴역한 ACS TOC 도판 수치',
+    'toc_rev_centred': '퇴역한 ACS TOC 도판 수치',
+    'toc_rev_uncentred': '퇴역한 ACS TOC 도판 수치',
+    'toc_rho_max': '퇴역한 ACS TOC 도판 수치',
+    'toc_rho_min': '퇴역한 ACS TOC 도판 수치',
+
+    # --------------------------------------------------------------
+    # 선행논문 분류성능 (lit_) — 5건
+    # LITERATURE 사전에 출처와 원문 한 문장까지 붙어 있으나 load_facts 는
+    # 산출물만 읽으므로 사실표에 들어가지 않는다. ACS 2.1 은 전제를 세 원논문
+    # 자신의 성능으로 세웠으나, JHM 서론(147행)은 네 논문을 묶어 인용만 하고
+    # 성능 수치를 인용하지 않는다. 병합할 이유가 없다.
+    'lit_d1_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d1_vis': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d2_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d3_acc': '선행논문 성능, JHM 서론은 인용만 함',
+    'lit_d3_lod': '선행논문 성능, JHM 서론은 인용만 함',
+
+    # --------------------------------------------------------------
+    # 염료 패널 구성 (dye_) — 9건
+    # JHM 은 염료를 언급하되 패널 구성을 숫자로 공시하지 않는다.
+    'dye_anthracene_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_n_fluor': '염료 패널 구성 공시 JHM 미수록',
+    'dye_n_nondye': '염료 패널 구성 공시 JHM 미수록',
+    'dye_null_normal': '염료 패널 구성 공시 JHM 미수록',
+    'dye_null_uv': '염료 패널 구성 공시 JHM 미수록',
+    'dye_pyrene_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_normal': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_ratio': '염료 패널 구성 공시 JHM 미수록',
+    'dye_top_uv': '염료 패널 구성 공시 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 보정 후 최소검출효과 (mde_) — 8건
+    # JHM SI 는 비보정 문턱 $\delta = 0.23$ 만 싣는다(884, 905행). 18검정
+    # 보정 문턱과 설계 대비 비율은 싣지 않는다.
+    'mde_below_alpha': '보정 문턱·비율 JHM 미수록',
+    'mde_below_bh': '보정 문턱·비율 JHM 미수록',
+    'mde_bh18_28': '보정 문턱·비율 JHM 미수록',
+    'mde_bh18_35': '보정 문턱·비율 JHM 미수록',
+    'mde_gap_median_28': '보정 문턱·비율 JHM 미수록',
+    'mde_ratio_bh28': '보정 문턱·비율 JHM 미수록',
+    'mde_ratio_bh35': '보정 문턱·비율 JHM 미수록',
+    'mde_rho_mantel_bh': '보정 문턱·비율 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 농도별 추세 구간값 (conc_) — 5건
+    # JHM SI 는 GB 대비 비교와 반사 채널 구간만 싣고 GB·GF 개별 구간값과
+    # 정규화 셀 수는 싣지 않는다.
+    'conc_gb_hi': '농도 추세 구간값 JHM 미수록',
+    'conc_gb_lo': '농도 추세 구간값 JHM 미수록',
+    'conc_gf_hi': '농도 추세 구간값 JHM 미수록',
+    'conc_norm_cells': '농도 추세 구간값 JHM 미수록',
+    'conc_norm_rho': '농도 추세 구간값 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 쌍극자·LUMO 검증 (dip_, lumo_) — 8건
+    # JHM SI 의 밀도함수 점검 절(377행)은 친전자성축만 다룬다. 쌍극자 회귀
+    # 통계와 LUMO 양수 개수는 싣지 않는다.
+    'dip_dmmp_b3lyp': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_dmmp_gfn2': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_mae': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_maxdev': '쌍극자·LUMO 통계 JHM 미수록',
+    'dip_r': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_b3lyp_max': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_b3lyp_pos': '쌍극자·LUMO 통계 JHM 미수록',
+    'lumo_gfn2_pos': '쌍극자·LUMO 통계 JHM 미수록',
+
+    # --------------------------------------------------------------
+    # 분량 감사 (len_) — 4건
+    # ACS 커버레터가 분량을 숫자로 적었고 검증기가 그것을 length_audit.json
+    # 과 대조했다. JHM 커버레터는 분량을 적지 않는다.
+    'len_body': '분량 수치 JHM 커버레터 미수록',
+    'len_figs': '분량 수치 JHM 커버레터 미수록',
+    'len_pages': '분량 수치 JHM 커버레터 미수록',
+    'len_refs': '분량 수치 JHM 커버레터 미수록',
+
+    # --------------------------------------------------------------
+    # AEGL 보유 개수 (aegl_) — 3건
+    # aegl_n_with 는 panel_with_aegl3 와 같은 양이고 그 키가 SI 1208행
+    # ("Nineteen of the twenty-eight compounds have an AEGL-3")에서 검사되고
+    # 있다. Final/Interim 분해는 JHM 이 싣지 않는다.
+    'aegl_n_final': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+    'aegl_n_interim': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+    'aegl_n_with': 'AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨',
+
+    # --------------------------------------------------------------
+    # 그 밖의 ACS 전용 단건 — 25건
+    # 아래는 ACS 판본 본문·SI 에만 있던 서술이다. 값이 틀렸다는 뜻이 아니라
+    # JHM 판본에 대조할 문장이 없다는 뜻이다. d1_p_min 은 JHM SI 가 상한으로만
+    # 적어($p \ge 0.22$) 등식 대조가 성립하지 않는다.
+    'ascl3_a36l_match': 'JHM 판본 미수록',
+    'boot_inc_le1': 'JHM 판본 미수록',
+    'd1_p_min': 'JHM 판본 미수록',
+    'dead_d1_uv': 'JHM 판본 미수록',
+    'dmmp_g4mean_nor': 'JHM 판본 미수록',
+    'dmmp_g4mean_uv': 'JHM 판본 미수록',
+    'dmmp_gmean_nor_3': 'JHM 판본 미수록',
+    'dmmp_gmean_uv_3': 'JHM 판본 미수록',
+    'fisher_minq': 'JHM 판본 미수록',
+    'h1_relaxed10': 'JHM 판본 미수록',
+    'h1_safer7': 'JHM 판본 미수록',
+    'lew_dnorm_E': 'JHM 판본 미수록',
+    'lew_dnorm_Z': 'JHM 판본 미수록',
+    'match_range_hi': 'JHM 판본 미수록',
+    'n_freedoms': 'JHM 판본 미수록',
+    'nb_dcm': 'JHM 판본 미수록',
+    'pn_exact_n': 'JHM 판본 미수록',
+    'rank_exp': 'JHM 판본 미수록',
+    'rank_obs': 'JHM 판본 미수록',
+    'rank_p': 'JHM 판본 미수록',
+    'thr_free_28': 'JHM 판본 미수록',
+    'trend_bh_q': 'JHM 판본 미수록',
+    'trend_monotone': 'JHM 판본 미수록',
 }
 
 
@@ -2770,6 +3092,50 @@ CHECKS = [
     ('dmmp_gd_35', [r'from DMMP, soman ([\d.]+) and'], 0.005),
     ('dmmp_gf_35', [r'soman [\d.]+ and cyclosarin ([\d.]+)\.'], 0.005),
     ('cees_hd', [r'sulfide at ([\d.]+) from sulfur mustard'], 0.005),
+    # 2026-11-08. 본문 4.4 의 DCNP-타분 거리. 사실표에 없어서 1.79 로
+    # 적혀 있었고(실측 1.769) 어느 검사도 보지 않았다.
+    ('dcnp_ga', [r'cyanophosphonate taking tabun at ([\d.]+)'], 0.005),
+    # 2026-11-08. 임계값 스윕 문단. ts_max_count 는 영문 수사로 적힌다.
+    # 2026-11-08. 방법절의 판독 선언. 수는 영문 수사로 적힌다.
+    ('mr_ncomp_wide_35', [r'designated simulant, (\w+[\w-]*)\s*\n?compounds '
+                          r'on the primary panel'], 0),
+    # 2026-11-10. 'on the primary panel and N on the twenty-eight-compound
+    # one' 은 서술자 좌표 수(38/35) 문장과 같은 모양이라 그쪽에 먼저
+    # 걸렸다. 비교집합 선언은 'compounds' 를 앞세우므로 그것을 요구한다.
+    ('mr_ncomp_wide_28', [r'compounds\s*\n?on the primary panel and (\w+) on the\s*\n?'
+                          r'twenty-eight-compound one'], 0),
+    ('mr_ncomp_narrow_35', [r'restricts it to the (\w+)\s*\n?compounds we '
+                            r'labelled interferents'], 0),
+    ('mr_ncomp_literal_35', [r'other ten agents as well, ([\w-]+) compounds'], 0),
+    ('mr_wide_35', [r'readings give (\w+), \w+ and \w+ valid matches on the'], 0),
+    ('mr_narrow_35', [r'readings give \w+, (\w+) and \w+ valid matches on the'], 0),
+    ('mr_literal_35', [r'readings give \w+, \w+ and (\w+) valid matches on the'], 0),
+    ('mr_wide_28', [r'primary panel; (\w+),\s*\n?\w+ and \w+ on the '
+                    r'twenty-eight-compound panel'], 0),
+    ('mr_literal_28', [r'\w+ and (\w+) on the twenty-eight-compound panel; and'], 0),
+    ('mr_wide_lit', [r'panel; and (\w+), \w+ and \w+ once'], 0),
+    ('mr_literal_lit', [r'and \w+, \w+ and (\w+) once\s*\n?the five literature'], 0),
+    # 2026-11-08 ((c)항). 25셀 감사표와 보정 검출력.
+    ('fa_n_cells', [r'gives (\w+[\w-]*) cells in which the matched set',
+                    r'Crossing them gives ([\w-]+)\s*\n?cells'], 0),
+    ('fa_n_vectors', [r'matched set takes (\w+)\s*\n?distinct values',
+                      r'the sets take (\w+) distinct values'], 0),
+    ('fa_n_invariant', [r'(\w+) agents have no valid simulant in any of them',
+                        r'(\w+) agents, VX, cyanogen'], 0),
+    ('fa_n_invariant_thr', [r'invariant failures from five to (\w+)'], 0),
+    ('fa_gb', [r'cyclosarin match in (\w+) of the twenty-five'], 0),
+    ('fa_ga', [r'and tabun in\s*\n?(\w+), so a reader'], 0),
+    ('fa_hd', [r'Sulfur mustard sits between, at (\w+)\.'], 0),
+    ('mde_bh18_35b', [r'detectable shift is \$\\delta = ([\d.]+)\$ on the '
+                      r'primary panel'], 0.0005),
+    ('mde_bh18_28b', [r'and\s*\n?\$\\delta = ([\d.]+)\$ on the '
+                      r'twenty-eight-compound one'], 0.0005),
+    ('mde_rho_bh', [r'\$\|\\rho\| \\ge ([\d.]+)\$ at the '
+                    r'Benjamini--Hochberg level'], 0.0005),
+    ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
+    ('ts_elec_ac', [r'dichloromethane at ([\d.]+), because acetonitrile'],
+     0.0005),
+    ('ts_max_count', [r'count does not exceed (\w+) of eleven'], 0),
     # 최소검출효과 (2026-10-17). 본문 Limitations + SI + 도판 주석 3경로 대조.
     ('mde_delta35', [r'moved ([\d.]+) typical nearest-neighbour',
                      r'returns \$p<0\.05\$ at\s*\n?\$\\delta = ([\d.]+)\$',
@@ -3116,6 +3482,139 @@ CHECKS = [
     ('struct_kept_28_2', [r'The structural space has (\d+) coordinates'], 0),
 ]
 
+# ----------------------------------------------------------------------
+# 2026-11-08 (라인 전환, 안 1 선별 이식). JHM 어투 앵커 보강.
+#
+# 왜. 위 CHECKS 의 패턴들은 ACS 판본의 문장에 맞춰 쓰여 있다. 본문을 JHM
+# 판본으로 되돌리자 같은 수치를 다른 문장이 말하게 되었고, 패턴이 빗나가
+# 검사가 조용히 꺼졌다 (문맥 미발견 191건). 아래는 '값은 JHM 문서에
+# 식별 가능한 정밀도로 실려 있는데 패턴만 어긋난' 항목이다. 값을 옮긴
+# 것이 아니라 가리키는 문장을 하나 더 적는 것이므로, 패턴이 틀리면
+# 반올림/불일치 검사가 즉시 실패로 드러난다. 끄는 방향이 아니라
+# 켜는 방향의 수정이다.
+#
+# 분류 근거: 각 사실값을 유효숫자 3자리 이상으로 표기해 JHM 네 문서
+# 전문에서 찾고, 걸린 자리의 문장이 같은 양을 말하는지 하나씩 대조했다.
+# 숫자만 같고 다른 양을 가리키던 11건(coll_merged_off, conc_norm_rho,
+# vol_bp_closer_gap, vol_lew_cis_p, vol_lew_cis_rank, vol_nperm,
+# dye_null_uv, rank_exp, sp_tabun_drop1, sr_id_lo, sr_mantel_q_red,
+# mde_ratio_bh35)은 여기 넣지 않고 면제 쪽으로 보냈다.
+#
+# bh_q28 은 이 작업에서 드러난 결함의 수정이다. 본문 Figure 1 주석이
+# '여덟 테스트 BH 0.165' 라고 적고 있었으나 실측은 0.163 이다(SI 가 맞게
+# 적고 있었다). 1000 미만 수치는 앵커가 없으면 어느 검사도 보지 않으므로
+# 통과했다. 값을 고치고 그 자리에 앵커를 둔다.
+JHM_EXTRA_PATS = {
+    'ascl3_a35l_dist':  [r'sulfur mustard simulant, at ([\d.]+) and outside'],
+    'coll_merged_on':   [r"compound set's ultraviolet channel "
+                         r"\(\$\\rho = \+([\d.]+)\$, Mantel"],
+    'coll_struct_on':   [r'that same set and channel \(\$\\rho = \+([\d.]+)\$'],
+    'conc_gf_lo':       [r'in reflectance \(([\d.]+) to [\d.]+\), and closer to GB'],
+    'd1_rho_max_abs':   [r'in any space or channel \(\$\|\\rho\| \\le ([\d.]+)\$'],
+    'dmmp_gd_uv':       [r'cyclosarin following at \$(-[\d.]+)\$'],
+    'dmmp_vx_uv':       [r'cyclosarin following at \$-[\d.]+\$, \$(-[\d.]+)\$'],
+    'dmmp_gf_uv':       [r'cyclosarin following at \$-[\d.]+\$, \$-[\d.]+\$ '
+                         r'and \$(-[\d.]+)\$'],
+    'gvx_uv':           [r'against VX gives ([\d.]+) \('],
+    'gvx_uv_lo':        [r'against VX gives [\d.]+ \(([\d.]+) to'],
+    'gvx_uv_hi':        [r'against VX gives [\d.]+ \([\d.]+ to ([\d.]+)\)'],
+    'gvx_nor':          [r'channel but ([\d.]+) \(-[\d.]+ to [\d.]+\) in reflectance'],
+    'gvx_nor_lo':       [r'channel but [\d.]+ \((-[\d.]+) to'],
+    'gvx_nor_hi':       [r'channel but [\d.]+ \(-[\d.]+ to ([\d.]+)\) in reflectance'],
+    'heldout_err_max':  [r'by between [\d.]+ and ([\d.]+) log units'],
+    'mantel_bh12_main': [r'corrected across the twelve, the smallest '
+                         r'adjusted value is ([\d.]+)'],
+    'sp_mantel_q_base': [r'Benjamini--Hochberg value at ([\d.]+), [\d.]+ and [\d.]+'],
+    'sp_mantel_q_drop1':[r'Benjamini--Hochberg value at [\d.]+, ([\d.]+) and [\d.]+'],
+    'sp_mantel_q_drop3':[r'Benjamini--Hochberg value at [\d.]+, [\d.]+ and ([\d.]+)'],
+    'sp_mantel_q_max':  [r'Benjamini--Hochberg value at [\d.]+, ([\d.]+) and [\d.]+'],
+    'mantel_rho_max_abs':[r"same set's reflectance channel \(\$\\rho = \+([\d.]+)\$"],
+    'mantel_type_i_nrep':[r'are sampled, at (\d+) and \d+ draws'],
+    'nb_dmmp':          [r'DMMP is nearest sarin in ([\d.]+)\\%'],
+    'nb_dpgme':         [r'DPGME divides evenly, sulfur mustard in ([\d.]+)\\%'],
+    'nb_nboot':         [r'with replacement (\d+) times \(seed'],
+    'p_merged':         [r'rebuilt the same way, holds at ([\d.]+)'],
+    'sp_p_base':        [r'one-sided \$p\$ of ([\d.]+), against three'],
+    'pct_struct_caption':[r'is the (\d+\.\d+)th percentile of those draws'],
+    'sn_actual':        [r"incumbent designation's ([\d.]+)\\% ranks seventh"],
+    'sp_tabun_base':    [r'normalised distance is ([\d.]+) against a threshold'],
+    'sp_tabun_share':   [r'single-carrier columns are ([\d.]+)\\% of the squared'],
+    'thr_null_28':      [r'on the primary panel and ([\d.]+) on the smaller one'],
+    # 2026-11-08 (4차). 본문 4.3 ·4.4 의 작용제 거리. 이 자리에서 수치
+    # 결함 여섯 건이 나왔다. 아래 앵커로 전부 검사된다.
+    't3_GF':            [r'cyclosarin \(([\d.]+)\) are matched'],
+    't3_GA':            [r'tabun at ([\d.]+) and VX at'],
+    't3_VX':            [r'tabun at [\d.]+ and VX at ([\d.]+)'],
+    't3_GA_legacy':     [r'put tabun at ([\d.]+) and counted four matches'],
+    'dfp_gd':           [r'cyclosarin at [\d.]+, ([\d.]+) and [\d.]+'],
+    'cees_hd':          [r'taking sulfur mustard at ([\d.]+), the closest'],
+    'bh_q28':           [r'value over its eighteen tests is ([\d.]+)',
+                         r'eighteen tests whose smallest adjusted value is ([\d.]+)',
+                         r'eighteen-test family gives a smallest adjusted '
+                         r'value of ([\d.]+)'],
+    # 2026-11-08 (2차). 본문 5.3 의 다중성 단락 세 수치. 같은 양을
+    # paper/tab_family.tex 가 '28 cpd., incumbent 3' 열에 생성하고 있는데
+    # 본문만 어긋나 있었다. 셋 다 앵커가 없어 어느 검사도 보지 않았다.
+    #   per space : 본문 0.074 -> 0.077 (q_by_space28 = 0.0772059, 표 0.077)
+    #   Westfall-Young : 본문 0.078 -> 0.079 (wy28 = 0.0794118, 표 0.079)
+    # 0.163 은 맞게 적혀 있었으나 역시 앵커가 없었으므로 함께 둔다.
+    'q_by_space28':     [r'correcting the six statistics within each space '
+                         r'gives ([\d.]+)'],
+    'wy28':             [r'rather than approximating it, gives ([\d.]+)'],
+    'fam_wy_p28':       [r'rather than approximating it, gives ([\d.]+)'],
+    # Mantel 셀 두 건. 세 셀을 한 문장이 말하는데 ACS 판본은 셋을 따로
+    # 적었으므로 패턴이 빗나갔다.
+    'mantel_d2uv_struct_p': [r'that same set and channel \(\$\\rho = \+[\d.]+\$, '
+                             r'Mantel \$p = ([\d.]+)\$'],
+    'mantel_d2nor_elec_p':  [r"same set's reflectance channel \(\$\\rho = \+[\d.]+\$, "
+                             r'Mantel \$p = ([\d.]+)\$'],
+    # 9.625 를 본문이 반올림 올림으로 9.63 이라 적었다. 값은 맞다.
+    'thr_null_35':      [r'([\d.]+) of 11 on the primary panel'],
+
+    # 2026-11-08 (3차). sparse indicator 군. JHM 은 이 수치들을 산문이
+    # 아니라 paper/tab_sparse.tex 에 싣는다. 그 표는 make_si_tables.py 가
+    # outputs/ 에서 생성하므로, 표 행을 앵커로 두면 사실표 -> 표 전파가
+    # 검사된다. 산문 검사보다 약하지만(틀린 산문 주장은 못 잡는다)
+    # 표에만 있는 값에는 이것이 맞는 검사다.
+    'sp_n_singleton':   [r'Drop single-carrier binaries & (\d+) &'],
+    'sp_match_drop1':   [r'Drop single-carrier binaries & \d+ & \d+ & (\d+) &'],
+    'sp_tabun_drop1':   [r'Drop single-carrier binaries & \d+ & \d+ & \d+ '
+                         r'& ([\d.]+) &'],
+    'sp_match_drop3':   [r'Drop binaries with \$\\le 3\$ & \d+ & \d+ & (\d+) &'],
+    'sp_match_lowcard': [r'Drop cardinality \$\\le 5\$ & \d+ & \d+ & (\d+) &'],
+    'sp_p_lowcard':     [r'Drop cardinality \$\\le 5\$ & \d+ & \d+ & \d+ '
+                         r'& [\d.]+ & ([\d.]+)'],
+    # 단일 보유 이진열이 거리제곱에 더하는 상수. SI 가 산문으로 적는다.
+    'sp_pedestal':      [r'which is (\d+) here, from that one column'],
+    # 2026-11-08 (5차). SI 의 collapse 문단을 다시 썼다 (종전 문장은
+    # +0.568 / +0.539 -> +0.518 / +0.496 이라 적었으나 그 네 수는 어느
+    # 예치물에도 없었다. collapse_sensitivity.json 이 실제로 바꾸는 셀은
+    # 셋이고 그 가운데 유의미한 둘이 0.550 -> 0.500 과 0.546 -> 0.511 이다).
+    # 새 문구에 맞춰 앵커를 다시 걸고, 종전에 면제했던 두 건을 면제에서
+    # 뺀다. 문장이 생기면 앵커를 달고 면제에서 빼라고 적어 둔 그대로다.
+    'coll_q_off':       [r'over the twelve cells moves from ([\d.]+) to'],
+    'coll_q_on':        [r'over the twelve cells moves from [\d.]+ to ([\d.]+)\.'],
+    'coll_merged_off':  [r'weaken, from \$\\rho = \+([\d.]+)\$ and'],
+    'coll_struct_off':  [r'weaken, from \$\\rho = \+[\d.]+\$ and \$\+([\d.]+)\$ to'],
+    'coll_merged_on':   [r'\$\+([\d.]+)\$ and \$\+[\d.]+\$; the third is an'],
+    'coll_struct_on':   [r'and \$\+([\d.]+)\$; the third is an'],
+    # 'between 0.40 and 3.42 log units' 의 아래쪽 값.
+    'heldout_err_min':  [r'by between ([\d.]+) and [\d.]+ log units'],
+}
+_merged, _hit = [], set()
+for _k, _p, _t in CHECKS:
+    if _k in JHM_EXTRA_PATS:
+        _p = list(_p) + JHM_EXTRA_PATS[_k]
+        _hit.add(_k)
+    _merged.append((_k, _p, _t))
+_absent = sorted(set(JHM_EXTRA_PATS) - _hit)
+if _absent:
+    raise SystemExit('JHM_EXTRA_PATS 에 CHECKS 에 없는 키가 있다: '
+                     + ', '.join(_absent))
+CHECKS = _merged
+# ----------------------------------------------------------------------
+
+
 WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
@@ -3146,6 +3645,31 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-10 ([C-3] 복구). DPGME 특허(US 7129094 B1) 본문은 열람하지
+    # 못했다. sources/designations_20261106.csv 7행과
+    # outputs/tab_designations.tex:18 이 measurement·stated_basis 를 모두
+    # '[수집 불가: 특허 본문 미열람]' 으로 적는다. 그런데 원고는 그 특허가
+    # IMS 검출성을 요구한다고 네 곳에서 사실로 서술했다. 읽지 못한 문서의
+    # 내용이다.
+    #
+    # 더구나 IMS 검출성은 탐지다. 제목이 'No Public Designation Names a
+    # Detection Measurement' 인 원고가 지정 문서 하나에 탐지 측정을
+    # 부여하면 제목과 모순된다. 저자들이 2026-11-02 에 잡았고
+    # (sources/GATE8_7차_지적사항_우선순위_20261102.md:291-294) 8일간
+    # 미반영이었다.
+    #
+    # 같은 특허의 '선호 G계열 모사체' 문언은 2026-11-04 에 '원문 대조
+    # 불가' 를 이유로 철회됐다. IMS 는 같은 이유로 철회돼야 했는데
+    # 그 회차를 통과했다. 그래서 문자열로 금지한다.
+    ('DPGME 특허가 IMS 검출성을 요구한다는 서술 (특허 본문 미열람)',
+     [r'detectability by ion mobility spectrometry',
+      r'ion-mobility detectability',
+      r'ion-mobility response in a training composition',
+      r'ion-mobility training composition'],
+     # 철회문은 무엇을 철회하는지 명명해야 한다. SI 의 철회 단락만
+     # 면제한다. 면제는 '철회한다' 는 말이 같은 창 안에 있을 때만 적용되므로
+     # 주장으로 다시 적으면 그대로 걸린다.
+     [r'We withdraw both', r'Earlier versions of this section wrote']),
     # 2026-11-04 (작업 D). 패널 구성 명명. 8 은 문헌이 제안한 화합물 수가
     # 아니라 지정 후보의 총수다 — 기존 3종(DMMP, DPGME, 디클로로메탄) +
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature
@@ -3331,7 +3855,17 @@ SUPERSEDED = [
     ('B3LYP 3좌표 매칭 5건을 전부 기록 지지 짝이라고 서술 (정본 4/5)',
      [r'[Tt]he five are pairings the designation',
       r'all five are pairings', r'five of them pairings the designation'], []),
-    ('28종 구조공간 유의 통계량 수 (정본 2)', [r'one of six statistics in the structural'], []),
+    # 2026-11-08 (에디터 게이트 1회차). 이 항목을 뒤집었다. 종전에는 정본이
+    # 2 라고 보고 'one of six' 를 금지했다. 그러나 예치물 둘이 일치해서
+    # 하나라고 말한다: permutation_statistics panel28_designated/A_rdkit 와
+    # rollback_c panels/panel28_designated3/structural 의 여섯 통계량 p 는
+    # 0.0279 / 0.1103 / 0.1132 / 0.0544 / 0.1103 / 0.2162 이고 0.05 미만은
+    # mean_diff 하나다 (mean_dsim 은 0.0544 로 바깥). 병합공간은 세 개가
+    # 맞으므로 문장의 기준이 p<0.05 인 것도 확인된다.
+    # SUPERSEDED 가 낡으면 정본이 실패를 받는다고 B2a 주석에 적어 둔 그
+    # 상황이다. 금지 대상을 'two of six' 로 바꾼다.
+    ('28종 구조공간 유의 통계량 수 (정본 1)',
+     [r'two of six statistics in the structural'], []),
     ('28종 구조좌표 수 (정본 36)',
      [r'38-dimensional value', r'thirty-eight structural coordinates are not'], []),
     # 2026-11-02 (T2-1). 종전 항목은 정본이 1.989 일 때 2.003 을 금지했다.
@@ -3439,6 +3973,7 @@ def main():
     # 넣으면 레코드끼리 붙어 오탐만 생기므로 원문 쪽에만 남긴다.
     body_flat = '\x00'.join(_segs)
     fails, checked, unseen = [], 0, []
+    matched_keys = set()
     for _g, _why in ((_ordinal_typos(), '서수 접미사 오류'),
                      (_handmade_tables(), '생성기 없는 수치 표'),
                      (_generated_table_sync(), '생성 표 사본 시차'),
@@ -3459,20 +3994,22 @@ def main():
     # 복사되는데 그 복사가 수작업이었다. 분석을 다시 돌린 뒤 복사를 잊으면
     # 원고에 옛 그림이 박히고, 수치 대조는 전부 통과한다. GATE 8 3차에서
     # 도판과 본문이 어긋난 경로가 이것이므로 시각을 직접 비교한다.
-    FIGS = ['Fig_main.png', 'Fig_plocal.png', 'Fig_h1.png', 'Fig_mde.png',
-            'Fig_talk_response.png', 'Fig_talk_tox.png']
+    # 2026-11-08 라인 전환: JHM 본의 여섯으로. Fig_talk_* 는 ACS 발표용
+    # 도판이고 JHM 원고에 들어가지 않는다.
+    FIGS = ['Fig_main.png', 'Fig_spaces.png', 'Fig_plocal.png',
+            'Fig_h1.png', 'Fig_mde.png', 'Fig_toxicity.png']
     for fig in FIGS:
         # 2026-11-04 (J-C). 사본 대상을 paper_acs/ 로 옮긴다.
-        src, dst = f'outputs/{fig}', f'paper_acs/{fig}'
+        src, dst = f'outputs/{fig}', f'paper/{fig}'
         if not os.path.exists(src):
             unseen.append(f'{fig}: outputs/ 에 없음 (도판 스크립트 미실행)')
             continue
         if not os.path.exists(dst):
-            fails.append(f'  도판 누락 {fig}: paper_acs/ 에 없다')
+            fails.append(f'  도판 누락 {fig}: paper/ 에 없다')
             continue
         if os.path.getmtime(dst) < os.path.getmtime(src) - MTIME_TOL:
-            fails.append(f'  도판 구판 {fig}: paper_acs/ 사본이 outputs/ 보다 '
-                         f'오래됐다 (sh build_paper_acs.sh 로 복사할 것)')
+            fails.append(f'  도판 구판 {fig}: paper/ 사본이 outputs/ 보다 '
+                         f'오래됐다 (sh build_paper.sh 로 복사할 것)')
         checked += 1
     # 분석 산출물보다 도판이 오래되면 그림이 낡은 수치를 그리고 있다.
     newest = max(os.path.getmtime(x) for x in
@@ -3482,7 +4019,7 @@ def main():
         src = f'outputs/{fig}'
         if os.path.exists(src) and os.path.getmtime(src) < newest - MTIME_TOL:
             fails.append(f'  도판 구판 {fig}: 분석 산출물보다 오래됐다 '
-                         f'(sh build_paper_acs.sh --figs 로 재생성할 것)')
+                         f'(sh build_paper.sh --figs 로 재생성할 것)')
 
     for key, pats, tol in CHECKS:
         if key not in f:
@@ -3512,6 +4049,7 @@ def main():
         if not found:
             unseen.append(f'{key}: 본문에서 문맥을 찾지 못함 (값 {want:g})')
             continue
+        matched_keys.add(key)
         for got, ctx, raw in found:
             checked += 1
             # 2026-10-27. 절대 허용오차만 쓰면 반올림 오류가 빠져나간다.
@@ -3609,25 +4147,62 @@ def main():
     import hashlib as _hl
     import os as _o2
     _stamp = {}
-    if _o2.path.exists('paper_acs/.buildstamp'):
-        for _ln in open('paper_acs/.buildstamp'):
+    if _o2.path.exists('paper/.buildstamp'):
+        for _ln in open('paper/.buildstamp'):
             _h, _, _n = _ln.strip().partition(' ')
             _stamp[_o2.path.basename(_n.strip())] = _h
-    for _b in ('main', 'supporting', 'cover_letter'):
-        _t, _p = f'paper_acs/{_b}.tex', f'paper_acs/{_b}.pdf'
+    # 2026-11-08 (ACS 전환): Analytical Chemistry 는 Highlights 를 쓰지
+    # 않는다. 투고 문서는 본문·SI·커버레터 셋이다.
+    for _b in ('main', 'supplementary', 'cover_letter'):
+        _t, _p = f'paper/{_b}.tex', f'paper/{_b}.pdf'
         if not _o2.path.exists(_p):
             fails.append(f'{_p} 가 없다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것')
+                         'sh build_paper.sh 를 돌릴 것')
             continue
         if not _stamp:
-            fails.append('paper_acs/.buildstamp 가 없다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것')
+            fails.append('paper/.buildstamp 가 없다 (검사 A-pdf): '
+                         'sh build_paper.sh 를 돌릴 것')
             break
         _cur = _hl.sha256(open(_t, 'rb').read()).hexdigest()
         if _stamp.get(f'{_b}.tex') != _cur:
             fails.append(f'{_p} 가 {_b}.tex 와 다른 판본이다 (검사 A-pdf): '
-                         'sh build_paper_acs.sh 를 돌릴 것 — 올라가는 '
+                         'sh build_paper.sh 를 돌릴 것 — 올라가는 '
                          'PDF 가 원고와 다르다')
+
+    # (B2e) '이 저널' 주장이 실제 타깃 저널과 맞는지 (2026-11-10 신설).
+    #
+    # 왜 필요한가. 원고는 JHM 을 노리고 쓰였고 서론과 논의가 lavoie2011 을
+    # 'in this journal' 로 적었다. lavoie2011 은 Journal of Hazardous
+    # Materials 다. ACS Analytical Chemistry 로 타깃을 옮기면서 그 문장 둘이
+    # 거짓이 됐는데, 어느 검사도 묻지 않았다. 저널은 앞으로도 바뀔 수 있으므로
+    # 문장이 아니라 검사로 막는다. achemso 의 journal= 값에서 타깃을 읽고,
+    # 'this journal' 근처에 있는 인용의 bib journal 필드와 대조한다.
+    import re as _r4
+    _ms = open(TEX).read()
+    _jm = _r4.search(r'journal=(\w+)', _ms)
+    _JOURNAL_OF = {'ancham': 'analytical chemistry',
+                   'ascefj': 'acs sensors'}
+    _target = _JOURNAL_OF.get(_jm.group(1).lower()) if _jm else None
+    if _target:
+        _bibtxt = ''
+        for _bp in ('paper/refs.bib',):
+            if os.path.exists(_bp):
+                _bibtxt += open(_bp, encoding='utf8').read()
+        _bibj = {}
+        for _e in _r4.finditer(r'@\w+\{([^,]+),(.*?)\n\}', _bibtxt, _r4.S):
+            _jf = _r4.search(r'journal\s*=\s*\{(.+?)\}', _e.group(2), _r4.S)
+            if _jf:
+                _bibj[_e.group(1).strip()] = ' '.join(_jf.group(1).split()).lower()
+        for _m in _r4.finditer(r'this\s+journal', _ms):
+            _win = _ms[_m.start():_m.start() + 400]
+            for _c in _r4.finditer(r'\\cite\{([^}]+)\}', _win):
+                for _k in _c.group(1).split(','):
+                    _k = _k.strip()
+                    _j = _bibj.get(_k)
+                    if _j and _target not in _j:
+                        fails.append(
+                            f"원고가 '{_k}' 를 'this journal' 로 적는데 그 논문은 "
+                            f"{_j} 에 실렸다 (검사 B2e). 타깃은 {_target} 이다")
 
     # (A-tag) 원고가 가리키는 예치 태그가 실제로 공개돼 있는지
     # (2026-11-07 신설, 12차 A-1).
@@ -3642,8 +4217,23 @@ def main():
     # 로컬 태그만 확인하고 그 사실을 적는다.
     import re as _r3
     import subprocess as _sp
-    _tagm = _r3.search(r'\\texttt\{(acs-submission-[\w-]+)\}',
-                       open(TEX).read())
+    # 2026-11-10. 종전 정규식은 acs-submission-* 만 찾았다. 그래서 원고가
+    # 'at the tagged release \texttt{v1.0}' 을 적고 있는 동안 이 검사는
+    # '태그를 적지 않는다' 고만 알렸고, v1.0 이 원고의 산출물 19개 중 어느
+    # 것도 담지 않고 핵심 통계량의 부호가 반대라는 사실은 아무 검사도 묻지
+    # 않았다. 태그처럼 보이는 것은 전부 잡고, 투고 예치 태그가 아니면
+    # 실패시킨다.
+    _src = open(TEX).read()
+    _tagm = _r3.search(r'\\texttt\{(acs-submission-[\w-]+)\}', _src)
+    _other = [m.group(1) for m in
+              _r3.finditer(r'tagged release \\texttt\{([\w.\-]+)\}', _src)
+              if not m.group(1).startswith('acs-submission-')]
+    if _other:
+        fails.append(
+            '원고가 투고 예치 태그가 아닌 태그를 가리킨다 (검사 A-tag): '
+            + ', '.join(sorted(set(_other)))
+            + ' — 그 태그는 이 원고의 산출물을 담지 않는다. Data '
+              'Availability 를 acs-submission-* 로 바꿀 것')
     if not _tagm:
         print('[verify] 검사 A-tag: 원고가 예치 태그를 적지 않는다. 투고 '
               '직전에 태그를 만들어 푸시하고 Data Availability 에 적을 것 '
@@ -3695,13 +4285,14 @@ def main():
     if _o2.path.isdir('submission'):
         import filecmp as _fc
         _sd = []
-        for _n in ('main.tex', 'supporting.tex', 'cover_letter.tex',
+        # 2026-11-08: JHM 본은 SI 파일명이 supplementary.tex 다.
+        for _n in ('main.tex', 'supplementary.tex', 'cover_letter.tex',
                    'refs.bib'):
-            _a, _b = f'paper_acs/{_n}', f'submission/{_n}'
+            _a, _b = f'paper/{_n}', f'submission/{_n}'
             if not _o2.path.exists(_b):
                 _sd.append(f'  submission/{_n} 없음')
             elif not _fc.cmp(_a, _b, shallow=False):
-                _sd.append(f'  submission/{_n} 가 paper_acs/{_n} 와 다르다')
+                _sd.append(f'  submission/{_n} 가 paper/{_n} 와 다르다')
         if _o2.path.isdir('submission/code'):
             _root = {_o2.path.basename(x) for x in
                      _glob.glob('*.py') + _glob.glob('*.sh')
@@ -3740,10 +4331,13 @@ def main():
     import fig_annot as _fa2
     import re as _r2
     _ann = _fa2.load()
+    # 2026-11-08 (ACS 재전환): 다시 ACS TOC 를 본다. 가드의 목적(머리글
+    # 도판이 제목과 다른 주장을 하지 않는지)은 그대로다.
     _hl = (_ann.get('toc_acs') or {}).get('headline', '')
     if not _hl:
-        fails.append('TOC 머리글이 등재부에 없다 (검사 B2c): '
-                     'python3 make_toc_acs.py 를 돌릴 것')
+        fails.append('ACS TOC 머리글이 등재부에 없다 (검사 B2c): '
+                     'python3 make_toc_acs.py 를 돌릴 것. 돌리기 전에 '
+                     'make_toc_acs.py:78 의 철회 헤드라인을 고칠 것')
     else:
         _ttl = _r2.search(r'\\title\{(.+?)\}', open(TEX).read(), _r2.S)
         _ttl = ' '.join(_ttl.group(1).split()) if _ttl else ''
@@ -3886,6 +4480,53 @@ def main():
         for _t in sorted(set(stray))[:8]:
             fails.append('  ' + _t)
 
+    # (B3b) 표 3 (tab:match) 의 '유효 일치' 열 (2026-11-08 신설).
+    #
+    # 왜 필요한가. 이 표는 손으로 유지한다. 11행의 거리 열은 2026-10-17 에
+    # t3_* 사실로 등록해 전수 대조가 걸렸지만, yes/no 열은 숫자가 아니므로
+    # 어느 검사도 보지 않았다. 그래서 GA 행이 '2.004 & yes' 로 남아 있었다.
+    # 2.004 는 문턱 2 를 넘으므로 산출물의 match 는 거짓이고, SI 는 네 곳에서
+    # 'three valid matches' 라고 적는다. 본문 표 한 곳만 넷을 세고 있었다.
+    # 판정 열을 거리 열과 같은 자격으로 검사한다.
+    try:
+        _mbp = json.load(open('outputs/match_by_panel.json'))
+        _p28m = {a['agent']: a for a in _mbp['panel28_incumbent3']['agents']}
+        _CODE = {'GB': 'sarin (GB)', 'GD': 'soman (GD)', 'GA': 'tabun (GA)',
+                 'GF': 'cyclosarin (GF)', 'HD': 'sulfur mustard (HD)',
+                 'L': 'lewisite 1 (L)', 'AC': 'hydrogen cyanide (AC)',
+                 'CK': 'cyanogen chloride (CK)', 'CG': 'phosgene (CG)',
+                 'PS': 'chloropicrin (PS)', 'VX': 'VX'}
+        _tabm = re.search(r'\\label\{tab:match\}(.*?)\\end\{tabular\}',
+                          tex, re.S)
+        if _tabm:
+            _bad, _seen = [], set()
+            for _r in re.finditer(r'^\s*([A-Z]{1,2})\s*&[^&]*&\s*([\d.]+)\s*&\s*'
+                                  r'(yes|no)\s*\\\\', _tabm.group(1), re.M):
+                _code, _d, _verdict = _r.group(1), _r.group(2), _r.group(3)
+                if _code not in _CODE:
+                    continue
+                _seen.add(_code)
+                _want = _p28m[_CODE[_code]]['match']
+                if (_verdict == 'yes') != bool(_want):
+                    _bad.append(f'  {_code} 행: 표는 {_verdict}, 산출물은 '
+                                f'{"yes" if _want else "no"} '
+                                f'(d_norm {_p28m[_CODE[_code]]["d_norm"]}, '
+                                f'문턱 내 '
+                                f'{_p28m[_CODE[_code]]["within_threshold"]})')
+            _missing = sorted(set(_CODE) - _seen)
+            if _missing:
+                _bad.append('  표에서 읽지 못한 행: ' + ', '.join(_missing))
+            _nyes = sum(1 for a in _p28m.values() if a['match'])
+            if _nyes != _mbp['panel28_incumbent3']['n_match']:
+                _bad.append(f'  산출물 자체가 어긋난다: match 참 {_nyes}개 vs '
+                            f'n_match {_mbp["panel28_incumbent3"]["n_match"]}')
+            if _bad:
+                fails.append('표 3 의 유효 일치 열이 산출물과 어긋났다 '
+                             '(검사 B3b)')
+                fails.extend(_bad)
+    except (OSError, KeyError, ValueError) as _e:
+        fails.append(f'표 3 유효 일치 열 검사를 돌릴 수 없다 (검사 B3b): {_e}')
+
     # (B4) 표 2 의 최근접 모사체 이름 (2026-10-27 신설).
     #
     # 왜. 표 행 패턴이 모사체 이름을 박아 두고 있었다. 재실행으로 HD 의
@@ -3992,6 +4633,18 @@ def main():
     # 꺼지고 화면에는 통과가 찍혔다. 이 세션에서만 그 경로로 세 번 빠뜨렸다.
     # 꺼진 검사는 없는 검사보다 나쁘다. 실패로 올린다. 본문에 싣지 않기로
     # 한 사실은 UNQUOTED 에 이유와 함께 적어 명시적으로 면제한다.
+    # 2026-11-08. 미발견 판정을 키 단위로 본다.
+    #
+    # 왜. CHECKS 에 같은 키가 두세 번 올라온 항목이 여덟 개 있다 (문장이
+    # 여럿이라 어구별로 나눠 적은 결과다). 한 항목이 맞고 다른 항목이
+    # 빗나가면 종전 코드는 그 키를 미발견으로 올렸다. 그러면 그 양은
+    # 이미 검사되고 있는데도 '검사 누락' 으로 집계되어, 진짜 누락이
+    # 그 소음에 묻힌다. mde_rho_mantel 이 그 사례다: 'design detects
+    # $|\rho| \ge 0.67$ at 80% power' 가 맞고 있는데도 누락으로 찍혔다.
+    #
+    # 한 키라도 어딘가에서 맞았으면 그 양은 검사되고 있다. 그 키는
+    # 미발견에서 뺀다. 아무 항목도 맞지 않은 키만 남긴다.
+    unseen = [u for u in unseen if u.split(':')[0] not in matched_keys]
     unexpected = [u for u in unseen
                   if u.split(':')[0] not in UNQUOTED and '도판' not in u]
     if unseen:

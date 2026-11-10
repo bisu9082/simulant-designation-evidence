@@ -16,22 +16,39 @@ mkdir -p submission/code submission/outputs
 
 # 2026-11-04 (결정 J-C). 투고 패키지는 ACS Sensors 판본이다. JHM 평행본은
 # archive/jhm_v1/ 로 동결했다 (사유와 되살리는 절차는 그쪽 FROZEN.md).
+# 2026-11-10. submission/supporting.tex 가 ACS Sensors 시절 이름으로
+# 남아 있었고, 아래 자기검증이 그 묵은 사본을 SI 로 읽고 있었다.
+# 복사 대상이 아닌 .tex 는 지운다.
+rm -f submission/*.tex
 cp -p paper/main.tex paper/refs.bib paper/cover_letter.tex \
       paper/supplementary.tex submission/
 for f in acs-main.bib acs-supporting.bib; do
   [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done
-for f in main.pdf cover_letter.pdf supporting.pdf; do
+
+# 2026-11-10. 도판 목록을 손으로 들고 있었다. 3층 재설계로 Fig_spaces 와
+# Fig_toxicity 가 SI 로 들어갔는데 이 목록에 없어서 패키지에 빠졌고,
+# 철회한 graphical_abstract 는 목록에 남아 계속 복사되고 있었다. 문서가
+# 실제로 \includegraphics 하는 것만 복사한다.
+rm -f submission/*.png submission/*.pdf
+for f in $(grep -ho '\\includegraphics\[[^]]*\]{[^}]*}' \
+             paper/main.tex paper/supplementary.tex \
+           | sed 's/.*{\(.*\)}/\1/' | sort -u); do
+  if [ -f "outputs/$f" ]; then
+    cp -p "outputs/$f" "submission/$f"
+  else
+    printf '[sync] 도판 없음: outputs/%s\n' "$f"; exit 1
+  fi
+done
+
+# 2026-11-10. supporting.pdf 는 ACS Sensors 시절 이름이다. 지금 빌드가
+# 내는 것은 supplementary.pdf 다.
+for f in main.pdf cover_letter.pdf supplementary.pdf; do
   [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done
 [ -f paper/main.pdf ] && cp -p paper/main.pdf \
     submission/simulant_manuscript.pdf
 
-for f in Fig_main.png Fig_plocal.png Fig_h1.png Fig_mde.png \
-         Fig_talk_response.png Fig_talk_tox.png toc_acs.png \
-         graphical_abstract.png graphical_abstract.pdf; do
-  [ -f "outputs/$f" ] && cp -p "outputs/$f" "submission/$f"
-done
 
 # 코드: 분석·도판·검증 스크립트와 빌드 스크립트 전량
 for f in *.py *.sh; do
@@ -65,7 +82,10 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
 ( cd submission/code \
   && ln -sfn ../../outputs outputs 2>/dev/null \
   && mkdir -p paper \
-  && cp -p ../main.tex ../supporting.tex ../cover_letter.tex paper/ \
+  && cp -p ../main.tex ../supplementary.tex ../cover_letter.tex paper/ \
+  && cp -p ../main.pdf ../supplementary.pdf ../cover_letter.pdf paper/ \
+  && cp -p ../../paper/.buildstamp paper/ \
+  && cp -p ../../README.md . \
   && cp -p ../../paper/tab_*.tex paper/ \
   && cp -p ../Fig_*.png ../toc_acs.png paper/ 2>/dev/null \
   && python3 verify_consistency.py ) || {

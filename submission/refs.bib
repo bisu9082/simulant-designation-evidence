@@ -254,17 +254,14 @@
   doi     = {10.1016/j.jhazmat.2025.140703}
 }
 
-% [확인 필요] 투고 전에 Zenodo 등으로 예치해 DOI 를 발급받고 아래 항목을
-% 그 DOI 로 교체할 것. ACS 는 영구 식별자를 선호한다. bib 의 note 필드에
-% 한글을 넣으면 pdflatex 가 Unicode 오류로 깨진다 (2026-11-02 적발).
-@misc{simulantrepo,
-  author       = {Kang, Ku},
-  title        = {simulant-designation-evidence: analysis code, descriptor
-                  tables and figure scripts for this work},
-  year         = {2026},
-  howpublished = {\url{https://github.com/bisu9082/simulant-designation-evidence}},
-  note         = {Public Git repository, tag \texttt{acs-submission-20261107}.
-                  Code under the MIT licence, data and text under CC~BY~4.0}
+@article{group3ref,
+  author  = {Shin, Myeongsik and Kang, Ku and Kim, Jeongyun and Kim, Soohwan and Yoo, Jin and Jang, Yoon Jeong and Kim, Min-Kun and Anslyn, Eric V. and Lee, Doo-Hee},
+  title   = {Portable machine learning--integrated optical sensor array for rapid and selective detection of authentic {Novichok} nerve agents},
+  journal = {Sensors and Actuators B: Chemical},
+  volume  = {457},
+  pages   = {139706},
+  year    = {2026},
+  doi     = {10.1016/j.snb.2026.139706}
 }
 
 @article{multiplexref,
@@ -276,16 +273,6 @@
   pages   = {29},
   year    = {2025},
   doi     = {10.1007/s44397-025-00032-y}
-}
-
-@article{group3ref,
-  author  = {Shin, Myeongsik and Kang, Ku and Kim, Jeongyun and Kim, Soohwan and Yoo, Jin and Jang, Yoon Jeong and Kim, Min-Kun and Anslyn, Eric V. and Lee, Doo-Hee},
-  title   = {Portable machine learning--integrated optical sensor array for rapid and selective detection of authentic {Novichok} nerve agents},
-  journal = {Sensors and Actuators B: Chemical},
-  volume  = {457},
-  pages   = {139706},
-  year    = {2026},
-  doi     = {10.1016/j.snb.2026.139706}
 }
 
 @article{ondeviceref,
@@ -833,30 +820,6 @@
   doi     = {10.1111/j.2517-6161.1995.tb02031.x}
 }
 
-@book{nrc1997mist,
-  author    = {{National Research Council}},
-  title     = {Technical Assessment of the Man-in-Simulant Test Program},
-  publisher = {National Academies Press},
-  address   = {Washington, DC},
-  year      = {1997},
-  isbn      = {978-0-309-05940-4},
-  doi       = {10.17226/5936},
-  note      = {Chapter 3, Simulant Selection},
-  url       = {https://nap.nationalacademies.org/catalog/5936/technical-assessment-of-the-man-in-simulant-test-program}
-}
-
-% 2026-11-07 (12차 R4). 발효된 표준시험절차. 2002 년 개념문서가 DMMP 를
-% 제안했으나 실제 표준은 실작용제 사린으로 시험한다.
-@techreport{nioshaprstp0350,
-  author      = {{National Institute for Occupational Safety and Health}},
-  title       = {Determination of {CBRN} {APR} Performance during Dynamic
-                 Testing against the Chemical Agent Vapor Sarin {(GB)}},
-  institution = {National Personal Protective Technology Laboratory, NIOSH},
-  number      = {RCT-CBRN-APR-STP-0350},
-  year        = {2025},
-  url         = {https://www.cdc.gov/niosh/rap/stps/RCT-CBRN-APR-STP-0350-508.pdf}
-}
-
 @techreport{niosh2002simulant,
   author      = {{National Institute for Occupational Safety and Health}},
   title       = {Chemical Warfare Agent {(CWA)} Simulant Program for
@@ -864,10 +827,7 @@
   institution = {National Personal Protective Technology Laboratory, NIOSH},
   year        = {2002},
   month       = jul,
-% 표기 확인 (2026-11-07): DRAFT FOR DISCUSSION 머리글은 원 HTML 쪽
-% .../apr/concepts/cwatest-073102.html 에 있고, 508 접근성 PDF 에는 없다.
-  note        = {Dated 31 July 2002; issued as a concept marked
-                 DRAFT FOR DISCUSSION},
+  note        = {Dated 31 July 2002},
   url         = {https://archive.cdc.gov/www_cdc_gov/niosh/npptl/standardsdev/cbrn/apr/concepts/pdfs/simulantjul31-508.pdf}
 }
 
@@ -878,6 +838,15 @@
              Department of the Army. Filed 16 May 2003; granted 31 October 2006},
   year    = {2006},
   url     = {https://patents.google.com/patent/US7129094B1/en}
+}
+
+@book{nrc1997mist,
+  author    = {{National Research Council}},
+  title     = {Technical Assessment of the Man-in-Simulant Test Program},
+  publisher = {The National Academies Press},
+  address   = {Washington, DC},
+  year      = {1997},
+  doi       = {10.17226/5936}
 }
 
 @article{lawrence2025simulants,
@@ -1019,10 +988,8 @@
   number      = {TOP 08-2-196},
   year        = {2011},
   month       = apr,
-  note        = {Known to this work only through the citation in TOP 08-2-188
-                 CN1, which is also the source of the title and year. A
-                 revision 08-2-196A is held by DTIC under accession
-                 AD1167884. Neither was obtainable for this work}
+  note        = {Cited in TOP 08-2-188 CN1 as the governing simulant-selection
+                 procedure; the document itself was not obtainable for this work}
 }
 
 @techreport{top082188,
@@ -1055,92 +1022,4 @@
   volume  = {28},
   number  = {5},
   doi     = {10.18637/jss.v028.i05}
-}
-
-%% ---- 2026-11-03 추가 (H1). 우리 저자 그룹의 ACS Sensors 선행 논문.
-%%      Crossref 실측: DOI 확인, update-to 없음(철회·정정 0건).
-%%      issued/published-online 2024-11-11, published-print 2025-01-24,
-%%      journal-issue vol 10(1) 185-195 -> 권 연도 2025 로 적는다.
-%%      저자 전원 Crossref 원문: Jin Yoo; Donggyu Lee; Soobeen Lee;
-%%      Seungmin Kang; Hye In Kim; Yoon Jeong Jang; Jihyun Kim; Tai Hyun Park.
-%%      이 가운데 Yoon Jeong Jang 과 Jin Yoo 가 본 원고의 공저자다
-%%      (Seungmin Kang 은 본 원고의 Ku Kang 과 다른 사람이다).
-@article{yoo2025bioelectronic,
-  author  = {Yoo, Jin and Lee, Donggyu and Lee, Soobeen and Kang, Seungmin
-             and Kim, Hye In and Jang, Yoon Jeong and Kim, Jihyun and
-             Park, Tai Hyun},
-  title   = {Combinatorial Pattern Response of Bioelectronic Nose for the
-             Detection of Real Nerve Agents},
-  journal = {ACS Sensors},
-  volume  = {10},
-  number  = {1},
-  pages   = {185--195},
-  year    = {2025},
-  doi     = {10.1021/acssensors.4c01739}
-}
-
-%% ---- 2026-11-03 추가. ACS Sensors 가 '센싱이 의존하는 구성요소가
-%%      검증됐는가' 를 묻는 논문을 싣는다는 선례. 표지서신 스코프 논증용.
-%%      Crossref 실측: published-online 2026-10-21, 권·면 미배정(ASAP).
-@article{chen2026aptamer,
-  author  = {Chen, Yijing and Liu, Juewen},
-  title   = {A Practical Guide of Choosing and Validating Aptamers for
-             Biosensors},
-  journal = {ACS Sensors},
-  year    = {2026},
-  note    = {Advance online publication},
-  doi     = {10.1021/acssensors.6c02357}
-}
-
-%% ---- 2026-11-03 추가. Software 절이 이름과 버전만 적고 인용하지 않았다.
-%%      PySCF: Crossref 실측 (vol 8(1), issued 2017-09-28, 철회·정정 0건).
-@article{pyscf2018,
-  author  = {Sun, Qiming and Berkelbach, Timothy C. and Blunt, Nick S. and
-             Booth, George H. and Guo, Sheng and Li, Zhendong and
-             Liu, Junzi and McClain, James D. and Sayfutyarova, Elvira R. and
-             Sharma, Sandeep and Wouters, Sebastian and
-             Chan, Garnet Kin-Lic},
-  title   = {{PySCF}: the {Python}-based simulations of chemistry framework},
-  journal = {WIREs Computational Molecular Science},
-  volume  = {8},
-  number  = {1},
-  pages   = {e1340},
-  year    = {2018},
-  doi     = {10.1002/wcms.1340}
-}
-
-%% scikit-learn 은 JMLR 게재로 DOI 가 없다. 권·면만 적는다.
-@article{sklearn2011,
-  author  = {Pedregosa, Fabian and Varoquaux, Ga{\"e}l and Gramfort, Alexandre
-             and Michel, Vincent and Thirion, Bertrand and Grisel, Olivier
-             and Blondel, Mathieu and Prettenhofer, Peter and Weiss, Ron and
-             Dubourg, Vincent and Vanderplas, Jake and Passos, Alexandre and
-             Cournapeau, David and Brucher, Matthieu and Perrot, Matthieu and
-             Duchesnay, {\'E}douard},
-  title   = {Scikit-learn: Machine Learning in {Python}},
-  journal = {Journal of Machine Learning Research},
-  volume  = {12},
-  pages   = {2825--2830},
-  year    = {2011}
-}
-
-@misc{opcwschedules,
-  author       = {{Organisation for the Prohibition of Chemical Weapons}},
-  title        = {Scheduled Chemicals under the Chemical Weapons Convention},
-  howpublished = {Guide to Schedules, OPCW Technical Secretariat},
-  note         = {Schedule~1 entries 1A(1)--1A(6) and Schedule~3 entries
-                  3A(1)--3A(4)},
-  url          = {https://www.opcw.org/sites/default/files/documents/2018/07/Guide_to_Schedules.pdf},
-  urldate      = {2026-11-07}
-}
-
-@misc{opcwnovichok,
-  author       = {{Organisation for the Prohibition of Chemical Weapons}},
-  title        = {Consolidated Text of Adopted Changes to Schedule~1 of the
-                  Annex on Chemicals to the Chemical Weapons Convention},
-  howpublished = {Technical Secretariat note S/1820/2019 (CS-2019-2235(E))},
-  year         = {2019},
-  note         = {Adds entries 1A(13)--1A(16); entered into force 7 June 2020},
-  url          = {https://www.opcw.org/sites/default/files/documents/2019/12/s-1820-2019(e).pdf},
-  urldate      = {2026-11-07}
 }
