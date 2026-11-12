@@ -56,7 +56,8 @@
 % 또한 q=0.0430 을 만든 측정은 동일 몰농도 용액(아세토니트릴) 투여이므로
 % 증기압이 전달량을 지배한다는 기작 주장의 근거가 되지 못한다.
 % 제목이 지탱하는 범위를 문헌 발견까지로 내린다.
-% [확인 필요] 최종 제목은 Ku 확정.
+% 2026-11-12 Ku 확정. Perspective 제안서를 거치지 않고 Article 로 바로
+% 투고한다(커버레터 28행·183행이 이미 Article 과 8면 한도로 적는다).
 \title{The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated
 for Other Measurements, and Descriptor Comparison Does Not Settle the
 Substitution}
@@ -116,9 +117,9 @@ Chemical warfare agent detection is developed almost entirely on simulants,
 compounds accepted as agent-like and safe to handle. We tested that acceptance.
 In the public standard-setting record no incumbent carries a designation that
 validates a detection response against an agent's: one is designated for
-filtration, one for a training composition that asks only that a vapour detector
+barrier testing, one for a training composition that asks only that a vapour detector
 respond, and the third has no designating document we found. The Army procedure
-for simulant selection is not public, which bounds this. For eleven authentic
+for simulant selection is not public, bounding this. For eleven authentic
 agents we computed structural and GFN2-xTB electronic descriptors and asked, by
 exact permutation over every designation, whether those three sit closer to the
 agents than other non-agents. On the
@@ -395,7 +396,10 @@ authoritative it looks, with the source URL and search date for each. DMMP was
 identified as a test simulant for canister and cartridge filtration against GB
 and HD in a NIOSH respirator programme \cite{niosh2002simulant}, a document that
 also states its simulant information is not to be used as a recommendation of
-any simulant; the property at issue is breakthrough through a barrier. DPGME is
+any simulant. A second designation is of the same kind, naming DMMP for fabric
+penetration against VX in the Man-in-Simulant Test assessment
+\cite{nrc1997mist}; the property at issue in both is transport through a
+barrier. DPGME is
 designated in a US Army patent for a simulant training composition
 \cite{seitzinger2006simulant} which names its agent classes, liquid G-agent
 including VX and H-agent, and requires detectability rather than resemblance:
@@ -797,17 +801,21 @@ validation, writing -- original draft. \textbf{Yoon Jeong Jang:} validation,
 writing -- review and editing, supervision, project administration.
 
 \section*{Notes}
-The authors declare no competing financial interest. During the preparation of
-this work the authors used a large language model (Anthropic Claude) to assist
-in drafting and editing prose, in writing and auditing the analysis and figure
+The authors declare no competing financial interest.
+
+% 2026-11-12. ACS 는 생성형 AI 사용 공시를 Acknowledgments 에 두도록 한다
+% (출판사별 위치: Elsevier 는 참고문헌 앞 독립 절, Springer Nature 는
+% Methods). 종전에는 Notes 에 있었으므로 옮긴다. 도구·용도·검증 범위를
+% 함께 적는다.
+\section*{Acknowledgement}
+This research did not receive any specific grant from funding agencies in the
+public, commercial, or not-for-profit sectors. During the preparation of this
+work the authors used a large language model (Anthropic Claude) to assist in
+drafting and editing prose, in writing and auditing the analysis and figure
 scripts, and in building the internal-consistency checks described under
 Reproducibility. No numerical result was produced by the model: every value
 reported here is read from the output of the deposited scripts. The authors
 reviewed and edited all content and take full responsibility for it.
-
-\section*{Acknowledgement}
-This research did not receive any specific grant from funding agencies in the
-public, commercial, or not-for-profit sectors.
 
 \section*{Data and code availability}
 % 2026-11-12. 태그명을 acs-submission-20261112 로 확정해 아래에 적었다.
@@ -822,19 +830,16 @@ distributions, candidate tables and all analysis and figure scripts are in a
 public repository at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, and are also
 provided with this article. The release tagged for this submission is
-\texttt{acs-submission-20261112}. The
-repository also carries the primary EPA source document from which every
-toxicity value here was parsed, so the parse can be checked against the
-original. The descriptor cache is checked against the code rather than taken on
-trust: \texttt{build\_descriptors.py --verify} rebuilds the fifty-three columns
-that RDKit can regenerate and the analysis pipeline stops if any of them fails to
-reproduce. The declared exemption list names nine columns that cannot be
-rebuilt without the xtb binary, eight of which are present on the
-twenty-eight-compound cache and go unchecked; they include all three coordinates
-of the electronic space, so that space rests on the deposited cache rather than
-on a reproduced one, and the gate halts if any column outside the declared list
-goes unchecked.
-Section~\ref{S-meth:conformer} reports what that check caught.
+\texttt{acs-submission-20261112}. The repository carries the primary EPA source
+document from which every toxicity value was parsed. The descriptor cache is
+checked against the code: \texttt{build\_descriptors.py --verify} rebuilds the
+fifty-three columns RDKit can regenerate and the pipeline stops if any fails.
+The declared exemption list names nine columns needing the xtb binary, eight of
+them present on the twenty-eight-compound cache and unchecked; they include all
+three coordinates of the electronic space, so that space rests on the deposited
+cache rather than a reproduced one, and the gate halts if any column outside the
+list goes unchecked. Section~\ref{S-meth:conformer} reports what the check
+caught.
 
 \bibliography{refs}
 

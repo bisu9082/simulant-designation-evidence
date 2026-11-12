@@ -371,6 +371,13 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[{National Research Council}(1997)]{nrc1997mist}
+{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
+  Test Program}; The National Academies Press: Washington, DC, 1997\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
@@ -392,13 +399,6 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 {ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
   Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
   reapproved 2020\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{National Research Council}(1997)]{nrc1997mist}
-{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
-  Test Program}; The National Academies Press: Washington, DC, 1997\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

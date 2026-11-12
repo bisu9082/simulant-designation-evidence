@@ -405,9 +405,8 @@ def volatility():
             # 2026-11-06 (9차 P-10). TX 가 각주에 정의돼 있지 않았다. 그리고
             # 축 자체에 불확도가 없어서 0.473 대 0.216 의 0.257 여유를
             # 온도차가 만들 수 있는지 독자가 판단할 수 없었다.
-            r'\multicolumn{5}{l}{\footnotesize value without a stated '
-            r'measurement temperature, used only for solvents. Over this '
-            r'compound}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize value the source itself marks as extrapolated rather than}\\' '\n'
+            r'\multicolumn{5}{l}{\footnotesize measured, used only for solvents. Over this compound}\\' '\n'
             r'\multicolumn{5}{l}{\footnotesize class the '
             r'Clausius--Clapeyron slope is of order 0.03 to 0.05 '
             r'decades per $^{\circ}$C, so a}\\' '\n'

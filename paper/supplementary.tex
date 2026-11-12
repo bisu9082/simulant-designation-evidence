@@ -194,7 +194,7 @@ descriptors were used throughout in preference to a substructural fingerprint
 such as ECFP \cite{rogers2010}, because the quantity of interest here is the
 position of a compound along named physical axes rather than a similarity score.
 
-Ten of the fifty-two are not functions of the SMILES string alone. The RDKit
+Ten of the fifty-one are not functions of the SMILES string alone. The RDKit
 shape descriptors, the three principal moments of inertia and the radius of
 gyration, asphericity, eccentricity, inertial shape factor, the two normalised
 principal-moment ratios and the spherocity index, are read from a
@@ -350,8 +350,8 @@ three-dimensional structure rather than from the SMILES string, so they depend
 on which conformer the descriptor build uses. The first version of this work
 took the single lowest-energy member of an ETKDGv3 ensemble of at most twenty,
 pruned at 0.5~\AA{} RMSD. That choice was never stated, and it did not
-reproduce: rebuilding the cache from the deposited code returned eleven of
-fifty-two numeric columns different from the deposited values, the worst by 72
+reproduce: rebuilding the cache from the deposited code returned eleven numeric
+columns different from the deposited values, the worst by 72
 per cent of its own magnitude. The cause is that the selection is an
 \texttt{argmin} over near-degenerate force-field energies, so a small numerical
 difference between runs moves it to a different conformer.
@@ -1483,7 +1483,7 @@ which to pick.
 
 The merged space puts 35 structural coordinates and 3 electronic ones into one
 Euclidean distance. Standardising each descriptor equalises the variance per
-coordinate, not per block, so the expected contribution is 38 against 3 and the
+coordinate, not per block, so the expected contribution is 35 against 3 and the
 merged distance is in practice a structural distance. This section is the only
 place that imbalance is quantified, and we quantify it here because a reader is entitled to ask whether the merged
 result is an artifact of that imbalance. A colleague who read a draft asked
