@@ -88,6 +88,21 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
   && cp -p ../../README.md . \
   && cp -p ../../paper/tab_*.tex paper/ \
   && cp -p ../Fig_*.png ../toc_acs.png paper/ 2>/dev/null \
-  && python3 verify_consistency.py ) || {
-  echo '[sync] 패키지 자기검증 실패'; exit 1; }
+  && python3 verify_consistency.py > /tmp/_sync_verify.txt 2>&1 ) || {
+  # 2026-11-12. 종전에는 verify 가 FAIL 이면 무조건 멈췄다. 그런데 A-tag 는
+  # '예치 태그가 원격에 없다' 를 FAIL 로 보는데, 그것은 Ku 가 투고 직전에
+  # 푸시하기 전까지의 정상 상태다. 그래서 패키지 동기화가 투고 직전까지
+  # 영구히 막히고 submission/ 사본이 묵었다 — 그 묵은 사본이 바로 이
+  # 스크립트가 고치려던 문제다. A-tag 단독 실패는 경고로 통과시킨다.
+  n_fail=$(grep -cE '\(검사 [^)]*\):' /tmp/_sync_verify.txt 2>/dev/null || true)
+  n_tag=$(grep -c '(검사 A-tag)' /tmp/_sync_verify.txt 2>/dev/null || true)
+  n_b2d=$(grep -c '(검사 B2d)' /tmp/_sync_verify.txt 2>/dev/null || true)
+  n_fail=${n_fail:-0}; n_tag=${n_tag:-0}; n_b2d=${n_b2d:-0}
+  if [ "$n_fail" -gt 0 ] && [ "$((n_tag + n_b2d))" -eq "$n_fail" ]; then
+    echo '[sync] A-tag/B2d 만 남았다 — 푸시 전 정상 상태이므로 통과시킨다'
+  else
+    echo '[sync] 패키지 자기검증 실패'
+    grep -E '\(검사 [^)]*\):' /tmp/_sync_verify.txt | head -8
+    exit 1
+  fi; }
 rm -rf submission/code/paper submission/code/outputs

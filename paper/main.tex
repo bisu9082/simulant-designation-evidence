@@ -47,10 +47,19 @@
 % 재현' 이다. (2) 휘발성 축(outputs/volatility_space.json)에서 현행 지정은
 % p=0.0206 이고 측정 ΔE00 응답거리와 BH q=0.0430 으로 일치한다. 서술자
 % 비교가 아무것도 공급하지 못한다는 서술은 그 축에서 거짓이다.
-% [확인 필요] 최종 제목은 Ku 확정. 아래는 두 반증을 반영한 임시 정본.
-\title{Simulant Designations Validate Detectability, Not Agent Resemblance:
-Only the Volatility Axis Supports the Compounds Chemical Warfare Agent Sensing
-Is Built On}
+% 2026-11-12 (에디터 게이트 반영). 위 임시 제목도 두 곳에서 과대였다.
+% (1) 'Designations Validate Detectability' 의 복수형이 지정 8건 중
+%     1건(DPGME 특허)에만 해당하고, 초록은 그 1건조차 '작용제 응답과
+%     대조한 검증은 아니다' 로 부정한다.
+% (2) 'Supports' 는 결론부 다음 문장이 해체한다 — 유효매칭 기준
+%     316/680위, 매칭 1건, 그 1건은 측정 온도차 안쪽.
+% 또한 q=0.0430 을 만든 측정은 동일 몰농도 용액(아세토니트릴) 투여이므로
+% 증기압이 전달량을 지배한다는 기작 주장의 근거가 되지 못한다.
+% 제목이 지탱하는 범위를 문헌 발견까지로 내린다.
+% [확인 필요] 최종 제목은 Ku 확정.
+\title{The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated
+for Other Measurements, and Descriptor Comparison Does Not Settle the
+Substitution}
 
 % 2026-11-01 Ku 지시 저자 구성. 공동1저자 해제(Ku 단독), Jeongyun Kim 과
 % Miae Kim 이 2·3저자, Doo-Hee Lee 4저자(교신 해제), Jin Yoo 5저자,
@@ -103,30 +112,28 @@ exact permutation test, acute exposure guideline level, dual-use}
 
 \begin{abstract}
 \noindent
-Chemical warfare agent detection is developed almost entirely on simulants:
-compounds accepted as agent-like and safe to handle. We tested that
-acceptance. In the public standard-setting record, no incumbent carries a
-designation that validates detection: one is designated for filtration, one is
-designated for a training composition whose requirement is that a vapour
-detector respond at all, and the third has no designating document we could
-find; the Army procedure governing simulant selection is not public, so this
-bounds the claim.
-For eleven authentic agents we then computed structural and GFN2-xTB electronic
-descriptors and asked, by exact permutation over every designation, whether
-those three sit closer to the agents than the panel's other non-agents. On the
+Chemical warfare agent detection is developed almost entirely on simulants,
+compounds accepted as agent-like and safe to handle. We tested that acceptance.
+In the public standard-setting record no incumbent carries a designation that
+validates a detection response against an agent's: one is designated for
+filtration, one for a training composition that asks only that a vapour detector
+respond, and the third has no designating document we found. The Army procedure
+for simulant selection is not public, which bounds this. For eleven authentic
+agents we computed structural and GFN2-xTB electronic descriptors and asked, by
+exact permutation over every designation, whether those three sit closer to the
+agents than other non-agents. On the
 primary thirty-five-compound panel, which adds five compounds the sensor
 literature also calls simulants, no agent has a valid match and no test reaches
-significance. Resampling the descriptors gives the incumbent
-three a median of zero matched agents against five for a set of eight containing
-them, and neither count is unusual for its size ($p=0.48$ and $p=0.07$). What
-the extended panel changes is the comparison rather than the chemistry, since
-diisopropyl fluorophosphate is nearer to three G agents than any incumbent is. A
-twenty-eight-compound panel omitting those five and two organophosphorus
-pesticides yields three matches and a
-nominal $p$ of 0.025 that no correction over eighteen tests leaves significant,
-while relabelling those two pesticides as simulants produces an adjusted 0.0008. A defensible claim must name the
-measurement it rests on and fix panel, space, statistic and weighting in
-advance.
+significance. Resampling the descriptors leaves both the incumbent
+three and an eight-compound set containing them inside a null matched to their
+size ($p=0.48$ and $p=0.16$). The extended panel changes the comparison rather
+than the chemistry: diisopropyl fluorophosphate is nearer to three G agents than
+any incumbent is. A twenty-eight-compound panel omitting those five and the two
+pesticides yields three matches and a nominal structural $p$ of 0.028 that no
+correction over eighteen tests leaves significant. Relabelling the two
+pesticides as simulants moves the corrected value to 0.745, relabelling all
+seven to 0.00075. A defensible claim must name the measurement it rests on and
+fix panel, space, statistic and weighting in advance.
 \end{abstract}
 
 \section{Introduction}
@@ -499,7 +506,7 @@ changing nothing else makes the result worse, not better: the smallest
 Benjamini--Hochberg value over the same eighteen tests moves from 0.630 to
 0.745. Classing all seven of the undesignated organophosphorus and literature
 compounds as simulants gives a smallest nominal value of 0.00006 and a corrected
-0.00075, the only configuration here that survives all five accounting schemes.
+0.00075, the only configuration here that survives all six accounting schemes.
 Neither relabelling is arbitrary, and on one of them we correct ourselves: we
 described the two pesticides as compounds nobody uses as simulants, which is
 wrong for malathion, since the NIOSH document lists it in a GB simulant column
@@ -594,9 +601,11 @@ only one of the three that predicts the response we measured.
 \label{res:toxsummary}
 
 Every argument above rests on descriptor distances, and the premise that one of
-those spaces corresponds to what a vapour-phase sensor reports is tested in
+those spaces corresponds to what a sensor reports is tested in
 Supporting Information Section~\ref{S-res:arraydetail} against measured
-colorimetric response for twelve panel compounds over 29 dyes. It does not
+colorimetric response for twelve panel compounds over 29 dyes. Those exposures
+were acetonitrile solutions at matched molarity rather than vapour, so the test
+bounds what any of this establishes about a vapour-phase response. It does not
 resolve the question: three of twelve cells reach a nominal $p<0.05$ and
 disagree on a space, correcting over the twelve leaves a smallest adjusted
 value of 0.117, all three lie in the plate set containing no simulant, and the
@@ -631,8 +640,11 @@ should be compared against, and that decides the answer. On a panel containing
 the compounds the field itself uses as simulants, the three incumbents match no
 agent and no test reaches nominal significance; on a panel omitting them, three
 agents are matched and the smallest nominal value is 0.025. The mechanism is not
-a story about fidelity: on a single standardisation basis the incumbents do not
-move between the panels at all, and what the larger panel supplies is
+a story about fidelity. The identity of each agent's nearest incumbent is
+unchanged between the panels, and for the three G agents the argument turns on
+the distances move by under one per cent; across all eleven the median shift is
+6.2 per cent and the largest, for tabun, is 26.4 per cent, which is enough to
+carry tabun across the threshold on its own. What the larger panel supplies is
 diisopropyl fluorophosphate. A designation defended by a comparison that
 excludes the alternatives is not defended.
 
@@ -659,21 +671,24 @@ and the only one that tracks the colorimetric response we measured
 detection put the same requirement in 2003: an ideal simulant would mimic every
 property but toxicity, that is never achieved, and simulants for vapour-phase
 detection must approximate the vapour pressure of the agent
-\cite{nrc2003standoff}. An external check points the same way. Davidson et
-al.~\cite{davidson2020} exposed a 73-indicator colorimetric array to fourteen
-authentic agents alongside precursors, pesticides and household chemicals, and
-their clusters are a measured grouping a descriptor space can be scored against.
-Six compounds are common to their panel and ours; ranked by distance to the
-seven agents both panels share, neither our structural space ($p = 0.500$) nor
-our electronic one ($p = 0.350$) separates the three they grouped with an agent
-from the three that fell in their weak-response cluster. With six compounds the
-smallest attainable value is 0.05, so that is absence of support rather than
-refutation. Their analytes were delivered neat into a headspace, so how much
-vapour reached the array was set by each compound's own vapour pressure, which
-is the axis that does hold. The incumbent designations are therefore supported
-in kind, on the property governing whether a compound reaches a vapour-phase
-sensor at all, and undocumented in degree, since the one valid match that axis
-yields lies inside a temperature mismatch.
+\cite{nrc2003standoff}. An external check gives no support to the other two
+axes. Davidson et al.~\cite{davidson2020} exposed a 73-indicator colorimetric
+array to fourteen authentic agents alongside precursors, pesticides and
+household chemicals, and their clusters are a measured grouping a descriptor
+space can be scored against. Of the six compounds common to both panels,
+neither our structural space ($p = 0.500$) nor our electronic one ($p = 0.350$)
+separates the three they grouped with an agent from the three in their
+weak-response cluster; with six compounds the smallest attainable value is 0.05,
+so that is absence of support rather than refutation. Their analytes were delivered neat into a headspace, so how much
+vapour reached their array was set by each compound's own vapour pressure. That
+mechanism is theirs and not ours: our own plates received solutions at matched
+molarity, so the agreement we report on the volatility axis is a correlation
+with response distance and not evidence that vapour delivery produced it. What
+can be said is narrower than the standing requirement would suggest. The
+incumbent designations are supported in kind on the one axis the criterion
+names, and undocumented in degree, since that axis ranks the designation 316th
+of 680 on match count and the single match it yields lies inside a temperature
+mismatch.
 
 The documentary record explains how that arose, and it is not a story about
 carelessness. DMMP was designated carefully, for adsorptive breakthrough on a
@@ -699,24 +714,22 @@ follows for practice.
 on public sources, and the scope of that search is stated there: the claim is
 that no public instrument designates these three compounds for the use the
 sensor literature makes of them, not that none does. Sensitivity depends on
-which threshold is applied. Against a nominal 0.05 the test detects effects
+the threshold applied. Against a nominal 0.05 the test detects effects
 smaller than the one at issue, reaching that threshold once the incumbents are
 moved 0.24 typical separations closer against an observed median deficit of
-0.493. Correcting across the eighteen tests of the family raises the minimum
-detectable effect to 0.72, above the observed deficit, and eight of the eleven
-agents sit below it, so at the corrected threshold the design has no power
-against an effect of this size. An earlier version reported 0.43 here, computed
-from a null held fixed while the distance matrix was shifted; regenerating the
-null at each shift gives 0.72 (Supporting Information
-Section~\ref{S-res:mde}). Leaving out one agent at a time moves the structural
-$p$ between 0.021 and 0.182. Measured toxicity values
-exist for a subset of the panel only, DMMP among the compounds without one. The
-four configurations reported sample the configuration space rather than census
-it, and one omission is systematic: probe chemistries for lewisite are developed
-against arsenic trichloride \cite{lee2016lewisite}, which is in neither panel.
-Supporting Information Section~\ref{S-disc:detail} gives the remaining
-limitations in full, including why the semi-empirical virtual orbital energies
-are coordinates rather than affinity estimates.
+0.493. Correcting across the eighteen tests raises the minimum detectable effect
+to 0.72, above that deficit, with eight of the eleven agents below it, so at the
+corrected threshold the design has no power against an effect of this size; an
+earlier version reported 0.43 from a null held fixed while the distance matrix
+was shifted (Supporting Information Section~\ref{S-res:mde}). On the
+eight-compound designation, leaving out one agent at a time moves the structural
+$p$ between 0.021 and 0.182. Measured toxicity values exist for a subset of the
+panel only, DMMP among those without one. The four configurations sample the
+configuration space rather than census it, and one omission is systematic:
+probe chemistries for lewisite are developed against arsenic trichloride
+\cite{lee2016lewisite}, which is in neither panel. Supporting Information
+Section~\ref{S-disc:detail} gives the rest, including why the semi-empirical
+virtual orbital energies are coordinates rather than affinity estimates.
 
 \section{Conclusions}
 
@@ -730,27 +743,25 @@ nominal significance. Omitting those five restores three matches and a nominal
 structural $p$ of 0.028, which survives no correction over the family it belongs
 to.
 
-One axis behaves differently, and it is the one the stated criterion names.
-On vapour pressure the incumbent designation ranks 14th of 680
+One axis behaves differently, and it is the one the stated criterion names. On
+vapour pressure the incumbent designation is not indistinguishable from chance
 ($p = 0.0206$) and distance along it tracks the colorimetric response we
-measured in the visible channel ($q = 0.0430$). The support is in aggregate
-distance only: scored by valid matches the same designation ranks 316th, the
-axis yields one match, and that match pairs DPGME with soman across a gap
-smaller than the mismatch between the temperatures at which the two vapour
-pressures were measured.
+measured in the reflectance channel ($q = 0.0430$). The support is in aggregate
+distance only: scored by valid matches the same designation ranks 316th of 680,
+the axis yields one match, and that match lies inside the mismatch between the
+temperatures at which the two vapour pressures were measured.
 
 The documentary record fits that pattern. DMMP was designated for filtration
-breakthrough, which is not detection chemistry. DPGME is designated in a
-training patent whose requirement is that a vapour detector respond, with no
-comparison to an agent's response given. For dichloromethane we found no
-designating document. Each validates something, and none validates resemblance.
+breakthrough, DPGME in a training patent that asks only that a vapour detector
+respond, and for dichloromethane we found no designating document. Each
+validates something, and none validates resemblance.
 
-So the incumbent choices are supported in kind and undocumented in degree, and
-the test establishing this returns whatever the analyst's undeclared choices
-imply: relabelling seven non-agents as simulants takes the corrected minimum to
-0.00075, relabelling two takes it to 0.745. A simulant result should name the
-measurement the compound was validated against and the comparison set it was
-tested in, and should fix the panel, space, statistic, descriptor weighting and
+The incumbent choices are therefore supported in kind and undocumented in
+degree, and the test establishing this returns whatever the analyst's undeclared
+choices imply: relabelling seven non-agents as simulants takes the corrected
+minimum to 0.00075, relabelling two takes it to 0.745. A simulant result should
+name the measurement the compound was validated against and the comparison set
+it was tested in, and should fix the panel, space, statistic, weighting and
 treatment of conformer-dependent descriptors before the test is run. We add the
 last because a reproduction check caught us not counting it (Supporting
 Information Section~\ref{S-meth:conformer}). We propose no replacement compound,
@@ -792,26 +803,30 @@ This research did not receive any specific grant from funding agencies in the
 public, commercial, or not-for-profit sectors.
 
 \section*{Data and code availability}
-% [확인 필요] 투고 직전에 acs-submission-<날짜> 태그를 만들어 푸시하고
-% 아래 태그명을 적을 것. v1.0 은 쓸 수 없다: 2026-10-24 커밋이고, 원고가
+% 2026-11-12. 태그명을 acs-submission-20261112 로 확정해 아래에 적었다.
+% Ku 가 푸시할 때 git filter-repo 로 이력의 공저자 이메일을 제거한 뒤
+% 같은 이름으로 태그를 만들어 커밋과 함께 올린다(--follow-tags).
+% v1.0 은 쓸 수 없다: 2026-10-24 커밋이고, 원고가
 % 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
 % panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
 % 검사 A-tag 가 acs-submission-* 이 아닌 태그를 적으면 실패시킨다.
 Descriptor tables, parsed AEGL values with their sources, permutation
 distributions, candidate tables and all analysis and figure scripts are in a
 public repository at
-\url{https://github.com/bisu9082/simulant-designation-evidence}, at the tagged
-release made for this submission, and are also provided with this article. The
+\url{https://github.com/bisu9082/simulant-designation-evidence}, and are also
+provided with this article. The release tagged for this submission is
+\texttt{acs-submission-20261112}. The
 repository also carries the primary EPA source document from which every
 toxicity value here was parsed, so the parse can be checked against the
 original. The descriptor cache is checked against the code rather than taken on
 trust: \texttt{build\_descriptors.py --verify} rebuilds the fifty-three columns
 that RDKit can regenerate and the analysis pipeline stops if any of them fails to
-reproduce. Eight semi-empirical columns cannot be rebuilt without the xtb binary
-and are named in a declared exemption list instead; they include all three
-coordinates of the electronic space, so that space rests on the deposited cache
-rather than on a reproduced one, and the gate halts if any column outside the
-declared list goes unchecked.
+reproduce. The declared exemption list names nine columns that cannot be
+rebuilt without the xtb binary, eight of which are present on the
+twenty-eight-compound cache and go unchecked; they include all three coordinates
+of the electronic space, so that space rests on the deposited cache rather than
+on a reproduced one, and the gate halts if any column outside the declared list
+goes unchecked.
 Section~\ref{S-meth:conformer} reports what that check caught.
 
 \bibliography{refs}

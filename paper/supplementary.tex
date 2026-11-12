@@ -16,7 +16,7 @@
 \bibliographystyle{achemso}
 
 \title{Supporting Information\\[4pt]
-\large Simulant Designations Validate Detectability, Not Agent Resemblance: Only the Volatility Axis Supports the Compounds Chemical Warfare Agent Sensing Is Built On}
+\large The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated for Other Measurements, and Descriptor Comparison Does Not Settle the Substitution}
 \author{Ku Kang \and Jeongyun Kim \and Miae Kim \and Doo-Hee Lee \and Jin Yoo
   \and Yoon Jeong Jang}
 \date{}
@@ -726,7 +726,7 @@ statistic for 2000 random three-descriptor subspaces of the structural space,
 before and after ZCA whitening, with the space used here marked: its 0.028 is
 the 22.4th percentile of those draws, and 28.95\% of them fall below 0.05 as
 measured, 17.25\% after whitening. (d) Smallest adjusted value over the
-eighteen tests of each configuration under the five accounting schemes of
+eighteen tests of each configuration under the six accounting schemes of
 Table~\ref{tab:family}; on the twenty-eight-compound panel only the
 scheme that
 fixes the statistic in advance falls below 0.05, and the fourth configuration
@@ -934,6 +934,19 @@ Fisher's method and correcting across the two channels by Benjamini--Hochberg,
 the reflectance channel gives $p = 0.0215$ and the ultraviolet channel gives
 $p = 0.6389$, so the reflectance
 channel reaches $q = 0.0430$ and the ultraviolet channel does not.
+
+One asymmetry has to be stated against us. Section~\ref{res:arraydetail}
+separates the two compound sets because only the first contains a simulant, and
+reports that the six cells bearing on the substitution premise are all null. The
+Fisher combination above crosses that separation: the reflectance-channel value
+combines one cell from each set, and the first-set cell on its own gives
+$p = 0.0694$. So the agreement reported here is not a simulant-to-agent result
+either. It is agreement between volatility distance and response distance across
+whatever compounds each plate carried. We drew the family boundary ourselves, at
+two channels rather than at the twelve cells of
+Section~\ref{res:arraydetail}, and the direction of that choice favours our own
+result; a reader who prefers the twelve-cell family should read this axis as
+null as well.
 
 An earlier version combined all four cells in a single Fisher step. It returns
 $p = 0.0809$, and the four cells read as one family give 0.1389, so that form
@@ -1849,10 +1862,11 @@ Mantel $p = 0.044$). The first compound set gives nothing in any space or
 channel ($|\rho| \le 0.225$, Mantel $p \ge 0.22$).
 
 Which set the three nominal cells come from decides what they can mean, and we
-state it because the composition of the two sets is not symmetric. The first set
-is DMMP with five G agents and VX, and it is the only one of the two that
-contains a simulant at all; the second is seven authentic agents and no
-simulant. A cell in the second set therefore asks whether the pattern distance
+state it because the composition of the two sets is not symmetric. The first set is
+six compounds, DMMP with four G agents and VX, and it is the only one of the two
+that contains a simulant at all; the second is seven authentic agents and no
+simulant, of which six enter the test because nitrogen mustard is not on the
+descriptor panel. A cell in the second set therefore asks whether the pattern distance
 between two agents tracks their descriptor distance, which is a different
 question from whether a simulant stands in for an agent. All three nominal cells
 are in the second set. The six cells that bear directly on the premise this

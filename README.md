@@ -2,9 +2,9 @@
 
 Analysis code, descriptor tables and permutation results for:
 
-> **Simulant Designations Validate Detectability, Not Agent Resemblance:
-> Only the Volatility Axis Supports the Compounds Chemical Warfare Agent
-> Sensing Is Built On**
+> **The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated
+> for Other Measurements, and Descriptor Comparison Does Not Settle the
+> Substitution**
 > Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee, Jin Yoo, Yoon Jeong Jang.
 > CBRN Defense Research Institute, Ministry of National Defense, Republic of Korea.
 > Target journal under review as of 2026-11-08.

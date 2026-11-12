@@ -16,7 +16,7 @@
 \bibliographystyle{achemso}
 
 \title{Supporting Information\\[4pt]
-\large Simulant Designations Validate Detectability, Not Agent Resemblance: Only the Volatility Axis Supports the Compounds Chemical Warfare Agent Sensing Is Built On}
+\large The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated for Other Measurements, and Descriptor Comparison Does Not Settle the Substitution}
 \author{Ku Kang \and Jeongyun Kim \and Miae Kim \and Doo-Hee Lee \and Jin Yoo
   \and Yoon Jeong Jang}
 \date{}
@@ -726,7 +726,7 @@ statistic for 2000 random three-descriptor subspaces of the structural space,
 before and after ZCA whitening, with the space used here marked: its 0.028 is
 the 22.4th percentile of those draws, and 28.95\% of them fall below 0.05 as
 measured, 17.25\% after whitening. (d) Smallest adjusted value over the
-eighteen tests of each configuration under the five accounting schemes of
+eighteen tests of each configuration under the six accounting schemes of
 Table~\ref{tab:family}; on the twenty-eight-compound panel only the
 scheme that
 fixes the statistic in advance falls below 0.05, and the fourth configuration
@@ -847,22 +847,28 @@ The criterion the field states for simulant choice names volatility
 vapour pressure first among the properties a vapour-phase simulant must
 approximate \cite{nrc2003standoff}, and the electronic descriptors of
 Section~\ref{meth:descriptors} are computed in the gas phase for the same
-reason. The axis is carried here as a space in its own right.
+reason. The axis was absent from the descriptor panel, which is a gap in the
+analysis rather than something to argue away, so it is carried here as a space
+in its own right and tested separately.
 
-It is one measured quantity, $\log_{10}$ of the vapour pressure in mmHg, so
-there is no filter, weighting or coordinate choice to declare. Values follow a
-three-tier rule fixed before collection: T1 is a 25~$^{\circ}$C value from a
-vapour-pressure compilation or a dedicated measurement report, T2 a
-25~$^{\circ}$C value from a government compendium where no T1 entry exists, T3
-the nearest available temperature recorded with that temperature. One value is
-marked TX because its source labels it extrapolated rather than measured. Of the
-twenty-eight compounds, twenty-four are T1, one T2, two T3 and one TX.
-Table~\ref{tab:volatility} gives every value with its source; where sources
-disagree the adjudication is recorded in \texttt{outputs/volatility\_space.json}
-alongside the rejected candidate. No value was converted between temperatures.
-The axis cannot be carried on the thirty-five compound panel: no vapour pressure
-is published for diethyl chlorophosphate or diethyl cyanophosphonate, and both
-are recorded as uncollected rather than imputed.
+It is one measured quantity, $\log_{10}$ of the vapour pressure in mmHg. Three
+of the analyst choices catalogued in Section~\ref{res:paneldetail} disappear
+structurally: there is no correlation filter to run on a single coordinate, no
+weighting to assign between coordinates, and no space to choose among. Values
+follow a three-tier rule fixed before collection. Tier one is a
+25~$^{\circ}$C value from a vapour-pressure compilation or a dedicated
+measurement report, tier two a 25~$^{\circ}$C value from a government compendium
+where no tier-one entry exists, tier three the nearest available temperature
+recorded with that temperature. Of the twenty-eight compounds there are
+twenty-four of them at tier one, one at tier two and two at tier three; one
+further value is marked tier X because its source labels it extrapolated rather
+than measured. Table~\ref{tab:volatility} gives every value with its source, and
+the adjudication where sources disagree is deposited in
+\texttt{outputs/volatility\_space.json} with the rejected candidate. No value was
+converted between temperatures. The axis cannot be carried on the thirty-five
+compound panel, since no vapour pressure is published for diethyl
+chlorophosphate or diethyl cyanophosphonate, and both are recorded as
+uncollected rather than imputed.
 
 \begin{table}[htb]
   \centering
@@ -876,20 +882,81 @@ are recorded as uncollected rather than imputed.
 \input{tab_volatility}
 \end{table}
 
-Two tests were specified in advance. They sit outside the eighteen-test families
-of Section~\ref{res:permfull}, so no correction over those families applies to
-them, and the min-$q$ column of Table~\ref{tab:ablation} is blank on the
-volatility row for that reason.
+Two tests were specified in advance of this axis. They sit outside the
+eighteen-test families of Section~\ref{res:permfull}, so no correction over
+those families applies to them, and the min-$q$ column of
+Table~\ref{tab:ablation} is blank on the volatility row for that reason.
 
-The first repeats the designation test on this axis. Over all
-$\binom{17}{3}=680$ designations the incumbent set ranks 14th on the
-pre-specified mean-difference statistic, a one-sided $p$ of 0.0206, with a mean
-deficit of 0.0015 on the standardised axis; four of the six statistics fall
-below 0.05 and the exception is the one that counts matches rather than
-distances, where the same designation ranks 316th ($p = 0.465$).
-Table~\ref{tab:vpairing} gives the agent-by-agent pairing. Three of the eleven
-agents have an interferent nearer than any incumbent here as well, and the axis
-spans 6.2 $\log_{10}$ units, from VX at $-3.06$ to phosgene at $3.15$.
+The first repeats the designation test of Section~\ref{M-sec:perm} here. An
+exact enumeration of all 680 designations on the twenty-eight-compound panel
+with the pre-specified mean-difference statistic gives a one-sided $p$ of
+0.0206, ranking the incumbent trio fourteenth of 680. The margin is 0.0015 in
+standardised units. Four of the six statistics fall below 0.05 and the exception
+is the one that counts matches rather than distances: scoring by valid matches
+returns one match with a $p$ of 0.4647, ranking 316th of 680. The axis spans
+6.2088 decades, from VX at the bottom to phosgene at the top, and
+Table~\ref{tab:vpairing} gives the agent-by-agent pairing. For three of the
+eleven agents the nearest compound on this axis is an interferent rather than an
+incumbent.
+
+The one valid match does not survive inspection. It pairs DPGME with soman on a
+gap of 0.0107 decades between measurements at 26~$^{\circ}$C and
+25~$^{\circ}$C, which is smaller than the temperature mismatch that produced it.
+Vapour pressure rises with temperature, so the 25~$^{\circ}$C value for DPGME
+lies below the 0.4~mmHg measured at 26~$^{\circ}$C and the gap can only widen;
+the direction is fixed thermodynamically and needs no fitted relation. The
+breakpoints are calculated rather than estimated. The pairing breaks as a ratio
+condition once the gap exceeds 0.1383 decades, which is a vapour pressure below
+0.2982~mmHg, and it stops being the nearest pairing as a closer condition beyond
+0.1654 decades, or 0.2802~mmHg. The designated pairings are also not the ones
+the axis returns. Dichloromethane, which our panel table labels for the choking
+agents although no document designates it at all (Section~\ref{M-res:docs}),
+sits 0.2319 decades
+from hydrogen cyanide and 0.5138 decades from phosgene; DMMP sits
+0.4732 decades from sarin while an interferent sits 0.2158; DPGME, named by its
+patent for the H-agent class, sits 0.5607 decades from sulfur
+mustard; and nothing within 2.6586 decades of VX.
+
+Lewisite enters the axis as the technical mixture, and the isomers differ.
+Substituting the separated values moves the result from $p = 0.0206$ at rank
+fourteen to $p = 0.0103$ at rank seventh. The direction of the headline does not
+change under either substitution.
+
+The second test asks whether distance on this axis tracks the colorimetric
+response of Section~\ref{meth:deltaE}. Mantel tests were run within each plate
+and optical channel rather than across them, which leaves four evaluable cells;
+the third plate maps no agent at all, so neither of its cells reaches the
+four-agent minimum a Mantel test needs here, and both are excluded by that rule
+rather than by their result. Spearman correlations are positive in all
+four: $+0.0429$ and $+0.2536$ in the ultraviolet channel, $+0.3893$ and
+$+0.5464$ in the reflectance channel. Combining runs within a channel by
+Fisher's method and correcting across the two channels by Benjamini--Hochberg,
+the reflectance channel gives $p = 0.0215$ and the ultraviolet channel gives
+$p = 0.6389$, so the reflectance
+channel reaches $q = 0.0430$ and the ultraviolet channel does not.
+
+One asymmetry has to be stated against us. Section~\ref{res:arraydetail}
+separates the two compound sets because only the first contains a simulant, and
+reports that the six cells bearing on the substitution premise are all null. The
+Fisher combination above crosses that separation: the reflectance-channel value
+combines one cell from each set, and the first-set cell on its own gives
+$p = 0.0694$. So the agreement reported here is not a simulant-to-agent result
+either. It is agreement between volatility distance and response distance across
+whatever compounds each plate carried. We drew the family boundary ourselves, at
+two channels rather than at the twelve cells of
+Section~\ref{res:arraydetail}, and the direction of that choice favours our own
+result; a reader who prefers the twelve-cell family should read this axis as
+null as well.
+
+An earlier version combined all four cells in a single Fisher step. It returns
+$p = 0.0809$, and the four cells read as one family give 0.1389, so that form
+reported no agreement at all. The two channels of one plate are not
+independent, the mean inter-channel cosine being reported in
+\texttt{outputs/reversal\_audit.json}, so the pooled form is withdrawn and the
+per-channel form above replaces it. The difference is not cosmetic: it is the
+difference between reporting that the axis practitioners name first fails to
+track the measured response and reporting that it tracks it in the reflectance
+channel.
 
 \begin{table}[htb]
   \centering
@@ -903,34 +970,6 @@ spans 6.2 $\log_{10}$ units, from VX at $-3.06$ to phosgene at $3.15$.
   % 2026-11-12. outputs/tab_vpairing.tex 로 자동 생성.
 \input{tab_vpairing}
 \end{table}
-
-The axis yields one valid match, DPGME to soman, and it does not survive
-inspection. The gap is 0.011 $\log_{10}$ units; the two values were measured at
-different temperatures, 0.4~mmHg at 26~$^{\circ}$C against 0.41~mmHg at
-25~$^{\circ}$C. Vapour pressure rises with temperature, so the 25~$^{\circ}$C
-value for DPGME lies below the measurement in hand and the gap can only widen.
-The direction follows from thermodynamics and needs no fitted relation; over
-this compound class the Clausius--Clapeyron slope is of order 0.03 to 0.05
-decades per $^{\circ}$C, so the 1~$^{\circ}$C mismatch is itself of the order of
-the gap. The match would break as a ratio condition at 0.138 $\log_{10}$ units,
-and would cease to be the nearest pairing at 0.165. We report the match and do
-not rest anything on it.
-
-The second test asks whether distance on this axis tracks the colorimetric
-response of Section~\ref{meth:deltaE}. Mantel tests were run within each plate
-and optical channel rather than across them. Two visible-channel cells give
-Spearman $\rho = 0.389$ and 0.546 with Mantel $p = 0.0694$ and 0.0458; the two
-ultraviolet cells give 0.043 and 0.254 with $p = 0.875$ and 0.322. The third
-plate maps no agent at all, so neither of its cells reaches the four-agent
-minimum a Mantel test needs here, and both are excluded by that rule rather than
-by their result. Combining runs within a channel by Fisher's method and
-correcting across the two channels by Benjamini--Hochberg, the visible channel
-reaches $p = 0.0215$ and $q = 0.0430$ while the ultraviolet channel does not
-($p = 0.639$). An earlier version combined all four cells in one step and
-reported $p = 0.081$. The two channels of one plate are not independent, the
-mean inter-channel cosine being reported in
-\texttt{outputs/reversal\_audit.json}, so that pooled form is withdrawn and the
-per-channel form above replaces it.
 
 \section{Scope of the documentary search}
 \label{res:searchscope}
@@ -1823,10 +1862,11 @@ Mantel $p = 0.044$). The first compound set gives nothing in any space or
 channel ($|\rho| \le 0.225$, Mantel $p \ge 0.22$).
 
 Which set the three nominal cells come from decides what they can mean, and we
-state it because the composition of the two sets is not symmetric. The first set
-is DMMP with five G agents and VX, and it is the only one of the two that
-contains a simulant at all; the second is seven authentic agents and no
-simulant. A cell in the second set therefore asks whether the pattern distance
+state it because the composition of the two sets is not symmetric. The first set is
+six compounds, DMMP with four G agents and VX, and it is the only one of the two
+that contains a simulant at all; the second is seven authentic agents and no
+simulant, of which six enter the test because nitrogen mustard is not on the
+descriptor panel. A cell in the second set therefore asks whether the pattern distance
 between two agents tracks their descriptor distance, which is a different
 question from whether a simulant stands in for an agent. All three nominal cells
 are in the second set. The six cells that bear directly on the premise this
