@@ -74,14 +74,21 @@ def scores(cond):
 #   Fig S     인 국소반응성과 omega 순위     (a)(b)
 # Figure 1 은 (a) 작용제별 거리와 (b) 부트스트랩이 가로폭을 요구하므로 (둘 다
 # 마커 오른쪽에 글자가 붙는다) 그 둘을 전폭 행에 두고, (c)(d) 를 아래에서 나눈다.
-fig = plt.figure(figsize=(10.0, 12.0))
-_g1 = fig.add_gridspec(3, 2, height_ratios=[1.22, 0.66, 1.05],
-                       hspace=0.46, wspace=0.40,
-                       left=0.098, right=0.980, top=0.962, bottom=0.062)
+# 2026-11-12. 휘발성 축을 본문에 올렸으므로 그 축의 작용제별 간격을
+# (e) 로 더한다. 5패널은 패널수 규칙(4~6) 안이다. 동시에 (d) 의 y 틱
+# 라벨이 길어 (c) 영역을 침범하고 있었다 — wspace 를 넓히고 (d) 라벨을
+# 짧게 바꾼다. 긴 이름은 (c) 범례가 이미 싣는다.
+# (c) 는 헤드룸을 넓히면서 행 간격이 눌려 y 틱 라벨이 서로 닿았다.
+# 3행 높이를 키워 간격을 되돌린다.
+fig = plt.figure(figsize=(10.0, 15.4))
+_g1 = fig.add_gridspec(4, 2, height_ratios=[1.16, 0.62, 1.42, 1.08],
+                       hspace=0.46, wspace=0.56,
+                       left=0.098, right=0.980, top=0.968, bottom=0.052)
 gx = fig.add_subplot(_g1[0, :])
 hx = fig.add_subplot(_g1[1, :])
 cx = fig.add_subplot(_g1[2, 0])
 dx = fig.add_subplot(_g1[2, 1])
+vx = fig.add_subplot(_g1[3, :])
 
 fig2, _f2 = plt.subplots(2, 2, figsize=(10.0, 8.8))
 fig2.subplots_adjust(left=0.090, right=0.982, top=0.950, bottom=0.078,
@@ -139,11 +146,16 @@ for cond in ['A_rdkit', 'B_electronic', 'C_merged']:
         cx.scatter(r.d_sim_norm, yy[r.real_agent], marker=MARK[cond], s=32,
                    facecolors=(C_SIM if ok else 'white'), edgecolors=C_INK,
                    lw=1.0, zorder=3)
-cx.axvline(2.0, color=C_REF, ls=(0, (5, 3)), lw=1.3, zorder=1)
+# 2026-11-12. 패널 전체 높이로 그으면 아래 헤드룸의 범례 첫 줄을
+# 가로지른다. 데이터 행까지만 긋는다 (R-9: 글자와 선의 겹침 금지).
+cx.plot([2.0, 2.0], [-0.72, len(order) - 0.45 + 0.55], color=C_REF,
+        ls=(0, (5, 3)), lw=1.3, zorder=1, clip_on=False)
 cx.set_yticks(range(len(order)))
 cx.set_yticklabels([s(n) for n in order][::-1])
 xm = float(R.d_sim_norm.max())
-cx.set_xlim(0, xm * 1.16); cx.set_ylim(-4.6, len(order) - 0.45 + 1.15)
+# 2026-11-12. 범례 4줄이 -4.6 띠에 들어가지 않아 PS/VX 행 위로 올라왔다.
+# R-15 대로 띠를 넓힌다. 눈금은 데이터 범위까지만 남는다(아래 set_bounds).
+cx.set_xlim(0, xm * 1.16); cx.set_ylim(-6.5, len(order) - 0.45 + 1.15)
 cx.spines['left'].set_bounds(0, len(order) - 1)
 cx.set_xlabel('distance to nearest incumbent simulant\n'
               '(typical nearest-neighbour units)')
@@ -180,7 +192,10 @@ for y, c in zip(yv, cond_order):
 for c in cond_order:
     fig_annot.record('Fig_main', f'panel_d_{c}',
                      f"exact p = {SAN[c]['p_exact']:.3f}")
-dx.set_yticks(yv); dx.set_yticklabels([SPACE_LBL[c] for c in cond_order])
+SPACE_LBL_SHORT = {'A_rdkit': 'structural', 'B_electronic': 'electronic',
+                   'C_merged': 'merged'}
+dx.set_yticks(yv)
+dx.set_yticklabels([SPACE_LBL_SHORT[c] for c in cond_order])
 dx.set_xlim(-1.5, 4.3); dx.set_ylim(-1.35, len(cond_order) - 1 + 0.95)
 dx.spines['left'].set_bounds(yv.min(), yv.max())
 dx.set_xlabel(r'mean ( $d_\mathrm{sim} - d_\mathrm{intf}$ )'
@@ -194,6 +209,51 @@ dx.legend(handles=[Line2D([], [], marker='o', ls='', ms=6.7, mfc='#BBBBBB',
           loc='lower right', frameon=False, fontsize=FS_LEG - 3, bbox_to_anchor=(1.03, -0.015),
           handletextpad=0.6, labelspacing=0.5)
 dress(dx); panel_label(dx, 'd')
+
+# ---- (e) 휘발성 축: 작용제별 최근접 모사체와 최근접 풀 화합물
+# 정본 outputs/volatility_space.json pairing_table. 축은 log10(P/mmHg) 간격.
+_VOL = json.load(open('outputs/volatility_space.json'))
+_vrows = _VOL['pairing_table']['rows']
+_vy = np.arange(len(_vrows))[::-1]
+for _k, _r in enumerate(_vrows):
+    _y = _vy[_k]
+    _gs, _gp = _r['gap_to_nearest_simulant'], _r['gap_to_nearest_pool']
+    if _r['nearest_is_interferent']:
+        vx.plot([_gp, _gs], [_y, _y], color='#BBBBBB', lw=1.1, zorder=1)
+    vx.scatter(_gs, _y, s=74, marker='o', c=C_SIM, edgecolors='white', lw=1.3,
+               zorder=3)
+    vx.annotate(s(_r['nearest_simulant']), xy=(_gs, _y), xytext=(10, 0),
+                textcoords='offset points', fontsize=FS_ANNOT, color=C_SIM,
+                va='center', ha='left')
+    if _r['nearest_is_interferent']:
+        vx.scatter(_gp, _y, s=74, marker='D', c=C_INTF, edgecolors='white',
+                   lw=1.3, zorder=3)
+        vx.annotate(s(_r['nearest_pool_compound']), xy=(_gp, _y), xytext=(-10, 0),
+                    textcoords='offset points', fontsize=FS_ANNOT, color=C_INTF,
+                    va='center', ha='right')
+vx.set_yticks(_vy); vx.set_yticklabels([s(r['agent']) for r in _vrows])
+vx.spines['left'].set_bounds(_vy.min(), _vy.max())
+# 헤드룸: 오른쪽 라벨이 축 밖으로 나가지 않도록 x 상한을 데이터 위로 연다.
+_gmax = max(max(r['gap_to_nearest_simulant'], r['gap_to_nearest_pool'])
+            for r in _vrows)
+vx.set_xlim(-0.52, _gmax * 1.34)
+vx.set_ylim(-1.45, len(_vrows) - 1 + 0.75)
+vx.set_xlabel(r'gap to the nearest candidate, $\log_{10}(P/\mathrm{mmHg})$'
+              '\nat 25 $^\\circ$C unless the deposited table records otherwise')
+_nint = sum(1 for r in _vrows if r['nearest_is_interferent'])
+vx.legend(handles=[Line2D([], [], marker='o', ls='', ms=8.2, mfc=C_SIM,
+                          mec='white', mew=1.2,
+                          label='nearest of the three incumbent simulants'),
+                   Line2D([], [], marker='D', ls='', ms=7.6, mfc=C_INTF,
+                          mec='white', mew=1.2,
+                          label=f'nearest of the pool, where that is an '
+                                f'interferent ({_nint} of {len(_vrows)})')],
+          loc='upper right', frameon=False, fontsize=FS_LEG - 2,
+          bbox_to_anchor=(1.02, 1.02), handletextpad=0.6, labelspacing=0.5)
+fig_annot.record('Fig_main', 'panel_e_n_interferent_nearest', str(_nint))
+fig_annot.record('Fig_main', 'panel_e_gd_gap',
+                 f"{_vrows[[r['agent'] for r in _vrows].index('soman (GD)')]['gap_to_nearest_simulant']:.4f}")
+dress(vx); panel_label(vx, 'e')
 
 # ---- (e) 인 중심 국소 반응성
 P = df[df.q_P.notna()].reset_index(drop=True)
