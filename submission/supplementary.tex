@@ -453,6 +453,55 @@ data. We therefore report three valid matches on the twenty-eight-compound panel
 and name tabun as a borderline case wherever the count appears, rather than
 presenting either three or four as settled.
 
+\section{The shape coordinates are not independent either}
+\label{meth:shape}
+
+The main text reports that the Parr electrophilicity index is an exact function
+of the two frontier orbital energies reported beside it, and that the
+correlation filter does not catch it. The shape block has the same structure.
+We report it here because the filter does not catch that one either, and
+because the twenty-eight-compound result does not survive the reduction it
+implies.
+
+Nine of the thirty-eight coordinates in the merged space on the
+twenty-eight-compound panel are shape descriptors read from the inertia tensor,
+and nine of the forty-one on the primary panel. All nine are functions of the
+three principal moments. The normalised principal-moment ratios are
+$\mathrm{NPR1} = \mathrm{PMI1}/\mathrm{PMI3}$ and
+$\mathrm{NPR2} = \mathrm{PMI2}/\mathrm{PMI3}$; asphericity, eccentricity, the
+inertial shape factor and the spherocity index are further algebraic
+combinations of the same three; and the radius of gyration is fixed by them
+together with the mass distribution. The relations are ratios rather than linear
+ones, which is why a linear filter leaves them in: the largest absolute Pearson
+coefficient inside the block is 0.9364 on the twenty-eight compound panel and
+0.9359 on the primary panel, both below the 0.95 cut this work uses.
+Recomputing the identities from the Boltzmann-averaged values returns
+discrepancies of 1.36 to 15.30\%, which is not machine precision; the averaging
+is applied to each descriptor independently, so the identities break.
+
+Keeping only PMI1, PMI2 and PMI3, that is with the seven derived coordinates
+dropped, the merged space falls from 38 coordinates to 31, and the share of
+squared merged distance falls from 23.68 to 6.45\%. The effect on individual
+pairs is larger than that block average suggests. For the two pairs in which an
+interferent beats an incumbent on shape alone, hydrogen cyanide against
+acetonitrile and cyanogen chloride against acetonitrile, it falls from 69.85 and
+61.85\% to 0.195 and 0.118\%.
+
+The result does not survive. The count of valid matches there falls from three
+to zero. On the structural space alone it falls from three to one, and the
+agreement with measured colorimetric response weakens as well: the smallest
+Benjamini--Hochberg value over the twelve Mantel cells is 0.1167 with the full
+block, and dropping the derived shape coordinates raises it to 0.1708.
+
+We report the full block in the main text because it is what the descriptor
+convention supplies and what a reader reproducing this work from RDKit defaults
+would obtain. The reduction is a declared sensitivity rather than a correction.
+We state it because the twenty-eight-compound result is the one it removes, and
+because the general form of the point is the one the main text already makes
+about the electrophilicity index: a descriptor set that reports a quantity and
+its algebraic consequences as separate coordinates has fewer coordinates than it
+counts, and a linear filter will not say so.
+
 \section{Sparse indicator columns and the distance they add}
 \label{meth:sparse}
 
