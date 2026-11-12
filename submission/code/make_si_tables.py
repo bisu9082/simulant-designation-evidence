@@ -113,6 +113,19 @@ def ablation(rc, mq, pf, pp, mc):
                          f"{dims[s]:>2} & "
                          f"{cells} & {qcell} \\\\")
         lines.append('\\hline')
+    # 2026-11-12. 휘발성 축을 표에 넣는다. 캡션이 'Every exact permutation
+    # test' 라고 적는데 이 축이 빠져 있었다 — 사전지정 전수 검정이고 통계량
+    # 여섯 개가 모두 계산돼 있다(outputs/volatility_space.json). 1차원이므로
+    # 공간 세 행이 아니라 한 행이다. 18검정 가족 밖이라 min q 칸은 비운다.
+    vd = [t for t in _vol()['designation']
+          if t.get('label') == 'panel28_incumbent3' and not t.get('skipped')]
+    if len(vd) != 1:
+        raise SystemExit('[tab_ablation] 휘발성 designation 항목이 1개가 아니다')
+    vst = vd[0]['statistics']
+    vcells = ' & '.join(fmt(vst[st]['p']) for st in STATS)
+    lines.append(f"{'28 cpd., incumbent 3':<22} & {'volatility':<11} & "
+                 f"{vd[0].get('n_dims', 1):>2} & {vcells} &  \\\\")
+    lines.append('\\hline')
     return '\n'.join(lines)
 
 
@@ -576,12 +589,15 @@ def main():
 %            outputs/multiplicity_across_panels.json (구성별 최소 q).
 \begin{table}[htb]
 \centering
-\caption{Every exact permutation test across panel constructions, descriptor
-spaces and statistics. Values are one-sided $p$. Bold marks $p<0.05$ before
-correction. The last column is the smallest Benjamini--Hochberg value over the
-eighteen tests of that panel construction. Dimensions are the retained
-coordinate counts after the correlation filter of
-Section~\ref{meth:orderinvariance}.}
+\caption{Every exact permutation test run in this work, across panel
+constructions, descriptor spaces and statistics. Values are one-sided $p$. Bold
+marks $p<0.05$ before correction. The last column is the smallest
+Benjamini--Hochberg value over the eighteen tests of that panel construction;
+it is blank for the volatility row, which was specified separately and is not a
+member of any of those families, so no correction over them applies to it.
+Dimensions are the retained coordinate counts after the correlation filter of
+Section~\ref{meth:orderinvariance}; the volatility axis is a single measured
+quantity and carries no filter.}
 \label{tab:ablation}
 \small
 \setlength{\tabcolsep}{4pt}

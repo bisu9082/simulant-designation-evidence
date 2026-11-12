@@ -1,0 +1,127 @@
+{
+  "source": "Davidson et al. 2020, ACS Sens. 5, 1102-1109, Table 1",
+  "agents_overlapping": [
+    "tabun (GA)",
+    "sarin (GB)",
+    "soman (GD)",
+    "cyclosarin (GF)",
+    "VX",
+    "sulfur mustard (HD)",
+    "lewisite 1 (L)"
+  ],
+  "davidson_outcome": {
+    "DCP": true,
+    "CEES": true,
+    "malathion": true,
+    "DMMP": false,
+    "dichloromethane": false,
+    "methyl salicylate": false
+  },
+  "cluster_note": {
+    "DCP": "c10 with GB,GD,GF",
+    "CEES": "c7 with HD,HT,T",
+    "malathion": "c5 with GA",
+    "DMMP": "c6 weak/blank",
+    "dichloromethane": "c6 (Table 1 미등재)",
+    "methyl salicylate": "c6 (Table 1 미등재)"
+  },
+  "test": "Mann-Whitney U, exact 3v3 enumeration, one-sided",
+  "spaces": {
+    "structural": {
+      "n_coords": 38,
+      "nn_median": 3.273286753654107,
+      "d_min_to_davidson_agents": {
+        "DCP": 4.878006563490039,
+        "CEES": 1.7458726317384494,
+        "malathion": 7.686848365636737,
+        "DMMP": 4.097362047760722,
+        "dichloromethane": 5.389034648757676,
+        "methyl salicylate": 7.560303084685041
+      },
+      "ranking_closest_first": [
+        "CEES",
+        "DMMP",
+        "DCP",
+        "dichloromethane",
+        "methyl salicylate",
+        "malathion"
+      ],
+      "perfect_separation": false,
+      "rank_sum_coclustered": 7,
+      "p_one_sided": 0.5,
+      "n_permutations": 20,
+      "d_min_normalised": {
+        "DCP": 1.490247244010784,
+        "CEES": 0.5333699009991896,
+        "malathion": 2.348357765189862,
+        "DMMP": 1.2517577456929692,
+        "dichloromethane": 1.646368025270524,
+        "methyl salicylate": 2.309697760590379
+      }
+    },
+    "electronic3": {
+      "n_coords": 3,
+      "nn_median": 0.6253520176527663,
+      "d_min_to_davidson_agents": {
+        "DCP": 0.7931898931163007,
+        "CEES": 0.749930182632857,
+        "malathion": 1.175535767117186,
+        "DMMP": 0.8734273301332284,
+        "dichloromethane": 0.9389696706938253,
+        "methyl salicylate": 0.9004834603588657
+      },
+      "ranking_closest_first": [
+        "CEES",
+        "DCP",
+        "DMMP",
+        "methyl salicylate",
+        "dichloromethane",
+        "malathion"
+      ],
+      "perfect_separation": false,
+      "rank_sum_coclustered": 6,
+      "p_one_sided": 0.35,
+      "n_permutations": 20,
+      "d_min_normalised": {
+        "DCP": 1.2683894362306645,
+        "CEES": 1.1992128616578066,
+        "malathion": 1.879798471794354,
+        "DMMP": 1.3966970689750116,
+        "dichloromethane": 1.5015057826441662,
+        "methyl salicylate": 1.4399625090181916
+      }
+    },
+    "merged": {
+      "n_coords": 41,
+      "nn_median": 3.5594247868424618,
+      "d_min_to_davidson_agents": {
+        "DCP": 4.942074285155348,
+        "CEES": 1.9001227657909605,
+        "malathion": 7.801550076367743,
+        "DMMP": 4.201922177554393,
+        "dichloromethane": 5.659020272793886,
+        "methyl salicylate": 7.635976553493936
+      },
+      "ranking_closest_first": [
+        "CEES",
+        "DMMP",
+        "DCP",
+        "dichloromethane",
+        "methyl salicylate",
+        "malathion"
+      ],
+      "perfect_separation": false,
+      "rank_sum_coclustered": 7,
+      "p_one_sided": 0.5,
+      "n_permutations": 20,
+      "d_min_normalised": {
+        "DCP": 1.388447454606682,
+        "CEES": 0.5338286042213424,
+        "malathion": 2.1918007946695335,
+        "DMMP": 1.1805059607066135,
+        "dichloromethane": 1.5898693220636808,
+        "methyl salicylate": 2.1452838620781063
+      }
+    }
+  }
+}

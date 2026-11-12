@@ -85,6 +85,17 @@ Askim,~J.~R.; Mahmoudi,~M.; Suslick,~K.~S. Optical sensor arrays for chemical
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Davidson \latin{et~al.}(2020)Davidson, Dixon, Williams, Kilper, Lim,
+  Martino, Rhodes, Hulet, Miles, Samuels, Emanuel, and Miklos]{davidson2020}
+Davidson,~C.~E.; Dixon,~M.~M.; Williams,~B.~R.; Kilper,~G.~K.; Lim,~S.~H.;
+  Martino,~R.~A.; Rhodes,~P.; Hulet,~M.~S.; Miles,~R.~W.; Samuels,~A.~C.;
+  Emanuel,~P.~A.; Miklos,~A.~E. Detection of Chemical Warfare Agents by
+  Colorimetric Sensor Arrays. \emph{ACS Sensors} \textbf{2020}, \emph{5},
+  1102--1109\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Kim \latin{et~al.}(2026)Kim, Kang, Shin, Kim, Yoo, Kim, Lee, and
   Lee]{hazref}
 Kim,~J.; Kang,~K.; Shin,~M.; Kim,~S.; Yoo,~J.; Kim,~M.-K.; Lee,~W.~B.;
@@ -360,21 +371,6 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[{National Research Council}(1997)]{nrc1997mist}
-{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
-  Test Program}; The National Academies Press: Washington, DC, 1997\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{ASTM International}(2020)]{astmf2588}
-{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
-  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
-  reapproved 2020\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
@@ -392,6 +388,21 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[{ASTM International}(2020)]{astmf2588}
+{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
+  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
+  reapproved 2020\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Research Council}(1997)]{nrc1997mist}
+{National Research Council} \emph{Technical Assessment of the Man-in-Simulant
+  Test Program}; The National Academies Press: Washington, DC, 1997\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Lawrence and Van~Houten(2025)Lawrence, and
   Van~Houten]{lawrence2025simulants}
 Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
@@ -405,17 +416,6 @@ Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
 {National Research Council} \emph{Standoff Chemical Agent Detectors}; The
   National Academies Press: Washington, DC, 2003; Chapter 5, Simulant
   Characteristics and Specifics, pp.~24--26\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Davidson \latin{et~al.}(2020)Davidson, Dixon, Williams, Kilper, Lim,
-  Martino, Rhodes, Hulet, Miles, Samuels, Emanuel, and Miklos]{davidson2020}
-Davidson,~C.~E.; Dixon,~M.~M.; Williams,~B.~R.; Kilper,~G.~K.; Lim,~S.~H.;
-  Martino,~R.~A.; Rhodes,~P.; Hulet,~M.~S.; Miles,~R.~W.; Samuels,~A.~C.;
-  Emanuel,~P.~A.; Miklos,~A.~E. Detection of Chemical Warfare Agents by
-  Colorimetric Sensor Arrays. \emph{ACS Sensors} \textbf{2020}, \emph{5},
-  1102--1109\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

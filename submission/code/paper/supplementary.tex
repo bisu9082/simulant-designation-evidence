@@ -16,9 +16,7 @@
 \bibliographystyle{achemso}
 
 \title{Supporting Information\\[4pt]
-\large No Public Designation Names a Detection Measurement for the Simulants
-Chemical Warfare Agent Sensing Is Built On, and Descriptor Comparison Cannot
-Supply the Missing Validation}
+\large Simulant Designations Validate Detectability, Not Agent Resemblance: Only the Volatility Axis Supports the Compounds Chemical Warfare Agent Sensing Is Built On}
 \author{Ku Kang \and Jeongyun Kim \and Miae Kim \and Doo-Hee Lee \and Jin Yoo
   \and Yoon Jeong Jang}
 \date{}
@@ -211,8 +209,14 @@ compounds one conformer carries essentially the whole weight and the mean
 equals the single-conformer value; the difference is confined to the flexible
 compounds, of which VX and malathion are the extremes. Section~\ref{meth:conformer}
 reports what the two treatments do to the results, and the deposited
-\texttt{build\_descriptors.py --verify} reproduces every numeric column of the
-descriptor cache from the code.
+\texttt{build\_descriptors.py --verify} reproduces the fifty-three columns of the
+descriptor cache that RDKit can regenerate. Of the sixty-one numeric columns on the
+twenty-eight-compound cache, eight require the xtb binary and are exempted by name:
+\texttt{E\_HOMO\_eV}, \texttt{E\_LUMO\_eV}, \texttt{dipole\_moment\_D},
+\texttt{electrophilicity\_index\_eV}, \texttt{fukui\_f\_plus\_P}, \texttt{q\_P},
+\texttt{q\_phosphoryl\_O} and \texttt{wiberg\_PO}. The first three are the whole of
+the electronic space, so the check that covers the structural coordinates does not
+cover the electronic ones.
 Identifiers, formulae and molecular weights were resolved against PubChem
 \cite{pubchem2025}; the EPA CompTox Dashboard \cite{williams2017} was the
 intended second route but its programmatic interface was not reachable from
@@ -610,16 +614,24 @@ a one-sided $p$ of 0.275. Replacing the two orbital energies and leaving the
 dipole at GFN2 gives four valid matches and 0.128. Replacing all three gives
 five valid matches and 0.0368. Four of those five are sarin, soman and tabun
 matched to DMMP and cyclosarin matched to DPGME, pairings the designation record
-supports. The fifth is sulfur mustard matched to DPGME, about
-which the designation record says nothing either way: we could not obtain the
-text of the patent that names DPGME, so no agent class is established for the
-compound (Section~\ref{M-res:docs}). Earlier versions of this section wrote
-first that the patent calls DPGME a preferred G-agent simulant, and then that
-it requires detectability by ion mobility spectrometry. We withdraw both.
-Neither could be verified against the patent itself, which we never read, and
-the second survived one round of correction that removed the first on exactly
-that ground. The single match under GFN2 was hydrogen cyanide to
-dichloromethane.
+supports. The fifth, sulfur mustard matched to DPGME, is supported as well: the
+patent names H-agent, mustard-HD, among the classes its composition simulates,
+alongside liquid G-agent including VX (Section~\ref{M-res:docs}). All five valid
+matches in the density-functional space therefore fall on pairings the
+designation record names, which is not true of any other space we tested.
+
+One earlier version of this section wrote that the patent calls DPGME a
+preferred G-agent simulant and that it requires detectability by ion mobility
+spectrometry; a later one withdrew both on the ground that the patent text could
+not be obtained. The withdrawal was the error. Three services had refused the
+text and that refusal was recorded, but the record of a failed attempt was then
+treated as a fact about the document, and the text is served at the URL already
+carried in our own bibliography. Reading it confirms the agent classes and the
+ion-mobility statement, and establishes that neither is a comparison with an
+agent's response. Both are reinstated in the form the patent supports, and the
+episode is an instance of the mechanism this paper is about: a status that
+travelled without the check that would have grounded it. The single match under
+GFN2 was hydrogen cyanide to dichloromethane.
 
 Three things have to be said about that. The first is that the sign of the
 conclusion in this one space depends on the electronic-structure method. Under
@@ -827,8 +839,103 @@ coefficient against $|\rho|$ of the permuted matrices. Both the Mantel value and
 the value that treating pairs as independent would have given are reported, so
 the size of the error is visible.
 
+\section{The volatility axis}
+\label{meth:vol}
+
+The criterion the field states for simulant choice names volatility
+\cite{webb2025}, a National Research Council committee writing on detection put
+vapour pressure first among the properties a vapour-phase simulant must
+approximate \cite{nrc2003standoff}, and the electronic descriptors of
+Section~\ref{meth:descriptors} are computed in the gas phase for the same
+reason. The axis is carried here as a space in its own right.
+
+It is one measured quantity, $\log_{10}$ of the vapour pressure in mmHg, so
+there is no filter, weighting or coordinate choice to declare. Values follow a
+three-tier rule fixed before collection: T1 is a 25~$^{\circ}$C value from a
+vapour-pressure compilation or a dedicated measurement report, T2 a
+25~$^{\circ}$C value from a government compendium where no T1 entry exists, T3
+the nearest available temperature recorded with that temperature. One value is
+marked TX because its source labels it extrapolated rather than measured. Of the
+twenty-eight compounds, twenty-four are T1, one T2, two T3 and one TX.
+Table~\ref{tab:volatility} gives every value with its source; where sources
+disagree the adjudication is recorded in \texttt{outputs/volatility\_space.json}
+alongside the rejected candidate. No value was converted between temperatures.
+The axis cannot be carried on the thirty-five compound panel: no vapour pressure
+is published for diethyl chlorophosphate or diethyl cyanophosphonate, and both
+are recorded as uncollected rather than imputed.
+
+\begin{table}[htb]
+  \centering
+  \caption{Adopted vapour pressures for the twenty-eight-compound panel, in
+  descending order. Tier records how the value was obtained; blank temperature
+  means 25~$^{\circ}$C. Sources, rejected candidates and the adjudication where
+  sources disagree are deposited in \texttt{outputs/volatility\_space.json}.}
+  \label{tab:volatility}
+  \small
+  % 2026-11-12. outputs/tab_volatility.tex 로 자동 생성.
+\input{tab_volatility}
+\end{table}
+
+Two tests were specified in advance. They sit outside the eighteen-test families
+of Section~\ref{res:permfull}, so no correction over those families applies to
+them, and the min-$q$ column of Table~\ref{tab:ablation} is blank on the
+volatility row for that reason.
+
+The first repeats the designation test on this axis. Over all
+$\binom{17}{3}=680$ designations the incumbent set ranks 14th on the
+pre-specified mean-difference statistic, a one-sided $p$ of 0.0206, with a mean
+deficit of 0.0015 on the standardised axis; four of the six statistics fall
+below 0.05 and the exception is the one that counts matches rather than
+distances, where the same designation ranks 316th ($p = 0.465$).
+Table~\ref{tab:vpairing} gives the agent-by-agent pairing. Three of the eleven
+agents have an interferent nearer than any incumbent here as well, and the axis
+spans 6.2 $\log_{10}$ units, from VX at $-3.06$ to phosgene at $3.15$.
+
+\begin{table}[htb]
+  \centering
+  \caption{Nearest incumbent simulant and nearest compound of the non-agent pool
+  for each agent on the volatility axis. $\Delta$ is the gap in
+  $\log_{10}(P/\mathrm{mmHg})$. Where the last two columns name the same
+  compound, a simulant is the nearest of the pool; where they differ, an
+  interferent is.}
+  \label{tab:vpairing}
+  \small
+  % 2026-11-12. outputs/tab_vpairing.tex 로 자동 생성.
+\input{tab_vpairing}
+\end{table}
+
+The axis yields one valid match, DPGME to soman, and it does not survive
+inspection. The gap is 0.011 $\log_{10}$ units; the two values were measured at
+different temperatures, 0.4~mmHg at 26~$^{\circ}$C against 0.41~mmHg at
+25~$^{\circ}$C. Vapour pressure rises with temperature, so the 25~$^{\circ}$C
+value for DPGME lies below the measurement in hand and the gap can only widen.
+The direction follows from thermodynamics and needs no fitted relation; over
+this compound class the Clausius--Clapeyron slope is of order 0.03 to 0.05
+decades per $^{\circ}$C, so the 1~$^{\circ}$C mismatch is itself of the order of
+the gap. The match would break as a ratio condition at 0.138 $\log_{10}$ units,
+and would cease to be the nearest pairing at 0.165. We report the match and do
+not rest anything on it.
+
+The second test asks whether distance on this axis tracks the colorimetric
+response of Section~\ref{meth:deltaE}. Mantel tests were run within each plate
+and optical channel rather than across them. Two visible-channel cells give
+Spearman $\rho = 0.389$ and 0.546 with Mantel $p = 0.0694$ and 0.0458; the two
+ultraviolet cells give 0.043 and 0.254 with $p = 0.875$ and 0.322. The third
+plate maps no agent at all, so neither of its cells reaches the four-agent
+minimum a Mantel test needs here, and both are excluded by that rule rather than
+by their result. Combining runs within a channel by Fisher's method and
+correcting across the two channels by Benjamini--Hochberg, the visible channel
+reaches $p = 0.0215$ and $q = 0.0430$ while the ultraviolet channel does not
+($p = 0.639$). An earlier version combined all four cells in one step and
+reported $p = 0.081$. The two channels of one plate are not independent, the
+mean inter-channel cosine being reported in
+\texttt{outputs/reversal\_audit.json}, so that pooled form is withdrawn and the
+per-channel form above replaces it.
+
 \section{Scope of the documentary search}
 \label{res:searchscope}
+
+\input{tab_designations}
 
 A negative claim about documents is only as good as its scope. We searched the
 standard-setting and test-procedure literature reachable without a subscription
