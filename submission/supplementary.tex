@@ -7,6 +7,11 @@
 \usepackage{times}
 \usepackage{amsmath,amssymb,graphicx,booktabs}
 \usepackage[hidelinks]{hyperref}
+% 2026-11-12. SI 는 article 클래스라 natbib 이 없었고, achemso.bst 가
+% 내놓는 natbib 형식 레이블이 그대로 펼쳐져
+% [Kang et al.(2026)Kang, Kim, Jang, Shin, Kim, and Yoo] 처럼 조판됐다.
+% 그것이 Overfull 32건의 원인이다. ACS 본문과 같은 위첨자 숫자로 맞춘다.
+\usepackage[super,comma,sort&compress]{natbib}
 \usepackage{xr}
 \externaldocument[M-]{main}
 \renewcommand{\thesection}{S\arabic{section}}

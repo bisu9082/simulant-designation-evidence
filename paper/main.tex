@@ -23,6 +23,17 @@
 %   length of Articles is eight journal pages' 라고 적는다. ACS 가 호스팅하는
 %   두 페이지가 서로 다르므로 보수적인 쪽(8면)을 따른다.
 \documentclass[journal=ancham,manuscript=article,margin=1in]{achemso}
+% 2026-11-12. achemso 는 절 번호를 매기지 않는다. 그래서 본문의
+% Section~\ref{...} 10곳과 SI 의 M- 상호참조가 전부 빈 문자열로 조판되고
+% 있었다 (main.aux 의 newlabel 번호 칸이 비어 있고, PDF 에 'Section
+% reports' 로 나온다). 번호를 켠다. ACS 논문은 번호 있는 절을 허용한다.
+% 2026-11-12. achemso 는 기본으로 절 번호를 끈다(\SectionNumbersOff).
+% 그래서 main.aux 의 newlabel 번호 칸이 비고, 본문의 Section~\ref{...}
+% 10곳과 SI 의 M- 상호참조 29곳이 전부 빈 문자열로 조판되고 있었다
+% (PDF 에 'Section reports' 로 나왔다). 클래스가 주는 스위치로 켠다.
+% secnumdepth 나 AtBeginDocument 로는 열리지 않는다 — achemso 가
+% \@startsection 을 별표 강제판으로 바꿔두기 때문이다.
+\SectionNumbersOn
 
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb}
@@ -154,10 +165,10 @@ and the same pattern runs through the recognition chemistry developed for nerve
 agents \cite{royo2007,sambrook2013,eubanks2007} and through the colorimetric
 sensor-array lineage much field instrumentation descends from
 \cite{rakow2000,askim2013}, so the compounds an array is characterised on are
-inherited rather than fixed by the chemistry. How rare the alternative is can be
-read off the exception: when a 73-indicator colorimetric array was run against
-fourteen authentic agents at a licensed facility, the authors recorded that
-using actual CWAs was, to their knowledge, novel \cite{davidson2020}. Our own
+inherited rather than fixed by the chemistry. How rare the alternative is shows in the
+exception: when a 73-indicator colorimetric array was run against fourteen
+authentic agents, the authors recorded that using actual CWAs was, to their
+knowledge, novel \cite{davidson2020}. Our own
 work sits on both sides \cite{hazref,multiplexref,ondeviceref,group3ref}. What a
 simulant is for differs by subfield
 \cite{bartelthunt2008,mondloch2015,ebeam}, but in every case the inference
@@ -395,8 +406,7 @@ designation we located by what its document does rather than by how
 authoritative it looks, with the source URL and search date for each. DMMP was
 identified as a test simulant for canister and cartridge filtration against GB
 and HD in a NIOSH respirator programme \cite{niosh2002simulant}, a document that
-also states its simulant information is not to be used as a recommendation of
-any simulant. A second designation is of the same kind, naming DMMP for fabric
+also states its simulant information is not a recommendation of any simulant. A second designation is of the same kind, naming DMMP for fabric
 penetration against VX in the Man-in-Simulant Test assessment
 \cite{nrc1997mist}; the property at issue in both is transport through a
 barrier. DPGME is
@@ -434,8 +444,8 @@ methyl salicylate carries a consensus standard fixing the measurement as vapour
 penetration of a protective ensemble \cite{astmf2588}, yet the National
 Academies assessment of that programme records that its selection ``was based on
 its historical use as an agent simulant'' and that the assumptions behind it
-``have not been tested'' \cite{nrc1997mist}. A recent survey states the same in
-general form \cite{lawrence2025simulants}.
+``have not been tested'' \cite{nrc1997mist}. A recent survey states the same
+\cite{lawrence2025simulants}.
 
 \begin{figure}[tp]
 \centering
@@ -489,7 +499,7 @@ resampling comparison returns $p=0.479$, which is the smallest value it can ever
 return and reports a comparison that cannot reach significance whatever the
 data. Supporting Information Section~\ref{S-res:paneldetail} gives the
 intervals, the per-agent reliabilities, which reverse what the point estimates
-suggest, and the controls on dimension and subspace.
+suggest, and the dimension and subspace controls.
 
 Every exact permutation test we ran is in Supporting Information
 Table~\ref{S-tab:ablation}, in full rather than selected from, because the
@@ -518,10 +528,9 @@ Benjamini--Hochberg value over the same eighteen tests moves from 0.630 to
 0.745. Classing all seven of the undesignated organophosphorus and literature
 compounds as simulants gives a smallest nominal value of 0.00006 and a corrected
 0.00075, the only configuration here that survives all six accounting schemes.
-Neither relabelling is arbitrary, and on one of them we correct ourselves: we
-described the two pesticides as compounds nobody uses as simulants, which is
-wrong for malathion, since the NIOSH document lists it in a GB simulant column
-with breakthrough times through protective clothing
+Neither relabelling is arbitrary, and on one we correct ourselves: we called the
+two pesticides compounds nobody uses as simulants, which is wrong for malathion,
+which the NIOSH document lists in a GB simulant column with breakthrough times
 \cite{niosh2002simulant}. That strengthens the point. An analyst with a citation
 in hand can move a defensible number of labels and land anywhere between 0.745
 and 0.00075, and the practice records neither that labels were moved nor how
@@ -612,11 +621,11 @@ only one of the three that predicts the response we measured.
 \label{res:toxsummary}
 
 Every argument above rests on descriptor distances, and the premise that one of
-those spaces corresponds to what a sensor reports is tested in
-Supporting Information Section~\ref{S-res:arraydetail} against measured
-colorimetric response for twelve panel compounds over 29 dyes. Those exposures
-were acetonitrile solutions at matched molarity rather than vapour, so the test
-bounds what any of this establishes about a vapour-phase response. It does not
+those spaces corresponds to what a sensor reports is tested in Supporting
+Information Section~\ref{S-res:arraydetail} against measured colorimetric
+response for twelve panel compounds over 29 dyes. Those exposures were
+acetonitrile solutions at matched molarity, not vapour, which bounds what any of
+this establishes about a vapour-phase response. It does not
 resolve the question: three of twelve cells reach a nominal $p<0.05$ and
 disagree on a space, correcting over the twelve leaves a smallest adjusted
 value of 0.117, all three lie in the plate set containing no simulant, and the
@@ -632,15 +641,15 @@ grounds present minimal toxicity risk \cite{webb2025}, tested on the same panel
 \ref{S-sec:qsar} and \ref{S-res:h1}). The two incumbents differ in how well
 documented they are and not only in how hazardous: dichloromethane carries a
 regulator-derived acute inhalation value at the 96th percentile of a
-207-compound pool, DMMP carries neither an acute value nor a chronic one. A
-model cannot fill that gap, since a random forest trained on 230 AEGL chemicals
-reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
-agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
-as inside its applicability domain. Fidelity and acute toxicity show no
-detectable monotonic association across the 207 compounds carrying both measured
-axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$), an interval that
-bounds the association rather than establishing independence. We draw no
-candidate recommendation from any of it.
+207-compound pool, DMMP carries neither an acute value nor a chronic one. A model
+cannot fill that gap: a random forest trained on 230 AEGL chemicals reaches
+$R^{2}=0.458$ and then predicts every one of twenty held-out military agents
+safer than measured, by factors of 2.5 to 2600, while certifying fourteen as
+inside its applicability domain. Fidelity and acute toxicity show no detectable
+monotonic association across the 207 compounds carrying both measured axes
+(Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$), an interval that bounds
+the association rather than establishing independence. We draw no candidate
+recommendation from it.
 
 \section{Discussion}
 
@@ -712,13 +721,12 @@ published fifteen years ago \cite{lavoie2011}; what is missing is any route by
 which either reached the compounds the detection literature settled on.
 
 That mechanism is general. Treating a validation as a property of the compound,
-so that it travels into a new application, produces a working set whose standing
-no descriptor space reproduces. The corrective is a declaration rather than a
+so that it travels into a new application, produces a working set no descriptor
+space reproduces. The corrective is a declaration rather than a
 replacement compound: which measurement a simulant was validated against, and a
 panel, space and statistic fixed before it is tested for a different one.
-Agrawal et al.~\cite{agrawal2018} reach the same place from the other direction,
-adequacy being a property of the compound together with the measurement it
-stands in for. Supporting Information Section~\ref{S-disc:detail} gives what
+Agrawal et al.~\cite{agrawal2018} reach the same place from the other
+direction. Supporting Information Section~\ref{S-disc:detail} gives what
 follows for practice.
 
 \paragraph{Limitations.} The documentary findings of Section~\ref{res:docs} rest
@@ -734,11 +742,10 @@ corrected threshold the design has no power against an effect of this size; an
 earlier version reported 0.43 from a null held fixed while the distance matrix
 was shifted (Supporting Information Section~\ref{S-res:mde}). On the
 eight-compound designation, leaving out one agent at a time moves the structural
-$p$ between 0.021 and 0.182. Measured toxicity values exist for a subset of the
-panel only, DMMP among those without one. The four configurations sample the
-configuration space rather than census it, and one omission is systematic:
-probe chemistries for lewisite are developed against arsenic trichloride
-\cite{lee2016lewisite}, which is in neither panel. Supporting Information
+$p$ between 0.021 and 0.182. Measured toxicity values exist for part of the
+panel only, DMMP among those without one. The four configurations sample rather
+than census, and one omission is systematic: probe chemistries for lewisite are
+developed against arsenic trichloride \cite{lee2016lewisite}, in neither panel. Supporting Information
 Section~\ref{S-disc:detail} gives the rest, including why the semi-empirical
 virtual orbital energies are coordinates rather than affinity estimates.
 
@@ -764,12 +771,12 @@ temperatures at which the two vapour pressures were measured.
 
 The documentary record fits that pattern. DMMP was designated for filtration
 breakthrough, DPGME in a training patent that asks only that a vapour detector
-respond, and for dichloromethane we found no designating document. Each
-validates something, and none validates resemblance.
+respond, and for dichloromethane we found no designating document. None of the
+three validates resemblance.
 
-The incumbent choices are therefore supported in kind and undocumented in
-degree, and the test establishing this returns whatever the analyst's undeclared
-choices imply: relabelling seven non-agents as simulants takes the corrected
+The incumbent choices are supported in kind and undocumented in degree, and the
+test establishing this returns whatever the analyst's undeclared choices
+imply: relabelling seven non-agents as simulants takes the corrected
 minimum to 0.00075, relabelling two takes it to 0.745. A simulant result should
 name the measurement the compound was validated against and the comparison set
 it was tested in, and should fix the panel, space, statistic, weighting and
@@ -813,9 +820,9 @@ public, commercial, or not-for-profit sectors. During the preparation of this
 work the authors used a large language model (Anthropic Claude) to assist in
 drafting and editing prose, in writing and auditing the analysis and figure
 scripts, and in building the internal-consistency checks described under
-Reproducibility. No numerical result was produced by the model: every value
-reported here is read from the output of the deposited scripts. The authors
-reviewed and edited all content and take full responsibility for it.
+Reproducibility. No numerical result was produced by the model: every value is
+read from the output of the deposited scripts. The authors reviewed and edited
+all content and take responsibility for it.
 
 \section*{Data and code availability}
 % 2026-11-12. 태그명을 acs-submission-20261112 로 확정해 아래에 적었다.
@@ -825,13 +832,13 @@ reviewed and edited all content and take full responsibility for it.
 % 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
 % panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
 % 검사 A-tag 가 acs-submission-* 이 아닌 태그를 적으면 실패시킨다.
-Descriptor tables, parsed AEGL values with their sources, permutation
-distributions, candidate tables and all analysis and figure scripts are in a
-public repository at
+Descriptor tables, parsed AEGL values with sources, permutation distributions,
+candidate tables and all analysis and figure scripts are in a public repository
+at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, and are also
 provided with this article. The release tagged for this submission is
-\texttt{acs-submission-20261112}. The repository carries the primary EPA source
-document from which every toxicity value was parsed. The descriptor cache is
+\texttt{acs-submission-20261112}. The repository carries the EPA source
+document every toxicity value was parsed from. The descriptor cache is
 checked against the code: \texttt{build\_descriptors.py --verify} rebuilds the
 fifty-three columns RDKit can regenerate and the pipeline stops if any fails.
 The declared exemption list names nine columns needing the xtb binary, eight of
