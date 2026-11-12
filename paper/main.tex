@@ -780,8 +780,13 @@ release made for this submission, and are also provided with this article. The
 repository also carries the primary EPA source document from which every
 toxicity value here was parsed, so the parse can be checked against the
 original. The descriptor cache is checked against the code rather than taken on
-trust: \texttt{build\_descriptors.py --verify} rebuilds every numeric column and
-the analysis pipeline stops if any column fails to reproduce.
+trust: \texttt{build\_descriptors.py --verify} rebuilds the fifty-three columns
+that RDKit can regenerate and the analysis pipeline stops if any of them fails to
+reproduce. Eight semi-empirical columns cannot be rebuilt without the xtb binary
+and are named in a declared exemption list instead; they include all three
+coordinates of the electronic space, so that space rests on the deposited cache
+rather than on a reproduced one, and the gate halts if any column outside the
+declared list goes unchecked.
 Section~\ref{S-meth:conformer} reports what that check caught.
 
 \bibliography{refs}

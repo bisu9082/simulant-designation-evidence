@@ -211,8 +211,14 @@ compounds one conformer carries essentially the whole weight and the mean
 equals the single-conformer value; the difference is confined to the flexible
 compounds, of which VX and malathion are the extremes. Section~\ref{meth:conformer}
 reports what the two treatments do to the results, and the deposited
-\texttt{build\_descriptors.py --verify} reproduces every numeric column of the
-descriptor cache from the code.
+\texttt{build\_descriptors.py --verify} reproduces the fifty-three columns of the
+descriptor cache that RDKit can regenerate. Of the sixty-one numeric columns on the
+twenty-eight-compound cache, eight require the xtb binary and are exempted by name:
+\texttt{E\_HOMO\_eV}, \texttt{E\_LUMO\_eV}, \texttt{dipole\_moment\_D},
+\texttt{electrophilicity\_index\_eV}, \texttt{fukui\_f\_plus\_P}, \texttt{q\_P},
+\texttt{q\_phosphoryl\_O} and \texttt{wiberg\_PO}. The first three are the whole of
+the electronic space, so the check that covers the structural coordinates does not
+cover the electronic ones.
 Identifiers, formulae and molecular weights were resolved against PubChem
 \cite{pubchem2025}; the EPA CompTox Dashboard \cite{williams2017} was the
 intended second route but its programmatic interface was not reachable from
