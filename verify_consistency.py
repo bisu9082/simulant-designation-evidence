@@ -3671,31 +3671,33 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
-    # 2026-11-10 ([C-3] 복구). DPGME 특허(US 7129094 B1) 본문은 열람하지
-    # 못했다. sources/designations_20261106.csv 7행과
-    # outputs/tab_designations.tex:18 이 measurement·stated_basis 를 모두
-    # '[수집 불가: 특허 본문 미열람]' 으로 적는다. 그런데 원고는 그 특허가
-    # IMS 검출성을 요구한다고 네 곳에서 사실로 서술했다. 읽지 못한 문서의
-    # 내용이다.
+    # 2026-11-12 (반전). 위 항목은 2026-11-10 에 "DPGME 특허 본문 미열람" 을
+    # 근거로 IMS 서술을 금지했다. 그 근거가 틀렸다.
+    # sources/designations_20261106.csv 7행은 '[수집 불가: Google Patents,
+    # Justia, USPTO 전문 서비스 모두 접근 거부]' 를 적었는데, 그것은 시도
+    # 실패의 기록이지 문서에 대한 사실이 아니다. refs.bib 의 url 에서
+    # B1/en 접미를 뗀 주소(patents.google.com/patent/US7129094)가 본문을
+    # 서빙한다. 2026-11-12 에 직독해 확인한 문언:
+    #   "liquid G-agent (i.e., nerve agent, including VX) and H-agent
+    #    (mustard-HD) simulants"
+    #   "The vapors of the simulant composition can be detected by a variety
+    #    of equipment such as ion mobility spectrometers"
+    #   claim 1(a) "...sufficient to be detectable by a vapor detection
+    #    apparatus"
+    # 따라서 작용제 클래스와 IMS 서술은 모두 특허가 지지한다. 특허가 주지
+    # 않는 것은 작용제 응답과의 비교다. 제목도 그 구분으로 교체했다.
     #
-    # 더구나 IMS 검출성은 탐지다. 제목이 'No Public Designation Names a
-    # Detection Measurement' 인 원고가 지정 문서 하나에 탐지 측정을
-    # 부여하면 제목과 모순된다. 저자들이 2026-11-02 에 잡았고
-    # (sources/GATE8_7차_지적사항_우선순위_20261102.md:291-294) 8일간
-    # 미반영이었다.
-    #
-    # 같은 특허의 '선호 G계열 모사체' 문언은 2026-11-04 에 '원문 대조
-    # 불가' 를 이유로 철회됐다. IMS 는 같은 이유로 철회돼야 했는데
-    # 그 회차를 통과했다. 그래서 문자열로 금지한다.
-    ('DPGME 특허가 IMS 검출성을 요구한다는 서술 (특허 본문 미열람)',
-     [r'detectability by ion mobility spectrometry',
-      r'ion-mobility detectability',
-      r'ion-mobility response in a training composition',
-      r'ion-mobility training composition'],
-     # 철회문은 무엇을 철회하는지 명명해야 한다. SI 의 철회 단락만
-     # 면제한다. 면제는 '철회한다' 는 말이 같은 창 안에 있을 때만 적용되므로
-     # 주장으로 다시 적으면 그대로 걸린다.
-     [r'We withdraw both', r'Earlier versions of this section wrote']),
+    # 이제 금지 대상은 반대다. 특허 본문을 읽지 못했다는 서술이 원고에
+    # 남으면 거짓이다. 그 서술을 금지한다. SI 의 '철회가 오류였다' 단락만
+    # 면제하며, 면제는 그 단락이 무엇을 바로잡는지 명명할 때만 적용된다.
+    ('DPGME 특허 본문을 읽지 못했다는 서술 (2026-11-12 직독으로 반증)',
+     [r'patent text we could not obtain',
+      r'patent text not obtained',
+      r'could not obtain the\s*\n?text of the patent',
+      r'patent we could not obtain',
+      r'which we never read',
+      r'no agent class is established'],
+     [r'The withdrawal was the error', r'record of a failed attempt']),
     # 2026-11-04 (작업 D). 패널 구성 명명. 8 은 문헌이 제안한 화합물 수가
     # 아니라 지정 후보의 총수다 — 기존 3종(DMMP, DPGME, 디클로로메탄) +
     # 문헌 5종(CEES, DCNP, DCP, DFP, 살리실산메틸). 'the eight literature

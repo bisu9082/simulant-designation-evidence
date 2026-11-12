@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{54}
+\begin{mcitethebibliography}{56}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -411,6 +411,23 @@ Shin,~M.; Kang,~K.; Kim,~J.; Kim,~S.; Yoo,~J.; Jang,~Y.~J.; Kim,~M.-K.;
 Mantel,~N. The Detection of Disease Clustering and a Generalized Regression
   Approach. \emph{Cancer Research} \textbf{1967}, \emph{27}, 209--220, PMID:
   6018555\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Webb \latin{et~al.}(2025)Webb, Coulon, and Temple]{webb2025}
+Webb,~S.; Coulon,~F.; Temple,~T. A critical review of liquid, low toxicity
+  chemical warfare agent simulants: Enhancing accuracy, safety, and
+  methodological approaches for sampling. \emph{Journal of Hazardous Materials}
+  \textbf{2025}, \emph{492}, 138021\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Research Council}(2003)]{nrc2003standoff}
+{National Research Council} \emph{Standoff Chemical Agent Detectors}; The
+  National Academies Press: Washington, DC, 2003; Chapter 5, Simulant
+  Characteristics and Specifics, pp.~24--26\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

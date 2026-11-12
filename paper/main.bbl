@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{41}
+\begin{mcitethebibliography}{43}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -397,6 +397,25 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
   Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025},
   \emph{37}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Research Council}(2003)]{nrc2003standoff}
+{National Research Council} \emph{Standoff Chemical Agent Detectors}; The
+  National Academies Press: Washington, DC, 2003; Chapter 5, Simulant
+  Characteristics and Specifics, pp.~24--26\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Davidson \latin{et~al.}(2020)Davidson, Dixon, Williams, Kilper, Lim,
+  Martino, Rhodes, Hulet, Miles, Samuels, Emanuel, and Miklos]{davidson2020}
+Davidson,~C.~E.; Dixon,~M.~M.; Williams,~B.~R.; Kilper,~G.~K.; Lim,~S.~H.;
+  Martino,~R.~A.; Rhodes,~P.; Hulet,~M.~S.; Miles,~R.~W.; Samuels,~A.~C.;
+  Emanuel,~P.~A.; Miklos,~A.~E. Detection of Chemical Warfare Agents by
+  Colorimetric Sensor Arrays. \emph{ACS Sensors} \textbf{2020}, \emph{5},
+  1102--1109\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
