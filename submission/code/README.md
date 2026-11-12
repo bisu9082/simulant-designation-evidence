@@ -3,11 +3,12 @@
 Analysis code, descriptor tables and permutation results for:
 
 > **The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated
-> for Other Measurements, and Descriptor Comparison Does Not Settle the
+> for Other Measurements or Not at All, and No Descriptor Axis Settles the
 > Substitution**
 > Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee, Jin Yoo, Yoon Jeong Jang.
 > CBRN Defense Research Institute, Ministry of National Defense, Republic of Korea.
-> Target journal under review as of 2026-11-08.
+> Submitted to Analytical Chemistry (ACS) as an Article; deposit tagged
+> `acs-submission-20261112`.
 
 A designation says one compound stands in for another, which is a claim about a
 nearest neighbour. The paper counts how often this array supplies one: in 13 of
@@ -15,10 +16,15 @@ the 34 compound-and-cell instances a compound's response pattern is nearer
 another compound's than its own agreement across concentrations, and in 28 of
 the 34 before the dye-wise centring that makes compound identity recoverable.
 It then asks whether descriptor distance, the basis on which simulants are
-selected, predicts response distance. Twelve exact Mantel tests leave nothing
-below q = 0.05. Whether the three incumbent designations look supported at all
-depends on which compounds are in the comparison, and that dependence is
-reported rather than resolved.
+selected, predicts response distance. Twelve exact Mantel tests over the
+structural and electronic spaces leave nothing below q = 0.05. One axis behaves
+differently: vapour pressure, which is the property the stated criterion names,
+ranks the incumbent designation fourteenth of 680 (p = 0.0206) and tracks the
+measured response in the reflectance channel (q = 0.0430), though scored by
+valid matches the same designation ranks 316th. Whether the three incumbent
+designations look supported at all depends on which compounds are in the
+comparison and on which axis is asked, and that dependence is reported rather
+than resolved.
 
 ## What is here
 

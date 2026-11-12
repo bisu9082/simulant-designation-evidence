@@ -28,7 +28,7 @@ Dear Editors,
 %            'Dear Professor <Name>,' 로 교체하면 더 낫다.
 %            2026-11-10 웹 검색으로는 확정하지 못했다. 추정해서 적지 않는다.
 
-We submit \textit{The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated for Other Measurements, and Descriptor Comparison Does Not Settle the Substitution} for consideration as
+We submit \textit{The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated for Other Measurements or Not at All, and No Descriptor Axis Settles the Substitution} for consideration as
 an Article.
 
 Analytical chemistry for chemical warfare agents is almost never done with the
@@ -45,7 +45,7 @@ which measurement. The answer to that question is the paper's first result,
 and it decides how much the descriptor comparison can be asked to carry.
 
 \textbf{In the record we could reach, no incumbent simulant carries a public
-designation that names a detection measurement.} We looked for the instrument that
+designation that validates a detection response against an agent's.} We looked for the instrument that
 designates them, and we say at the outset where that search falls short: the US
 Army procedure titled \emph{Simulant Selection for Laboratory, Chamber, and
 Field Testing} is not public, and we could not obtain it. We know its title and
@@ -54,11 +54,14 @@ same public procedure states a detection-relevant criterion, which is evidence
 against the strong form of our claim, and we report it in the paper rather than
 leaving a reviewer to find it. DMMP was identified as a filtration-breakthrough test simulant in a NIOSH
 respirator programme, in a document that also declines to recommend any
-simulant. % 2026-11-03 (2차). 특허 직접 인용 철회. 원문 미확인.
-DPGME appears in the title of a US Army patent for a
-chemical agent simulant training composition, but the patent text could not be
-obtained from any full-text service we tried, so neither its agent class nor
-its measurement is established. For dichloromethane we found no designating document
+simulant, and a second designation names it for fabric penetration against VX.
+% 2026-11-12. 특허 본문을 직독해 철회를 되돌렸다. 2026-11-03 의 '원문
+% 미확인' 은 시도 실패의 기록이었고 문서에 대한 사실이 아니었다.
+DPGME is designated in a US Army patent for a chemical agent simulant training
+composition, which names its agent classes, liquid G-agent including VX and
+H-agent. What the patent requires is detectability, not resemblance: its first
+claim asks only that the mixture be detectable by a vapour detection apparatus,
+and no comparison with an agent's response is given. For dichloromethane we found no designating document
 at all; it is absent from the NIOSH document and from the Man-in-Simulant
 Test programme. The record separates into three grades, which the manuscript
 tabulates: a compound named for a stated measurement, a compound recorded only
@@ -98,7 +101,7 @@ comparison that excludes the alternatives is not defended.
 \textbf{The twenty-eight-compound panel that omits those five is reported in
 full, because the contrast is the result.} On it, three agents are matched, DMMP
 supplies all three, and the smallest nominal $p$ is 0.025. How that is corrected
-decides whether it means anything, so we report five schemes rather than one:
+decides whether it means anything, so we report six schemes rather than one:
 under Benjamini-Hochberg across the eighteen tests, across six within each
 space, at the effective number of independent tests estimated from the
 correlation of the permutation nulls, or under the Westfall-Young min-$P$
@@ -110,8 +113,24 @@ That contrast is the paper's argument made with its own data. The observed value
 also sits at the 22.4th percentile of 2000 arbitrary three-descriptor subspaces
 of the same descriptor block.
 
+\textbf{One axis behaves differently, and it is the one the criterion names.}
+Volatility is a single measured quantity rather than a descriptor set, so the
+analyst choices above do not arise on it. We specified two tests in advance of
+it, outside the eighteen-test families. Over all 680 designations on the
+twenty-eight-compound panel the incumbent set ranks fourteenth on the
+pre-specified statistic, a one-sided $p$ of 0.0206, and distance along the axis
+tracks the colorimetric response we measured in the reflectance channel
+($q = 0.0430$). The support is in aggregate distance only. Scored by valid
+matches the same designation ranks 316th of 680, the axis yields one match, and
+that match pairs DPGME with soman across a gap smaller than the mismatch between
+the temperatures at which the two vapour pressures were measured. We also state
+in the paper that the family boundary on this axis is one we drew ourselves, at
+two optical channels rather than the twelve cells used above, and that the
+direction of that choice favours our own result.
+
 \textbf{Taken together, we cannot establish that the incumbent simulants
-resemble the agents, and we cannot establish that they do not.} Three things are
+resemble the agents in the descriptor spaces, and we cannot establish that they
+do not.} Three things are
 open to the analyst: the compound panel, the descriptor space, and the distance
 statistic. We fixed all three in every combination we could compute, which is
 eighteen tests on each of three panel and designation configurations, and we
@@ -133,7 +152,9 @@ us on one point.} Twenty-nine-dye colorimetric response for twelve of the
 compounds, tested by Mantel permutation over compounds rather than over the
 pairs they generate, gives three nominally significant cells out of twelve that
 do not agree on a descriptor space, none of which survives correction across
-the twelve (smallest $q$ = 0.117). Three artifacts of this kind of array analysis
+the twelve (smallest $q$ = 0.117). Those exposures were acetonitrile solutions
+at matched molarity rather than vapour, which bounds what any of it establishes
+about a vapour-phase response, and we say so in the paper. Three artifacts of this kind of array analysis
 are reported alongside, because our own first version contained all three:
 we read the between-compound mean cosine against an algebraic bound of
 $-1/(n-1)$, which the renormalisation step in our own processing removes, and
