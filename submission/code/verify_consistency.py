@@ -702,6 +702,11 @@ def preflight():
     GENERATED_BY = {
         # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
         'threshold_sweep.json': 'threshold_sweep.py',
+        # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
+        # 리뷰어 지적을 내가 직접 재현한 산출물이다.
+        'twolabel_panel.json': 'twolabel_panel.py',
+        'mde_nullshift.json': 'mde_nullshift.py',
+        'shape_match.json': 'shape_match.py',
         # 2026-11-08. SI 의 25셀 감사표 출처.
         'designation_failure_audit.json': 'designation_failure_audit.py',
         'conformer_sensitivity_ensemble.json': 'conformer_sensitivity.py',

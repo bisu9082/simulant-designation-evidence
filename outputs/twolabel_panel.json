@@ -1,0 +1,58 @@
+{
+ "panel": "panel35_incumbent3_plus_pesticides2",
+ "note": "main.tex 가 \"moves two labels\" 라 부르는 구성의 실제 값. 0.0008 을 내는 구성은 문헌 5종이 함께 지정된 10종이다.",
+ "n_simulants": 5,
+ "simulant_names": [
+  "DMMP",
+  "DPGME",
+  "dichloromethane",
+  "dichlorvos",
+  "malathion"
+ ],
+ "spaces": {
+  "structural": {
+   "p": {
+    "mean_diff": 0.5025644645209862,
+    "median_diff": 0.5292207792207793,
+    "mean_logratio": 0.61229531338227,
+    "mean_dsim": 0.449510634293243,
+    "n_closer": 0.8972332015810277,
+    "n_valid": 1.0
+   },
+   "n_perm": 42504,
+   "nn_median": 3.273286753654107,
+   "n_valid": 0,
+   "n_dims": 38
+  },
+  "electronic3": {
+   "p": {
+    "mean_diff": 0.19635798983625072,
+    "median_diff": 0.46454451345755693,
+    "mean_logratio": 0.2696687370600414,
+    "mean_dsim": 0.11055430077169208,
+    "n_closer": 0.39986824769433466,
+    "n_valid": 0.5184453227931489
+   },
+   "n_perm": 42504,
+   "nn_median": 0.6253520176527663,
+   "n_valid": 2,
+   "n_dims": 3
+  },
+  "merged": {
+   "p": {
+    "mean_diff": 0.42384246188594016,
+    "median_diff": 0.4877423301336345,
+    "mean_logratio": 0.5382081686429513,
+    "mean_dsim": 0.3293572369659326,
+    "n_closer": 0.8972332015810277,
+    "n_valid": 1.0
+   },
+   "n_perm": 42504,
+   "nn_median": 3.5594247868424618,
+   "n_valid": 0,
+   "n_dims": 41
+  }
+ },
+ "min_p": 0.11055430077169208,
+ "bh_min_q": 0.7452113104287018
+}

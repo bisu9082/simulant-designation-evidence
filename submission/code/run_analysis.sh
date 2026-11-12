@@ -131,7 +131,8 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            volatility_fetch.py volatility_space.py \
            shape_reduction.py premise_null.py conformer_sensitivity.py \
            collapse_sensitivity.py reversal_audit.py dye_panel_audit.py \
-           threshold_sweep.py designation_failure_audit.py
+           threshold_sweep.py designation_failure_audit.py \
+           twolabel_panel.py mde_nullshift.py shape_match.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가
 # 인용하는 두 예치물 중 하나가 파이프라인에서 아예 생성되지 않았고,
