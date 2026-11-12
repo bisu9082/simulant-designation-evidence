@@ -3791,10 +3791,17 @@ SUPERSEDED = [
     #     SI 가 특허 문언이라고 적었던 'a preferred G agent simulant' 는
     #     특허 원문을 확인할 수 없었다. 두 주장 모두 쓰지 않는다. 본문이
     #     사실로 적는 것은 '특허가 요구한 성질은 IMS 검출성' 하나다.
-    ('DPGME 지정 계열 주장 (특허 원문 미확인, 등재부 라벨은 지정문서 아님)',
+    # 2026-11-12 (부분 해제). 특허 US 7129094 본문을 직독했다. 문언은
+    #     "liquid G-agent (i.e., nerve agent, including VX) and H-agent
+    #      (mustard-HD) simulants"
+    # 로 계열을 특허 자신이 명명한다. 따라서 DPGME 를 수포작용제 계열로
+    # 적는 것은 등재부 라벨이 아니라 특허 문언에 근거하며, 금지에서 뺀다.
+    # 'a preferred G agent simulant' 는 특허에 없는 문언이므로 유지한다.
+    # 디클로로메탄의 'choking' 은 등재부 라벨 그대로이고 지정 문서가
+    # 없으므로(본문 res:docs) 계속 금지한다.
+    ('DPGME·디클로로메탄 지정 계열 주장 (등재부 라벨은 지정문서 아님)',
      [r'a preferred G agent simulant',
       r'blister-agent simulant with a nerve agent',
-      r'designated for the blister agent',
       r'designated for the choking agent'],
      [r'An\s+earlier version of this section wrote',
       r'We withdraw that\s+statement']),

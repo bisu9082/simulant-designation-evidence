@@ -185,10 +185,22 @@ Hochberg pro-ce-dure [[]]
 Overfull \hbox (182.54657pt too wide) in paragraph at lines 762--781
 \OT1/ptm/m/n/10.95 tory [[], [],
 [11] [12 <./Fig_spaces.png>]
-Overfull \hbox (25.77603pt too wide) in paragraph at lines 845--851
+Overfull \hbox (25.77603pt too wide) in paragraph at lines 845--853
 \OT1/ptm/m/n/10.95 The cri-te-rion the field states for sim-u-lant choice names
  volatil-ity [[]],
-(./tab_volatility.tex) [13] (./tab_vpairing.tex) (./tab_designations.tex
+(./tab_volatility.tex) [13]
+
+Package hyperref Warning: Suppressing empty link on input line 890.
+
+
+Package hyperref Warning: Suppressing empty link on input line 913.
+
+
+Overfull \hbox (36.45413pt too wide) in paragraph at lines 938--947
+\OT1/ptm/m/n/10.95 plate are not in-de-pen-dent, the mean inter-channel co-sine
+ be-ing re-ported in \OT1/pcr/m/n/10.95 outputs/reversal[]audit.json\OT1/ptm/m/
+n/10.95 ,
+(./tab_vpairing.tex) (./tab_designations.tex
 Underfull \hbox (badness 10000) in paragraph at lines 13--13
 []\OT1/ptm/m/n/9 carbon tetra-
 
@@ -281,110 +293,108 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--18
 
 Overfull \hbox (6.4283pt too wide) in paragraph at lines 19--19
 []\OT1/ptm/m/n/9 dichloromethane| 
-)
+) [14]
 
-Package hyperref Warning: Suppressing empty link on input line 1007.
-
-
-Package hyperref Warning: Suppressing empty link on input line 1008.
-
-[14]
-
-Package hyperref Warning: Suppressing empty link on input line 1017.
+Package hyperref Warning: Suppressing empty link on input line 1033.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1028.
+Package hyperref Warning: Suppressing empty link on input line 1034.
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1059
+Package hyperref Warning: Suppressing empty link on input line 1043.
+
+
+Package hyperref Warning: Suppressing empty link on input line 1054.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [15]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1085
 .
 
-[15]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1113
+Package hyperref Warning: Suppressing link with empty target on input line 1139
 .
 
 [16]
 
-Package hyperref Warning: Suppressing empty link on input line 1195.
+Package hyperref Warning: Suppressing empty link on input line 1221.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1211.
-
-
-Package hyperref Warning: Suppressing empty link on input line 1240.
+Package hyperref Warning: Suppressing empty link on input line 1237.
 
 [17]
 
-Package hyperref Warning: Suppressing empty link on input line 1244.
+Package hyperref Warning: Suppressing empty link on input line 1266.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1260.
+Package hyperref Warning: Suppressing empty link on input line 1270.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1265.
+Package hyperref Warning: Suppressing empty link on input line 1286.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1299.
+Package hyperref Warning: Suppressing empty link on input line 1291.
 
-(./tab_ablation.tex
+
+Package hyperref Warning: Suppressing empty link on input line 1325.
+
+[18] (./tab_ablation.tex
 Overfull \hbox (29.67078pt too wide) in paragraph at lines 19--50
  [][] 
-) (./tab_family.tex) [18] [19] (./tab_blockbalance.tex) [20]
+) (./tab_family.tex) [19] (./tab_blockbalance.tex) [20] [21]
 
-Package hyperref Warning: Suppressing empty link on input line 1592.
+Package hyperref Warning: Suppressing empty link on input line 1618.
 
-[21]
-Overfull \hbox (128.82527pt too wide) in paragraph at lines 1638--1653
+
+Overfull \hbox (128.82527pt too wide) in paragraph at lines 1664--1679
 \OT1/ptm/m/n/10.95 cause they dis-agree. The com-pos-ite lo-cal elec-trophilic-
 ity of Domingo et al. [[]],
-(./tab_plocal.tex) [22 <./Fig_mde.png>] [23 <./Fig_plocal.png>]
-(./tab_premisenull.tex)
+[22 <./Fig_mde.png>] (./tab_plocal.tex) [23 <./Fig_plocal.png>]
+(./tab_premisenull.tex) [24]
 
-Package hyperref Warning: Suppressing empty link on input line 1791.
-
-[24]
-
-Package hyperref Warning: Suppressing empty link on input line 1815.
+Package hyperref Warning: Suppressing empty link on input line 1817.
 
 
-Package hyperref Warning: Suppressing empty link on input line 1839.
+Package hyperref Warning: Suppressing empty link on input line 1841.
+
+
+Package hyperref Warning: Suppressing empty link on input line 1865.
 
 [25] [26] [27 <./Fig_toxicity.png>]
-Underfull \hbox (badness 1127) in paragraph at lines 2012--2024
+Underfull \hbox (badness 1127) in paragraph at lines 2038--2050
 \OT1/ptm/m/n/10.95 cause that was our first hy-poth-e-sis and it is wrong. Thir
 -teen of the 230 train-ing com-pounds
 
-Underfull \hbox (badness 1442) in paragraph at lines 2012--2024
+Underfull \hbox (badness 1442) in paragraph at lines 2038--2050
 \OT1/ptm/m/n/10.95 carry an acetylcholinesterase-inhibiting phar-ma-cophore, id
 en-ti-fied by sub-struc-ture rather than by
 
-Underfull \hbox (badness 1577) in paragraph at lines 2012--2024
+Underfull \hbox (badness 1577) in paragraph at lines 2038--2050
 \OT1/ptm/m/n/10.95 parathion, methyl parathion, methami-dophos, dichlor-vos, ma
 lathion) and three car-ba-mate es-ters
 
-Underfull \hbox (badness 1038) in paragraph at lines 2012--2024
+Underfull \hbox (badness 1038) in paragraph at lines 2038--2050
 \OT1/ptm/m/n/10.95 the ser-ine hy-droxyl of acetyl-cholinesterase and the choli
 n-er-gic cri-sis that fol-lows [[],
 
-Underfull \hbox (badness 4913) in paragraph at lines 2012--2024
+Underfull \hbox (badness 4913) in paragraph at lines 2038--2050
 []\OT1/ptm/m/n/10.95 , []],
-
-Package hyperref Warning: Suppressing empty link on input line 2044.
-
 [28]
-Underfull \hbox (badness 1424) in paragraph at lines 2127--2135
+
+Package hyperref Warning: Suppressing empty link on input line 2070.
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 2153--2161
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
 
-Overfull \hbox (57.80573pt too wide) in paragraph at lines 2150--2164
+Overfull \hbox (57.80573pt too wide) in paragraph at lines 2176--2190
 \OT1/ptm/m/n/10.95 screen [[], []];
-[29] (./supplementary.bbl
+[29] [30] (./supplementary.bbl
 Underfull \hbox (badness 4391) in paragraph at lines 30--38
 \OT1/ptm/m/n/10.95 Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https : / / www
  . epa . gov / sites / default / files / 2018-[]08 /
-[30]
+
 Underfull \hbox (badness 1496) in paragraph at lines 39--48
 []\OT1/ptm/m/n/10.95 Watson, A.; Opresko, D.; Young, R.;
 
@@ -406,8 +416,8 @@ Overfull \hbox (2.80377pt too wide) in paragraph at lines 248--257
 Underfull \hbox (badness 10000) in paragraph at lines 470--478
 \OT1/pcr/m/n/10.95 / / cfpub . epa . gov / ncea / pprtv / documents / Dimethylm
 ethylphosphonate . pdf$[]\OT1/ptm/m/n/10.95 ,
-) [34] [35] [36] [37] [38] [39] [40] [41 <./Fig_h1.png>] (./supplementary.aux) 
-)
+[34]) [35] [36] [37] [38] [39] [40] [41] [42 <./Fig_h1.png>]
+(./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -427,5 +437,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (41 pages, 2077738 bytes).
+Output written on supplementary.pdf (42 pages, 2079421 bytes).
 Transcript written on supplementary.log.
