@@ -44,7 +44,7 @@ Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 *geometry* detected driver: pdftex
 (./cover_letter.out) (./cover_letter.out) [1{/var/lib/texmf/fonts/map/pdftex/up
 dmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
-[2] [3] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) [4]
+[2] [3] [4] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) [5]
 (./cover_letter.aux) )</usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
@@ -54,5 +54,5 @@ texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on cover_letter.pdf (4 pages, 121213 bytes).
+Output written on cover_letter.pdf (5 pages, 121819 bytes).
 Transcript written on cover_letter.log.

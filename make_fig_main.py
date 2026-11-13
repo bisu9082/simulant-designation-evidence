@@ -398,12 +398,15 @@ for pos, (key, lab, col) in zip(_pos, KK):
     hx.text(hi + 0.22, pos, f"median {o['median']}, 2.5-97.5 pct {lo} to {hi}",
             fontsize=FS_ANNOT, va='center', ha='left', color=col)
 hx.set_yticks(_pos); hx.set_yticklabels([l for _, l, _ in KK])
-hx.set_xlim(-0.5, 13.6); hx.set_ylim(-1.05, len(KK) - 0.40)
+# 2026-11-13. x 축이 13.6 까지 그려져 있었다. 이 축의 양은 '11종 중 몇 종'
+# 이므로 11 을 넘을 수 없다. 주석 상자를 두 줄로 접고 축을 11 에서 끊는다.
+hx.set_xlim(-0.5, 11.4); hx.set_ylim(-1.38, len(KK) - 0.40)
+hx.set_xticks([0, 2, 4, 6, 8, 10])
 hx.set_xlabel('agents of eleven with a valid match, over 1000 descriptor '
               'resampling replicates')
 _d = BT['difference']
-hx.text(5.4, -0.76,
-        f"difference positive in {100*_d['frac_positive']:.0f}% of replicates "
+hx.text(-0.25, -0.98,
+        f"difference positive in {100*_d['frac_positive']:.0f}% of replicates\n"
         f"(median {_d['median']}, 2.5-97.5 pct {_d['ci'][0]} to {_d['ci'][1]})",
         fontsize=FS_ANNOT, va='center', ha='left', color=C_REF,
         bbox=dict(fc='white', ec=C_REF, boxstyle='round,pad=0.32', alpha=0.95))

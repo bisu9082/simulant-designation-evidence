@@ -62,6 +62,20 @@ cp -p descriptor_cache*.csv submission/code/ 2>/dev/null || true
 # 10차에 이미 둘을 담게 고쳤는데 이쪽만 빠져 있었다.
 cp -p README.md requirements.txt submission/code/
 
+# 2026-11-13 (GATE 8 9차, 재현성 심사). 패키지가 7단계에서 죽었다.
+# run_analysis.sh 의 첫 스크립트 deltaE_premise.py 가 deltaE/ 를 읽는데
+# 그 폴더가 패키지에 없었고, sources/ (EPA 원문·지정문서 CSV) 와 패널
+# 정의 세 파일도 없었다. 원고는 이 패키지를 "also provided with this
+# article" 이라 적는다. 돌지 않는 것을 그렇게 적을 수 없다.
+# 선적 outputs 5개도 함께 넣는다 — README 가 재생성하지 않는다고 선언한
+# 것들이고, 없으면 파이프라인이 전자축에서 멈춘다.
+mkdir -p submission/code/deltaE submission/code/sources
+cp -p deltaE/*.csv submission/code/deltaE/ 2>/dev/null || true
+cp -p sources/*.csv sources/*.pdf submission/code/sources/ 2>/dev/null || true
+cp -p panel_all.csv panel_new.csv inchikeys.csv submission/code/ 2>/dev/null || true
+# 선적 outputs 5개는 자기검증 뒤에 넣는다. 자기검증이 submission/code/outputs
+# 를 루트 outputs 로 가는 심볼릭 링크로 만들었다가 지우기 때문이다.
+
 # 산출물: 본문이 인용하는 수치의 출처. 2026-10-23 이전에는 여덟 개만 손으로
 # 골라 복사했고, 그 목록이 갱신되지 않아 h1_summary.json 을 비롯해 헤드라인
 # 수치의 출처 열세 개가 패키지에서 빠져 있었다. 전량 복사로 바꾼다.
@@ -106,3 +120,11 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
     exit 1
   fi; }
 rm -rf submission/code/paper submission/code/outputs
+
+# README 가 "재생성하지 않고 선적한다" 고 선언한 다섯 파일. 없으면 패키지가
+# 전자축에서 멈춘다 (xtb 바이너리 / 1시간짜리 B3LYP 실행이 필요한 자리).
+mkdir -p submission/code/outputs
+for f in aegl_electronic.csv xtb_fast_vs_slow.csv dft_omega.csv \
+         dft_dipole.csv dft_vs_gfn2.csv; do
+  [ -f "outputs/$f" ] && cp -p "outputs/$f" submission/code/outputs/
+done

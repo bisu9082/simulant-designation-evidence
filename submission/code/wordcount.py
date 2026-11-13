@@ -135,7 +135,14 @@ def main():
     print(f'  ACS 환산 {pages:.1f}면 = 본문 {(n_body-cap)/1000:.1f}'
           f' + 도판 {len(figs)}장 {len(figs)*0.5:.1f}'
           f' + 표 {len(tabs)}개 {sum(tabs)/1000:.2f}'
-          f' + 참고문헌 {refs/1000:.1f}   (TOC 제외, Article 한도 8면)')
+          f' + 참고문헌 {refs/1000:.1f}   (TOC 제외)')
+    # 2026-11-13. ACS 현행 저자지침(researcher-resources.acs.org,
+    # 2026-10-05 갱신)은 면이 아니라 단어로 센다 — Article 10,000 단어,
+    # Perspective 도 10,000 단어. 종전의 '8면' 은 다른 ACS 페이지에서
+    # 온 값이고 두 페이지가 실제로 충돌한다. 단어로 센다.
+    _total = n_body + refs + 76
+    print(f'  ACS 단어 셈법 약 {_total:,} 단어 (본문+캡션+참고문헌+표제)'
+          f'  — 한도 10,000')
 
     # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
     # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.

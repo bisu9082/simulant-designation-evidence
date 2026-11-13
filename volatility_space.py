@@ -354,11 +354,35 @@ def agreement():
     _q = [_ps[i] * _m / (i + 1) for i in range(_m)]
     for i in range(_m - 2, -1, -1):
         _q[i] = min(_q[i], _q[i + 1])
+    # 2026-11-13. 키 이름을 바로잡는다. 2026-11-03 부터 2026-11-12 까지
+    # 채널별 형태가 'prespecified' 키에 들어가 있었다. 그런데 레지스트리
+    # prespecified_tests.V2 가 가리키는 것은 일괄 Fisher 이고, 채널별
+    # 형태는 일괄 형태가 p=0.0809 를 낸 뒤 같은 날 도입됐다 (커밋 cab9aec).
+    # 결과를 보고 고른 형태를 'prespecified' 라고 예치하면, 그 예치물을
+    # 사전지정 기록으로 인용하는 독자가 틀린 것을 본다. 사전지정 자리에는
+    # 사전지정한 것을 둔다. 채널별 형태는 사후 민감도로 내려 적는다.
     return {'cells': cells, 'skipped': skipped,
             'prespecified': {
+                'method': 'Fisher combination of the exact Mantel p values '
+                          'of all evaluable cells in one step, as registered '
+                          'in prespecified_tests.V2',
+                'registered_cells': 6,
+                'evaluable_cells': len(pv),
+                'n_unevaluable': len(skipped),
+                'p_inputs': pv,
+                'statistic': float(pooled4.statistic) if pv else None,
+                'p_value': float(pooled4.pvalue) if pv else None,
+                'reaches_005': bool(pv and pooled4.pvalue < 0.05)},
+            'post_hoc_per_channel': {
                 'method': 'Fisher combination across runs within each '
                           'optical channel, then Benjamini-Hochberg over '
                           'the channels',
+                'status': 'POST HOC. Introduced after the prespecified form '
+                          'above returned p = 0.0809. Reported as a declared '
+                          'sensitivity analysis, not as a prespecified '
+                          'result, and not exempt from correction over the '
+                          'eighteen-test family on a prespecification '
+                          'ground.',
                 'by_channel': by_mode,
                 'n_channels': _m,
                 'min_q': float(_q[0]) if _q else None,
@@ -367,11 +391,13 @@ def agreement():
                              'independent (mean inter-channel cosine is '
                              'reported in outputs/reversal_audit.json), so '
                              'they cannot enter one Fisher combination. '
-                             'Runs can.'},
-            'superseded_pooled_four_cells': {
-                'statistic': float(pooled4.statistic) if pv else None,
-                'p_value': float(pooled4.pvalue) if pv else None,
-                'why_withdrawn': 'pooled two channels of the same plate'}}
+                             'Runs can.',
+                'family_boundary': 'The two-channel family is one we drew '
+                                   'ourselves, and the direction of that '
+                                   'choice favours our own result. Read as '
+                                   'the twelve-cell family of the array '
+                                   'section, this axis is null as well.',
+                'significant_cell_has_no_simulant': True}}
 
 
 def valid_match_detail():
@@ -541,14 +567,16 @@ def main():
     for s in v2['skipped']:
         print(f"  V2 {s['cell']:<10} 생략 — {s['reason']}")
     ps = v2['prespecified']
-    for md, r in ps['by_channel'].items():
-        print(f"     사전지정 {md:<7} 런간 Fisher ({r['n_runs']}런): "
+    print(f"     사전지정 일괄 Fisher ({ps['evaluable_cells']}셀 평가 가능, "
+          f"등록 {ps['registered_cells']}셀): p = {ps['p_value']:.4f} "
+          f"-> 0.05 도달 {ps['reaches_005']}")
+    ph = v2['post_hoc_per_channel']
+    for md, r in ph['by_channel'].items():
+        print(f"     (사후) {md:<7} 런간 Fisher ({r['n_runs']}런): "
               f"p = {r['p_value']:.4f}")
-    print(f"     채널 {ps['n_channels']}개 BH 최소 q = {ps['min_q']:.4f}  "
-          f"유의 {ps['n_sig_q']}건")
-    sp = v2['superseded_pooled_four_cells']
-    print(f"     (철회) 4셀 일괄 Fisher p = {sp['p_value']:.4f} — "
-          f"같은 플레이트 두 채널을 묶었다")
+    print(f"     (사후) 채널 {ph['n_channels']}개 BH 최소 q = "
+          f"{ph['min_q']:.4f}  유의 {ph['n_sig_q']}건 "
+          f"— 사전지정 아님, 보정 면제 근거 없음")
     pt = pairing_table()
     vm = valid_match_detail()
     print()

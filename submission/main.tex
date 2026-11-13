@@ -76,9 +76,24 @@
 % (2) 'Descriptor Comparison' 이 휘발성 축을 포함하는지 애매했다. 휘발성도
 %     유효매칭 기준으로는 316/680 이고 유일 매칭이 온도 불일치 안이므로
 %     정착되지 않는다. 'No Descriptor Axis' 로 명시해 세 축을 모두 덮는다.
-\title{The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated
-for Other Measurements or Not at All, and No Descriptor Axis Settles the
-Substitution}
+%
+% 2026-11-13 (GATE 8 9차 — 편집장 + 리뷰어 5인, 합계 -1). 위 2026-11-12
+% 항목 두 개가 뒤집혔다. 이력이므로 지우지 않고 여기 적는다.
+% (1) 59-60 행의 'q=0.0430 으로 일치한다' 는 철회됐다. 그 값은 사전지정
+%     형태가 아니라 그것이 p=0.0809 를 낸 뒤 같은 날 교체된 형태의 값이다
+%     (커밋 5b6fb2c 10:06 등록 -> afb6f14 10:38 음성 보고 -> cab9aec 14:54
+%     합성 교체). 사전지정 형태를 보고값으로 복원하고 채널별 형태는 선언된
+%     사후 민감도로 내렸다. V1(p=0.0206)은 등록형과 보고형이 같으므로 유지.
+% (2) 70-71 행의 'Article 로 바로 투고' 가 Perspective 로 바뀌었다.
+%     ACS 현행 저자지침(2026-10-05 갱신)은 Article 에 본문 Experimental
+%     Section 을 요구하는데 이 원고에는 새 실험이 없다. Perspective 는
+%     'neither reports of original research nor reviews' 이고 비초청 투고가
+%     가능하며 한도가 같다(양쪽 10,000 단어). 종전의 '8면' 은 다른 ACS
+%     페이지에서 온 값이고 두 페이지가 충돌한다 — 단어로 센다.
+% (3) 제목을 주장문에서 방향을 가리키는 형태로 바꿨다. 측정법 명기 요건은
+%     초록의 '29-component colorimetric sensor array' 로 충족한다.
+\title{What Chemical Warfare Agent Simulants Are Validated For, and What
+Descriptor Comparisons Can Decide}
 
 % 2026-11-01 Ku 지시 저자 구성. 공동1저자 해제(Ku 단독), Jeongyun Kim 과
 % Miae Kim 이 2·3저자, Doo-Hee Lee 4저자(교신 해제), Jin Yoo 5저자,
@@ -132,7 +147,8 @@ exact permutation test, acute exposure guideline level, dual-use}
 \begin{abstract}
 \noindent
 Chemical warfare agent detection is developed almost entirely on simulants,
-compounds accepted as agent-like and safe to handle. We tested that acceptance.
+compounds accepted as agent-like and safe to handle. This Perspective asks what
+that acceptance rests on.
 In the public standard-setting record no incumbent carries a designation that
 validates a detection response against an agent's: one is designated for
 barrier testing, one for a training composition that asks only that a vapour detector
@@ -140,19 +156,21 @@ respond, and the third has no designating document we found. The Army procedure
 for simulant selection is not public, bounding this. For eleven authentic
 agents we computed structural and GFN2-xTB electronic descriptors and asked, by
 exact permutation over every designation, whether those three sit closer to the
-agents than other non-agents. On the
-primary thirty-five-compound panel, which adds five compounds the sensor
-literature also calls simulants, no agent has a valid match and no test reaches
-significance. Resampling the descriptors leaves both the incumbent
-three and an eight-compound set containing them inside a null matched to their
-size ($p=0.48$ and $p=0.16$). The extended panel changes the comparison rather
-than the chemistry: diisopropyl fluorophosphate is nearer to three G agents than
-any incumbent is. A twenty-eight-compound panel omitting those five and the two
+agents than other non-agents. On a
+thirty-five-compound panel that adds five compounds the sensor literature also
+calls simulants, no agent has a valid match and no test reaches
+significance; that panel changes the comparison rather
+than the chemistry, diisopropyl fluorophosphate being nearer to three G agents
+than any incumbent is. A twenty-eight-compound panel omitting those five and the two
 pesticides yields three matches and a nominal structural $p$ of 0.028 that no
 correction over eighteen tests leaves significant. Relabelling the two
 pesticides as simulants moves the corrected value to 0.745, relabelling all
-seven to 0.00075. A defensible claim must name the measurement it rests on and
-fix panel, space, statistic and weighting in advance.
+seven to 0.00075. Volatility, the axis the stated criterion names, is the one
+on which the designation is distinguishable from chance ($p = 0.0206$), but on
+the form specified in advance it does not track the response of a 29-component
+colorimetric sensor array. The corrective is a declaration rather than a
+replacement compound: a defensible claim must name the measurement it rests on
+and fix panel, space, statistic and weighting before the test is run.
 \end{abstract}
 
 \section{Introduction}
@@ -600,14 +618,16 @@ not an independent finding.
 \label{res:vol}
 Volatility is the one axis the stated criterion names that is not a descriptor
 we chose, and it is the one axis on which the incumbent designation is not
-indistinguishable from chance. Two tests were fixed in advance of it, outside
-the family of eighteen reported above, so no correction over that family applies
-to them; Supporting Information Section~\ref{S-meth:vol} gives both in full with
+indistinguishable from chance. Two tests were registered in advance of it,
+outside the family of eighteen reported above. Only the first was reported in
+the form registered for it, and the second is set out below as what it is;
+Supporting Information Section~\ref{S-meth:vol} gives both in full with
 every adopted vapour pressure and its source.
 
 The designation test repeated on the one-dimensional axis puts the incumbent set
 fourteenth on the pre-specified statistic, a one-sided $p$ of 0.0206 over all
-680 designations. It
+680 designations. Its registered form and its reported form are the same, so
+the exemption from the eighteen holds for this one. It
 does not carry to the match criterion: the valid-match count returns one match
 at $p = 0.4647$, and that match pairs DPGME with soman across a gap smaller than
 the mismatch between the temperatures at which the two vapour pressures were
@@ -615,11 +635,23 @@ measured, so nothing rests on it. Three of the eleven agents have an interferent
 nearer than any incumbent here as well.
 
 The second test asks whether distance on this axis tracks the colorimetric
-response we measured. Correcting across the two optical channels, the smallest
-corrected value reaches $q = 0.0430$, in the
-reflectance channel, while the ultraviolet channel does not. The axis the
-criterion names is therefore the one on which the designation holds, and the
-only one of the three that predicts the response we measured.
+response the array recorded, and here we report against ourselves. The form we
+registered combined the exact Mantel value of every evaluable cell in one
+Fisher step. It returned $p = 0.0809$ and was withdrawn the same day for a
+per-channel form that corrects across the two optical channels, under which the
+smallest adjusted value reaches $q = 0.0430$, in the
+reflectance channel, while the ultraviolet channel does not. The replacement
+has a reason, in that two channels of one plate are not independent and cannot
+enter one Fisher step, but it was chosen after the result of the form it
+replaced was known. It is therefore a post hoc form and carries no exemption
+from correction on a prespecification ground. Two further facts bear on it. The
+two-channel family is one we drew ourselves rather than the twelve cells of
+Section~\ref{res:measured}, and the direction of that choice favours our own
+result; read as one family of four
+cells it is 0.1389. And the only cell under 0.05 in the reflectance
+combination, at $p = 0.0458$, comes from the plate that carries no simulant,
+while the cell from the plate that carries one gives $p = 0.0694$. On the form
+we registered, this axis reports no agreement either.
 
 \subsection{What the two premises survive}
 \label{res:measured}
@@ -628,7 +660,10 @@ only one of the three that predicts the response we measured.
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a sensor reports is tested in Supporting
 Information Section~\ref{S-res:arraydetail} against measured colorimetric
-response for twelve compounds over 29 dyes. Those exposures were
+response for twelve compounds over 29 dyes. That response is not new here: it is
+taken from a 29-component array reported in earlier work from this laboratory
+\cite{hazref,multiplexref,group3ref}, and what this paper adds is the
+reanalysis rather than the measurement. Those exposures were
 acetonitrile solutions at matched molarity, not vapour, which bounds what any of
 this establishes about a vapour-phase response. It does not
 resolve the question: three of twelve cells reach a nominal $p<0.05$ and
@@ -637,8 +672,9 @@ value of 0.117, all three lie in the plate set containing no simulant, and the
 six cells that bear on the premise are null while the design detects only
 $|\rho| \ge 0.85$ at the Benjamini--Hochberg level. The
 premise is untested rather than supported, and every distance-based claim here
-inherits that. Section~\ref{res:vol} is the exception: the volatility axis was
-tested against the same measurement and does track it.
+inherits that. The volatility axis of Section~\ref{res:vol} was tested against
+the same measurement and, on the form registered for that test, does not track
+it either.
 
 The criterion has a second half, that compounds chosen on physicochemical
 grounds present minimal toxicity risk \cite{webb2025}, tested on the same panel
@@ -690,8 +726,10 @@ establish is that the compounds which would make the
 comparison informative were not in it.
 
 The volatility axis separates the two halves of that statement. It is the only
-one of the three on which the designation is not indistinguishable from chance
-and the only one that tracks the colorimetric response we measured
+one of the three on which the designation is not indistinguishable from chance,
+and that result stands on the form specified in advance for it; whether distance
+along it tracks the colorimetric response the array recorded is a second
+question, and the form specified for that one returns no agreement
 (Section~\ref{res:vol}). A National Research Council committee writing about
 detection put the same requirement in 2003: an ideal simulant would mimic every
 property but toxicity, that is never achieved, and simulants for vapour-phase
@@ -771,11 +809,13 @@ to.
 
 One axis behaves differently, and it is the one the stated criterion names. On
 vapour pressure the incumbent designation is not indistinguishable from chance
-($p = 0.0206$) and distance along it tracks the colorimetric response we
-measured in the reflectance channel ($q = 0.0430$). The support is in aggregate
+($p = 0.0206$), and that test was reported in the form registered for it. The
+support is in aggregate
 distance only: scored by valid matches the same designation ranks 316th of 680,
 the axis yields one match, and that match lies inside the mismatch between the
-temperatures at which the two vapour pressures were measured.
+temperatures at which the two vapour pressures were measured. Whether distance
+along the axis tracks the response the array recorded is a separate question,
+and on the form we registered for it the answer is no.
 
 The documentary record fits that pattern. DMMP was designated for filtration
 breakthrough, DPGME in a training patent asking only that a vapour detector

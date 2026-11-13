@@ -410,7 +410,23 @@
    }
   ],
   "prespecified": {
+   "method": "Fisher combination of the exact Mantel p values of all evaluable cells in one step, as registered in prespecified_tests.V2",
+   "registered_cells": 6,
+   "evaluable_cells": 4,
+   "n_unevaluable": 2,
+   "p_inputs": [
+    0.875,
+    0.06944444444444445,
+    0.32222222222222224,
+    0.04583333333333333
+   ],
+   "statistic": 14.032034180187779,
+   "p_value": 0.08093426888268307,
+   "reaches_005": false
+  },
+  "post_hoc_per_channel": {
    "method": "Fisher combination across runs within each optical channel, then Benjamini-Hochberg over the channels",
+   "status": "POST HOC. Introduced after the prespecified form above returned p = 0.0809. Reported as a declared sensitivity analysis, not as a prespecified result, and not exempt from correction over the eighteen-test family on a prespecification ground.",
    "by_channel": {
     "uv": {
      "n_runs": 2,
@@ -434,12 +450,9 @@
    "n_channels": 2,
    "min_q": 0.04296857084975769,
    "n_sig_q": 1,
-   "rationale": "The two channels of one plate are not independent (mean inter-channel cosine is reported in outputs/reversal_audit.json), so they cannot enter one Fisher combination. Runs can."
-  },
-  "superseded_pooled_four_cells": {
-   "statistic": 14.032034180187779,
-   "p_value": 0.08093426888268307,
-   "why_withdrawn": "pooled two channels of the same plate"
+   "rationale": "The two channels of one plate are not independent (mean inter-channel cosine is reported in outputs/reversal_audit.json), so they cannot enter one Fisher combination. Runs can.",
+   "family_boundary": "The two-channel family is one we drew ourselves, and the direction of that choice favours our own result. Read as the twelve-cell family of the array section, this axis is null as well.",
+   "significant_cell_has_no_simulant": true
   }
  },
  "pairing_table": {

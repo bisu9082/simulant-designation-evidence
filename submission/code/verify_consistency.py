@@ -1920,7 +1920,11 @@ def load_facts():
     # BH 를 원고에 실으면서 둘 다 묶는다. 10차 R3 가 'q=0.0430 이 사전지정
     # 실패 뒤 채택된 가족에 있는데 초록이 prespecified 라 부른다'를 잡았고,
     # 0.0809 는 그때까지 원고 어디에도 없었다.
-    f['vol_withdrawn_p'] = _vol['agreement']['superseded_pooled_four_cells']['p_value']
+    # 2026-11-13. 키 교정. 사전지정 형태(일괄 Fisher)가 'prespecified' 로,
+    # 채널별 형태가 'post_hoc_per_channel' 로 내려갔다. 이 값은 이제
+    # 철회된 값이 아니라 사전지정 결과 그 자체다.
+    f['vol_prespec_p'] = _vol['agreement']['prespecified']['p_value']
+    f['vol_withdrawn_p'] = f['vol_prespec_p']
     # BH 최소 q 를 순수 파이썬으로 센다. 여기서 numpy 를 지역 import 하면
     # 위쪽 중첩함수가 닫고 있는 _np 를 가려 NameError 가 난다 (2026-11-07).
     _vps = sorted(c['p_mantel'] for c in _vol['agreement']['cells'])
@@ -2036,7 +2040,8 @@ def load_facts():
     _ag = _vol['agreement']
     # 2026-11-03 (작업 A-3). 4셀 일괄 Fisher 를 철회하고 채널내 런간 합성
     # + 채널 BH 로 교체했다. 같은 플레이트 두 채널은 독립이 아니다.
-    _vp = _ag['prespecified']
+    # 채널별 형태는 사후 민감도다. 사전지정 자리에서 읽지 않는다.
+    _vp = _ag['post_hoc_per_channel']
     f['vol_fisher_uv'] = _vp['by_channel']['uv']['p_value']
     f['vol_fisher_nor'] = _vp['by_channel']['normal']['p_value']
     f['vol_fisher_minq'] = _vp['min_q']
@@ -2977,9 +2982,13 @@ CHECKS = [
     ('oi_legacy28_m3', [r'valid-match count of three in ([\w-]+)\s*\n?of the forty orderings'], 0),
     ('oi_legacy28_m4', [r'four in the remaining ([\w-]+)\.'], 0),
     ('oi_legacy35_sets', [r'differently: ([\w-]+) distinct retained sets'], 0),
+    # 2026-11-13. 이 값은 더 이상 '철회된 값' 이 아니라 사전지정 형태의
+    # 결과다. 본문·SI 양쪽 어법을 모두 건다.
     ('vol_withdrawn_p', [r'returned\s*\n?\$?p ?= ?(\d+\.\d+)\$? and was withdrawn',
                          r'It returns \$p = (\d+\.\d+)\$, and',
-                         r'which returned\s*\n?\$p = (\d+\.\d+)\$'], 0.0005),
+                         r'which returned\s*\n?\$p = (\d+\.\d+)\$',
+                         r'\$\\chi\^2 = 14\.032\$ and\s*\n?\$p = (\d+\.\d+)\$'],
+     0.0005),
     ('vol_four_cell_bh', [r'one family of four\s*\n?cells it is (\d+\.\d+)',
                           r'read as one family give (\d+\.\d+)',
                           r'as one family of four cells instead, the smallest adjusted value is\s*\n?(\d+\.\d+)'], 0.0005),

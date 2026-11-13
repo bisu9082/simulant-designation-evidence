@@ -1,0 +1,29 @@
+compound_name,compound_class,smiles,inchikey
+DMMP,simulant,COP(C)(=O)OC,VONWDASPFIQPDY-UHFFFAOYSA-N
+acetone,interferent,CC(C)=O,CSCPPACGZOOCGX-UHFFFAOYSA-N
+methanol,interferent,CO,OKKJLVBELUTLKV-UHFFFAOYSA-N
+acetonitrile,interferent,CC#N,WEVYAHXRMPXWCK-UHFFFAOYSA-N
+chloroform,interferent,ClC(Cl)Cl,HEDRZPFGACZZDS-UHFFFAOYSA-N
+n-hexane,interferent,CCCCCC,VLKZOEOYAKHREP-UHFFFAOYSA-N
+THF,interferent,C1CCOC1,WYURNTSHIVDZCO-UHFFFAOYSA-N
+ethyl acetate,interferent,CCOC(C)=O,XEKOWRVHYACXOJ-UHFFFAOYSA-N
+benzene,interferent,c1ccccc1,UHOVQNZJYSORNB-UHFFFAOYSA-N
+water,interferent,O,XLYOFNOQVPJJNP-UHFFFAOYSA-N
+dichloromethane,simulant,ClCCl,YMWUJEATGCHHMB-UHFFFAOYSA-N
+DPGME,simulant,COCC(C)OCC(C)O,WGYZMNBUZFHYRX-UHFFFAOYSA-N
+ethanol,interferent,CCO,LFQSCWFLJHTTHZ-UHFFFAOYSA-N
+toluene,interferent,Cc1ccccc1,YXFVVABEGXRONW-UHFFFAOYSA-N
+DMSO,interferent,CS(C)=O,IAZDPXIOMUYVGZ-UHFFFAOYSA-N
+p-dichlorobenzene,interferent,Clc1ccc(Cl)cc1,OCJBOOLMMGQPQU-UHFFFAOYSA-N
+p-xylene,interferent,Cc1ccc(C)cc1,URLKBWYHVLBVBO-UHFFFAOYSA-N
+sarin (GB),real_agent,CC(C)OP(C)(=O)F,DYAHQFWOVKZOOW-UHFFFAOYSA-N
+soman (GD),real_agent,CC(OP(C)(=O)F)C(C)(C)C,GRXKLBBBQUKJJZ-UHFFFAOYSA-N
+tabun (GA),real_agent,CCOP(=O)(C#N)N(C)C,PJVJTCIRVMBVIA-UHFFFAOYSA-N
+sulfur mustard (HD),real_agent,ClCCSCCCl,QKSKPIVNLNLAAV-UHFFFAOYSA-N
+lewisite 1 (L),real_agent,Cl/C=C/[As](Cl)Cl,GIKLTQKNOXNBNY-OWOJBTEDSA-N
+hydrogen cyanide (AC),real_agent,C#N,LELOWRISYMNNSU-UHFFFAOYSA-N
+cyanogen chloride (CK),real_agent,N#CCl,QPJDMGCKMHUXFD-UHFFFAOYSA-N
+phosgene (CG),real_agent,O=C(Cl)Cl,YGYAWVDWMABLBF-UHFFFAOYSA-N
+chloropicrin (PS),real_agent,O=[N+]([O-])C(Cl)(Cl)Cl,LFHISGNCFUNFFM-UHFFFAOYSA-N
+cyclosarin (GF),real_agent,CP(=O)(F)OC1CCCCC1,SNTRKUOVAPUGAY-UHFFFAOYSA-N
+VX,real_agent,CCOP(C)(=O)SCCN(C(C)C)C(C)C,JJIUCEJQJXNMHV-UHFFFAOYSA-N

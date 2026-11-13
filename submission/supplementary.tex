@@ -21,7 +21,7 @@
 \bibliographystyle{achemso}
 
 \title{Supporting Information\\[4pt]
-\large The Simulants Chemical Warfare Agent Sensing Is Built On Were Designated for Other Measurements or Not at All, and No Descriptor Axis Settles the Substitution}
+\large What Chemical Warfare Agent Simulants Are Validated For, and What Descriptor Comparisons Can Decide}
 \author{Ku Kang \and Jeongyun Kim \and Miae Kim \and Doo-Hee Lee \and Jin Yoo
   \and Yoon Jeong Jang}
 \date{}
@@ -940,10 +940,13 @@ uncollected rather than imputed.
 \input{tab_volatility}
 \end{table}
 
-Two tests were specified in advance of this axis. They sit outside the
-eighteen-test families of Section~\ref{res:permfull}, so no correction over
-those families applies to them, and the min-$q$ column of
-Table~\ref{tab:ablation} is blank on the volatility row for that reason.
+Two tests were specified in advance of this axis, and they sit outside the
+eighteen-test families of Section~\ref{res:permfull}. The first was reported in
+the form specified for it, so no correction over those families applies to it,
+and the min-$q$ column of Table~\ref{tab:ablation} is blank on the volatility
+row for that reason. The second was not, and it is reported below first in the
+form specified and then in the form that replaced it, which claims no
+exemption.
 
 The first repeats the designation test of Section~\ref{M-sec:perm} here. An
 exact enumeration of all 680 designations on the twenty-eight-compound panel
@@ -987,7 +990,15 @@ the third plate maps no agent at all, so neither of its cells reaches the
 four-agent minimum a Mantel test needs here, and both are excluded by that rule
 rather than by their result. Spearman correlations are positive in all
 four: $+0.0429$ and $+0.2536$ in the ultraviolet channel, $+0.3893$ and
-$+0.5464$ in the reflectance channel. Combining runs within a channel by
+$+0.5464$ in the reflectance channel. The form specified in advance for this
+test, recorded in \texttt{prespecified\_tests.V2} of
+\texttt{outputs/volatility\_space.json}, combines the exact Mantel value of
+every evaluable cell in one Fisher step. It returns $\chi^2 = 14.032$ and
+$p = 0.0809$, which does not clear 0.05. On the form specified, this axis
+reports no agreement.
+
+What follows replaced that form and is reported as a sensitivity analysis
+rather than as a specified result. Combining runs within a channel by
 Fisher's method and correcting across the two channels by Benjamini--Hochberg,
 the reflectance channel gives $p = 0.0215$ and the ultraviolet channel gives
 $p = 0.6389$, so the reflectance
@@ -1006,15 +1017,19 @@ Section~\ref{res:arraydetail}, and the direction of that choice favours our own
 result; a reader who prefers the twelve-cell family should read this axis as
 null as well.
 
-An earlier version combined all four cells in a single Fisher step. It returns
-$p = 0.0809$, and the four cells read as one family give 0.1389, so that form
-reported no agreement at all. The two channels of one plate are not
+The reason for the replacement is real. The two channels of one plate are not
 independent, the mean inter-channel cosine being reported in
-\texttt{outputs/reversal\_audit.json}, so the pooled form is withdrawn and the
-per-channel form above replaces it. The difference is not cosmetic: it is the
-difference between reporting that the axis practitioners name first fails to
-track the measured response and reporting that it tracks it in the reflectance
-channel.
+\texttt{outputs/reversal\_audit.json}, so they cannot enter one Fisher step,
+and the four cells read as one family give 0.1389. But the replacement was
+made on the same day as the specified form was run, after its result was
+known, which is the circumstance a prespecification exists to exclude. The
+difference is not cosmetic: it is the difference between reporting that the
+axis practitioners name first fails to track the measured response and
+reporting that it tracks it in the reflectance channel. We therefore report the
+specified form as the result of this test and the per-channel form as a
+declared post hoc sensitivity, and we claim no correction exemption for the
+latter. A reader who prefers the twelve-cell family of
+Section~\ref{res:arraydetail} reaches the same place by a shorter route.
 
 \begin{table}[htb]
   \centering
