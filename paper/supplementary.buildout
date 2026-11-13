@@ -292,14 +292,14 @@ Package hyperref Warning: Suppressing link with empty target on input line 2264
 
 [34] [35] [36 <./Fig_toxicity.png>] (./tab_registers.tex) [37]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2481
+Package hyperref Warning: Suppressing link with empty target on input line 2490
 .
 
 [38] [39 <./Fig_h1.png>]
-Underfull \hbox (badness 1424) in paragraph at lines 2564--2572
+Underfull \hbox (badness 1424) in paragraph at lines 2573--2581
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[40] (./supplementary.bbl [41] [42] [43] [44]) [45] (./supplementary.aux) )
+[40] [41] (./supplementary.bbl [42] [43] [44]) [45] (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -319,5 +319,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (45 pages, 2108249 bytes).
+Output written on supplementary.pdf (45 pages, 2108736 bytes).
 Transcript written on supplementary.log.

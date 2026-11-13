@@ -166,7 +166,7 @@ exact permutation test, acute exposure guideline level, dual-use}
 Chemical warfare agent detection is developed almost entirely on simulants,
 compounds accepted as agent-like and safe to handle. We asked what that
 acceptance rests on. No incumbent carries a public designation validating a
-detection response against an agent's: one is designated for barrier testing,
+detection response against an agent's: one is designated for filter breakthrough,
 one for a training composition asking only that a vapour detector respond, the
 third not at all, and the Army's own selection procedure is not public, which
 bounds the claim. Exact permutation over every designation tested whether the
@@ -370,11 +370,10 @@ first of the analyst choices catalogued in Section~\ref{res:panels} and the only
 one with a defensible default.
 
 How the comparison pool is rebuilt under each relabelling is a further choice,
-and the one we were slowest to declare. We take it to be every non-agent the
-labelling did not designate, so the pool moves with the designation. Two other
-readings give 0.054 and 0.160 in the structural space against the 0.028
-reported here; until this version the choice appeared nowhere outside a comment
-in the code (Supporting Information Section~\ref{S-meth:prespec}).
+and the one we were slowest to declare: we take it to be every non-agent the
+labelling did not designate, and two other readings give 0.054 and 0.160 in the
+structural space against the 0.028 reported here (Supporting Information
+Section~\ref{S-meth:prespec}).
 
 \subsection{Match criterion}
 \label{meth:match}
@@ -413,8 +412,10 @@ of every library the pipeline uses
 One part of the descriptor table cannot be regenerated, and we state it here
 rather than in the deposit alone. The three electronic coordinates come from a
 GFN2-xTB binary whose version was not recorded when the cache was built, so
-those columns, and the five that depend on them, rest on the deposited cache
-rather than on a reproducible calculation; the gate
+those columns rest on the deposited cache rather than on a reproducible
+calculation, as do the five further columns the same binary produced, of which
+one is an algebraic function of the orbital energies and four are independent
+outputs; only the three enter any distance reported here; the gate
 \texttt{build\_descriptors.py --verify} regenerates the fifty-three columns
 RDKit can rebuild and exempts the rest by name.
 
@@ -568,9 +569,12 @@ analyst with a citation in hand can move a defensible number of labels and land
 anywhere between 0.745 and 0.00075, and the practice records neither that labels
 were moved nor how many.
 
-What the one surviving nominal result carries is narrower than it sounds, and
-the sign of the statistic says so. The observed mean difference in the
-structural space is $+0.195$: the designated simulants are on average
+What those nominal results carry is narrower than it sounds, and the sign of
+the statistic says so. Four of the eighteen cells fall below 0.05 before
+correction, one in the structural space and three in the merged one, and the
+smallest is the merged mean difference at 0.025 rather than the structural
+0.028 the abstract quotes. The observed mean difference in the structural space
+is $+0.195$: the designated simulants are on average
 \emph{further} from the agents than the nearest compound outside the designated
 set. What the test detects is only that they are less far than a triple drawn at
 random from a pool chosen because its members are not like the agents, and
@@ -675,11 +679,11 @@ response for twelve compounds. That response is not new here: it is taken from a
 solutions at matched molarity, not vapour, which bounds what any of this
 establishes about a vapour-phase response. It does not resolve the question:
 three of twelve cells reach a nominal $p<0.05$ and disagree on a space,
-correcting over the twelve leaves a smallest adjusted value of 0.117, all three
-lie in the plate set containing no simulant, and the six cells that bear on the
-premise are null while the design detects only $|\rho| \ge 0.85$ at the
-Benjamini--Hochberg level. The premise is untested rather than supported, and
-every distance-based claim here inherits that.
+correcting over the twelve leaves 0.117, all three lie in the plate set
+containing no simulant, and the six cells bearing on the premise are null while
+the design detects only $|\rho| \ge 0.85$ after correction. The premise is
+untested rather than supported, and every distance-based claim here inherits
+that.
 
 The criterion's second half, that compounds chosen on physicochemical grounds
 present minimal toxicity risk \cite{webb2025}, was tested on the same panel
@@ -687,17 +691,17 @@ present minimal toxicity risk \cite{webb2025}, was tested on the same panel
 \ref{S-sec:qsar} and \ref{S-res:h1}). The two incumbents differ in how well
 documented they are and not only in how hazardous: dichloromethane carries an
 Acute Exposure Guideline Level at the 96th percentile of a 207-compound pool,
-while DMMP is absent from that list and the Environmental Protection Agency
+although that value is an Interim one rather than a Final one, while DMMP is
+absent from the list altogether and the Environmental Protection Agency
 declined to derive an inhalation reference concentration for it. What DMMP does
 carry is weaker and differently derived, and Supporting Information
 Table~\ref{S-tab:registers} gives every register entry we located so that the
-scope of that negative is visible. A model cannot fill the gap: a random forest
-trained on 230 AEGL chemicals reaches $R^{2}=0.458$ and then predicts every one
-of twenty held-out military agents safer than measured, by factors of 2.5 to
-2600, while certifying fourteen as inside its applicability domain. Fidelity and
-acute toxicity show no detectable monotonic association across the 207 compounds
-carrying both measured axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$),
-an interval that bounds the association rather than establishing it.
+scope of that negative is visible. A model cannot fill the gap: a random forest trained on 230 AEGL chemicals
+reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
+agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
+as inside its applicability domain. Fidelity and acute toxicity show no
+detectable monotonic association across the 207 compounds carrying both measured
+axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$).
 
 \section{Discussion}
 \label{sec:discussion}
@@ -713,13 +717,12 @@ to matter being tabun (Supporting Information Section~\ref{S-disc:detail}). What
 the larger panel supplies is diisopropyl fluorophosphate. A designation defended
 by a comparison that excludes the alternatives is not defended.
 
-An earlier version reported the twenty-eight-compound structural cell as the
-finding and built a thesis on its contrast with the electronic space. We
-withdraw that contrast: the cell does not survive its own family ($q = 0.163$),
-it sits at the 22.4th percentile of 2000 arbitrary three-descriptor slices of
-the same block, and rebuilding the electronic space at the density-functional
-level moves it from $p=0.275$ to 0.0368 while the merged space holds at 0.0250
-(Supporting Information Section~\ref{S-meth:dft}).
+An earlier version built a thesis on the contrast between the
+twenty-eight-compound structural cell and the electronic space. We withdraw it:
+the cell does not survive its own family ($q = 0.163$), it sits at the 22.4th
+percentile of 2000 arbitrary three-descriptor slices of the same block, and
+rebuilding the electronic space at the density-functional level moves it from
+$p=0.275$ to 0.0368 (Supporting Information Section~\ref{S-meth:dft}).
 
 What remains is a claim about comparison rather than about chemistry. On the
 primary panel we can establish neither that the incumbent simulants are closer
@@ -756,8 +759,10 @@ on match count and the single match it yields lies inside a temperature
 mismatch.
 
 The documentary record explains how that arose, and it is not a story about
-carelessness. DMMP was designated carefully, for adsorptive breakthrough on a
-filter bed, and carried that status into sensor development, where the governing
+carelessness. DMMP was designated for a stated measurement, adsorptive
+breakthrough on a filter bed, in a document that declines to recommend any
+simulant and carries a draft marking, and it carried that status into sensor
+development, where the governing
 property is the response of a dye or an electrode rather than a breakthrough
 time (Section~\ref{res:docs}). The absence is specific rather than general: a
 safety-screened repository of candidate simulants exists \cite{james2021} and a

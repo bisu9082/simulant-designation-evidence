@@ -2920,7 +2920,8 @@ CHECKS = [
     # 2026-11-03. 신설 문장들의 수치. 자리별 맹점을 만들지 않기 위해
     # 새로 쓴 모든 수치에 앵커를 붙인다.
     ('mantel_bh12_main',
-     [r'over the twelve leaves a smallest adjusted\s*\n?value of ([\d.]+)\.'],
+     [r'over the twelve leaves a smallest adjusted\s*\n?value of ([\d.]+)\.',
+      r'correcting over the twelve leaves ([\d.]+),'],
      0.0005),
     ('mantel_d2uv_struct_p',
      [r'structural space\s*\n?in the ultraviolet channel at ([\d.]+)'], 0.0005),
@@ -3258,7 +3259,8 @@ CHECKS = [
     ('jack_p_hi',
      [r'structural \$p\$ between [\d.]+ and ([\d.]+)'], 0.0005),
     ('mde_rho_bh', [r'\$\|\\rho\| \\ge ([\d.]+)\$ at the '
-                    r'Benjamini--Hochberg level'], 0.0005),
+                    r'Benjamini--Hochberg level',
+                    r'\$\|\\rho\| \\ge ([\d.]+)\$ after correction'], 0.0005),
     ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
     # 2026-11-13. Davidson 외부 대조 앵커.
     ('dv_p_struct', [r'structural space \(\$p = (\d+\.\d+)\$\)'], 0.0005),
