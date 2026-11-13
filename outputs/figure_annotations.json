@@ -35,6 +35,6 @@
  "toc_acs": {
   "headline": "The comparison decides the answer",
   "panel_a": "valid matches of 11 agents: 0 (full panel), 3 (omit seven), 5 (eight desig.)",
-  "panel_b": "smallest Benjamini-Hochberg q over 18 tests: 0.6299 (incumbent 3, full panel), 0.2122 (eight designated), 0.1632 (incumbent 3, seven omitted), 0.0008 (two labels moved)"
+  "panel_b": "smallest Benjamini-Hochberg q over 18 tests: 0.6299 (incumbent 3, full panel), 0.2122 (eight designated), 0.1632 (incumbent 3, seven omitted), 0.0008 (seven labels moved)"
  }
 }

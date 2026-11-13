@@ -52,6 +52,21 @@ ROWS = [
 # 문헌 쪽 수(5)만 적고, 총수 8 은 본문이 문장으로 말한다.
 #   28종 구성 = 35종에서 7종을 뺀 것 (문헌 5 + 농약 2)
 
+
+_NUMWORD = {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six',
+            7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten'}
+
+
+def _nondye_count_word():
+    """비염료 표식 수를 dye_panel_audit.json 에서 읽는다.
+
+    2026-11-13: 캡션에 'Five' 가 박혀 있었는데 감사 산출물은 6 이었다.
+    손으로 센 숫자를 캡션에 쓰지 않는다.
+    """
+    with open('outputs/dye_panel_audit.json', encoding='utf-8') as fh:
+        n = json.load(fh)['n_marked_nondye']
+    return _NUMWORD[n]
+
 def fmt(p, dp=4):
     """p 를 SI 관례로 쓴다. 0.001 미만은 <0.001, 0.05 미만은 굵게."""
     if p is None:
@@ -647,7 +662,8 @@ every interferent; count of valid matches.}\\
     open('outputs/tab_dyepanel.tex', 'w').write(
         hdr + '% 출처: sources/dye_panel_20261106.csv\n'
         + '\\begin{table}[htb]\n\\centering\n\\caption{The 29-component '
-        'array, in the order the three source studies number it. Five entries '
+        'array, in the order the three source studies number it. '
+        + _nondye_count_word() + ' entries '
         'marked $^{a}$ are not chromogenic dyes; $^{b}$ marks a component '
         'whose stock solvent differs between the source studies.}\n'
         '\\label{tab:dyepanel}\n\\small\n'

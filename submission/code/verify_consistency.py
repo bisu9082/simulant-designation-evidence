@@ -2149,7 +2149,6 @@ UNQUOTED = {
     'null_exp35': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'null_exp28': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'boot_diff_pos': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
-    'ret_gb3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'ret_gd3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'ret_gf3': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'ret_ga8': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
@@ -2341,7 +2340,6 @@ UNQUOTED = {
     # JHM 은 염료를 언급하되 패널 구성을 숫자로 공시하지 않는다.
     'dye_anthracene_ratio': '염료 패널 구성 공시 JHM 미수록',
     'dye_n_fluor': '염료 패널 구성 공시 JHM 미수록',
-    'dye_n_nondye': '염료 패널 구성 공시 JHM 미수록',
     'dye_null_normal': '염료 패널 구성 공시 JHM 미수록',
     'dye_null_uv': '염료 패널 구성 공시 JHM 미수록',
     'dye_pyrene_ratio': '염료 패널 구성 공시 JHM 미수록',
@@ -2353,7 +2351,6 @@ UNQUOTED = {
     # 보정 후 최소검출효과 (mde_) — 8건
     # JHM SI 는 비보정 문턱 $\delta = 0.23$ 만 싣는다(884, 905행). 18검정
     # 보정 문턱과 설계 대비 비율은 싣지 않는다.
-    'mde_below_alpha': '보정 문턱·비율 JHM 미수록',
     'mde_below_bh': '보정 문턱·비율 JHM 미수록',
     'mde_bh18_28': '보정 문턱·비율 JHM 미수록',
     'mde_bh18_35': '보정 문턱·비율 JHM 미수록',
@@ -3055,7 +3052,8 @@ CHECKS = [
     # 2026-11-07 (12차 A-9) 염료 패널.
     # 2026-11-07 (12차 A-9). 본문과 SI 가 어법이 다르다. 둘 다 건다.
     ('dye_n_nondye', [r'(\w+) of the\s*\n?twenty-nine are not chromogenic',
-                      r'(\w+) are not chromogenic dyes: quinine'], 0),
+                      r'(\w+) are not chromogenic dyes: quinine',
+                      r'(\w+) entries\s*\n?marked \$\^\{a\}\$ are not chromogenic'], 0),
     ('dye_n_fluor', [r'twenty-nine are not chromogenic dyes: (\w+) are'], 0),
     ('dye_top_uv', [r'maximum \$\\Delta E_\{00\}\$ of ([\d.]+) in the'], 0.05),
     ('dye_top_normal', [r'against ([\d.]+) in reflectance, a ratio'], 0.05),
@@ -3070,7 +3068,10 @@ CHECKS = [
     ('swap_far_med', [r'and by ([\d.]+)\\% over the quartile'], 0.05),
     ('swap_inc_med', [r'moves by a median of\s*\n?([\d.]+)\\% and by'], 0.05),
     ('swap_inc_max', [r'and by ([\d.]+)\\% for tabun'], 0.05),
-    ('mde_below_alpha', [r'(\w+) agents fall below even the uncorrected'], 0),
+    # 2026-11-13: SI 가 'only at sarin' 이라 적는 동안 산출물은 2 였다.
+    # 루이사이트 1 (0.221) 도 문턱 0.23 아래다. 새 어법을 건다.
+    ('mde_below_alpha', [r'(\w+) agents fall below even the uncorrected',
+                         r'test can resolve at (\w+) agents'], 0),
     ('mde_below_bh', [r'of 0\.43, which is the one\s*\n?this paper is entitled to use, (\w+) do'], 0),
     ('aegl_n_with', [r'of the (\w+) panel\s*\n?compounds that have an AEGL-3 at 10'], 0),
     ('aegl_n_final', [r'(\w+) are Final and \w+ are\s*\n?Interim'], 0),
@@ -3190,7 +3191,10 @@ CHECKS = [
                        r'exactly zero\s*\n?in ([\d.]+)\\% of replicates'], 0.05),
     ('boot_inc_le1', [r'at most one in ([\d.]+)\\%'], 0.05),
     ('boot_diff_pos', [r'positive in (\d+) of 1000'], 0),
-    ('ret_gb3', [r'as its nearest compound in ([\d.]+)\\% of replicates'], 0.05),
+    # 2026-11-13: SI res:mde 가 이 양에 41.0 (= DPGME->HD) 을 쓰고 있었다.
+    # 그쪽 어법도 건다.
+    ('ret_gb3', [r'as its nearest compound in ([\d.]+)\\% of replicates',
+                 r'recovering DMMP as nearest in ([\d.]+)\\%'], 0.05),
     ('ret_gd3', [r'replicates, soman in ([\d.]+)\\%'], 0.05),
     ('ret_gf3', [r'and\s*\n?cyclosarin in ([\d.]+)\\%'], 0.05),
     ('ret_ga8', [r'cyanophosphonate in ([\d.]+)\\%'], 0.05),
@@ -3407,6 +3411,8 @@ CHECKS = [
     ('mde_gap_median_28', [r'a median gap of (0\.\d+)'], 0.0005),
     # 재표집 회복률. 41.0 을 DMMP 자리에 쓴 오류의 재발을 막는다.
     ('nb_nboot', [r'agent in [\d.]+\\% of (\d+) bootstrap replicates'], 0),
+    # nb_dmmp 는 DMMP -> 사린 방향(89.8). 사린 -> DMMP 방향(36.2)은 ret_gb3 다.
+    # 둘을 한 앵커에 묶지 말 것.
     ('nb_dmmp', [r'recovers sarin as its nearest\s*\n?agent in (\d+\.\d+)\\%'],
      0.05),
     ('nb_dpgme', [r'DPGME recovers sulfur mustard in (\d+\.\d+)\\%'], 0.05),

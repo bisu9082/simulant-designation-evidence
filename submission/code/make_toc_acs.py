@@ -52,7 +52,11 @@ B_KEYS = [('panel35_incumbent3', 'incumbent 3, full panel'),
           ('panel35_incumbent_plus_lit8', 'eight designated'),
           ('panel28_incumbent3', 'incumbent 3, seven omitted')]
 QS = [FAM[k]['bh_all_min_q'] for k, _ in B_KEYS] + [PF['bh_all_min_q']]
-B_LAB = [lab for _, lab in B_KEYS] + ['two labels moved']
+# PF 는 pesticide_family.json = incumbent 3 + 문헌 5 + 농약 2 = 10종 지정.
+# incumbent 3 기준으로 일곱 라벨이 움직인 구성이다. 2026-11-13 까지 라벨이
+# 'two labels moved' 로 박혀 있었는데 두 라벨 구성의 값은 0.745 (twolabel_panel.json)
+# 이고 PF 값 0.00075 는 일곱 라벨 값이다. 라벨이 값보다 세 자릿수 극적이었다.
+B_LAB = [lab for _, lab in B_KEYS] + ['seven labels moved']
 
 FS = 5.6          # 본문 글자. 최종 크기에서 4.5 pt 하한을 넉넉히 넘긴다.
 FS_SM = 5.0

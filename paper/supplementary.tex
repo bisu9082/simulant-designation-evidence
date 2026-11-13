@@ -370,7 +370,7 @@ run.
 The seed moves one of the eleven agents and nothing else. Repeating the
 embedding under six seeds and rebuilding only the nine shape coordinates, the
 thirty-five-compound panel returns no valid match in any of the twelve runs and
-the retained merged space is thirty-eight coordinates in all twelve. On the
+the retained merged space is forty-one coordinates in all twelve. On the
 twenty-eight-compound panel the count is three under all six single-conformer
 seeds, and three under three of the six ensemble seeds against four under the
 other three. The agent that moves is tabun in every case. Its normalised
@@ -728,7 +728,7 @@ separate analyses. That ground fails once the statistic is also chosen by the
 analyst, and we treat the earlier position as an error rather than a convention.
 
 Defining that family is itself a choice, and a paper arguing that such choices
-decide the answer cannot leave its own unexamined. We therefore report four
+decide the answer cannot leave its own unexamined. We therefore report six
 schemes rather than one. The eighteen tests are corrected together; the six
 statistics are corrected within each space separately, treating the spaces as
 three analyses; a single statistic, the mean difference, is treated as though it
@@ -745,7 +745,10 @@ correlation structure. We also report the approximation it replaces, the
 effective number of independent tests estimated from the eigenvalues of the
 correlation matrix of the eighteen nulls by the method of Li and Ji
 \cite{liji2005} used as a Bonferroni divisor, so that the two can be compared.
-The five answers are given in Table~\ref{tab:family} and they do not agree.
+Last, because the four panel configurations of Table~\ref{tab:family} are
+themselves a choice made after seeing them, we correct across all seventy-two
+tests of the four together. The six answers are given in
+Table~\ref{tab:family} and they do not agree.
 
 \section{Dimensionality and subspace controls}
 \label{meth:dimdetail}
@@ -887,8 +890,9 @@ gives $\binom{n}{2}$ pairs that share compounds, so correlating measured
 dissimilarity against descriptor distance over pairs and testing it as if the
 pairs were independent inflates significance; the unit of analysis is the
 compound. We therefore test the association by Mantel permutation
-\cite{mantel1967}, permuting compound labels on the descriptor distance matrix
-10\,000 times (seed \texttt{0xC0DE}) and comparing the observed Spearman
+\cite{mantel1967}, enumerating every relabelling of the compounds on the
+descriptor distance matrix rather than sampling them, which is $6! = 720$ for a
+six-compound cell, and comparing the observed Spearman
 coefficient against $|\rho|$ of the permuted matrices. Both the Mantel value and
 the value that treating pairs as independent would have given are reported, so
 the size of the error is visible.
@@ -1341,8 +1345,8 @@ instrument does. A null result invites the question whether the design could hav
 effect. On the primary panel the mean-difference statistic reaches $p<0.05$ once
 the incumbent simulants are moved 0.23 typical nearest-neighbour separations
 closer to the agents, while the deficit they actually carry has a median of
-0.493 and falls below that value only at sarin, where it is 0.125
-(Section~\ref{res:mde}). The test is therefore sensitive to effects
+0.493 and falls below that value at sarin, where it is 0.125, and at
+lewisite~1, where it is 0.221 (Section~\ref{res:mde}). The test is therefore sensitive to effects
 smaller than the one at issue. The
 agent set is eleven compounds and the nearest-neighbour statistics inherit that:
 on the larger panel with eight simulants, leaving out one agent at a time moves
@@ -1466,7 +1470,7 @@ subsets of the structural space and ran the full exact permutation test on each,
 taking the mean-difference statistic throughout, so that the draws and the
 observed value are the same quantity.
 On the twenty-eight-compound panel the median $p$ is 0.149, the 5th to 95th
-percentile range is 0.006 to 0.710, and 28.95\% of the subspaces reach $p<0.05$
+percentile range is 0.007 to 0.796, and 28.95\% of the subspaces reach $p<0.05$
 (Monte Carlo standard error 1.08 percentage points). The observed
 35-dimensional value of 0.028 sits at the 22.4th percentile of that
 distribution, and the electronic value of 0.275 at the 68.8th. The
@@ -1680,12 +1684,13 @@ the bar by roughly a factor of two.
 The comparison that matters is between that value and the deficit the incumbent
 compounds actually carry. Across the eleven agents the normalised difference
 between the nearest incumbent simulant and the nearest other compound has a
-median of 0.493, more than twice the detectable value. Only at sarin, where it
-is 0.125, does it fall below what the test can resolve, and that is the agent at
-which the descriptor resampling of Section~\ref{M-res:panels} is also weakest,
-recovering DMMP as nearest in 41.0\% of replicates. The null on the primary
-panel is therefore a statement about the data rather than about the sensitivity
-of the design, with sarin the one case where the two cannot be separated.
+median of 0.493, more than twice the detectable value. It falls below what the
+test can resolve at two agents: sarin, where it is 0.125, and lewisite~1, where
+it is 0.221. Sarin is also the agent at which the descriptor resampling of
+Section~\ref{M-res:panels} is weakest, recovering DMMP as nearest in 36.2\% of
+replicates. The null on the primary panel is therefore a statement about the
+data rather than about the sensitivity of the design, except at those two
+agents, where the two cannot be separated.
 
 \begin{figure}[!htb]
 \centering
@@ -1696,7 +1701,8 @@ typical nearest-neighbour separations closer to the eleven agents, with the rest
 of each panel unchanged and the null taken from the unmodified distances. On the
 primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.23$. The shaded
 band spans that value and the median deficit the incumbent compounds actually
-carry, 0.493; the deficit falls below the detectable value only at sarin.}
+carry, 0.493; the deficit falls below the detectable value at sarin and at
+lewisite~1.}
 \label{fig:mde}
 \end{figure}
 
