@@ -6,44 +6,44 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-main.bib
 Database file #2: refs.bib
 achemso 2024-01-30 v3.13g
-You've used 43 entries,
+You've used 44 entries,
             2538 wiz_defined-function locations,
-            1039 strings with 19740 characters,
-and the built_in function-call counts, 17232 in all, are:
-= -- 1199
-> -- 1381
+            1046 strings with 20815 characters,
+and the built_in function-call counts, 18183 in all, are:
+= -- 1226
+> -- 1533
 < -- 18
-+ -- 519
-- -- 476
-* -- 1927
-:= -- 2382
-add.period$ -- 78
-call.type$ -- 43
++ -- 570
+- -- 526
+* -- 2056
+:= -- 2513
+add.period$ -- 80
+call.type$ -- 44
 change.case$ -- 4
 chr.to.int$ -- 2
-cite$ -- 43
-duplicate$ -- 868
-empty$ -- 997
-format.name$ -- 524
-if$ -- 3230
+cite$ -- 44
+duplicate$ -- 883
+empty$ -- 1021
+format.name$ -- 575
+if$ -- 3385
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
-newline$ -- 280
-num.names$ -- 126
-pop$ -- 86
+newline$ -- 286
+num.names$ -- 129
+pop$ -- 88
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 40
+skip$ -- 41
 stack$ -- 0
-substring$ -- 719
-swap$ -- 1211
-text.length$ -- 85
+substring$ -- 737
+swap$ -- 1318
+text.length$ -- 87
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 292
+type$ -- 299
 warning$ -- 0
-while$ -- 141
+while$ -- 144
 width$ -- 0
-write$ -- 558
+write$ -- 571

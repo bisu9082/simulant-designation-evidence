@@ -667,5 +667,49 @@
    "ci_lo": -0.31512087194107863,
    "ci_hi": 0.7041263429836792
   }
+ ],
+ "raw_similarity": [
+  {
+   "dataset": "d1",
+   "mode": "uv",
+   "within": 0.8243200582148363,
+   "between": 0.7837680448990153,
+   "between_exceeds_within": false
+  },
+  {
+   "dataset": "d1",
+   "mode": "normal",
+   "within": 0.791507003237793,
+   "between": 0.7718079111940263,
+   "between_exceeds_within": false
+  },
+  {
+   "dataset": "d2",
+   "mode": "uv",
+   "within": 0.809186409896273,
+   "between": 0.7723481780894869,
+   "between_exceeds_within": false
+  },
+  {
+   "dataset": "d2",
+   "mode": "normal",
+   "within": 0.8277659716732113,
+   "between": 0.7946189846156554,
+   "between_exceeds_within": false
+  },
+  {
+   "dataset": "d3",
+   "mode": "uv",
+   "within": 0.7962099596290932,
+   "between": 0.7627256428441069,
+   "between_exceeds_within": false
+  },
+  {
+   "dataset": "d3",
+   "mode": "normal",
+   "within": 0.7872088528849676,
+   "between": 0.8667607102702414,
+   "between_exceeds_within": true
+  }
  ]
 }

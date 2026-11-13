@@ -400,6 +400,43 @@ def agreement():
                 'significant_cell_has_no_simulant': True}}
 
 
+
+def _family_corrections(v1, p_v2):
+    """V1 을 여러 가족 정의에서 보정한 값. 2026-11-13 (GATE 8 10차).
+
+    본문이 V1 의 보정 면제를 사전지정에 기대어 주장한다. 그 등록이 외부
+    타임스탬프 없이 스크립트 안에 있으므로, 면제를 깎는 독자를 위해 가족
+    정의 세 가지의 보정값을 함께 예치한다. 어느 값도 숨기지 않는다.
+    """
+    import json as _j
+
+    def _bh(ps):
+        o = sorted(ps)
+        m = len(o)
+        q = [o[i] * m / (i + 1) for i in range(m)]
+        for i in range(m - 2, -1, -1):
+            q[i] = min(q[i], q[i + 1])
+        return float(q[0])
+
+    if v1.get('skipped'):
+        return {'note': '[수집 불가: V1 이 생략됐다]'}
+    p_v1 = v1['statistics'][PRESPECIFIED]['p']
+    p_axis = [v['p'] for v in v1['statistics'].values()
+              if isinstance(v, dict) and 'p' in v]
+    with open('outputs/permutation_statistics.json', encoding='utf-8') as fh:
+        pm = _j.load(fh)['panel28_designated']
+    p18 = [t['p_one_sided'] for sp in pm.values()
+           for t in sp['statistics'].values()]
+    return {
+        'v1_nominal': p_v1,
+        'registered_pair_bh': _bh([p_v1, p_v2]),
+        'axis_six_statistics_bh': _bh(p_axis),
+        'with_eighteen_bh': _bh(p18 + [p_v1]),
+        'with_eighteen_plus_axis_six_bh': _bh(p18 + p_axis),
+        'note': ('V1 을 가족 정의별로 보정한 값. 등록 2검정 가족이 본문의 '
+                 '보고 기준이고 나머지는 면제를 깎는 독자를 위한 것이다.'),
+    }
+
 def valid_match_detail():
     """유효매칭을 작용제별로 분해하고, 유일한 매칭의 붕괴점을 계산한다.
 
@@ -625,6 +662,8 @@ def main():
                for n, v in VP.items()},
            'unavailable': UNAVAILABLE,
            'designation': v1, 'agreement': v2, 'pairing_table': pt,
+           'family_corrections': _family_corrections(
+               v1[0], v2['prespecified']['p_value']),
            'valid_match_detail': vm,
            'lewisite_isomer_sensitivity': lew}
     with open('outputs/volatility_space.json', 'w') as fh:

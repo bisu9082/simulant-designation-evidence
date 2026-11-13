@@ -168,7 +168,7 @@ bx.text(-0.045, -2.75,
         bbox=dict(fc='white', ec=C_REF, boxstyle='round,pad=0.4', alpha=0.93))
 bx.text(-0.045, len(M) - 0.35 + 0.72,
         fig_annot.record('Fig_toxicity', 'panel_b_header',
-            f'no regulator-grade acute inhalation\nvalue exists for any of these {len(M)}'),
+            f'none of these {len(M)} is on the Acute Exposure\nGuideline Level list'),
         fontsize=FS_ANNOT + 1, color=C_INK, va='center', ha='left')
 dress(bx); bx.grid(False); panel_label(bx, 'b')
 

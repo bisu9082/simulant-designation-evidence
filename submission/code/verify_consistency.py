@@ -705,6 +705,7 @@ def preflight():
     GENERATED_BY = {
         # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
         'threshold_sweep.json': 'threshold_sweep.py',
+        'mde.json': 'mde.py',
         'threshold_equivalence.json': 'threshold_equivalence.py',
         'acetonitrile_panel.json': 'acetonitrile_panel.py',
         'davidson_external.json': 'davidson_external.py',
@@ -1629,11 +1630,30 @@ def load_facts():
     f['te_pct_merged'] = _t28['merged']['pct_pairs_within_threshold']
     f['te_pct_struct'] = _t28['structural']['pct_pairs_within_threshold']
     f['te_rank_merged'] = _t28['merged']['matrix_rank']
+    f['te_rank_merged35'] = _te['panels']['panel35_incumbent3'][
+        'merged']['matrix_rank']
+    # 2026-11-13. 식별역 아래 응답 비율. 잡음바닥을 못 내는 자리의 대체 수치.
+    _sj = {x['cell']: x for x in json.load(
+        open('outputs/deltaE_noise.json'))['sub_jnd']}
+    f['sj_d1n_frac'] = round(100.0 * _sj['d1.normal']['frac_below_jnd'], 1)
+    f['sj_d1n_median'] = _sj['d1.normal']['median']
+    f['blank_d3uv_max'] = [x['max_abs'] for x in json.load(
+        open('outputs/deltaE_noise.json'))['blank_audit']
+        if x['cell'] == 'd3.uv'][0]
+    f['ra_rev_uncentred'] = json.load(
+        open('outputs/reversal_audit.json'))['totals']['reversals_uncentred']
     _le = _te['gfn2_lumo_method_error']
     f['te_lumo_lo'] = abs(_le['gfn2_minus_b3lyp_min_eV'])
     f['te_lumo_hi'] = _le['gfn2_minus_b3lyp_max_eV']
-    f['te_lumo_span'] = _le['deviation_span_eV']
-    f['te_lumo_chem_range'] = _le['b3lyp_lumo_range_eV']
+    # 2026-11-13. 중심화 전 유사도. SI 가 인용하는데 예치된 적이 없었다.
+    _rs = json.load(open('outputs/deltaE_premise.json'))['raw_similarity']
+    f['rs_within_lo'] = min(x['within'] for x in _rs)
+    f['rs_within_hi'] = max(x['within'] for x in _rs)
+    f['rs_between_lo'] = min(x['between'] for x in _rs)
+    f['rs_between_hi'] = max(x['between'] for x in _rs)
+    f['te_disp_rmsd'] = _le['standardised_displacement_rmsd']
+    f['te_disp_max'] = _le['standardised_displacement_max']
+    f['te_elec_nnmed'] = _t28['electronic3']['nn_median']
 
     # 2026-11-13. 아세토니트릴 재라벨. 기존 3종 중 둘과 같은 출처가 모사체로
     # 지정한 화합물이고, 전자공간에서 GB·GD·GF·CK 의 차단자다. 한 라벨이
@@ -1794,6 +1814,9 @@ def load_facts():
     _mj = json.load(open('outputs/mde.json'))['panel35_incumbent3']
     f['mde_below_alpha'] = _mj['n_below_alpha_mde']
     f['mde_below_bh'] = _mj['n_below_bh_mde']
+    f['mde_below_bh18_ns'] = json.load(
+        open('outputs/mde_nullshift.json'))['panel35_incumbent3'][
+            'n_below_mde_bh18']
 
     # 2026-11-07 (12차 R4). AEGL 등급. 편람이 Final/Interim/Proposed 로
     # 나누는데 원고가 등급 없이 한 축에 놓고 있었다.
@@ -1968,6 +1991,11 @@ def load_facts():
     # 채널별 형태가 'post_hoc_per_channel' 로 내려갔다. 이 값은 이제
     # 철회된 값이 아니라 사전지정 결과 그 자체다.
     f['vol_prespec_p'] = _vol['agreement']['prespecified']['p_value']
+    # 2026-11-13. V1 을 가족 정의별로 보정한 값. 본문이 셋을 인쇄한다.
+    _fc = _vol['family_corrections']
+    f['vol_fam_pair'] = _fc['registered_pair_bh']
+    f['vol_fam_18'] = _fc['with_eighteen_bh']
+    f['vol_fam_24'] = _fc['with_eighteen_plus_axis_six_bh']
     f['vol_withdrawn_p'] = f['vol_prespec_p']
     # BH 최소 q 를 순수 파이썬으로 센다. 여기서 numpy 를 지역 import 하면
     # 위쪽 중첩함수가 닫고 있는 _np 를 가려 NameError 가 난다 (2026-11-07).
@@ -2337,7 +2365,6 @@ UNQUOTED = {
     'sr_match_red': '차원축소 대조 수치 JHM 미수록',
     'sr_maxr28': '차원축소 대조 수치 JHM 미수록',
     'sr_maxr35': '차원축소 대조 수치 JHM 미수록',
-    'sr_nderived': '차원축소 대조 수치 JHM 미수록',
     'sr_nshape': '차원축소 대조 수치 JHM 미수록',
     'sr_share_full': '차원축소 대조 수치 JHM 미수록',
     'sr_share_red': '차원축소 대조 수치 JHM 미수록',
@@ -3036,7 +3063,8 @@ CHECKS = [
     ('vol_four_cell_bh', [r'one family of four\s*\n?cells it is (\d+\.\d+)',
                           r'read as one family give (\d+\.\d+)',
                           r'as one family of four cells instead, the smallest adjusted value is\s*\n?(\d+\.\d+)'], 0.0005),
-    ('mantel_type_i_nrep', [r'over ([\d,\\\s]+) null replicates'], 0),
+    ('mantel_type_i_nrep', [r'over ([\d,\\\s]+) null replicates',
+                            r'separate ([\d]+)-draw run for'], 0),
     ('mantel_d2nor_elec', [r'reflectance channel \(\$\\rho = \+\d+\.\d+\$,\s*\n?Mantel \$p = (\d+\.\d+)\$'], 0.0005),
     ('mantel_d2uv_merged_rho',
      [r"merged space in the\s*\n?second compound set's ultraviolet channel "
@@ -3126,6 +3154,8 @@ CHECKS = [
     ('mde_below_alpha', [r'(\w+) agents fall below even the uncorrected',
                          r'test can resolve at (\w+) agents'], 0),
     ('mde_below_bh', [r'of 0\.43, which is the one\s*\n?this paper is entitled to use, (\w+) do'], 0),
+    # 2026-11-13. SI 가 두 구성을 다 적게 되어 보정 바 0.72 쪽 수를 건다.
+    ('mde_below_bh18_ns', [r'corrected bar of 0\.72, (\w+) of the'], 0),
     ('aegl_n_with', [r'of the (\w+) panel\s*\n?compounds that have an AEGL-3 at 10'], 0),
     ('aegl_n_final', [r'(\w+) are Final and \w+ are\s*\n?Interim'], 0),
     ('aegl_n_interim', [r'\w+ are Final and (\w+) are\s*\n?Interim'], 0),
@@ -3229,13 +3259,25 @@ CHECKS = [
     ('acn_q35', [r'panel it moves 0\.630 to ([\d.]+)'], 0.0005),
     # 2026-11-13. 역치 비등가성·LUMO 방법오차 앵커. 본문 4.3 전용.
     ('te_pct_elec', [r'admits ([\d.]+) per cent of all pairs in the'], 0.05),
+    ('te_rank_merged', [r'merged spaces have rank\s*\n?(\d+) against 35'], 0),
+    ('te_rank_merged35', [r'primary panel rank (\d+)\s*\n?against 38'], 0),
+    ('ra_rev_uncentred', [r'the same count is (\d+) of the 34'], 0),
+    ('blank_d3uv_max', [r'a single\s*\n?entry of ([\d.]+) in the ultraviolet'],
+     0.0005),
+    ('sj_d1n_frac', [r'first set ([\d.]+) per cent of non-blank'], 0.05),
+    ('sj_d1n_median', [r'below it and the median\s*\n?is ([\d.]+)'], 0.0005),
     ('te_pct_merged', [r'against ([\d.]+) per cent in the\s*\n?'
                        r'thirty-eight-coordinate merged one'], 0.05),
     ('te_lumo_lo', [r'run from ([\d.]+) eV below'], 0.005),
     ('te_lumo_hi', [r'eV below to ([\d.]+) eV above'], 0.005),
-    ('te_lumo_span', [r'a span of ([\d.]+) eV where the'], 0.005),
-    ('te_lumo_chem_range', [r'B3LYP values themselves cover ([\d.]+) eV'],
-     0.005),
+    ('rs_between_lo', [r'similarity of ([\d.]+) to [\d.]+ is not'], 0.00005),
+    ('rs_between_hi', [r'similarity of [\d.]+ to ([\d.]+) is not'], 0.00005),
+    ('rs_within_lo', [r'within-compound value of ([\d.]+) to'], 0.00005),
+    ('rs_within_hi', [r'within-compound value of [\d.]+ to ([\d.]+)'],
+     0.00005),
+    ('te_disp_rmsd', [r'move by ([\d.]+) coordinate standard'], 0.0005),
+    ('te_disp_max', [r'root mean square and by ([\d.]+) at most'], 0.0005),
+    ('te_elec_nnmed', [r'separation of ([\d.]+) in the same space'], 0.0005),
     ('ts_elec_ac', [r'dichloromethane at ([\d.]+), because acetonitrile'],
      0.0005),
     ('ts_max_count', [r'count does not exceed (\w+) of eleven'], 0),
@@ -3248,6 +3290,7 @@ CHECKS = [
                         r'median of ([\d.]+), more than twice',
                         r'"gap_median35": "([\d.]+)"'], 0.0005),
     ('mde_gap_min', [r'only at sarin, where it is\s*\n?([\d.]+)',
+                     r'at two agents: sarin, where it is\s*\n?([\d.]+)',
                      r'it is ([\d.]+), does it fall below',
                      r'"gap_min35": "([\d.]+)"'], 0.0005),
     ('mde_p0_35', [r'it returns ([\d.]+) on\s*\n?the primary panel',
@@ -3386,6 +3429,10 @@ CHECKS = [
     ('struct_candidates', [r'removes \d+ of the (\d+)',
                           r'physicochemical descriptors,\s*\n?(\d+) after excluding',
                            r'descriptors \((\d+) after excluding run metadata\)'], 0),
+    # 2026-11-13. 결론 헤드라인 0.00075 가 앵커 없이 있었다. 본문 세 자리를 건다.
+    ('pf_bh18', [r'classing all seven takes it to ([\d.]+);',
+                 r'corrected\s*\n?([\d.]+), the only one of the four',
+                 r'and ([\d.]+), and the practice records neither'], 0.000005),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
                  r'produces an adjusted\s*\n?(?:value of )?(\d+\.\d+)',
                  r'into one with an adjusted value of\s*\n?(\d+\.\d+)'], 0.00005),
@@ -3398,6 +3445,10 @@ CHECKS = [
     ('j21_possible', [r'suitable and (\d+) provisional'], 0),
     # ------------------------------------------- 휘발성 축 (2026-11-03 신설)
     # 본문 res:panels 말미 단락과 SI res:volatility, 그리고 생성표 두 개.
+    ('vol_fam_pair', [r'it stands at\s*\n?\$q = (0\.\d+)\$'], 0.00005),
+    ('vol_fam_18', [r'against the eighteen, where it reaches ([\d.]+)'],
+     0.0005),
+    ('vol_fam_24', [r'this axis, where it reaches ([\d.]+)'], 0.0005),
     ('vol_p_md', [r'one-sided \$p\$ of (0\.\d+) over all\s+680',
                   r'statistic gives a one-sided \$p\$ of (0\.\d+)'], 0.0005),
     # 'ranking 316th of 680' 과 구분해야 한다. 뒤따르는 문장을 닻으로 쓴다.
@@ -3478,9 +3529,11 @@ CHECKS = [
     ('pn_zs_min', [r'between (0\.\d+) and 0\.\d+ after the'], 0.00005),
     ('pn_zs_max', [r'between 0\.\d+ and (0\.\d+) after the'], 0.00005),
     # MDE 의 BH18 문턱.
-    ('mde_bh18_35', [r'moves the threshold to\s*\n?\$\\delta = (0\.\d+)\$'],
+    ('mde_bh18_35', [r'moves the threshold to\s*\n?\$\\delta = (0\.\d+)\$',
+                     r'detectable shift is \$\\delta = (0\.\d+)\$ on the primary'],
      0.005),
-    ('mde_bh18_28', [r'corrected\s*\n?threshold is \$\\delta = (0\.\d+)\$'],
+    ('mde_bh18_28', [r'corrected\s*\n?threshold is \$\\delta = (0\.\d+)\$',
+                     r'\$\\delta = (0\.\d+)\$ on the twenty-eight-compound one'],
      0.005),
     ('mde_ratio_bh35', [r'then (\d\.\d+) times what the design'], 0.005),
     ('mde_ratio_bh28', [r'a ratio of (0\.\d+)'], 0.005),
@@ -3637,7 +3690,7 @@ JHM_EXTRA_PATS = {
     'sp_mantel_q_drop3':[r'Benjamini--Hochberg value at [\d.]+, [\d.]+ and ([\d.]+)'],
     'sp_mantel_q_max':  [r'Benjamini--Hochberg value at [\d.]+, ([\d.]+) and [\d.]+'],
     'mantel_rho_max_abs':[r"same set's reflectance channel \(\$\\rho = \+([\d.]+)\$"],
-    'mantel_type_i_nrep':[r'are sampled, at (\d+) and \d+ draws'],
+    'mantel_type_i_nrep':[r'separate (\d+)-draw run for'],
     'nb_dmmp':          [r'DMMP is nearest sarin in ([\d.]+)\\%'],
     'nb_dpgme':         [r'DPGME divides evenly, sulfur mustard in ([\d.]+)\\%'],
     'nb_nboot':         [r'with replacement (\d+) times \(seed'],

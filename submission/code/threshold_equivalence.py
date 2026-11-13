@@ -86,8 +86,22 @@ def lumo_method_error():
     rs = float(pd.Series(g).rank().corr(pd.Series(x).rank(), method='spearman'))
     shift = (pd.Series(x).rank() - pd.Series(g).rank()).to_numpy()
     j = int(np.argmax(np.abs(shift)))
+    # 2026-11-13 (GATE 8 10차). 원시 eV 비는 이 공간에 작용하는 양이 아니다.
+    # 이 논문의 모든 거리는 패널 내 z표준화 좌표 위에 있으므로, 축 하나에
+    # 걸리는 평행이동과 축척은 거리에 영향이 없다. 두 LUMO 열을 각각
+    # 표준화한 뒤의 화합물별 변위가 실제로 거리를 움직이는 양이다.
+    zg = (g - g.mean()) / g.std(ddof=1)
+    zx = (x - x.mean()) / x.std(ddof=1)
+    disp = np.abs(zx - zg)
     return {
         'n_compounds': int(ok.sum()),
+        'standardised_displacement_rmsd': round(
+            float(np.sqrt((disp ** 2).mean())), 4),
+        'standardised_displacement_max': round(float(disp.max()), 4),
+        'standardised_displacement_note': (
+            'In coordinate standard deviations, the unit the distances are '
+            'actually computed in. Compare the median nearest-neighbour '
+            'separation of the electronic space in the same units.'),
         'b3lyp_lumo_range_eV': round(rg, 4),
         'gfn2_minus_b3lyp_min_eV': round(float(d.min()), 4),
         'gfn2_minus_b3lyp_max_eV': round(float(d.max()), 4),

@@ -18,9 +18,12 @@ It then asks whether descriptor distance, the basis on which simulants are
 selected, predicts response distance. Twelve exact Mantel tests over the
 structural and electronic spaces leave nothing below q = 0.05. One axis behaves
 differently: vapour pressure, which is the property the stated criterion names,
-ranks the incumbent designation fourteenth of 680 (p = 0.0206) and tracks the
-measured response in the reflectance channel (q = 0.0430), though scored by
-valid matches the same designation ranks 316th. Whether the three incumbent
+ranks the incumbent designation fourteenth of 680 (p = 0.0206), though scored by
+valid matches the same designation ranks 316th. A second test on that axis, of
+whether distance along it tracks the measured response, returned p = 0.0809 in
+the form specified in advance for it and reports no agreement; a per-channel
+form adopted after that result reaches q = 0.0430 and is carried as a declared
+post hoc sensitivity with no exemption from correction. Whether the three incumbent
 designations look supported at all depends on which compounds are in the
 comparison and on which axis is asked, and that dependence is reported rather
 than resolved.
@@ -113,13 +116,17 @@ of five seeds. The rest is deterministic given the seed `0xC0DE`.
 
 ## Verification
 
-`verify_consistency.py` reads every numerical claim in `paper/main.tex`,
-`paper/supplementary.tex`, the cover letter and the figure annotations, and
-checks each against the generator output it came from. `test_verify_consistency.py`
-injects historical and synthetic defects into the manuscript or the Supporting
-Information and confirms the verifier catches each one. Both print their
-current counts; we do not repeat the counts here, because a number in a README
-is one more thing that goes stale.
+`verify_consistency.py` holds a registry of quantities read from the generator
+outputs, locates each in `paper/main.tex`, `paper/supplementary.tex`, the cover
+letter or the figure annotations by a regular expression, and compares the two.
+It is not exhaustive and reports its own scope: it prints the number it matched
+and the number it could not locate, and the second is not zero. A registered
+quantity that it cannot locate is unchecked, not verified.
+`test_verify_consistency.py` injects historical and synthetic defects and
+reports how many the verifier catches, how many it misses, and how many of its
+cases no longer apply to the current manuscript. Both print their current
+counts; we do not repeat the counts here, because a number in a README is one
+more thing that goes stale.
 
 The descriptor reproduction gate has a stated scope and prints it on every run.
 `build_descriptors.py --verify` recomputes the RDKit-derived columns of the

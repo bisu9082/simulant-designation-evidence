@@ -18,7 +18,7 @@
  "Fig_toxicity": {
   "panel_a": "dichloromethane, an incumbent simulant with no designating\ndocument, ranks 3 of 19 on this axis: methanol and n-hexane score higher.\nIt is 1,411,800$\\times$ less acutely toxic than VX\nand 1,397$\\times$ less than hydrogen cyanide.",
   "panel_b_dmmp": "DMMP, which carries every valid match on the twenty-eight-compound panel and zero on the primary one, has no AEGL. EPA PPRTV (EPA/690/R-06/014F, 2006) declined to derive an inhalation RfC (\"data are insufficient\") and derived no inhalation unit risk.",
-  "panel_b_header": "no regulator-grade acute inhalation\nvalue exists for any of these 9",
+  "panel_b_header": "none of these 9 is on the Acute Exposure\nGuideline Level list",
   "panel_d": "14 of the 20 agents pass the domain check, and all 20 are wrong by 0.40 to 3.42 log (a factor of 2.5 to 2,600), always in the unsafe direction. The worst inside the domain is wrong by 2.68 log."
  },
  "Fig_h1": {

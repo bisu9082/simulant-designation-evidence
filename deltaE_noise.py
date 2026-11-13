@@ -54,6 +54,27 @@ def blank_audit():
     return rows
 
 
+def sub_jnd():
+    """비블랭크 응답 중 ΔE00 = 1 (가까스로 식별되는 차이) 아래의 비율.
+
+    2026-11-13 (GATE 8 10차). 잡음바닥이 예치물에서 산출 불가인데 원고가
+    29차원 패턴 코사인을 소수 넷째자리까지 보고한다. 바닥을 못 내는 대신
+    응답 자체가 식별역 아래에 얼마나 몰려 있는지는 셀 수 있다. 패턴벡터를
+    단위정규화하므로 이 성분도 실제 응답과 같은 가중으로 거리에 들어간다.
+    """
+    rows = []
+    for tag, mode in cells():
+        D = pd.read_csv(f'deltaE/{tag}.{mode}_deltaE_pivot.csv')
+        dy = [c for c in D.columns if c.lower().startswith('dye')]
+        v = D[D.Concentration > 0][dy].to_numpy(float).ravel()
+        v = v[np.isfinite(v)]
+        rows.append(dict(cell=f'{tag}.{mode}', n=int(v.size),
+                         frac_below_jnd=float((v < 1.0).mean()),
+                         frac_exactly_zero=float((v == 0.0).mean()),
+                         median=float(np.median(v))))
+    return rows
+
+
 def dye_magnitudes():
     """염료별 |ΔE| 분포. 유효 채널(중복 축약 후)만 본다."""
     rows = []
@@ -268,7 +289,7 @@ def main():
 
     json.dump(dict(noise_floor='[수집 불가: 반복측정 수준 ΔE 및 공시료 반복 '
                                '촬상이 예치물에 없다. 0 µM 행은 정의상 0.]',
-                   blank_audit=ba, dye_magnitudes=dm,
+                   blank_audit=ba, sub_jnd=sub_jnd(), dye_magnitudes=dm,
                    drop_weak_sensitivity=ds,
                    concentration_vs_magnitude=cv,
                    concentration_vs_norm_all_cells=cvn,

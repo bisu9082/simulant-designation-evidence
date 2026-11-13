@@ -44,6 +44,50 @@
    "carries_variation": false
   }
  ],
+ "sub_jnd": [
+  {
+   "cell": "d1.uv",
+   "n": 696,
+   "frac_below_jnd": 0.2614942528735632,
+   "frac_exactly_zero": 0.04741379310344827,
+   "median": 1.9438887509999998
+  },
+  {
+   "cell": "d1.normal",
+   "n": 696,
+   "frac_below_jnd": 0.47701149425287354,
+   "frac_exactly_zero": 0.05747126436781609,
+   "median": 1.043147993
+  },
+  {
+   "cell": "d2.uv",
+   "n": 812,
+   "frac_below_jnd": 0.3288177339901478,
+   "frac_exactly_zero": 0.12807881773399016,
+   "median": 1.7352089545
+  },
+  {
+   "cell": "d2.normal",
+   "n": 812,
+   "frac_below_jnd": 0.3275862068965517,
+   "frac_exactly_zero": 0.027093596059113302,
+   "median": 1.405411038
+  },
+  {
+   "cell": "d3.uv",
+   "n": 464,
+   "frac_below_jnd": 0.584051724137931,
+   "frac_exactly_zero": 0.25,
+   "median": 0.7942787524999999
+  },
+  {
+   "cell": "d3.normal",
+   "n": 464,
+   "frac_below_jnd": 0.3297413793103448,
+   "frac_exactly_zero": 0.023706896551724137,
+   "median": 1.712489711
+  }
+ ],
  "dye_magnitudes": [
   {
    "cell": "d1.uv",

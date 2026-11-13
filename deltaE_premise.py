@@ -340,6 +340,40 @@ def space_test():
     return pd.DataFrame(rows)
 
 
+def raw_similarity():
+    """중심화 전 유사도. SI 가 인용하는데 예치된 적이 없던 양이다.
+
+    2026-11-13 (GATE 8 10차). SI 가 "Between-compound similarity of 0.77 to
+    0.80" 이라 적는데 그 범위는 이 스크립트의 주석에만 있었고 산출물에
+    없었다. 여섯 셀 전부를 계산해 예치한다. 실제 상한은 0.8668 이고,
+    d3 반사 채널에서는 물질간이 물질내를 넘는다 — 중심화 전 어레이가 그
+    셀에서 변별을 전혀 못 한다는 뜻이고, 인용 범위 밖으로 떨어져 있었다.
+
+    정의는 discrimination() 과 같다. 중심화만 하지 않는다.
+    """
+    rows = []
+    for tag in ['d1', 'd2', 'd3']:
+        for mode in ['uv', 'normal']:
+            D, dy = load(tag, mode)
+            raw = raw_patterns(D, dy)
+            P = consensus(raw)
+            names = sorted(raw)
+            w, b = [], []
+            for a in names:
+                ks = sorted(raw[a])
+                wa = [float(np.dot(raw[a][i], raw[a][j]))
+                      for i, j in itertools.combinations(ks, 2)]
+                ba = [float(np.dot(P[a], P[o])) for o in names if o != a]
+                if wa and ba:
+                    w.append(float(np.mean(wa)))
+                    b.append(float(np.mean(ba)))
+            rows.append(dict(dataset=tag, mode=mode,
+                             within=float(np.mean(w)),
+                             between=float(np.mean(b)),
+                             between_exceeds_within=bool(np.mean(b) > np.mean(w))))
+    return rows
+
+
 if __name__ == '__main__':
     dis = discrimination()
     dm = dmmp_question()
@@ -347,7 +381,8 @@ if __name__ == '__main__':
     json.dump(dict(seed=SEED, bootstrap=N_BOOT,
                    discrimination=dis.to_dict('records'),
                    dmmp=dm.to_dict('records'),
-                   space_test=sp.to_dict('records')),
+                   space_test=sp.to_dict('records'),
+                   raw_similarity=raw_similarity()),
               open('outputs/deltaE_premise.json', 'w'), indent=1, ensure_ascii=False)
     # per_compound 는 중첩 레코드이므로 CSV 에서 뺀다. JSON 에 그대로 있다.
     dis.drop(columns=['per_compound']).to_csv(

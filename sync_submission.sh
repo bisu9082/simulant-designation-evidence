@@ -55,6 +55,7 @@ for f in *.py *.sh; do
   case "$f" in sync_submission.sh) continue ;; esac
   cp -p "$f" submission/code/
 done
+
 cp -p descriptor_cache*.csv submission/code/ 2>/dev/null || true
 # 2026-11-07 (11차). README.md 와 requirements.txt 가 빠져 있었다. README 는
 # 재현 지시서이고 검증기가 그 안의 재현 약속 수치를 대조하므로(키 rm_*),
@@ -120,6 +121,9 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
     exit 1
   fi; }
 rm -rf submission/code/paper submission/code/outputs
+# 2026-11-13. 자기검증이 submission/code 안에서 python3 를 돌리므로
+# __pycache__ 가 생긴다. 복사 직후가 아니라 여기서 지워야 한다.
+rm -rf submission/code/__pycache__
 
 # README 가 "재생성하지 않고 선적한다" 고 선언한 다섯 파일. 없으면 패키지가
 # 전자축에서 멈춘다 (xtb 바이너리 / 1시간짜리 B3LYP 실행이 필요한 자리).

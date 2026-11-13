@@ -76,6 +76,9 @@
  },
  "gfn2_lumo_method_error": {
   "n_compounds": 28,
+  "standardised_displacement_rmsd": 0.7739,
+  "standardised_displacement_max": 1.4928,
+  "standardised_displacement_note": "In coordinate standard deviations, the unit the distances are actually computed in. Compare the median nearest-neighbour separation of the electronic space in the same units.",
   "b3lyp_lumo_range_eV": 4.3508,
   "gfn2_minus_b3lyp_min_eV": -6.0837,
   "gfn2_minus_b3lyp_max_eV": 2.3351,

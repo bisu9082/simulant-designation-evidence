@@ -583,6 +583,14 @@
   "max_gap_agent": "VX",
   "temperature_caveat": "DPGME 0.4 mmHg @26 C vs soman 0.41 mmHg @25 C — the 0.011 log-unit gap is within the temperature mismatch and is not evidence of a match"
  },
+ "family_corrections": {
+  "v1_nominal": 0.020588235294117647,
+  "registered_pair_bh": 0.041176470588235294,
+  "axis_six_statistics_bh": 0.047058823529411764,
+  "with_eighteen_bh": 0.1476890756302521,
+  "with_eighteen_plus_axis_six_bh": 0.12794117647058822,
+  "note": "V1 을 가족 정의별로 보정한 값. 등록 2검정 가족이 본문의 보고 기준이고 나머지는 면제를 깎는 독자를 위한 것이다."
+ },
  "valid_match_detail": {
   "nn_median_distance": 0.044236305527572295,
   "threshold_ratio": 2.0,

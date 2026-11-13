@@ -198,6 +198,29 @@ Crippen atomic-contribution estimates of logP and molar refractivity
 descriptors were used throughout in preference to a substructural fingerprint
 such as ECFP \cite{rogers2010}, because the quantity of interest here is the
 position of a compound along named physical axes rather than a similarity score.
+That preference is not fully honoured by the space it produced, and the
+discrepancy belongs here rather than in a reply. Eleven of the thirty-eight
+retained coordinates on the twenty-eight-compound panel are one-bit
+substructure flags set from a SMARTS match, and two more take at most four
+values: the phosphorus and arsenic flags alone are five of the thirty-eight,
+against three for the whole electronic block. Under equal weighting that
+arithmetic says a coordinate recording that a phosphorus--fluorine bond is
+present counts for more than the lowest unoccupied orbital energy, and it is
+that arithmetic rather than any physical axis that places DMMP next to the G
+series. Table~\ref{tab:sparse} prices the four flags that only one compound
+carries. Equal weighting was inherited rather than chosen, as
+Section~\ref{M-meth:panels} states, and this is the sharpest form the
+consequence takes.
+
+The named dimension of each space is also larger than the number of independent
+directions in it, because the panels have fewer compounds than coordinates.
+On the twenty-eight-compound panel the structural and merged spaces have rank
+27 against 35 and 38 named coordinates, and on the primary panel rank 34
+against 38 and 41; the participation ratio of the standardised covariance
+eigenvalues is about ten in every case
+(\texttt{outputs/threshold\_equivalence.json}). We report the named counts
+throughout because they are what an analyst sets, but a reader comparing two
+spaces should compare the ranks.
 
 Ten of the fifty-one are not functions of the SMILES string alone. The RDKit
 shape descriptors, the three principal moments of inertia and the radius of
@@ -210,8 +233,10 @@ them depend on a choice the paper never declared and which did not reproduce
 when the descriptor build was repeated. We now take each as a
 Boltzmann-weighted mean over the whole ensemble at 298~K, with MMFF94 energies
 or UFF where MMFF has no parameters. For seventeen of the twenty-eight
-compounds one conformer carries essentially the whole weight and the mean
-equals the single-conformer value; the difference is confined to the flexible
+compounds the embedding returns a single conformer after pruning at
+0.5~\AA, so there is nothing to average and the mean equals the
+single-conformer value; that is a property of the pruning rather than evidence
+that an ensemble converged; the difference is confined to the flexible
 compounds, of which VX and malathion are the extremes. Section~\ref{meth:conformer}
 reports what the two treatments do to the results, and the deposited
 \texttt{build\_descriptors.py --verify} reproduces the fifty-three columns of the
@@ -479,9 +504,16 @@ Recomputing the identities from the Boltzmann-averaged values returns
 discrepancies of 1.36 to 15.30\%, which is not machine precision; the averaging
 is applied to each descriptor independently, so the identities break.
 
-Keeping only PMI1, PMI2 and PMI3, that is with the seven derived coordinates
-dropped, the merged space falls from 38 coordinates to 31, and the share of
-squared merged distance falls from 23.68 to 6.45\%. The effect on individual
+The block with the seven derived coordinates dropped keeps the two
+principal moments the
+correlation filter had already kept, PMI1 and PMI2; PMI3 is not among them,
+because it correlates with PMI2 at $|r| = 0.998$ on the twenty-eight-compound
+panel and 0.997 on the primary one and the filter removes it before any
+distance is taken. The merged space falls from 38 coordinates to 31, and the
+share of squared merged distance falls from 23.68 to 6.45\%. That last pair is
+arithmetic rather than measurement and we say so: under standardisation every
+coordinate contributes the same summed squared distance, so a block's share is
+exactly its count over the total, $9/38$ and $2/31$. The effect on individual
 pairs is larger than that block average suggests. For the two pairs in which an
 interferent beats an incumbent on shape alone, hydrogen cyanide against
 acetonitrile and cyanogen chloride against acetonitrile, it falls from 69.85 and
@@ -816,8 +848,14 @@ percentile to 0.05.
 
 \section{Measured colorimetric array response}
 \label{meth:deltaE}
-Measured response was taken from a 29-dye colorimetric array reported in earlier
-work from this laboratory \cite{hazref,multiplexref,group3ref}. Colour difference
+Measured response was taken from a 29-component colorimetric array reported in
+earlier work from this laboratory \cite{hazref,multiplexref,group3ref}. The
+array is given component by component in Table~\ref{tab:dyepanel}. Six of the
+twenty-nine are not chromogenic dyes: three fluorophores, a thiol reductant and
+two carbonyl derivatising reagents. We call the array twenty-nine components
+rather than twenty-nine dyes for that reason, and the table marks which six.
+
+\input{tab_dyepanel} Colour difference
 $\Delta E$ is the CIEDE2000 difference against the zero-concentration image of
 the same dye in the same channel, given per dye for three compound sets at
 solution concentrations of 10, 50, 100 and 500~$\mu$M delivered in
@@ -835,6 +873,36 @@ The third set is excluded entirely and the criterion is arithmetic rather than
 editorial: none of its four compounds appears in the descriptor panel, so no
 pair of a measured pattern and a descriptor distance can be formed from it. It
 contributes to no analysis in this paper.
+
+What the measurement does not carry has to be set out before any number is
+read from it. There is one observation per compound, concentration, component
+and channel, so there are no replicates, and the intervals reported from this
+array describe variation across the four concentrations of one plate set rather
+than agreement between independent preparations. A noise floor cannot be
+computed from the deposit, because it holds no repeat exposures and no repeated
+blank images, and the zero-concentration rows are zero by construction rather
+than by measurement, with one exception we have no account for: a single
+entry of 0.080 in the ultraviolet channel of the third set, which is excluded
+from every analysis here but shows that the deposited pivot does not everywhere
+satisfy its own definition; \texttt{outputs/deltaE\_noise.json} records that as
+uncollected rather than as zero. What can be counted is how much of the
+response sits below the threshold at which a colour difference is ordinarily
+held to be perceptible at all, $\Delta E_{00} = 1$: in the reflectance channel
+of the first set 47.7 per cent of non-blank values fall below it and the median
+is 1.043, and the figures for the other cells are in the same file. Because
+each pattern is normalised to unit length before any cosine is taken, those
+components enter the distance with the same weight as the ones that responded.
+Plate layout, well assignment, imaging order, whether any of it was randomised,
+the region-of-interest geometry, the illumination and white point, and the
+camera are not recorded in the source reports in a form we could carry over,
+and the raw colour data are not in the deposit either, so the CIEDE2000
+conversion itself is not reproducible from what we publish. The consequence is
+specific rather than general: the discrimination gate of
+Section~\ref{res:arraydetail} compares agreement within a compound against
+agreement between compounds, and if the four concentrations of one compound
+were imaged in one place on one plate, a position or illumination artefact
+would produce the same ordering as a chemical one. Nothing in the deposit
+separates those.
 
 The three sets are different compounds measured on different plates, not
 replicates, so no $\Delta E$ value is compared across sets; every analysis is run
@@ -924,7 +992,8 @@ than measured. Table~\ref{tab:volatility} gives every value with its source, and
 the adjudication where sources disagree is deposited in
 \texttt{outputs/volatility\_space.json} with the rejected candidate. No value was
 converted between temperatures. The axis cannot be carried on the thirty-five
-compound panel, since no vapour pressure is published for diethyl
+compound panel, since the sources fixed by the three-tier rule carry no
+vapour-pressure entry for diethyl
 chlorophosphate or diethyl cyanophosphonate, and both are recorded as
 uncollected rather than imputed.
 
@@ -1696,6 +1765,20 @@ $\delta = 0.18$ on the twenty-eight-compound one. We give both because
 reporting the uncorrected figure beside a corrected inference would understate
 the bar by roughly a factor of two.
 
+Two constructions of this quantity are possible and they do not agree, so we
+name which is which. The figures above, and Figure~\ref{fig:mde}, hold the null
+fixed at the unmodified distances
+(\texttt{outputs/mde.json}). Regenerating the null at each shift, so that the
+comparison set moves with the simulants, raises the bar to $\delta = 0.24$
+uncorrected and $\delta = 0.72$ corrected
+(\texttt{outputs/mde\_nullshift.json}); that is the pair the main text quotes,
+because the inference there is the corrected one and the regenerated null is
+the conservative reading. Against the corrected bar of 0.72, eight of the
+eleven agents carry a deficit below it, which is the sense in which the
+corrected design has no power against an effect of this size. Against the
+uncorrected bar the count is two. Both counts are in the deposited files and
+neither is the whole statement on its own.
+
 The comparison that matters is between that value and the deficit the incumbent
 compounds actually carry. Across the eleven agents the normalised difference
 between the nearest incumbent simulant and the nearest other compound has a
@@ -1713,8 +1796,11 @@ agents, where the two cannot be separated.
 \caption{What the permutation test could have detected. One-sided exact $p$ for
 the mean-difference statistic as the incumbent simulants are moved $\delta$
 typical nearest-neighbour separations closer to the eleven agents, with the rest
-of each panel unchanged and the null taken from the unmodified distances. On the
-primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.23$. The shaded
+of each panel unchanged and the null held fixed at the unmodified distances,
+which is the first of the two constructions set out above. On the
+primary panel the test crosses $\alpha = 0.05$ at $\delta = 0.23$; regenerating
+the null at each shift gives 0.24, and the corrected bars are 0.43 and 0.72
+respectively. The shaded
 band spans that value and the median deficit the incumbent compounds actually
 carry, 0.493; the deficit falls below the detectable value at sarin and at
 lewisite~1.}
@@ -1766,7 +1852,7 @@ harsher of the two, placing DMMP 6.87 standard deviations below the cluster
 against 4.47 for $f^{+}(\mathrm{P})$ alone.
 
 The measured array response bears on this and narrows it.
-Section~\ref{res:arraydetail} compares DMMP's 29-dye response pattern with those of
+Section~\ref{res:arraydetail} compares DMMP's 29-component response pattern with those of
 the authentic agents. DMMP is closer to sarin than to VX by 1.35 in cosine in
 the ultraviolet channel and by 0.84 in reflectance, both intervals excluding
 zero, so on the VX comparison the measurement sides with $f^{+}(\mathrm{P})$
@@ -1833,7 +1919,7 @@ method rather than about the compounds.
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a vapour-phase sensor reports has so far been
 assumed rather than shown. We test it against measured response from a
-29-dye colorimetric array, reported for three compound sets at four
+29-component colorimetric array, reported for three compound sets at four
 concentrations in two imaging channels, ultraviolet-excited and reflectance
 (Section~\ref{meth:deltaE}). Twelve of the measured compounds are in the panel:
 DMMP and the five nerve agents in the first set, and six of the remaining agents
@@ -1843,9 +1929,13 @@ The array discriminates, but only after the common-mode response is removed, and
 less of that separation is empirical than the raw numbers suggest. Colour
 difference is a non-negative quantity, so every analyte shares a common
 ``something responded'' component and cosine similarity between raw profiles is
-compressed towards unity. Between-compound similarity of 0.77 to 0.80 is not
-separable from the within-compound value of 0.79 to 0.83 across concentrations
-($p = 0.06$ to $0.94$). Subtracting the compound-axis mean at each concentration
+compressed towards unity. Between-compound similarity of 0.7627 to 0.8668 is not
+separable from the within-compound value of 0.7872 to 0.8278 across concentrations
+($p = 0.06$ to $0.94$). In one of the six cells, the reflectance channel of the
+third set, the between-compound value exceeds the within-compound one, so before
+centring the array does not discriminate at all there; that is the cell which
+returns $p = 0.94$, and an earlier version of this section quoted a
+between-compound range that stopped short of it. Subtracting the compound-axis mean at each concentration
 separates them, to $+0.3451$ to $+0.5416$ within compounds against $-0.1026$ to
 $-0.3302$ between them, in all six combinations of compound set and channel.
 
@@ -1877,7 +1967,11 @@ null mean of the six and still clears the threshold. The contrast holds per
 compound on average and not pairwise: in 13 of the 34 compound-and-cell
 instances some
 other compound's consensus is closer than the compound's own agreement across
-concentrations. All results below use the centred patterns, with those caveats
+concentrations. Before the centring, the same count is 28 of the 34, which is
+the figure the deposit's README leads with and which belongs here as well: what
+the centring buys is the difference between an array in which four compounds in
+five are nearer something else than themselves and one in which two in five
+are. All results below use the centred patterns, with those caveats
 attached.
 
 % 2026-11-03 (T1-13). 종전에는 바닥이 네 셀에서만 계산되어 있었다. d3 두
@@ -2092,7 +2186,19 @@ nerve-agent simulant has not been established; it has not been assessed. The two
 incumbent simulants therefore sit at opposite ends of the evidence, not of the
 hazard: for dichloromethane there is a regulator-derived value and it is
 favourable, and for DMMP there is a regulator's recorded decision not to derive
-one.
+one. Table~\ref{tab:registers} gives every register entry we located, so that
+the scope of each negative statement is visible: the absences above are
+absences from the Acute Exposure Guideline Level list and from EPA's own
+assessments, not from every register. DMMP carries Department of Energy
+Protective Action Criteria of 11, 120 and 730~mg~m$^{-3}$, derived from a rat
+one-hour LC$_{50}$ of 26{,}100~mg~m$^{-3}$ rather than from a human exposure
+assessment, and DPGME carries a NIOSH immediately-dangerous-to-life value of
+600~ppm. Neither is an AEGL and neither rests on the agent-relevant exposure
+duration, but a reader is owed the distinction between
+``no value in this register'' and ``no value anywhere'', which is the same
+distinction this paper asks of simulant claims.
+
+\input{tab_registers}
 
 Cyclosarin carries its own entry in the compiled table under CAS 329-99-7, with
 a ten-minute AEGL-3 of 0.053~ppm bracketed by the agency as 0.38~mg~m$^{-3}$;
