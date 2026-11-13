@@ -39,6 +39,9 @@
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,booktabs}
 \usepackage{textcomp}
+% 2026-11-13. 예치 저장소 URL 과 파일명이 \texttt 안에서 끊기지 않아
+% overfull hbox 를 냈다. xurl 은 URL 을 어디서나 끊게 한다.
+\usepackage{xurl}
 \usepackage{xr}
 \externaldocument[S-]{supplementary}
 % 본문 도판 셋이 각 네 패널이라 높이가 쪽의 70%를 넘는다. LaTeX 기본값
@@ -408,14 +411,17 @@ rather than on a reproducible calculation; the gate
 \texttt{build\_descriptors.py --verify} regenerates the fifty-three columns
 RDKit can rebuild and exempts the rest by name.
 
+\begingroup\sloppy
 The deposit also carries two consistency harnesses, and their scope is narrower
 than their names suggest. \texttt{verify\_consistency.py} locates each
 registered quantity in the manuscript by a regular expression and compares it
 with the generator output, reporting both what it matched and what it could not
-locate, the second not being zero; \texttt{test\_verify\_consistency.py} injects
-defects and checks that the first catches them. Neither checks a claim the
+locate, the second not being zero. A second harness
+(\texttt{test\_verify\_consistency.py}) injects defects and checks that the
+first catches them. Neither checks a claim the
 manuscript makes about a document, and neither is a substitute for reading the
 sources.
+\endgroup
 
 \section{Results}
 
@@ -849,12 +855,14 @@ edited all content and take responsibility for it.
 % 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
 % panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
 % 검사 A-tag 가 acs-submission-* 이 아닌 태그를 적으면 실패시킨다.
+\begingroup\sloppy
 Descriptor tables, parsed AEGL values with sources, permutation distributions,
 candidate tables, the EPA source document every toxicity value was parsed from,
 and all analysis and figure scripts are in a public repository at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, and are also
-provided with this article. The release tagged for this submission is
-\texttt{acs-submission-20261112}. The descriptor cache is checked against the
+provided with this article; the release tagged for this submission is the one
+named \texttt{acs-submission-20261112}.
+The descriptor cache is checked against the
 code: \texttt{build\_descriptors.py --verify} rebuilds the fifty-three columns
 RDKit can regenerate, halts if any fails or if any column outside the declared
 exemption list goes unchecked, and exempts nine columns needing the xtb binary,
@@ -862,6 +870,7 @@ eight of them present on the twenty-eight-compound cache and unchecked. Those
 include all three coordinates of the electronic space, so that space rests on
 the deposited cache rather than a reproduced one.
 Section~\ref{S-meth:conformer} reports what the check caught.
+\endgroup
 
 \bibliography{refs}
 
