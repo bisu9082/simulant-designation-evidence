@@ -15,8 +15,20 @@ as a member of a different cluster in Table 1 is a member of cluster 6."
 이원 결과 (Davidson Table 1 에서 직독, 우리 판단 아님):
   진본 작용제와 동일 군집  = DCP(c10: GB,GD,GF) / CEES(c7: HD,HT,T)
                              / malathion(c5: GA)
-  약반응·블랭크 군집(c6)   = DMMP / dichloromethane / methyl salicylate
-                             (뒤 둘은 Table 1 미등재 -> 본문 규칙상 c6)
+  약반응·블랭크 군집(c6)   = DMMP(c6 "various; includes ... DMMP")
+                             / dichloromethane / methyl salicylate
+
+2026-11-13 단서. 뒤 둘은 Table 1 에 없고 전문 어디에도 이름이 없다. 본문
+규칙은 "미등재 = c6" 이지만 그 규칙은 **노출된** 화합물에만 적용된다.
+Davidson 은 "The test matrix included 56 analytes" 라 적고 "complete list
+of tested analytes can be found in the Supporting Information" 으로 넘긴다.
+그 SI 를 얻지 못했다 (pubs.acs.org client_error, 2026-11-13). 따라서
+두 화합물이 56종 안에 있었는지는 [수집 불가] 다. ethanol 도 같은 이유로
+판정할 수 없어 비교군에 넣지 않았다.
+
+그래서 두 가지를 함께 낸다. primary = 6종(현행), verifiable_only =
+Table 1 에서 직접 확인되는 4종(DCP/CEES/malathion/DMMP). 후자는 3대1 이라
+도달 가능한 최소 p 가 0.25 이므로 검정력이 없고, 그 사실을 적는다.
 
 사전 지정 검정. 각 후보에서 Davidson 이 측정한 진본 작용제 7종
 (GA,GB,GD,GF,VX,HD,L) 까지의 최소거리. 군집 동반 3종이 비동반 3종보다
@@ -42,6 +54,13 @@ CLUSTER_NOTE = {'DCP': 'c10 with GB,GD,GF', 'CEES': 'c7 with HD,HT,T',
                 'malathion': 'c5 with GA', 'DMMP': 'c6 weak/blank',
                 'dichloromethane': 'c6 (Table 1 미등재)',
                 'methyl salicylate': 'c6 (Table 1 미등재)'}
+# Davidson 전문에 이름이 나오는 것만. 나머지 둘은 56종 안에 있었는지
+# 확인할 수 없다 (분석물 전체 목록이 SI 에만 있고 SI 를 얻지 못했다).
+VERIFIABLE = ['DCP', 'CEES', 'malathion', 'DMMP']
+EXPOSURE_UNVERIFIED = ['dichloromethane', 'methyl salicylate']
+UNRESOLVED = {'ethanol': ('[수집 불가: Davidson 분석물 전체 목록이 SI 에만 '
+                          '있고 SI 를 얻지 못했다. 우리 패널에는 간섭물로 '
+                          '있으나 노출 여부를 판정할 수 없다]')}
 
 
 def mwu_exact(x_yes, x_no):
@@ -68,8 +87,11 @@ def main():
     out = {'source': 'Davidson et al. 2020, ACS Sens. 5, 1102-1109, Table 1',
            'agents_overlapping': DAVIDSON_AGENTS,
            'davidson_outcome': CO_CLUSTERED, 'cluster_note': CLUSTER_NOTE,
-           'test': 'Mann-Whitney U, exact 3v3 enumeration, one-sided',
-           'spaces': {}}
+           'exposure_verified_from_article': VERIFIABLE,
+           'exposure_unverified': EXPOSURE_UNVERIFIED,
+           'unresolved': UNRESOLVED,
+           'test': 'Mann-Whitney U, exact enumeration, one-sided',
+           'spaces': {}, 'verifiable_only': {}}
 
     for sname, cols in sp.items():
         D = dmat(df, cols)
@@ -87,8 +109,18 @@ def main():
             'perfect_separation': bool(perfect),
             'rank_sum_coclustered': obs, 'p_one_sided': p, 'n_permutations': n,
             'd_min_normalised': {c: d_min[c] / nn_med for c in d_min}}
+        # 노출이 전문에서 확인되는 4종만. 3대1 이므로 최소 도달 p = 0.25.
+        vy = [d_min[c] for c in VERIFIABLE if CO_CLUSTERED[c]]
+        vn = [d_min[c] for c in VERIFIABLE if not CO_CLUSTERED[c]]
+        vobs, vp, vn_ = mwu_exact(vy, vn)
+        out['verifiable_only'][sname] = {
+            'compounds': VERIFIABLE, 'n_coclustered': len(vy),
+            'n_not': len(vn), 'p_one_sided': vp, 'n_permutations': vn_,
+            'smallest_attainable_p': round(1.0 / vn_, 4)}
         print(f'[{sname}] n_coords={len(cols)} p={p:.4f} '
               f'perfect={perfect}  order={order}')
+        print(f'    검증가능 4종만: p={vp:.4f} '
+              f'(도달 가능 최소 {1.0/vn_:.4f}, 검정력 없음)')
 
     with open('outputs/davidson_external.json', 'w') as f:
         json.dump(out, f, indent=2, ensure_ascii=False)

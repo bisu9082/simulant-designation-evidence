@@ -25,7 +25,20 @@
     "dichloromethane": "c6 (Table 1 미등재)",
     "methyl salicylate": "c6 (Table 1 미등재)"
   },
-  "test": "Mann-Whitney U, exact 3v3 enumeration, one-sided",
+  "exposure_verified_from_article": [
+    "DCP",
+    "CEES",
+    "malathion",
+    "DMMP"
+  ],
+  "exposure_unverified": [
+    "dichloromethane",
+    "methyl salicylate"
+  ],
+  "unresolved": {
+    "ethanol": "[수집 불가: Davidson 분석물 전체 목록이 SI 에만 있고 SI 를 얻지 못했다. 우리 패널에는 간섭물로 있으나 노출 여부를 판정할 수 없다]"
+  },
+  "test": "Mann-Whitney U, exact enumeration, one-sided",
   "spaces": {
     "structural": {
       "n_coords": 38,
@@ -122,6 +135,47 @@
         "dichloromethane": 1.5898693220636808,
         "methyl salicylate": 2.1452838620781063
       }
+    }
+  },
+  "verifiable_only": {
+    "structural": {
+      "compounds": [
+        "DCP",
+        "CEES",
+        "malathion",
+        "DMMP"
+      ],
+      "n_coclustered": 3,
+      "n_not": 1,
+      "p_one_sided": 0.75,
+      "n_permutations": 4,
+      "smallest_attainable_p": 0.25
+    },
+    "electronic3": {
+      "compounds": [
+        "DCP",
+        "CEES",
+        "malathion",
+        "DMMP"
+      ],
+      "n_coclustered": 3,
+      "n_not": 1,
+      "p_one_sided": 0.5,
+      "n_permutations": 4,
+      "smallest_attainable_p": 0.25
+    },
+    "merged": {
+      "compounds": [
+        "DCP",
+        "CEES",
+        "malathion",
+        "DMMP"
+      ],
+      "n_coclustered": 3,
+      "n_not": 1,
+      "p_one_sided": 0.75,
+      "n_permutations": 4,
+      "smallest_attainable_p": 0.25
     }
   }
 }

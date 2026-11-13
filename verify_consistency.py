@@ -64,6 +64,9 @@ EXTRA_TEX = ('paper/supplementary.tex', 'paper/cover_letter.tex',
 # 계약서 구실도 한다.
 REQUIRED_OUTPUTS = [
     'outputs/threshold_sweep.json',
+    'outputs/threshold_equivalence.json',
+    'outputs/acetonitrile_panel.json',
+    'outputs/davidson_external.json',
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
     'outputs/collapse_sensitivity.json',
@@ -702,6 +705,9 @@ def preflight():
     GENERATED_BY = {
         # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
         'threshold_sweep.json': 'threshold_sweep.py',
+        'threshold_equivalence.json': 'threshold_equivalence.py',
+        'acetonitrile_panel.json': 'acetonitrile_panel.py',
+        'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
         # 리뷰어 지적을 내가 직접 재현한 산출물이다.
         'twolabel_panel.json': 'twolabel_panel.py',
@@ -1613,6 +1619,44 @@ def load_facts():
     f['ts_max_count'] = max(c for b in _ts['spaces'].values()
                             for k, c in b['counts'].items()
                             if k != 'unbounded')
+
+    # 2026-11-13. 역치의 공간 간 비등가성과 GFN2 LUMO 방법오차.
+    # 본문 4.3 이 전자공간의 매칭 1건을 세 공간 대비로 읽는데, 그 대비가
+    # 화학인지 차원인지 가르는 수치다.
+    _te = json.load(open('outputs/threshold_equivalence.json'))
+    _t28 = _te['panels']['panel28_incumbent3']
+    f['te_pct_elec'] = _t28['electronic3']['pct_pairs_within_threshold']
+    f['te_pct_merged'] = _t28['merged']['pct_pairs_within_threshold']
+    f['te_pct_struct'] = _t28['structural']['pct_pairs_within_threshold']
+    f['te_rank_merged'] = _t28['merged']['matrix_rank']
+    _le = _te['gfn2_lumo_method_error']
+    f['te_lumo_lo'] = abs(_le['gfn2_minus_b3lyp_min_eV'])
+    f['te_lumo_hi'] = _le['gfn2_minus_b3lyp_max_eV']
+    f['te_lumo_span'] = _le['deviation_span_eV']
+    f['te_lumo_chem_range'] = _le['b3lyp_lumo_range_eV']
+
+    # 2026-11-13. 아세토니트릴 재라벨. 기존 3종 중 둘과 같은 출처가 모사체로
+    # 지정한 화합물이고, 전자공간에서 GB·GD·GF·CK 의 차단자다. 한 라벨이
+    # 28종 패널의 보정값을 0.163 -> 0.023 으로 옮긴다.
+    _ap = json.load(open('outputs/acetonitrile_panel.json'))['panels']
+    f['acn_q28'] = _ap['panel28_incumbent3_plus_acetonitrile']['bh_min_q']
+    f['acn_q35'] = _ap['panel35_incumbent3_plus_acetonitrile']['bh_min_q']
+    f['acn_match28'] = _ap['panel28_incumbent3_plus_acetonitrile'][
+        'spaces']['merged']['n_valid']
+    f['acn_byspace28'] = _ap['panel28_incumbent3_plus_acetonitrile'][
+        'bh_by_space_min_q']
+    f['acn_prespec28'] = _ap['panel28_incumbent3_plus_acetonitrile'][
+        'prespecified_bh_min_q']
+
+    # 2026-11-13. 외부 대조. 본문의 유일한 외부 검증인데 2026-11-13 까지
+    # 검증기 사실표에 없었고 파이프라인에도 없었다.
+    _dv = json.load(open('outputs/davidson_external.json'))
+    f['dv_p_struct'] = _dv['spaces']['structural']['p_one_sided']
+    f['dv_p_elec'] = _dv['spaces']['electronic3']['p_one_sided']
+    f['dv_vp_struct'] = _dv['verifiable_only']['structural']['p_one_sided']
+    f['dv_vp_elec'] = _dv['verifiable_only']['electronic3']['p_one_sided']
+    f['dv_vp_floor'] = _dv['verifiable_only']['structural'][
+        'smallest_attainable_p']
 
     # 2026-10-17. 표 3 (tab:match) 은 이 산출물을 쓰면서도 검증기에 등록된 적이
     # 없었다. 144건 검사를 통과하는 동안 11행 중 9행이 구판 값이었다. 동료
@@ -3169,6 +3213,29 @@ CHECKS = [
     ('mde_rho_bh', [r'\$\|\\rho\| \\ge ([\d.]+)\$ at the '
                     r'Benjamini--Hochberg level'], 0.0005),
     ('ts_struct_gf', [r'with cyclosarin at ([\d.]+)\s*outside'], 0.0005),
+    # 2026-11-13. Davidson 외부 대조 앵커.
+    ('dv_p_struct', [r'structural space \(\$p = (\d+\.\d+)\$\)'], 0.0005),
+    ('dv_p_elec', [r'electronic one \(\$p = (\d+\.\d+)\$\)'], 0.0005),
+    ('dv_vp_struct', [r'the comparison returns ([\d.]+)\s*\n?and'], 0.0005),
+    ('dv_vp_elec', [r'returns 0\.750\s*\n?and ([\d.]+) against'], 0.0005),
+    ('dv_vp_floor', [r'against a smallest attainable ([\d.]+)'], 0.0005),
+    # 2026-11-13. 아세토니트릴 재라벨 앵커. 본문 4.2.
+    ('acn_q28', [r'from a corrected 0\.163 to ([\d.]+) and the matched',
+                 r'compound value from 0\.163 to\s*\n?([\d.]+)\.'], 0.0005),
+    ('acn_match28', [r'matched\s*\n?count from three to (\w+);'], 0),
+    ('acn_byspace28', [r'six-per-space\s*\n?family at ([\d.]+)'], 0.0005),
+    ('acn_prespec28', [r'prespecified-statistic family at ([\d.]+)'],
+     0.0005),
+    ('acn_q35', [r'panel it moves 0\.630 to ([\d.]+)'], 0.0005),
+    # 2026-11-13. 역치 비등가성·LUMO 방법오차 앵커. 본문 4.3 전용.
+    ('te_pct_elec', [r'admits ([\d.]+) per cent of all pairs in the'], 0.05),
+    ('te_pct_merged', [r'against ([\d.]+) per cent in the\s*\n?'
+                       r'thirty-eight-coordinate merged one'], 0.05),
+    ('te_lumo_lo', [r'run from ([\d.]+) eV below'], 0.005),
+    ('te_lumo_hi', [r'eV below to ([\d.]+) eV above'], 0.005),
+    ('te_lumo_span', [r'a span of ([\d.]+) eV where the'], 0.005),
+    ('te_lumo_chem_range', [r'B3LYP values themselves cover ([\d.]+) eV'],
+     0.005),
     ('ts_elec_ac', [r'dichloromethane at ([\d.]+), because acetonitrile'],
      0.0005),
     ('ts_max_count', [r'count does not exceed (\w+) of eleven'], 0),

@@ -24,6 +24,17 @@
 #   rollback_c           방향 C 전용 (omega 종속, 차원 통제, Mantel, 중심화 바닥)
 #   match_by_panel       패널 3구성 x 작용제 11종 최근접 모사체와 유효매칭
 #   threshold_sweep      28종 패널 공간 3종 x 임계값 5종의 매칭 집합
+#   davidson_external    Davidson 2020 의 측정 군집에 대한 외부 대조.
+#                        2026-11-13 까지 파이프라인에 없었다 — 본문의 유일한
+#                        외부 검증인데 클론이 재현할 수 없었다. 생성기
+#                        미등록 사고가 이 프로젝트에서 네 번째다.
+#   acetonitrile_panel   기존 3종 중 둘과 같은 출처(lee2011sno2)가 모사체로
+#                        지정한 아세토니트릴을 우리는 간섭물로 뒀다.
+#                        옮겨 보고 값을 적는다. (2026-11-13 신설)
+#   threshold_equivalence  역치 '<=2' 가 공간마다 전 쌍거리의 몇 %를 담는지.
+#                        공간 간 매칭 수 대비가 화학인지 차원인지 가른다.
+#                        GFN2 LUMO 방법오차도 좌표의 화학적 폭과 함께 잰다.
+#                        (2026-11-13 신설)
 #   designation_failure_audit  판독 3 x 필터 2 x 패널 3 + 인코딩 7 = 25셀의
 #                        매칭집합. SI 표의 출처. 종전에는 파이프라인에
 #                        없어서 클론이 재현할 수 없었다 (2026-11-08 등재)
@@ -131,8 +142,10 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            volatility_fetch.py volatility_space.py \
            shape_reduction.py premise_null.py conformer_sensitivity.py \
            collapse_sensitivity.py reversal_audit.py dye_panel_audit.py \
-           threshold_sweep.py designation_failure_audit.py \
-           twolabel_panel.py mde_nullshift.py shape_match.py
+           threshold_sweep.py threshold_equivalence.py \
+           designation_failure_audit.py \
+           twolabel_panel.py acetonitrile_panel.py davidson_external.py \
+           mde_nullshift.py shape_match.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가
 # 인용하는 두 예치물 중 하나가 파이프라인에서 아예 생성되지 않았고,

@@ -1,0 +1,134 @@
+{
+ "generated_by": "acetonitrile_panel.py",
+ "relabel": "acetonitrile",
+ "authority": "lee2011sno2, Methods: \"chemical agent simulants of blood agents, nerve agents, blister agents, and pulmonary agents, respectively\" -- acetonitrile, DMMP, DPGME, dichloromethane in that order.",
+ "note": "기존 3종 중 둘과 같은 출처가 모사체로 지정한 화합물을 우리는 간섭물로 두었다. 옮겨 보고 값을 적는다.",
+ "panels": {
+  "panel35_incumbent3_plus_acetonitrile": {
+   "panel": "panel35_incumbent3_plus_acetonitrile",
+   "n_simulants": 4,
+   "simulant_names": [
+    "DMMP",
+    "DPGME",
+    "acetonitrile",
+    "dichloromethane"
+   ],
+   "spaces": {
+    "structural": {
+     "p": {
+      "mean_diff": 0.155467720685112,
+      "median_diff": 0.3606248823640128,
+      "mean_logratio": 0.15678524374176547,
+      "mean_dsim": 0.16384340297383776,
+      "n_closer": 0.5125164690382081,
+      "n_valid": 0.3616600790513834
+     },
+     "n_perm": 10626,
+     "nn_median": 3.273286753654107,
+     "n_valid": 2,
+     "n_dims": 38
+    },
+    "electronic3": {
+     "p": {
+      "mean_diff": 0.38641069075851686,
+      "median_diff": 0.5399021268586486,
+      "mean_logratio": 0.4418407679277245,
+      "mean_dsim": 0.3180877093920572,
+      "n_closer": 0.8287220026350461,
+      "n_valid": 0.7760210803689065
+     },
+     "n_perm": 10626,
+     "nn_median": 0.6253520176527663,
+     "n_valid": 1,
+     "n_dims": 3
+    },
+    "merged": {
+     "p": {
+      "mean_diff": 0.14342179559570864,
+      "median_diff": 0.14191605495953322,
+      "mean_logratio": 0.15151515151515152,
+      "mean_dsim": 0.12262375305853566,
+      "n_closer": 0.5125164690382081,
+      "n_valid": 0.3616600790513834
+     },
+     "n_perm": 10626,
+     "nn_median": 3.5594247868424618,
+     "n_valid": 2,
+     "n_dims": 41
+    }
+   },
+   "min_p": 0.12262375305853566,
+   "bh_min_q": 0.4213116076470114,
+   "bh_by_space_min_q": 0.2272727272727273,
+   "prespecified_bh_min_q": 0.233201581027668,
+   "schemes_not_computed": [
+    "westfall_young",
+    "liji_meff",
+    "bh_over_72"
+   ]
+  },
+  "panel28_incumbent3_plus_acetonitrile": {
+   "panel": "panel28_incumbent3_plus_acetonitrile",
+   "n_simulants": 4,
+   "simulant_names": [
+    "DMMP",
+    "DPGME",
+    "acetonitrile",
+    "dichloromethane"
+   ],
+   "spaces": {
+    "structural": {
+     "p": {
+      "mean_diff": 0.0033613445378151263,
+      "median_diff": 0.0058823529411764705,
+      "mean_logratio": 0.007563025210084034,
+      "mean_dsim": 0.019327731092436976,
+      "n_closer": 0.029411764705882353,
+      "n_valid": 0.04957983193277311
+     },
+     "n_perm": 2380,
+     "nn_median": 3.3991187408572747,
+     "n_valid": 5,
+     "n_dims": 35
+    },
+    "electronic3": {
+     "p": {
+      "mean_diff": 0.07815126050420168,
+      "median_diff": 0.17899159663865546,
+      "mean_logratio": 0.061764705882352944,
+      "mean_dsim": 0.16260504201680673,
+      "n_closer": 0.1819327731092437,
+      "n_valid": 0.16806722689075632
+     },
+     "n_perm": 2380,
+     "nn_median": 0.652195622360424,
+     "n_valid": 4,
+     "n_dims": 3
+    },
+    "merged": {
+     "p": {
+      "mean_diff": 0.0016806722689075631,
+      "median_diff": 0.0063025210084033615,
+      "mean_logratio": 0.004201680672268907,
+      "mean_dsim": 0.009243697478991597,
+      "n_closer": 0.029411764705882353,
+      "n_valid": 0.06008403361344538
+     },
+     "n_perm": 2380,
+     "nn_median": 3.8289044949365705,
+     "n_valid": 5,
+     "n_dims": 38
+    }
+   },
+   "min_p": 0.0016806722689075631,
+   "bh_min_q": 0.0226890756302521,
+   "bh_by_space_min_q": 0.010084033613445379,
+   "prespecified_bh_min_q": 0.005042016806722689,
+   "schemes_not_computed": [
+    "westfall_young",
+    "liji_meff",
+    "bh_over_72"
+   ]
+  }
+ }
+}

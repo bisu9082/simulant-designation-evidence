@@ -1,0 +1,88 @@
+{
+ "generated_by": "threshold_equivalence.py",
+ "note": "매칭 역치가 공간 사이에서 등가인지, 그리고 GFN2 LUMO 의 방법오차가 그 좌표의 화학적 폭에 비해 얼마나 큰지.",
+ "threshold_rule": "normalised distance <= 2 x median nearest neighbour",
+ "panels": {
+  "panel28_incumbent3": {
+   "structural": {
+    "n_coords": 35,
+    "matrix_rank": 27,
+    "effective_dim_participation": 9.776,
+    "nn_median": 3.3991,
+    "threshold_distance": 6.7982,
+    "pairs_total": 378,
+    "pairs_within_threshold": 131,
+    "pct_pairs_within_threshold": 34.66,
+    "relative_contrast": 13.47
+   },
+   "electronic3": {
+    "n_coords": 3,
+    "matrix_rank": 3,
+    "effective_dim_participation": 2.987,
+    "nn_median": 0.6522,
+    "threshold_distance": 1.3044,
+    "pairs_total": 378,
+    "pairs_within_threshold": 56,
+    "pct_pairs_within_threshold": 14.81,
+    "relative_contrast": 26.76
+   },
+   "merged": {
+    "n_coords": 38,
+    "matrix_rank": 27,
+    "effective_dim_participation": 10.154,
+    "nn_median": 3.8289,
+    "threshold_distance": 7.6578,
+    "pairs_total": 378,
+    "pairs_within_threshold": 159,
+    "pct_pairs_within_threshold": 42.06,
+    "relative_contrast": 12.96
+   }
+  },
+  "panel35_incumbent3": {
+   "structural": {
+    "n_coords": 38,
+    "matrix_rank": 34,
+    "effective_dim_participation": 10.099,
+    "nn_median": 3.2733,
+    "threshold_distance": 6.5466,
+    "pairs_total": 595,
+    "pairs_within_threshold": 168,
+    "pct_pairs_within_threshold": 28.24,
+    "relative_contrast": 13.6
+   },
+   "electronic3": {
+    "n_coords": 3,
+    "matrix_rank": 3,
+    "effective_dim_participation": 2.988,
+    "nn_median": 0.6254,
+    "threshold_distance": 1.2507,
+    "pairs_total": 595,
+    "pairs_within_threshold": 84,
+    "pct_pairs_within_threshold": 14.12,
+    "relative_contrast": 26.92
+   },
+   "merged": {
+    "n_coords": 41,
+    "matrix_rank": 34,
+    "effective_dim_participation": 10.534,
+    "nn_median": 3.5594,
+    "threshold_distance": 7.1188,
+    "pairs_total": 595,
+    "pairs_within_threshold": 175,
+    "pct_pairs_within_threshold": 29.41,
+    "relative_contrast": 13.11
+   }
+  }
+ },
+ "gfn2_lumo_method_error": {
+  "n_compounds": 28,
+  "b3lyp_lumo_range_eV": 4.3508,
+  "gfn2_minus_b3lyp_min_eV": -6.0837,
+  "gfn2_minus_b3lyp_max_eV": 2.3351,
+  "deviation_span_eV": 8.4188,
+  "deviation_span_over_chemical_range": 1.935,
+  "spearman_lumo": 0.8976,
+  "largest_rank_shift": 12,
+  "largest_rank_shift_compound": "water"
+ }
+}
