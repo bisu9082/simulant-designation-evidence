@@ -707,6 +707,7 @@ def preflight():
         'threshold_sweep.json': 'threshold_sweep.py',
         'mde.json': 'mde.py',
         'threshold_equivalence.json': 'threshold_equivalence.py',
+        'null_convention.json': 'null_convention.py',
         'acetonitrile_panel.json': 'acetonitrile_panel.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
@@ -750,8 +751,12 @@ def preflight():
             continue
         _t = '\n'.join(l for l in open(_doc).read().split('\n')
                         if not l.lstrip().startswith('%'))
+        # 2026-11-13. \allowbreak 을 넣어 긴 파일명을 끊자 이 스캐너가
+        # 파일명을 못 읽고 전부 고아로 신고했다. 조판용 힌트를 먼저 뗀다.
         for _m in re.finditer(r'\\texttt\{([^}]*\.(?:json|csv))\}', _t):
-            _cited.add(os.path.basename(_m.group(1).replace('\\_', '_')))
+            _fn = (_m.group(1).replace('\\allowbreak', '')
+                   .replace('\\-', '').replace('\\_', '_'))
+            _cited.add(os.path.basename(''.join(_fn.split())))
     for _name in sorted(_cited):
         _maker = GENERATED_BY.get(_name)
         if _maker is None:
@@ -1863,8 +1868,20 @@ def load_facts():
         f[f'bb_match{_tag}'] = bb[_lab]['block_balanced']['n_valid']
         f[f'bb_cur_match{_tag}'] = bb[_lab]['equal_per_descriptor']['n_valid']
         f[f'bb_meandiff{_tag}'] = _p['mean_diff']
-    f['bb_nstruct'] = bb['panel28_incumbent3']['n_struct']
-    f['bb_nelec'] = bb['panel28_incumbent3']['n_elec']
+    # 2026-11-13 (GATE 8 11차). panel28 에 묶여 있었다. SI 의 해당 문장은
+    # "lowers the primary panel's smallest nominal value from 0.192 to 0.061"
+    # 로 1차 패널(panel35, 구조 38좌표)을 서술한다. 28종 패널의 35 가
+    # 등록돼 있어서 틀린 35 가 대조를 통과하고 있었다.
+    # 귀무 비교군 구성 규약 (2026-11-13, GATE 8 11차 적발 다섯째 자유도)
+    _nc = json.load(open('outputs/null_convention.json'))['conventions']
+    f['nc_fixed_struct'] = _nc['fixed']['A_rdkit']['p_value']
+    f['nc_minus_struct'] = _nc['minus']['A_rdkit']['p_value']
+    f['nc_fixed_merged'] = _nc['fixed']['C_merged']['p_value']
+    f['nc_minus_merged'] = _nc['minus']['C_merged']['p_value']
+
+    f['bb_nstruct'] = bb['panel35_incumbent3']['n_struct']
+    f['bb_nstruct28'] = bb['panel28_incumbent3']['n_struct']
+    f['bb_nelec'] = bb['panel35_incumbent3']['n_elec']
 
     # 블록균등 병합공간 + 기존 구조·전자 = 18검정 가족의 BH 최소 q.
     def _bh_min(ps):
@@ -3362,8 +3379,19 @@ CHECKS = [
     ('merged_CG_rival', [r'and in the merged space \(([\d.]+) against'], 0.005),
     ('elec_CG_rival', [r'chloroform in the electronic space \(([\d.]+) against'], 0.005),
     # 블록 가중 민감도 (2026-10-17). SI 표 + SI 산문 + 본문 한 문장 3경로.
-    ('bb_nstruct', [r'Weighting the (\d+) structural', r'\$n_\{s\}=(\d+)\$',
-                    r'puts (\d+) structural coordinates'], 0),
+    # 2026-11-13. 두 패널의 구조좌표 수(38 / 35)가 한 사실을 공유하고 있어
+    # SI 표주의 틀린 35 가 통과했다. 패널별로 분리한다.
+    ('nc_fixed_struct', [r'gives ([\d.]+) and [\d.]+ in the\s*\n?structural',
+                         r'fixed at the labelled interferents\s*&\s*([\d.]+)'], 0.001),
+    ('nc_minus_struct', [r'gives [\d.]+ and ([\d.]+) in the\s*\n?structural',
+                         r'minus the designation & ([\d.]+)'], 0.001),
+    ('nc_fixed_merged', [r'and ([\d.]+) and [\d.]+ in the\s*\n?merged space',
+                         r'fixed at the labelled interferents\s*& [\d.]+ & ([\d.]+)'], 0.001),
+    ('nc_minus_merged', [r'and [\d.]+ and ([\d.]+) in the\s*\n?merged space',
+                         r'minus the designation & [\d.]+ & ([\d.]+)'], 0.001),
+    ('bb_nstruct', [r'Weighting the (\d+) structural'], 0),
+    ('bb_nstruct28', [r'\$n_\{s\}=(\d+)\$',
+                      r'puts (\d+) structural coordinates'], 0),
     ('bb_nelec', [r'and (\d+) electronic descriptors as two equal blocks',
                   r'\$n_\{e\}=(\d+)\$'], 0),
     # 2026-11-07 (12차 A-3). 종전 두 패턴이 0\.151 을 리터럴로 들고 있었고

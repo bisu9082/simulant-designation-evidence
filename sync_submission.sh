@@ -22,6 +22,9 @@ mkdir -p submission/code submission/outputs
 rm -f submission/*.tex
 cp -p paper/main.tex paper/refs.bib paper/cover_letter.tex \
       paper/supplementary.tex submission/
+# 2026-11-13. supplementary.tex 가 \input 하는 표 12개가 패키지에 없어
+# 조판소에서 'File tab_sparse.tex not found' 로 멈춘다. GATE 8 11차 적발.
+cp -p paper/tab_*.tex submission/
 for f in acs-main.bib acs-supporting.bib; do
   [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done

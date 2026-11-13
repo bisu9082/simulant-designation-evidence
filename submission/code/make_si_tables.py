@@ -131,15 +131,20 @@ def ablation(rc, mq, pf, pp, mc):
     # 2026-11-12. 휘발성 축을 표에 넣는다. 캡션이 'Every exact permutation
     # test' 라고 적는데 이 축이 빠져 있었다 — 사전지정 전수 검정이고 통계량
     # 여섯 개가 모두 계산돼 있다(outputs/volatility_space.json). 1차원이므로
-    # 공간 세 행이 아니라 한 행이다. 18검정 가족 밖이라 min q 칸은 비운다.
+    # 공간 세 행이 아니라 한 행이다.
+    # 2026-11-13 (GATE 8 11차). min q 칸을 비워 두었더니, 독자가 훑는 유일한
+    # 표에서 굵은 값 넷이 든 행만 보정이 정지한 모습이 됐다. 이 축 자체의
+    # 6통계량 BH 는 이미 family_corrections 에 예치돼 있으므로 기입한다.
     vd = [t for t in _vol()['designation']
           if t.get('label') == 'panel28_incumbent3' and not t.get('skipped')]
     if len(vd) != 1:
         raise SystemExit('[tab_ablation] 휘발성 designation 항목이 1개가 아니다')
     vst = vd[0]['statistics']
     vcells = ' & '.join(fmt(vst[st]['p']) for st in STATS)
+    vq = _vol()['family_corrections']['axis_six_statistics_bh']
     lines.append(f"{'28 cpd., incumbent 3':<22} & {'volatility':<11} & "
-                 f"{vd[0].get('n_dims', 1):>2} & {vcells} &  \\\\")
+                 f"{vd[0].get('n_dims', 1):>2} & {vcells} & "
+                 f"{vq:.3f}$^{{\\dagger}}$ \\\\")
     lines.append('\\hline')
     return '\n'.join(lines)
 
@@ -603,18 +608,24 @@ def main():
 %            outputs/multiplicity_across_panels.json (구성별 최소 q).
 \begin{table}[htb]
 \centering
-\caption{Every exact permutation test run in this work, across panel
-constructions, descriptor spaces and statistics. Values are one-sided $p$. Bold
-marks $p<0.05$ before correction. The last column is the smallest
-Benjamini--Hochberg value over the eighteen tests of that panel construction;
-it is blank for the volatility row, which was specified separately and is not a
-member of any of those families, so no correction over them applies to it.
+\caption{The exact permutation tests over the four panel and designation
+constructions, by descriptor space and statistic. Values are one-sided $p$.
+Bold marks $p<0.05$ before correction. The last column is the smallest
+Benjamini--Hochberg value over the eighteen tests of that panel construction.
+$^{\dagger}$The volatility axis was specified separately and is not a member of
+any of those families; the value given for it is the Benjamini--Hochberg
+minimum over its own six statistics, and
+Section~\ref{M-res:vol} gives what it becomes under wider families.
 Dimensions are the retained coordinate counts after the correlation filter of
 Section~\ref{meth:orderinvariance}; the volatility axis is a single measured
-quantity and carries no filter.}
+quantity and carries no filter. Two further enumerations are reported in the
+text rather than here, the two-pesticide and acetonitrile relabellings of
+Section~\ref{M-res:panels}
+(\texttt{outputs/twolabel\_panel.json}, \texttt{outputs/acetonitrile\_panel.json}).}
 \label{tab:ablation}
-\small
-\setlength{\tabcolsep}{4pt}
+% 2026-11-13. small/4pt 로는 29.7pt 가 여백을 넘었다 (GATE 8 11차).
+\footnotesize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{llcccccccc}
 \hline
 Panel / simulant set & Space & Dim. & $\Delta\bar{d}$ & $\Delta\tilde{d}$ &
@@ -646,7 +657,7 @@ every interferent; count of valid matches.}\\
         'AEGL is the axis the agents are placed on in the main text; the '
         'other registers use different averaging times and severity '
         'definitions and are not interchangeable with it.}\n'
-        '\\label{tab:registers}\n\\small\n'
+        '\\label{tab:registers}\n\\footnotesize\n\\setlength{\\tabcolsep}{3pt}\n'
         + registers() + '\n\\end{table}\n')
     print('-> outputs/tab_registers.tex')
     open('outputs/tab_designations.tex', 'w').write(
@@ -656,7 +667,7 @@ every interferent; count of valid matches.}\\
         'was made against, and the basis the designating document itself '
         'states. Source URLs and the search date are in '
         '\\texttt{sources/designations\\_20261106.csv} of the deposit.}\n'
-        '\\label{tab:designations}\n\\footnotesize\n'
+        '\\label{tab:designations}\n\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n'
         + designations() + '\n\\end{table}\n')
     print('-> outputs/tab_designations.tex')
     open('outputs/tab_dyepanel.tex', 'w').write(

@@ -132,6 +132,20 @@ for f in main supplementary cover_letter; do
     fi
 done
 
+# 2026-11-13 신설. 'Overfull' 만 세다가 Fig 1 캡션 282 단어 중 152 단어가
+# 페이지 밖으로 밀린 것을 놓쳤다 (GATE 8 11차 적발). Float too large 는
+# 조판이 아니라 내용 소실이므로 경고가 아니라 실패로 다룬다.
+for f in main supplementary cover_letter; do
+    [ -f "$f.log" ] || continue
+    n=$(grep -c 'Float too large' "$f.log" || true)
+    if [ "$n" -ne 0 ]; then
+        echo "  [중단] $f.log 에 Float too large $n 건 — 캡션 또는 도판이"
+        echo "         페이지 밖으로 밀린다. 도판 폭 또는 캡션을 줄일 것."
+        grep -n 'Float too large' "$f.log" | sed 's/^/         /'
+        fail=1
+    fi
+done
+
 # 커버레터가 분량을 숫자로 적고 검증기가 그 숫자를
 # outputs/length_audit.json 과 대조한다. 그 파일은 빌드된 PDF 를 읽어야
 # 만들어지므로 여기서 갱신한다. 빌드가 성공한 뒤에만 돈다.

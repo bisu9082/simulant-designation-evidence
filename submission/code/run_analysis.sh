@@ -145,6 +145,7 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            threshold_sweep.py threshold_equivalence.py \
            designation_failure_audit.py \
            twolabel_panel.py acetonitrile_panel.py davidson_external.py \
+           null_convention.py \
            mde_nullshift.py shape_match.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가

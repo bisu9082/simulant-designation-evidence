@@ -369,6 +369,13 @@ which the structural value sits outside a conventional threshold. This is the
 first of the analyst choices catalogued in Section~\ref{res:panels} and the only
 one with a defensible default.
 
+How the comparison pool is rebuilt under each relabelling is a further choice,
+and the one we were slowest to declare. We take it to be every non-agent the
+labelling did not designate, so the pool moves with the designation. Two other
+readings give 0.054 and 0.160 in the structural space against the 0.028
+reported here; until this version the choice appeared nowhere outside a comment
+in the code (Supporting Information Section~\ref{S-meth:prespec}).
+
 \subsection{Match criterion}
 \label{meth:match}
 Nearest-neighbour rank alone is not sufficient: in the 38-dimensional merged
@@ -473,32 +480,23 @@ agent simulant'' and that the assumptions behind it ``have not been tested''
 
 \begin{figure}[tp]
 \centering
-\includegraphics[width=\textwidth]{Fig_main.png}
-\caption{What the comparison contains decides the answer. (a) For each agent,
-the distance to the nearest incumbent simulant (circles) and to the nearest
-candidate once the five further literature-used compounds are included
-(diamonds), in multiples of the typical nearest-neighbour separation of the
-merged space on the thirty-five-compound panel. Sarin, soman and cyclosarin fail
-on the primary panel despite lying inside the dashed threshold, because the
-criterion also requires a simulant to be nearer than every compound not
-designated one. (b) Matched agents under 1000 descriptor-resampling replicates
-(Supporting Information Section~\ref{S-meth:dboot}) for the incumbent three and
-for the eight literature-used simulants; circles are means, vertical rules
-medians, bars the 2.5th to 97.5th percentiles. (c) On the twenty-eight-compound
-panel, the normalised distance from each agent to its nearest incumbent simulant
-in each of the three spaces; filled markers are valid matches. (d) Exact
-permutation null for that panel over all 680 designations of three of the
-seventeen non-agents, with the actual designation marked; the $p$ shown is the
-mean-difference statistic only, the other five and the adjusted values being in
-Supporting Information Table~\ref{S-tab:ablation}, where the
-Benjamini-Hochberg value over its eighteen tests is 0.163. (e) The same
-comparison on the volatility axis, one measured quantity rather than a
-descriptor set: the gap in $\log_{10}(P/\mathrm{mmHg})$ to the nearest incumbent
-simulant and, where an interferent is nearer, to that compound. Three of the
-eleven agents are nearer an interferent here as well; the one pairing inside the
-match criterion, soman to DPGME, lies 0.0107 decades apart, between measurements
-made at different temperatures, a separation smaller than the mismatch
-(Supporting Information Section~\ref{S-meth:vol}).}
+\includegraphics[width=0.79\textwidth]{Fig_main.png}
+\caption{What the comparison contains decides the answer. Distances are
+normalised by the typical nearest-neighbour separation of the space in hand,
+and a valid match requires a normalised distance below the dashed threshold
+\emph{and} a distance smaller than that to every compound not designated a
+simulant. (a) Thirty-five-compound panel, merged space: nearest incumbent
+simulant (circles) and nearest candidate once the five literature-used
+compounds are admitted (diamonds). (b) Matched agents over 1000
+descriptor-resampling replicates; circles means, rules medians, bars the 2.5th
+to 97.5th percentiles. (c) Twenty-eight-compound panel, the three spaces;
+filled markers are valid matches. (d) Exact permutation null for that panel
+over all 680 designations, actual designation marked, mean-difference statistic
+(Benjamini-Hochberg over the eighteen tests, 0.163). (e) Volatility axis, in
+$\log_{10}(P/\mathrm{mmHg})$; the one pairing inside the criterion, soman to
+DPGME, lies 0.0107 decades apart. Section~\ref{res:panels} and Supporting
+Information Sections~\ref{S-meth:dboot} and~\ref{S-meth:vol} give the
+constructions.}
 \label{fig:main}
 \end{figure}
 
@@ -522,9 +520,11 @@ Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
 reliabilities, which reverse what the point estimates suggest, and the dimension
 and subspace controls.
 
-Every exact permutation test we ran is in Supporting Information
-Table~\ref{S-tab:ablation}, in full rather than selected from, because the
-pattern across the cells is the finding. On the primary panel no test reaches
+The exact permutation tests over the four panel and designation constructions
+are in Supporting Information Table~\ref{S-tab:ablation}, in full rather than
+selected from, because the pattern across the cells is the finding; the two
+relabelling enumerations reported later in this section are in the deposit
+under their own names. On the primary panel no test reaches
 nominal significance in any space under any statistic, while classing the five
 literature compounds as simulants recovers two nominal values below 0.05, so the
 difficulty is not that the test cannot detect anything here. On the

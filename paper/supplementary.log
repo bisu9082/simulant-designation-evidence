@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  13 NOV 2026 12:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  13 NOV 2026 14:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -316,9 +316,12 @@ LaTeX Info: Redefining \cite on input line 694.
 (/usr/share/texlive/texmf-dist/tex/latex/tools/xr.sty
 Package: xr 2023-07-04 v5.06 eXternal References (DPC)
 )
-Package xr Info: IMPORTING LABELS FROM main.aux on input line 16.
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 2
-9.
+(/usr/share/texlive/texmf-dist/tex/latex/xurl/xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+)
+Package xr Info: IMPORTING LABELS FROM main.aux on input line 24.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
+7.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -331,24 +334,24 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (./supplementary.aux)
 \openout1 = `supplementary.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 29.
-LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 37.
+LaTeX Font Info:    ... okay on input line 37.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -406,19 +409,19 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 29.
+Package hyperref Info: Link coloring OFF on input line 37.
 
 (./supplementary.out) (./supplementary.out)
 \@outlinefile=\write3
 \openout3 = `supplementary.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 39.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 39.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -428,411 +431,335 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/base/8r.enc}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 188.
+Package hyperref Warning: Suppressing link with empty target on input line 196.
 
 
 [2] [3]
 
-Package hyperref Warning: Suppressing link with empty target on input line 239.
+Package hyperref Warning: Suppressing link with empty target on input line 247.
 
 
-
-Package hyperref Warning: Suppressing link with empty target on input line 293.
-
-
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
-02.
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 2
+76.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-) [4]
+)
 
-Package hyperref Warning: Suppressing link with empty target on input line 356.
+Package hyperref Warning: Suppressing link with empty target on input line 327.
+
+
+[4]
+
+Package hyperref Warning: Suppressing link with empty target on input line 390.
 
 
 [5]
 
-Package hyperref Warning: Suppressing link with empty target on input line 421.
+Package hyperref Warning: Suppressing link with empty target on input line 455.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 427.
+Package hyperref Warning: Suppressing link with empty target on input line 461.
 
 
 [6]
 
-Package hyperref Warning: Suppressing link with empty target on input line 493.
+Package hyperref Warning: Suppressing link with empty target on input line 527.
 
 
-[7]
-Overfull \hbox (39.16048pt too wide) in paragraph at lines 542--550
-\OT1/ptm/m/n/10.95 counts are in \OT1/pcr/m/n/10.95 order[]invariance.json \OT1
-/ptm/m/n/10.95 un-der \OT1/pcr/m/n/10.95 outputs/ \OT1/ptm/m/n/10.95 and are re
--gen-er-ated by \OT1/pcr/m/n/10.95 order[]invariance.py\OT1/ptm/m/n/10.95 ,
- []
+[7] [8] (./tab_sparse.tex)
 
-[8] (./tab_sparse.tex)
-
-Package hyperref Warning: Suppressing link with empty target on input line 671.
+Package hyperref Warning: Suppressing link with empty target on input line 705.
 
 
 [9]
 
-Package hyperref Warning: Suppressing link with empty target on input line 693.
+Package hyperref Warning: Suppressing link with empty target on input line 727.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 694.
+Package hyperref Warning: Suppressing link with empty target on input line 728.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 712.
+Package hyperref Warning: Suppressing link with empty target on input line 746.
 
 
 (./tab_failaudit.tex) [10]
 
-Package hyperref Warning: Suppressing link with empty target on input line 790.
+Package hyperref Warning: Suppressing link with empty target on input line 824.
 
 
 [11] [12]
-<Fig_spaces.png, id=356, 722.33865pt x 658.01836pt>
+<Fig_spaces.png, id=357, 722.33865pt x 658.01836pt>
 File: Fig_spaces.png Graphic file (type png)
 <use Fig_spaces.png>
-Package pdftex.def Info: Fig_spaces.png  used on input line 897.
+Package pdftex.def Info: Fig_spaces.png  used on input line 931.
 (pdftex.def)             Requested size: 460.935pt x 419.90536pt.
- (./tab_dyepanel.tex) [13] [14 <./Fig_spaces.png>] [15]
-(./tab_volatility.tex)
+ (./tab_dyepanel.tex) [13] [14 <./Fig_spaces.png>] [15] [16]
+(./tab_volatility.tex) [17]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1113
-.
-
-[16]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1136
-.
-
-[17] (./tab_vpairing.tex) (./tab_designations.tex
-Underfull \hbox (badness 10000) in paragraph at lines 13--13
-[]\OT1/ptm/m/n/9 carbon tetra-
- []
-
-
-Underfull \hbox (badness 3861) in paragraph at lines 15--15
-[]\OT1/ptm/m/n/9 NRC, Tech-ni-cal As-sess-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--15
-\OT1/ptm/m/n/9 ment of the Man-in-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--15
-\OT1/ptm/m/n/9 Simulant Test Pro-gram
- []
-
-
-Underfull \hbox (badness 3861) in paragraph at lines 16--16
-[]\OT1/ptm/m/n/9 NRC, Tech-ni-cal As-sess-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--16
-\OT1/ptm/m/n/9 ment of the Man-in-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--16
-\OT1/ptm/m/n/9 Simulant Test Pro-gram
- []
-
-
-Underfull \hbox (badness 1087) in paragraph at lines 17--17
-[]\OT1/ptm/m/n/9 methyl sal-i-cy-
- []
-
-
-Underfull \hbox (badness 3861) in paragraph at lines 17--17
-[]\OT1/ptm/m/n/9 NRC, Tech-ni-cal As-sess-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--17
-\OT1/ptm/m/n/9 ment of the Man-in-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--17
-\OT1/ptm/m/n/9 Simulant Test Pro-gram
- []
-
-
-Underfull \hbox (badness 2512) in paragraph at lines 18--18
-[]\OT1/ptm/m/n/9 US Patent 7129094 B1,
- []
-
-
-Underfull \hbox (badness 4013) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 chem-i-cal agent sim-u-lant
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 train-ing com-po-si-tion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-[]\OT1/ptm/m/n/9 liquid
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 G-agent
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 sim-u-lants
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 in-clud-ing
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 VX, and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 H-agent
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 (mustard-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 HD)
- []
-
-
-Underfull \hbox (badness 6493) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 vapour de-tec-tion
- []
-
-
-Underfull \hbox (badness 7558) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 ap-pa-ra-tus (claim
- []
-
-
-Underfull \hbox (badness 7963) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 1(a)); spec-i-fi-ca-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 tion names ion
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 mo-bil-ity spec-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 trom-e-ters, and
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 else-where in-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 18--18
-\OT1/ptm/m/n/9 acous-tic wave
- []
-
-
-Overfull \hbox (6.4283pt too wide) in paragraph at lines 19--19
-[]\OT1/ptm/m/n/9 dichloromethane| 
- []
-
-)
-
-Package hyperref Warning: Suppressing link with empty target on input line 1309
-.
-
-[18]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1331
+Package hyperref Warning: Suppressing link with empty target on input line 1147
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1332
+Package hyperref Warning: Suppressing link with empty target on input line 1170
 .
 
-
-Package hyperref Warning: Suppressing link with empty target on input line 1341
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1352
-.
-
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
-358.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1358.
+[18] (./tab_vpairing.tex) (./tab_designations.tex
+Underfull \hbox (badness 3568) in paragraph at lines 13--13
+\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
+ []
 
 
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+[]\OT1/ptm/m/n/8 relatively non-toxic; eas-ily de-
+ []
 
-Package hyperref Warning: Suppressing link with empty target on input line 1385
-.
 
-[19]
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+\OT1/ptm/m/n/8 tectable; volatil-ity in-ter-me-di-ate
+ []
 
-Package hyperref Warning: Suppressing link with empty target on input line 1439
+
+Underfull \hbox (badness 3568) in paragraph at lines 14--14
+\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
+ []
+
+
+Underfull \hbox (badness 3568) in paragraph at lines 15--15
+\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
+ []
+
+
+Underfull \hbox (badness 1221) in paragraph at lines 16--16
+[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
+ []
+
+
+Underfull \hbox (badness 1221) in paragraph at lines 17--17
+[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
+ []
+
+
+Underfull \hbox (badness 1221) in paragraph at lines 18--18
+[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
+ []
+
+
+Underfull \hbox (badness 1783) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+[]\OT1/ptm/m/n/8 liquid
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 G-agent
+ []
+
+
+Underfull \hbox (badness 1769) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 clud-ing VX,
+ []
+
+
+Underfull \hbox (badness 2189) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 and H-agent
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 (mustard-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 HD) sim-u-
+ []
+
+
+Underfull \hbox (badness 7981) in paragraph at lines 19--19
+[]\OT1/ptm/m/n/8 detectability by a
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 vapour de-tec-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 ap-pa-ra-tus (claim
+ []
+
+
+Underfull \hbox (badness 2452) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 1(a)); spec-i-fi-ca-tion
+ []
+
+
+Underfull \hbox (badness 4805) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 spec-trom-e-ters, and
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+\OT1/ptm/m/n/8 else-where in-frared
+ []
+
+) [19]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1343
 .
 
 [20]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1531
+Package hyperref Warning: Suppressing link with empty target on input line 1366
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1547
-.
-
-[21]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1576
+Package hyperref Warning: Suppressing link with empty target on input line 1367
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1580
+Package hyperref Warning: Suppressing link with empty target on input line 1376
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1596
+Package hyperref Warning: Suppressing link with empty target on input line 1387
+.
+
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
+393.
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1393.
+
+ [21]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1420
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1601
+Package hyperref Warning: Suppressing link with empty target on input line 1474
+.
+
+[22] [23]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1566
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1635
+Package hyperref Warning: Suppressing link with empty target on input line 1582
 .
 
-[22] (./tab_ablation.tex
-Overfull \hbox (29.67078pt too wide) in paragraph at lines 19--50
- [][] 
- []
 
-) (./tab_family.tex)
-Overfull \hbox (51.66412pt too wide) in paragraph at lines 1692--1702
-\OT1/ptm/m/n/10.95 space and 42.1 per cent in the thirty-eight-coordinate merge
-d one (\OT1/pcr/m/n/10.95 outputs/threshold[]equivalence.json\OT1/ptm/m/n/10.95
- ).
- []
-
-[23] [24] (./tab_blockbalance.tex) [25]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1967
+Package hyperref Warning: Suppressing link with empty target on input line 1611
 .
 
-<Fig_mde.png, id=501, 603.4545pt x 372.1905pt>
+
+Package hyperref Warning: Suppressing link with empty target on input line 1615
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1631
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1636
+.
+
+[24]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1670
+.
+
+(./tab_ablation.tex
+
+Package hyperref Warning: Suppressing link with empty target on input line 20.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 20.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 20.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 20.
+
+) (./tab_family.tex) [25] [26] [27] (./tab_blockbalance.tex) [28] [29]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2004
+.
+
+<Fig_mde.png, id=531, 603.4545pt x 372.1905pt>
 File: Fig_mde.png Graphic file (type png)
 <use Fig_mde.png>
-Package pdftex.def Info: Fig_mde.png  used on input line 1974.
+Package pdftex.def Info: Fig_mde.png  used on input line 2011.
 (pdftex.def)             Requested size: 460.935pt x 284.29318pt.
-<Fig_plocal.png, id=502, 841.9455pt x 499.74706pt>
+<Fig_plocal.png, id=532, 841.9455pt x 499.74706pt>
 File: Fig_plocal.png Graphic file (type png)
 <use Fig_plocal.png>
-Package pdftex.def Info: Fig_plocal.png  used on input line 1991.
+Package pdftex.def Info: Fig_plocal.png  used on input line 2028.
 (pdftex.def)             Requested size: 460.935pt x 273.58826pt.
-[26] (./tab_plocal.tex) [27 <./Fig_mde.png>] [28 <./Fig_plocal.png>]
-(./tab_premisenull.tex)
+(./tab_plocal.tex) [30] [31 <./Fig_mde.png>] [32 <./Fig_plocal.png>]
+(./tab_premisenull.tex) [33]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2178
-.
-
-[29]
-
-Package hyperref Warning: Suppressing link with empty target on input line 2202
+Package hyperref Warning: Suppressing link with empty target on input line 2215
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 2227
+Package hyperref Warning: Suppressing link with empty target on input line 2239
 .
 
-[30]
-<Fig_toxicity.png, id=550, 844.47495pt x 865.0719pt>
+
+Package hyperref Warning: Suppressing link with empty target on input line 2264
+.
+
+[34]
+<Fig_toxicity.png, id=581, 844.47495pt x 865.0719pt>
 File: Fig_toxicity.png Graphic file (type png)
 <use Fig_toxicity.png>
-Package pdftex.def Info: Fig_toxicity.png  used on input line 2301.
+Package pdftex.def Info: Fig_toxicity.png  used on input line 2338.
 (pdftex.def)             Requested size: 460.935pt x 472.17424pt.
- [31] [32 <./Fig_toxicity.png>] (./tab_registers.tex
-Overfull \hbox (36.75706pt too wide) in paragraph at lines 8--27
- [][] 
- []
+ [35] [36 <./Fig_toxicity.png>] (./tab_registers.tex) [37]
 
-)
-
-Package hyperref Warning: Suppressing link with empty target on input line 2444
+Package hyperref Warning: Suppressing link with empty target on input line 2481
 .
 
-<Fig_h1.png, id=573, 777.26385pt x 834.35715pt>
+<Fig_h1.png, id=609, 777.26385pt x 834.35715pt>
 File: Fig_h1.png Graphic file (type png)
 <use Fig_h1.png>
-Package pdftex.def Info: Fig_h1.png  used on input line 2450.
+Package pdftex.def Info: Fig_h1.png  used on input line 2487.
 (pdftex.def)             Requested size: 460.935pt x 494.79997pt.
-[33]
-Underfull \hbox (badness 1424) in paragraph at lines 2527--2535
+[38] [39 <./Fig_h1.png>]
+Underfull \hbox (badness 1424) in paragraph at lines 2564--2572
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
  []
 
-[34] (./supplementary.bbl
-Underfull \hbox (badness 2495) in paragraph at lines 30--38
-[]\OT1/ptm/m/n/10.95 U.S. En-vi-ron-men-tal Pro-tec-tion Agency Com-piled AEGL 
-Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https :
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 30--38
-\OT1/pcr/m/n/10.95 / / www . epa . gov / sites / default / files / 2018-[]08 / 
-documents / compiled _
- []
-
-[35] [36] [37] [38]) [39] [40] [41] [42] [43] [44] [45] [46 <./Fig_h1.png>]
-(./supplementary.aux)
+[40] (./supplementary.bbl [41] [42] [43] [44]) [45] (./supplementary.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `supplementary.out' has not changed.
-(rerunfilecheck)             Checksum: A174ADFCA3098068BDF8588271936E61;10408.
+(rerunfilecheck)             Checksum: EBD265F107BA67B2E32165B4AEC46E0E;10814.
  ) 
 Here is how much of TeX's memory you used:
- 11299 strings out of 476106
- 170687 string characters out of 5793932
- 1994975 words of memory out of 5000000
- 32941 multiletter control sequences out of 15000+600000
- 587165 words of font info for 102 fonts, out of 8000000 for 9000
+ 11327 strings out of 476106
+ 171303 string characters out of 5793932
+ 1950975 words of memory out of 5000000
+ 32964 multiletter control sequences out of 15000+600000
+ 588791 words of font info for 104 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,13n,79p,2020b,671s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,1474b,669s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -851,10 +778,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
 onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (46 pages, 2100416 bytes).
+Output written on supplementary.pdf (45 pages, 2108249 bytes).
 PDF statistics:
  792 PDF objects out of 1000 (max. 8388607)
- 676 compressed objects within 7 object streams
+ 677 compressed objects within 7 object streams
  175 named destinations out of 1000 (max. 500000)
- 338 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 346 words of extra memory for PDF output out of 10000 (max. 10000000)
 

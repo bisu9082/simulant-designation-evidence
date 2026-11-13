@@ -1,0 +1,50 @@
+{
+ "generated_by": "null_convention.py",
+ "panel": "panel28_incumbent3",
+ "statistic": "mean_diff (the prespecified one)",
+ "note": "귀무의 비교군 구성 규약 세 가지. 원고는 complement 를 쓴다. 이 선택은 사전 고정하지 않은 다섯 번째 자유도다.",
+ "conventions": {
+  "complement": {
+   "A_rdkit": {
+    "p_value": 0.027941,
+    "n_perm": 680
+   },
+   "B_electronic": {
+    "p_value": 0.275,
+    "n_perm": 680
+   },
+   "C_merged": {
+    "p_value": 0.025,
+    "n_perm": 680
+   }
+  },
+  "fixed": {
+   "A_rdkit": {
+    "p_value": 0.054412,
+    "n_perm": 680
+   },
+   "B_electronic": {
+    "p_value": 0.235294,
+    "n_perm": 680
+   },
+   "C_merged": {
+    "p_value": 0.033824,
+    "n_perm": 680
+   }
+  },
+  "minus": {
+   "A_rdkit": {
+    "p_value": 0.160294,
+    "n_perm": 680
+   },
+   "B_electronic": {
+    "p_value": 0.339706,
+    "n_perm": 680
+   },
+   "C_merged": {
+    "p_value": 0.111765,
+    "n_perm": 680
+   }
+  }
+ }
+}

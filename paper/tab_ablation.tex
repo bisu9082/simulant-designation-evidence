@@ -4,18 +4,24 @@
 %            outputs/multiplicity_across_panels.json (구성별 최소 q).
 \begin{table}[htb]
 \centering
-\caption{Every exact permutation test run in this work, across panel
-constructions, descriptor spaces and statistics. Values are one-sided $p$. Bold
-marks $p<0.05$ before correction. The last column is the smallest
-Benjamini--Hochberg value over the eighteen tests of that panel construction;
-it is blank for the volatility row, which was specified separately and is not a
-member of any of those families, so no correction over them applies to it.
+\caption{The exact permutation tests over the four panel and designation
+constructions, by descriptor space and statistic. Values are one-sided $p$.
+Bold marks $p<0.05$ before correction. The last column is the smallest
+Benjamini--Hochberg value over the eighteen tests of that panel construction.
+$^{\dagger}$The volatility axis was specified separately and is not a member of
+any of those families; the value given for it is the Benjamini--Hochberg
+minimum over its own six statistics, and
+Section~\ref{M-res:vol} gives what it becomes under wider families.
 Dimensions are the retained coordinate counts after the correlation filter of
 Section~\ref{meth:orderinvariance}; the volatility axis is a single measured
-quantity and carries no filter.}
+quantity and carries no filter. Two further enumerations are reported in the
+text rather than here, the two-pesticide and acetonitrile relabellings of
+Section~\ref{M-res:panels}
+(\texttt{outputs/twolabel\_panel.json}, \texttt{outputs/acetonitrile\_panel.json}).}
 \label{tab:ablation}
-\small
-\setlength{\tabcolsep}{4pt}
+% 2026-11-13. small/4pt 로는 29.7pt 가 여백을 넘었다 (GATE 8 11차).
+\footnotesize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{llcccccccc}
 \hline
 Panel / simulant set & Space & Dim. & $\Delta\bar{d}$ & $\Delta\tilde{d}$ &
@@ -38,7 +44,7 @@ $n_\mathrm{valid}$ & min $q$ \\
 \quad (3 incumbent + 5 literature & electronic  &  3 & 0.08917 & 0.05262 & 0.05889 & 0.08556 & 0.06638 & 0.05495 &  \\
 \quad + 2 pesticides)  & merged      & 41 & \textbf{0.004756} & \textbf{$<$0.001} & \textbf{0.03517} & 0.1435 & 0.3176 & 0.2678 & \textbf{$<$0.001} \\
 \hline
-28 cpd., incumbent 3   & volatility  &  1 & \textbf{0.02059} & \textbf{0.04265} & 0.07647 & \textbf{0.02353} & \textbf{0.02206} & 0.4647 &  \\
+28 cpd., incumbent 3   & volatility  &  1 & \textbf{0.02059} & \textbf{0.04265} & 0.07647 & \textbf{0.02353} & \textbf{0.02206} & 0.4647 & 0.047$^{\dagger}$ \\
 \hline
 \hline
 \multicolumn{10}{l}{\footnotesize Statistics, in order: mean and median of

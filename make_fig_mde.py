@@ -36,7 +36,15 @@ for key, dat, col, lbl in [
          'Twenty-eight-compound panel')]:
     d = np.array([r['delta'] for r in dat['curve']])
     p = np.array([r['p'] for r in dat['curve']])
+    # 2026-11-13 (GATE 8 11차). 곡선의 94/133 점이 정확히 p = 0 으로 그려지고
+    # 있었다. 전수치환의 p 하한은 1/n_perm 이고 0 은 반환될 수 없는 값이다.
+    # 하한에서 자르고 그 선을 그린다. 축 라벨이 'exact p' 이므로 더 중요하다.
+    floor = 1.0 / float(dat['n_perm'])
+    p = np.maximum(p, floor)
     ax.plot(d, p, color=col, lw=3.3, zorder=3, label=lbl)
+    ax.axhline(floor, color=col, ls=(0, (1, 2.4)), lw=1.6, zorder=1)
+    ax.text(d.max(), floor * 1.12, f'exact floor {floor:.1e}',
+            fontsize=FS_ANNOT - 2, color=col, ha='right', va='bottom')
 
 ax.axhline(0.05, color=C_REF, ls=(0, (5, 3)), lw=2.3, zorder=2)
 ax.text(1.46, 0.057, r'$\alpha = 0.05$', fontsize=FS_ANNOT, color=C_REF,
