@@ -1,121 +1,23 @@
-% simulant — Analytical Chemistry (ACS) 투고본
-%
-% 2026-11-08. 저널 전환. JHM 에서 Analytical Chemistry 로 옮겼다. 사유는
-% sources/NOTE_EditorGate_Step5_20261108.md 와 그 뒤의 스코프 조사다. JHM
-% 현행 스코프(2022-09-08 사설)는 관문이 둘이고, 둘째인 "is the study
-% conducted under an environmentally relevant condition?" 에 답할 데이터가
-% 이 원고에 없다. 관문을 맞추려고 증기압 축을 끌어올리는 것은 이 논문이
-% 비판하는 바로 그 행위이므로 하지 않고 저널을 옮겼다.
-%
-% 양식: achemso. 퇴역한 archive/acs_v1/ 의 골격을 가져왔으나 본문은
-% 그쪽을 되살린 것이 아니다. 그 라인만 지녔던 결함 네 개가 있고
-% 2026-11-08 교정 29건이 없다. 지금 교정본을 재타깃한 것이다.
-%
-% Analytical Chemistry 하드 게이트 (저자지침 2026-10-05 갱신본):
-%   Article 최대 8 journal page / 초록 80~250 단어
-%   TOC 그래픽 8.25 x 4.45 cm / 커버레터 필수
-%   추천 심사위원 4인 이상 이메일 포함
-%     → Ku 결정(2026-10-15, 11-10 재확인): 제출 시스템에서 공란.
-%       커버레터에 명단을 싣지 않는다.
-%   2026-11-10 정정. 종전에 '10,000 단어' 로 적혀 있었다. 그 수치는
-%   researcher-resources.acs.org 의 PDF 내보내기에만 있고, 실제
-%   publish.acs.org/publish/author_guidelines?coden=ancham 은 'The maximum
-%   length of Articles is eight journal pages' 라고 적는다. ACS 가 호스팅하는
-%   두 페이지가 서로 다르므로 보수적인 쪽(8면)을 따른다.
 \documentclass[journal=ancham,manuscript=article,margin=1in]{achemso}
-% 2026-11-12. achemso 는 절 번호를 매기지 않는다. 그래서 본문의
-% Section~\ref{...} 10곳과 SI 의 M- 상호참조가 전부 빈 문자열로 조판되고
-% 있었다 (main.aux 의 newlabel 번호 칸이 비어 있고, PDF 에 'Section
-% reports' 로 나온다). 번호를 켠다. ACS 논문은 번호 있는 절을 허용한다.
-% 2026-11-12. achemso 는 기본으로 절 번호를 끈다(\SectionNumbersOff).
-% 그래서 main.aux 의 newlabel 번호 칸이 비고, 본문의 Section~\ref{...}
-% 10곳과 SI 의 M- 상호참조 29곳이 전부 빈 문자열로 조판되고 있었다
-% (PDF 에 'Section reports' 로 나왔다). 클래스가 주는 스위치로 켠다.
-% secnumdepth 나 AtBeginDocument 로는 열리지 않는다 — achemso 가
-% \@startsection 을 별표 강제판으로 바꿔두기 때문이다.
 \SectionNumbersOn
 
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,booktabs}
 \usepackage{textcomp}
-% 2026-11-13. 예치 저장소 URL 과 파일명이 \texttt 안에서 끊기지 않아
-% overfull hbox 를 냈다. xurl 은 URL 을 어디서나 끊게 한다.
 \usepackage{xurl}
 \usepackage{xr}
 \externaldocument[S-]{supplementary}
-% 본문 도판 셋이 각 네 패널이라 높이가 쪽의 70%를 넘는다. LaTeX 기본값
-% (\topfraction 0.7)은 그런 float 를 상단에 두지 못해 셋을 전부 참고문헌
-% 뒤로 밀어낸다. 한도를 올려 호출 지점 근처에 놓는다.
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.92}
 \renewcommand{\textfraction}{0.06}
 \renewcommand{\floatpagefraction}{0.72}
 \renewcommand{\arraystretch}{1.15}
 
-% 2026-11-12. 종전 제목 'No Public Designation Names a Detection Measurement
-% ... and Descriptor Comparison Cannot Supply the Missing Validation' 은 두
-% 곳에서 반증됐다. (1) DPGME 특허(US 7129094 B1) 본문을 직독하니 IMS·IR·SAW
-% 검출을 명시하고 청구항이 증기 검출 장비의 검출성을 요건으로 둔다. 즉 탐지
-% 측정을 명명하는 공개 지정이 존재한다. 명명되지 않는 것은 '작용제 응답의
-% 재현' 이다. (2) 휘발성 축(outputs/volatility_space.json)에서 현행 지정은
-% p=0.0206 이고 측정 ΔE00 응답거리와 BH q=0.0430 으로 일치한다. 서술자
-% 비교가 아무것도 공급하지 못한다는 서술은 그 축에서 거짓이다.
-% 2026-11-12 (에디터 게이트 반영). 위 임시 제목도 두 곳에서 과대였다.
-% (1) 'Designations Validate Detectability' 의 복수형이 지정 8건 중
-%     1건(DPGME 특허)에만 해당하고, 초록은 그 1건조차 '작용제 응답과
-%     대조한 검증은 아니다' 로 부정한다.
-% (2) 'Supports' 는 결론부 다음 문장이 해체한다 — 유효매칭 기준
-%     316/680위, 매칭 1건, 그 1건은 측정 온도차 안쪽.
-% 또한 q=0.0430 을 만든 측정은 동일 몰농도 용액(아세토니트릴) 투여이므로
-% 증기압이 전달량을 지배한다는 기작 주장의 근거가 되지 못한다.
-% 제목이 지탱하는 범위를 문헌 발견까지로 내린다.
-% 2026-11-12 Ku 확정. Perspective 제안서를 거치지 않고 Article 로 바로
-% 투고한다(커버레터 28행·183행이 이미 Article 과 8면 한도로 적는다).
-% 2026-11-12 (정합성 점검). 두 곳을 더 좁힌다.
-% (1) 'Were Designated for Other Measurements' 는 3종 전부가 다른 측정으로
-%     지정됐다고 읽힌다. 디클로로메탄은 지정 문서가 아예 없다(res:docs).
-%     'or Not at All' 을 붙인다.
-% (2) 'Descriptor Comparison' 이 휘발성 축을 포함하는지 애매했다. 휘발성도
-%     유효매칭 기준으로는 316/680 이고 유일 매칭이 온도 불일치 안이므로
-%     정착되지 않는다. 'No Descriptor Axis' 로 명시해 세 축을 모두 덮는다.
-%
-% 2026-11-13 (GATE 8 9차 — 편집장 + 리뷰어 5인, 합계 -1). 위 2026-11-12
-% 항목 두 개가 뒤집혔다. 이력이므로 지우지 않고 여기 적는다.
-% (1) 59-60 행의 'q=0.0430 으로 일치한다' 는 철회됐다. 그 값은 사전지정
-%     형태가 아니라 그것이 p=0.0809 를 낸 뒤 같은 날 교체된 형태의 값이다
-%     (커밋 5b6fb2c 10:06 등록 -> afb6f14 10:38 음성 보고 -> cab9aec 14:54
-%     합성 교체). 사전지정 형태를 보고값으로 복원하고 채널별 형태는 선언된
-%     사후 민감도로 내렸다. V1(p=0.0206)은 등록형과 보고형이 같으므로 유지.
-% (2) 70-71 행의 'Article 로 바로 투고' 가 Perspective 로 바뀌었다.
-%     ACS 현행 저자지침(2026-10-05 갱신)은 Article 에 본문 Experimental
-%     Section 을 요구하는데 이 원고에는 새 실험이 없다. Perspective 는
-%     'neither reports of original research nor reviews' 이고 비초청 투고가
-%     가능하며 한도가 같다(양쪽 10,000 단어). 종전의 '8면' 은 다른 ACS
-%     페이지에서 온 값이고 두 페이지가 충돌한다 — 단어로 센다.
-% (3) 제목을 주장문에서 방향을 가리키는 형태로 바꿨다. 측정법 명기 요건은
-%     초록의 '29-component colorimetric sensor array' 로 충족한다.
-%
-% 2026-11-13 (2) Ku 확정. Article 로 되돌린다. 위 (2) 의 근거가 오독이었다.
-% 같은 ACS 페이지가 "Articles may be theoretical or they may report
-% experimental results" 라고 적는다. 이론 논문을 받는 저널이 습식 실험 절을
-% 요구할 수 없고, 'experimental section is required to be in the main
-% article' 의 실제 의미는 옆 문장 "It is not acceptable to place important
-% details of the experiments in the Supporting Information" 이다. 본문 2절에
-% Methods 6소절이 있으므로 요건은 충족된다.
-% 결정적인 것은 Perspective 쪽 배제 조항 둘이다 — "neither reports of
-% original research nor reviews" 와 "not intended to be accounts or analyses
-% of an individual's personal research". 이 원고는 Methods·Results 를 들어
-% 내지 않으면 둘 다 피할 수 없고, 3.5 절은 자기 실험실 어레이 재분석이다.
-% 범주 조항은 못 고치고 분량은 고칠 수 있으므로 Article 로 간다.
-% 분량: ACS 셈법 9.86면 -> 8면. 공시는 버리지 않고 SI 로 위치만 옮긴다.
 \title{What Chemical Warfare Agent Simulants Are Validated For, and What
 Descriptor Comparisons Can Decide}
 
-% 2026-11-01 Ku 지시 저자 구성. 공동1저자 해제(Ku 단독), Jeongyun Kim 과
-% Miae Kim 이 2·3저자, Doo-Hee Lee 4저자(교신 해제), Jin Yoo 5저자,
-% Yoon Jeong Jang 단독교신. 비교신저자 주소는 공개 저장소에 두지 않고
-% 투고 시스템에만 입력한다 (2026-11-07, GATE8 13차 R5 지적).
 \author{Ku Kang}
 \affiliation[CBDRI]{Chemical, Biological, Radiological and Nuclear (CBRN) Defense
 Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
@@ -136,13 +38,6 @@ Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
 Research Institute, Ministry of National Defense, Seoul, Republic of Korea}
 \email{yjjangchem@korea.kr}
 
-% ORCID (제출 시스템 입력용):
-%   Ku Kang          0000-0001-8739-218X
-%   Jeongyun Kim     0009-0004-1377-8572
-%   Miae Kim         없음 (2026-10-24 Ku 확인, 추적 종료)
-%   Doo-Hee Lee      0000-0002-5116-2064
-%   Jin Yoo          0000-0002-7738-8424
-%   Yoon Jeong Jang  0000-0002-5625-2528
 
 
 \keywords{chemical warfare agent simulant, descriptor space, DMMP,
@@ -150,13 +45,6 @@ exact permutation test, acute exposure guideline level, dual-use}
 
 \begin{document}
 
-% TOC 그래픽. ACS 규격은 3.25 x 1.75 in 이고 make_toc_acs.py 가 600 dpi
-% 실척(1950 x 1050 px)으로 만든다. graphical_abstract.png 는 JHM 전용
-% 산출물이므로 쓰지 않는다.
-%
-% 2026-11-10 해소. 철회 헤드라인을 교체하고 도판을 현행 논지((a) 패널별
-% 유효 매칭, (b) 구성별 보정 후 q)로 다시 그렸다. 렌더 후 눈으로 확인했고
-% 범주 이름 겹침을 한 번 고쳤다. 1950 x 1050 px 확인.
 \begin{tocentry}
 \includegraphics[width=3.25in]{toc_acs.png}
 \end{tocentry}
@@ -182,8 +70,8 @@ panel moving the one compound our own source for two incumbents also calls a
 simulant takes 0.163 to 0.023. Volatility, the axis the criterion names, is the
 one on which the designation is distinguishable from chance ($p = 0.0206$). The
 corrective is a declaration, not a replacement compound: a defensible claim must
-name the measurement it rests on and fix panel, space, statistic and weighting
-in advance.
+name the measurement it rests on and fix panel, space, statistic, comparison
+pool and weighting in advance.
 \end{abstract}
 
 \section{Introduction}
@@ -210,8 +98,8 @@ differs by subfield \cite{bartelthunt2008,mondloch2015,ebeam}, but the inference
 always runs from simulant to agent on a resemblance argument.
 
 The convention is property matching. A recent critical review of liquid,
-low-toxicity simulants states the criterion plainly --- align hydrophobicity,
-volatility and solubility with the agent's --- and describes the simulants it
+low-toxicity simulants states the criterion plainly, align hydrophobicity,
+volatility and solubility with the agent's, and describes the simulants it
 assesses as presenting minimal toxicity risks \cite{webb2025}. That review
 covers liquid-phase sampling, but the same criterion underwrites vapour-phase
 detection, where the quantity of interest is a chemical response.
@@ -223,9 +111,9 @@ frameworks it has been examined directly: four common simulants and two nerve
 agents simulated across 2969 frameworks reproduced agent adsorption behaviour
 only partially \cite{agrawal2018}. The analogous question for the electronic
 properties governing a chemical response has not been asked. A cheminformatic
-attempt at the selection problem predates this one --- Lavoie et al.\ applied
+attempt at the selection problem predates this one. Lavoie et al.\ applied
 pharmaceutical similarity search to simulant identification, seeking compounds
-close to the agents but less toxic \cite{lavoie2011} --- and what we add is that
+close to the agents but less toxic \cite{lavoie2011}. What we add is that
 the compounds the detection literature settled on were not reached by it or by
 any comparable procedure we could find. The second assumption is that a simulant
 is safe, usually supported by the absence of an agent-class hazard label rather
@@ -305,14 +193,18 @@ twenty-eight-compound panel is reported throughout with equal numerical detail,
 because what it shows beside the larger one is the paper's result. All class
 labels were read from a single canonical table and never assigned by hand.
 
-Panel, space, statistic and descriptor weighting were not fixed before the
-analysis was run, and this paper's conclusion is that they should be; we state
+Panel, space, statistic, comparison pool and descriptor weighting were not
+fixed before the analysis was run, and this paper's conclusion is that they
+should be; we state
 that here so the standard we recommend can be applied to the work recommending
 it. The thirty-five-compound panel was built, and designated primary, after the
 twenty-eight-compound result was in hand, which is the same post hoc choice this
 paper catalogues in others. Supporting Information
-Section~\ref{S-meth:prespec} sets out each of the four choices, when it was
-made and what the alternative gives.
+Section~\ref{S-meth:prespec} sets out each of the five choices, when it was
+made and what the alternative gives, with the block-weighting alternative in
+Table~\ref{S-tab:blockbalance}, the per-panel match counts in
+Table~\ref{S-tab:si-ascl3} and the relabelling null in
+Table~\ref{S-tab:premisenull}.
 
 \subsection{Descriptors and descriptor spaces}
 Structural and physicochemical descriptors (51 after excluding run metadata)
@@ -441,16 +333,16 @@ chemical warfare agent simulants, we found that two carry documented
 designations for purposes other than the one they now serve and the third
 carries none. Supporting Information Table~\ref{S-tab:designations} grades every
 designation we located by what its document does rather than by how
-authoritative it looks, with the source URL and search date for each. Both of
-DMMP's concern transport through a barrier: canister and cartridge filtration
-against GB and HD in a NIOSH respirator programme \cite{niosh2002simulant}, a
-document that also states its simulant information is not a recommendation of
-any simulant, and fabric penetration against VX in the Man-in-Simulant Test
-assessment \cite{nrc1997mist}. DPGME is designated in a US Army patent for a
+authoritative it looks, with the source URL and search date for each. The two we
+located for DMMP both concern transport through a barrier: canister and
+cartridge filtration against GB and HD in a NIOSH respirator programme
+\cite{niosh2002simulant}, a document that also states its simulant information
+is not a recommendation of any simulant, and fabric penetration against VX in
+the Man-in-Simulant Test assessment \cite{nrc1997mist}. DPGME is designated in a US Army patent for a
 simulant training composition \cite{seitzinger2006simulant} which requires
-detectability rather than resemblance: its first claim asks only that the
-mixture be present in an amount sufficient to be detectable by a vapour
-detection apparatus. No comparison with an agent's response is given, so the
+detectability rather than resemblance: what its first claim asks of the
+vapour-generating component is that it be present in an amount sufficient to be
+detectable by a vapour detection apparatus. No comparison with an agent's response is given, so the
 structure is DMMP's: a designation exists and it validates that an instrument
 reacts, not that it reacts as it would to the agent. For dichloromethane we
 found no designating document of any kind, and it is present in this role only
@@ -516,8 +408,9 @@ does not depend on the threshold: no incumbent is the nearest non-agent compound
 to any of the eleven agents, so the count stays at zero however far the
 threshold is relaxed, and because zero is the smallest attainable count the
 resampling comparison returns $p=0.479$, the smallest value it can ever return
-and a comparison that cannot reach significance whatever the data. Supporting
-Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
+and a comparison that cannot reach significance whatever the data. Resampling
+the descriptors leaves that contrast in place (Figure~\ref{fig:main}b), and
+Supporting Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
 reliabilities, which reverse what the point estimates suggest, and the dimension
 and subspace controls.
 
@@ -536,7 +429,7 @@ six accounting schemes of Supporting Information
 Section~\ref{S-meth:multiplicity} the eighteen-test family leaves that result at
 0.163 and the closest any scheme brings it without crossing is 0.077. Had the
 mean difference been named in advance as the single statistic it would survive
-at $q=0.042$ --- but we computed six and chose among them after seeing them,
+at $q=0.042$, but we computed six and chose among them after seeing them,
 which is the circumstance the correction exists for, and that declaration is one
 nobody in this literature makes.
 
@@ -584,9 +477,10 @@ sufficient.
 \subsection{How many agents have a valid simulant depends on the panel}
 \label{res:match}
 
-Supporting Information Table~\ref{S-tab:match} lists, for each agent on the
-twenty-eight-compound panel, the nearest incumbent simulant in the merged space
-as a multiple of that space's typical nearest-neighbour separation. Sarin
+Figure~\ref{fig:main}c and Supporting Information Table~\ref{S-tab:match} give,
+for each agent on the twenty-eight-compound panel, the nearest incumbent
+simulant as a multiple of that space's typical nearest-neighbour separation,
+and Figure~\ref{fig:main}d the permutation null behind the nominal value. Sarin
 (1.187), soman (1.446) and cyclosarin (1.594) are matched, all three by DMMP;
 tabun at 2.004 and VX at 3.057 are not. Tabun misses the threshold of 2 by
 0.004, and we flag that rather than report the count as firm: an earlier version
@@ -644,9 +538,9 @@ exemption from the eighteen holds for this one; corrected within the two tests
 registered for this axis it stands at $q = 0.0412$. That registration is a
 statistic named inside the script that computes it, with no external timestamp,
 and Supporting Information Section~\ref{S-meth:vol} sets out what it is worth
-and what the value becomes under wider families. It does not carry to the match
-criterion: the valid-match count returns one match at $p = 0.4647$, pairing
-DPGME with soman across a gap smaller than the mismatch between the temperatures
+and what the value becomes under wider families. It does not carry to the match criterion
+(Figure~\ref{fig:main}e): the valid-match count returns one match at
+$p = 0.4647$, pairing DPGME with soman across a gap smaller than the mismatch between the temperatures
 at which the two vapour pressures were measured, so nothing rests on it. Three
 of the eleven agents have an interferent nearer than any incumbent here as
 well.
@@ -811,7 +705,8 @@ distinguishable from chance is the one the stated criterion names.
 
 A simulant result should therefore name the measurement the compound was
 validated against and the comparison set it was tested in, and should fix the
-panel, space, statistic, weighting and treatment of conformer-dependent
+panel, space, statistic, comparison pool, weighting and treatment of
+conformer-dependent
 descriptors before the test is run; we add the last because a reproduction check
 caught us not counting it. We propose no replacement compound, because proposing
 one would repeat the error this paper is about.
@@ -839,10 +734,6 @@ writing -- review and editing, supervision, project administration.
 \section*{Notes}
 The authors declare no competing financial interest.
 
-% 2026-11-12. ACS 는 생성형 AI 사용 공시를 Acknowledgments 에 두도록 한다
-% (출판사별 위치: Elsevier 는 참고문헌 앞 독립 절, Springer Nature 는
-% Methods). 종전에는 Notes 에 있었으므로 옮긴다. 도구·용도·검증 범위를
-% 함께 적는다.
 \section*{Acknowledgement}
 This research did not receive any specific grant from funding agencies in the
 public, commercial, or not-for-profit sectors. During the preparation of this
@@ -853,13 +744,6 @@ value is read from the output of the deposited scripts. The authors reviewed and
 edited all content and take responsibility for it.
 
 \section*{Data and code availability}
-% 2026-11-12. 태그명을 acs-submission-20261112 로 확정해 아래에 적었다.
-% Ku 가 푸시할 때 git filter-repo 로 이력의 공저자 이메일을 제거한 뒤
-% 같은 이름으로 태그를 만들어 커밋과 함께 올린다(--follow-tags).
-% v1.0 은 쓸 수 없다: 2026-10-24 커밋이고, 원고가
-% 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
-% panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
-% 검사 A-tag 가 acs-submission-* 이 아닌 태그를 적으면 실패시킨다.
 \begingroup\sloppy
 Descriptor tables, parsed AEGL values with sources, permutation distributions,
 candidate tables, the EPA source document every toxicity value was parsed from,

@@ -4474,6 +4474,42 @@ def main():
                     f'예치 태그 {_tag} 가 원격에 없다 (검사 A-tag): '
                     '원고 Data Availability 가 공개돼 있지 않은 상태를 '
                     '가리킨다. 태그를 푸시하거나 원고에서 뺄 것')
+            else:
+                # 2026-11-13 (GATE 8 12차). 종전에는 태그 '이름' 이 원격에
+                # 있으면 통과였다. 그래서 원격 태그가 두 커밋 뒤에 고정돼
+                # 원고가 이름으로 부르는 예치물(null_convention.json)이
+                # 공개본에 없는 상태가 PASS 를 받았다. 이름이 아니라
+                # 커밋을 본다. --follow-tags 는 이미 있는 원격 태그를
+                # 옮기지 못하므로 교정에는 --force 가 필요하다.
+                _rtag = None
+                for _ln in _rem.stdout.splitlines():
+                    _h, _, _r = _ln.partition('\t')
+                    if _r == f'refs/tags/{_tag}^{{}}':
+                        _rtag = _h.strip()
+                    elif _r == f'refs/tags/{_tag}' and _rtag is None:
+                        _rtag = _h.strip()
+                try:
+                    _loc = _sp.run(['git', 'rev-list', '-n1', _tag],
+                                   capture_output=True, text=True,
+                                   timeout=30).stdout.strip()
+                    _head = _sp.run(['git', 'rev-parse', 'HEAD'],
+                                    capture_output=True, text=True,
+                                    timeout=30).stdout.strip()
+                except Exception:
+                    _loc = _head = ''
+                if _rtag and _loc and _rtag != _loc:
+                    fails.append(
+                        f'예치 태그 {_tag} 의 원격 커밋이 로컬과 다르다 '
+                        f'(검사 A-tag): 원격 {_rtag[:7]} 대 로컬 '
+                        f'{_loc[:7]}. 공개본이 원고가 인용하는 산출물을 '
+                        '담지 않는다. git push --force origin '
+                        f'{_tag} 로 맞출 것 (--follow-tags 는 이미 있는 '
+                        '원격 태그를 옮기지 못한다)')
+                elif _loc and _head and _loc != _head:
+                    fails.append(
+                        f'예치 태그 {_tag} 가 HEAD 가 아니다 (검사 A-tag): '
+                        f'태그 {_loc[:7]} 대 HEAD {_head[:7]}. 투고본과 '
+                        '예치본이 다른 상태다')
 
     # (B2d) 투고 패키지 사본이 작업본과 어긋났는지 (2026-11-07 신설).
     #
@@ -4499,7 +4535,16 @@ def main():
             if not _o2.path.exists(_b):
                 _sd.append(f'  submission/{_n} 없음')
             elif not _fc.cmp(_a, _b, shallow=False):
-                _sd.append(f'  submission/{_n} 가 paper/{_n} 와 다르다')
+                # 2026-11-13 (GATE 8 12차). 투고 사본은 sync 가 전행 주석을
+                # 뗀다 (ACS 가 조판용 소스를 받고, 작업 주석에 저널 재타깃
+                # 경위와 미해결 TODO 가 들어 있었다). 그러므로 바이트가
+                # 아니라 '주석을 뗀 내용' 이 같은지를 본다.
+                def _strip(_f):
+                    return [l for l in open(_f, encoding='utf-8')
+                            if not l.lstrip().startswith('%')]
+                if _strip(_a) != _strip(_b):
+                    _sd.append(f'  submission/{_n} 가 paper/{_n} 와 '
+                               '다르다 (주석 제외 비교)')
         if _o2.path.isdir('submission/code'):
             _root = {_o2.path.basename(x) for x in
                      _glob.glob('*.py') + _glob.glob('*.sh')

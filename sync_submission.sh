@@ -25,6 +25,20 @@ cp -p paper/main.tex paper/refs.bib paper/cover_letter.tex \
 # 2026-11-13. supplementary.tex 가 \input 하는 표 12개가 패키지에 없어
 # 조판소에서 'File tab_sparse.tex not found' 로 멈춘다. GATE 8 11차 적발.
 cp -p paper/tab_*.tex submission/
+
+# 2026-11-13 (GATE 8 12차). ACS 는 조판용 소스 .tex 를 받는다. 작업 주석
+# 176행에 저널 재타깃 경위, 폐기 라인의 결함 목록, 미해결 TODO 가 들어
+# 있어 편집장이 읽게 된다. 작업본은 그대로 두고 패키지 사본에서만 뺀다.
+# 줄 전체가 주석인 것만 지운다 (줄 끝 % 는 LaTeX 의미가 있을 수 있다).
+for f in main supplementary cover_letter tab_ablation tab_family tab_sparse \
+         tab_plocal tab_volatility tab_vpairing tab_premisenull tab_registers \
+         tab_designations tab_dyepanel tab_match tab_failaudit tab_blockbalance \
+         tab_si-ascl3; do
+  [ -f "submission/$f.tex" ] || continue
+  sed -i '/^[[:space:]]*%/d' "submission/$f.tex"
+done
+echo "[sync] 투고 사본에서 전행 주석 제거"
+
 for f in acs-main.bib acs-supporting.bib; do
   [ -f "paper/$f" ] && cp -p "paper/$f" "submission/$f"
 done

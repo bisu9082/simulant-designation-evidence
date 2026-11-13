@@ -171,6 +171,6 @@ dx.legend(handles=[Line2D([], [], marker='s', ls='', ms=12, mfc=c, mec='white',
           loc='lower right', frameon=False, bbox_to_anchor=(1.0, 0.02))
 dress(dx); panel_label(dx, 'd')
 
-fig.savefig('outputs/Fig_electronic_space.png', dpi=200,
+fig.savefig('outputs/Fig_electronic_space.png', dpi=600,
             bbox_inches='tight', facecolor='white')
 print('[fig] outputs/Fig_electronic_space.png')

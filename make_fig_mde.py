@@ -43,8 +43,13 @@ for key, dat, col, lbl in [
     p = np.maximum(p, floor)
     ax.plot(d, p, color=col, lw=3.3, zorder=3, label=lbl)
     ax.axhline(floor, color=col, ls=(0, (1, 2.4)), lw=1.6, zorder=1)
-    ax.text(d.max(), floor * 1.12, f'exact floor {floor:.1e}',
-            fontsize=FS_ANNOT - 2, color=col, ha='right', va='bottom')
+    # 2026-11-13 (GATE 8 12차). 두 하한이 선형축에서 1 px 차이라 두 라벨이
+    # 포개져 인쇄됐다. x 로 갈라 놓고 y 는 축 하단에 고정한다.
+    _xpos = d.min() + (0.06 if 'thirty-five' in lbl else 0.52) * (d.max() - d.min())
+    ax.annotate(f'exact floor {floor:.1e}',
+                xy=(_xpos, floor), xytext=(_xpos, 0.055 if 'thirty-five' in lbl else 0.095),
+                fontsize=FS_ANNOT - 2, color=col, ha='left', va='bottom',
+                arrowprops=dict(arrowstyle='-', color=col, lw=1.0))
 
 ax.axhline(0.05, color=C_REF, ls=(0, (5, 3)), lw=2.3, zorder=2)
 ax.text(1.46, 0.057, r'$\alpha = 0.05$', fontsize=FS_ANNOT, color=C_REF,
@@ -83,7 +88,7 @@ ax.legend(handles=[Line2D([], [], color=C_SIM, lw=3.3,
           loc='upper left', frameon=False)
 
 fig.tight_layout()
-fig.savefig('outputs/Fig_mde.png', dpi=200, bbox_inches='tight')
+fig.savefig('outputs/Fig_mde.png', dpi=600, bbox_inches='tight')
 print('[fig] outputs/Fig_mde.png')
 
 for k, v in [('mde_delta35', f'{mde:.2f}'),

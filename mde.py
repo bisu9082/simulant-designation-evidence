@@ -91,7 +91,11 @@ def run(label, path, sim_cls):
     rows, mde = [], None
     for d in GRID:
         obs, _, _ = observed_at(D, i_real, i_sim, i_other, nn_med, d)
-        p = float((null <= obs).sum() / len(null))
+        # 2026-11-13 (GATE 8 12차). 전수치환의 p 하한은 1/len(null) 이고
+        # 0 은 반환될 수 없는 값인데, 예치 JSON 이 곡선 151점 중 94·133점을
+        # p = 0 으로 담고 있었다. 하한에서 자르고 하한을 같이 기록한다.
+        _floor = 1.0 / len(null)
+        p = max(float((null <= obs).sum() / len(null)), _floor)
         rows.append(dict(delta=float(d), observed=obs, p=p))
         if mde is None and p < ALPHA:
             mde = float(d)
@@ -130,7 +134,8 @@ def run(label, path, sim_cls):
         print(f'  BH18 역치({BH18:.5f})에서의 최소검출효과: '
               f'delta = {mde_bh:.2f}  '
               f'(중위 격차 {_med:.3f} 대비 {_med / mde_bh:.2f}배)')
-    return dict(label=label, n_dims=nk, n_perm=len(null), nn_median=nn_med,
+    return dict(label=label, n_dims=nk, n_perm=len(null),
+                p_floor=1.0 / len(null), nn_median=nn_med,
                 p_at_zero=p0, mde_delta=mde, alpha=ALPHA,
                 mde_delta_bh18=mde_bh, bh18_level=BH18,
                 thresholds=thresholds,

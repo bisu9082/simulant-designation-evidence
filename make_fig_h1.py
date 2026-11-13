@@ -191,5 +191,5 @@ fig_annot.record('Fig_h1', 'quadrant',
                  f'faithful and safe at the incumbent bar: {n_strict}; '
                  f'one order of magnitude below it: {len(best)}.')
 
-fig.savefig('outputs/Fig_h1.png', dpi=200, bbox_inches='tight', facecolor='white')
+fig.savefig('outputs/Fig_h1.png', dpi=600, bbox_inches='tight', facecolor='white')
 print('[fig] outputs/Fig_h1.png')

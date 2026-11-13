@@ -187,7 +187,7 @@ def main():
                         color=col[ag], fontsize=10, fontweight='bold',
                         va='center')
 
-    fig.savefig('outputs/Fig_talk_response.png', dpi=200,
+    fig.savefig('outputs/Fig_talk_response.png', dpi=600,
                 bbox_inches='tight', facecolor='white')
     print('[done] outputs/Fig_talk_response.png')
     return 0

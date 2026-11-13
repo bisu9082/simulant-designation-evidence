@@ -511,11 +511,11 @@ fig_annot.record('Fig_spaces', 'panel_d',
                  'scheme.')
 
 
-fig.savefig('outputs/Fig_main.png', dpi=200, bbox_inches='tight',
+fig.savefig('outputs/Fig_main.png', dpi=600, bbox_inches='tight',
             facecolor='white')
-fig2.savefig('outputs/Fig_spaces.png', dpi=200, bbox_inches='tight',
+fig2.savefig('outputs/Fig_spaces.png', dpi=600, bbox_inches='tight',
              facecolor='white')
-figS.savefig('outputs/Fig_plocal.png', dpi=200, bbox_inches='tight',
+figS.savefig('outputs/Fig_plocal.png', dpi=600, bbox_inches='tight',
              facecolor='white')
 print('[fig] outputs/Fig_spaces.png')
 print('[fig] outputs/Fig_plocal.png')

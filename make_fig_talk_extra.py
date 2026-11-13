@@ -73,7 +73,7 @@ def fig_dmmp():
     ax.set_xlabel(r'concentration ($\mu$M)')
     ax.set_ylabel('cosine, DMMP response pattern vs agent')
     fig.tight_layout()
-    fig.savefig('outputs/Fig_talk_dmmp.png', dpi=200,
+    fig.savefig('outputs/Fig_talk_dmmp.png', dpi=600,
                 bbox_inches='tight', facecolor='white')
     print('[done] outputs/Fig_talk_dmmp.png')
 
@@ -147,7 +147,7 @@ def fig_tox():
                  loc='left', fontweight='bold')
 
     fig.tight_layout()
-    fig.savefig('outputs/Fig_talk_tox.png', dpi=200,
+    fig.savefig('outputs/Fig_talk_tox.png', dpi=600,
                 bbox_inches='tight', facecolor='white')
     print('[done] outputs/Fig_talk_tox.png')
 

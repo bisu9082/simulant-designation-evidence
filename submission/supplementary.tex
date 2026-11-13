@@ -1,21 +1,10 @@
-% simulant — Supporting Information (2026-10-14 분리).
-% 본문이 14,297 단어로 JHM Research Paper 통상 범위의 두 배였다. 패널 논증과
-% 직접 맞물리지 않는 독성축·QSAR·탈동조·인 국소반응성을 여기로 옮긴다.
-% 상호참조는 xr 로 건다. 빌드 순서는 build_paper.sh 가 고정한다.
 \documentclass[11pt,a4paper]{article}
 \usepackage[margin=2.4cm]{geometry}
 \usepackage{times}
 \usepackage{amsmath,amssymb,graphicx,booktabs}
 \usepackage[hidelinks]{hyperref}
-% 2026-11-12. SI 는 article 클래스라 natbib 이 없었고, achemso.bst 가
-% 내놓는 natbib 형식 레이블이 그대로 펼쳐져
-% [Kang et al.(2026)Kang, Kim, Jang, Shin, Kim, and Yoo] 처럼 조판됐다.
-% 그것이 Overfull 32건의 원인이다. ACS 본문과 같은 위첨자 숫자로 맞춘다.
 \usepackage[super,comma,sort&compress]{natbib}
 \usepackage{xr}
-% 2026-11-13 (GATE 8 11차). 본문에만 넣고 SI 에 이식하지 않아 같은 결함이
-% 남아 있었다. xurl 은 \texttt 안의 긴 파일명·URL 을 끊고, float 분수는
-% 표 15개가 논의 절에서 20쪽 뒤로 밀리는 것을 줄인다.
 \usepackage{xurl}
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.92}
@@ -227,16 +216,17 @@ states why.
 \section{Which choices were not fixed in advance, and when each was made}
 \label{meth:prespec}
 
-Panel, space, statistic and descriptor weighting were not fixed before the
-analysis was run. Each is set out here with the alternative it has, because the
-standard the main text recommends has to be applied to the work recommending it.
+Panel, space, statistic, comparison pool and descriptor weighting were not
+fixed before the analysis was run. Each of the five is set out here with the
+alternative it has, because the standard the main text recommends has to be
+applied to the work recommending it.
 
 The panel. The thirty-five-compound panel was built, and designated primary,
 after the twenty-eight-compound result was in hand, when an audit found we had
 never run a panel containing the other compounds the literature treats as
-simulants. The principle we give for designating it primary --- that a
+simulants. The principle we give for designating it primary, that a
 comparison asking whether three compounds are close to the agents while
-excluding the obvious alternatives is not a test of those three --- could have
+excluding the obvious alternatives is not a test of those three, could have
 been stated before the data were seen and was not.
 
 The space. The merged space is reported alongside both component spaces rather
@@ -253,8 +243,8 @@ family.
 The comparison pool. Each relabelling designates three non-agents as simulants,
 and the statistic needs a pool to compare them against. We rebuild that pool as
 the complement of the designation, so it changes with the labelling. Two other
-readings are defensible: hold the pool fixed at the sixteen compounds we
-labelled interferents, or take that set minus whatever the labelling designated.
+readings are defensible: hold the pool fixed at the fourteen compounds we
+labelled interferents on this panel, or take that set minus whatever the labelling designated.
 The three give, for the prespecified mean difference,
 
 \begin{center}
@@ -470,8 +460,6 @@ fixed by the question and the descriptor set is not. The descriptors are not
 sampled observations drawn from a defined population, so the replicates are
 read as a sensitivity analysis over descriptor choice and the reported
 intervals are percentile ranges across replicates rather than confidence
-% 2026-10-24. 귀무기댓값 절차가 초록에만 수치로 등장하고 방법 선언이 없었다.
-% 여섯 페르소나 전원이 같은 자리를 짚었다.
 intervals in the sampling sense. The same replicates serve
 both simulant definitions, so the difference is paired.
 
@@ -686,7 +674,6 @@ rather than the four raises tabun's share to 72.1\% and sarin's to 48.8\%.
   coordinate and is the least defensible of the variants. The one-sided $p$ is
   the merged-space exact enumeration over all $\binom{17}{3}=680$ designations.}
   \label{tab:sparse}
-  % 2026-11-03. outputs/tab_sparse.tex 로 자동 생성.
 \input{tab_sparse}
 \end{table}
 
@@ -912,7 +899,6 @@ Table~\ref{tab:family} and they do not agree.
 \section{Dimensionality and subspace controls}
 \label{meth:dimdetail}
 
-% 2026-11-09. 본문 3.2 의 주성분 단락을 여기로 옮겼다 (ACS 8면 한도).
 Figure~\ref{fig:spaces}a and b give the spaces on the twenty-eight-compound
 panel. The leading structural component is a size axis carrying 32.8\% of the
 variance and the leading electronic component loads on the two orbital energies
@@ -924,8 +910,6 @@ chemical reason: at equal per-descriptor weighting the structural descriptors,
 thirty-five on the smaller panel and thirty-eight on the primary one, outvote
 three electronic ones.
 
-% 2026-11-09. 본문 Figure 2 를 여기로 옮겼다 (ACS 8면 한도). 본문
-% 3.2 는 수치를 산문으로 유지하고 이 도판을 가리킨다.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{Fig_spaces.png}
@@ -1132,7 +1116,6 @@ uncollected rather than imputed.
   sources disagree are deposited in \texttt{outputs/volatility\_space.json}.}
   \label{tab:volatility}
   \small
-  % 2026-11-12. outputs/tab_volatility.tex 로 자동 생성.
 \input{tab_volatility}
 \end{table}
 
@@ -1251,7 +1234,6 @@ Section~\ref{res:arraydetail} reaches the same place by a shorter route.
   interferent is.}
   \label{tab:vpairing}
   \small
-  % 2026-11-12. outputs/tab_vpairing.tex 로 자동 생성.
 \input{tab_vpairing}
 \end{table}
 
@@ -1287,14 +1269,6 @@ section as a question put to that document rather than as an answer about it.
 The measurements in the rest of the paper do not depend on how that question
 comes out.
 
-
-The literature searched was: NIOSH and NPPTL respirator documents, US Army and
-DEVCOM reports indexed by the Defense Technical Information Center, United
-States patents assigned to the Department of the Army, National Academies
-assessments of Department of Defense test programmes, ASTM and NATO standards
-catalogues, the peer-reviewed simulant literature cited in the main text, and
-the US Army Test Operations Procedures reachable through the same index.
-National CBRN defence manuals are generally not public.
 
 \begin{table}[!htb]
 \centering
@@ -1373,12 +1347,9 @@ note.
 
 \subsection{The two-sided conventions}
 
-The reported $p$ is one-sided (Section~\ref{M-sec:perm}). Scored two-sided as
-distance from the null mean the same statistic gives 0.044, 0.482 and 0.028 for
-the structural, electronic and merged spaces, and at twice the smaller tail
-0.056, 0.550 and 0.050. The hypothesis under test is directional, since
-property matching is claimed to place simulants closer to the agents than
-arbitrary compounds would be, so the reported $p$ is one-sided. The choice is
+The hypothesis under test is directional, since property matching is claimed to
+place simulants closer to the agents than arbitrary compounds would be, so the
+reported $p$ is one-sided (Section~\ref{M-sec:perm}). The choice is
 consequential and we give all three conventions: scored two-sided as distance
 from the null mean the same statistic gives 0.044, 0.482 and 0.028 for the
 structural, electronic and merged spaces, and at twice the smaller tail 0.056,
@@ -1524,10 +1495,6 @@ Section~\ref{meth:dboot} the three incumbents separate. DMMP is nearest sarin in
 Dichloromethane is nearest a G-series agent in 6.0\%, sitting instead with the
 choking and blood agents. DPGME divides evenly, sulfur mustard in 41.0\% and the
 G series in 53.4\%. % 2026-11-03 (2차). 종전 문장은 특허 문언을 직접 인용으로 적었다
-% (특허가 DPGME 를 G계열 모사체로 부른다는 문언). 원문 확인 불가로 철회.
-% 철회한 문자열 자체는 B2 블랙리스트에 올려 두었으므로 여기 적지 않는다.
-% 같은 특허에 대해 res:docs 가 사실로 적는 것은 '요구된 성질이 IMS
-% 검출성' 하나다. 직접 인용은 확인 전에는 쓰지 않는다.
 
 One agent deserves a note of its own. Lewisite's incumbent simulant is
 dichloromethane, which shares neither its central element nor its halogen
@@ -1669,10 +1636,6 @@ four panel and designation configurations, three spaces and six statistics, in
 full rather than selected from, because the pattern across the cells is the
 finding. Main-text Section~\ref{M-res:panels} states what holds across it.
 
-% 2026-11-03. 이 표는 outputs/tab_ablation.tex 로 자동 생성한다.
-% 종전에는 10열 24수치를 손으로 유지했고, 그래서 T2-1(상관필터
-% 교체)과 T2-8(형태이성질체 재생성)을 전부 통과해 차원 열이
-% 40/42 구판으로 남았다. 생성기는 make_si_tables.py 다.
 \input{tab_ablation}
 
 Two further values belong with Table~\ref{tab:family}. Weighting the 38
@@ -1703,9 +1666,6 @@ differs from the second by two class labels, is below 0.05 under every scheme.}
 \label{tab:family}
 \small
 \setlength{\tabcolsep}{4pt}
-% 2026-11-03. outputs/tab_family.tex 로 자동 생성. 생성기는
-% make_si_tables.py. 종전에는 34수치를 손으로 유지했고 72검정
-% BH 행이 구판으로 남아 있었다.
 \input{tab_family}
 \end{table}
 
@@ -1749,7 +1709,6 @@ the two sets is a global statement while a nearest-neighbour question is local,
 which is why rebuilding the space at the density-functional level moves the
 matched count from one to five (Section~\ref{meth:dft}).
 
-% 2026-11-03 (2차). T2-8 재생성으로 35 가 되었는데 이 문장이 구판이었다.
 The structural space has 35 coordinates and the electronic space has 3. Euclidean
 distance behaves differently in the two, so a difference between them could be
 geometric rather than chemical. We tested that, and it is not. We also tested
@@ -1817,7 +1776,6 @@ That rate is partly an artifact of the descriptors themselves, and we report the
 correction because it is larger than we expected. Three descriptors drawn from a
 correlated pool do not carry three degrees of freedom. Repeating the control on
 ZCA-whitened coordinates (Section~\ref{meth:dimdetail}), where the coordinates are
-% 2026-11-03 (2차). ACS 판본과 같은 교정. 리뷰어 1 적발.
 uncorrelated by construction, the rate falls from 28.95\% to 17.25\% and the
 median $p$ rises from 0.149 to 0.332. The correlation structure of the
 structural block therefore inflates the apparent ease of reaching nominal
@@ -1866,18 +1824,9 @@ family of three spaces by six statistics, and $q$ is the
 Benjamini--Hochberg adjusted value of that family.}
 \label{tab:blockbalance}
 \small
-% 2026-11-03. outputs/tab_blockbalance.tex 로 자동 생성.
-% 종전 q 두 열은 어느 산출물에도 없는 값이었고 두 열의
-% 가족 정의도 달랐다. 이제 양쪽 모두 같은 6개 병합공간
-% 통계량에 대한 BH 최소 q 다.
 \input{tab_blockbalance}
 \end{table}
 
-% 2026-11-03. 종전 산문은 28종 패널에서 매칭이 4에서 3으로 움직인다고
-% 적었다. 그것은 구판 상관필터에서 기준이 4였을 때의 서술이고, 결정적
-% 필터에서는 기준도 3이며 블록 균등에서도 3이다. 표 본문은 이미 3/11 과
-% 3/11 로 갱신되어 있었고 산문과 캡션만 구판으로 남아 있었다.
-% 수치는 outputs/blockbalance.json 실측.
 The valid-match counts do not move under either weighting, on any panel
 construction: zero of eleven on the primary panel with the incumbent three,
 five with the eight designated candidates admitted, and three on the
@@ -2190,9 +2139,6 @@ five are nearer something else than themselves and one in which two in five
 are. All results below use the centred patterns, with those caveats
 attached.
 
-% 2026-11-03 (T1-13). 종전에는 바닥이 네 셀에서만 계산되어 있었다. d3 두
-% 셀이 Mantel 관문 뒤에 있어 빠졌고, 빠진 셀 하나가 여유 최소값이다.
-% 수치는 outputs/rollback_c.json 의 deltaE.centring_floor 실측.
 
 The measurement bears on Supporting Information Section~\ref{res:plocal}, and it narrows the claim
 rather than confirming it. What replicates across both channels is specific to
@@ -2331,8 +2277,6 @@ are written to that limit.
 \section{The measured safety axis, and the holes in it}
 \label{res:safety}
 
-% 2026-11-09. 본문 Figure 3 을 여기로 옮겼다 (ACS 8면 한도). 본문
-% 3.5 는 수치 셋과 선언만 남기고 이 절을 가리킨다.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{Fig_toxicity.png}

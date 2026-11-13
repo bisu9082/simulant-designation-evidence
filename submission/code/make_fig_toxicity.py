@@ -283,6 +283,6 @@ _adj(_tb, x=np.asarray(hd), y=_err, ax=dx, only_move={'text': 'xy'},
 dress(dx); panel_label(dx, 'd')
 
 
-fig.savefig('outputs/Fig_toxicity.png', dpi=200, bbox_inches='tight', facecolor='white')
+fig.savefig('outputs/Fig_toxicity.png', dpi=600, bbox_inches='tight', facecolor='white')
 print('[fig] outputs/Fig_toxicity.png')
 print(f'  (a) {len(H)}종  (b) {len(M)}종  (c)(d) 보류 {len(hd)}종')

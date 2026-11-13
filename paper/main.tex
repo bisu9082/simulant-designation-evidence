@@ -36,6 +36,11 @@
 \SectionNumbersOn
 
 \usepackage[T1]{fontenc}
+% 2026-11-13 (GATE 8 12차). T1 만 쓰면 pdflatex 가 EC 600dpi 비트맵(Type 3)
+% 을 만들어 PDF 텍스트층에서 fi/fl/ff 합자가 전부 사라진다 — 추출하면
+% five -> ve, filter -> lter, significant -> signicant. 편집장 검색과
+% 표절검사가 그 텍스트층 위에서 돈다. lmodern 한 줄로 Type 1 이 된다.
+\usepackage{lmodern}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx,booktabs}
 \usepackage{textcomp}
@@ -182,8 +187,8 @@ panel moving the one compound our own source for two incumbents also calls a
 simulant takes 0.163 to 0.023. Volatility, the axis the criterion names, is the
 one on which the designation is distinguishable from chance ($p = 0.0206$). The
 corrective is a declaration, not a replacement compound: a defensible claim must
-name the measurement it rests on and fix panel, space, statistic and weighting
-in advance.
+name the measurement it rests on and fix panel, space, statistic, comparison
+pool and weighting in advance.
 \end{abstract}
 
 \section{Introduction}
@@ -210,8 +215,8 @@ differs by subfield \cite{bartelthunt2008,mondloch2015,ebeam}, but the inference
 always runs from simulant to agent on a resemblance argument.
 
 The convention is property matching. A recent critical review of liquid,
-low-toxicity simulants states the criterion plainly --- align hydrophobicity,
-volatility and solubility with the agent's --- and describes the simulants it
+low-toxicity simulants states the criterion plainly, align hydrophobicity,
+volatility and solubility with the agent's, and describes the simulants it
 assesses as presenting minimal toxicity risks \cite{webb2025}. That review
 covers liquid-phase sampling, but the same criterion underwrites vapour-phase
 detection, where the quantity of interest is a chemical response.
@@ -223,9 +228,9 @@ frameworks it has been examined directly: four common simulants and two nerve
 agents simulated across 2969 frameworks reproduced agent adsorption behaviour
 only partially \cite{agrawal2018}. The analogous question for the electronic
 properties governing a chemical response has not been asked. A cheminformatic
-attempt at the selection problem predates this one --- Lavoie et al.\ applied
+attempt at the selection problem predates this one. Lavoie et al.\ applied
 pharmaceutical similarity search to simulant identification, seeking compounds
-close to the agents but less toxic \cite{lavoie2011} --- and what we add is that
+close to the agents but less toxic \cite{lavoie2011}. What we add is that
 the compounds the detection literature settled on were not reached by it or by
 any comparable procedure we could find. The second assumption is that a simulant
 is safe, usually supported by the absence of an agent-class hazard label rather
@@ -305,14 +310,18 @@ twenty-eight-compound panel is reported throughout with equal numerical detail,
 because what it shows beside the larger one is the paper's result. All class
 labels were read from a single canonical table and never assigned by hand.
 
-Panel, space, statistic and descriptor weighting were not fixed before the
-analysis was run, and this paper's conclusion is that they should be; we state
+Panel, space, statistic, comparison pool and descriptor weighting were not
+fixed before the analysis was run, and this paper's conclusion is that they
+should be; we state
 that here so the standard we recommend can be applied to the work recommending
 it. The thirty-five-compound panel was built, and designated primary, after the
 twenty-eight-compound result was in hand, which is the same post hoc choice this
 paper catalogues in others. Supporting Information
-Section~\ref{S-meth:prespec} sets out each of the four choices, when it was
-made and what the alternative gives.
+Section~\ref{S-meth:prespec} sets out each of the five choices, when it was
+made and what the alternative gives, with the block-weighting alternative in
+Table~\ref{S-tab:blockbalance}, the per-panel match counts in
+Table~\ref{S-tab:si-ascl3} and the relabelling null in
+Table~\ref{S-tab:premisenull}.
 
 \subsection{Descriptors and descriptor spaces}
 Structural and physicochemical descriptors (51 after excluding run metadata)
@@ -441,16 +450,16 @@ chemical warfare agent simulants, we found that two carry documented
 designations for purposes other than the one they now serve and the third
 carries none. Supporting Information Table~\ref{S-tab:designations} grades every
 designation we located by what its document does rather than by how
-authoritative it looks, with the source URL and search date for each. Both of
-DMMP's concern transport through a barrier: canister and cartridge filtration
-against GB and HD in a NIOSH respirator programme \cite{niosh2002simulant}, a
-document that also states its simulant information is not a recommendation of
-any simulant, and fabric penetration against VX in the Man-in-Simulant Test
-assessment \cite{nrc1997mist}. DPGME is designated in a US Army patent for a
+authoritative it looks, with the source URL and search date for each. The two we
+located for DMMP both concern transport through a barrier: canister and
+cartridge filtration against GB and HD in a NIOSH respirator programme
+\cite{niosh2002simulant}, a document that also states its simulant information
+is not a recommendation of any simulant, and fabric penetration against VX in
+the Man-in-Simulant Test assessment \cite{nrc1997mist}. DPGME is designated in a US Army patent for a
 simulant training composition \cite{seitzinger2006simulant} which requires
-detectability rather than resemblance: its first claim asks only that the
-mixture be present in an amount sufficient to be detectable by a vapour
-detection apparatus. No comparison with an agent's response is given, so the
+detectability rather than resemblance: what its first claim asks of the
+vapour-generating component is that it be present in an amount sufficient to be
+detectable by a vapour detection apparatus. No comparison with an agent's response is given, so the
 structure is DMMP's: a designation exists and it validates that an instrument
 reacts, not that it reacts as it would to the agent. For dichloromethane we
 found no designating document of any kind, and it is present in this role only
@@ -516,8 +525,9 @@ does not depend on the threshold: no incumbent is the nearest non-agent compound
 to any of the eleven agents, so the count stays at zero however far the
 threshold is relaxed, and because zero is the smallest attainable count the
 resampling comparison returns $p=0.479$, the smallest value it can ever return
-and a comparison that cannot reach significance whatever the data. Supporting
-Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
+and a comparison that cannot reach significance whatever the data. Resampling
+the descriptors leaves that contrast in place (Figure~\ref{fig:main}b), and
+Supporting Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
 reliabilities, which reverse what the point estimates suggest, and the dimension
 and subspace controls.
 
@@ -536,7 +546,7 @@ six accounting schemes of Supporting Information
 Section~\ref{S-meth:multiplicity} the eighteen-test family leaves that result at
 0.163 and the closest any scheme brings it without crossing is 0.077. Had the
 mean difference been named in advance as the single statistic it would survive
-at $q=0.042$ --- but we computed six and chose among them after seeing them,
+at $q=0.042$, but we computed six and chose among them after seeing them,
 which is the circumstance the correction exists for, and that declaration is one
 nobody in this literature makes.
 
@@ -584,9 +594,10 @@ sufficient.
 \subsection{How many agents have a valid simulant depends on the panel}
 \label{res:match}
 
-Supporting Information Table~\ref{S-tab:match} lists, for each agent on the
-twenty-eight-compound panel, the nearest incumbent simulant in the merged space
-as a multiple of that space's typical nearest-neighbour separation. Sarin
+Figure~\ref{fig:main}c and Supporting Information Table~\ref{S-tab:match} give,
+for each agent on the twenty-eight-compound panel, the nearest incumbent
+simulant as a multiple of that space's typical nearest-neighbour separation,
+and Figure~\ref{fig:main}d the permutation null behind the nominal value. Sarin
 (1.187), soman (1.446) and cyclosarin (1.594) are matched, all three by DMMP;
 tabun at 2.004 and VX at 3.057 are not. Tabun misses the threshold of 2 by
 0.004, and we flag that rather than report the count as firm: an earlier version
@@ -644,9 +655,9 @@ exemption from the eighteen holds for this one; corrected within the two tests
 registered for this axis it stands at $q = 0.0412$. That registration is a
 statistic named inside the script that computes it, with no external timestamp,
 and Supporting Information Section~\ref{S-meth:vol} sets out what it is worth
-and what the value becomes under wider families. It does not carry to the match
-criterion: the valid-match count returns one match at $p = 0.4647$, pairing
-DPGME with soman across a gap smaller than the mismatch between the temperatures
+and what the value becomes under wider families. It does not carry to the match criterion
+(Figure~\ref{fig:main}e): the valid-match count returns one match at
+$p = 0.4647$, pairing DPGME with soman across a gap smaller than the mismatch between the temperatures
 at which the two vapour pressures were measured, so nothing rests on it. Three
 of the eleven agents have an interferent nearer than any incumbent here as
 well.
@@ -811,7 +822,8 @@ distinguishable from chance is the one the stated criterion names.
 
 A simulant result should therefore name the measurement the compound was
 validated against and the comparison set it was tested in, and should fix the
-panel, space, statistic, weighting and treatment of conformer-dependent
+panel, space, statistic, comparison pool, weighting and treatment of
+conformer-dependent
 descriptors before the test is run; we add the last because a reproduction check
 caught us not counting it. We propose no replacement compound, because proposing
 one would repeat the error this paper is about.
@@ -855,7 +867,12 @@ edited all content and take responsibility for it.
 \section*{Data and code availability}
 % 2026-11-12. 태그명을 acs-submission-20261112 로 확정해 아래에 적었다.
 % Ku 가 푸시할 때 git filter-repo 로 이력의 공저자 이메일을 제거한 뒤
-% 같은 이름으로 태그를 만들어 커밋과 함께 올린다(--follow-tags).
+% 같은 이름으로 태그를 만들어 커밋과 함께 올린다.
+% 2026-11-13 정정 (GATE 8 12차): 여기 적혀 있던 --follow-tags 로는
+% 이미 원격에 있는 태그를 옮기지 못한다. 그래서 원격 태그가 두 커밋
+% 뒤에 고정된 채 검사를 통과했다. 태그 갱신은
+%   git push --force origin acs-submission-<날짜>
+% 가 필요하고, 검사 A-tag 가 이제 원격 커밋까지 대조한다.
 % v1.0 은 쓸 수 없다: 2026-10-24 커밋이고, 원고가
 % 파일명으로 부르는 22개 중 19개가 없으며, permutation_statistics.json 의
 % panel28 구조공간 mean_diff 부호가 지금과 반대다(-0.0527 대 +0.1953).
