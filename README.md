@@ -6,7 +6,7 @@ Analysis code, descriptor tables and permutation results for:
 > Descriptor Comparisons Can Decide**
 > Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee, Jin Yoo, Yoon Jeong Jang.
 > CBRN Defense Research Institute, Ministry of National Defense, Republic of Korea.
-> Submitted to Analytical Chemistry (ACS) as a Perspective; deposit tagged
+> Submitted to Analytical Chemistry (ACS) as an Article; deposit tagged
 > `acs-submission-20261112`.
 
 A designation says one compound stands in for another, which is a claim about a

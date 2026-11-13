@@ -129,20 +129,25 @@ def main():
             if 'toc' not in f.lower()
             and 'graphical_abstract' not in f.lower()]
     refs = len(words(txt[txt.index('References'):]))
-    pages = ((n_body - cap) / 1000.0 + len(figs) * 0.5
-             + sum(tabs) / 1000.0 + refs / 1000.0)
+    # 2026-11-13 (Article 전환). 종전 식은 캡션을 본문에서 빼고 초록과
+    # 표제 블록을 아예 세지 않았다. ACS 규칙은 "all text, figures, tables
+    # and references" 를 1000 words/page 로 환산하고 도판을 양단 500 /
+    # 단단 250 단어로 센다. 초과분을 과소평가하면 조판 단계에서 반송된다.
+    _abs = len(words(
+        re.search(r'\\begin\{abstract\}(.*?)\\end\{abstract\}',
+                  src, re.S).group(1))) if 'begin{abstract}' in src else 0
+    _front = 76   # 제목 + 저자·소속 블록 실측 근사
+    text_words = n_body + _abs + refs + _front
+    fig_words = len(figs) * 500   # Fig 1 은 양단 5패널
+    pages = (text_words + fig_words + sum(tabs)) / 1000.0
     print(f'\n  참고문헌      {refs:>6} 단어')
-    print(f'  ACS 환산 {pages:.1f}면 = 본문 {(n_body-cap)/1000:.1f}'
-          f' + 도판 {len(figs)}장 {len(figs)*0.5:.1f}'
-          f' + 표 {len(tabs)}개 {sum(tabs)/1000:.2f}'
-          f' + 참고문헌 {refs/1000:.1f}   (TOC 제외)')
-    # 2026-11-13. ACS 현행 저자지침(researcher-resources.acs.org,
-    # 2026-10-05 갱신)은 면이 아니라 단어로 센다 — Article 10,000 단어,
-    # Perspective 도 10,000 단어. 종전의 '8면' 은 다른 ACS 페이지에서
-    # 온 값이고 두 페이지가 실제로 충돌한다. 단어로 센다.
-    _total = n_body + refs + 76
-    print(f'  ACS 단어 셈법 약 {_total:,} 단어 (본문+캡션+참고문헌+표제)'
-          f'  — 한도 10,000')
+    print(f'  초록          {_abs:>6} 단어')
+    print(f'  ACS 환산 {pages:.2f}면 = (본문{n_body} + 초록{_abs} + 참고문헌{refs}'
+          f' + 표제{_front} + 도판{len(figs)}장 x500'
+          f' + 표{sum(tabs)}) / 1000   (TOC 제외, Article 한도 8면)')
+    if pages > 8.0:
+        print(f'  ** 8면 초과 {pages - 8.0:.2f}면 = 약 '
+              f'{int(round((pages - 8.0) * 1000))} 단어 **')
 
     # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
     # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.
@@ -150,6 +155,8 @@ def main():
     import os as _o
     _o.makedirs('outputs', exist_ok=True)
     _j.dump({'body_words': n_body - cap, 'caption_words': cap,
+             'abstract_words': _abs, 'front_words': _front,
+             'figure_words': fig_words, 'text_words': text_words,
              'ref_words': refs, 'n_figures': len(figs),
              'n_tables': len(tabs), 'table_words': sum(tabs),
              'acs_pages': round(pages, 2)},

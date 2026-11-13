@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{56}
+\begin{mcitethebibliography}{63}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -156,6 +156,52 @@ Wilcoxon,~F. Individual Comparisons by Ranking Methods. \emph{Biometrics
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Harris \latin{et~al.}(2020)Harris, Millman, Walt, Gommers, Virtanen,
+  Cournapeau, Wieser, Taylor, Berg, Smith, Kern, Picus, Hoyer, Kerkwijk, Brett,
+  Haldane, R{\'i}o, Wiebe, Peterson, G{\'e}rard-Marchant, Sheppard, Reddy,
+  Weckesser, Abbasi, Gohlke, and Oliphant]{numpy2020}
+Harris,~C.~R. \latin{et~al.}  Array programming with NumPy. \emph{Nature}
+  \textbf{2020}, \emph{585}, 357--362\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Virtanen \latin{et~al.}(2020)Virtanen, Gommers, Oliphant, Haberland,
+  Reddy, Cournapeau, Burovski, Peterson, Weckesser, Bright, Walt, Brett,
+  Wilson, Millman, Mayorov, Nelson, Jones, Kern, Larson, Carey, Polat, Feng,
+  Moore, VanderPlas, Laxalde, Perktold, Cimrman, Henriksen, Quintero, Harris,
+  Archibald, Ribeiro, Pedregosa, Mulbregt, Vijaykumar, Bardelli, Rothberg,
+  Hilboll, Kloeckner, Scopatz, Lee, Rokem, Woods, Fulton, Masson,
+  H{\"a}ggstr{\"o}m, Fitzgerald, Nicholson, Hagen, Pasechnik, Olivetti, Martin,
+  Wieser, Silva, Lenders, Wilhelm, Young, Price, Ingold, Allen, Lee, Audren,
+  Probst, Dietrich, Silterra, Webber, Slavi{\v c}, Nothman, Buchner, Kulick,
+  Sch{\"o}nberger, Cardoso, Reimer, Harrington, Rodr{\'i}guez, Nunez-Iglesias,
+  Kuczynski, Tritz, Thoma, Newville, K{\"u}mmerer, Bolingbroke, Tartre, Pak,
+  Smith, Nowaczyk, Shebanov, Pavlyk, Brodtkorb, Lee, McGibbon, Feldbauer,
+  Lewis, Tygier, Sievert, Vigna, Peterson, More, Pudlik, Oshima, Pingel,
+  Robitaille, Spura, Jones, Cera, Leslie, Zito, Krauss, Upadhyay, Halchenko,
+  and V{\'a}zquez-Baeza]{scipy2020}
+Virtanen,~P. \latin{et~al.}  SciPy 1.0: fundamental algorithms for scientific
+  computing in Python. \emph{Nature Methods} \textbf{2020}, \emph{17},
+  261--272\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[McKinney(2010)]{mckinney2010}
+McKinney,~W. \emph{Data Structures for Statistical Computing in Python}; 2010;
+  pp 56--61\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Hunter(2007)]{matplotlib2007}
+Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
+  \& Engineering} \textbf{2007}, \emph{9}, 90--95\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
 Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
@@ -163,6 +209,19 @@ Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   releases (10.5281/zenodo.10398 is release 2014.03.1) and no
   version-independent concept {DOI} could be verified, so none is given
   here\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Sun \latin{et~al.}(2020)Sun, Zhang, Banerjee, Bao, Barbry,
+  Boukharfane, Bogdanov, Booth, Chen, Cui, Eriksen, Gao, Guo, Hermann, Hermes,
+  Koh, Koval, Lehtola, Li, Liu, Mardirossian, McClain, Motta, Mussard, Pham,
+  Pulkin, Purwanto, Robinson, Ronca, Sayfutyarova, Scheurer, Schurkus, Smith,
+  Sun, Sun, Upadhyay, Wagner, Wang, White, Whitfield, Williamson, Wouters,
+  Yang, Yu, Zhu, Berkelbach, Sharma, Sokolov, and Chan]{pyscf2020}
+Sun,~Q. \latin{et~al.}  Recent developments in the {PySCF} program package.
+  \emph{The Journal of Chemical Physics} \textbf{2020}, \emph{153},
+  024109\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -445,6 +504,26 @@ Webb,~S.; Coulon,~F.; Temple,~T. A critical review of liquid, low toxicity
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-188 CN1: Chemical Point Detector Vapor Testing}; 2019; Approved for
   public release; Defense Technical Information Center AD1072837\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Institute for Occupational Safety and
+  Health}(2002)]{niosh2002simulant}
+{National Institute for Occupational Safety and Health} \emph{Chemical Warfare
+  Agent {(CWA)} Simulant Program for Respirator Materials Resistance Testing};
+  2002; Dated 31 July 2002\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Davidson \latin{et~al.}(2020)Davidson, Dixon, Williams, Kilper, Lim,
+  Martino, Rhodes, Hulet, Miles, Samuels, Emanuel, and Miklos]{davidson2020}
+Davidson,~C.~E.; Dixon,~M.~M.; Williams,~B.~R.; Kilper,~G.~K.; Lim,~S.~H.;
+  Martino,~R.~A.; Rhodes,~P.; Hulet,~M.~S.; Miles,~R.~W.; Samuels,~A.~C.;
+  Emanuel,~P.~A.; Miklos,~A.~E. Detection of Chemical Warfare Agents by
+  Colorimetric Sensor Arrays. \emph{ACS Sensors} \textbf{2020}, \emph{5},
+  1102--1109\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

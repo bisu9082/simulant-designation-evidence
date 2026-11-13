@@ -71,73 +71,78 @@ nts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips
 Package hyperref Warning: Suppressing link with empty target on input line 188.
 
 
-[2]
+[2] [3]
 
-Package hyperref Warning: Suppressing link with empty target on input line 212.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) [3]
-
-Package hyperref Warning: Suppressing link with empty target on input line 275.
-
-
-[4]
-
-Package hyperref Warning: Suppressing link with empty target on input line 340.
+Package hyperref Warning: Suppressing link with empty target on input line 239.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 346.
+Overfull \hbox (11.06145pt too wide) in paragraph at lines 263--270
+\OT1/ptm/m/n/10.95 and scikit-learn 1.9.1; fig-ures Mat-plotlib 3.11.2$[]$; de-
+scrip-tors RD-Kit 2026.03.6$[]$; and the density-functional
+
+Package hyperref Warning: Suppressing link with empty target on input line 293.
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) [4]
+
+Package hyperref Warning: Suppressing link with empty target on input line 356.
 
 
 [5]
 
-Package hyperref Warning: Suppressing link with empty target on input line 412.
+Package hyperref Warning: Suppressing link with empty target on input line 421.
 
 
 
-Overfull \hbox (39.16048pt too wide) in paragraph at lines 461--469
+Package hyperref Warning: Suppressing link with empty target on input line 427.
+
+
+[6]
+
+Package hyperref Warning: Suppressing link with empty target on input line 493.
+
+
+[7]
+Overfull \hbox (39.16048pt too wide) in paragraph at lines 542--550
 \OT1/ptm/m/n/10.95 counts are in \OT1/pcr/m/n/10.95 order[]invariance.json \OT1
 /ptm/m/n/10.95 un-der \OT1/pcr/m/n/10.95 outputs/ \OT1/ptm/m/n/10.95 and are re
 -gen-er-ated by \OT1/pcr/m/n/10.95 order[]invariance.py\OT1/ptm/m/n/10.95 ,
-[6] [7] (./tab_sparse.tex)
+[8] (./tab_sparse.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 590.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 600.
+Package hyperref Warning: Suppressing link with empty target on input line 671.
 
 
+[9]
 
-Package hyperref Warning: Suppressing link with empty target on input line 601.
-
-
-[8]
-
-Package hyperref Warning: Suppressing link with empty target on input line 619.
-
-
-(./tab_failaudit.tex) [9]
-
-Package hyperref Warning: Suppressing link with empty target on input line 697.
+Package hyperref Warning: Suppressing link with empty target on input line 693.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 705.
+Package hyperref Warning: Suppressing link with empty target on input line 694.
 
 
-[10] [11] [12 <./Fig_spaces.png>] (./tab_dyepanel.tex) [13] [14]
+
+Package hyperref Warning: Suppressing link with empty target on input line 712.
+
+
+(./tab_failaudit.tex) [10]
+
+Package hyperref Warning: Suppressing link with empty target on input line 790.
+
+
+[11] [12] (./tab_dyepanel.tex) [13] [14 <./Fig_spaces.png>] [15]
 (./tab_volatility.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1020
+Package hyperref Warning: Suppressing link with empty target on input line 1113
 .
 
+[16]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1043
+Package hyperref Warning: Suppressing link with empty target on input line 1136
 .
 
-[15] (./tab_vpairing.tex) (./tab_designations.tex
+[17] (./tab_vpairing.tex) (./tab_designations.tex
 Underfull \hbox (badness 10000) in paragraph at lines 13--13
 []\OT1/ptm/m/n/9 carbon tetra-
 
@@ -230,98 +235,109 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--18
 
 Overfull \hbox (6.4283pt too wide) in paragraph at lines 19--19
 []\OT1/ptm/m/n/9 dichloromethane| 
-) [16]
+)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1188
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1189
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1198
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1209
-.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [17]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1240
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1294
+Package hyperref Warning: Suppressing link with empty target on input line 1309
 .
 
 [18]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1376
+Package hyperref Warning: Suppressing link with empty target on input line 1331
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1392
+Package hyperref Warning: Suppressing link with empty target on input line 1332
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1341
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1352
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd)
+
+Package hyperref Warning: Suppressing link with empty target on input line 1385
 .
 
 [19]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1421
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1425
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1441
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1446
+Package hyperref Warning: Suppressing link with empty target on input line 1439
 .
 
 [20]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1480
+Package hyperref Warning: Suppressing link with empty target on input line 1531
 .
 
-(./tab_ablation.tex
+
+Package hyperref Warning: Suppressing link with empty target on input line 1547
+.
+
+[21]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1576
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1580
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1596
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1601
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1635
+.
+
+[22] (./tab_ablation.tex
 Overfull \hbox (29.67078pt too wide) in paragraph at lines 19--50
  [][] 
-) (./tab_family.tex) [21] [22] (./tab_blockbalance.tex) [23]
+) (./tab_family.tex)
+Overfull \hbox (51.66412pt too wide) in paragraph at lines 1692--1702
+\OT1/ptm/m/n/10.95 space and 42.1 per cent in the thirty-eight-coordinate merge
+d one (\OT1/pcr/m/n/10.95 outputs/threshold[]equivalence.json\OT1/ptm/m/n/10.95
+ ).
+[23] [24] (./tab_blockbalance.tex) [25]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1788
+Package hyperref Warning: Suppressing link with empty target on input line 1967
 .
 
-(./tab_plocal.tex) [24] [25 <./Fig_mde.png>] [26 <./Fig_plocal.png>]
+[26] (./tab_plocal.tex) [27 <./Fig_mde.png>] [28 <./Fig_plocal.png>]
 (./tab_premisenull.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1999
+Package hyperref Warning: Suppressing link with empty target on input line 2178
+.
+
+[29]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2202
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 2023
+Package hyperref Warning: Suppressing link with empty target on input line 2227
 .
 
-
-Package hyperref Warning: Suppressing link with empty target on input line 2048
-.
-
-[27] [28] (./tab_registers.tex
+[30] [31] [32 <./Fig_toxicity.png>] (./tab_registers.tex
 Overfull \hbox (36.75706pt too wide) in paragraph at lines 8--27
  [][] 
-) [29] [30 <./Fig_toxicity.png>]
+)
 
-Package hyperref Warning: Suppressing link with empty target on input line 2265
+Package hyperref Warning: Suppressing link with empty target on input line 2444
 .
 
-[31]
-Underfull \hbox (badness 1424) in paragraph at lines 2348--2356
+[33]
+Underfull \hbox (badness 1424) in paragraph at lines 2527--2535
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[32] (./supplementary.bbl
+[34] (./supplementary.bbl
 Underfull \hbox (badness 2495) in paragraph at lines 30--38
 []\OT1/ptm/m/n/10.95 U.S. En-vi-ron-men-tal Pro-tec-tion Agency Com-piled AEGL 
 Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https :
@@ -329,7 +345,7 @@ Val-ues, 27 July 2018. []$\OT1/pcr/m/n/10.95 https :
 Underfull \hbox (badness 10000) in paragraph at lines 30--38
 \OT1/pcr/m/n/10.95 / / www . epa . gov / sites / default / files / 2018-[]08 / 
 documents / compiled _
-[33] [34] [35] [36]) [37] [38] [39] [40] [41] [42] [43] [44 <./Fig_h1.png>]
+[35] [36] [37] [38]) [39] [40] [41] [42] [43] [44] [45] [46 <./Fig_h1.png>]
 (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
@@ -350,5 +366,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (44 pages, 2089430 bytes).
+Output written on supplementary.pdf (46 pages, 2100402 bytes).
 Transcript written on supplementary.log.

@@ -305,15 +305,6 @@ Jang,~Y.~J.; Tsay,~O.~G.; Murale,~D.~P.; Jeong,~J.~A.; Segev,~A.;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[{National Institute for Occupational Safety and
-  Health}(2002)]{niosh2002simulant}
-{National Institute for Occupational Safety and Health} \emph{Chemical Warfare
-  Agent {(CWA)} Simulant Program for Respirator Materials Resistance Testing};
-  2002; Dated 31 July 2002\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Landrum \latin{et~al.}(2026)Landrum, \latin{et~al.} others]{rdkit}
 Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   \url{https://www.rdkit.org}, 2026; Version 2026.03.6. Cited by name, version
@@ -380,6 +371,15 @@ Hunter,~J.~D. Matplotlib: A 2D Graphics Environment. \emph{Computing in Science
 Sun,~Q. \latin{et~al.}  Recent developments in the {PySCF} program package.
   \emph{The Journal of Chemical Physics} \textbf{2020}, \emph{153},
   024109\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{National Institute for Occupational Safety and
+  Health}(2002)]{niosh2002simulant}
+{National Institute for Occupational Safety and Health} \emph{Chemical Warfare
+  Agent {(CWA)} Simulant Program for Respirator Materials Resistance Testing};
+  2002; Dated 31 July 2002\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

@@ -3246,19 +3246,22 @@ CHECKS = [
     # 2026-11-13. Davidson 외부 대조 앵커.
     ('dv_p_struct', [r'structural space \(\$p = (\d+\.\d+)\$\)'], 0.0005),
     ('dv_p_elec', [r'electronic one \(\$p = (\d+\.\d+)\$\)'], 0.0005),
-    ('dv_vp_struct', [r'the comparison returns ([\d.]+)\s*\n?and'], 0.0005),
-    ('dv_vp_elec', [r'returns 0\.750\s*\n?and ([\d.]+) against'], 0.0005),
-    ('dv_vp_floor', [r'against a smallest attainable ([\d.]+)'], 0.0005),
+    ('dv_vp_struct', [r'comparison returns ([\d.]+) in the structural'], 0.0005),
+    ('dv_vp_elec', [r'([\d.]+) in the electronic one against'], 0.0005),
+    ('dv_vp_floor', [r'smallest attainable value of\s*\n?([\d.]+)'], 0.0005),
     # 2026-11-13. 아세토니트릴 재라벨 앵커. 본문 4.2.
     ('acn_q28', [r'from a corrected 0\.163 to ([\d.]+) and the matched',
                  r'compound value from 0\.163 to\s*\n?([\d.]+)\.'], 0.0005),
-    ('acn_match28', [r'matched\s*\n?count from three to (\w+);'], 0),
-    ('acn_byspace28', [r'six-per-space\s*\n?family at ([\d.]+)'], 0.0005),
-    ('acn_prespec28', [r'prespecified-statistic family at ([\d.]+)'],
-     0.0005),
-    ('acn_q35', [r'panel it moves 0\.630 to ([\d.]+)'], 0.0005),
+    ('acn_match28', [r'matched\s*\n?count from three to (\w+)[,;]'], 0),
+    ('acn_byspace28', [r'six-per-space\s*\n?family at ([\d.]+)',
+                       r'per space it is ([\d.]+)'], 0.0005),
+    ('acn_prespec28', [r'prespecified-statistic family at ([\d.]+)',
+                       r'prespecified statistic ([\d.]+)'], 0.0005),
+    ('acn_q35', [r'panel moves 0\.630 to\s*\n?([\d.]+)'], 0.0005),
     # 2026-11-13. 역치 비등가성·LUMO 방법오차 앵커. 본문 4.3 전용.
-    ('te_pct_elec', [r'admits ([\d.]+) per cent of all pairs in the'], 0.05),
+    ('te_pct_struct', [r'admits ([\d.]+) per cent of all pairs in the'], 0.05),
+    ('te_pct_elec', [r'([\d.]+) per cent in the three-coordinate electronic'],
+     0.05),
     ('te_rank_merged', [r'merged spaces have rank\s*\n?(\d+) against 35'], 0),
     ('te_rank_merged35', [r'primary panel rank (\d+)\s*\n?against 38'], 0),
     ('ra_rev_uncentred', [r'the same count is (\d+) of the 34'], 0),
@@ -3266,7 +3269,7 @@ CHECKS = [
      0.0005),
     ('sj_d1n_frac', [r'first set ([\d.]+) per cent of non-blank'], 0.05),
     ('sj_d1n_median', [r'below it and the median\s*\n?is ([\d.]+)'], 0.0005),
-    ('te_pct_merged', [r'against ([\d.]+) per cent in the\s*\n?'
+    ('te_pct_merged', [r'([\d.]+) per cent in the\s*\n?'
                        r'thirty-eight-coordinate merged one'], 0.05),
     ('te_lumo_lo', [r'run from ([\d.]+) eV below'], 0.005),
     ('te_lumo_hi', [r'eV below to ([\d.]+) eV above'], 0.005),
@@ -3446,9 +3449,8 @@ CHECKS = [
     # ------------------------------------------- 휘발성 축 (2026-11-03 신설)
     # 본문 res:panels 말미 단락과 SI res:volatility, 그리고 생성표 두 개.
     ('vol_fam_pair', [r'it stands at\s*\n?\$q = (0\.\d+)\$'], 0.00005),
-    ('vol_fam_18', [r'against the eighteen, where it reaches ([\d.]+)'],
-     0.0005),
-    ('vol_fam_24', [r'this axis, where it reaches ([\d.]+)'], 0.0005),
+    ('vol_fam_18', [r'descriptor spaces it reaches\s*\n?([\d.]+)'], 0.0005),
+    ('vol_fam_24', [r'this axis it reaches ([\d.]+), and against'], 0.0005),
     ('vol_p_md', [r'one-sided \$p\$ of (0\.\d+) over all\s+680',
                   r'statistic gives a one-sided \$p\$ of (0\.\d+)'], 0.0005),
     # 'ranking 316th of 680' 과 구분해야 한다. 뒤따르는 문장을 닻으로 쓴다.
