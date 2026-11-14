@@ -662,12 +662,19 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_registers.tex')
     open('outputs/tab_designations.tex', 'w').write(
         hdr + '% 출처: sources/designations_20261106.csv (URL 포함)\n'
-        + '\\begin{table}[htb]\n\\centering\n\\caption{Every simulant '
-        'designation we located, with the agent it names, the measurement it '
-        'was made against, and the basis the designating document itself '
-        'states. Source URLs and the search date are in '
+        + '\\begin{table}[htb]\n\\centering\n\\caption{The simulant '
+        'designations we located in the instruments of '
+        'Section~\\ref{res:searchscope}, with the agent each names, the '
+        'measurement it was made against, and the basis the designating '
+        'document itself states. Compounds named in a document without being '
+        'characterised there are marked as listed rather than measured. This '
+        'is what the search returned, not a census of designations. Source '
+        'URLs and the date each document was read are in '
         '\\texttt{sources/designations\\_20261106.csv} of the deposit.}\n'
         '\\label{tab:designations}\n\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n'
+        # 2026-11-14. 청구항 3 두 행을 더하자 1.1pt 넘쳤다. 전역 1.15 를
+        # 이 표에서만 1.0 으로 둔다 (build_paper.sh 의 Float 게이트 적발).
+        '\\renewcommand{\\arraystretch}{1.0}\n'
         + designations() + '\n\\end{table}\n')
     print('-> outputs/tab_designations.tex')
     open('outputs/tab_dyepanel.tex', 'w').write(

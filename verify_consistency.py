@@ -1748,6 +1748,8 @@ def load_facts():
     f['len_body'] = _la['body_words']
     f['len_refs'] = _la['ref_words']
     f['len_pages'] = _la['acs_pages']
+    f['len_text_words'] = _la['text_words']
+    f['len_text_plus_fig'] = _la['text_words'] + _la['figure_words']
     f['len_figs'] = _la['n_figures']
 
     _cs = json.load(open('outputs/collapse_sensitivity.json'))
@@ -2479,9 +2481,12 @@ UNQUOTED = {
     # 분량 감사 (len_) — 4건
     # ACS 커버레터가 분량을 숫자로 적었고 검증기가 그것을 length_audit.json
     # 과 대조했다. JHM 커버레터는 분량을 적지 않는다.
-    'len_body': '분량 수치 JHM 커버레터 미수록',
+
     'len_figs': '분량 수치 JHM 커버레터 미수록',
     'len_pages': '분량 수치 JHM 커버레터 미수록',
+    # 2026-11-14. 커버레터는 총계(text_words)와 면수를 적고 본문 단어수는
+    # 적지 않는다. 총계 쪽이 대조되므로 이쪽은 면제한다.
+    'len_body': '커버레터가 총계와 면수만 적는다 — len_text_words 로 대조',
     'len_refs': '분량 수치 JHM 커버레터 미수록',
 
     # --------------------------------------------------------------
@@ -3391,6 +3396,12 @@ CHECKS = [
                          r'fixed at the labelled interferents\s*& [\d.]+ & ([\d.]+)'], 0.001),
     ('nc_minus_merged', [r'and [\d.]+ and ([\d.]+) in the\s*\n?merged space',
                          r'minus the designation & [\d.]+ & ([\d.]+)'], 0.001),
+    # 2026-11-14. 커버레터가 분량을 숫자로 적는데 그 수치가 '미발견' 으로
+    # 빠져 있었다. 특허 교정으로 본문이 늘자 커버레터가 구값을 든 채
+    # PASS 가 났다. 대조 대상으로 올린다.
+    ('len_pages', [r'it\s*\n?stands at ([\d.]+) pages'], 0.005),
+    ('len_text_words', [r'stands at ([\d,]+) words\s*\n?of text, abstract'], 0),
+    ('len_text_plus_fig', [r'or ([\d,]+) with its one figure'], 0),
     ('bb_nstruct', [r'Weighting the (\d+) structural'], 0),
     ('bb_nstruct28', [r'\$n_\{s\}=(\d+)\$',
                       r'puts (\d+) structural coordinates'], 0),

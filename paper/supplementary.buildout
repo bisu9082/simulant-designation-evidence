@@ -135,23 +135,20 @@ Package hyperref Warning: Suppressing link with empty target on input line 1171
 .
 
 [18] (./tab_vpairing.tex) (./tab_designations.tex
-Underfull \hbox (badness 3568) in paragraph at lines 13--13
-\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
-[]\OT1/ptm/m/n/8 relatively non-toxic; eas-ily de-
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
-\OT1/ptm/m/n/8 tectable; volatil-ity in-ter-me-di-ate
-
 Underfull \hbox (badness 3568) in paragraph at lines 14--14
 \OT1/ptm/m/n/8 pro-gramme (31 July 2002,
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+[]\OT1/ptm/m/n/8 relatively non-toxic; eas-ily de-
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
+\OT1/ptm/m/n/8 tectable; volatil-ity in-ter-me-di-ate
 
 Underfull \hbox (badness 3568) in paragraph at lines 15--15
 \OT1/ptm/m/n/8 pro-gramme (31 July 2002,
 
-Underfull \hbox (badness 1221) in paragraph at lines 16--16
-[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
+Underfull \hbox (badness 3568) in paragraph at lines 16--16
+\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
 
 Underfull \hbox (badness 1221) in paragraph at lines 17--17
 []\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
@@ -159,50 +156,157 @@ Underfull \hbox (badness 1221) in paragraph at lines 17--17
 Underfull \hbox (badness 1221) in paragraph at lines 18--18
 []\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
 
-Underfull \hbox (badness 1783) in paragraph at lines 19--19
+Underfull \hbox (badness 1221) in paragraph at lines 19--19
+[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
+
+Underfull \hbox (badness 1783) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
 []\OT1/ptm/m/n/8 liquid
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 G-agent
 
-Underfull \hbox (badness 1769) in paragraph at lines 19--19
+Underfull \hbox (badness 1769) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 clud-ing VX,
 
-Underfull \hbox (badness 2189) in paragraph at lines 19--19
+Underfull \hbox (badness 2189) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 and H-agent
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 (mustard-
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
 \OT1/ptm/m/n/8 HD) sim-u-
 
-Underfull \hbox (badness 7981) in paragraph at lines 19--19
-[]\OT1/ptm/m/n/8 detectability by a
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+[]\OT1/ptm/m/n/8 granted claim
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-\OT1/ptm/m/n/8 vapour de-tec-tion
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 1(a) re-quires a
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-\OT1/ptm/m/n/8 ap-pa-ra-tus (claim
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 vapour-generating
 
-Underfull \hbox (badness 2452) in paragraph at lines 19--19
-\OT1/ptm/m/n/8 1(a)); spec-i-fi-ca-tion
+Underfull \hbox (badness 3861) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 com-po-nent with a
 
-Underfull \hbox (badness 4805) in paragraph at lines 19--19
-\OT1/ptm/m/n/8 spec-trom-e-ters, and
+Underfull \hbox (badness 1642) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 vapour pres-sure of
 
-Underfull \hbox (badness 10000) in paragraph at lines 19--19
-\OT1/ptm/m/n/8 else-where in-frared
+Underfull \hbox (badness 2189) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 30 mm Hg at 25
+
+Underfull \hbox (badness 7558) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 C, present in an
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 amount suf-fi-cient
+
+Underfull \hbox (badness 2027) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 a vapour de-tec-tion
+
+Underfull \hbox (badness 1152) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 ap-pa-ra-tus; claim 3
+
+Underfull \hbox (badness 1824) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 lists 23 ad-mis-si-ble
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 methyl sal-i-cy-late
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 or their mix-ture;
+
+Underfull \hbox (badness 2717) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 ion mo-bil-ity spec-
+
+Underfull \hbox (badness 10000) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 trom-e-ters (CAM),
+
+Underfull \hbox (badness 4416) in paragraph at lines 20--20
+\OT1/ptm/m/n/8 acous-tic wave de-
+
+Underfull \hbox (badness 1783) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+[]\OT1/ptm/m/n/8 liquid
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 G-agent
+
+Underfull \hbox (badness 1769) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 clud-ing VX,
+
+Underfull \hbox (badness 2189) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 and H-agent
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 (mustard-
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 HD) sim-u-
+
+Underfull \hbox (badness 6995) in paragraph at lines 22--22
+[]\OT1/ptm/m/n/8 named in granted
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 claim 3 among
+
+Underfull \hbox (badness 6078) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 the 23 ad-mis-si-ble
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 vapour-generating
+
+Underfull \hbox (badness 4467) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 to the claim 1(a)
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 volatil-ity win-dow
+
+Underfull \hbox (badness 2343) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 re-quire-ment. Not
+
+Underfull \hbox (badness 10000) in paragraph at lines 22--22
+\OT1/ptm/m/n/8 com-po-nents of
+
+Underfull \hbox (badness 1043) in paragraph at lines 22--23
+\OT1/ptm/m/n/8 gives no mea-sure-ment for DMMP
+
+Underfull \hbox (badness 1783) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]\OT1/ptm/m/n/8 H-agent
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 (mustard-
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 HD) sim-u-
+
+Underfull \hbox (badness 6995) in paragraph at lines 23--23
+[]\OT1/ptm/m/n/8 named in granted
+
+Underfull \hbox (badness 4954) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 claim 3 and pre-
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 ferred in claims
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 win-dow and the
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/ptm/m/n/8 de-tectabil-ity re-
 ) [19]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1336
 .
 
-[20]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1359
 .
@@ -219,7 +323,7 @@ Package hyperref Warning: Suppressing link with empty target on input line 1371
 Package hyperref Warning: Suppressing link with empty target on input line 1377
 .
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [20]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1410
 .
@@ -228,7 +332,7 @@ Package hyperref Warning: Suppressing link with empty target on input line 1410
 Package hyperref Warning: Suppressing link with empty target on input line 1464
 .
 
-[22] [23]
+[21] [22]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1556
 .
@@ -253,7 +357,7 @@ Package hyperref Warning: Suppressing link with empty target on input line 1621
 Package hyperref Warning: Suppressing link with empty target on input line 1626
 .
 
-[24]
+[23]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1660
 .
@@ -271,18 +375,17 @@ Package hyperref Warning: Suppressing link with empty target on input line 20.
 
 Package hyperref Warning: Suppressing link with empty target on input line 20.
 
-) [25] (./tab_family.tex) [26] [27] (./tab_blockbalance.tex) [28] [29]
+) (./tab_family.tex) [24] [25] (./tab_blockbalance.tex) [26] [27]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1994
 .
 
-[30 <./Fig_mde.png>] (./tab_plocal.tex) [31 <./Fig_plocal.png>] [32]
-(./tab_premisenull.tex)
+[28 <./Fig_mde.png>] (./tab_plocal.tex) [29 <./Fig_plocal.png>]
+(./tab_premisenull.tex) [30]
 
 Package hyperref Warning: Suppressing link with empty target on input line 2205
 .
 
-[33]
 
 Package hyperref Warning: Suppressing link with empty target on input line 2229
 .
@@ -291,16 +394,17 @@ Package hyperref Warning: Suppressing link with empty target on input line 2229
 Package hyperref Warning: Suppressing link with empty target on input line 2254
 .
 
-[34] [35] [36 <./Fig_toxicity.png>] (./tab_registers.tex) [37]
+[31] [32] [33 <./Fig_toxicity.png>] (./tab_registers.tex) [34]
 
 Package hyperref Warning: Suppressing link with empty target on input line 2480
 .
 
-[38] [39 <./Fig_h1.png>]
+
 Underfull \hbox (badness 1424) in paragraph at lines 2563--2571
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[40] (./supplementary.bbl [41] [42] [43] [44]) [45] (./supplementary.aux) )
+[35] [36 <./Fig_h1.png>] [37] (./supplementary.bbl [38] [39] [40] [41])
+[42] [43] [44] [45] [46] [47] (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -320,5 +424,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (45 pages, 6750814 bytes).
+Output written on supplementary.pdf (47 pages, 6752351 bytes).
 Transcript written on supplementary.log.
