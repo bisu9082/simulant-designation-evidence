@@ -153,6 +153,28 @@ done
 if [ "$fail" -eq 0 ]; then
     ( cd "$ROOT" && python3 wordcount.py >outputs/_log_wordcount.txt 2>&1 ) \
         || echo '  [주의] wordcount.py 실패 — length_audit.json 갱신 안 됨'
+    # 2026-11-14. 커버레터는 [6/6] 에서 조판되고 감사는 그 뒤에 돌므로
+    # 구조적으로 한 빌드 뒤처진다. 이 세션에서 같은 결함이 다섯 번 났다.
+    # 감사 직후 숫자를 되쓰고, 바뀐 때만 커버레터를 다시 조판한다.
+    # 본문 단어수는 main.pdf 에서 세므로 커버레터 수정이 감사값을 바꾸지
+    # 않는다 — 반복 없이 한 번에 고정점이 잡힌다.
+    # set -e 가 켜져 있으므로 종료코드 10 을 그대로 흘리면 스크립트가
+    # 여기서 죽고 재조판이 돌지 않는다. 조건문으로 받아 set -e 를 피한다.
+    rc=0
+    ( cd "$ROOT" && python3 sync_cover_length.py ) || rc=$?
+    case $rc in
+      0) ;;
+      10) echo '  [재조판] 커버레터 분량 숫자가 갱신됐다'
+          pass cover_letter; pass cover_letter
+          # 지문을 위와 같은 방식으로 다시 찍는다. 다르게 찍으면 A-pdf 가
+          # 깨진다.
+          for f in main supplementary cover_letter; do
+            sha256sum "$f.tex"
+          done > .buildstamp
+          ;;
+      *) echo '  [주의] sync_cover_length.py 실패 — 커버레터 숫자 미갱신'
+         fail=1 ;;
+    esac
 fi
 
 [ "$fail" -eq 0 ] && echo '[빌드] 오류 없음' || { echo '[빌드] 위 항목 확인'; exit 1; }
