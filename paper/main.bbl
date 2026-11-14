@@ -239,6 +239,16 @@ Watson,~A.; Opresko,~D.; Young,~R.; Hauschild,~V. Development and Application
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Lawrence and Van~Houten(2025)Lawrence, and
+  Van~Houten]{lawrence2025simulants}
+Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
+  Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025}, \emph{37},
+  No DOI or page range is given on the publisher's article page; verified
+  against that page on 2026-11-14\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Urbina \latin{et~al.}(2022)Urbina, Lentzos, Invernizzi, and
   Ekins]{urbina2022}
 Urbina,~F.; Lentzos,~F.; Invernizzi,~C.; Ekins,~S. Dual use of
@@ -391,11 +401,11 @@ Sun,~Q. \latin{et~al.}  Recent developments in the {PySCF} program package.
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[{US Army Test and Evaluation Command}(2011)]{top082196}
+\bibitem[{US Army Test and Evaluation Command}(2022)]{top082196}
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
-  08-2-196: Simulant Selection for Laboratory, Chamber, and Field Testing};
-  2011; Cited in TOP 08-2-188 CN1 as the governing simulant-selection
-  procedure; the document itself was not obtainable for this work\relax
+  08-2-196A: Simulant Selection for Laboratory, Chamber, and Field Testing};
+  2022; Defense Technical Information Center accession AD1167884. Not read by
+  the present authors; see Supporting Information\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -412,15 +422,6 @@ Sun,~Q. \latin{et~al.}  Recent developments in the {PySCF} program package.
 {ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
   Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
   reapproved 2020\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[Lawrence and Van~Houten(2025)Lawrence, and
-  Van~Houten]{lawrence2025simulants}
-Lawrence,~D.~S.; Van~Houten,~K.~A. Simulants for Chemical and Explosive
-  Threats. \emph{Johns Hopkins APL Technical Digest} \textbf{2025},
-  \emph{37}\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

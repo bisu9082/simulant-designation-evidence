@@ -33,7 +33,7 @@ cp -p paper/tab_*.tex submission/
 for f in main supplementary cover_letter tab_ablation tab_family tab_sparse \
          tab_plocal tab_volatility tab_vpairing tab_premisenull tab_registers \
          tab_designations tab_dyepanel tab_match tab_failaudit tab_blockbalance \
-         tab_si-ascl3; do
+         tab_niosh tab_voldecomp tab_si-ascl3; do
   [ -f "submission/$f.tex" ] || continue
   sed -i '/^[[:space:]]*%/d' "submission/$f.tex"
 done

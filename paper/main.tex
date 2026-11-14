@@ -169,24 +169,23 @@ exact permutation test, acute exposure guideline level, dual-use}
 \begin{abstract}
 \noindent
 Chemical warfare agent detection is developed almost entirely on simulants,
-compounds accepted as agent-like and safe to handle. We asked what that
-acceptance rests on. No incumbent carries a public designation validating a
-detection response against an agent's: one is designated for filter breakthrough,
-one in a training patent that fixes a volatility window and asks that a vapour
-detector respond, the
-third not at all, and the Army's own selection procedure is not public, which
+compounds accepted as agent-like and safe. We asked what that acceptance rests
+on. No incumbent carries a public designation validating a detection response
+against an agent's: one is designated for filter breakthrough, one in a training
+patent that fixes a volatility window and asks for a detector response, the
+third not at all, and we did not read the Army's selection procedure, which
 bounds the claim. Exact permutation over every designation tested whether the
-three sit closer to eleven authentic agents than other non-agents do, in
-structural and GFN2-xTB electronic descriptor spaces and against a 29-component
-colorimetric sensor array. On a thirty-five-compound panel no agent has a valid
-match and no test reaches significance; a twenty-eight-compound panel omitting
-five literature simulants and two pesticides yields three matches and a nominal
-structural $p$ of 0.028 that no correction over eighteen tests leaves
-significant. Moving labels moves the answer, and not in one direction: 0.630
-becomes 0.745 or 0.00075 according to how many are moved, and on the smaller
-panel moving the one compound our own source for two incumbents also calls a
-simulant takes 0.163 to 0.023. Volatility, the axis the criterion names, is the
-one on which the designation is distinguishable from chance ($p = 0.0206$). The
+three sit closer to eleven agents than other non-agents, in structural and
+GFN2-xTB electronic descriptor spaces and against a colorimetric sensor array.
+On a thirty-five-compound panel no agent has a valid match and nothing is
+significant; a twenty-eight-compound panel omitting five literature simulants
+and two pesticides yields three matches and a nominal structural $p$ of 0.028
+that no correction leaves significant and that rises to 0.350 when four
+compounds our own source names beside an incumbent join the pool. Moving labels
+moves the answer, and not in one direction: 0.630 becomes 0.745 or 0.00075
+with how many move. Volatility, the axis the criterion names, gives the one
+nominal value under 0.05 ($p = 0.0206$), but it tracks how widely the three
+cover that axis, not how close they sit; read two-sided it is 0.182. The
 corrective is a declaration, not a replacement compound: a defensible claim must
 name the measurement it rests on and fix panel, space, statistic, comparison
 pool and weighting in advance.
@@ -254,6 +253,20 @@ statistics computed, nor removing a descriptor that was an exact function of two
 others. That earlier reading is reported below alongside what the data support,
 because how a nominal result of this kind arises is part of what a reader of
 this literature needs.
+
+The premise is not ours alone, and the nearest recent work states it. Lawrence
+and Van Houten set out a systems-engineering method for developing simulants,
+with stakeholder requirements, a down-selection against stated criteria, a
+property database and a validation step, introduced against the observation that
+simulants have more often been adopted for convenience than designed
+\cite{lawrence2025simulants}. We take that as given and ask the retrospective
+question their method does not: what the compounds already in service rest on,
+and how much of any answer is fixed by the data rather than the analyst. Theirs
+is a procedure for the simulants a programme will build; ours is an audit of the
+three the optical sensing literature already uses, and a measurement of how far
+its verdict moves when panel, space, statistic, comparison pool or weighting is
+chosen differently. The two meet at the same corrective and overlap in neither
+what they examine nor what they report.
 
 \paragraph{Dual-use statement.} Throughout, the optimisation direction is
 fixed: fidelity to the detection-relevant properties is to be maximised while
@@ -410,6 +423,7 @@ agents, so the count there is zero at every threshold, including an unbounded
 one.
 
 \subsection{Reproducibility}
+\label{res:repro}
 All analyses are deterministic given the seed, which is 42 except where a
 script records otherwise. The designation and Mantel permutation tests are
 exhaustive. Seven analyses are sampled rather than enumerated, at between 1000
@@ -480,15 +494,19 @@ in the research literature \cite{lee2011sno2}.
 A negative claim about documents is only as good as its scope, and ours has a
 hole in it which is the most important document of all. TOP 08-2-196,
 \emph{Simulant Selection for Laboratory, Chamber, and Field Testing}
-\cite{top082196}, is the Army's procedure for exactly this question and we could
-not obtain it; we know its title and role only because TOP 08-2-188 CN1 defers
-simulant selection to it \cite{top082188}, and that public procedure states a
-detection criterion rather than a barrier one, that the simulant ``should
-produce a signature signal similar to the one from the threat analyte''. So the
-claim is bounded, and the literature behind it is listed in Supporting
-Information Section~\ref{S-res:searchscope}: the three compounds carry no public
-designation validating a detection response against an agent's, and we cannot
-say that no such instrument exists.
+\cite{top082196}, is the Army's procedure for exactly this question and we have
+not read it. Its current revision carries a Defense Technical Information Center
+accession and a full-text address in that agency's public repository, so the
+document is reachable in principle; our own attempts to retrieve it failed, the
+last of them while that repository was under maintenance. What we know of its
+role comes from TOP 08-2-188 CN1, which defers simulant selection to it
+\cite{top082188} and itself states a detection criterion rather than a barrier
+one, that the simulant ``should produce a signature signal similar to the one
+from the threat analyte''. The claim is therefore bounded by a document we did
+not read rather than by one that does not exist, and the literature we did read
+is listed in Supporting Information Section~\ref{S-res:searchscope}: among those
+instruments the three compounds carry no designation validating a detection
+response against an agent's, and we cannot say that no such instrument exists.
 
 The observation that follows is that a designation is specific to a measurement,
 so a compound chosen because it breaks through a carbon bed like sarin has been
@@ -498,7 +516,7 @@ consensus standard fixing the measurement as vapour penetration of a protective
 ensemble \cite{astmf2588}, yet the National Academies assessment of that
 programme records that its selection ``was based on its historical use as an
 agent simulant'' and that the assumptions behind it ``have not been tested''
-\cite{nrc1997mist}, a reading a recent survey shares \cite{lawrence2025simulants}.
+\cite{nrc1997mist}.
 
 \begin{figure}[tp]
 \centering
@@ -603,6 +621,28 @@ random from a pool chosen because its members are not like the agents, and
 against that reference class one organophosphorus compound is close to
 sufficient.
 
+One addition to that pool removes the value, and the compounds to add were
+named in our own evidence. The respirator document we rely on for DMMP's single
+designation lists eleven candidates for its permeation study, and four stand in
+that list beside DMMP itself: diisopropyl methylphosphonate, diethyl
+ethylphosphonate, triethyl phosphate and di-n-butyl sulfide. None is on either
+panel, and we did not record the decision to leave them off, which is the
+comparison-pool freedom this paper asks others to fix, taken once more and in
+our own favour. Admitting the four with the designated set unchanged takes the
+nominal structural value from 0.028 to 0.350 and the valid matches from three to
+one on the twenty-eight-compound panel, and from 0.351 to 0.424 with no match
+either way on the primary one. Nothing survived correction before the change;
+what does not survive the change is the nominal value the abstract quotes.
+Diisopropyl methylphosphonate stands nearer than any incumbent to soman, to
+cyclosarin and to VX, and di-n-butyl sulfide nearer to sulfur mustard than
+dichloromethane, leaving sarin the only matched agent, which is the mechanism
+diisopropyl fluorophosphate supplies on the primary panel. We report the
+extension rather than adopt it, and it reaches the structural space only,
+because the electronic coordinates would need the semi-empirical binary whose
+version we did not record (Section~\ref{res:repro}). Supporting Information
+Section~\ref{S-meth:niosh} gives the structures, the distances agent by agent
+and the coordinates the filters exchange when the pool grows.
+
 \subsection{How many agents have a valid simulant depends on the panel}
 \label{res:match}
 
@@ -653,8 +693,8 @@ report and not an independent finding.
 \subsection{The axis the stated criterion names}
 \label{res:vol}
 Volatility is the one axis the stated criterion names that is not a descriptor
-we chose, and the one axis on which the incumbent designation is not
-indistinguishable from chance. Two tests were registered in advance of it,
+we chose, and the one axis on which the test returns a nominal value below
+0.05. Two readings of that value, set out below, take it back above 0.05. Two tests were registered in advance of it,
 outside the family of eighteen reported above; only the first was reported in
 the form registered for it, and Supporting Information
 Section~\ref{S-meth:vol} gives both in full with every adopted vapour pressure
@@ -673,6 +713,25 @@ $p = 0.4647$, pairing DPGME with soman across a gap smaller than the mismatch be
 at which the two vapour pressures were measured, so nothing rests on it. Three
 of the eleven agents have an interferent nearer than any incumbent here as
 well.
+
+Two readings weaken that 0.0206, and both were ours to make. The three
+descriptor spaces above are each reported one-sided and two-sided; this axis was
+reported one-sided only, and under the two conventions used there it stands at
+0.0412 and at 0.182, the second of which does not reach 0.05. What the statistic
+responds to is the second reading. On a single axis the mean difference falls as
+the designated set covers more of the axis, and across all 680 designations the
+two are nearly one quantity, with a Spearman correlation of $-0.971$. The
+incumbent three cover more of this axis than any other triple in the pool, so
+0.0206 is largely a comparison against triples covering less of it; held against
+triples of comparable coverage it rises to 0.326, 0.203 and 0.101 at the top
+twentieth, tenth and fifth of that distribution. Decomposing by size says the
+same: DPGME alone is the best of the seventeen singles and dichloromethane the
+worst, dichloromethane with DPGME is the best of the 136 pairs at 0.0074, and
+the incumbent triple stands fourteenth of 680 where DMSO with DPGME and
+dichloromethane stands first. The axis supports that three compounds spanning it
+beat a triple drawn from a pool spanning less, not that these three were chosen
+well for it. Supporting Information Section~\ref{S-meth:vol} gives the ranking
+at each size and the coverage ladder.
 
 The second test asks whether distance on this axis tracks the colorimetric
 response the array recorded, and here we report against ourselves. The form we

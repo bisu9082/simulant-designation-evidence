@@ -67,7 +67,8 @@ done
 for f in tab_ablation.tex tab_family.tex tab_blockbalance.tex \
          tab_sparse.tex tab_plocal.tex tab_volatility.tex \
          tab_vpairing.tex tab_premisenull.tex tab_registers.tex \
-         tab_designations.tex tab_dyepanel.tex tab_failaudit.tex; do
+         tab_designations.tex tab_dyepanel.tex tab_failaudit.tex \
+         tab_niosh.tex tab_voldecomp.tex; do
   if [ -f "outputs/$f" ]; then
     cp -p "outputs/$f" "paper/$f"
   else

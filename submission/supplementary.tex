@@ -1225,6 +1225,47 @@ declared post hoc sensitivity, and we claim no correction exemption for the
 latter. A reader who prefers the twelve-cell family of
 Section~\ref{res:arraydetail} reaches the same place by a shorter route.
 
+\paragraph{What the 0.0206 is made of.} Two things we did not report with it
+bear on how much it carries, and Table~\ref{tab:voldecomp} gives both.
+
+The first is the sidedness convention. The three descriptor spaces are reported
+under two conventions each in Section~\ref{res:paneldetail}, one-sided and
+two-sided, and this axis was reported one-sided only. Under the two conventions
+used there it stands at 0.0412, twice the smaller tail, and at 0.182, the
+proportion of the null deviating from its own mean by at least as much as the
+observation does. The descriptor spaces move by factors of 1.1 to 1.6 between
+those conventions; this axis moves by a factor of nine, because the
+observation sits almost exactly at the edge of the null rather than inside a
+tail, and the second convention is the one that does not reach 0.05. We left out
+the convention that costs us, and we did not notice until a reviewer asked for
+the axis to be decomposed.
+
+The second is what the statistic responds to. On a one-dimensional axis the mean
+difference falls as the designated set covers more of the axis, because every
+agent then has some designated compound within reach of it. Over all 680
+designations the statistic and the coverage of the designated triple, measured
+as the range of the standardised axis it spans, have a Spearman correlation of
+$-0.971$. The incumbent three span 1.943 standardised units, which is the
+largest span of any triple in the pool, so the null the observation is compared
+against consists almost entirely of triples that cover less of the axis than it
+does. Conditioning on comparable coverage, the one-sided value rises to 0.326,
+0.203 and 0.101 at the top five, ten and twenty per cent of the span
+distribution. Conditioning at the observed span exactly leaves fifteen triples
+and puts the incumbents fourteenth of them, but fifteen is too few to carry a
+conclusion and we report the ladder instead.
+
+Decomposing by designation size says the same thing from another direction.
+Of the seventeen single designations DPGME is the best and dichloromethane the
+worst; of the 136 pairs dichloromethane with DPGME is the best, at 0.0074,
+better than the incumbent triple; and of the 680 triples the incumbents stand
+fourteenth, while DMSO with DPGME and dichloromethane stands first at 0.0015.
+What the axis supports is that three compounds spanning it do better than a
+triple drawn at random from a pool that spans less of it. It does not support
+the reading that these three compounds were chosen well for it, and the main
+text now says so.
+
+\input{tab_voldecomp}
+
 \begin{table}[htb]
   \centering
   \caption{Nearest incumbent simulant and nearest compound of the non-agent pool
@@ -1252,10 +1293,18 @@ peer-reviewed simulant literature cited here, and the US Army Test Operations
 Procedures reachable through the same index. That search has a hole in it, and
 the hole is the most important document of all. TOP 08-2-196, \emph{Simulant
 Selection for Laboratory, Chamber, and Field Testing} \cite{top082196}, is the
-Army's procedure for exactly the question this section asks, and we could not
-obtain it. We know its title and its role only because TOP 08-2-188 CN1, which
-governs chemical point detector vapour testing, defers simulant selection to it
-\cite{top082188}. That public procedure also states a criterion about detection
+Army's procedure for exactly the question this section asks, and we have not
+read it. We record what we know about its availability, because the bound on our
+claim depends on it. The current revision, TOP 08-2-196A, carries a Defense
+Technical Information Center accession number, AD1167884, and a full-text
+address in that agency's public technical-report repository; sibling procedures
+in the same series are reachable the same way. Our own retrieval attempts
+failed, the last of them while that repository was under scheduled maintenance,
+so we treat the document as reachable in principle and unread by us rather than
+as unavailable. Any reader who obtains it should check our Section~\ref{M-res:docs}
+claim against it first. We know its title and its role because TOP 08-2-188 CN1,
+which governs chemical point detector vapour testing, defers simulant selection
+to it \cite{top082188}, and that procedure states a criterion about detection
 rather than about barriers, that the simulant ``should produce a signature
 signal similar to the one from the threat analyte''. National CBRN defence
 manuals are generally not public.
@@ -1377,6 +1426,7 @@ taking sulfur mustard at 0.53, the closest agent-simulant pair anywhere in this
 work.
 
 \subsection{The compounds the NIOSH document and the Man-in-Simulant Test name}
+\label{meth:niosh}
 
 The NIOSH document's candidate list for the permeation study names eleven
 compounds, among them DIMP, DEEP, TEP, di-n-butyl sulfide and DMMP itself.
@@ -1387,6 +1437,60 @@ vapour simulant rather than designated for a measurement. Malathion and
 breakthrough data. Dichloromethane appears in neither the NIOSH document nor the
 Man-in-Simulant Test programme, which is the whole of the negative the main text
 reports for it.
+
+\paragraph{Admitting the four to the comparison pool.} The four that are on the
+candidate list and not on either of our panels are diisopropyl
+methylphosphonate, diethyl ethylphosphonate, triethyl phosphate and
+di-n-butyl sulfide, entered as the structures
+\texttt{CC(C)OP(C)\allowbreak(=O)OC(C)C},
+\texttt{CCOP(CC)\allowbreak(=O)OCC},
+\texttt{CCOP(=O)\allowbreak(OCC)OCC} and
+\texttt{CCCC\allowbreak SCCCC} respectively.
+Descriptors for them were generated by the same script that generates them for
+the panel, which reproduces all fifty-three RDKit columns of the
+twenty-eight-compound cache with no disagreement. They enter as comparison
+compounds, not as designated simulants: the designated set stays the incumbent
+three, and the only thing that changes is the pool the permutation draws from,
+which grows from seventeen to twenty-one and takes the enumeration from 680
+designations to 1330. On the primary panel it grows from twenty-four to
+twenty-eight and from 2024 to 3276.
+
+The pre-specified mean difference in the structural space moves from
+$p = 0.028$ to $p = 0.350$ on the twenty-eight-compound panel and from
+$p = 0.351$ to $p = 0.424$ on the primary one, and the valid-match count from
+three to one and from zero to zero. Recomputing the correlation and dependency
+filters on the larger frame admits \texttt{chi2v}, \texttt{chi3v} and
+\texttt{is\_organophosphorus} and drops \texttt{RadiusOfGyration} and
+\texttt{chi1v}, taking the structural space from thirty-five coordinates to
+thirty-six; holding the coordinate set at the twenty-eight-compound one instead
+gives $p = 0.354$ with the same single match, so the change is the pool and not
+the filters. The six statistics of Table~\ref{tab:ablation} move together: the
+smallest of them goes from 0.028 to 0.276.
+
+Table~\ref{tab:niosh} gives the mechanism agent by agent. Its distances are
+unnormalised and belong to the structural space alone, so they are not on the
+scale of the merged-space normalised distances the main text reports for the
+same agents; the separation that sets the match threshold on this frame is
+3.399 before the addition and 3.042 after it. Three of the four compounds enter
+as the nearest non-designated compound to at least one agent. Diisopropyl
+methylphosphonate displaces the incumbents at soman, cyclosarin and VX, diethyl
+ethylphosphonate at tabun, and di-n-butyl sulfide at sulfur mustard, where it
+stands at 2.845 against dichloromethane's 5.720. Sarin is the only agent that
+keeps its match, and it keeps it by a tenth of the separation. This is the
+mechanism diisopropyl fluorophosphate supplies on the primary panel, from a
+different document and a different list.
+
+The extension reaches the structural space only. The three electronic
+coordinates are outputs of a semi-empirical binary that is not in the deposit
+and whose version is not recorded, which is the limitation
+Section~\ref{M-res:repro} of the main text states; computing four compounds with
+a different version would put two binaries' output in one distance space, which
+is worse than not extending it. The merged space inherits that, so neither it
+nor the electronic space is reported here. The whole of this subsection is
+reported rather than adopted: the headline panels are unchanged, and
+\texttt{outputs/niosh\_panel.json} carries every value above.
+
+\input{tab_niosh}
 
 Figure~\ref{M-fig:main}a shows why, and the mechanism is not
 the one our earlier version reported. The two panels do not share a scale, and
@@ -1583,12 +1687,22 @@ Section~\ref{M-res:docs} rest on public sources, and the scope of that search
 is stated there. The claim is that no public instrument designates these three
 compounds for the use the sensor literature makes of them, not that no
 instrument does. A null result invites the question whether the design could have seen an
-effect. On the primary panel the mean-difference statistic reaches $p<0.05$ once
-the incumbent simulants are moved 0.23 typical nearest-neighbour separations
-closer to the agents, while the deficit they actually carry has a median of
-0.493 and falls below that value at sarin, where it is 0.125, and at
-lewisite~1, where it is 0.221 (Section~\ref{res:mde}). The test is therefore sensitive to effects
-smaller than the one at issue. The
+effect. Four values answer it and they do not agree, so the construction has to
+be named. Holding the permutation null fixed while the incumbents move, the
+mean-difference statistic on the primary panel reaches a nominal $p<0.05$ once
+they stand 0.23 typical nearest-neighbour separations closer to the agents, and
+reaches the threshold corrected across the eighteen tests at 0.43; regenerating
+the null at each shift, the same two thresholds fall at 0.24 and at 0.72
+(Section~\ref{res:mde}). The deficit the incumbents actually carry has a median
+of 0.493 and falls below that median at sarin, where it is 0.125, and at
+lewisite~1, where it is 0.221. Against either nominal threshold the design can
+see an effect of the size at issue; against either corrected threshold it
+cannot, and against the larger of the two the detectable effect exceeds the
+deficit of eight of the eleven agents. The main text reports the corrected pair,
+because the eighteen tests were run and the correction is not optional. An
+earlier version of this paragraph quoted the 0.23 alone and concluded that the
+design was sensitive to effects smaller than the one at issue; that is the
+uncorrected quarter of a four-value answer, and the quarter that favours us. The
 agent set is eleven compounds and the nearest-neighbour statistics inherit that:
 on the larger panel with eight simulants, leaving out one agent at a time moves
 the structural $p$ between 0.021 and 0.182, the worst case being removal of

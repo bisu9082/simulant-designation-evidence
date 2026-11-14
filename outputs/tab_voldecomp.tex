@@ -1,0 +1,30 @@
+% 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.
+% 출처: outputs/volatility_decomposition.json
+\begin{table}[htb]
+\centering
+\caption{The volatility axis taken apart. For each designation size, the best set in the pool and the incumbent sets of that size, ranked on the pre-specified mean difference (negative is better). Two-sided readings and the coverage conditioning follow. Values are in \texttt{outputs/volatility\_decomposition.json}.}
+\label{tab:voldecomp}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrr}
+\hline
+Size & Designated set & $\overline{\Delta d}$ & Rank & One-sided $p$ \\
+\hline
+single & DPGME & $+0.6286$ & 1 of 17 & 0.0588 \\
+ & DMMP & $+0.6808$ & 3 of 17 & 0.2353 \\
+ & dichloromethane & $+1.1874$ & 17 of 17 & 1.0000 \\
+\hline
+pair & DPGME + dichloromethane & $+0.0207$ & 1 of 136 & 0.0074 \\
+ & DMMP + dichloromethane & $+0.1614$ & 11 of 136 & 0.0809 \\
+ & DMMP + DPGME & $+0.5178$ & 57 of 136 & 0.4191 \\
+\hline
+triple & DMMP + DPGME + dichloromethane & $-0.0015$ & 14 of 680 & 0.0206 \\
+ & DMSO + DPGME + dichloromethane & $-0.0697$ & 1 of 680 & 0.0015 \\
+\hline
+\multicolumn{5}{@{}p{0.92\textwidth}@{}}{\footnotesize Two-sided readings of the incumbent triple: 0.0412 (twice the smaller tail), 0.1824 (deviation from the null mean).}\\
+\multicolumn{5}{@{}p{0.92\textwidth}@{}}{\footnotesize Spearman correlation between axis coverage and the statistic over all 680 designations: $-0.971$. The incumbent span is 1.943, the largest in the pool.}\\
+\multicolumn{5}{@{}p{0.92\textwidth}@{}}{\footnotesize Conditioned on span $\geq$ 1.767 (top 5 per cent, $n = 43$): $p = 0.3256$, rank 14 of 43.}\\
+\multicolumn{5}{@{}p{0.92\textwidth}@{}}{\footnotesize Conditioned on span $\geq$ 1.699 (top 10 per cent, $n = 69$): $p = 0.2029$, rank 14 of 69.}\\
+\multicolumn{5}{@{}p{0.92\textwidth}@{}}{\footnotesize Conditioned on span $\geq$ 1.555 (top 20 per cent, $n = 138$): $p = 0.1014$, rank 14 of 138.}\\
+\end{tabular}
+\end{table}

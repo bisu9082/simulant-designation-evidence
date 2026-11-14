@@ -1,0 +1,29 @@
+\begin{table}[htb]
+\centering
+\caption{Distance from each agent to its nearest designated simulant and to its nearest non-designated compound, in the structural space, before and after the four compounds the NIOSH candidate list names beside DMMP enter the comparison pool. Distances are unnormalised Euclidean distances in the standardised structural space, not the merged-space normalised distances of the main text, and the two are not comparable; the median nearest-neighbour separation that sets the match threshold is 3.399 before the addition and 3.042 after it. The designated set is the incumbent three throughout. Values are in \texttt{outputs/niosh\_panel.json}.}
+\label{tab:niosh}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrlrrl}
+\hline
+ & \multicolumn{3}{c}{twenty-eight-compound pool} & \multicolumn{3}{c}{with the four added} \\
+\cline{2-4}\cline{5-7}
+Agent & $d_{\mathrm{sim}}$ & $d_{\mathrm{near}}$ & nearest non-designated & $d_{\mathrm{sim}}$ & $d_{\mathrm{near}}$ & nearest non-designated \\
+\hline
+sarin (GB) & 4.442 & 6.421 & ethyl acetate & 4.360 & 4.661 & DIMP \\
+soman (GD) & 5.445 & 7.197 & n-hexane & 5.313 & 4.171 & DIMP \\
+tabun (GA) & 7.339 & 8.637 & ethyl acetate & 7.425 & 7.225 & DEEP \\
+sulfur mustard (HD) & 6.248 & 5.322 & n-hexane & 5.720 & 2.845 & di-n-butyl sulfide \\
+lewisite 1 (L) & 8.126 & 7.160 & p-dichlorobenzene & 8.560 & 7.581 & p-dichlorobenzene \\
+hydrogen cyanide (AC) & 6.001 & 3.148 & acetonitrile & 6.084 & 3.214 & acetonitrile \\
+cyanogen chloride (CK) & 5.312 & 3.161 & acetonitrile & 5.505 & 3.330 & acetonitrile \\
+phosgene (CG) & 5.970 & 3.861 & ethyl acetate & 6.228 & 3.947 & ethyl acetate \\
+chloropicrin (PS) & 8.924 & 8.368 & chloroform & 8.984 & 8.621 & chloroform \\
+cyclosarin (GF) & 6.038 & 6.758 & n-hexane & 5.835 & 4.522 & DIMP \\
+VX & 11.402 & 13.068 & n-hexane & 12.074 & 9.457 & DIMP \\
+\hline
+matched & \multicolumn{3}{c}{3 of 11} & \multicolumn{3}{c}{1 of 11} \\
+pre-specified $p$ & \multicolumn{3}{c}{0.028} & \multicolumn{3}{c}{0.350} \\
+\hline
+\end{tabular}
+\end{table}

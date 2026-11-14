@@ -8,24 +8,24 @@ Database file #2: refs.bib
 achemso 2024-01-30 v3.13g
 You've used 44 entries,
             2538 wiz_defined-function locations,
-            1046 strings with 20815 characters,
-and the built_in function-call counts, 18183 in all, are:
-= -- 1226
+            1048 strings with 21016 characters,
+and the built_in function-call counts, 18194 in all, are:
+= -- 1228
 > -- 1533
 < -- 18
 + -- 570
 - -- 526
-* -- 2056
-:= -- 2513
+* -- 2057
+:= -- 2514
 add.period$ -- 80
 call.type$ -- 44
 change.case$ -- 4
 chr.to.int$ -- 2
 cite$ -- 44
-duplicate$ -- 883
-empty$ -- 1021
+duplicate$ -- 884
+empty$ -- 1022
 format.name$ -- 575
-if$ -- 3385
+if$ -- 3388
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
@@ -38,7 +38,7 @@ quote$ -- 0
 skip$ -- 41
 stack$ -- 0
 substring$ -- 737
-swap$ -- 1318
+swap$ -- 1319
 text.length$ -- 87
 text.prefix$ -- 0
 top$ -- 1
@@ -46,4 +46,4 @@ type$ -- 299
 warning$ -- 0
 while$ -- 144
 width$ -- 0
-write$ -- 571
+write$ -- 572

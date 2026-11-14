@@ -134,7 +134,19 @@ Package hyperref Warning: Suppressing link with empty target on input line 1148
 Package hyperref Warning: Suppressing link with empty target on input line 1171
 .
 
-[18] (./tab_vpairing.tex) (./tab_designations.tex
+[18] (./tab_voldecomp.tex
+Underfull \hbox (badness 2460) in paragraph at lines 5--5
+[]\OT1/ptm/m/n/10.95 Table S5: []The volatil-ity axis taken apart. For each des
+-ig-na-tion size, the best set in the
+
+Underfull \hbox (badness 2103) in paragraph at lines 5--5
+\OT1/ptm/m/n/10.95 pool and the in-cum-bent sets of that size, ranked on the pr
+e-specified mean dif-fer-ence (neg-
+
+Underfull \hbox (badness 2726) in paragraph at lines 5--5
+\OT1/ptm/m/n/10.95 a-tive is bet-ter). Two-sided read-ings and the cov-er-age c
+on-di-tion-ing fol-low. Val-ues are in
+) (./tab_vpairing.tex) (./tab_designations.tex
 Underfull \hbox (badness 3568) in paragraph at lines 14--14
 \OT1/ptm/m/n/8 pro-gramme (31 July 2002,
 
@@ -302,109 +314,121 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--23
 
 Underfull \hbox (badness 10000) in paragraph at lines 23--23
 \OT1/ptm/m/n/8 de-tectabil-ity re-
-) [19]
+)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1336
+Package hyperref Warning: Suppressing link with empty target on input line 1324
+.
+
+[19] [20]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1386
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1359
+Package hyperref Warning: Suppressing link with empty target on input line 1409
 .
 
-
-Package hyperref Warning: Suppressing link with empty target on input line 1360
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1371
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1377
-.
-
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [20]
 
 Package hyperref Warning: Suppressing link with empty target on input line 1410
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1464
-.
-
-[21] [22]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1556
+Package hyperref Warning: Suppressing link with empty target on input line 1421
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1572
+Package hyperref Warning: Suppressing link with empty target on input line 1427
+.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [21]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1506
+.
+
+[22] (./tab_niosh.tex)
+
+Package hyperref Warning: Suppressing link with empty target on input line 1516
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1601
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1605
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1621
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1626
+Package hyperref Warning: Suppressing link with empty target on input line 1570
 .
 
 [23]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1660
+Package hyperref Warning: Suppressing link with empty target on input line 1662
+.
+
+[24]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1678
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1707
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1711
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1737
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1742
+.
+
+[25]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1776
 .
 
 (./tab_ablation.tex
 
-Package hyperref Warning: Suppressing link with empty target on input line 20.
+Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 20.
+Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 20.
+Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 20.
+Package hyperref Warning: Suppressing link with empty target on input line 25.
 
-) (./tab_family.tex) [24] [25] (./tab_blockbalance.tex) [26] [27]
+) (./tab_family.tex) [26] [27] (./tab_blockbalance.tex) [28]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1994
+Package hyperref Warning: Suppressing link with empty target on input line 2110
 .
 
-[28 <./Fig_mde.png>] (./tab_plocal.tex) [29 <./Fig_plocal.png>]
-(./tab_premisenull.tex) [30]
+[29] [30 <./Fig_mde.png>] (./tab_plocal.tex) [31 <./Fig_plocal.png>]
+(./tab_premisenull.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 2205
+Package hyperref Warning: Suppressing link with empty target on input line 2321
 .
 
+[32]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2229
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 2254
-.
-
-[31] [32] [33 <./Fig_toxicity.png>] (./tab_registers.tex) [34]
-
-Package hyperref Warning: Suppressing link with empty target on input line 2480
+Package hyperref Warning: Suppressing link with empty target on input line 2345
 .
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 2563--2571
+Package hyperref Warning: Suppressing link with empty target on input line 2370
+.
+
+[33] [34] [35 <./Fig_toxicity.png>] (./tab_registers.tex) [36]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2596
+.
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 2679--2687
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[35] [36 <./Fig_h1.png>] [37] (./supplementary.bbl [38] [39] [40] [41])
-[42] [43] [44] [45] [46] [47] (./supplementary.aux) )
+[37] [38 <./Fig_h1.png>] [39] (./supplementary.bbl [40] [41] [42] [43])
+[44] [45] [46] [47] [48] [49] (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -424,5 +448,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (47 pages, 6752351 bytes).
+Output written on supplementary.pdf (49 pages, 6764985 bytes).
 Transcript written on supplementary.log.

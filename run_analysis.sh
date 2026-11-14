@@ -31,6 +31,13 @@
 #   acetonitrile_panel   기존 3종 중 둘과 같은 출처(lee2011sno2)가 모사체로
 #                        지정한 아세토니트릴을 우리는 간섭물로 뒀다.
 #                        옮겨 보고 값을 적는다. (2026-11-13 신설)
+#   niosh_panel          본문이 DMMP 의 지정 근거로 쓰는 NIOSH 문서가 DMMP 와
+#                        같은 후보목록에 적은 네 종(DIMP·DEEP·TEP·di-n-butyl
+#                        sulfide)을 비교군에 넣었을 때. 기록되지 않은 패널
+#                        구성 선택 하나를 열어 값을 적는다. (2026-11-14 신설)
+#   volatility_decomposition  휘발성 축 V1 의 측면 규약 3종과 피복(span) 분해.
+#                        우연과 구별되는 유일한 검정이 충실도를 재는지 축
+#                        피복을 재는지 가른다. (2026-11-14 신설)
 #   threshold_equivalence  역치 '<=2' 가 공간마다 전 쌍거리의 몇 %를 담는지.
 #                        공간 간 매칭 수 대비가 화학인지 차원인지 가른다.
 #                        GFN2 LUMO 방법오차도 좌표의 화학적 폭과 함께 잰다.
@@ -145,7 +152,7 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            threshold_sweep.py threshold_equivalence.py \
            designation_failure_audit.py \
            twolabel_panel.py acetonitrile_panel.py davidson_external.py \
-           null_convention.py \
+           null_convention.py niosh_panel.py volatility_decomposition.py \
            mde_nullshift.py shape_match.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가

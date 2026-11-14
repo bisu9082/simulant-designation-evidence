@@ -1,0 +1,661 @@
+{
+ "generated_by": "niosh_panel.py",
+ "added_to_comparison_pool": [
+  "DIMP",
+  "DEEP",
+  "TEP",
+  "di-n-butyl sulfide"
+ ],
+ "smiles": {
+  "DIMP": "CC(C)OP(C)(=O)OC(C)C",
+  "DEEP": "CCOP(CC)(=O)OCC",
+  "TEP": "CCOP(=O)(OCC)OCC",
+  "di-n-butyl sulfide": "CCCCSCCCC"
+ },
+ "iupac_like": {
+  "DIMP": "diisopropyl methylphosphonate",
+  "DEEP": "diethyl ethylphosphonate",
+  "TEP": "triethyl phosphate",
+  "di-n-butyl sulfide": "di-n-butyl sulfide"
+ },
+ "authority": "NIOSH/NPPTL respirator permeation candidate list names eleven compounds including DMMP, DIMP, DEEP, TEP and di-n-butyl sulfide; see Supporting Information Section meth:niosh.",
+ "designated_set": "unchanged (incumbent three)",
+ "spaces_extended": [
+  "structural"
+ ],
+ "spaces_not_extended": [
+  "electronic3",
+  "merged"
+ ],
+ "why_not_extended": "전자 좌표는 xtb 반경험 계산이 필요하고 그 바이너리가 저장소에 없으며 기존 캐시의 생성 버전도 기록돼 있지 않다. 다른 버전으로 계산하면 한 거리공간에 두 바이너리의 출력이 섞인다.",
+ "status": "reported rather than adopted",
+ "panels": {
+  "panel28_incumbent3": {
+   "baseline": {
+    "p": {
+     "mean_diff": 0.027941176470588237,
+     "median_diff": 0.11029411764705882,
+     "mean_logratio": 0.11323529411764706,
+     "mean_dsim": 0.054411764705882354,
+     "n_closer": 0.11029411764705882,
+     "n_valid": 0.2161764705882353
+    },
+    "n_perm": 680,
+    "nn_median": 3.3991187408572747,
+    "n_valid": 3,
+    "observed": {
+     "mean_diff": 0.19534354747424018,
+     "median_diff": 0.5561170108620885,
+     "mean_logratio": 0.08113344780636339,
+     "mean_dsim": 6.840795774667281,
+     "n_closer": -5.0,
+     "n_valid": -3.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.4423671088194645,
+      "d_blocker": 6.420544051835998,
+      "blocker": "ethyl acetate",
+      "matched": true
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.444761952588281,
+      "d_blocker": 7.197289425095437,
+      "blocker": "n-hexane",
+      "matched": true
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 7.3393189650220645,
+      "d_blocker": 8.636699326828058,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 6.248397472394651,
+      "d_blocker": 5.321850528399362,
+      "blocker": "n-hexane",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.12615317982363,
+      "d_blocker": 7.160057763409795,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.001042006300969,
+      "d_blocker": 3.1479347379742144,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.312315860417155,
+      "d_blocker": 3.1612240313473614,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 5.970466015134553,
+      "d_blocker": 3.860666082909586,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 8.92403795705238,
+      "d_blocker": 8.367920946190292,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 6.037847747651434,
+      "d_blocker": 6.758165017562342,
+      "blocker": "n-hexane",
+      "matched": true
+     },
+     {
+      "agent": "VX",
+      "d_sim": 11.402045256135505,
+      "d_blocker": 13.067622587571,
+      "blocker": "n-hexane",
+      "matched": false
+     }
+    ],
+    "n_compounds": 28,
+    "n_dims": 35
+   },
+   "plus4_recomputed": {
+    "p": {
+     "mean_diff": 0.35037593984962406,
+     "median_diff": 0.37593984962406013,
+     "mean_logratio": 0.42781954887218043,
+     "mean_dsim": 0.27593984962406015,
+     "n_closer": 0.7849624060150376,
+     "n_valid": 0.5789473684210527
+    },
+    "n_perm": 1330,
+    "nn_median": 3.0421881356715916,
+    "n_valid": 1,
+    "observed": {
+     "mean_diff": 1.5012035206474594,
+     "median_diff": 1.3126055230684122,
+     "mean_logratio": 0.2872393110971267,
+     "mean_dsim": 6.9171218123612705,
+     "n_closer": -1.0,
+     "n_valid": -1.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.360442427158051,
+      "d_blocker": 4.661087401150632,
+      "blocker": "DIMP",
+      "matched": true
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.312629077286533,
+      "d_blocker": 4.171083249776232,
+      "blocker": "DIMP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 7.425093704234176,
+      "d_blocker": 7.22477277536243,
+      "blocker": "DEEP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.720367964273304,
+      "d_blocker": 2.8449845519395702,
+      "blocker": "di-n-butyl sulfide",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.560352850024127,
+      "d_blocker": 7.58109799059973,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.083836781847437,
+      "d_blocker": 3.214456254637915,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.50531295408553,
+      "d_blocker": 3.33013208936243,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 6.228323010012431,
+      "d_blocker": 3.947090313860297,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 8.983648814353492,
+      "d_blocker": 8.621496820780681,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 5.834830505208923,
+      "d_blocker": 4.522224982140511,
+      "blocker": "DIMP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 12.073501847489961,
+      "d_blocker": 9.456674779241482,
+      "blocker": "DIMP",
+      "matched": false
+     }
+    ],
+    "n_compounds": 32,
+    "n_dims": 36
+   },
+   "plus4_columns_fixed": {
+    "p": {
+     "mean_diff": 0.35413533834586464,
+     "median_diff": 0.38421052631578945,
+     "mean_logratio": 0.44285714285714284,
+     "mean_dsim": 0.26090225563909775,
+     "n_closer": 0.7849624060150376,
+     "n_valid": 0.5789473684210527
+    },
+    "n_perm": 1330,
+    "nn_median": 3.1148805117879004,
+    "n_valid": 1,
+    "observed": {
+     "mean_diff": 1.45626302558699,
+     "median_diff": 1.4457448110438298,
+     "mean_logratio": 0.2845927834507483,
+     "mean_dsim": 6.838587799872047,
+     "n_closer": -1.0,
+     "n_valid": -1.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.342116963379687,
+      "d_blocker": 4.627971616618315,
+      "blocker": "DIMP",
+      "matched": true
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.35668079216513,
+      "d_blocker": 4.165304991338848,
+      "blocker": "DIMP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 7.432145010335057,
+      "d_blocker": 7.232873210576562,
+      "blocker": "DEEP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.895197041809735,
+      "d_blocker": 2.8536141347997157,
+      "blocker": "di-n-butyl sulfide",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.370556599943468,
+      "d_blocker": 7.489625802701281,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.196013739749827,
+      "d_blocker": 3.308957589531476,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.514339613374354,
+      "d_blocker": 3.3314004038725193,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 6.229702687860206,
+      "d_blocker": 3.973213109389397,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 8.681784059776383,
+      "d_blocker": 8.610968931203526,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 5.967169930388776,
+      "d_blocker": 4.521425119344946,
+      "blocker": "DIMP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 11.238759359809896,
+      "d_blocker": 9.090217607759042,
+      "blocker": "DIMP",
+      "matched": false
+     }
+    ],
+    "n_compounds": 32,
+    "n_dims": 35
+   },
+   "columns_only_in_baseline": [
+    "RadiusOfGyration",
+    "chi1v"
+   ],
+   "columns_only_in_extended": [
+    "chi2v",
+    "chi3v",
+    "is_organophosphorus"
+   ]
+  },
+  "panel35_incumbent3": {
+   "baseline": {
+    "p": {
+     "mean_diff": 0.35079051383399207,
+     "median_diff": 0.32608695652173914,
+     "mean_logratio": 0.4199604743083004,
+     "mean_dsim": 0.25691699604743085,
+     "n_closer": 1.0,
+     "n_valid": 1.0
+    },
+    "n_perm": 2024,
+    "nn_median": 3.273286753654107,
+    "n_valid": 0,
+    "observed": {
+     "mean_diff": 1.8734659312018977,
+     "median_diff": 1.736668304426289,
+     "mean_logratio": 0.38130151823491243,
+     "mean_dsim": 6.758894014308364,
+     "n_closer": 0.0,
+     "n_valid": 0.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.097362047760722,
+      "d_blocker": 3.7478573076387054,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.099309629889514,
+      "d_blocker": 3.5572367150819177,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 8.723803093744829,
+      "d_blocker": 6.155574724613269,
+      "blocker": "DCNP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.389034648757676,
+      "d_blocker": 1.7458726317384494,
+      "blocker": "CEES",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.313845341281098,
+      "d_blocker": 7.533471872389729,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.0576623883200815,
+      "d_blocker": 3.378207121215563,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.402188636458698,
+      "d_blocker": 3.400652880289818,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 5.728243251624814,
+      "d_blocker": 4.008984599242982,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 9.512799804522029,
+      "d_blocker": 8.61907776375135,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 5.642593236998888,
+      "d_blocker": 3.905924932572599,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 10.380992078033644,
+      "d_blocker": 7.686848365636737,
+      "blocker": "malathion",
+      "matched": false
+     }
+    ],
+    "n_compounds": 35,
+    "n_dims": 38
+   },
+   "plus4_recomputed": {
+    "p": {
+     "mean_diff": 0.423992673992674,
+     "median_diff": 0.4832112332112332,
+     "mean_logratio": 0.4899267399267399,
+     "mean_dsim": 0.35744810744810745,
+     "n_closer": 1.0,
+     "n_valid": 1.0
+    },
+    "n_perm": 3276,
+    "nn_median": 2.954299578651941,
+    "n_valid": 0,
+    "observed": {
+     "mean_diff": 1.9693438086652748,
+     "median_diff": 2.0552481548470256,
+     "mean_logratio": 0.39809680712259204,
+     "mean_dsim": 6.926006134609278,
+     "n_closer": 0.0,
+     "n_valid": 0.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.188771308835137,
+      "d_blocker": 3.518501334786094,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.209879039127988,
+      "d_blocker": 3.315396611421258,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 9.017348220260736,
+      "d_blocker": 6.441097733800306,
+      "blocker": "DCNP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.368754401318157,
+      "d_blocker": 1.7874150293492324,
+      "blocker": "CEES",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.660588112310933,
+      "d_blocker": 7.892066775232789,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.269108954758419,
+      "d_blocker": 3.5276059545230507,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.608448010930927,
+      "d_blocker": 3.5531998560839018,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 5.943868210102005,
+      "d_blocker": 4.138700074657462,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 9.620650029034447,
+      "d_blocker": 8.945162521278183,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 5.754724740325533,
+      "d_blocker": 3.6871417706485605,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 10.543926453697773,
+      "d_blocker": 7.716997923603197,
+      "blocker": "malathion",
+      "matched": false
+     }
+    ],
+    "n_compounds": 39,
+    "n_dims": 38
+   },
+   "plus4_columns_fixed": {
+    "p": {
+     "mean_diff": 0.423992673992674,
+     "median_diff": 0.4832112332112332,
+     "mean_logratio": 0.4899267399267399,
+     "mean_dsim": 0.35744810744810745,
+     "n_closer": 1.0,
+     "n_valid": 1.0
+    },
+    "n_perm": 3276,
+    "nn_median": 2.954299578651941,
+    "n_valid": 0,
+    "observed": {
+     "mean_diff": 1.9693438086652748,
+     "median_diff": 2.0552481548470256,
+     "mean_logratio": 0.39809680712259204,
+     "mean_dsim": 6.926006134609278,
+     "n_closer": 0.0,
+     "n_valid": 0.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.188771308835137,
+      "d_blocker": 3.518501334786094,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 5.209879039127988,
+      "d_blocker": 3.315396611421258,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 9.017348220260736,
+      "d_blocker": 6.441097733800306,
+      "blocker": "DCNP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.368754401318157,
+      "d_blocker": 1.7874150293492324,
+      "blocker": "CEES",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.660588112310933,
+      "d_blocker": 7.892066775232789,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.269108954758419,
+      "d_blocker": 3.5276059545230507,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.608448010930927,
+      "d_blocker": 3.5531998560839018,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 5.943868210102005,
+      "d_blocker": 4.138700074657462,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 9.620650029034447,
+      "d_blocker": 8.945162521278183,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 5.754724740325533,
+      "d_blocker": 3.6871417706485605,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 10.543926453697773,
+      "d_blocker": 7.716997923603197,
+      "blocker": "malathion",
+      "matched": false
+     }
+    ],
+    "n_compounds": 39,
+    "n_dims": 38
+   },
+   "columns_only_in_baseline": [],
+   "columns_only_in_extended": []
+  }
+ }
+}

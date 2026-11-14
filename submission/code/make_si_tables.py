@@ -599,6 +599,96 @@ def dyepanel():
             + '\n' + r'\end{tabular}')
 
 
+
+def niosh():
+    """NIOSH 후보 4종을 비교군에 넣을 때 작용제별 최근접 거리 (2026-11-14)."""
+    d = json.load(open('outputs/niosh_panel.json'))
+    p = d['panels']['panel28_incumbent3']
+    b, e = p['baseline'], p['plus4_recomputed']
+    nb, ne = b['nn_median'], e['nn_median']
+    L = ['\\begin{tabular}{lrrlrrl}', '\\hline',
+         ' & \\multicolumn{3}{c}{twenty-eight-compound pool}'
+         ' & \\multicolumn{3}{c}{with the four added} \\\\',
+         '\\cline{2-4}\\cline{5-7}',
+         'Agent & $d_{\\mathrm{sim}}$ & $d_{\\mathrm{near}}$ & nearest '
+         'non-designated & $d_{\\mathrm{sim}}$ & $d_{\\mathrm{near}}$ & '
+         'nearest non-designated \\\\', '\\hline']
+    for x, y in zip(b['agents'], e['agents']):
+        # 생거리로 적는다. 정규화해 적으면 본문 표 2 의 병합공간 d_norm 과
+        # 같은 단위로 보이는데 공간이 다르다 — 이 논문이 경고하는 혼동이다.
+        L.append(f"{x['agent']} & {x['d_sim']:.3f} & "
+                 f"{x['d_blocker']:.3f} & {x['blocker']} & "
+                 f"{y['d_sim']:.3f} & {y['d_blocker']:.3f} & "
+                 f"{y['blocker']} \\\\")
+    L += ['\\hline',
+          f"matched & \\multicolumn{{3}}{{c}}{{{b['n_valid']} of 11}}"
+          f" & \\multicolumn{{3}}{{c}}{{{e['n_valid']} of 11}} \\\\",
+          'pre-specified $p$ & '
+          f"\\multicolumn{{3}}{{c}}{{{b['p']['mean_diff']:.3f}}} & "
+          f"\\multicolumn{{3}}{{c}}{{{e['p']['mean_diff']:.3f}}} \\\\",
+          '\\hline', '\\end{tabular}']
+    return '\n'.join(L)
+
+
+
+def voldecomp():
+    """휘발성 축 지정 규모별 순위와 피복 사다리 (2026-11-14)."""
+    d = json.load(open('outputs/volatility_decomposition.json'))
+    sd, sp = d['sidedness'], d['span']
+    L = ['\\begin{tabular}{llrrr}', '\\hline',
+         'Size & Designated set & $\\overline{\\Delta d}$ & Rank & '
+         'One-sided $p$ \\\\', '\\hline']
+    for k, n in (('k1', 'single'), ('k2', 'pair')):
+        rows = d['by_designation_size'][k]['ranking']
+        tot = d['by_designation_size'][k]['n_combinations']
+        inc = {'k1': ['DMMP', 'dichloromethane', 'DPGME'],
+               'k2': [' + '.join(sorted(x)) for x in
+                      (('DMMP', 'dichloromethane'),
+                       ('DMMP', 'DPGME'),
+                       ('dichloromethane', 'DPGME'))]}[k]
+        pick = [rows[0]] + [r for r in rows
+                            if ' + '.join(r['compounds']) in inc
+                            and r is not rows[0]]
+        seen = set()
+        for r in pick:
+            nm = ' + '.join(r['compounds'])
+            if nm in seen:
+                continue
+            seen.add(nm)
+            tag = n if nm == ' + '.join(rows[0]['compounds']) else ''
+            L.append(f"{tag} & {nm} & ${r['mean_diff']:+.4f}$ & "
+                     f"{r['rank']} of {tot} & {r['p']:.4f} \\\\")
+        L.append('\\hline')
+    inc3 = d['by_designation_size']['k3']['incumbent']
+    L.append(f"triple & {' + '.join(inc3['compounds'])} & "
+             f"${inc3['mean_diff']:+.4f}$ & {inc3['rank']} of "
+             f"{d['by_designation_size']['k3']['n_combinations']} & "
+             f"{inc3['p']:.4f} \\\\")
+    best3 = d['by_designation_size']['k3']['ranking'][0]
+    L.append(f" & {' + '.join(best3['compounds'])} & "
+             f"${best3['mean_diff']:+.4f}$ & {best3['rank']} of "
+             f"{d['by_designation_size']['k3']['n_combinations']} & "
+             f"{best3['p']:.4f} \\\\")
+    L += ['\\hline',
+          '\\multicolumn{5}{@{}p{0.92\\textwidth}@{}}{\\footnotesize Two-sided readings of the '
+          'incumbent triple: '
+          f"{sd['two_sided_2min']:.4f} (twice the smaller tail), "
+          f"{sd['two_sided_abs']:.4f} (deviation from the null mean).}}\\\\",
+          '\\multicolumn{5}{@{}p{0.92\\textwidth}@{}}{\\footnotesize Spearman correlation between '
+          'axis coverage and the statistic over all '
+          f"{sp['n']} designations: ${sp['spearman_rho']:.3f}$. The incumbent "
+          f"span is {sp['incumbent_span']:.3f}, the largest in the pool.}}"
+          '\\\\']
+    for r in sp['ladder']:
+        L.append('\\multicolumn{5}{@{}p{0.92\\textwidth}@{}}{\\footnotesize Conditioned on span '
+                 f"$\\geq$ {r['threshold']:.3f} (top "
+                 f"{100 * (1 - r['quantile']):.0f} per cent, $n = {r['n']}$): "
+                 f"$p = {r['conditional_p']:.4f}$, rank {r['rank']} of "
+                 f"{r['n']}.}}\\\\")
+    L.append('\\end{tabular}')
+    return '\n'.join(L)
+
+
 def main():
     rc, mq, pf, pp, mc = load()
     body = ablation(rc, mq, pf, pp, mc)
@@ -618,10 +708,15 @@ minimum over its own six statistics, and
 Section~\ref{M-res:vol} gives what it becomes under wider families.
 Dimensions are the retained coordinate counts after the correlation filter of
 Section~\ref{meth:orderinvariance}; the volatility axis is a single measured
-quantity and carries no filter. Two further enumerations are reported in the
-text rather than here, the two-pesticide and acetonitrile relabellings of
+quantity and carries no filter. Four further enumerations are reported in the
+text rather than here: the two-pesticide and acetonitrile relabellings of
 Section~\ref{M-res:panels}
-(\texttt{outputs/twolabel\_panel.json}, \texttt{outputs/acetonitrile\_panel.json}).}
+(\texttt{outputs/twolabel\_panel.json}, \texttt{outputs/acetonitrile\_panel.json});
+the enlargement of the comparison pool by the four compounds the NIOSH
+candidate list names beside DMMP (Section~\ref{meth:niosh},
+\texttt{outputs/niosh\_panel.json}); and the single- and pair-designation
+enumerations on the volatility axis (Section~\ref{meth:vol},
+\texttt{outputs/volatility\_decomposition.json}).}
 \label{tab:ablation}
 % 2026-11-13. small/4pt 로는 29.7pt 가 여백을 넘었다 (GATE 8 11차).
 \footnotesize
@@ -702,6 +797,35 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_vpairing.tex')
     open('outputs/tab_premisenull.tex', 'w').write(hdr + premisenull() + '\n')
     print('-> outputs/tab_premisenull.tex')
+    open('outputs/tab_niosh.tex', 'w').write(
+        hdr + '% 출처: outputs/niosh_panel.json\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{Distance from '
+        'each agent to its nearest designated simulant and to its nearest '
+        'non-designated compound, in the structural space, before and after '
+        'the four compounds the NIOSH candidate list names beside DMMP enter '
+        'the comparison pool. Distances are unnormalised Euclidean distances '
+        'in the standardised structural space, not the merged-space normalised '
+        'distances of the main text, and the two are not comparable; the '
+        'median nearest-neighbour separation that sets the match threshold is '
+        '3.399 before the addition and 3.042 after it. The designated set is '
+        'the incumbent three throughout. Values are in '
+        '\\texttt{outputs/niosh\\_panel.json}.}\n'
+        '\\label{tab:niosh}\n\\footnotesize\n'
+        '\\setlength{\\tabcolsep}{3pt}\n'
+        + niosh() + '\n\\end{table}\n')
+    print('-> outputs/tab_niosh.tex')
+    open('outputs/tab_voldecomp.tex', 'w').write(
+        hdr + '% 출처: outputs/volatility_decomposition.json\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{The volatility '
+        'axis taken apart. For each designation size, the best set in the '
+        'pool and the incumbent sets of that size, ranked on the '
+        'pre-specified mean difference (negative is better). Two-sided '
+        'readings and the coverage conditioning follow. Values are in '
+        '\\texttt{outputs/volatility\\_decomposition.json}.}\n'
+        '\\label{tab:voldecomp}\n\\footnotesize\n'
+        '\\setlength{\\tabcolsep}{4pt}\n'
+        + voldecomp() + '\n\\end{table}\n')
+    print('-> outputs/tab_voldecomp.tex')
     for i, (a, b, c, key) in enumerate(ROWS):
         if key == 'pesticide':
             dims = {s: pp[s]['n_dims'] for s in pp}

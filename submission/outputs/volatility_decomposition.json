@@ -1,0 +1,9073 @@
+{
+ "generated_by": "volatility_decomposition.py",
+ "panel": "panel28_incumbent3",
+ "statistic": "mean_diff (사전지정)",
+ "note": "휘발성 축 V1 의 측면 규약과 피복 분해. 본문 값을 바꾸지 않고 그 값이 무엇에서 오는지 적는다.",
+ "sidedness": {
+  "n_permutations": 680,
+  "observed": -0.0015058125934016967,
+  "null_mean": 0.4318638533392061,
+  "one_sided_low": 0.020588235294117647,
+  "two_sided_2min": 0.041176470588235294,
+  "two_sided_abs": 0.18235294117647058,
+  "convention_source": "perm_sidedness.py 와 같은 세 정의"
+ },
+ "by_designation_size": {
+  "k1": {
+   "n_combinations": 17,
+   "ranking": [
+    {
+     "compounds": [
+      "DPGME"
+     ],
+     "mean_diff": 0.628646993500028,
+     "rank": 1,
+     "p": 0.058823529411764705,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "DMSO"
+     ],
+     "mean_diff": 0.660301541537637,
+     "rank": 2,
+     "p": 0.11764705882352941,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "DMMP"
+     ],
+     "mean_diff": 0.6807544088347168,
+     "rank": 3,
+     "p": 0.23529411764705882,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.6807544088347168,
+     "rank": 3,
+     "p": 0.23529411764705882,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "p-xylene"
+     ],
+     "mean_diff": 0.7937844651154967,
+     "rank": 5,
+     "p": 0.29411764705882354,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "water"
+     ],
+     "mean_diff": 0.8646852304051378,
+     "rank": 6,
+     "p": 0.35294117647058826,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "toluene"
+     ],
+     "mean_diff": 0.890725438702733,
+     "rank": 7,
+     "p": 0.4117647058823529,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "ethanol"
+     ],
+     "mean_diff": 0.9837039675909406,
+     "rank": 8,
+     "p": 0.47058823529411764,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "acetonitrile"
+     ],
+     "mean_diff": 1.034697712994943,
+     "rank": 9,
+     "p": 0.5294117647058824,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "ethyl acetate"
+     ],
+     "mean_diff": 1.040805317133904,
+     "rank": 10,
+     "p": 0.5882352941176471,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "benzene"
+     ],
+     "mean_diff": 1.0429550157615566,
+     "rank": 11,
+     "p": 0.6470588235294118,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "methanol"
+     ],
+     "mean_diff": 1.0798849545122806,
+     "rank": 12,
+     "p": 0.7058823529411765,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "n-hexane"
+     ],
+     "mean_diff": 1.1034068974819933,
+     "rank": 13,
+     "p": 0.7647058823529411,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "THF"
+     ],
+     "mean_diff": 1.110625533312861,
+     "rank": 14,
+     "p": 0.8235294117647058,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "chloroform"
+     ],
+     "mean_diff": 1.1353291323927108,
+     "rank": 15,
+     "p": 0.8823529411764706,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "acetone"
+     ],
+     "mean_diff": 1.155436543996153,
+     "rank": 16,
+     "p": 0.9411764705882353,
+     "span": 0.0
+    },
+    {
+     "compounds": [
+      "dichloromethane"
+     ],
+     "mean_diff": 1.1874099928466313,
+     "rank": 17,
+     "p": 1.0,
+     "span": 0.0
+    }
+   ]
+  },
+  "k2": {
+   "n_combinations": 136,
+   "ranking": [
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.020659649152735906,
+     "rank": 1,
+     "p": 0.007352941176470588,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.09327971405373482,
+     "rank": 2,
+     "p": 0.014705882352941176,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone"
+     ],
+     "mean_diff": 0.10059327127893164,
+     "rank": 3,
+     "p": 0.022058823529411766,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform"
+     ],
+     "mean_diff": 0.10863623592030841,
+     "rank": 4,
+     "p": 0.029411764705882353,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF"
+     ],
+     "mean_diff": 0.11851767555224835,
+     "rank": 5,
+     "p": 0.03676470588235294,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "n-hexane"
+     ],
+     "mean_diff": 0.12140512988459547,
+     "rank": 6,
+     "p": 0.04411764705882353,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol"
+     ],
+     "mean_diff": 0.1308139070724805,
+     "rank": 7,
+     "p": 0.051470588235294115,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene"
+     ],
+     "mean_diff": 0.14558588257277025,
+     "rank": 8,
+     "p": 0.058823529411764705,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.14644576202383122,
+     "rank": 9,
+     "p": 0.0661764705882353,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.1488888036794155,
+     "rank": 10,
+     "p": 0.07352941176470588,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.16142891147197516,
+     "rank": 11,
+     "p": 0.08088235294117647,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol"
+     ],
+     "mean_diff": 0.16928630184101648,
+     "rank": 12,
+     "p": 0.08823529411764706,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone"
+     ],
+     "mean_diff": 0.1732133361799305,
+     "rank": 13,
+     "p": 0.09558823529411764,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform"
+     ],
+     "mean_diff": 0.1812563008213073,
+     "rank": 14,
+     "p": 0.10294117647058823,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF"
+     ],
+     "mean_diff": 0.19113774045324725,
+     "rank": 15,
+     "p": 0.11029411764705882,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "n-hexane"
+     ],
+     "mean_diff": 0.19402519478559432,
+     "rank": 16,
+     "p": 0.11764705882352941,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol"
+     ],
+     "mean_diff": 0.20343397197347934,
+     "rank": 17,
+     "p": 0.125,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "toluene"
+     ],
+     "mean_diff": 0.20647771339629958,
+     "rank": 18,
+     "p": 0.1323529411764706,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "water"
+     ],
+     "mean_diff": 0.21205202426400274,
+     "rank": 19,
+     "p": 0.13970588235294118,
+     "span": 1.134670858334039
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2144052746754121,
+     "rank": 20,
+     "p": 0.14705882352941177,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene"
+     ],
+     "mean_diff": 0.21820594747376906,
+     "rank": 21,
+     "p": 0.15441176470588236,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.21906582692483004,
+     "rank": 22,
+     "p": 0.16176470588235295,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.22150886858041433,
+     "rank": 23,
+     "p": 0.16911764705882354,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone"
+     ],
+     "mean_diff": 0.2413625335981709,
+     "rank": 24,
+     "p": 0.17647058823529413,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol"
+     ],
+     "mean_diff": 0.24190636674201535,
+     "rank": 25,
+     "p": 0.18382352941176472,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform"
+     ],
+     "mean_diff": 0.2494054982395477,
+     "rank": 26,
+     "p": 0.19117647058823528,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF"
+     ],
+     "mean_diff": 0.2592869378714876,
+     "rank": 27,
+     "p": 0.19852941176470587,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "n-hexane"
+     ],
+     "mean_diff": 0.2621743922038347,
+     "rank": 28,
+     "p": 0.20588235294117646,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol"
+     ],
+     "mean_diff": 0.2715831693917198,
+     "rank": 29,
+     "p": 0.21323529411764705,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "toluene"
+     ],
+     "mean_diff": 0.2790977782972984,
+     "rank": 30,
+     "p": 0.22058823529411764,
+     "span": 1.0716956456480426
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "water"
+     ],
+     "mean_diff": 0.2846720891650016,
+     "rank": 31,
+     "p": 0.22794117647058823,
+     "span": 1.0220156869597163
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene"
+     ],
+     "mean_diff": 0.28635514489200947,
+     "rank": 32,
+     "p": 0.23529411764705882,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.2872150243430705,
+     "rank": 33,
+     "p": 0.2426470588235294,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.2896580659986548,
+     "rank": 34,
+     "p": 0.25,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2947074336076829,
+     "rank": 35,
+     "p": 0.25735294117647056,
+     "span": 0.8600809761853146
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.301237545076299,
+     "rank": 36,
+     "p": 0.2647058823529412,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3092805097176758,
+     "rank": 37,
+     "p": 0.27205882352941174,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol"
+     ],
+     "mean_diff": 0.31005556416025576,
+     "rank": 38,
+     "p": 0.27941176470588236,
+     "span": 1.1450835013689085
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3191619493496157,
+     "rank": 39,
+     "p": 0.2867647058823529,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.32204940368196283,
+     "rank": 40,
+     "p": 0.29411764705882354,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.33145818086984785,
+     "rank": 41,
+     "p": 0.3014705882352941,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3462301563701376,
+     "rank": 42,
+     "p": 0.3088235294117647,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3470900358211986,
+     "rank": 43,
+     "p": 0.3161764705882353,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "toluene"
+     ],
+     "mean_diff": 0.3472469757155388,
+     "rank": 44,
+     "p": 0.3235294117647059,
+     "span": 0.9405307378148515
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.34953307747678286,
+     "rank": 45,
+     "p": 0.33088235294117646,
+     "span": 1.0926134596928616
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "water"
+     ],
+     "mean_diff": 0.352821286583242,
+     "rank": 46,
+     "p": 0.3382352941176471,
+     "span": 0.8908507791265253
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.36993057563838383,
+     "rank": 47,
+     "p": 0.34558823529411764,
+     "span": 0.9804272198040562
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-xylene"
+     ],
+     "mean_diff": 0.3775688777245294,
+     "rank": 48,
+     "p": 0.35294117647058826,
+     "span": 0.7474258048109921
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.40712198719366693,
+     "rank": 49,
+     "p": 0.3602941176470588,
+     "span": 0.7758744562499993
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.4126962980613701,
+     "rank": 50,
+     "p": 0.36764705882352944,
+     "span": 0.7261944975616731
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.4280071675521478,
+     "rank": 51,
+     "p": 0.375,
+     "span": 0.40847636077236593
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 52,
+     "p": 0.38235294117647056,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-xylene"
+     ],
+     "mean_diff": 0.4566595372064256,
+     "rank": 53,
+     "p": 0.3897058823529412,
+     "span": 0.616260896977801
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME"
+     ],
+     "mean_diff": 0.49736681747226,
+     "rank": 54,
+     "p": 0.39705882352941174,
+     "span": 0.11265517137432257
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.5108686116689943,
+     "rank": 55,
+     "p": 0.40441176470588236,
+     "span": 0.29582118939804336
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5165345486845537,
+     "rank": 56,
+     "p": 0.4117647058823529,
+     "span": 0.4516046154129488
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME"
+     ],
+     "mean_diff": 0.5178196847693399,
+     "rank": 57,
+     "p": 0.41911764705882354,
+     "span": 0.2438200792075137
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 58,
+     "p": 0.4264705882352941,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 59,
+     "p": 0.4338235294117647,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 60,
+     "p": 0.4411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5777383605287448,
+     "rank": 61,
+     "p": 0.4485294117647059,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.5899592711508905,
+     "rank": 62,
+     "p": 0.45588235294117646,
+     "span": 0.16465628156485224
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5918515263105725,
+     "rank": 63,
+     "p": 0.4632352941176471,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 64,
+     "p": 0.47058823529411764,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO"
+     ],
+     "mean_diff": 0.6006811288861864,
+     "rank": 65,
+     "p": 0.47794117647058826,
+     "span": 0.13116490783319112
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.614009489561007,
+     "rank": 66,
+     "p": 0.4852941176470588,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6152993087375985,
+     "rank": 67,
+     "p": 0.49264705882352944,
+     "span": 0.6544455733856266
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.618963871220975,
+     "rank": 68,
+     "p": 0.5,
+     "span": 0.641008844279913
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 69,
+     "p": 0.5073529411764706,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6471804920693268,
+     "rank": 70,
+     "p": 0.5147058823529411,
+     "span": 0.5288226043911075
+    },
+    {
+     "compounds": [
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.6843719036246099,
+     "rank": 71,
+     "p": 0.5220588235294118,
+     "span": 0.3242698408370505
+    },
+    {
+     "compounds": [
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.6899462144923131,
+     "rank": 72,
+     "p": 0.5294117647058824,
+     "span": 0.2745898821487243
+    },
+    {
+     "compounds": [
+      "acetone",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 73,
+     "p": 0.5367647058823529,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 74,
+     "p": 0.5441176470588235,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "THF",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 75,
+     "p": 0.5514705882352942,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 76,
+     "p": 0.5588235294117647,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "acetone",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 77,
+     "p": 0.5661764705882353,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7376404412771382,
+     "rank": 78,
+     "p": 0.5735294117647058,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 79,
+     "p": 0.5808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "THF",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 80,
+     "p": 0.5882352941176471,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.759798404527573,
+     "rank": 81,
+     "p": 0.5955882352941176,
+     "span": 0.38458502821773766
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.7610882237041644,
+     "rank": 82,
+     "p": 0.6029411764705882,
+     "span": 0.3798556912369022
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 83,
+     "p": 0.6102941176470589,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.7647527861875407,
+     "rank": 84,
+     "p": 0.6176470588235294,
+     "span": 0.36641896213118863
+    },
+    {
+     "compounds": [
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7772297292170042,
+     "rank": 85,
+     "p": 0.625,
+     "span": 0.41615093478100496
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 86,
+     "p": 0.6323529411764706,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.7953490334299423,
+     "rank": 87,
+     "p": 0.6397058823529411,
+     "span": 0.25423272224238314
+    },
+    {
+     "compounds": [
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.7993876924674391,
+     "rank": 88,
+     "p": 0.6470588235294118,
+     "span": 0.33490506952941146
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.8006775116440304,
+     "rank": 89,
+     "p": 0.6544117647058824,
+     "span": 0.330175732548576
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.8043420741274067,
+     "rank": 90,
+     "p": 0.6617647058823529,
+     "span": 0.31673900344286243
+    },
+    {
+     "compounds": [
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.8325404449852255,
+     "rank": 91,
+     "p": 0.6691176470588235,
+     "span": 0.0496799586883262
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.8349383213698083,
+     "rank": 92,
+     "p": 0.6764705882352942,
+     "span": 0.20455276355405694
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 93,
+     "p": 0.6838235294117647,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 94,
+     "p": 0.6911764705882353,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8795457522693636,
+     "rank": 95,
+     "p": 0.6985294117647058,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 96,
+     "p": 0.7058823529411765,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 97,
+     "p": 0.7132352941176471,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 98,
+     "p": 0.7205882352941176,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.911882209656309,
+     "rank": 99,
+     "p": 0.7279411764705882,
+     "span": 0.26334644576031574
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.9259953754381365,
+     "rank": 100,
+     "p": 0.7352941176470589,
+     "span": 0.21159817122694802
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.9386336542705226,
+     "rank": 101,
+     "p": 0.7426470588235294,
+     "span": 0.3420674655421493
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.9481533386885714,
+     "rank": 102,
+     "p": 0.75,
+     "span": 0.13035230597535452
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9494431578651628,
+     "rank": 103,
+     "p": 0.7573529411764706,
+     "span": 0.12562296899451908
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.9531077203485391,
+     "rank": 104,
+     "p": 0.7647058823529411,
+     "span": 0.1121862398888055
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 105,
+     "p": 0.7720588235294118,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 106,
+     "p": 0.7794117647058824,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 107,
+     "p": 0.7867647058823529,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene"
+     ],
+     "mean_diff": 0.9754660988207985,
+     "rank": 108,
+     "p": 0.7941176470588235,
+     "span": 0.2474593621161122
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9762687630220626,
+     "rank": 109,
+     "p": 0.8014705882352942,
+     "span": 0.29031919100878156
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9840910279786197,
+     "rank": 110,
+     "p": 0.8088235294117647,
+     "span": 0.20795239356937534
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.9875305457828637,
+     "rank": 111,
+     "p": 0.8161764705882353,
+     "span": 0.2032230565885399
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.9878185803514512,
+     "rank": 112,
+     "p": 0.8235294117647058,
+     "span": 0.2744381921808724
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.9891410208041926,
+     "rank": 113,
+     "p": 0.8308823529411765,
+     "span": 0.1670412046994194
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9934722023027134,
+     "rank": 114,
+     "p": 0.8382352941176471,
+     "span": 0.15116020587151024
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9989131874265297,
+     "rank": 115,
+     "p": 0.8455882352941176,
+     "span": 0.15360447559370582
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene"
+     ],
+     "mean_diff": 1.0023527052307737,
+     "rank": 116,
+     "p": 0.8529411764705882,
+     "span": 0.14887513861287038
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0032443689250503,
+     "rank": 117,
+     "p": 0.8602941176470589,
+     "span": 0.13772347676579666
+    },
+    {
+     "compounds": [
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0066838867292942,
+     "rank": 118,
+     "p": 0.8676470588235294,
+     "span": 0.13299413978496122
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 1.007585368084541,
+     "rank": 119,
+     "p": 0.875,
+     "span": 0.09941193133814252
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 1.017357534706878,
+     "rank": 120,
+     "p": 0.8823529411764706,
+     "span": 0.08597520223242894
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 1.0207970525111218,
+     "rank": 121,
+     "p": 0.8897058823529411,
+     "span": 0.0812458652515935
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 1.027344338879211,
+     "rank": 122,
+     "p": 0.8970588235294118,
+     "span": 0.22009027420520288
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 1.0297433313349755,
+     "rank": 123,
+     "p": 0.9044117647058824,
+     "span": 0.018166066086549026
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 1.0310331505115669,
+     "rank": 124,
+     "p": 0.9117647058823529,
+     "span": 0.013436729105713585
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol"
+     ],
+     "mean_diff": 1.0345540008219574,
+     "rank": 125,
+     "p": 0.9191176470588235,
+     "span": 0.1662134968645187
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 1.0395154979573127,
+     "rank": 126,
+     "p": 0.9264705882352942,
+     "span": 0.004729336980835441
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 1.0466184477840228,
+     "rank": 127,
+     "p": 0.9338235294117647,
+     "span": 0.1219771913369464
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane"
+     ],
+     "mean_diff": 1.0474517504826528,
+     "rank": 128,
+     "p": 0.9411764705882353,
+     "span": 0.1758539686776306
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol"
+     ],
+     "mean_diff": 1.0614406072319325,
+     "rank": 129,
+     "p": 0.9485294117647058,
+     "span": 0.06762927336127689
+    },
+    {
+     "compounds": [
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.065771788730453,
+     "rank": 130,
+     "p": 0.9558823529411765,
+     "span": 0.05174827453336772
+    },
+    {
+     "compounds": [
+      "acetone",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0721891095734974,
+     "rank": 131,
+     "p": 0.9632352941176471,
+     "span": 0.11446522233115097
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone"
+     ],
+     "mean_diff": 1.083738926902886,
+     "rank": 132,
+     "p": 0.9705882352941176,
+     "span": 0.09858422350324181
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0842535565355627,
+     "rank": 133,
+     "p": 0.9779411764705882,
+     "span": 0.07022891680357868
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform"
+     ],
+     "mean_diff": 1.0958033738649513,
+     "rank": 134,
+     "p": 0.9852941176470589,
+     "span": 0.05434791797566951
+    },
+    {
+     "compounds": [
+      "THF",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0990757159834725,
+     "rank": 135,
+     "p": 0.9926470588235294,
+     "span": 0.015880998827909165
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform"
+     ],
+     "mean_diff": 1.1232646854306458,
+     "rank": 136,
+     "p": 1.0,
+     "span": 0.044236305527572295
+    }
+   ]
+  },
+  "k3": {
+   "n_combinations": 680,
+   "ranking": [
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.06965501001164208,
+     "rank": 1,
+     "p": 0.0014705882352941176,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": -0.05624406510575481,
+     "rank": 2,
+     "p": 0.0029411764705882353,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": -0.04847680543899946,
+     "rank": 3,
+     "p": 0.004411764705882353,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": -0.0482692963311872,
+     "rank": 4,
+     "p": 0.0058823529411764705,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": -0.03834196660715691,
+     "rank": 5,
+     "p": 0.007352941176470588,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": -0.029673590553545667,
+     "rank": 6,
+     "p": 0.008823529411764706,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.019474841472745166,
+     "rank": 7,
+     "p": 0.010294117647058823,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": -0.01825332064495302,
+     "rank": 8,
+     "p": 0.011764705882352941,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.017823380919422527,
+     "rank": 9,
+     "p": 0.013235294117647059,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": -0.010437393169277664,
+     "rank": 10,
+     "p": 0.014705882352941176,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.007391522234568409,
+     "rank": 11,
+     "p": 0.016176470588235296,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": -0.0057330045753351344,
+     "rank": 12,
+     "p": 0.01764705882352941,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.004289277409161574,
+     "rank": 13,
+     "p": 0.01911764705882353,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "dichloromethane"
+     ],
+     "mean_diff": -0.0015058125934016967,
+     "rank": 14,
+     "p": 0.020588235294117647,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.0006514424068083719,
+     "rank": 15,
+     "p": 0.022058823529411766,
+     "span": 1.9425692173455196
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "acetone"
+     ],
+     "mean_diff": 0.01027861211455366,
+     "rank": 16,
+     "p": 0.023529411764705882,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.016375999795244088,
+     "rank": 17,
+     "p": 0.025,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "chloroform"
+     ],
+     "mean_diff": 0.01832157675593044,
+     "rank": 18,
+     "p": 0.026470588235294117,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.024350768569811696,
+     "rank": 19,
+     "p": 0.027941176470588237,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "THF"
+     ],
+     "mean_diff": 0.02820301638787036,
+     "rank": 20,
+     "p": 0.029411764705882353,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "n-hexane"
+     ],
+     "mean_diff": 0.03109047072021748,
+     "rank": 21,
+     "p": 0.030882352941176472,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.03438463867784693,
+     "rank": 22,
+     "p": 0.03235294117647059,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "water"
+     ],
+     "mean_diff": 0.03967628144568005,
+     "rank": 23,
+     "p": 0.033823529411764704,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "methanol"
+     ],
+     "mean_diff": 0.04049924790810251,
+     "rank": 24,
+     "p": 0.03529411764705882,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.04294647434745324,
+     "rank": 25,
+     "p": 0.03676470588235294,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.044519477509689494,
+     "rank": 26,
+     "p": 0.03823529411764706,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "p-xylene"
+     ],
+     "mean_diff": 0.0474435411124354,
+     "rank": 27,
+     "p": 0.039705882352941174,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "toluene"
+     ],
+     "mean_diff": 0.047651050220247654,
+     "rank": 28,
+     "p": 0.041176470588235294,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.04849030379372998,
+     "rank": 29,
+     "p": 0.04264705882352941,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.05174072840774522,
+     "rank": 30,
+     "p": 0.04411764705882353,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.053145223428253736,
+     "rank": 31,
+     "p": 0.045588235294117645,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.05436674425604588,
+     "rank": 32,
+     "p": 0.047058823529411764,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.054796683981576375,
+     "rank": 33,
+     "p": 0.04852941176470588,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "benzene"
+     ],
+     "mean_diff": 0.05527122340839225,
+     "rank": 34,
+     "p": 0.05,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.05613110285945324,
+     "rank": 35,
+     "p": 0.051470588235294115,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.05653326843510676,
+     "rank": 36,
+     "p": 0.052941176470588235,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.05857414451503753,
+     "rank": 37,
+     "p": 0.054411764705882354,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.05950798807450057,
+     "rank": 38,
+     "p": 0.05588235294117647,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.05971549718231283,
+     "rank": 39,
+     "p": 0.057352941176470586,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.062182671731721234,
+     "rank": 40,
+     "p": 0.058823529411764705,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.0652285426664305,
+     "rank": 41,
+     "p": 0.060294117647058824,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "ethanol"
+     ],
+     "mean_diff": 0.06624675599788919,
+     "rank": 42,
+     "p": 0.061764705882352944,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.06641470806704669,
+     "rank": 43,
+     "p": 0.06323529411764706,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "water"
+     ],
+     "mean_diff": 0.0665628878556551,
+     "rank": 44,
+     "p": 0.06470588235294118,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.06688706032566377,
+     "rank": 45,
+     "p": 0.0661764705882353,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.06833078749183732,
+     "rank": 46,
+     "p": 0.06764705882352941,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.06930216239939381,
+     "rank": 47,
+     "p": 0.06911764705882353,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.07089406935417578,
+     "rank": 48,
+     "p": 0.07058823529411765,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.07327150730780728,
+     "rank": 49,
+     "p": 0.07205882352941176,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "p-xylene"
+     ],
+     "mean_diff": 0.07433014752241042,
+     "rank": 50,
+     "p": 0.07352941176470588,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "toluene"
+     ],
+     "mean_diff": 0.0745376566302227,
+     "rank": 51,
+     "p": 0.075,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.07644550507868969,
+     "rank": 52,
+     "p": 0.07647058823529412,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.07766702590648183,
+     "rank": 53,
+     "p": 0.07794117647058824,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "benzene"
+     ],
+     "mean_diff": 0.07809696563201232,
+     "rank": 54,
+     "p": 0.07941176470588235,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.07831120295995436,
+     "rank": 55,
+     "p": 0.08088235294117647,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "acetone"
+     ],
+     "mean_diff": 0.07842780953279403,
+     "rank": 56,
+     "p": 0.08235294117647059,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.0786613290209311,
+     "rank": 57,
+     "p": 0.0838235294117647,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.07871093958727883,
+     "rank": 58,
+     "p": 0.08529411764705883,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.07886883812874339,
+     "rank": 59,
+     "p": 0.08676470588235294,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "ethanol"
+     ],
+     "mean_diff": 0.07897164267663853,
+     "rank": 60,
+     "p": 0.08823529411764706,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.0813556315234447,
+     "rank": 61,
+     "p": 0.08970588235294118,
+     "span": 1.829914045971197
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.08452519721348445,
+     "rank": 62,
+     "p": 0.09117647058823529,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.08500723513600335,
+     "rank": 63,
+     "p": 0.09264705882352942,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "methanol"
+     ],
+     "mean_diff": 0.0854829533821572,
+     "rank": 64,
+     "p": 0.09411764705882353,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "chloroform"
+     ],
+     "mean_diff": 0.0864707741741708,
+     "rank": 65,
+     "p": 0.09558823529411764,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.08850995204075486,
+     "rank": 66,
+     "p": 0.09705882352941177,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.089731472868547,
+     "rank": 67,
+     "p": 0.09852941176470588,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.0901614125940775,
+     "rank": 68,
+     "p": 0.1,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "n-hexane"
+     ],
+     "mean_diff": 0.09018734197609973,
+     "rank": 69,
+     "p": 0.10147058823529412,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "acetone"
+     ],
+     "mean_diff": 0.09163106914227327,
+     "rank": 70,
+     "p": 0.10294117647058823,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.09249996598805206,
+     "rank": 71,
+     "p": 0.10441176470588236,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.09277449480275866,
+     "rank": 72,
+     "p": 0.10588235294117647,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.09298200391057096,
+     "rank": 73,
+     "p": 0.10735294117647058,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "ethanol"
+     ],
+     "mean_diff": 0.09313336240786425,
+     "rank": 74,
+     "p": 0.10882352941176471,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.09348291508756858,
+     "rank": 75,
+     "p": 0.11029411764705882,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.09434279453862957,
+     "rank": 76,
+     "p": 0.11176470588235295,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "THF"
+     ],
+     "mean_diff": 0.09635221380611073,
+     "rank": 77,
+     "p": 0.11323529411764706,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetone",
+      "chloroform"
+     ],
+     "mean_diff": 0.09657178895824324,
+     "rank": 78,
+     "p": 0.11470588235294117,
+     "span": 1.766715248667889
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.09678583619421385,
+     "rank": 79,
+     "p": 0.1161764705882353,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.09746454390638491,
+     "rank": 80,
+     "p": 0.11764705882352941,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 0.09754740034422237,
+     "rank": 81,
+     "p": 0.11911764705882352,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "n-hexane"
+     ],
+     "mean_diff": 0.09923966813845785,
+     "rank": 82,
+     "p": 0.12058823529411765,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 0.1022517889381649,
+     "rank": 83,
+     "p": 0.12205882352941176,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.10333211148866477,
+     "rank": 84,
+     "p": 0.12352941176470589,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "chloroform"
+     ],
+     "mean_diff": 0.10369551610433846,
+     "rank": 85,
+     "p": 0.125,
+     "span": 1.7224789431403167
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.10455363231645691,
+     "rank": 86,
+     "p": 0.1264705882352941,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "benzene"
+     ],
+     "mean_diff": 0.1049835720419874,
+     "rank": 87,
+     "p": 0.12794117647058822,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.10716519838643794,
+     "rank": 88,
+     "p": 0.12941176470588237,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.10766329298718542,
+     "rank": 89,
+     "p": 0.13088235294117648,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.10845501756302943,
+     "rank": 90,
+     "p": 0.1323529411764706,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "methanol"
+     ],
+     "mean_diff": 0.1086484453263429,
+     "rank": 91,
+     "p": 0.1338235294117647,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.10888481381497757,
+     "rank": 92,
+     "p": 0.13529411764705881,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 0.10931475354050807,
+     "rank": 93,
+     "p": 0.13676470588235295,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.1110956717656936,
+     "rank": 94,
+     "p": 0.13823529411764707,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.1115777096882125,
+     "rank": 95,
+     "p": 0.13970588235294118,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.11211958004640586,
+     "rank": 96,
+     "p": 0.1411764705882353,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "water"
+     ],
+     "mean_diff": 0.11229634634667897,
+     "rank": 97,
+     "p": 0.1426470588235294,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "methanol"
+     ],
+     "mean_diff": 0.11236955979213227,
+     "rank": 98,
+     "p": 0.14411764705882352,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.11347529815974321,
+     "rank": 99,
+     "p": 0.14558823529411766,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.11493245805319324,
+     "rank": 100,
+     "p": 0.14705882352941177,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.11513996716100555,
+     "rank": 101,
+     "p": 0.14852941176470588,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "toluene"
+     ],
+     "mean_diff": 0.11616305423192162,
+     "rank": 102,
+     "p": 0.15,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.11622227722978473,
+     "rank": 103,
+     "p": 0.1514705882352941,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.11642978633759703,
+     "rank": 104,
+     "p": 0.15294117647058825,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.11670074129065293,
+     "rank": 105,
+     "p": 0.15441176470588236,
+     "span": 1.652250026336738
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "THF",
+      "n-hexane"
+     ],
+     "mean_diff": 0.11707394838607477,
+     "rank": 106,
+     "p": 0.15588235294117647,
+     "span": 1.668131025164647
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.11718333435581484,
+     "rank": 107,
+     "p": 0.15735294117647058,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.11988683971316116,
+     "rank": 108,
+     "p": 0.1588235294117647,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.12009434882097346,
+     "rank": 109,
+     "p": 0.16029411764705884,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "toluene"
+     ],
+     "mean_diff": 0.12027111512124657,
+     "rank": 110,
+     "p": 0.16176470588235295,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.1212944208464941,
+     "rank": 111,
+     "p": 0.16323529411764706,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "water"
+     ],
+     "mean_diff": 0.12173736509962478,
+     "rank": 112,
+     "p": 0.16470588235294117,
+     "span": 1.134670858334039
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 0.12177645876901301,
+     "rank": 113,
+     "p": 0.1661764705882353,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.12251594167428624,
+     "rank": 114,
+     "p": 0.1676470588235294,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.12294588139981673,
+     "rank": 115,
+     "p": 0.16911764705882354,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.12299797959680515,
+     "rank": 116,
+     "p": 0.17058823529411765,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "benzene"
+     ],
+     "mean_diff": 0.12342042082663261,
+     "rank": 117,
+     "p": 0.17205882352941176,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 0.12342791932233564,
+     "rank": 118,
+     "p": 0.17352941176470588,
+     "span": 1.6005017518033702
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.12361013699158577,
+     "rank": 119,
+     "p": 0.175,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.1242803002776936,
+     "rank": 120,
+     "p": 0.17647058823529413,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.12436079330874414,
+     "rank": 121,
+     "p": 0.17794117647058824,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.1267233419332779,
+     "rank": 122,
+     "p": 0.17941176470588235,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "p-xylene"
+     ],
+     "mean_diff": 0.1303049852292818,
+     "rank": 123,
+     "p": 0.18088235294117647,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.1303318691499616,
+     "rank": 124,
+     "p": 0.18235294117647058,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.13135174791057638,
+     "rank": 125,
+     "p": 0.18382352941176472,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.13233556208331174,
+     "rank": 126,
+     "p": 0.18529411764705883,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.13337774008467085,
+     "rank": 127,
+     "p": 0.18676470588235294,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.13373567293864708,
+     "rank": 128,
+     "p": 0.18823529411764706,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.13502549211523857,
+     "rank": 129,
+     "p": 0.18970588235294117,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.13503625774390413,
+     "rank": 130,
+     "p": 0.19117647058823528,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.1364799849100777,
+     "rank": 131,
+     "p": 0.19264705882352942,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.138690054598615,
+     "rank": 132,
+     "p": 0.19411764705882353,
+     "span": 1.5010898204652277
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "ethanol"
+     ],
+     "mean_diff": 0.1388668208988881,
+     "rank": 133,
+     "p": 0.19558823529411765,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "water"
+     ],
+     "mean_diff": 0.139182952756654,
+     "rank": 134,
+     "p": 0.19705882352941176,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.13939471255195318,
+     "rank": 135,
+     "p": 0.19852941176470587,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.14142070472604765,
+     "rank": 136,
+     "p": 0.2,
+     "span": 1.6987491381380058
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.14236943219134698,
+     "rank": 137,
+     "p": 0.20147058823529412,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.14271582728880736,
+     "rank": 138,
+     "p": 0.20294117647058824,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.1435141342551747,
+     "rank": 139,
+     "p": 0.20441176470588235,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 0.1439344220194476,
+     "rank": 140,
+     "p": 0.20588235294117646,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.14440020869161255,
+     "rank": 141,
+     "p": 0.2073529411764706,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.14515594284723973,
+     "rank": 142,
+     "p": 0.2088235294117647,
+     "span": 1.5192558865517767
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.14522424119603908,
+     "rank": 143,
+     "p": 0.21029411764705883,
+     "span": 1.5145265495709412
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "ethanol"
+     ],
+     "mean_diff": 0.14712084009487889,
+     "rank": 144,
+     "p": 0.21176470588235294,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "toluene"
+     ],
+     "mean_diff": 0.1471577215312216,
+     "rank": 145,
+     "p": 0.21323529411764705,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.14810346056151305,
+     "rank": 146,
+     "p": 0.21470588235294116,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.1490655699796886,
+     "rank": 147,
+     "p": 0.2161764705882353,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.14927615218389306,
+     "rank": 148,
+     "p": 0.21764705882352942,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.15028709080748073,
+     "rank": 149,
+     "p": 0.21911764705882353,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.15069059606337495,
+     "rank": 150,
+     "p": 0.22058823529411764,
+     "span": 1.388903580576422
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "benzene"
+     ],
+     "mean_diff": 0.15071703053301122,
+     "rank": 151,
+     "p": 0.22205882352941175,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.1509312678609533,
+     "rank": 152,
+     "p": 0.2235294117647059,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.1514889030297423,
+     "rank": 153,
+     "p": 0.225,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.1521636065162402,
+     "rank": 154,
+     "p": 0.22647058823529412,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.15237497746618017,
+     "rank": 155,
+     "p": 0.22794117647058823,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.1543747459110979,
+     "rank": 156,
+     "p": 0.22941176470588234,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "p-xylene"
+     ],
+     "mean_diff": 0.15719159163925683,
+     "rank": 157,
+     "p": 0.23088235294117648,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.15762730003700223,
+     "rank": 158,
+     "p": 0.2323529411764706,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "methanol"
+     ],
+     "mean_diff": 0.1581030182831561,
+     "rank": 159,
+     "p": 0.2338235294117647,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.15994905677880109,
+     "rank": 160,
+     "p": 0.23529411764705882,
+     "span": 1.134670858334039
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.16113001694175375,
+     "rank": 161,
+     "p": 0.23676470588235293,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "acetone"
+     ],
+     "mean_diff": 0.16128925364964045,
+     "rank": 162,
+     "p": 0.23823529411764705,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.1615227731377775,
+     "rank": 163,
+     "p": 0.23970588235294119,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.16157238370412522,
+     "rank": 164,
+     "p": 0.2411764705882353,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.1623515377695459,
+     "rank": 165,
+     "p": 0.2426470588235294,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.1627814774950764,
+     "rank": 166,
+     "p": 0.24411764705882352,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "n-hexane"
+     ],
+     "mean_diff": 0.16280740687709863,
+     "rank": 167,
+     "p": 0.24558823529411763,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "acetone"
+     ],
+     "mean_diff": 0.1642511340432722,
+     "rank": 168,
+     "p": 0.24705882352941178,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.16560206881156983,
+     "rank": 169,
+     "p": 0.2485294117647059,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "ethanol"
+     ],
+     "mean_diff": 0.16575342730886314,
+     "rank": 170,
+     "p": 0.25,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetone",
+      "chloroform"
+     ],
+     "mean_diff": 0.16919185385924213,
+     "rank": 171,
+     "p": 0.2514705882352941,
+     "span": 1.6540600772935663
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "chloroform"
+     ],
+     "mean_diff": 0.16933221829101722,
+     "rank": 172,
+     "p": 0.2529411764705882,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.17008460880738385,
+     "rank": 173,
+     "p": 0.25441176470588234,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 0.17016746524522125,
+     "rank": 174,
+     "p": 0.25588235294117645,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.1709706832438217,
+     "rank": 175,
+     "p": 0.25735294117647056,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.1733503096378713,
+     "rank": 176,
+     "p": 0.25882352941176473,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 0.1748718538391638,
+     "rank": 177,
+     "p": 0.26029411764705884,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.17563593891960508,
+     "rank": 178,
+     "p": 0.26176470588235295,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.17595217638966362,
+     "rank": 179,
+     "p": 0.26323529411764707,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "chloroform"
+     ],
+     "mean_diff": 0.17631558100533737,
+     "rank": 180,
+     "p": 0.2647058823529412,
+     "span": 1.609823771765994
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.17634435920441496,
+     "rank": 181,
+     "p": 0.2661764705882353,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.17717369721745577,
+     "rank": 182,
+     "p": 0.2676470588235294,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.17720423865547594,
+     "rank": 183,
+     "p": 0.2691176470588235,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "benzene"
+     ],
+     "mean_diff": 0.17760363694298625,
+     "rank": 184,
+     "p": 0.27058823529411763,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "THF"
+     ],
+     "mean_diff": 0.17921365792295715,
+     "rank": 185,
+     "p": 0.27205882352941174,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.17964728031106023,
+     "rank": 186,
+     "p": 0.2735294117647059,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.17978526328743683,
+     "rank": 187,
+     "p": 0.275,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.17990723884409038,
+     "rank": 188,
+     "p": 0.27647058823529413,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.1802833578881843,
+     "rank": 189,
+     "p": 0.27794117647058825,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "water"
+     ],
+     "mean_diff": 0.1804455437649193,
+     "rank": 190,
+     "p": 0.27941176470588236,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.18107508246402831,
+     "rank": 191,
+     "p": 0.28088235294117647,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.1811694323246222,
+     "rank": 192,
+     "p": 0.2823529411764706,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.18150487871597645,
+     "rank": 193,
+     "p": 0.2838235294117647,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 0.18193481844150694,
+     "rank": 194,
+     "p": 0.2852941176470588,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "n-hexane"
+     ],
+     "mean_diff": 0.18210111225530426,
+     "rank": 195,
+     "p": 0.2867647058823529,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.18239095315241435,
+     "rank": 196,
+     "p": 0.28823529411764703,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.18282089287794487,
+     "rank": 197,
+     "p": 0.2897058823529412,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.18419777458921135,
+     "rank": 198,
+     "p": 0.2911764705882353,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "toluene"
+     ],
+     "mean_diff": 0.18431225165016196,
+     "rank": 199,
+     "p": 0.2926470588235294,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.18473964494740477,
+     "rank": 200,
+     "p": 0.29411764705882354,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "methanol"
+     ],
+     "mean_diff": 0.1849896246931311,
+     "rank": 201,
+     "p": 0.29558823529411765,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.18529487211679616,
+     "rank": 202,
+     "p": 0.29705882352941176,
+     "span": 1.184350817022365
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.18776003206200445,
+     "rank": 203,
+     "p": 0.2985294117647059,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "toluene"
+     ],
+     "mean_diff": 0.1884203125394869,
+     "rank": 204,
+     "p": 0.3,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.18904985123859594,
+     "rank": 205,
+     "p": 0.3014705882352941,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.18932080619165184,
+     "rank": 206,
+     "p": 0.3029411764705882,
+     "span": 1.5395948549624152
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "THF",
+      "n-hexane"
+     ],
+     "mean_diff": 0.18969401328707367,
+     "rank": 207,
+     "p": 0.3044117647058823,
+     "span": 1.5554758537903246
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "water"
+     ],
+     "mean_diff": 0.18988656251786515,
+     "rank": 208,
+     "p": 0.3058823529411765,
+     "span": 1.134670858334039
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.19020688062808971,
+     "rank": 209,
+     "p": 0.3073529411764706,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.1908691829844993,
+     "rank": 210,
+     "p": 0.3088235294117647,
+     "span": 1.134670858334039
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "methanol"
+     ],
+     "mean_diff": 0.19150988944318925,
+     "rank": 211,
+     "p": 0.31029411764705883,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.19250999072698446,
+     "rank": 212,
+     "p": 0.31176470588235294,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.19271441372197232,
+     "rank": 213,
+     "p": 0.31323529411764706,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.19325275156279895,
+     "rank": 214,
+     "p": 0.31470588235294117,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 0.19439652367001184,
+     "rank": 215,
+     "p": 0.3161764705882353,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.19491126922203222,
+     "rank": 216,
+     "p": 0.3176470588235294,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.195618044497804,
+     "rank": 217,
+     "p": 0.3191176470588235,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 0.1960479842233345,
+     "rank": 218,
+     "p": 0.3205882352941177,
+     "span": 1.4878465804290477
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.1963549963882058,
+     "rank": 219,
+     "p": 0.3220588235294118,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.19779390217003964,
+     "rank": 220,
+     "p": 0.3235294117647059,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.19908372134663113,
+     "rank": 221,
+     "p": 0.325,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.20004477847266122,
+     "rank": 222,
+     "p": 0.3264705882352941,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.2004847595015521,
+     "rank": 223,
+     "p": 0.32794117647058824,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.20129571620417572,
+     "rank": 224,
+     "p": 0.32941176470588235,
+     "span": 1.5340928565731535
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.20274828383000762,
+     "rank": 225,
+     "p": 0.33088235294117646,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "benzene"
+     ],
+     "mean_diff": 0.20628186494347897,
+     "rank": 226,
+     "p": 0.3323529411764706,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.20635573783964592,
+     "rank": 227,
+     "p": 0.3338235294117647,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "ethanol"
+     ],
+     "mean_diff": 0.20701601831712846,
+     "rank": 228,
+     "p": 0.3352941176470588,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.20714174439453997,
+     "rank": 229,
+     "p": 0.33676470588235297,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "water"
+     ],
+     "mean_diff": 0.20733215017489437,
+     "rank": 230,
+     "p": 0.3382352941176471,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.2076455570162374,
+     "rank": 231,
+     "p": 0.3397058823529412,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "p-xylene"
+     ],
+     "mean_diff": 0.20939564471117803,
+     "rank": 232,
+     "p": 0.3411764705882353,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.20958478605012426,
+     "rank": 233,
+     "p": 0.3426470588235294,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.21044240739247266,
+     "rank": 234,
+     "p": 0.34411764705882353,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.21131011949961387,
+     "rank": 235,
+     "p": 0.34558823529411764,
+     "span": 1.3884346490909052
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.21166333167341503,
+     "rank": 236,
+     "p": 0.34705882352941175,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "p-xylene"
+     ],
+     "mean_diff": 0.21463415365915245,
+     "rank": 237,
+     "p": 0.34852941176470587,
+     "span": 0.8600809761853146
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "toluene"
+     ],
+     "mean_diff": 0.21530691894946197,
+     "rank": 238,
+     "p": 0.35,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.21533589218980626,
+     "rank": 239,
+     "p": 0.3514705882352941,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 0.21655448692044646,
+     "rank": 240,
+     "p": 0.35294117647058826,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.21721476739792897,
+     "rank": 241,
+     "p": 0.35441176470588237,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.21777600774823858,
+     "rank": 242,
+     "p": 0.3558823529411765,
+     "span": 1.4066007151774542
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.21784430609703795,
+     "rank": 243,
+     "p": 0.3573529411764706,
+     "span": 1.4018713781966188
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.21843628822572111,
+     "rank": 244,
+     "p": 0.3588235294117647,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.21848537203384943,
+     "rank": 245,
+     "p": 0.3602941176470588,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "benzene"
+     ],
+     "mean_diff": 0.2188662279512516,
+     "rank": 246,
+     "p": 0.36176470588235293,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.21908046527919361,
+     "rank": 247,
+     "p": 0.36323529411764705,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.21963810044798263,
+     "rank": 248,
+     "p": 0.36470588235294116,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2214600916732432,
+     "rank": 249,
+     "p": 0.36617647058823527,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.22331066096437382,
+     "rank": 250,
+     "p": 0.36764705882352944,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.22577649745524261,
+     "rank": 251,
+     "p": 0.36911764705882355,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "methanol"
+     ],
+     "mean_diff": 0.22625221570139645,
+     "rank": 252,
+     "p": 0.37058823529411766,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.22836681166578934,
+     "rank": 253,
+     "p": 0.3720588235294118,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.22927921435999413,
+     "rank": 254,
+     "p": 0.3735294117647059,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "ethanol"
+     ],
+     "mean_diff": 0.22998228421172529,
+     "rank": 255,
+     "p": 0.375,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.23050073518778627,
+     "rank": 256,
+     "p": 0.3764705882352941,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.23093067491331676,
+     "rank": 257,
+     "p": 0.3779411764705882,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "n-hexane"
+     ],
+     "mean_diff": 0.230956604295339,
+     "rank": 258,
+     "p": 0.37941176470588234,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.23096490467835948,
+     "rank": 259,
+     "p": 0.38088235294117645,
+     "span": 1.2762484092020996
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2312542659981365,
+     "rank": 260,
+     "p": 0.38235294117647056,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "acetone"
+     ],
+     "mean_diff": 0.23240033146151254,
+     "rank": 261,
+     "p": 0.38382352941176473,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.2337512662298102,
+     "rank": 262,
+     "p": 0.38529411764705884,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "ethanol"
+     ],
+     "mean_diff": 0.23390262472710352,
+     "rank": 263,
+     "p": 0.38676470588235295,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "p-xylene"
+     ],
+     "mean_diff": 0.23628225112115311,
+     "rank": 264,
+     "p": 0.38823529411764707,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.2372361900279443,
+     "rank": 265,
+     "p": 0.3897058823529412,
+     "span": 1.0716956456480426
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetone",
+      "chloroform"
+     ],
+     "mean_diff": 0.2373410512774825,
+     "rank": 266,
+     "p": 0.3911764705882353,
+     "span": 1.5228951694603752
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.23823380622562418,
+     "rank": 267,
+     "p": 0.3926470588235294,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 0.23831666266346163,
+     "rank": 268,
+     "p": 0.3941176470588235,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.24032055524304743,
+     "rank": 269,
+     "p": 0.39558823529411763,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2406134326196738,
+     "rank": 270,
+     "p": 0.39705882352941174,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.24066304318602152,
+     "rank": 271,
+     "p": 0.3985294117647059,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.24281050089564749,
+     "rank": 272,
+     "p": 0.4,
+     "span": 1.0220156869597163
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 0.24302105125740417,
+     "rank": 273,
+     "p": 0.40147058823529413,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.24410137380790403,
+     "rank": 274,
+     "p": 0.40294117647058825,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "chloroform"
+     ],
+     "mean_diff": 0.24446477842357775,
+     "rank": 275,
+     "p": 0.40441176470588236,
+     "span": 1.4786588639328029
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.24532289463569618,
+     "rank": 276,
+     "p": 0.40588235294117647,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "benzene"
+     ],
+     "mean_diff": 0.24575283436122666,
+     "rank": 277,
+     "p": 0.4073529411764706,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.2479344607056772,
+     "rank": 278,
+     "p": 0.4088235294117647,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.24829532401761503,
+     "rank": 279,
+     "p": 0.4102941176470588,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.2484325553064247,
+     "rank": 280,
+     "p": 0.4117647058823529,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.2492242798822687,
+     "rank": 281,
+     "p": 0.41323529411764703,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.24965407613421683,
+     "rank": 282,
+     "p": 0.4147058823529412,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 0.2500840158597473,
+     "rank": 283,
+     "p": 0.4161764705882353,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.25234697200745176,
+     "rank": 284,
+     "p": 0.4176470588235294,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.25238500220511256,
+     "rank": 285,
+     "p": 0.41911764705882354,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.2525273037450893,
+     "rank": 286,
+     "p": 0.42058823529411765,
+     "span": 1.0716956456480426
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.2528888423656452,
+     "rank": 287,
+     "p": 0.42205882352941176,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "methanol"
+     ],
+     "mean_diff": 0.2531388221113715,
+     "rank": 288,
+     "p": 0.4235294117647059,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2547265984015014,
+     "rank": 289,
+     "p": 0.425,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.25543501868631124,
+     "rank": 290,
+     "p": 0.4264705882352941,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.25590922948024486,
+     "rank": 291,
+     "p": 0.4279411764705882,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2562948981373723,
+     "rank": 292,
+     "p": 0.4294117647058823,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.25719904865683635,
+     "rank": 293,
+     "p": 0.4308823529411765,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.2574700036098922,
+     "rank": 294,
+     "p": 0.4323529411764706,
+     "span": 1.4084299471292243
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "THF",
+      "n-hexane"
+     ],
+     "mean_diff": 0.2578432107053141,
+     "rank": 295,
+     "p": 0.4338235294117647,
+     "span": 1.4243109459571333
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.25873793979295656,
+     "rank": 296,
+     "p": 0.43529411764705883,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.26035977097968016,
+     "rank": 297,
+     "p": 0.43676470588235294,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.2608636111402127,
+     "rank": 298,
+     "p": 0.43823529411764706,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 0.26254572108825225,
+     "rank": 299,
+     "p": 0.43970588235294117,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.2637672419160444,
+     "rank": 300,
+     "p": 0.4411764705882353,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "DPGME",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2637873074019847,
+     "rank": 301,
+     "p": 0.4426470588235294,
+     "span": 0.8600809761853146
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 0.2641971816415749,
+     "rank": 302,
+     "p": 0.4441176470588235,
+     "span": 1.3566816725958564
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2668910297952566,
+     "rank": 303,
+     "p": 0.4455882352941177,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "toluene"
+     ],
+     "mean_diff": 0.26717369576700833,
+     "rank": 304,
+     "p": 0.4470588235294118,
+     "span": 1.0716956456480426
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.2672071616530225,
+     "rank": 305,
+     "p": 0.4485294117647059,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.26815631623364256,
+     "rank": 306,
+     "p": 0.45,
+     "span": 1.0716956456480426
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2692706561893062,
+     "rank": 307,
+     "p": 0.4514705882352941,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.2715383431515432,
+     "rank": 308,
+     "p": 0.45294117647058824,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "water"
+     ],
+     "mean_diff": 0.2727480066347115,
+     "rank": 309,
+     "p": 0.45441176470588235,
+     "span": 1.0220156869597163
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.2737306271013457,
+     "rank": 310,
+     "p": 0.45588235294117646,
+     "span": 1.0220156869597163
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.2745049352578864,
+     "rank": 311,
+     "p": 0.4573529411764706,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.27518193042759004,
+     "rank": 312,
+     "p": 0.4588235294117647,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.2757947544344779,
+     "rank": 313,
+     "p": 0.4602941176470588,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.276884561651936,
+     "rank": 314,
+     "p": 0.46176470588235297,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.27708977887605707,
+     "rank": 315,
+     "p": 0.4632352941176471,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.27817438082852747,
+     "rank": 316,
+     "p": 0.4647058823529412,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2783112997038492,
+     "rank": 317,
+     "p": 0.4661764705882353,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.27874123942937973,
+     "rank": 318,
+     "p": 0.4676470588235294,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2789554767573217,
+     "rank": 319,
+     "p": 0.46911764705882353,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.27913543795455753,
+     "rank": 320,
+     "p": 0.47058823529411764,
+     "span": 1.1450835013689085
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.27945931691785425,
+     "rank": 321,
+     "p": 0.47205882352941175,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.2795131119261107,
+     "rank": 322,
+     "p": 0.47352941176470587,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.28133510315137134,
+     "rank": 323,
+     "p": 0.475,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2818389433119039,
+     "rank": 324,
+     "p": 0.4764705882352941,
+     "span": 1.2572697412577138
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.28348508960804664,
+     "rank": 325,
+     "p": 0.47794117647058826,
+     "span": 1.1450835013689085
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 0.28470368433868687,
+     "rank": 326,
+     "p": 0.47941176470588237,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.2856515089333707,
+     "rank": 327,
+     "p": 0.4808823529411765,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.285925205166479,
+     "rank": 328,
+     "p": 0.4823529411764706,
+     "span": 1.2754358073442629
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.28599350351527836,
+     "rank": 329,
+     "p": 0.4838235294117647,
+     "span": 1.2707064703634274
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2861272271795246,
+     "rank": 330,
+     "p": 0.4852941176470588,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2891542258381222,
+     "rank": 331,
+     "p": 0.48676470588235293,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.29037574666591437,
+     "rank": 332,
+     "p": 0.48823529411764705,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.29080568639144483,
+     "rank": 333,
+     "p": 0.48970588235294116,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "acetone",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2908316157734671,
+     "rank": 334,
+     "p": 0.49117647058823527,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.29145985838261423,
+     "rank": 335,
+     "p": 0.49264705882352944,
+     "span": 1.1450835013689085
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2922753429396407,
+     "rank": 336,
+     "p": 0.49411764705882355,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.2936262777079383,
+     "rank": 337,
+     "p": 0.49558823529411766,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "p-xylene"
+     ],
+     "mean_diff": 0.29372481314104876,
+     "rank": 338,
+     "p": 0.4970588235294118,
+     "span": 0.8600809761853146
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2937776362052316,
+     "rank": 339,
+     "p": 0.4985294117647059,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.2961572625992812,
+     "rank": 340,
+     "p": 0.5,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2972160627556106,
+     "rank": 341,
+     "p": 0.5014705882352941,
+     "span": 1.358238887895523
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.29810881770375225,
+     "rank": 342,
+     "p": 0.5029411764705882,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.2981916741415897,
+     "rank": 343,
+     "p": 0.5044117647058823,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.3004884440978019,
+     "rank": 344,
+     "p": 0.5058823529411764,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.30289606273553227,
+     "rank": 345,
+     "p": 0.5073529411764706,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3039763852860321,
+     "rank": 346,
+     "p": 0.5088235294117647,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.30433978990170585,
+     "rank": 347,
+     "p": 0.5102941176470588,
+     "span": 1.3140025823679506
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.30519790611382425,
+     "rank": 348,
+     "p": 0.5117647058823529,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.30562784583935476,
+     "rank": 349,
+     "p": 0.513235294117647,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.3078094721838053,
+     "rank": 350,
+     "p": 0.5147058823529411,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3083075667845528,
+     "rank": 351,
+     "p": 0.5161764705882353,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.30909929136039677,
+     "rank": 352,
+     "p": 0.5176470588235295,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.30952908761234493,
+     "rank": 353,
+     "p": 0.5191176470588236,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "benzene",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3099590273378754,
+     "rank": 354,
+     "p": 0.5205882352941177,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.31005556416025576,
+     "rank": 355,
+     "p": 0.5220588235294118,
+     "span": 1.1450835013689085
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.31222198348557983,
+     "rank": 356,
+     "p": 0.5235294117647059,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.31276385384377325,
+     "rank": 357,
+     "p": 0.525,
+     "span": 1.0926134596928616
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.31301383358949963,
+     "rank": 358,
+     "p": 0.5264705882352941,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.3146016098796295,
+     "rank": 359,
+     "p": 0.5279411764705882,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.31578424095837293,
+     "rank": 360,
+     "p": 0.5294117647058824,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.3163268495098406,
+     "rank": 361,
+     "p": 0.5308823529411765,
+     "span": 0.9405307378148515
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.3170740601349644,
+     "rank": 362,
+     "p": 0.5323529411764706,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "methanol",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.31734501508802027,
+     "rank": 363,
+     "p": 0.5338235294117647,
+     "span": 1.243773665564372
+    },
+    {
+     "compounds": [
+      "THF",
+      "n-hexane",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.31771822218344214,
+     "rank": 364,
+     "p": 0.5352941176470588,
+     "span": 1.259654664392281
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.32067650116332974,
+     "rank": 365,
+     "p": 0.5367647058823529,
+     "span": 0.9405307378148515
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.3207386226183408,
+     "rank": 366,
+     "p": 0.538235294117647,
+     "span": 1.0926134596928616
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.32190116037754374,
+     "rank": 367,
+     "p": 0.5397058823529411,
+     "span": 0.8908507791265253
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3224207325663804,
+     "rank": 368,
+     "p": 0.5411764705882353,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3236422533941725,
+     "rank": 369,
+     "p": 0.5426470588235294,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.324072193119703,
+     "rank": 370,
+     "p": 0.5441176470588235,
+     "span": 1.1920253910310041
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.33437994673601446,
+     "rank": 371,
+     "p": 0.5455882352941176,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.33566976591260594,
+     "rank": 372,
+     "p": 0.5470588235294118,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.33675957313006405,
+     "rank": 373,
+     "p": 0.5485294117647059,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.33804939230665554,
+     "rank": 374,
+     "p": 0.55,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3393343283959824,
+     "rank": 375,
+     "p": 0.5514705882352942,
+     "span": 1.0926134596928616
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.34171395479003197,
+     "rank": 376,
+     "p": 0.5529411764705883,
+     "span": 1.0926134596928616
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-dichlorobenzene",
+      "water"
+     ],
+     "mean_diff": 0.3433601010861747,
+     "rank": 377,
+     "p": 0.5544117647058824,
+     "span": 0.9804272198040562
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.34457869581681494,
+     "rank": 378,
+     "p": 0.5558823529411765,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3458002166446071,
+     "rank": 379,
+     "p": 0.5573529411764706,
+     "span": 1.1107795257794106
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.34586851499340643,
+     "rank": 380,
+     "p": 0.5588235294117647,
+     "span": 1.1060501887985752
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.34664875151883107,
+     "rank": 381,
+     "p": 0.5602941176470588,
+     "span": 0.7474258048109921
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.3472469757155388,
+     "rank": 382,
+     "p": 0.5617647058823529,
+     "span": 0.9405307378148515
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "DPGME"
+     ],
+     "mean_diff": 0.3479338876036173,
+     "rank": 383,
+     "p": 0.5647058823529412,
+     "span": 0.2438200792075137
+    },
+    {
+     "compounds": [
+      "DMSO",
+      "DPGME",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.3479338876036173,
+     "rank": 383,
+     "p": 0.5647058823529412,
+     "span": 0.40847636077236593
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-dichlorobenzene",
+      "toluene"
+     ],
+     "mean_diff": 0.3513348698607423,
+     "rank": 385,
+     "p": 0.5661764705882353,
+     "span": 0.9804272198040562
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.352821286583242,
+     "rank": 386,
+     "p": 0.5676470588235294,
+     "span": 0.8908507791265253
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.36993057563838383,
+     "rank": 387,
+     "p": 0.5691176470588235,
+     "span": 0.9804272198040562
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "p-xylene"
+     ],
+     "mean_diff": 0.37658625725789513,
+     "rank": 388,
+     "p": 0.5705882352941176,
+     "span": 0.7474258048109921
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.3805515126414578,
+     "rank": 389,
+     "p": 0.5720588235294117,
+     "span": 0.7758744562499993
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.40712198719366693,
+     "rank": 390,
+     "p": 0.5735294117647058,
+     "span": 0.7758744562499993
+    },
+    {
+     "compounds": [
+      "p-dichlorobenzene",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.4126962980613701,
+     "rank": 391,
+     "p": 0.575,
+     "span": 0.7261944975616731
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "p-dichlorobenzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.41479794893707145,
+     "rank": 392,
+     "p": 0.5764705882352941,
+     "span": 0.616260896977801
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.42165012512255556,
+     "rank": 393,
+     "p": 0.5779411764705882,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DPGME",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.4270245470855136,
+     "rank": 394,
+     "p": 0.5794117647058824,
+     "span": 0.40847636077236593
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.42962489389712316,
+     "rank": 395,
+     "p": 0.5808823529411765,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.4385357791067491,
+     "rank": 396,
+     "p": 0.5823529411764706,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.4482205996747647,
+     "rank": 397,
+     "p": 0.5838235294117647,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.45060022606881434,
+     "rank": 398,
+     "p": 0.5941176470588235,
+     "span": 1.0824882411602048
+    },
+    {
+     "compounds": [
+      "DMMP",
+      "DMSO",
+      "p-dichlorobenzene"
+     ],
+     "mean_diff": 0.50988599120236,
+     "rank": 405,
+     "p": 0.5955882352941176,
+     "span": 0.29582118939804336
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5175704716739905,
+     "rank": 406,
+     "p": 0.5970588235294118,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.525545240448558,
+     "rank": 407,
+     "p": 0.5985294117647059,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5296349186360556,
+     "rank": 408,
+     "p": 0.6,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5376096874106232,
+     "rank": 409,
+     "p": 0.6014705882352941,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5441409462261996,
+     "rank": 410,
+     "p": 0.6029411764705882,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5444570780839655,
+     "rank": 411,
+     "p": 0.6044117647058823,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5465205726202492,
+     "rank": 412,
+     "p": 0.6147058823529412,
+     "span": 0.9066342724825742
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5487882595824861,
+     "rank": 419,
+     "p": 0.6161764705882353,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "THF",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5524318468585331,
+     "rank": 420,
+     "p": 0.6176470588235294,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5562053931882647,
+     "rank": 421,
+     "p": 0.6191176470588236,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5567630283570537,
+     "rank": 422,
+     "p": 0.6205882352941177,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5585850195823143,
+     "rank": 423,
+     "p": 0.6294117647058823,
+     "span": 0.8623979669550019
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5629014253643138,
+     "rank": 429,
+     "p": 0.6308823529411764,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "methanol",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5708761941388812,
+     "rank": 430,
+     "p": 0.6323529411764706,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5710275526361746,
+     "rank": 431,
+     "p": 0.6338235294117647,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 432,
+     "p": 0.6411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 432,
+     "p": 0.6411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "THF",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 432,
+     "p": 0.6411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 432,
+     "p": 0.6411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5734071790302242,
+     "rank": 432,
+     "p": 0.6411764705882353,
+     "span": 0.8080500489793324
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5753587341346953,
+     "rank": 437,
+     "p": 0.6426470588235295,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "benzene",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5777383605287448,
+     "rank": 438,
+     "p": 0.6485294117647059,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5777383605287448,
+     "rank": 438,
+     "p": 0.6485294117647059,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5777383605287448,
+     "rank": 438,
+     "p": 0.6485294117647059,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "methanol",
+      "n-hexane",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5777383605287448,
+     "rank": 438,
+     "p": 0.6485294117647059,
+     "span": 0.7921690501514232
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.5777934352577386,
+     "rank": 442,
+     "p": 0.65,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.584324694073315,
+     "rank": 443,
+     "p": 0.6514705882352941,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5850593886147483,
+     "rank": 444,
+     "p": 0.6529411764705882,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5863492077913398,
+     "rank": 445,
+     "p": 0.6544117647058824,
+     "span": 0.6544455733856266
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5894718999165228,
+     "rank": 446,
+     "p": 0.6558823529411765,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.5900137702747162,
+     "rank": 447,
+     "p": 0.6573529411764706,
+     "span": 0.641008844279913
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5918515263105725,
+     "rank": 448,
+     "p": 0.6617647058823529,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5918515263105725,
+     "rank": 448,
+     "p": 0.6617647058823529,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.5918515263105725,
+     "rank": 448,
+     "p": 0.6617647058823529,
+     "span": 0.7404207756180555
+    },
+    {
+     "compounds": [
+      "benzene",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5930341573893159,
+     "rank": 451,
+     "p": 0.663235294117647,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5943239765659073,
+     "rank": 452,
+     "p": 0.6647058823529411,
+     "span": 0.6544455733856266
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.5963891410353802,
+     "rank": 453,
+     "p": 0.6764705882352942,
+     "span": 0.8078983590114804
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.5979885390492838,
+     "rank": 461,
+     "p": 0.6779411764705883,
+     "span": 0.641008844279913
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6116298631669573,
+     "rank": 462,
+     "p": 0.6794117647058824,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6129196823435489,
+     "rank": 463,
+     "p": 0.6808823529411765,
+     "span": 0.6544455733856266
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.614009489561007,
+     "rank": 464,
+     "p": 0.6838235294117647,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "p-xylene"
+     ],
+     "mean_diff": 0.614009489561007,
+     "rank": 464,
+     "p": 0.6838235294117647,
+     "span": 0.659174910366462
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6152993087375985,
+     "rank": 466,
+     "p": 0.6852941176470588,
+     "span": 0.6544455733856266
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "p-xylene"
+     ],
+     "mean_diff": 0.6165842448269253,
+     "rank": 467,
+     "p": 0.6867647058823529,
+     "span": 0.641008844279913
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-xylene",
+      "water"
+     ],
+     "mean_diff": 0.6206100175171178,
+     "rank": 468,
+     "p": 0.6882352941176471,
+     "span": 0.5288226043911075
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6239139820131809,
+     "rank": 469,
+     "p": 0.6897058823529412,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "p-xylene",
+      "toluene"
+     ],
+     "mean_diff": 0.6285847862916852,
+     "rank": 470,
+     "p": 0.6911764705882353,
+     "span": 0.5288226043911075
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "toluene"
+     ],
+     "mean_diff": 0.6359784289752463,
+     "rank": 471,
+     "p": 0.7029411764705882,
+     "span": 0.7582184003231542
+    },
+    {
+     "compounds": [
+      "p-xylene",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.6578014290724008,
+     "rank": 479,
+     "p": 0.7044117647058824,
+     "span": 0.3242698408370505
+    },
+    {
+     "compounds": [
+      "acetone",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.6737137818091735,
+     "rank": 480,
+     "p": 0.7058823529411765,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.6857782287712386,
+     "rank": 481,
+     "p": 0.7073529411764706,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.6923094875868151,
+     "rank": 482,
+     "p": 0.7191176470588235,
+     "span": 0.6320443903338498
+    },
+    {
+     "compounds": [
+      "THF",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7006003882191485,
+     "rank": 490,
+     "p": 0.7205882352941176,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7043739345488802,
+     "rank": 491,
+     "p": 0.7308823529411764,
+     "span": 0.5878080848062776
+    },
+    {
+     "compounds": [
+      "n-hexane",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7049315697176692,
+     "rank": 498,
+     "p": 0.7323529411764705,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "methanol",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7190447354994967,
+     "rank": 499,
+     "p": 0.7338235294117647,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.7191960939967901,
+     "rank": 500,
+     "p": 0.7426470588235294,
+     "span": 0.533460166830608
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 506,
+     "p": 0.75,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "methanol",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 506,
+     "p": 0.75,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 506,
+     "p": 0.75,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 506,
+     "p": 0.75,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "benzene",
+      "n-hexane",
+      "water"
+     ],
+     "mean_diff": 0.7235272754953107,
+     "rank": 506,
+     "p": 0.75,
+     "span": 0.5175791680026989
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.731898775526681,
+     "rank": 511,
+     "p": 0.7617647058823529,
+     "span": 0.5823644316455237
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7376404412771382,
+     "rank": 519,
+     "p": 0.7676470588235295,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7376404412771382,
+     "rank": 519,
+     "p": 0.7676470588235295,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7376404412771382,
+     "rank": 519,
+     "p": 0.7676470588235295,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol",
+      "water"
+     ],
+     "mean_diff": 0.7376404412771382,
+     "rank": 519,
+     "p": 0.7676470588235295,
+     "span": 0.46583089346933115
+    },
+    {
+     "compounds": [
+      "benzene",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7412026987499314,
+     "rank": 523,
+     "p": 0.7691176470588236,
+     "span": 0.38458502821773766
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7424925179265229,
+     "rank": 524,
+     "p": 0.7705882352941177,
+     "span": 0.3798556912369022
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7439632224887464,
+     "rank": 525,
+     "p": 0.7808823529411765,
+     "span": 0.5381281261179514
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7461570804098993,
+     "rank": 532,
+     "p": 0.7823529411764706,
+     "span": 0.36641896213118863
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "THF",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.758785381936656,
+     "rank": 533,
+     "p": 0.7911764705882353,
+     "span": 0.48378020814228184
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.759798404527573,
+     "rank": 539,
+     "p": 0.7955882352941176,
+     "span": 0.38458502821773766
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "water"
+     ],
+     "mean_diff": 0.759798404527573,
+     "rank": 539,
+     "p": 0.7955882352941176,
+     "span": 0.38458502821773766
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.759798404527573,
+     "rank": 539,
+     "p": 0.7955882352941176,
+     "span": 0.38458502821773766
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.7610882237041644,
+     "rank": 542,
+     "p": 0.7985294117647059,
+     "span": 0.3798556912369022
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "water"
+     ],
+     "mean_diff": 0.7610882237041644,
+     "rank": 542,
+     "p": 0.7985294117647059,
+     "span": 0.3798556912369022
+    },
+    {
+     "compounds": [
+      "methanol",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 544,
+     "p": 0.8058823529411765,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 544,
+     "p": 0.8058823529411765,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "benzene",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 544,
+     "p": 0.8058823529411765,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 544,
+     "p": 0.8058823529411765,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "n-hexane",
+      "toluene"
+     ],
+     "mean_diff": 0.7631165634351766,
+     "rank": 544,
+     "p": 0.8058823529411765,
+     "span": 0.4678992093143727
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "water"
+     ],
+     "mean_diff": 0.7647527861875407,
+     "rank": 549,
+     "p": 0.8073529411764706,
+     "span": 0.36641896213118863
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7726796282343134,
+     "rank": 550,
+     "p": 0.8088235294117647,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "toluene",
+      "water"
+     ],
+     "mean_diff": 0.7743737012582511,
+     "rank": 551,
+     "p": 0.8102941176470588,
+     "span": 0.25423272224238314
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7772297292170042,
+     "rank": 552,
+     "p": 0.8161764705882353,
+     "span": 0.41615093478100496
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7772297292170042,
+     "rank": 552,
+     "p": 0.8161764705882353,
+     "span": 0.41615093478100496
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7772297292170042,
+     "rank": 552,
+     "p": 0.8161764705882353,
+     "span": 0.41615093478100496
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7772297292170042,
+     "rank": 552,
+     "p": 0.8161764705882353,
+     "span": 0.41615093478100496
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "ethanol"
+     ],
+     "mean_diff": 0.7847440751963785,
+     "rank": 556,
+     "p": 0.8264705882352941,
+     "span": 0.5536656367690973
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.7993876924674391,
+     "rank": 563,
+     "p": 0.8308823529411765,
+     "span": 0.33490506952941146
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "toluene"
+     ],
+     "mean_diff": 0.7993876924674391,
+     "rank": 563,
+     "p": 0.8308823529411765,
+     "span": 0.33490506952941146
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.7993876924674391,
+     "rank": 563,
+     "p": 0.8308823529411765,
+     "span": 0.33490506952941146
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.8006775116440304,
+     "rank": 566,
+     "p": 0.8338235294117647,
+     "span": 0.330175732548576
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "toluene"
+     ],
+     "mean_diff": 0.8006775116440304,
+     "rank": 566,
+     "p": 0.8338235294117647,
+     "span": 0.330175732548576
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "toluene"
+     ],
+     "mean_diff": 0.8043420741274067,
+     "rank": 568,
+     "p": 0.8352941176470589,
+     "span": 0.31673900344286243
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8542696208807175,
+     "rank": 569,
+     "p": 0.836764705882353,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8640417875030546,
+     "rank": 570,
+     "p": 0.8382352941176471,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8663340678427826,
+     "rank": 571,
+     "p": 0.8470588235294118,
+     "span": 0.4414793968802918
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8674813053072985,
+     "rank": 577,
+     "p": 0.8485294117647059,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 578,
+     "p": 0.8558823529411764,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 578,
+     "p": 0.8558823529411764,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 578,
+     "p": 0.8558823529411764,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 578,
+     "p": 0.8558823529411764,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.8761062344651197,
+     "rank": 578,
+     "p": 0.8558823529411764,
+     "span": 0.4280426677745782
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8795457522693636,
+     "rank": 583,
+     "p": 0.861764705882353,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.8795457522693636,
+     "rank": 583,
+     "p": 0.861764705882353,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "benzene",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.8795457522693636,
+     "rank": 583,
+     "p": 0.861764705882353,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.8795457522693636,
+     "rank": 583,
+     "p": 0.861764705882353,
+     "span": 0.4233133307937428
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "ethanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.8806644217478133,
+     "rank": 587,
+     "p": 0.8720588235294118,
+     "span": 0.3778116680914667
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "ethanol"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.8927288687098787,
+     "rank": 594,
+     "p": 0.8808823529411764,
+     "span": 0.3335753625638944
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 600,
+     "p": 0.888235294117647,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 600,
+     "p": 0.888235294117647,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "ethanol"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 600,
+     "p": 0.888235294117647,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 600,
+     "p": 0.888235294117647,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9075510281577883,
+     "rank": 600,
+     "p": 0.888235294117647,
+     "span": 0.2792274445882249
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.911882209656309,
+     "rank": 605,
+     "p": 0.8941176470588236,
+     "span": 0.26334644576031574
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.911882209656309,
+     "rank": 605,
+     "p": 0.8941176470588236,
+     "span": 0.26334644576031574
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.911882209656309,
+     "rank": 605,
+     "p": 0.8941176470588236,
+     "span": 0.26334644576031574
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.911882209656309,
+     "rank": 605,
+     "p": 0.8941176470588236,
+     "span": 0.26334644576031574
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.9259953754381365,
+     "rank": 609,
+     "p": 0.8985294117647059,
+     "span": 0.21159817122694802
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "methanol"
+     ],
+     "mean_diff": 0.9259953754381365,
+     "rank": 609,
+     "p": 0.8985294117647059,
+     "span": 0.21159817122694802
+    },
+    {
+     "compounds": [
+      "ethanol",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.9259953754381365,
+     "rank": 609,
+     "p": 0.8985294117647059,
+     "span": 0.21159817122694802
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.9265692073084576,
+     "rank": 612,
+     "p": 0.9,
+     "span": 0.3420674655421493
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.9386336542705226,
+     "rank": 613,
+     "p": 0.9044117647058824,
+     "span": 0.3420674655421493
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "methanol"
+     ],
+     "mean_diff": 0.9386336542705226,
+     "rank": 613,
+     "p": 0.9044117647058824,
+     "span": 0.3420674655421493
+    },
+    {
+     "compounds": [
+      "dichloromethane",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9386336542705226,
+     "rank": 613,
+     "p": 0.9044117647058824,
+     "span": 0.3420674655421493
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9481533386885714,
+     "rank": 616,
+     "p": 0.9073529411764706,
+     "span": 0.13035230597535452
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "ethanol"
+     ],
+     "mean_diff": 0.9481533386885714,
+     "rank": 616,
+     "p": 0.9073529411764706,
+     "span": 0.13035230597535452
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethanol",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9494431578651628,
+     "rank": 618,
+     "p": 0.9088235294117647,
+     "span": 0.12562296899451908
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "acetonitrile"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.9622544143942174,
+     "rank": 619,
+     "p": 0.9176470588235294,
+     "span": 0.2656254282026612
+    },
+    {
+     "compounds": [
+      "acetone",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9642043160599975,
+     "rank": 625,
+     "p": 0.9191176470588235,
+     "span": 0.29031919100878156
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 626,
+     "p": 0.9264705882352942,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 626,
+     "p": 0.9264705882352942,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 626,
+     "p": 0.9264705882352942,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 626,
+     "p": 0.9264705882352942,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetone",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.9720265810165546,
+     "rank": 626,
+     "p": 0.9264705882352942,
+     "span": 0.25218869909694763
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 631,
+     "p": 0.9338235294117647,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "chloroform"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 631,
+     "p": 0.9338235294117647,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 631,
+     "p": 0.9338235294117647,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 631,
+     "p": 0.9338235294117647,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.9743188613562827,
+     "rank": 631,
+     "p": 0.9338235294117647,
+     "span": 0.22138912267508892
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 0.9754660988207985,
+     "rank": 636,
+     "p": 0.9397058823529412,
+     "span": 0.2474593621161122
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "benzene"
+     ],
+     "mean_diff": 0.9754660988207985,
+     "rank": 636,
+     "p": 0.9397058823529412,
+     "span": 0.2474593621161122
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9754660988207985,
+     "rank": 636,
+     "p": 0.9397058823529412,
+     "span": 0.2474593621161122
+    },
+    {
+     "compounds": [
+      "acetone",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.9754660988207985,
+     "rank": 636,
+     "p": 0.9397058823529412,
+     "span": 0.2474593621161122
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.9757541333893862,
+     "rank": 640,
+     "p": 0.9411764705882353,
+     "span": 0.2744381921808724
+    },
+    {
+     "compounds": [
+      "THF",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9762687630220626,
+     "rank": 641,
+     "p": 0.9441176470588235,
+     "span": 0.29031919100878156
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "dichloromethane",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9762687630220626,
+     "rank": 641,
+     "p": 0.9441176470588235,
+     "span": 0.29031919100878156
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9840910279786197,
+     "rank": 643,
+     "p": 0.95,
+     "span": 0.20795239356937534
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.9840910279786197,
+     "rank": 643,
+     "p": 0.95,
+     "span": 0.20795239356937534
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9840910279786197,
+     "rank": 643,
+     "p": 0.95,
+     "span": 0.20795239356937534
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9840910279786197,
+     "rank": 643,
+     "p": 0.95,
+     "span": 0.20795239356937534
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 0.9875305457828637,
+     "rank": 647,
+     "p": 0.9544117647058824,
+     "span": 0.2032230565885399
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "chloroform"
+     ],
+     "mean_diff": 0.9875305457828637,
+     "rank": 647,
+     "p": 0.9544117647058824,
+     "span": 0.2032230565885399
+    },
+    {
+     "compounds": [
+      "benzene",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9875305457828637,
+     "rank": 647,
+     "p": 0.9544117647058824,
+     "span": 0.2032230565885399
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 0.9878185803514512,
+     "rank": 650,
+     "p": 0.9558823529411765,
+     "span": 0.2744381921808724
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9891410208041926,
+     "rank": 651,
+     "p": 0.961764705882353,
+     "span": 0.1670412046994194
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "benzene"
+     ],
+     "mean_diff": 0.9891410208041926,
+     "rank": 651,
+     "p": 0.961764705882353,
+     "span": 0.1670412046994194
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9891410208041926,
+     "rank": 651,
+     "p": 0.961764705882353,
+     "span": 0.1670412046994194
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetonitrile",
+      "methanol"
+     ],
+     "mean_diff": 0.9891410208041926,
+     "rank": 651,
+     "p": 0.961764705882353,
+     "span": 0.1670412046994194
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9934722023027134,
+     "rank": 655,
+     "p": 0.9661764705882353,
+     "span": 0.15116020587151024
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9934722023027134,
+     "rank": 655,
+     "p": 0.9661764705882353,
+     "span": 0.15116020587151024
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9934722023027134,
+     "rank": 655,
+     "p": 0.9661764705882353,
+     "span": 0.15116020587151024
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 0.9989131874265297,
+     "rank": 658,
+     "p": 0.9705882352941176,
+     "span": 0.15360447559370582
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 0.9989131874265297,
+     "rank": 658,
+     "p": 0.9705882352941176,
+     "span": 0.15360447559370582
+    },
+    {
+     "compounds": [
+      "THF",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 0.9989131874265297,
+     "rank": 658,
+     "p": 0.9705882352941176,
+     "span": 0.15360447559370582
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "dichloromethane"
+     ],
+     "mean_diff": 1.0004577324692359,
+     "rank": 661,
+     "p": 0.9720588235294118,
+     "span": 0.22009027420520288
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0023527052307737,
+     "rank": 662,
+     "p": 0.975,
+     "span": 0.14887513861287038
+    },
+    {
+     "compounds": [
+      "THF",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 1.0023527052307737,
+     "rank": 662,
+     "p": 0.975,
+     "span": 0.14887513861287038
+    },
+    {
+     "compounds": [
+      "ethyl acetate",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0032443689250503,
+     "rank": 664,
+     "p": 0.9779411764705882,
+     "span": 0.13772347676579666
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0032443689250503,
+     "rank": 664,
+     "p": 0.9779411764705882,
+     "span": 0.13772347676579666
+    },
+    {
+     "compounds": [
+      "benzene",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0066838867292942,
+     "rank": 666,
+     "p": 0.9794117647058823,
+     "span": 0.13299413978496122
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 1.007585368084541,
+     "rank": 667,
+     "p": 0.9823529411764705,
+     "span": 0.09941193133814252
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "methanol"
+     ],
+     "mean_diff": 1.007585368084541,
+     "rank": 667,
+     "p": 0.9823529411764705,
+     "span": 0.09941193133814252
+    },
+    {
+     "compounds": [
+      "benzene",
+      "ethyl acetate",
+      "methanol"
+     ],
+     "mean_diff": 1.017357534706878,
+     "rank": 669,
+     "p": 0.9838235294117647,
+     "span": 0.08597520223242894
+    },
+    {
+     "compounds": [
+      "acetonitrile",
+      "benzene",
+      "ethyl acetate"
+     ],
+     "mean_diff": 1.0297433313349755,
+     "rank": 670,
+     "p": 0.9852941176470589,
+     "span": 0.018166066086549026
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "methanol"
+     ],
+     "mean_diff": 1.0345540008219574,
+     "rank": 671,
+     "p": 0.9897058823529412,
+     "span": 0.1662134968645187
+    },
+    {
+     "compounds": [
+      "acetone",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0345540008219574,
+     "rank": 671,
+     "p": 0.9897058823529412,
+     "span": 0.1662134968645187
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 1.0345540008219574,
+     "rank": 671,
+     "p": 0.9897058823529412,
+     "span": 0.1662134968645187
+    },
+    {
+     "compounds": [
+      "chloroform",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0466184477840228,
+     "rank": 674,
+     "p": 0.9926470588235294,
+     "span": 0.1219771913369464
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "methanol"
+     ],
+     "mean_diff": 1.0466184477840228,
+     "rank": 674,
+     "p": 0.9926470588235294,
+     "span": 0.1219771913369464
+    },
+    {
+     "compounds": [
+      "THF",
+      "methanol",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0614406072319325,
+     "rank": 676,
+     "p": 0.9941176470588236,
+     "span": 0.06762927336127689
+    },
+    {
+     "compounds": [
+      "acetone",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0721891095734974,
+     "rank": 677,
+     "p": 0.9970588235294118,
+     "span": 0.11446522233115097
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0721891095734974,
+     "rank": 677,
+     "p": 0.9970588235294118,
+     "span": 0.11446522233115097
+    },
+    {
+     "compounds": [
+      "THF",
+      "acetone",
+      "chloroform"
+     ],
+     "mean_diff": 1.083738926902886,
+     "rank": 679,
+     "p": 0.9985294117647059,
+     "span": 0.09858422350324181
+    },
+    {
+     "compounds": [
+      "THF",
+      "chloroform",
+      "n-hexane"
+     ],
+     "mean_diff": 1.0842535565355627,
+     "rank": 680,
+     "p": 1.0,
+     "span": 0.07022891680357868
+    }
+   ],
+   "incumbent": {
+    "compounds": [
+     "DMMP",
+     "DPGME",
+     "dichloromethane"
+    ],
+    "mean_diff": -0.0015058125934016967,
+    "rank": 14,
+    "p": 0.020588235294117647
+   }
+  }
+ },
+ "span": {
+  "spearman_rho": -0.9707501660548661,
+  "spearman_p": 0.0,
+  "n": 680,
+  "incumbent_span": 1.9425692173455196,
+  "incumbent_span_percentile": 100.0,
+  "max_span": 1.9425692173455196,
+  "conditional_at_incumbent_span": {
+   "n": 15,
+   "conditional_p": 0.9333333333333333,
+   "rank": 14,
+   "caveat": "현행 span 이 최대값이므로 이 조건화는 표본 15개로 거의 축퇴한다. 판정은 아래 사다리로 한다."
+  },
+  "ladder": [
+   {
+    "quantile": 0.95,
+    "threshold": 1.766715248667889,
+    "n": 43,
+    "conditional_p": 0.32558139534883723,
+    "rank": 14
+   },
+   {
+    "quantile": 0.9,
+    "threshold": 1.6987491381380058,
+    "n": 69,
+    "conditional_p": 0.2028985507246377,
+    "rank": 14
+   },
+   {
+    "quantile": 0.8,
+    "threshold": 1.5554758537903246,
+    "n": 138,
+    "conditional_p": 0.10144927536231885,
+    "rank": 14
+   }
+  ],
+  "interpretation": "통계량이 축 피복의 단조함수에 가깝다. 같은 정도로 퍼진 지정들 중에서 보면 현행 3종의 p 는 0.0206 이 아니라 0.10~0.33 이다."
+ }
+}

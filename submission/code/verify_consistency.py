@@ -66,6 +66,8 @@ REQUIRED_OUTPUTS = [
     'outputs/threshold_sweep.json',
     'outputs/threshold_equivalence.json',
     'outputs/acetonitrile_panel.json',
+    'outputs/niosh_panel.json',
+    'outputs/volatility_decomposition.json',
     'outputs/davidson_external.json',
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
@@ -709,6 +711,10 @@ def preflight():
         'threshold_equivalence.json': 'threshold_equivalence.py',
         'null_convention.json': 'null_convention.py',
         'acetonitrile_panel.json': 'acetonitrile_panel.py',
+        # 2026-11-14 (GATE 8 12차 선택항목 수행). 둘 다 기록되지 않은
+        # 분석자 선택을 열어 본 결과다.
+        'niosh_panel.json': 'niosh_panel.py',
+        'volatility_decomposition.json': 'volatility_decomposition.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
         # 리뷰어 지적을 내가 직접 재현한 산출물이다.
@@ -1752,6 +1758,58 @@ def load_facts():
     f['len_text_plus_fig'] = _la['text_words'] + _la['figure_words']
     f['len_figs'] = _la['n_figures']
 
+    # 2026-11-14 (GATE 8 12차 선택항목). 새 예치물 두 건의 수치를 등재한다.
+    # 등재하지 않으면 원고가 인용하는 값이 대조되지 않는다 — 이 프로젝트의
+    # 반복 결함이 계산이 아니라 전파였으므로 등재가 먼저다.
+    _np_ = json.load(open('outputs/niosh_panel.json'))['panels']
+    f['niosh_p28_base'] = _np_['panel28_incumbent3']['baseline']['p']['mean_diff']
+    f['niosh_p28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+                           ['p']['mean_diff'])
+    f['niosh_p28_fixed'] = (_np_['panel28_incumbent3']['plus4_columns_fixed']
+                            ['p']['mean_diff'])
+    f['niosh_p35_base'] = _np_['panel35_incumbent3']['baseline']['p']['mean_diff']
+    f['niosh_p35_plus'] = (_np_['panel35_incumbent3']['plus4_recomputed']
+                           ['p']['mean_diff'])
+    f['niosh_nvalid28_base'] = _np_['panel28_incumbent3']['baseline']['n_valid']
+    f['niosh_nvalid28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+                                ['n_valid'])
+    f['niosh_npool28'] = len(_np_['panel28_incumbent3']['baseline']['agents'])
+    f['niosh_nperm28_base'] = _np_['panel28_incumbent3']['baseline']['n_perm']
+    f['niosh_nperm28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+                               ['n_perm'])
+    f['niosh_nperm35_plus'] = (_np_['panel35_incumbent3']['plus4_recomputed']
+                               ['n_perm'])
+    f['niosh_nnmed28_base'] = _np_['panel28_incumbent3']['baseline']['nn_median']
+    f['niosh_nnmed28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+                               ['nn_median'])
+    f['niosh_dims28_base'] = _np_['panel28_incumbent3']['baseline']['n_dims']
+    f['niosh_dims28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+                              ['n_dims'])
+    f['niosh_minp28_plus'] = min(
+        _np_['panel28_incumbent3']['plus4_recomputed']['p'].values())
+
+    _vdc = json.load(open('outputs/volatility_decomposition.json'))
+    f['voldec_1sided'] = _vdc['sidedness']['one_sided_low']
+    f['voldec_2x'] = _vdc['sidedness']['two_sided_2min']
+    f['voldec_2abs'] = _vdc['sidedness']['two_sided_abs']
+    f['voldec_rho'] = abs(_vdc['span']['spearman_rho'])
+    f['voldec_span'] = _vdc['span']['incumbent_span']
+    f['voldec_nperm'] = _vdc['span']['n']
+    for _q, _key in ((0.95, 'voldec_cond05'), (0.90, 'voldec_cond10'),
+                     (0.80, 'voldec_cond20')):
+        for _r in _vdc['span']['ladder']:
+            if abs(_r['quantile'] - _q) < 1e-9:
+                f[_key] = _r['conditional_p']
+    _k1 = {' + '.join(r['compounds']): r
+           for r in _vdc['by_designation_size']['k1']['ranking']}
+    _k2 = {' + '.join(r['compounds']): r
+           for r in _vdc['by_designation_size']['k2']['ranking']}
+    f['voldec_k1_dpgme_rank'] = _k1['DPGME']['rank']
+    f['voldec_k1_dcm_rank'] = _k1['dichloromethane']['rank']
+    f['voldec_k2_best_p'] = _k2['DPGME + dichloromethane']['p']
+    f['voldec_k3_inc_rank'] = _vdc['by_designation_size']['k3']['incumbent']['rank']
+    f['voldec_k3_best_p'] = (_vdc['by_designation_size']['k3']['ranking'][0]['p'])
+
     _cs = json.load(open('outputs/collapse_sensitivity.json'))
     f['coll_q_off'] = _cs['bh_min_q_uncollapsed']
     f['coll_q_on'] = _cs['bh_min_q_collapsed']
@@ -2487,7 +2545,9 @@ UNQUOTED = {
     # 2026-11-14. 커버레터는 총계(text_words)와 면수를 적고 본문 단어수는
     # 적지 않는다. 총계 쪽이 대조되므로 이쪽은 면제한다.
     'len_body': '커버레터가 총계와 면수만 적는다 — len_text_words 로 대조',
-    'len_refs': '분량 수치 JHM 커버레터 미수록',
+    # 2026-11-14. 커버레터가 참고문헌 단어수를 적지 않아 일반 스캐너가
+    # tab_volatility 의 CK 증기압 1230 mmHg 를 이 사실로 잡고 있었다.
+    # 면제 대신 커버레터에 실제로 적어 앵커가 걸리게 했다.
 
     # --------------------------------------------------------------
     # AEGL 보유 개수 (aegl_) — 3건
@@ -3122,6 +3182,62 @@ CHECKS = [
     ('rm_q28', [r'Hochberg minima of ([\d.]+), [\d.]+ and [\d.]+'], 0.00005),
     ('rm_q35', [r'Hochberg minima of [\d.]+, ([\d.]+) and [\d.]+'], 0.00005),
     ('rm_q35lit', [r'Hochberg minima of [\d.]+, [\d.]+ and ([\d.]+)'], 0.00005),
+    # 2026-11-14 (GATE 8 12차 선택항목). 새 두 예치물의 어법 앵커.
+    ('niosh_p28_base',
+     [r'nominal structural value from ([\d.]+) to [\d.]+ and the valid',
+      r'from \$p = ([\d.]+)\$ to \$p = [\d.]+\$ on the twenty-eight',
+      r'smallest of them goes from ([\d.]+) to [\d.]+'], 0.0005),
+    ('niosh_p28_plus',
+     [r'nominal structural value from [\d.]+ to ([\d.]+) and the valid',
+      r'from \$p = [\d.]+\$ to \$p = ([\d.]+)\$ on the twenty-eight'], 0.0005),
+    ('niosh_p28_fixed',
+     [r'at the twenty-eight-compound one instead\s*gives \$p = ([\d.]+)\$'],
+     0.0005),
+    ('niosh_p35_base',
+     [r'and from ([\d.]+) to [\d.]+ with no match either way',
+      r'from \$p = ([\d.]+)\$ to \$p = [\d.]+\$ on the primary one'], 0.0005),
+    ('niosh_p35_plus',
+     [r'and from [\d.]+ to ([\d.]+) with no match either way',
+      r'from \$p = [\d.]+\$ to \$p = ([\d.]+)\$ on the primary one'], 0.0005),
+    ('niosh_nperm28_base',
+     [r'enumeration from ([\d,]+) designations to [\d,]+'], 0),
+    ('niosh_nperm28_plus',
+     [r'enumeration from [\d,]+ designations to ([\d,]+)'], 0),
+    ('niosh_nperm35_plus',
+     [r'twenty-eight and from [\d,]+ to ([\d,]+)'], 0),
+    ('niosh_minp28_plus',
+     [r'smallest of them goes from [\d.]+ to ([\d.]+)'], 0.0005),
+    ('niosh_nnmed28_base',
+     [r'threshold on this frame is\s*([\d.]+) before the addition'], 0.0005),
+    ('niosh_nnmed28_plus',
+     [r'before the addition and ([\d.]+) after it'], 0.0005),
+    ('voldec_2x',
+     [r'it stands at ([\d.]+) and at [\d.]+, the second of which',
+      r'stands at ([\d.]+), twice the smaller tail'], 0.0005),
+    ('voldec_2abs',
+     [r'stands at [\d.]+ and at ([\d.]+), the second of which',
+      r'twice the smaller tail, and at ([\d.]+), the proportion'], 0.0005),
+    ('voldec_rho',
+     [r'Spearman correlation of \$-([\d.]+)\$'], 0.0005),
+    ('voldec_span',
+     [r'incumbent three span ([\d.]+) standardised units'], 0.0005),
+    ('voldec_nperm',
+     [r'across all ([\d,]+) designations the', r'all ([\d,]+)\s*designations '
+      r'the statistic and the coverage'], 0),
+    ('voldec_cond20',
+     [r'it rises to [\d.]+, [\d.]+ and ([\d.]+) at the top',
+      r'rises to [\d.]+, [\d.]+ and ([\d.]+) at the top five'], 0.0005),
+    ('voldec_cond10',
+     [r'it rises to [\d.]+, ([\d.]+) and [\d.]+ at the top',
+      r'rises to [\d.]+, ([\d.]+) and [\d.]+ at the top five'], 0.0005),
+    ('voldec_cond05',
+     [r'it rises to ([\d.]+), [\d.]+ and [\d.]+ at the top',
+      r'rises to ([\d.]+), [\d.]+ and [\d.]+ at the top five'], 0.0005),
+    ('voldec_k2_best_p',
+     [r'best of the 136 pairs at ([\d.]+)',
+      r'the best, at ([\d.]+),\s*better than the incumbent triple'], 0.00005),
+    ('voldec_k3_best_p',
+     [r'dichloromethane stands first at ([\d.]+)'], 0.00005),
     ('len_pages', [r'runs to ([\d.]+) journal pages against'], 0.05),
     ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
     ('len_refs', [r'and ([\d,]+) words of\s*\n?references'], 0),
@@ -3363,7 +3479,8 @@ CHECKS = [
                r'passes its value of (\d+\.\d+)'], 0.0005),
     ('t3_L', [r'L & \S+ & (\d+\.\d+) &'], 0.0005),
     ('t3_PS', [r'PS & \S+ & (\d+\.\d+) &'], 0.0005),
-    ('t3_VX', [r'VX & \S+ & (\d+\.\d+) &', r'VX at\s*\n?([\d.]+) are not'], 0.0005),
+    ('t3_VX', [r'VX & (?!\d+\.\d+\s*&)\S+ & (\d+\.\d+) &',
+               r'VX at\s*\n?([\d.]+) are not'], 0.0005),
     # res:match 산문의 공간별 수치. 종전 산문은 세 공간의 원거리와 정규화
     # 거리를 섞어 적었고 어느 값도 산출물과 대조되지 않았다.
     ('struct_GD', [r'soman at ([\d.]+)\s*\n?and cyclosarin at'], 0.0005),
@@ -4694,6 +4811,21 @@ def main():
                     round(_g['gap'], 3))
     except (OSError, ValueError, KeyError):
         pass
+    # 2026-11-14. SI meth:niosh 가 작용제별 구조공간 생거리를 적는다. 그 값은
+    # 정규화 전이고 공간도 병합이 아니므로 위 표들과 맞지 않는다 (그 사실을
+    # 표 캡션과 본문이 명시한다). 같은 자격으로 허용 집합에 넣되, 출처는
+    # outputs/niosh_panel.json 하나다. 검사를 끄지 않고 범위를 넓힌다.
+    try:
+        _nj = json.load(open('outputs/niosh_panel.json'))
+        for _pan in _nj.get('panels', {}).values():
+            for _tag in ('baseline', 'plus4_recomputed', 'plus4_columns_fixed'):
+                for _a in _pan.get(_tag, {}).get('agents', []):
+                    allowed.setdefault(_a['agent'], set()).add(
+                        round(_a['d_sim'], 3))
+                    allowed.setdefault(_a['agent'], set()).add(
+                        round(_a['d_blocker'], 3))
+    except (OSError, ValueError, KeyError):
+        pass
     # 거리로 읽힐 수 있는 꼴만 본다. 괄호 안의 수와 'at N' 꼴.
     NEAR = re.compile(
         r'\b(' + '|'.join(sorted(AGENT_ALIASES, key=len, reverse=True)) +
@@ -4807,8 +4939,12 @@ def main():
     if os.path.exists('outputs/match_by_panel.json'):
         _mb = json.load(open('outputs/match_by_panel.json'))['panel28_incumbent3']
         _near = {a['agent']: a['nearest_simulant'] for a in _mb['agents']}
+        # 2026-11-14. 두 번째 칸이 수치인 행은 표 2 가 아니다 (tab_niosh 는
+        # 작용제 & 거리 & 거리 & 이름 꼴이다). 모사체 이름 자리에 수가 올 수
+        # 없으므로 수치 꼴을 배제해 다른 표를 오독하지 않게 한다.
         _rowpat = re.compile(
-            r'\b(' + '|'.join(AGENT_ABBR) + r') & (\S+) & \d+\.\d+ &')
+            r'\b(' + '|'.join(AGENT_ABBR) +
+            r') & ((?!\d+\.\d+\s*&)\S+) & \d+\.\d+ &')
         _bad = []
         for m in _rowpat.finditer(body_flat):
             _ag = AGENT_ABBR[m.group(1)]
@@ -4848,8 +4984,17 @@ def main():
     # 것은 천단위 구분자가 붙는 환산값이었고(41,683 대 41,685), 그 아래에서는
     # 서로 무관한 양끼리 우연히 0.5% 안쪽으로 가까워져 오경보만 낸다
     # ('270 chemical entries' 와 malathion 의 268.8배).
+    # 2026-11-14. 앵커가 정확히 맞고 통과한 사실은 근사 검사에서 뺀다.
+    # 근사 검사의 목적은 전파 실패로 남은 구판 수치를 잡는 것이고, 정본이
+    # 어법 단위로 이미 확인된 사실은 구판이 아니다. 그런데 1000 이상의 값은
+    # 무관한 양과 0.5% 안쪽으로 겹치기 쉬워 (tab_volatility 의 CK 증기압
+    # 1230 mmHg 가 참고문헌 단어수 1,224 를 잡았다) 오경보만 낸다. 단위
+    # 배제 목록으로는 못 막는다 — 표의 단위는 열 머리에 있고 셀에는 없다.
+    _exact_ok = {k for k in matched_keys
+                 if not any(f' {k}:' in _ln for _ln in fails)}
     targets = {k: float(v) for k, v in f.items()
-               if isinstance(v, (int, float)) and abs(float(v)) >= 1000}
+               if isinstance(v, (int, float)) and abs(float(v)) >= 1000
+               and k not in _exact_ok}
     near = []
     for m in re.finditer(r'(?<![\d.])(\d[\d,]*(?:\\,\d{3})*(?:\.\d+)?)', body):
         try:
