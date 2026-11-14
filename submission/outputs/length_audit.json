@@ -1,13 +1,13 @@
 {
- "body_words": 7265,
+ "body_words": 7579,
  "caption_words": 145,
  "abstract_words": 246,
  "front_words": 76,
  "figure_words": 500,
- "text_words": 8965,
- "ref_words": 1233,
+ "text_words": 9280,
+ "ref_words": 1234,
  "n_figures": 1,
  "n_tables": 0,
  "table_words": 0,
- "acs_pages": 9.46
+ "acs_pages": 9.78
 }
