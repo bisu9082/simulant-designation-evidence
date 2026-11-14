@@ -108,13 +108,19 @@ n_code=$(ls submission/code | wc -l)
 n_out=$(ls submission/outputs | wc -l)
 printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
 
+# 2026-11-13 (GATE 8 12차 교정). 자기검증용 paper/ 사본은 주석을 뗀
+# submission/*.tex 가 아니라 작업본 paper/*.tex 를 쓴다. 주석을 뗀 쪽을
+# 쓰면 A-pdf 검사(PDF 와 tex 의 판본 대조)가 어긋나 이 스크립트가 exit 1
+# 로 조기 종료했고, 그 결과 submission/code/outputs 가 검증용 심볼릭
+# 링크 상태로 남고 선적 CSV 5개가 빠진 채 커밋됐다.
 # 패키지 자기 정합성. 이 절은 이 스크립트의 머리말이 처음부터 약속했으나
 # 실제로는 없었다 (2026-10-23 적발). 복사된 코드 사본으로 검증기를 돌려
 # 패키지 안의 원고와 산출물이 서로 맞는지 확인한다.
 ( cd submission/code \
   && ln -sfn ../../outputs outputs 2>/dev/null \
   && mkdir -p paper \
-  && cp -p ../main.tex ../supplementary.tex ../cover_letter.tex paper/ \
+  && cp -p ../../paper/main.tex ../../paper/supplementary.tex \
+        ../../paper/cover_letter.tex paper/ \
   && cp -p ../main.pdf ../supplementary.pdf ../cover_letter.pdf paper/ \
   && cp -p ../../paper/.buildstamp paper/ \
   && cp -p ../../README.md . \
@@ -149,3 +155,19 @@ for f in aegl_electronic.csv xtb_fast_vs_slow.csv dft_omega.csv \
          dft_dipole.csv dft_vs_gfn2.csv; do
   [ -f "outputs/$f" ] && cp -p "outputs/$f" submission/code/outputs/
 done
+
+# 2026-11-13 (GATE 8 12차 교정) 가드. 위 자기검증이 어떤 사유로든 조기
+# 종료하면 submission/code/outputs 가 검증용 심볼릭 링크 상태로 남고
+# 선적 CSV 5개가 빠진다. 그 상태가 한 번 커밋됐다 (Windows 와 GitHub zip
+# 에서 링크가 텍스트로 풀려 독립 패키지가 깨진다). 끝에서 되묻는다.
+if [ -L submission/code/outputs ]; then
+  echo '[sync] 중단: submission/code/outputs 가 심볼릭 링크다 — 자기검증이'
+  echo '       조기 종료했다. 패키지를 커밋하지 말 것.'
+  exit 1
+fi
+n_seed=$(ls submission/code/outputs 2>/dev/null | wc -l)
+if [ "$n_seed" -ne 5 ]; then
+  echo "[sync] 중단: 선적 CSV 가 5개가 아니라 ${n_seed}개다"
+  exit 1
+fi
+echo '[sync] 선적 CSV 5개 확인'
