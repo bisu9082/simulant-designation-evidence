@@ -638,7 +638,7 @@ def niosh():
     nb, ne = b['nn_median'], e['nn_median']
     L = ['\\begin{tabular}{lrrlrrl}', '\\hline',
          ' & \\multicolumn{3}{c}{twenty-eight-compound pool}'
-         ' & \\multicolumn{3}{c}{with the four added} \\\\',
+         ' & \\multicolumn{3}{c}{with the ten added} \\\\',
          '\\cline{2-4}\\cline{5-7}',
          'Agent & $d_{\\mathrm{sim}}$ & $d_{\\mathrm{near}}$ & nearest '
          'non-designated & $d_{\\mathrm{sim}}$ & $d_{\\mathrm{near}}$ & '
@@ -742,8 +742,8 @@ quantity and carries no filter. Four further enumerations are reported in the
 text rather than here: the two-pesticide and acetonitrile relabellings of
 Section~\ref{M-res:panels}
 (\texttt{outputs/twolabel\_panel.json}, \texttt{outputs/acetonitrile\_panel.json});
-the enlargement of the comparison pool by the four compounds the NIOSH
-candidate list names beside DMMP (Section~\ref{meth:niosh},
+the enlargement of the comparison pool by the ten further compounds the
+NIOSH candidate list names beside DMMP (Section~\ref{meth:niosh},
 \texttt{outputs/niosh\_panel.json}); and the single- and pair-designation
 enumerations on the volatility axis (Section~\ref{meth:vol},
 \texttt{outputs/volatility\_decomposition.json}).}

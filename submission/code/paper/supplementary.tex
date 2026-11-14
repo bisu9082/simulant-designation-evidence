@@ -469,10 +469,15 @@ and neither changes which conclusion the twenty-eight-compound panel supports;
 \texttt{outputs/descriptor\_definitions.json} carries the values below.
 
 The hydrogen-bond counts come from the Lipinski-family definitions in the
-cheminformatics toolkit, which recognise only a hydroxyl hydrogen as a donor.
-Water is therefore recorded with no donors and no acceptors, which is false of
-water read as chemistry rather than as a toolkit output, and the consequence is
-not cosmetic. With water a non-donor, the donor count coincides exactly with the
+cheminformatics toolkit. Those definitions do count nitrogen-- and
+sulfur-bound hydrogens, which we checked directly: aniline, ammonia, acetamide
+and methanethiol each return one donor. What they require is that the
+heteroatom carry exactly one hydrogen, and water carries two, so water is
+recorded with no donors and no acceptors. That is false of water read as
+chemistry rather than as a toolkit output, and the consequence is not
+cosmetic. The same two columns enter the toxicity model of
+Section~\ref{sec:qsar} over 230 compounds, where amines and amides are common
+and the definition therefore matters beyond this panel. With water a non-donor, the donor count coincides exactly with the
 hydroxyl count on the twenty-eight-compound panel, both being one for methanol,
 ethanol and dipropylene glycol monomethyl ether and zero elsewhere, so the
 correlation filter removes the hydroxyl count at $|r| = 1.00$. Giving water one
@@ -2374,7 +2379,7 @@ of GD, GF and VX by 1.284 and 0.984 in the two channels, every interval
 excluding zero. The class-level statement is weaker. Taking the mean of the
 three matched G agents against VX gives 0.513 (0.131 to 0.722) in the
 ultraviolet channel but 0.137 (-0.144 to 0.290) in reflectance, and the least
-similar agent to DMMP is GF rather than VX in both channels (-0.721 and -0.496
+similar agent to DMMP is GF rather than VX in both channels (-0.721 and -0.495
 against -0.702 and -0.273 for VX).
 
 The full ranking contains one result that the descriptor analysis does not
