@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  14 NOV 2026 02:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  14 NOV 2026 04:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -481,10 +481,10 @@ Package pdftex.def Info: Fig_main.png  used on input line 523.
 <toc_acs.png, id=118, 234.8775pt x 126.4725pt>
 File: toc_acs.png Graphic file (type png)
 <use toc_acs.png>
-Package pdftex.def Info: toc_acs.png  used on input line 975.
+Package pdftex.def Info: toc_acs.png  used on input line 981.
 (pdftex.def)             Requested size: 234.87749pt x 126.47218pt.
 
-Underfull \vbox (badness 10000) detected at line 975
+Underfull \vbox (badness 10000) detected at line 981
  []
 
 [31 <./toc_acs.png>] (./main.aux)
@@ -494,10 +494,10 @@ L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6913 strings out of 476106
- 110692 string characters out of 5793932
+ 6914 strings out of 476106
+ 110709 string characters out of 5793932
  1931975 words of memory out of 5000000
- 28792 multiletter control sequences out of 15000+600000
+ 28793 multiletter control sequences out of 15000+600000
  639661 words of font info for 96 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  84i,8n,131p,1480b,601s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -511,7 +511,7 @@ m/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf
 2.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fo
 nts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on main.pdf (31 pages, 2282493 bytes).
+Output written on main.pdf (31 pages, 2283222 bytes).
 PDF statistics:
  199 PDF objects out of 1000 (max. 8388607)
  127 compressed objects within 2 object streams

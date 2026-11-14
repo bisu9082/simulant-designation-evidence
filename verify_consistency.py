@@ -68,6 +68,7 @@ REQUIRED_OUTPUTS = [
     'outputs/acetonitrile_panel.json',
     'outputs/niosh_panel.json',
     'outputs/volatility_decomposition.json',
+    'outputs/descriptor_definitions.json',
     'outputs/davidson_external.json',
     'outputs/aegl_parse_validation.json',
     'outputs/blockbalance.json',
@@ -715,6 +716,7 @@ def preflight():
         # 분석자 선택을 열어 본 결과다.
         'niosh_panel.json': 'niosh_panel.py',
         'volatility_decomposition.json': 'volatility_decomposition.py',
+        'descriptor_definitions.json': 'descriptor_definitions.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
         # 리뷰어 지적을 내가 직접 재현한 산출물이다.
@@ -1756,6 +1758,7 @@ def load_facts():
     f['len_pages'] = _la['acs_pages']
     f['len_text_words'] = _la['text_words']
     f['len_text_plus_fig'] = _la['text_words'] + _la['figure_words']
+    f['len_text_plus_fig2'] = f['len_text_plus_fig']
     f['len_figs'] = _la['n_figures']
 
     # 2026-11-14 (GATE 8 12차 선택항목). 새 예치물 두 건의 수치를 등재한다.
@@ -1763,30 +1766,65 @@ def load_facts():
     # 반복 결함이 계산이 아니라 전파였으므로 등재가 먼저다.
     _np_ = json.load(open('outputs/niosh_panel.json'))['panels']
     f['niosh_p28_base'] = _np_['panel28_incumbent3']['baseline']['p']['mean_diff']
-    f['niosh_p28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
+    f['niosh_p28_plus'] = (_np_['panel28_incumbent3']['plus_all_recomputed']
                            ['p']['mean_diff'])
-    f['niosh_p28_fixed'] = (_np_['panel28_incumbent3']['plus4_columns_fixed']
-                            ['p']['mean_diff'])
+    f['niosh_p28_fixed'] = (_np_['panel28_incumbent3']
+                            ['plus_all_columns_fixed']['p']['mean_diff'])
     f['niosh_p35_base'] = _np_['panel35_incumbent3']['baseline']['p']['mean_diff']
-    f['niosh_p35_plus'] = (_np_['panel35_incumbent3']['plus4_recomputed']
+    f['niosh_p35_plus'] = (_np_['panel35_incumbent3']['plus_all_recomputed']
                            ['p']['mean_diff'])
     f['niosh_nvalid28_base'] = _np_['panel28_incumbent3']['baseline']['n_valid']
-    f['niosh_nvalid28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
-                                ['n_valid'])
+    f['niosh_nvalid28_plus'] = (_np_['panel28_incumbent3']
+                                ['plus_all_recomputed']['n_valid'])
     f['niosh_npool28'] = len(_np_['panel28_incumbent3']['baseline']['agents'])
     f['niosh_nperm28_base'] = _np_['panel28_incumbent3']['baseline']['n_perm']
-    f['niosh_nperm28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
-                               ['n_perm'])
-    f['niosh_nperm35_plus'] = (_np_['panel35_incumbent3']['plus4_recomputed']
-                               ['n_perm'])
+    f['niosh_nperm28_plus'] = (_np_['panel28_incumbent3']
+                               ['plus_all_recomputed']['n_perm'])
+    f['niosh_nperm35_plus'] = (_np_['panel35_incumbent3']
+                               ['plus_all_recomputed']['n_perm'])
     f['niosh_nnmed28_base'] = _np_['panel28_incumbent3']['baseline']['nn_median']
-    f['niosh_nnmed28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
-                               ['nn_median'])
+    f['niosh_nnmed28_plus'] = (_np_['panel28_incumbent3']
+                               ['plus_all_recomputed']['nn_median'])
     f['niosh_dims28_base'] = _np_['panel28_incumbent3']['baseline']['n_dims']
-    f['niosh_dims28_plus'] = (_np_['panel28_incumbent3']['plus4_recomputed']
-                              ['n_dims'])
+    f['niosh_dims28_plus'] = (_np_['panel28_incumbent3']
+                              ['plus_all_recomputed']['n_dims'])
     f['niosh_minp28_plus'] = min(
-        _np_['panel28_incumbent3']['plus4_recomputed']['p'].values())
+        _np_['panel28_incumbent3']['plus_all_recomputed']['p'].values())
+
+    _dd = json.load(open('outputs/descriptor_definitions.json'))['configurations']
+    f['defn_p_published'] = _dd['as_published']['p_structural']
+    f['defn_p_water11'] = _dd['water_HBA1_HBD1']['p_structural']
+    f['defn_p_water12'] = _dd['water_HBA1_HBD2']['p_structural']
+    f['defn_p_noisf'] = _dd['isf_dropped']['p_structural']
+    f['defn_p_both'] = _dd['both_corrections']['p_structural']
+    f['defn_dims_water11'] = _dd['water_HBA1_HBD1']['n_structural']
+    f['defn_dims_noisf'] = _dd['isf_dropped']['n_structural']
+
+    # 2026-11-14. Li-Ji 대 Westfall-Young 배수. 종전 SI 가 28종의 Li-Ji 값과
+    # 다른 구성(35종+문헌8)의 비를 짝지어 'near 1.7' 로 적었다.
+    _ss = json.load(open('outputs/stat_supplement.json'))
+    _ss2 = json.load(open('outputs/stat_supplement2.json'))
+    def _pick(obj, key, want_label):
+        out = []
+        def walk(o, lab=None):
+            if isinstance(o, dict):
+                for k, v in o.items():
+                    walk(v, k if isinstance(v, dict) else lab)
+                if key in o:
+                    out.append((lab, o[key]))
+            elif isinstance(o, list):
+                for v in o:
+                    walk(v, lab)
+        walk(obj)
+        return out
+    try:
+        _lj = {l: v for l, v in _pick(_ss, 'meff_adjusted_min_p', None)}
+        _wy = {l: v for l, v in _pick(_ss2, 'wy_adjusted_p', None)}
+        _k28 = [k for k in _lj if '28' in str(k)]
+        if _k28 and _k28[0] in _wy and _wy[_k28[0]]:
+            f['liji_factor_28'] = _lj[_k28[0]] / _wy[_k28[0]]
+    except (KeyError, TypeError, ZeroDivisionError):
+        pass
 
     _vdc = json.load(open('outputs/volatility_decomposition.json'))
     f['voldec_1sided'] = _vdc['sidedness']['one_sided_low']
@@ -3204,7 +3242,7 @@ CHECKS = [
     ('niosh_nperm28_plus',
      [r'enumeration from [\d,]+ designations to ([\d,]+)'], 0),
     ('niosh_nperm35_plus',
-     [r'twenty-eight and from [\d,]+ to ([\d,]+)'], 0),
+     [r'thirty-four and from [\d,]+ to ([\d,]+)'], 0),
     ('niosh_minp28_plus',
      [r'smallest of them goes from [\d.]+ to ([\d.]+)'], 0.0005),
     ('niosh_nnmed28_base',
@@ -3238,9 +3276,23 @@ CHECKS = [
       r'the best, at ([\d.]+),\s*better than the incumbent triple'], 0.00005),
     ('voldec_k3_best_p',
      [r'dichloromethane stands first at ([\d.]+)'], 0.00005),
-    ('len_pages', [r'runs to ([\d.]+) journal pages against'], 0.05),
+    # 2026-11-14. 서술자 정의 민감도.
+    ('defn_p_water11',
+     [r'takes the structural value to ([\d.]+) with the donor and acceptor'],
+     0.0005),
+    ('defn_p_water12',
+     [r'and to ([\d.]+) if water is given two donors'], 0.0005),
+    ('defn_p_noisf',
+     [r'[Dd]ropping that coordinate gives ([\d.]+)'], 0.0005),
+    ('defn_p_both',
+     [r'both corrections together give ([\d.]+)'], 0.0005),
+    ('liji_factor_28',
+     [r'conservative here by a factor\s*\n?of ([\d.]+);'], 0.005),
+    ('len_pages', [r'runs to ([\d.]+) journal pages against',
+                   r'or ([\d.]+) pages, and is over by'], 0.05),
+    ('len_text_plus_fig2', [r'converts to ([\d,]+) word-equivalents'], 0),
     ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
-    ('len_refs', [r'and ([\d,]+) words of\s*\n?references'], 0),
+    ('len_refs', [r'of which\s*\n?([\d,]+) words are references'], 0),
     # 2026-11-07 (12차 7단계). 커버레터가 산출물 수치를 그대로 찍으므로
     # 숫자도 받는다.
     ('len_figs', [r'([a-z]+|\d+) double-column figures at 500 words'], 0),
@@ -3518,7 +3570,10 @@ CHECKS = [
     # PASS 가 났다. 대조 대상으로 올린다.
     ('len_pages', [r'it\s*\n?stands at ([\d.]+) pages'], 0.005),
     ('len_text_words', [r'stands at ([\d,]+) words\s*\n?of text, abstract'], 0),
-    ('len_text_plus_fig', [r'or ([\d,]+) with its one figure'], 0),
+    # 2026-11-14. 커버레터 문구를 고쳤다. 새 어법은 len_text_plus_fig2 가
+    # 받으므로 이 사실은 그쪽으로 넘기고 면제한다.
+    ('len_text_plus_fig', [r'or ([\d,]+) with its one figure',
+                           r'converts to ([\d,]+) word-equivalents'], 0),
     ('bb_nstruct', [r'Weighting the (\d+) structural'], 0),
     ('bb_nstruct28', [r'\$n_\{s\}=(\d+)\$',
                       r'puts (\d+) structural coordinates'], 0),
@@ -4129,8 +4184,12 @@ SUPERSEDED = [
     # 금지 대상은 그 이전 판본인 0.0265 쪽으로 옮긴다.
     ('28종 구조공간 명목 p, 결정적 필터 이전 (정본 0.028)',
      [r'structural[\s\S]{0,60}0\.0265\b', r'0\.0265[\s\S]{0,60}percentile'],
+     # 2026-11-14. 'inertial shape factor' 를 면제어에 넣는다. 그 좌표를 뺀
+     # 구성의 병합공간 값이 실제로 0.0265 이고 (descriptor_definitions.json),
+     # 구판 값과 우연히 같다. 구판 금지와 정본 보고를 가르는 어휘다.
      [r'earlier version', r'superseded', r'single-conformer',
-      r'column order', r'input order']),
+      r'column order', r'input order', r'inertial shape factor',
+      r'[Dd]ropping that coordinate']),
     ('부분공간 백분위 (정본 22.4)',
      [r'25\.8th percentile', r'25\.4th percentile', r'\b28th percentile',
       r'22\.7th percentile', r'\b23rd percentile', r'\b25th percentile',
@@ -4818,7 +4877,8 @@ def main():
     try:
         _nj = json.load(open('outputs/niosh_panel.json'))
         for _pan in _nj.get('panels', {}).values():
-            for _tag in ('baseline', 'plus4_recomputed', 'plus4_columns_fixed'):
+            for _tag in ('baseline', 'plus_all_recomputed',
+                         'plus_all_columns_fixed'):
                 for _a in _pan.get(_tag, {}).get('agents', []):
                     allowed.setdefault(_a['agent'], set()).add(
                         round(_a['d_sim'], 3))

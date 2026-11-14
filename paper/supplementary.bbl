@@ -364,14 +364,6 @@ Pracht,~P.; Bohle,~F.; Grimme,~S. Automated exploration of the low-energy
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
-Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
-  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
-  1922--1924\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Wiberg(1968)]{wiberg1968}
 Wiberg,~K. Application of the {Pople--Santry--Segal} {CNDO} method to the
   cyclopropylcarbinyl and cyclobutyl cation and to bicyclobutane.
@@ -400,6 +392,14 @@ Yang,~W.; Mortier,~W.~J. The use of global and local molecular parameters for
   Langenaeker]{geerlings2003}
 Geerlings,~P.; Proft,~F.~D.; Langenaeker,~W. Conceptual Density Functional
   Theory. \emph{Chemical Reviews} \textbf{2003}, \emph{103}, 1793--1874\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Parr \latin{et~al.}(1999)Parr, Szentp{\'a}ly, and Liu]{parr1999}
+Parr,~R.~G.; Szentp{\'a}ly,~L.~v.; Liu,~S. Electrophilicity Index.
+  \emph{Journal of the American Chemical Society} \textbf{1999}, \emph{121},
+  1922--1924\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

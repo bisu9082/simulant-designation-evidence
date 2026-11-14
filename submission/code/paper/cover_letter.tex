@@ -1,0 +1,349 @@
+% simulant — Cover letter (ACS Analytical Chemistry)
+% 2026-11-10 ACS 전환. 저널명·원고 유형·범위 문단·분량 사유·추천 심사자.
+% 재집필 2026-10-13, Step 3 롤백 방향 C. em-dash 금지 / AI 문체 금지 규칙 적용.
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\pagestyle{empty}
+
+\begin{document}
+
+{\small
+Chemical, Biological, Radiological and Nuclear (CBRN) Defense Research Institute\\
+Ministry of National Defense, Seoul, Republic of Korea\\
+14 November 2026}
+
+\vspace{6pt}
+
+Dear Professor Sweedler,
+% 2026-11-14. 편집장 성함을 1차 출처로 확정했다. ACS 저널 페이지
+% pubs.acs.org/ancham/pages/Editorial_Board 가 Editor-in-Chief 를
+% Jonathan V. Sweedler (University of Illinois at Urbana-Champaign)
+% 로 적는다. 연락처는 그 페이지에 있으므로 여기 옮겨 적지 않는다
+% (검사 B0d — 예치물에는 교신저자 연락처만 둔다). 종전에 403 이던 경로인데
+% 로그인 상태의 브라우저에서 자체 통과 후 열렸다. 우회하지 않았다.
+% 차기 편집장은 Christy L. Haynes (2027-01-01 취임) 이므로 2026년
+% 내 투고에는 위 성함이 맞다. 투고가 해를 넘기면 다시 확인할 것.
+
+We submit \textit{What Chemical Warfare Agent Simulants Are Validated For, and What Descriptor Comparisons Can Decide} for consideration as
+an Article.
+
+Analytical chemistry for chemical warfare agents is almost never done with the
+agents. Arrays, sorbents and sampling protocols are characterised on simulants,
+so the choice of simulant sets a ceiling on what a published detection result
+can be taken to mean. That choice is made by a convention, and the convention is
+stated plainly enough to test. Webb, Coulon and Temple (\textit{J.\ Hazard.\
+Mater.} \textbf{492}, 138021, 2025) give the criterion:
+align hydrophobicity, volatility and solubility with the agent, and the compounds
+so chosen present minimal toxicity risk. Both halves are testable against
+existing measurement. We tested them, and we first asked a prior question the
+criterion presupposes: which document designates these compounds, and for
+which measurement. The answer to that question is the paper's first result,
+and it decides how much the descriptor comparison can be asked to carry.
+
+\textbf{In the record we could reach, no incumbent simulant carries a public
+designation that validates a detection response against an agent's.} We looked for the instrument that
+designates them, and we say at the outset where that search falls short: the US
+Army procedure titled \emph{Simulant Selection for Laboratory, Chamber, and
+Field Testing} is one we have not read. It carries a Defense Technical
+Information Center accession and a public full-text address, so it is reachable
+in principle; our retrieval attempts failed. We say so in the paper rather than
+calling the document unavailable, and we flag it as the first thing a reader
+with access should check our claim against. That
+same public procedure states a detection-relevant criterion, which is evidence
+against the strong form of our claim, and we report it in the paper rather than
+leaving a reviewer to find it. DMMP was identified as a filtration-breakthrough test simulant in a NIOSH
+respirator programme, in a document that also declines to recommend any
+simulant, and a second designation names it for fabric penetration against VX.
+% 2026-11-12. 특허 본문을 직독해 철회를 되돌렸다. 2026-11-03 의 '원문
+% 미확인' 은 시도 실패의 기록이었고 문서에 대한 사실이 아니었다.
+DPGME is designated in a US Army patent for a chemical agent simulant training
+composition, which names its agent classes, liquid G-agent including VX and
+H-agent. What the patent requires is detectability, not resemblance: its first
+claim asks only that the mixture be detectable by a vapour detection apparatus,
+and no comparison with an agent's response is given. For dichloromethane we found no designating document
+at all; it is absent from the NIOSH document and from the Man-in-Simulant
+Test programme. The record separates into three grades, which the manuscript
+tabulates: a compound named for a stated measurement, a compound recorded only
+as having been used, and a compound with no document. The clearest designation
+belongs to none of the three: methyl salicylate is the Army's Man-in-Simulant
+Test simulant and the subject of a published ASTM test method, which fixes the
+measurement as vapour penetration of a protective ensemble. The National
+Academies assessment of that programme nonetheless records that its selection
+rested on historical use and that the assumptions behind it have not been
+tested. A simulant is validated against a
+measurement, not against an agent, and that validation does not travel with the
+compound into sensor development.
+
+\textbf{On a panel that contains the compounds the field itself uses as
+simulants, none of eleven agents has a valid match to an incumbent simulant.}
+For eleven authentic agents we computed RDKit structural and GFN2-xTB electronic
+descriptors and asked, by exact permutation over every possible designation,
+whether dimethyl methylphosphonate, dichloromethane and dipropylene glycol
+monomethyl ether sit closer to the agents than compounds drawn at random. Our
+primary panel of thirty-five compounds includes five further compounds the
+sensor, sorbent and decontamination literature uses as simulants (DFP, DCP,
+DCNP, CEES, methyl salicylate). On it, not one agent is matched, and not one of
+eighteen tests in three descriptor spaces under six distance statistics reaches
+nominal significance. The mechanism is not a loss of fidelity. The incumbent compounds have not become
+less faithful. Within the larger panel DMMP still sits 1.18 typical
+nearest-neighbour separations from sarin; what the panel supplies is
+diisopropyl fluorophosphate at 1.06 from sarin, 1.00 from soman and 1.11 from
+cyclosarin, and 2-chloroethyl ethyl sulfide at 0.53 from sulfur mustard against
+dichloromethane's 1.59. Resampling the 41 descriptors 1000 times leaves this
+intact: the incumbent three match a median of zero agents (2.5th to 97.5th
+percentiles zero to three) against five (four to six) for the eight designated
+candidates
+examined here, and
+the difference is positive in every replicate. A designation defended by a
+comparison that excludes the alternatives is not defended.
+
+\textbf{The twenty-eight-compound panel that omits those five is reported in
+full, because the contrast is the result.} On it, three agents are matched, DMMP
+supplies all three, and the smallest nominal $p$ is 0.025. How that is corrected
+decides whether it means anything, so we report six schemes rather than one:
+under Benjamini-Hochberg across the eighteen tests, across six within each
+space, at the effective number of independent tests estimated from the
+correlation of the permutation nulls, or under the Westfall-Young min-$P$
+procedure, which handles the dependence among the eighteen exactly because they
+share one enumeration of designations, nothing reaches 0.05 (Benjamini-Hochberg
+over six within each space, at 0.077, is the closest any correction brings it;
+the Westfall-Young value is 0.079). Had the statistic
+been specified in advance, it would survive at $q=0.042$. We did not specify one.
+That contrast is the paper's argument made with its own data. The observed value
+also sits at the 22.4th percentile of 2000 arbitrary three-descriptor subspaces
+of the same descriptor block.
+
+\textbf{One axis behaves differently, and it is the one the criterion names.}
+Volatility is a single measured quantity rather than a descriptor set, so the
+analyst choices above do not arise on it. We specified two tests in advance of
+it, outside the eighteen-test families. The first was reported in the form we
+specified: over all 680 designations on the twenty-eight-compound panel the
+incumbent set ranks fourteenth on the pre-specified statistic, a one-sided $p$
+of 0.0206 on that enumeration. The support is in aggregate distance only. Scored by valid
+matches the same designation ranks 316th of 680, the axis yields one match, and
+that match pairs DPGME with soman across a gap smaller than the mismatch between
+the temperatures at which the two vapour pressures were measured.
+
+The second test was not reported in the form we specified, and we would rather
+say so here than have you find it. The specified form combined every evaluable
+cell in one Fisher step and returned $p = 0.0809$. We replaced it the same day
+with a per-channel form, under which the reflectance channel reaches
+$q = 0.0430$, and the reason for replacing it is sound: two channels of one
+plate are not independent. But we chose that form after seeing what the
+specified one returned, which is the circumstance a prespecification exists to
+exclude, and it is the circumstance this paper is about. The manuscript now
+reports the specified form as the result of that test and the per-channel form
+as a declared post hoc sensitivity with no exemption from correction. The
+family boundary on that axis is also one we drew ourselves, at two optical
+channels rather than the twelve cells used above, and the direction of that
+choice favours our own result.
+
+\textbf{Taken together, we cannot establish that the incumbent simulants
+resemble the agents in the descriptor spaces, and we cannot establish that they
+do not.} Three things are
+open to the analyst: the compound panel, the descriptor space, and the distance
+statistic. We fixed all three in every combination we could compute, which is
+eighteen tests on each of four panel and designation configurations, and we
+report the whole table rather than a cell from it.
+
+\textbf{One widely used descriptor turned out not to be a coordinate.} The Parr
+electrophilicity index $\omega = \mu^{2}/2\eta$ is an exact function of the two
+frontier orbital energies normally reported beside it; across our panel the
+deviation from the definition reaches at most $1.3\times10^{-5}$~eV on the
+primary panel and $7.1\times10^{-15}$~eV on the twenty-eight-compound one. A correlation
+filter does not catch this, because $r(E_\mathrm{LUMO}, \omega) = -0.899$. We
+removed it, which cost the electronic space a dimension it never had, and we
+state the general form of the point in the Discussion because any descriptor set
+reporting $E_\mathrm{HOMO}$, $E_\mathrm{LUMO}$, the gap, $\mu$, $\eta$ and
+$\omega$ as six quantities has two.
+
+\textbf{The measured array agrees that the question is unresolved, and corrects
+us on one point.} Twenty-nine-component colorimetric response for twelve of the
+compounds, tested by Mantel permutation over compounds rather than over the
+pairs they generate, gives three nominally significant cells out of twelve that
+do not agree on a descriptor space, none of which survives correction across
+the twelve (smallest $q$ = 0.117). Those exposures were acetonitrile solutions
+at matched molarity rather than vapour, which bounds what any of it establishes
+about a vapour-phase response, and we say so in the paper. Three artifacts of this kind of array analysis
+are reported alongside, because our own first version contained all three:
+we read the between-compound mean cosine against an algebraic bound of
+$-1/(n-1)$, which the renormalisation step in our own processing removes, and
+we now test the premise against a label-permutation null instead; six dyes that do
+not fluoresce under ultraviolet illumination returned one background reading six
+times, which inflated the two strongest cells until we collapsed them; and the
+measured agent nearest to DMMP in the ultraviolet channel is tabun, not sarin,
+although tabun fails our own descriptor matching criterion. We also state
+there what the three nominal cells cannot carry: all three fall in the plate
+set that holds no simulant, so they compare agents with agents, while the six
+cells that bear on the premise are null and the design could only have
+registered a near-deterministic association. We would rather submit that
+sentence than a stronger one we cannot support.
+
+\textbf{The two incumbents differ in safety evidence, not only in hazard.}
+Dichloromethane has a regulator-derived acute inhalation value and it is
+favourable on that axis, sitting at the 96th percentile of the 207-compound pool
+that carries one. The manuscript is explicit that this is the acute axis alone,
+and that it says nothing about the chronic and carcinogenic classification
+now displacing dichloromethane from solvent inventories. DMMP has no value
+at all, because EPA declined to derive an inhalation reference concentration for
+want of data. Reporting the two as one category of low-toxicity simulant
+obscures that difference, which matters because DMMP is also the compound against
+which decontamination efficiency is quantified.
+
+\textbf{A model trained on the regulatory inventory cannot fill the gap, and the
+failure is instructive.} A random forest on 230 AEGL chemicals reaches
+$R^{2}=0.458$ with confidence intervals that do not overlap its baseline. Applied
+to the twenty military agents held out of training, it predicts every one of them
+safer than measured, by factors of 2.5 to 2600, and certifies fourteen of the
+twenty as inside its applicability domain. We checked the obvious explanation and
+it is wrong: thirteen training compounds carry an acetylcholinesterase-inhibiting
+pharmacophore, identified by substructure and listed in the paper, and one of
+them is more acutely toxic than sarin. The model fails because it regresses both
+tails toward the mean, a bias defined in the response space that an input-space
+applicability domain cannot see.
+
+\textbf{The two axes are not monotonically associated.} Across 207 compounds
+carrying both measured axes, Spearman $r = +0.062$ (95\% CI $-0.077$ to
+$+0.199$). Eight
+compounds combine top-quartile fidelity with measured acute inhalation safety
+within an order of magnitude of dichloromethane, all eight clear a structural
+filter for agent-class motifs, and all eight are more faithful than
+dichloromethane itself. We propose none of them as a replacement, and the reason
+is the paper's own argument: a recommendation resting on one panel, one space and
+two axes would repeat the error we are reporting.
+
+\textbf{On scope and length.} The paper reports no new measurement, and the
+colorimetric response against which it tests one premise was published in
+earlier work from this laboratory; what is new is theoretical and documentary,
+which is the kind of Article your guidelines describe when they say an Article
+may be theoretical. The new material is the graded record of what each
+designating document actually validates, an exhaustive enumeration of every
+way three non-agents could have been designated on each panel, with the larger
+designation null and the subspace controls sampled at 20000 and 2000 draws
+rather than enumerated, a re-parse of the regulatory
+acute-inhalation table at cell level, and a held-out test of whether a model
+can fill the toxicity gap. The question is what a measurement on a
+surrogate is evidence for, which is a question about analytical validation
+rather than about any one instrument, and the compounds at issue are the ones
+this journal's chemical warfare agent sensing papers are characterised on.
+On length we state our position under both of the limits your author guidelines
+carry, naming each, because the two do not agree and we would rather you saw
+the disagreement from us than found it. The author guidelines hosted on your
+researcher resources site, last updated 5 October 2026, give a maximum of
+10,000 words for an Article and state no figure conversion. Against that limit
+the manuscript stands at
+8,907 words of text, abstract, title block and references, of which
+1,233 words are references, and is inside it. The author guidelines hosted on
+your publishing site give a maximum of eight journal pages, 1,000 words to the
+page, with a double-column figure at 500 words. Against that limit the
+manuscript converts to 9,407 word-equivalents,
+or 9.41 pages, and is over by 1.41. We would rather give you the measurement than the more
+favourable of the two readings: the single main-text figure occupies about
+seven-tenths of the text block, so a reader who prices it by the area it takes
+rather than by the 500-word convention will arrive at a larger number still. We
+ask your indulgence for the overrun and will cut to any figure you set. Reaching
+even this length meant
+moving the descriptor-geometry detail, the toxicity axis, the dual-use audit and
+five of the six figures to the Supporting Information, and we have kept in the
+main text the
+disclosures a reader needs in order to weigh the claims: which form of each
+test was specified in advance, where we drew a family boundary ourselves, which
+plate the one significant cell came from, and the fact that the electronic
+coordinates rest on a cached calculation whose program version we did not
+record.
+
+\textbf{On data integrity, and on this manuscript's own history.} This analysis
+was audited four times before submission and each audit changed the numbers, so
+we state what happened rather than present the final version as though it had
+come out that way.
+
+The first audit found that the numeric parser had split thousands separators in
+the source table, so that ``12,000~ppm'' was read as 12. The second, of chemical
+identity rather than of numbers, found two records whose stored structure
+belonged to a different compound; both are excluded. The third found four further
+faults in how the regulatory table was read, all of one kind: treating a printed
+table as though its cells always held plain numbers. Footnote lines beginning
+\textit{AEGL 3 - 10 min = ...} were parsed as though they were table rows, which
+turned duration labels into values and gave propane and butane ten-minute
+AEGL-3 values of 10~ppm against the true 33,000 and 77,000~ppm. Nine compounds
+whose ten-minute cell reads \textit{see below}, the agency's marker for a value
+above half the lower explosive limit, had no value collected at all, among them
+methanol, acetone, benzene and n-hexane. Rows whose longer durations read
+\textit{NR} were discarded whole, which silently dropped three arsenical
+vesicants and BZ from the held-out agent set. And one row broken across two lines
+by the document's text layer was lost.
+
+The fourth audit was of our own statistics rather than of the data, and it is the
+reason the paper now says what it says. It found the functional dependence in the
+electronic descriptor set, the pairwise-distance pseudoreplication in the array
+analysis, our own misuse of an algebraic bound on the centred cosines, the
+absence of any multiplicity
+correction across eighteen tests we had in fact computed, and the fact that we had
+never run the panel that includes the other compounds the literature treats as
+simulants. An earlier version
+of this manuscript reported that cell as a result and built a thesis on it. None
+of those five problems is visible in that version, and together they remove the
+thesis. We have rewritten the paper around what the data support, and we report
+the earlier reading alongside it rather than deleting it, because how a nominal
+result of this kind arises is part of what a reader of this literature needs.
+
+The extraction is now cell-based and refuses any row that does not resolve into
+five duration cells, and it is validated over the whole table by a second reader
+that shares neither the text-extraction engine nor the algorithm, reading values
+by character column position rather than by token order. The two readers agree on
+all 250 entries for which both read a value from a table cell, on all 257 that
+resolved to a structure and on all nineteen panel values.
+
+\textbf{Dual-use.} The optimisation direction is fixed throughout and stated in
+the manuscript: detection-relevant fidelity is maximised while phosphorus
+electrophilicity, acetylcholinesterase reactivity, alkylating capacity and
+predicted mammalian toxicity are minimised. The structural filter excludes
+candidates and never orders them. The one ordering the paper publishes ranks
+compounds that have already cleared that filter by resemblance to the agents,
+and every compound in it is an industrial chemical in commerce carrying a
+published regulatory exposure value. We did not extend the toxicity model to the
+organophosphorus class, because a predictor of mammalian lethality evaluated over
+structures not yet made, inside a loop that proposes them, is the configuration
+this work is built to avoid. We cite the existing literature on organophosphorus
+lethality modelling, including our own, rather than implying that none exists.
+
+The acute toxicity axis, the random-forest interpolation of it, the decoupling
+test between fidelity and toxicity, and the phosphorus-local reactivity analysis
+are in the Supplementary Material. They stand on their own data and are
+summarised where the main text needs them; we placed them there because the
+argument of the paper turns on the composition of the comparison panel and does
+not depend on them.
+
+The manuscript is original, is not under consideration elsewhere, and has been
+approved by all six authors. The authors declare no competing financial interest,
+and the work received no specific funding. Analysis code, descriptor tables,
+parsed toxicity values with their sources and all figure scripts are deposited in
+the public repository cited in the manuscript and also accompany the submission.
+The designation and Mantel permutation tests are exhaustive. Seven further
+analyses are sampled rather than enumerated, at between 1000 and 20000 draws
+each, and the Supporting Information names every one with its draw count; the
+remainder are deterministic given the stated seeds.
+
+Thank you for considering this work.
+
+\vspace{10pt}
+
+Yours sincerely,
+
+\vspace{14pt}
+
+Yoon Jeong Jang, corresponding author\\
+on behalf of Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee,\\
+Jin Yoo and Yoon Jeong Jang\\
+\texttt{yjjangchem@korea.kr}
+
+% 추천 심사위원: Ku 결정에 따라 제출 시스템에서 공란으로 둔다.
+% 2026-10-15 결정, 2026-11-10 ACS 전환 시 재확인. ACS 저자지침은
+% 4인 이상을 요구하지만 그 요구는 제출 시스템에서 처리하고
+% 커버레터에는 싣지 않는다. 다음 회차에 명단을 다시 넣지 말 것.
+
+\end{document}

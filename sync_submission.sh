@@ -33,7 +33,7 @@ cp -p paper/tab_*.tex submission/
 for f in main supplementary cover_letter tab_ablation tab_family tab_sparse \
          tab_plocal tab_volatility tab_vpairing tab_premisenull tab_registers \
          tab_designations tab_dyepanel tab_match tab_failaudit tab_blockbalance \
-         tab_niosh tab_voldecomp tab_si-ascl3; do
+         tab_niosh tab_nioshlist tab_voldecomp tab_si-ascl3; do
   [ -f "submission/$f.tex" ] || continue
   sed -i '/^[[:space:]]*%/d' "submission/$f.tex"
 done
@@ -143,7 +143,14 @@ printf '[sync] code %s개, outputs %s개 복사\n' "$n_code" "$n_out"
     grep -E '\(검사 [^)]*\):' /tmp/_sync_verify.txt | head -8
     exit 1
   fi; }
-rm -rf submission/code/paper submission/code/outputs
+# 2026-11-14. 종전에는 자기검증용 paper/ 를 지웠다. 그런데 패키지의
+# README 가 build_paper.sh --figs · verify_consistency.py ·
+# test_verify_consistency.py · ai_style_scan.py 네 개를 처방하고, 넷 다
+# paper/ 를 읽는다. 지우면 처방 명령 다섯 중 넷이 패키지 안에서 돌지 않는다
+# (외부 심사에서 적발). paper/ 를 남긴다 — 원고 소스·PDF·표·도판은 이미
+# submission/ 최상위에도 있으므로 중복은 작고, 패키지가 문서대로 도는 쪽이
+# 낫다. outputs 심볼릭 링크만 지운다.
+rm -rf submission/code/outputs
 # 2026-11-13. 자기검증이 submission/code 안에서 python3 를 돌리므로
 # __pycache__ 가 생긴다. 복사 직후가 아니라 여기서 지워야 한다.
 rm -rf submission/code/__pycache__

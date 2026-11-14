@@ -1,0 +1,66 @@
+{
+ "generated_by": "descriptor_definitions.py",
+ "status": "reported rather than adopted",
+ "cache_unmodified": true,
+ "derived_columns_kept_consistent": [
+  "lser_A_proxy = HBD",
+  "lser_B_proxy = HBA"
+ ],
+ "observed": {
+  "water_HBA": 0,
+  "water_HBD": 0,
+  "water_TPSA": 31.5,
+  "n_OH_equals_HBD_on_panel28": true,
+  "isf_zero_compounds": [
+   "hydrogen cyanide (AC)",
+   "cyanogen chloride (CK)"
+  ],
+  "isf_pmi1_of_those": [
+   -3.7409979366124126e-16,
+   1.6141644004835628e-11
+  ],
+  "isf_acetonitrile": 0.3161991288219235
+ },
+ "configurations": {
+  "as_published": {
+   "n_structural": 35,
+   "n_merged": 38,
+   "p_structural": 0.027941176470588237,
+   "p_merged": 0.025,
+   "n_valid": 3,
+   "n_OH_retained": false
+  },
+  "water_HBA1_HBD1": {
+   "n_structural": 36,
+   "n_merged": 39,
+   "p_structural": 0.04852941176470588,
+   "p_merged": 0.03235294117647059,
+   "n_valid": 3,
+   "n_OH_retained": true
+  },
+  "water_HBA1_HBD2": {
+   "n_structural": 36,
+   "n_merged": 39,
+   "p_structural": 0.033823529411764704,
+   "p_merged": 0.027941176470588237,
+   "n_valid": 3,
+   "n_OH_retained": true
+  },
+  "isf_dropped": {
+   "n_structural": 34,
+   "n_merged": 37,
+   "p_structural": 0.03529411764705882,
+   "p_merged": 0.026470588235294117,
+   "n_valid": 3,
+   "n_OH_retained": false
+  },
+  "both_corrections": {
+   "n_structural": 35,
+   "n_merged": 38,
+   "p_structural": 0.05,
+   "p_merged": 0.03235294117647059,
+   "n_valid": 3,
+   "n_OH_retained": true
+  }
+ }
+}

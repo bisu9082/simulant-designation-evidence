@@ -87,54 +87,55 @@ Package hyperref Warning: Suppressing link with empty target on input line 328.
 Package hyperref Warning: Suppressing link with empty target on input line 391.
 
 
-[5]
+[5] [6]
 
-Package hyperref Warning: Suppressing link with empty target on input line 456.
-
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 462.
-
-
-[6]
-
-Package hyperref Warning: Suppressing link with empty target on input line 528.
-
-
-[7] [8] (./tab_sparse.tex)
-
-Package hyperref Warning: Suppressing link with empty target on input line 706.
-
-
-[9]
-
-Package hyperref Warning: Suppressing link with empty target on input line 728.
+Package hyperref Warning: Suppressing link with empty target on input line 509.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 729.
+Package hyperref Warning: Suppressing link with empty target on input line 515.
+
+
+[7]
+
+Package hyperref Warning: Suppressing link with empty target on input line 581.
+
+
+[8] [9] (./tab_sparse.tex)
+
+Package hyperref Warning: Suppressing link with empty target on input line 759.
+
+
+[10]
+
+Package hyperref Warning: Suppressing link with empty target on input line 781.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 747.
+Package hyperref Warning: Suppressing link with empty target on input line 782.
 
 
-(./tab_failaudit.tex) [10]
 
-Package hyperref Warning: Suppressing link with empty target on input line 825.
+Package hyperref Warning: Suppressing link with empty target on input line 800.
 
 
-[11] [12] (./tab_dyepanel.tex) [13] [14 <./Fig_spaces.png>] [15] [16]
+(./tab_failaudit.tex) [11]
+
+Package hyperref Warning: Suppressing link with empty target on input line 878.
+
+
+[12] [13] (./tab_dyepanel.tex) [14] [15 <./Fig_spaces.png>] [16]
 (./tab_volatility.tex) [17]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1148
+Package hyperref Warning: Suppressing link with empty target on input line 1201
 .
 
+[18]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1171
+Package hyperref Warning: Suppressing link with empty target on input line 1224
 .
 
-[18] (./tab_voldecomp.tex
+[19] (./tab_voldecomp.tex
 Underfull \hbox (badness 2460) in paragraph at lines 5--5
 []\OT1/ptm/m/n/10.95 Table S5: []The volatil-ity axis taken apart. For each des
 -ig-na-tion size, the best set in the
@@ -314,75 +315,76 @@ Underfull \hbox (badness 10000) in paragraph at lines 23--23
 
 Underfull \hbox (badness 10000) in paragraph at lines 23--23
 \OT1/ptm/m/n/8 de-tectabil-ity re-
-)
+[20])
 
-Package hyperref Warning: Suppressing link with empty target on input line 1325
-.
-
-[19] [20]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1387
+Package hyperref Warning: Suppressing link with empty target on input line 1378
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1410
+Package hyperref Warning: Suppressing link with empty target on input line 1440
+.
+
+[21]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1463
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1411
+Package hyperref Warning: Suppressing link with empty target on input line 1464
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1422
+Package hyperref Warning: Suppressing link with empty target on input line 1475
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1428
+Package hyperref Warning: Suppressing link with empty target on input line 1481
 .
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [21]
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [22]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1507
+Package hyperref Warning: Suppressing link with empty target on input line 1568
 .
 
-[22] (./tab_niosh.tex)
+(./tab_nioshlist.tex) (./tab_niosh.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1517
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1571
+Package hyperref Warning: Suppressing link with empty target on input line 1579
 .
 
 [23]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1663
+Package hyperref Warning: Suppressing link with empty target on input line 1633
 .
 
 [24]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1679
+Package hyperref Warning: Suppressing link with empty target on input line 1725
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1708
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1712
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1738
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1743
+Package hyperref Warning: Suppressing link with empty target on input line 1741
 .
 
 [25]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1777
+Package hyperref Warning: Suppressing link with empty target on input line 1770
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1774
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1800
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1805
+.
+
+[26]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1839
 .
 
 (./tab_ablation.tex
@@ -398,37 +400,37 @@ Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 Package hyperref Warning: Suppressing link with empty target on input line 25.
 
-) (./tab_family.tex) [26] [27] (./tab_blockbalance.tex) [28]
+) (./tab_family.tex) [27] [28] (./tab_blockbalance.tex) [29]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2111
+Package hyperref Warning: Suppressing link with empty target on input line 2175
 .
 
-[29] [30 <./Fig_mde.png>] (./tab_plocal.tex) [31 <./Fig_plocal.png>]
+[30] (./tab_plocal.tex) [31 <./Fig_mde.png>] [32 <./Fig_plocal.png>]
 (./tab_premisenull.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 2322
+Package hyperref Warning: Suppressing link with empty target on input line 2386
 .
 
-[32]
+[33]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2346
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 2371
-.
-
-[33] [34] [35 <./Fig_toxicity.png>] (./tab_registers.tex) [36]
-
-Package hyperref Warning: Suppressing link with empty target on input line 2597
+Package hyperref Warning: Suppressing link with empty target on input line 2410
 .
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 2680--2688
+Package hyperref Warning: Suppressing link with empty target on input line 2435
+.
+
+[34] [35] [36 <./Fig_toxicity.png>] (./tab_registers.tex) [37]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2661
+.
+
+
+Underfull \hbox (badness 1424) in paragraph at lines 2744--2752
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[37] [38 <./Fig_h1.png>] [39] (./supplementary.bbl [40] [41] [42] [43])
-[44] [45] [46] [47] [48] [49] (./supplementary.aux) )
+[38] [39 <./Fig_h1.png>] [40] (./supplementary.bbl [41] [42] [43] [44])
+[45] [46] [47] [48] [49] [50] [51] (./supplementary.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -448,5 +450,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (49 pages, 6765165 bytes).
+Output written on supplementary.pdf (51 pages, 6769762 bytes).
 Transcript written on supplementary.log.

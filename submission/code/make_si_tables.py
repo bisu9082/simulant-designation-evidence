@@ -600,11 +600,41 @@ def dyepanel():
 
 
 
+
+def _niosh_nn():
+    """표 캡션의 정규화자 두 값을 예치물에서 읽는다 (2026-11-14).
+
+    종전에는 캡션 문자열에 3.399 와 3.042 를 하드코딩했다. 비교군을 네 종에서
+    열 종으로 고치자 뒤 값이 3.197 로 바뀌었는데 캡션은 그대로였고, 검증기가
+    잡았다. 하드코딩을 제거한다.
+    """
+    d = json.load(open('outputs/niosh_panel.json'))
+    p = d['panels']['panel28_incumbent3']
+    return (f"{p['baseline']['nn_median']:.3f} before the addition and "
+            f"{p['plus_all_recomputed']['nn_median']:.3f} after it")
+
+
+
+def nioshlist():
+    """NIOSH 후보목록 11종과 패널 소속 (2026-11-14)."""
+    d = json.load(open('outputs/niosh_panel.json'))
+    L = ['\\begin{tabular}{llc}', '\\hline',
+         'Compound & Entered as & On a panel \\\\', '\\hline']
+    for n in d['added_to_comparison_pool']:
+        iup = d['iupac_like'][n]
+        sm = d['smiles'][n].replace('(', '\\allowbreak (')
+        L.append(f"{iup} & \\texttt{{{sm}}} & no \\\\")
+    L += ['dimethyl methanephosphonate & \\texttt{COP(C)\\allowbreak (=O)OC} '
+          '& yes \\\\',
+          '\\hline', '\\end{tabular}']
+    return '\n'.join(L)
+
+
 def niosh():
     """NIOSH 후보 4종을 비교군에 넣을 때 작용제별 최근접 거리 (2026-11-14)."""
     d = json.load(open('outputs/niosh_panel.json'))
     p = d['panels']['panel28_incumbent3']
-    b, e = p['baseline'], p['plus4_recomputed']
+    b, e = p['baseline'], p['plus_all_recomputed']
     nb, ne = b['nn_median'], e['nn_median']
     L = ['\\begin{tabular}{lrrlrrl}', '\\hline',
          ' & \\multicolumn{3}{c}{twenty-eight-compound pool}'
@@ -802,18 +832,31 @@ every interferent; count of valid matches.}\\
         + '\\begin{table}[htb]\n\\centering\n\\caption{Distance from '
         'each agent to its nearest designated simulant and to its nearest '
         'non-designated compound, in the structural space, before and after '
-        'the four compounds the NIOSH candidate list names beside DMMP enter '
+        'the further compounds the NIOSH candidate list names beside DMMP enter '
         'the comparison pool. Distances are unnormalised Euclidean distances '
         'in the standardised structural space, not the merged-space normalised '
         'distances of the main text, and the two are not comparable; the '
         'median nearest-neighbour separation that sets the match threshold is '
-        '3.399 before the addition and 3.042 after it. The designated set is '
+        + _niosh_nn() +
+        '. The designated set is '
         'the incumbent three throughout. Values are in '
         '\\texttt{outputs/niosh\\_panel.json}.}\n'
         '\\label{tab:niosh}\n\\footnotesize\n'
         '\\setlength{\\tabcolsep}{3pt}\n'
         + niosh() + '\n\\end{table}\n')
     print('-> outputs/tab_niosh.tex')
+    open('outputs/tab_nioshlist.tex', 'w').write(
+        hdr + '% 출처: outputs/niosh_panel.json\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{The eleven '
+        'compounds the NIOSH candidate list for barrier-material permeation '
+        'testing names, the structures we entered for the ten that are on '
+        'neither panel, and which one is. Names follow the source; its '
+        'spelling of triethyl phosphate is corrected here. Values are in '
+        '\\texttt{outputs/niosh\\_panel.json}.}\n'
+        '\\label{tab:nioshlist}\n\\footnotesize\n'
+        '\\setlength{\\tabcolsep}{4pt}\n'
+        + nioshlist() + '\n\\end{table}\n')
+    print('-> outputs/tab_nioshlist.tex')
     open('outputs/tab_voldecomp.tex', 'w').write(
         hdr + '% 출처: outputs/volatility_decomposition.json\n'
         + '\\begin{table}[htb]\n\\centering\n\\caption{The volatility '

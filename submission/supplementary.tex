@@ -385,9 +385,10 @@ calculation would put part of the systematic difference above into the
 distances.
 
 Four electronic descriptors are available for every compound: $E_\mathrm{HOMO}$,
-$E_\mathrm{LUMO}$, the global electrophilicity index
-$\omega=\mu^{2}/2\eta$ in the definition of Parr et al.~\cite{parr1999}, and the dipole
-moment. Four further descriptors exist only for the six phosphorus-bearing
+$E_\mathrm{LUMO}$, a global electrophilicity index
+$\omega=\mu^{2}/2\eta$ computed with $\eta$ as half the orbital gap, and the dipole
+moment. The convention matters for the printed values and for nothing else, and
+we state it in full below. Four further descriptors exist only for the six phosphorus-bearing
 compounds: the Mulliken charges at phosphorus and at the phosphoryl oxygen, the
 Wiberg P=O bond order \cite{wiberg1968}, and the condensed Fukui index
 $f^{+}(\mathrm{P})$ for nucleophilic attack at that centre
@@ -400,10 +401,10 @@ all 28 compounds.
 Three spaces were compared: structural, electronic and merged.
 
 The electronic space carries three coordinates, not the four that frontier-orbital
-descriptor sets of this kind usually report. The fourth, the Parr electrophilicity
+descriptor sets of this kind usually report. The fourth, an electrophilicity
 index $\omega = \mu^{2}/2\eta$ with $\mu = (E_{\mathrm{HOMO}} +
-E_{\mathrm{LUMO}})/2$ and $\eta = (E_{\mathrm{LUMO}} - E_{\mathrm{HOMO}})/2$
-\cite{parr1999}, is an exact function of the two orbital energies that accompany
+E_{\mathrm{LUMO}})/2$ and $\eta = (E_{\mathrm{LUMO}} - E_{\mathrm{HOMO}})/2$,
+is an exact function of the two orbital energies that accompany
 it. We confirmed this numerically: across the primary panel
 $|\omega - \mu^{2}/2\eta|$ reaches at most
 $1.3\times10^{-5}$~eV, and $7.1\times10^{-15}$~eV on the
@@ -417,7 +418,23 @@ removing $\omega$ leaves the rank order of pairwise distances almost unchanged
 (Spearman 0.934 on the primary panel, 0.932 on the smaller one). We therefore take $E_{\mathrm{HOMO}}$, $E_{\mathrm{LUMO}}$ and
 the dipole moment as the electronic space, and report $\omega$ and the condensed
 Fukui index in Table~\ref{tab:plocal} without admitting them to
-any distance. The four reactivity descriptors localised at phosphorus
+any distance.
+
+Two conventions for the hardness $\eta$ circulate, and we used one while an
+earlier version of this section cited the other. The absolute hardness of Parr
+and Pearson is half the gap between the ionisation energy and the electron
+affinity, which under Koopmans' theorem is half the orbital gap, and that is the
+quantity above. The electrophilicity index of Parr, Szentp\'aly and Liu
+\cite{parr1999} is defined with $\eta$ as the full difference, so the index they
+define is half of every $\omega$ printed in Table~\ref{tab:plocal}: for fluorine
+their convention gives 3.9~eV where ours gives 7.7~eV. We cited their paper for
+a quantity computed under the other convention, which is the kind of
+mis-attribution this paper asks others to avoid, so we name the convention
+rather than the author here and halve nothing: $\omega$ enters no distance in
+this work, the ratios that Section~\ref{res:plocal} draws from it are unchanged
+by a constant factor, and the density-functional check of
+Section~\ref{meth:dft} uses the same convention throughout. A reader who wants
+the index as those authors define it should halve the column. The four reactivity descriptors localised at phosphorus
 are undefined for the twenty-two panel compounds that contain none, so they
 cannot enter a panel-wide distance either.
 
@@ -433,7 +450,43 @@ twenty-eight-compound panel and by correlation at 0.95 on the primary one. No st
 variance. The correlation filter and the exact-dependence check of
 Section~\ref{meth:spaces} together remove 13 of the 51 on the primary panel and
 16 on the twenty-eight-compound panel, leaving 38 and 35 structural coordinates
-respectively; the attrition is therefore not the same on the two panels. Remaining descriptors were
+respectively; the attrition is therefore not the same on the two panels.
+
+\paragraph{Two places where a descriptor definition gives a chemically wrong
+value.} Both were found in external review of this manuscript, both are real,
+and neither changes which conclusion the twenty-eight-compound panel supports;
+\texttt{outputs/descriptor\_definitions.json} carries the values below.
+
+The hydrogen-bond counts come from the Lipinski-family definitions in the
+cheminformatics toolkit, which recognise only a hydroxyl hydrogen as a donor.
+Water is therefore recorded with no donors and no acceptors, which is false of
+water read as chemistry rather than as a toolkit output, and the consequence is
+not cosmetic. With water a non-donor, the donor count coincides exactly with the
+hydroxyl count on the twenty-eight-compound panel, both being one for methanol,
+ethanol and dipropylene glycol monomethyl ether and zero elsewhere, so the
+correlation filter removes the hydroxyl count at $|r| = 1.00$. Giving water one
+donor and one acceptor breaks that coincidence, admits the hydroxyl count, and
+takes the structural value to 0.0485 with the donor and acceptor set to one, and
+to 0.0338 if water is given two donors, against 0.0279 as published. The
+valid-match count is three in every case. We report this rather than edit the
+cached descriptors, because the cache is what the descriptor script regenerates
+and what the reproduction gate checks column by column; a hand-edited value is
+one the generator no longer produces. The two linear-solvation surrogates
+defined as the donor and acceptor counts are moved with them, since changing a
+definition and leaving the columns derived from it behind is the error this paper
+is about.
+
+The inertial shape factor is the second moment divided by the product of the
+first and third. Hydrogen cyanide and cyanogen chloride are linear, their first
+principal moment is numerically zero, and the quantity diverges; the toolkit
+returns zero for the division, which is the opposite limit. Acetonitrile, the
+nearest-linear interferent on the panel, receives 0.316, so the one coordinate
+that should gather the near-linear compounds at one end separates them and
+reverses the sign. Dropping that coordinate gives 0.0353 in the structural space
+and 0.0265 in the merged one, with three valid matches either way, and both
+corrections together give 0.0500. Every one of these values is nominal and none
+survives the correction over eighteen tests reported in
+Section~\ref{res:permfull}. Remaining descriptors were
 standardised and distances taken as Euclidean. Standardisation, and the median
 nearest-neighbour separation that normalises the distances, are computed over
 the compounds of the panel in hand. A normalised distance is therefore
@@ -584,7 +637,7 @@ presenting either three or four as settled.
 \section{The shape coordinates are not independent either}
 \label{meth:shape}
 
-The main text reports that the Parr electrophilicity index is an exact function
+The main text reports that the electrophilicity index is an exact function
 of the two frontier orbital energies reported beside it, and that the
 correlation filter does not catch it. The shape block has the same structure.
 We report it here because the filter does not catch that one either, and
@@ -931,7 +984,7 @@ Table~\ref{tab:family}; on the twenty-eight-compound panel only the
 scheme that
 fixes the statistic in advance falls below 0.05, and the fourth configuration
 falls below it under every scheme. Local reactivity at phosphorus and the rank
-of the Parr index are in Figure~\ref{fig:plocal}.}
+of the index are in Figure~\ref{fig:plocal}.}
 \label{fig:spaces}
 \end{figure}
 The structural and electronic spaces differ in dimension by more than an order of
@@ -1439,58 +1492,67 @@ breakthrough data. Dichloromethane appears in neither the NIOSH document nor the
 Man-in-Simulant Test programme, which is the whole of the negative the main text
 reports for it.
 
-\paragraph{Admitting the four to the comparison pool.} The four that are on the
-candidate list and not on either of our panels are diisopropyl
-methylphosphonate, diethyl ethylphosphonate, triethyl phosphate and
-di-n-butyl sulfide, entered as the structures
-\texttt{CC(C)OP(C)\allowbreak(=O)OC(C)C},
-\texttt{CCOP(CC)\allowbreak(=O)OCC},
-\texttt{CCOP(=O)\allowbreak(OCC)OCC} and
-\texttt{CCCC\allowbreak SCCCC} respectively.
+\paragraph{Restoring the comparison pool the document names.} The candidate
+list for barrier-material permeation testing names eleven compounds. Of those,
+DMMP alone is on either of our panels.
+Table~\ref{tab:nioshlist} gives the eleven with the structures we entered for
+the other ten.
 Descriptors for them were generated by the same script that generates them for
 the panel, which reproduces all fifty-three RDKit columns of the
 twenty-eight-compound cache with no disagreement. They enter as comparison
 compounds, not as designated simulants: the designated set stays the incumbent
 three, and the only thing that changes is the pool the permutation draws from,
-which grows from seventeen to twenty-one and takes the enumeration from 680
-designations to 1330. On the primary panel it grows from twenty-four to
-twenty-eight and from 2024 to 3276.
+which grows from seventeen to twenty-seven and takes the enumeration from 680
+designations to 2925. On the primary panel it grows from twenty-four to
+thirty-four and from 2024 to 5984.
 
 The pre-specified mean difference in the structural space moves from
-$p = 0.028$ to $p = 0.350$ on the twenty-eight-compound panel and from
-$p = 0.351$ to $p = 0.424$ on the primary one, and the valid-match count from
-three to one and from zero to zero. Recomputing the correlation and dependency
-filters on the larger frame admits \texttt{chi2v}, \texttt{chi3v} and
-\texttt{is\_organophosphorus} and drops \texttt{RadiusOfGyration} and
-\texttt{chi1v}, taking the structural space from thirty-five coordinates to
-thirty-six; holding the coordinate set at the twenty-eight-compound one instead
-gives $p = 0.354$ with the same single match, so the change is the pool and not
-the filters. The six statistics of Table~\ref{tab:ablation} move together: the
-smallest of them goes from 0.028 to 0.276.
+$p = 0.028$ to $p = 0.360$ on the twenty-eight-compound panel and from
+$p = 0.351$ to $p = 0.446$ on the primary one, and the valid-match count from
+three to zero and from zero to zero. Recomputing the correlation and dependency
+filters on the larger frame takes the structural space from thirty-five
+coordinates to thirty-six; holding the coordinate set at the
+twenty-eight-compound one instead gives $p = 0.373$, so the change is the pool
+and not the filters. The six statistics of Table~\ref{tab:ablation} move
+together: the smallest of them goes from 0.028 to 0.305.
 
 Table~\ref{tab:niosh} gives the mechanism agent by agent. Its distances are
 unnormalised and belong to the structural space alone, so they are not on the
 scale of the merged-space normalised distances the main text reports for the
 same agents; the separation that sets the match threshold on this frame is
-3.399 before the addition and 3.042 after it. Three of the four compounds enter
-as the nearest non-designated compound to at least one agent. Diisopropyl
-methylphosphonate displaces the incumbents at soman, cyclosarin and VX, diethyl
-ethylphosphonate at tabun, and di-n-butyl sulfide at sulfur mustard, where it
-stands at 2.845 against dichloromethane's 5.720. Sarin is the only agent that
-keeps its match, and it keeps it by a tenth of the separation. This is the
-mechanism diisopropyl fluorophosphate supplies on the primary panel, from a
-different document and a different list.
+3.399 before the addition and 3.197 after it. Four of the ten compounds enter as
+the nearest non-designated compound to at least one agent. Diethyl
+methanephosphonate, which differs from DMMP by two methylene groups, stands
+4.346 from sarin where the nearest incumbent stands 4.588, and that single pair
+removes the last valid match on this panel. Diisopropyl methylphosphonate displaces the
+incumbents at soman, cyclosarin and VX, 2-chloroethyl cyclohexyl sulfide at
+sulfur mustard, diethyl ethanephosphonate at tabun. No agent keeps a match.
+This is the mechanism diisopropyl fluorophosphate supplies on the primary panel,
+arriving from a different document and a different list.
+
+\paragraph{How the earlier version of this subsection was wrong.} An earlier
+version named four of the ten and reported $p = 0.350$ with one match retained.
+It was built by matching the document's compound list against our panel on
+abbreviations, and the abbreviation DCP denotes 2,4-dichlorophenol in the
+document and diethyl chlorophosphate in our panel, so that compound was recorded
+as already present. Five more were missed alongside it. We record the error
+rather than quietly replacing the numbers, because the mechanism is the one this
+paper is about: a label matched on a token rather than on a structure, in a
+direction that favoured the result. Correcting it strengthens the conclusion
+rather than weakening it, which is also why it is worth saying that we did not
+catch it ourselves until the panel was read a second time.
 
 The extension reaches the structural space only. The three electronic
 coordinates are outputs of a semi-empirical binary that is not in the deposit
 and whose version is not recorded, which is the limitation
-Section~\ref{M-res:repro} of the main text states; computing four compounds with
+Section~\ref{M-res:repro} of the main text states; computing ten compounds with
 a different version would put two binaries' output in one distance space, which
 is worse than not extending it. The merged space inherits that, so neither it
 nor the electronic space is reported here. The whole of this subsection is
 reported rather than adopted: the headline panels are unchanged, and
 \texttt{outputs/niosh\_panel.json} carries every value above.
 
+\input{tab_nioshlist}
 \input{tab_niosh}
 
 Figure~\ref{M-fig:main}a shows why, and the mechanism is not
@@ -1647,7 +1709,7 @@ defended by a comparison that excludes the alternatives is not defended.
 
 
 Two things we expected to dissolve the contrast between the spaces did not. The
-Parr electrophilicity index was an exact function of two of the other electronic
+electrophilicity index was an exact function of two of the other electronic
 descriptors, so the electronic space never had the dimension we reported;
 removing it left the distance ranks in that space almost unchanged, at a
 Spearman correlation of 0.932 with the four-coordinate version. Matching the
@@ -1764,7 +1826,9 @@ nobody declares that happens not to matter here
 (Section~\ref{res:blockbalance}).
 The Li-Ji approximation that the Westfall-Young procedure replaces estimates
 5.00 effective tests of eighteen and gives 0.125, conservative here by a factor
-near 1.7. None of the first three configurations of Table~\ref{tab:ablation}
+of 1.57; the factor is 1.72 on the primary panel with the eight literature
+compounds designated, and an earlier version of this sentence paired the
+twenty-eight-compound value with that panel's ratio. None of the first three configurations of Table~\ref{tab:ablation}
 reaches 0.05 under any of the four schemes that correct what was actually run.
 
 \begin{table}[!htb]

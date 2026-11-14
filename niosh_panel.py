@@ -40,22 +40,47 @@ import pandas as pd
 from perm_statistics import STATS
 from pesticide_panel import bh_min, dmat, spaces_of
 
-# NIOSH 후보목록 중 우리 패널에 없는 네 종. 명칭·SMILES 쌍은 손으로 적었다.
-NIOSH4 = [
-    ('DIMP', 'CC(C)OP(C)(=O)OC(C)C',
-     'diisopropyl methylphosphonate'),
-    ('DEEP', 'CCOP(CC)(=O)OCC',
-     'diethyl ethylphosphonate'),
-    ('TEP', 'CCOP(=O)(OCC)OCC',
-     'triethyl phosphate'),
+# NIOSH 후보목록 11종 중 우리 패널에 없는 열 종. 2026-11-14 전면 교정.
+#
+# 종전 이 목록은 네 종이었다. 1차 출처(원문 PDF)를 다시 열어 11종을 축자
+# 대조한 결과 패널에 있는 것은 DMMP 하나이고 나머지 열이 빠져 있었다.
+# 누락 기전은 약어 충돌이다. NIOSH 목록의 'DCP' 는 2,4-dichlorophenol 인데
+# 이 논문 35종 패널의 'DCP' 는 diethyl chlorophosphate 다. 약어로 대조하면
+# "이미 패널에 있다" 로 처리된다. 나머지 다섯은 황화물·이염화물·에터·DEMP 로
+# 명칭이 패널의 어느 것과도 겹치지 않는데 함께 빠졌다.
+#
+# 원문 표기 순서 그대로 적는다 (원문의 'Triethly' 오타는 바로잡아 적었다).
+NIOSH_CANDIDATES = [
+    ('2-chloroethyl phenyl sulfide', 'ClCCSc1ccccc1',
+     '2-chloroethyl phenyl sulfide'),
+    ('2-chloroethyl cyclohexyl sulfide', 'ClCCSC1CCCCC1',
+     '2-chloroethyl cyclohexyl sulfide'),
     ('di-n-butyl sulfide', 'CCCCSCCCC',
      'di-n-butyl sulfide'),
+    ('1,6-dichlorohexane', 'ClCCCCCCCl',
+     '1,6-dichlorohexane'),
+    ('bis(4-chlorobutyl) ether', 'ClCCCCOCCCCCl',
+     'bis(4-chlorobutyl) ether'),
+    ('DEMP', 'CCOP(C)(=O)OCC',
+     'diethyl methanephosphonate'),
+    ('DEEP', 'CCOP(CC)(=O)OCC',
+     'diethyl ethanephosphonate'),
+    ('DIMP', 'CC(C)OP(C)(=O)OC(C)C',
+     'diisopropyl methylphosphonate'),
+    ('TEP', 'CCOP(=O)(OCC)OCC',
+     'triethyl phosphate'),
+    ('2,4-dichlorophenol', 'Oc1ccc(Cl)cc1Cl',
+     '2,4-dichlorophenol'),
 ]
+# 하위호환 별칭. 종전 보고(넷만 넣은 값)를 재현해 보려는 독자를 위해 남긴다.
+NIOSH4 = [r for r in NIOSH_CANDIDATES
+          if r[0] in ('DIMP', 'DEEP', 'TEP', 'di-n-butyl sulfide')]
 PANELS = [('panel28_incumbent3', 'descriptor_cache_xtb.csv'),
           ('panel35_incumbent3', 'descriptor_cache_xtb_35.csv')]
-SOURCE = ('NIOSH/NPPTL respirator permeation candidate list names eleven '
-          'compounds including DMMP, DIMP, DEEP, TEP and di-n-butyl '
-          'sulfide; see Supporting Information Section meth:niosh.')
+SOURCE = ('NIOSH/NPPTL CWA simulant programme (31 July 2002, draft for '
+          'discussion), candidate list for barrier-material permeation '
+          'testing: eleven compounds, of which DMMP alone is on either of '
+          'our panels. See Supporting Information Section meth:niosh.')
 CHUNK = 4000
 
 
@@ -66,7 +91,7 @@ def build_four():
         out = os.path.join(td, 'niosh4_desc.csv')
         pd.DataFrame([{'compound_name': n, 'compound_class': 'interferent',
                        'agent_series': '', 'input_smiles': s}
-                      for n, s, _ in NIOSH4]).to_csv(src, index=False)
+                      for n, s, _ in NIOSH_CANDIDATES]).to_csv(src, index=False)
         r = subprocess.run([sys.executable, 'build_descriptors.py',
                             '--new', src, '--out', out],
                            capture_output=True, text=True)
@@ -128,7 +153,7 @@ def exact_perm(D, kl, sim_idx, names):
 def one_panel(label, path, four):
     base = pd.read_csv(path)
     names0 = base.compound_name.tolist()
-    dup = [n for n, _, _ in NIOSH4 if n in names0]
+    dup = [n for n, _, _ in NIOSH_CANDIDATES if n in names0]
     if dup:
         sys.exit(f'{path}: {dup} 가 이미 패널에 있다')
     cols0 = spaces_of(base)['structural']
@@ -136,8 +161,8 @@ def one_panel(label, path, four):
     cols1 = spaces_of(ext)['structural']
     rec = {}
     for tag, df, cols in (('baseline', base, cols0),
-                          ('plus4_recomputed', ext, cols1),
-                          ('plus4_columns_fixed', ext, cols0)):
+                          ('plus_all_recomputed', ext, cols1),
+                          ('plus_all_columns_fixed', ext, cols0)):
         kl = df.compound_class.tolist()
         nm = df.compound_name.tolist()
         sim_idx = [i for i, k in enumerate(kl) if k == 'simulant']
@@ -159,9 +184,9 @@ def main():
     print(f'[niosh] 서술자 생성 {len(four)}종 '
           f'({", ".join(four.compound_name)})')
     res = {'generated_by': 'niosh_panel.py',
-           'added_to_comparison_pool': [n for n, _, _ in NIOSH4],
-           'smiles': {n: s for n, s, _ in NIOSH4},
-           'iupac_like': {n: i for n, _, i in NIOSH4},
+           'added_to_comparison_pool': [n for n, _, _ in NIOSH_CANDIDATES],
+           'smiles': {n: s for n, s, _ in NIOSH_CANDIDATES},
+           'iupac_like': {n: i for n, _, i in NIOSH_CANDIDATES},
            'authority': SOURCE,
            'designated_set': 'unchanged (incumbent three)',
            'spaces_extended': ['structural'],
@@ -171,6 +196,15 @@ def main():
                                 '생성 버전도 기록돼 있지 않다. 다른 버전으로 '
                                 '계산하면 한 거리공간에 두 바이너리의 출력이 '
                                 '섞인다.'),
+           'n_candidates_in_source': 11,
+           'n_on_our_panels': 1,
+           'n_added': len(NIOSH_CANDIDATES),
+           'abbreviation_collision': ("NIOSH 'DCP' = 2,4-dichlorophenol; "
+                                      "this paper's panel 'DCP' = diethyl "
+                                      "chlorophosphate. The earlier version "
+                                      "of this analysis added only four "
+                                      "compounds because the match was made "
+                                      "on abbreviations."),
            'status': 'reported rather than adopted',
            'panels': {}}
     for label, path in PANELS:
@@ -180,10 +214,10 @@ def main():
     print()
     for k, v in res['panels'].items():
         b = v['baseline']['p']['mean_diff']
-        e = v['plus4_recomputed']['p']['mean_diff']
+        e = v['plus_all_recomputed']['p']['mean_diff']
         print(f"  {k}: 사전지정 p {b:.5f} -> {e:.5f}  "
               f"유효매칭 {v['baseline']['n_valid']} -> "
-              f"{v['plus4_recomputed']['n_valid']}")
+              f"{v['plus_all_recomputed']['n_valid']}")
     print('  -> outputs/niosh_panel.json')
 
 

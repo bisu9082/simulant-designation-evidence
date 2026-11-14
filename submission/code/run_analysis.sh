@@ -35,6 +35,9 @@
 #                        같은 후보목록에 적은 네 종(DIMP·DEEP·TEP·di-n-butyl
 #                        sulfide)을 비교군에 넣었을 때. 기록되지 않은 패널
 #                        구성 선택 하나를 열어 값을 적는다. (2026-11-14 신설)
+#   descriptor_definitions  서술자 정의가 특정 화합물에 화학적으로 틀린 값을
+#                        주는 두 자리(물의 HBA/HBD, 선형 분자의 ISF)와 그
+#                        정의를 고쳤을 때의 민감도. (2026-11-14 신설)
 #   volatility_decomposition  휘발성 축 V1 의 측면 규약 3종과 피복(span) 분해.
 #                        우연과 구별되는 유일한 검정이 충실도를 재는지 축
 #                        피복을 재는지 가른다. (2026-11-14 신설)
@@ -153,6 +156,7 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            designation_failure_audit.py \
            twolabel_panel.py acetonitrile_panel.py davidson_external.py \
            null_convention.py niosh_panel.py volatility_decomposition.py \
+           descriptor_definitions.py \
            mde_nullshift.py shape_match.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가

@@ -26,16 +26,22 @@ AUDIT = 'outputs/length_audit.json'
 
 # (사실 키, 정규식, 치환될 그룹의 서식)
 RULES = [
-    ('text_words', r'(stands at )([\d,]+)( words\s*\n?of text)', 'comma'),
-    ('text_plus_fig', r'(or )([\d,]+)( with its one figure)', 'comma'),
-    ('ref_words', r'(and )([\d,]+)( words of\s*\n?references)', 'comma'),
-    ('acs_pages', r'(it\s*\n?stands at )([\d.]+)( pages)', 'two_dp'),
+    ('text_words',
+     r'(manuscript stands at\s*\n?)([\d,]+)( words of text)', 'comma'),
+    ('ref_words',
+     r'(of which\s*\n?)([\d,]+)( words are references)', 'comma'),
+    ('text_plus_fig',
+     r'(converts to )([\d,]+)( word-equivalents)', 'comma'),
+    ('acs_pages', r'(or )([\d.]+)( pages, and is over by)', 'two_dp'),
+    ('acs_overage', r'(and is over by )([\d.]+)(\.)', 'two_dp'),
 ]
 
 
 def main():
     a = json.load(open(AUDIT))
     a['text_plus_fig'] = a['text_words'] + a['figure_words']
+    # 8면 한도 초과분. 커버레터가 숫자로 적으므로 여기서 함께 되쓴다.
+    a['acs_overage'] = a['acs_pages'] - 8.0
     src = open(TEX, encoding='utf-8').read()
     out, changed = src, []
     for key, pat, fmt in RULES:
