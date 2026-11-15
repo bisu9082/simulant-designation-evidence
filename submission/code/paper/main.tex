@@ -12,16 +12,19 @@
 % 2026-11-08 교정 29건이 없다. 지금 교정본을 재타깃한 것이다.
 %
 % Analytical Chemistry 하드 게이트 (저자지침 2026-10-05 갱신본):
-%   Article 최대 8 journal page / 초록 80~250 단어
+%   Article 최대 10,000 단어 / 초록 80~250 단어
 %   TOC 그래픽 8.25 x 4.45 cm / 커버레터 필수
 %   추천 심사위원 4인 이상 이메일 포함
 %     → Ku 결정(2026-10-15, 11-10 재확인): 제출 시스템에서 공란.
 %       커버레터에 명단을 싣지 않는다.
-%   2026-11-10 정정. 종전에 '10,000 단어' 로 적혀 있었다. 그 수치는
-%   researcher-resources.acs.org 의 PDF 내보내기에만 있고, 실제
-%   publish.acs.org/publish/author_guidelines?coden=ancham 은 'The maximum
-%   length of Articles is eight journal pages' 라고 적는다. ACS 가 호스팅하는
-%   두 페이지가 서로 다르므로 보수적인 쪽(8면)을 따른다.
+%   2026-11-15 확정. ACS 가 호스팅하는 두 페이지가 서로 다른 한도를 적어
+%   11-10 에는 보수적인 쪽(8면)을 따랐다. 투고 전 편집부에 물었고
+%   Managing Editor (Jie Fu) 가 2026-11-15 에 지배 지침을
+%   researcher-resources.acs.org/publish/author_guidelines?coden=ancham 으로
+%   지정했다 — Article 최대 10,000 단어, 도판-단어 환산 없음. 범주도 같은
+%   답신에서 Article 로 확정됐다(Perspective 아님). 8면 한도는 무효이므로
+%   분량 판단에 쓰지 말 것. 같은 지침이 본문 실험 절을 요구하고 '중요한
+%   실험 세부의 SI 배치' 를 금지한다.
 \documentclass[journal=ancham,manuscript=article,margin=1in]{achemso}
 % 2026-11-12. achemso 는 절 번호를 매기지 않는다. 그래서 본문의
 % Section~\ref{...} 10곳과 SI 의 M- 상호참조가 전부 빈 문자열로 조판되고
@@ -182,10 +185,10 @@ twenty-eight-compound panel omitting seven compounds yields three matches and a 
 correction of the family we ran leaves significant and that rises to 0.360, with
 no match left, once the ten further compounds our own source lists rejoin the
 pool. Moving labels moves the answer both ways: 0.630
-becomes 0.745 or 0.00075 with how many move. Volatility, the axis the criterion names, carries the one
-nominal value that survives the correction registered for it ($p = 0.0206$,
-$q = 0.0412$), but it tracks how widely the three cover that axis, not how close
-they sit; two-sided, 0.182. The corrective
+becomes 0.745 or 0.00075 depending on how many move. Volatility, the criterion's
+own axis, carries the one nominal value that survives the correction registered
+for it ($p = 0.0206$, $q = 0.0412$), but it tracks how widely the three cover
+that axis, not how close they sit; two-sided it is 0.182. The corrective
 is a declaration, not a replacement compound: a defensible claim must name the
 measurement it rests on and fix panel, space, statistic, comparison pool and
 weighting in advance.
@@ -774,17 +777,17 @@ report and not an independent finding.
 \label{res:vol}
 Volatility is the one axis the stated criterion names that is not a descriptor
 we chose. Four of the eighteen cells reported above also fall below 0.05 before
-correction; what is different here is that this value survives the correction
-registered for this axis ($q = 0.0412$) where those four do not survive theirs
-($q = 0.163$). Two readings of it, set out below, take it back above 0.05. Two tests were registered in advance of it,
+correction; what is different here is that the one-sided $p$ of 0.0206 this
+axis returns survives the correction registered for it ($q = 0.0412$) where
+those four do not survive theirs ($q = 0.163$). Two readings of that value, set
+out below, take it back above 0.05. Two tests were registered in advance of it,
 outside the family of eighteen reported above; only the first was reported in
 the form registered for it, and Supporting Information
 Section~\ref{S-meth:vol} gives both in full with every adopted vapour pressure
 and its source.
 
 The designation test repeated on the one-dimensional axis puts the incumbent set
-fourteenth on the pre-specified statistic, a one-sided $p$ of 0.0206 over all
-680 designations. Its registered form and its reported form are the same, so the
+fourteenth of all 680 designations on the pre-specified statistic. Its registered form and its reported form are the same, so the
 exemption from the eighteen holds for this one; corrected within the two tests
 registered for this axis it stands at $q = 0.0412$. That registration is a
 statistic named inside the script that computes it, with no external timestamp,
