@@ -302,6 +302,19 @@ colour difference is ordinarily held to be perceptible, and a single
 zero-concentration entry on which the deposit does not satisfy its own
 definition.
 
+\subsection{The toxicity axis and the model tested against it}
+\label{meth:tox}
+Acute toxicity is taken as $\log_{10}$ of the ten-minute AEGL-3 value. The
+model tested against it is a random forest on 37 RDKit descriptors, with five
+random seeds, five-fold cross-validation and 10\,000 bootstrap resamples for
+intervals. Twenty military agents were identified by registry number and held
+out of training entirely, leaving 230 compounds to train on; the applicability
+domain is the mean distance to the five nearest training compounds in
+standardised descriptor space, bounded at the 95th percentile of the training
+set's own such distances. Supporting Information Section~\ref{S-meth:aegl}
+gives the attrition from the listed entries to those 230 and the held-out set
+compound by compound.
+
 \subsection{Nearest-neighbour comparison and permutation test}
 \label{sec:perm}
 For each authentic agent we recorded the distance to the nearest incumbent
@@ -779,10 +792,8 @@ spectroscopic absorption bands of the agent being simulated''
 \cite{nrc2003standoff}. One of those two properties is the axis under test
 here and the other is not. No coordinate in any of our three spaces is a band
 position. The nearest any of them comes is the electronic space, whose three
-coordinates are two orbital energies and a dipole moment; orbital energies bear
-on electronic absorption rather than on the vibrational bands a passive
-infrared instrument reads, and a static dipole moment is not an infrared
-intensity, which goes as the derivative of the dipole along a normal mode. The
+coordinates are two orbital energies and a dipole moment, neither of which is a
+vibrational band position of the kind a passive infrared instrument reads. The
 committee names the two properties together, so this line supports volatility
 as one of two requirements and not as the requirement. And the one instrument we found that constrains a
 property rather than a barrier constrains this one, by a window of about 0.1 to
