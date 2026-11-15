@@ -144,12 +144,9 @@ property database and a validation step, introduced against the observation that
 simulants have more often been adopted for convenience than designed
 \cite{lawrence2025simulants}. We take that as given and ask the retrospective
 question their method does not: what the compounds already in service rest on,
-and how much of any answer is fixed by the data rather than the analyst. Theirs
+and what fixes any answer. Theirs
 is a procedure for the simulants a programme will build; ours is an audit of the
-three the optical sensing literature already uses, and a measurement of how far
-its verdict moves when panel, space, statistic, comparison pool or weighting is
-chosen differently. The two meet at the same corrective and overlap in neither
-what they examine nor what they report.
+three the optical sensing literature already uses.
 
 \paragraph{Dual-use statement.} Throughout, the optimisation direction is
 fixed: fidelity to the detection-relevant properties is to be maximised while
@@ -311,9 +308,16 @@ intervals. Twenty military agents were identified by registry number and held
 out of training entirely, leaving 230 compounds to train on; the applicability
 domain is the mean distance to the five nearest training compounds in
 standardised descriptor space, bounded at the 95th percentile of the training
-set's own such distances. Supporting Information Section~\ref{S-meth:aegl}
-gives the attrition from the listed entries to those 230 and the held-out set
-compound by compound.
+set's own such distances. Supporting Information
+Sections~\ref{S-meth:aegl} and~\ref{S-sec:qsar} give the attrition from the
+listed entries and the held-out set compound by compound. The association
+reported in Section~\ref{res:toxsummary} pairs that axis with fidelity, defined
+as the standardised Euclidean distance in the three-coordinate electronic space
+to the nearest authentic agent, by Spearman's $\rho$ over the 207 compounds
+carrying both axes, with 10\,000 bootstrap resamples for the interval;
+Supporting Information Section~\ref{S-meth:decoupling} gives that pool, the
+eight compounds excluded by rules declared in advance, and what keeping them
+does.
 
 \subsection{Nearest-neighbour comparison and permutation test}
 \label{sec:perm}
@@ -359,11 +363,7 @@ Section~\ref{S-meth:failaudit}; the narrower of them raises the primary-panel
 count from zero to three only by removing the five literature compounds from the
 comparison, which is the panel-composition effect of Section~\ref{res:panels}
 acting on the criterion rather than on the chemistry. The criterion is a
-statement about proximity in this descriptor space and nothing further. On the
-primary panel the incumbent simulants fail the second condition for all eleven
-agents in the structural and merged spaces, so the count in those two is zero at
-every threshold, including an unbounded
-one.
+statement about proximity in this descriptor space and nothing further.
 
 \subsection{Reproducibility}
 \label{res:repro}
@@ -371,9 +371,8 @@ All analyses are deterministic given the seed, which is 42 except where a
 script records otherwise. The designation and Mantel permutation tests are
 exhaustive. Seven analyses are sampled rather than enumerated, at between 1000
 and 20000 draws each; Supporting Information
-Section~\ref{S-meth:sampling} names them with their draw counts. Supporting Information
-Section~\ref{S-meth:sampling} names the sampled analyses and the pinned version
-of every library the pipeline uses
+Section~\ref{S-meth:sampling} names them with their draw counts and the pinned
+version of every library the pipeline uses
 \cite{numpy2020,scipy2020,mckinney2010,matplotlib2007,rdkit,pyscf2020}.
 
 One part of the descriptor table cannot be regenerated, and we state it here
@@ -722,9 +721,7 @@ registered, this axis reports no agreement either.
 Every argument above rests on descriptor distances, and the premise that one of
 those spaces corresponds to what a sensor reports is tested in Supporting
 Information Section~\ref{S-res:arraydetail} against measured colorimetric
-response for twelve compounds. That response is not new here: it is taken from a
-29-component array reported in earlier work from this laboratory
-\cite{hazref,multiplexref,group3ref}, and those exposures were acetonitrile
+response for twelve compounds. Those exposures were acetonitrile
 solutions at matched molarity, not vapour, which bounds what any of this
 establishes about a vapour-phase response. It does not resolve the question:
 three of twelve cells reach a nominal $p<0.05$ and disagree on a space,
@@ -862,10 +859,7 @@ panel. Supporting Information Section~\ref{S-disc:detail} gives the rest.
 Simulant validity is not an intrinsic property of a compound. It depends on the
 measurement the compound is meant to reproduce and on the comparison the claim
 is scored against, and the practice of choosing chemical warfare agent simulants
-records neither. DMMP was designated for filtration breakthrough, DPGME in a
-training patent that fixes a volatility window and asks that a vapour detector
-respond, and dichloromethane
-carries no designating document; none of the three validates resemblance. The
+records neither. None of the three carries a designation validating resemblance. The
 test that would establish resemblance returns whatever the analyst's undeclared
 choices imply, from a corrected 0.745 to 0.00075 on one panel according to how
 many labels are moved, and the one axis on which the designation is
