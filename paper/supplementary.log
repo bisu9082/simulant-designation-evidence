@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  15 NOV 2026 14:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  15 NOV 2026 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -961,10 +961,10 @@ Package rerunfilecheck Info: File `supplementary.out' has not changed.
 (rerunfilecheck)             Checksum: EBD265F107BA67B2E32165B4AEC46E0E;10814.
  ) 
 Here is how much of TeX's memory you used:
- 11377 strings out of 476106
- 172070 string characters out of 5793932
+ 11378 strings out of 476106
+ 172084 string characters out of 5793932
  1993975 words of memory out of 5000000
- 32990 multiletter control sequences out of 15000+600000
+ 32991 multiletter control sequences out of 15000+600000
  589306 words of font info for 106 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  75i,13n,79p,1474b,689s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -986,7 +986,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
 onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (51 pages, 6770151 bytes).
+Output written on supplementary.pdf (51 pages, 6770148 bytes).
 PDF statistics:
  844 PDF objects out of 1000 (max. 8388607)
  719 compressed objects within 8 object streams

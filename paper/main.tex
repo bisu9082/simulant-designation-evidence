@@ -387,6 +387,34 @@ the source we fixed in advance for
 diethyl chlorophosphate or for diethyl cyanophosphonate, so the thirty-five
 compound panel cannot carry it.
 
+\subsection{The measured colorimetric response}
+\label{meth:array}
+The premise that descriptor proximity tracks instrument response is tested
+against a twenty-nine-component colorimetric array reported in earlier work
+from this laboratory \cite{hazref,multiplexref,group3ref}. Six of the
+twenty-nine are not chromogenic dyes, which is why we count components rather
+than dyes. Colour difference is the CIEDE2000 value $\Delta E_{00}$ against the
+zero-concentration image of the same component in the same channel, recorded in
+two imaging channels, ultraviolet-excited emission and reflectance, at solution
+concentrations of 10, 50, 100 and 500~$\mu$M delivered in acetonitrile. Of the
+three compound sets in that work, two supply the twelve compounds that are also
+in the descriptor panel; the third is excluded on an arithmetic criterion and
+not an editorial one, since none of its four compounds appears in the descriptor
+panel, so no pair of a measured pattern and a descriptor distance can be formed
+from it. Three properties of the measurement bear on every number taken from
+it. There is one observation per compound, concentration, component and channel,
+so there are no replicates, and an interval reported from this array describes
+variation across the four concentrations rather than agreement between
+independent preparations. No noise floor can be computed from the deposit,
+which holds no repeat exposures and no repeated blank images. And each pattern
+is normalised to unit length before any cosine is taken, so a component that
+did not respond enters the distance with the same weight as one that did.
+Supporting Information Section~\ref{S-meth:deltaE} gives the array component by
+component, the share of the response that falls below the threshold at which a
+colour difference is ordinarily held to be perceptible, and a single
+zero-concentration entry on which the deposit does not satisfy its own
+definition.
+
 \subsection{Nearest-neighbour comparison and permutation test}
 \label{sec:perm}
 For each authentic agent we recorded the distance to the nearest incumbent
