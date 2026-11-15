@@ -64,12 +64,12 @@ For additional information on amsmath, use the `?' option.
 nts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc
 }{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}] [2{/usr/share/texmf/fonts
 /enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}]
-[3] [4] [5] [6] [7{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}] [8]
-(/usr/share/texmf/tex/latex/lm/t1lmtt.fd) [9] [10] [11] [12 <./Fig_main.png>]
-[13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] (./main.bbl
-[25] [26] [27] [28] [29] [30]) [31]
-Underfull \vbox (badness 10000) detected at line 1012
-[32 <./toc_acs.png>] (./main.aux) )
+[3] [4] [5] (/usr/share/texmf/tex/latex/lm/t1lmtt.fd) [6] [7] [8{/usr/share/tex
+mf/fonts/enc/dvips/lm/lm-mathex.enc}] [9] [10] [11] [12] [13 <./Fig_main.png>]
+[14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] (./main.bbl [25]
+[26] [27] [28] [29] [30] [31]) [32]
+Underfull \vbox (badness 10000) detected at line 1026
+[33 <./toc_acs.png>] (./main.aux) )
 (see the transcript file for additional information)</usr/share/texmf/fonts/typ
 e1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></us
 r/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/pu
@@ -81,5 +81,5 @@ fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10
 /type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pf
 b></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/typ
 e1/public/lm/lmtt12.pfb>
-Output written on main.pdf (32 pages, 2285390 bytes).
+Output written on main.pdf (33 pages, 2287625 bytes).
 Transcript written on main.log.

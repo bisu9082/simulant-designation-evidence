@@ -227,11 +227,25 @@ descriptors with GFN2-xTB \cite{bannwarth2019} in the gas phase, since
 vapour-phase response is the property of interest. Three spaces are compared:
 structural, electronic and merged. Interpretable descriptors were used in
 preference to a substructural fingerprint, because the quantity of interest is
-position along named physical axes rather than a similarity score. Supporting
-Information Section~\ref{S-meth:descriptors} gives the descriptor list, the
-conformer treatment, the electronic protocol and the correlation and
-exact-dependence filters that leave 38 structural coordinates on the primary
-panel and 35 on the twenty-eight-compound one. Distances are Euclidean on
+position along named physical axes rather than a similarity score. Conformers were
+generated with ETKDGv3 \cite{wang2020,riniker2015}, optimised with MMFF94
+\cite{halgren1996} (UFF \cite{rappe1992} for lewisite~1, the only compound
+without MMFF parameters), then optimised and evaluated at GFN2 level; the
+implicit solvation model available for these methods \cite{ehlert2021} was not
+applied, for the same reason the gas phase was used. Electronic properties for
+the twenty-eight-compound set are Boltzmann averages over up to five conformers
+at 298.15~K under tight optimisation, and the larger screening pool used a
+single conformer at \texttt{--opt normal}; an analysis that places both pools
+in one space uses the single-conformer values throughout, because mixing the
+two protocols inside a distance calculation would carry their systematic
+difference into the distance. Coordinates were then reduced by a correlation
+filter, which drops a column whose absolute Pearson correlation with a retained
+one exceeds 0.95, and by an exact-dependence check, which removes a column that
+is an exact function of others or carries no variance; 38 structural coordinates
+remain on the primary panel and 35 on the twenty-eight-compound one. Supporting
+Information Section~\ref{S-meth:descriptors} gives the descriptor list in full,
+the measured agreement between the two conformer protocols, and the column
+order the correlation filter is handed. Distances are Euclidean on
 standardised descriptors, normalised by the median nearest-neighbour separation
 of the panel in hand, so a normalised distance is comparable within a panel and
 not between panels.

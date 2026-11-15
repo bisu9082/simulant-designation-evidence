@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{44}
+\begin{mcitethebibliography}{49}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -322,6 +322,50 @@ Landrum,~G.; others {RDKit}: Open-source cheminformatics.
   releases (10.5281/zenodo.10398 is release 2014.03.1) and no
   version-independent concept {DOI} could be verified, so none is given
   here\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Wang \latin{et~al.}(2020)Wang, Witek, Landrum, and Riniker]{wang2020}
+Wang,~S.; Witek,~J.; Landrum,~G.~A.; Riniker,~S. Improving Conformer Generation
+  for Small Rings and Macrocycles Based on Distance Geometry and Experimental
+  Torsional-Angle Preferences. \emph{Journal of Chemical Information and
+  Modeling} \textbf{2020}, \emph{60}, 2044--2058\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Riniker and Landrum(2015)Riniker, and Landrum]{riniker2015}
+Riniker,~S.; Landrum,~G.~A. Better Informed Distance Geometry: Using What We
+  Know To Improve Conformation Generation. \emph{Journal of Chemical
+  Information and Modeling} \textbf{2015}, \emph{55}, 2562--2574\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Halgren(1996)]{halgren1996}
+Halgren,~T.~A. Merck molecular force field. {I}. Basis, form, scope,
+  parameterization, and performance of {MMFF94}. \emph{Journal of Computational
+  Chemistry} \textbf{1996}, \emph{17}, 490--519\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rappe \latin{et~al.}(1992)Rappe, Casewit, Colwell, Goddard, and
+  Skiff]{rappe1992}
+Rappe,~A.~K.; Casewit,~C.~J.; Colwell,~K.~S.; Goddard,~W.~A.; Skiff,~W.~M.
+  {UFF}, a full periodic table force field for molecular mechanics and
+  molecular dynamics simulations. \emph{Journal of the American Chemical
+  Society} \textbf{1992}, \emph{114}, 10024--10035\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ehlert \latin{et~al.}(2021)Ehlert, Stahn, Spicher, and
+  Grimme]{ehlert2021}
+Ehlert,~S.; Stahn,~M.; Spicher,~S.; Grimme,~S. Robust and Efficient Implicit
+  Solvation Model for Fast Semiempirical Methods. \emph{Journal of Chemical
+  Theory and Computation} \textbf{2021}, \emph{17}, 4250--4261\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
