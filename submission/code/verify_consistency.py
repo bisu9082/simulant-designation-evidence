@@ -1757,8 +1757,12 @@ def load_facts():
     f['len_refs'] = _la['ref_words']
     f['len_pages'] = _la['acs_pages']
     f['len_text_words'] = _la['text_words']
-    f['len_text_plus_fig'] = _la['text_words'] + _la['figure_words']
-    f['len_text_plus_fig2'] = f['len_text_plus_fig']
+    # 2026-11-15. len_text_plus_fig / len_text_plus_fig2 등재를 제거했다.
+    # 두 값은 8면 한도의 도판 환산치였고, 편집부(Jie Fu, Managing Editor,
+    # 2026-11-15)가 지배 지침을 researcher-resources 판 10,000단어로
+    # 지정했다. 그 판에는 도판 환산이 없어 커버레터가 환산치를 더는 적지
+    # 않는다. 등재만 남기면 '검사 누락' 으로 FAIL 한다. 기준이 다시 바뀌면
+    # 이 두 줄과 아래 앵커를 함께 되살릴 것.
     f['len_figs'] = _la['n_figures']
 
     # 2026-11-14 (GATE 8 12차 선택항목). 새 예치물 두 건의 수치를 등재한다.
@@ -3290,7 +3294,6 @@ CHECKS = [
      [r'conservative here by a factor\s*\n?of ([\d.]+);'], 0.005),
     ('len_pages', [r'runs to ([\d.]+) journal pages against',
                    r'or ([\d.]+) pages, and is over by'], 0.05),
-    ('len_text_plus_fig2', [r'converts to ([\d,]+) word-equivalents'], 0),
     ('len_body', [r'specify: ([\d,]+) words\s*\n?of text'], 0),
     ('len_refs', [r'of which\s*\n?([\d,]+) words are references'], 0),
     # 2026-11-07 (12차 7단계). 커버레터가 산출물 수치를 그대로 찍으므로
@@ -3570,10 +3573,6 @@ CHECKS = [
     # PASS 가 났다. 대조 대상으로 올린다.
     ('len_pages', [r'it\s*\n?stands at ([\d.]+) pages'], 0.005),
     ('len_text_words', [r'stands at ([\d,]+) words\s*\n?of text, abstract'], 0),
-    # 2026-11-14. 커버레터 문구를 고쳤다. 새 어법은 len_text_plus_fig2 가
-    # 받으므로 이 사실은 그쪽으로 넘기고 면제한다.
-    ('len_text_plus_fig', [r'or ([\d,]+) with its one figure',
-                           r'converts to ([\d,]+) word-equivalents'], 0),
     ('bb_nstruct', [r'Weighting the (\d+) structural'], 0),
     ('bb_nstruct28', [r'\$n_\{s\}=(\d+)\$',
                       r'puts (\d+) structural coordinates'], 0),

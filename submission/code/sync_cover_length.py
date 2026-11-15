@@ -30,10 +30,12 @@ RULES = [
      r'(manuscript stands at\s*\n?)([\d,]+)( words of text)', 'comma'),
     ('ref_words',
      r'(of which\s*\n?)([\d,]+)( words are references)', 'comma'),
-    ('text_plus_fig',
-     r'(converts to )([\d,]+)( word-equivalents)', 'comma'),
-    ('acs_pages', r'(or )([\d.]+)( pages, and is over by)', 'two_dp'),
-    ('acs_overage', r'(and is over by )([\d.]+)(\.)', 'two_dp'),
+    # 2026-11-15. 8면 기준 3개 규칙(text_plus_fig / acs_pages / acs_overage)을
+    # 제거했다. 편집부(Jie Fu, Managing Editor, 2026-11-15)가 지배 지침을
+    # researcher-resources 판 10,000단어로 지정했고, 그 판에는 도판 환산이
+    # 없다. 커버레터가 8면 환산치를 더는 적지 않으므로 되쓸 대상도 없다.
+    # length_audit.json 은 계속 acs_pages 를 계산하므로, 기준이 다시 바뀌면
+    # 규칙만 되살리면 된다.
 ]
 
 
