@@ -87,7 +87,9 @@ arithmetic and nothing else: every agent value carrying a bracketed conversion i
 below 1~ppm and contains no thousands separator, so a defect in numeric
 extraction could not appear in it. The extraction itself was therefore checked
 over the whole table by a second reader that shares neither the text-extraction
-engine nor the algorithm: it renders the document with a different tool, locates
+engine nor the algorithm: the primary parser reads the document with
+\texttt{pdfplumber} and the second reader with \texttt{pdftotext -layout},
+which locates
 the character columns of the five duration labels in each header line, and reads
 the ten-minute value from the corresponding substring of the AEGL-3 line. A
 positional reader of this kind cannot reproduce a token-ordering fault, which is
@@ -1503,15 +1505,22 @@ a designating, standard-setting or assessing document is deposited in
 \texttt{sources/quotations\_20261116.csv} with its locator, the date it was
 read and the route by which it was read, so that a reader can check each
 quotation against its source without first identifying which rendition of the
-document we used. Four of the thirteen entries carry a gap: the ASTM standard
-whose text we did not read, TOP 08-2-196A which we could not obtain, one
+document we used. Three of the fifteen entries carry a gap: the ASTM standard
+whose text we did not read, TOP 08-2-196A which we could not obtain, and one
 National Research Council span we verified on 14 November 2026 and could not
-re-open on 16 November, and the patent claim whose verbatim form we could not
-re-confirm, now reported indirectly rather than quoted. One further entry records a quotation withdrawn on 16 November 2026:
-the Man-in-Simulant Test assessment's sentence that certain assumptions have
-not been tested is about the body-region toxicity assumptions of that
-programme's hazard analysis, not about the assumptions behind the simulant
-choice, and this paper had attached it to the latter.
+re-open on 16 November. Two more record a correction the deposit itself
+produced. The first is a withdrawal: the Man-in-Simulant Test assessment's
+sentence that certain assumptions have not been tested is about the body-region
+toxicity assumptions of that programme's hazard analysis, not about the
+assumptions behind the simulant choice, and this paper had attached it to the
+latter. The second is a misquotation: a patent claim this paper had printed
+inside quotation marks in its own British spelling rather than the claim's. The
+span was otherwise identical, word order included, and it now carries the
+spelling the patent uses. Quotations here keep the spelling of the document
+quoted, which for the United States sources is the American one, while our own
+prose is British throughout; where a span would have forced the two to meet
+inside quotation marks we have quoted the part that does not, and the deposit
+says so for the entry concerned.
 
 
 \begin{table}[!htb]
