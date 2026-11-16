@@ -719,6 +719,8 @@ def preflight():
         'volatility_decomposition.json': 'volatility_decomposition.py',
         # 2026-11-16 (GATE 8 6인 채점, 리뷰어 B·C 지적 수행).
         'volatility_niosh.json': 'volatility_niosh.py',
+        # 2026-11-16. B5(Tier A 에 염화물 누락) 공시가 이 파일을 인용한다.
+        'h1_candidates.csv': 'h1_decoupling.py',
         'descriptor_definitions.json': 'descriptor_definitions.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
@@ -3245,7 +3247,8 @@ CHECKS = [
     ('rm_q35lit', [r'Hochberg minima of [\d.]+, [\d.]+ and ([\d.]+)'], 0.00005),
     # 2026-11-16. 휘발성 축 풀 복원의 어법 앵커.
     ('volniosh_p_plus3',
-     [r'this axis can carry moves it to ([\d.]+)',
+     [r'the three with measured values moves it to ([\d.]+)',
+      r'this axis can carry moves it to ([\d.]+)',
       r'to \$p = ([\d.]+)\$ over 1140',
       r'from 0\.0206\s*\n?over 680 designations to ([\d.]+) over 1140'],
      0.0005),

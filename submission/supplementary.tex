@@ -2,6 +2,8 @@
 \usepackage[margin=2.4cm]{geometry}
 \usepackage{times}
 \usepackage{amsmath,amssymb,graphicx,booktabs}
+\usepackage{longtable}
+\usepackage{array}
 \usepackage[hidelinks]{hyperref}
 \usepackage[super,comma,sort&compress]{natbib}
 \usepackage{xr}
@@ -216,10 +218,26 @@ states why.
 \section{Which choices were not fixed in advance, and when each was made}
 \label{meth:prespec}
 
-Panel, space, statistic, comparison pool and descriptor weighting were not
-fixed before the analysis was run. Each of the five is set out here with the
-alternative it has, because the standard the main text recommends has to be
-applied to the work recommending it.
+Panel, space, statistic, comparison pool, descriptor weighting and the
+designation set were not fixed before the analysis was run. Each of the six is
+set out here with the alternative it has, because the standard the main text
+recommends has to be applied to the work recommending it.
+
+The sixth was not on this list until a referee put it there, and it moves the
+answer further than any of the other five. The designation set is which
+compounds count as designated simulants, and we chose three. Moving one label,
+on the authority of the document that already supplies two of them, takes the
+corrected value of Section~\ref{M-res:panels} from 0.163 to 0.023 and the
+matched count from three to five; corrected over the six statistics per space
+it is 0.010, and treating the mean difference as pre-specified, 0.005. The
+deposit is
+\texttt{outputs/acetonitrile\_panel.json}. That is a wider move than the choice of statistic gives
+(0.163 to 0.042) and wider than the three readings of the comparison pool give
+(0.028, 0.054, 0.160). The consequence runs against the recommendation this
+paper makes rather than for it: fixing the other five in advance does not make
+a simulant claim defensible on its own, because the set of compounds the claim
+is about is itself a choice, and it is the choice the question under study is
+about.
 
 The panel. The thirty-five-compound panel was built, and designated primary,
 after the twenty-eight-compound result was in hand, when an audit found we had
@@ -228,6 +246,8 @@ simulants. The principle we give for designating it primary, that a
 comparison asking whether three compounds are close to the agents while
 excluding the obvious alternatives is not a test of those three, could have
 been stated before the data were seen and was not.
+
+All class labels were read from a single canonical table and never assigned by hand. That sentence stood in the main text until 2026-11-16, when it was moved here to make room under the word limit; it is a procedural detail and not a result.
 
 The space. The merged space is reported alongside both component spaces rather
 than selected among them, so no selection was made here; what was not fixed in
@@ -837,8 +857,18 @@ parameterised for geometries and energies rather than for virtual orbital
 energies, so any quantity built from its LUMO carries a question we cannot
 answer from inside the method. We therefore recomputed the frontier orbital
 energies of all twenty-eight compounds of the smaller panel at
-B3LYP/def2-SVPD, a basis chosen because it carries diffuse functions, which
-virtual orbitals need, and covers arsenic, which lewisite needs. From those we
+B3LYP/def2-SVPD. The basis covers arsenic, which lewisite needs. We also
+chose it for its diffuse functions, on the ground that virtual orbitals need
+them, and that ground is the wrong way round. For a neutral closed-shell
+molecule with no bound anion state the lowest virtual orbital is not a bound
+level, and adding diffuse functions pulls its eigenvalue toward zero rather
+than toward convergence, so the value becomes a property of the basis. The
+deposit records the symptom: nine of the twenty-eight compounds return a
+positive B3LYP LUMO against six under GFN2, so by count the choice made the
+pathology worse, although the largest positive value is smaller, 0.54~eV
+against 2.23 (\texttt{outputs/dft\_electronic\_space.json}). The nine are
+DMMP, DMSO, DPGME, tetrahydrofuran, acetonitrile, cyclosarin, ethanol,
+methanol and $n$-hexane. From those we
 formed $\mu$, $\eta$ and $\omega = \mu^{2}/2\eta$ by the same definitions used
 throughout. The same converged calculations also give the dipole moment, which
 the third paragraph of this section uses.
@@ -847,9 +877,17 @@ The comparison is not clean, and we say so rather than letting it read as one.
 The GFN2 values in this paper sit on GFN2-optimised geometries, which we could
 not reproduce in the environment where the check was run; the density-functional
 values sit on RDKit ETKDG geometries relaxed with MMFF94, or with UFF for
-lewisite, whose arsenic MMFF does not parameterise. The difference between the
-two sets of $\omega$ therefore contains a geometry term as well as a method
-term, and we do not attempt to separate them. What the check can establish is
+lewisite, whose arsenic MMFF does not parameterise. The two sets also differ in conformer treatment, which we did not
+declare in an earlier version of this section: the GFN2 values are Boltzmann
+averages over up to five conformers at 298.15~K, while the density-functional
+pass embeds and relaxes one. The difference between the two sets of $\omega$
+therefore contains three terms, method, geometry and conformer treatment, and
+we do not attempt to separate them. The third is not small on the coordinate
+that matters. We report elsewhere in this work that the largest dipole
+discrepancy between our own single-conformer and ensemble protocols is 0.95~D,
+at tabun; between the GFN2 ensemble and this single-conformer
+density-functional pass the dipole of DMMP differs by 2.36~D, from 2.52 to
+4.88, which is about two and a half times that figure. What the check can establish is
 whether an ordering drawn from the GFN2 $\omega$ axis is stable, and it is not
 (Section~\ref{res:plocal}). What it cannot establish is the size of the method
 term alone. All twenty-eight calculations converged; values are in the deposited
@@ -877,6 +915,16 @@ patent names H-agent, mustard-HD, among the classes its composition simulates,
 alongside liquid G-agent including VX (Table~\ref{tab:designations}). All five valid
 matches in the density-functional space therefore fall on pairings the
 designation record names, which is not true of any other space we tested.
+
+Two things bound that reading, and both point at the dipole. The step from
+0.128 to 0.0368 is the replacement of the dipole alone, so whatever crosses
+0.05 here rests on one coordinate of three, and that coordinate is the one
+where the undeclared conformer term is largest. And three of the compounds
+supplying those five matches, DMMP, DPGME and cyclosarin, are among the nine
+whose B3LYP virtual orbital is not a bound level, so the orbital coordinates
+of this comparison are least trustworthy exactly where it returns its result.
+We report the check and do not adopt it, which is what the main text does with
+it as well.
 
 One earlier version of this section wrote that the patent calls DPGME a
 preferred G-agent simulant and that it requires detectability by ion mobility
@@ -2822,15 +2870,23 @@ The five compounds the primary panel adds have not been put through the filter
 anywhere else in this work, and two of them fail it. Diisopropyl
 fluorophosphate and diethyl cyanophosphonate carry \texttt{A\_OP\_leaving\_F\_CN},
 the same Tier~A alert that catches sarin, soman and cyclosarin; diethyl
-chlorophosphate is Tier~C with the phosphoryl ester alone, and methyl
-salicylate raises nothing. These are the compounds that displace the incumbents
+chlorophosphate is Tier~C, and methyl
+salicylate raises nothing. The assignment for diethyl chlorophosphate is wrong
+and the filter is what is wrong: the compound carries a chloride on phosphorus,
+which is a leaving group, and the Tier~A patterns name fluoride, cyanide,
+thiolate and activated aryloxy and not chloride. The consequence is visible in
+the deposit, where ethyl phosphorodichloridate, phosphorus oxychloride and
+phosphorus trichloride raise no alert of any tier
+(\texttt{outputs/h1\_candidates.csv}). None of the three reached the candidate
+list, but the measured toxicity axis is what stopped them and not this gate, so
+the gate should not be credited with it. These are the compounds that displace the incumbents
 on the fidelity axis, so the two axes of the criterion point in opposite
 directions for them, and nothing here should be read as proposing either as a
 replacement. 2-Chloroethyl ethyl sulfide raises no alert at all, which is a
 false negative rather than a finding: \texttt{A\_sulfur\_mustard} requires a
 2-haloethyl group on both arms of the sulfide, so half-mustards pass a filter
 written for the agent. We record it beside chloropicrin as a second known gap
-in the filter's coverage. None of the five carries a measured acute inhalation
+in the filter's coverage, and the missing chloride pattern above as a third. None of the five carries a measured acute inhalation
 value in the panel assembled here, so the safety axis is unevaluated for all
 of them.
 

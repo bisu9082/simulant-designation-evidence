@@ -518,6 +518,18 @@ def registers():
     return head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + r'\end{tabular}'
 
 
+
+CAP_DESIG = (
+    '\\caption{The simulant designations we located in the instruments of '
+    'Section~\\ref{res:searchscope}, with the agent each names, the '
+    'measurement it was made against, and the basis the designating document '
+    'itself states. Compounds named in a document without being characterised '
+    'there are marked as listed rather than measured. This is what the search '
+    'returned, not a census of designations. Source URLs and the date each '
+    'document was read are in '
+    '\\texttt{sources/designations\\_20261106.csv} of the deposit.}')
+
+
 def designations():
     """지정 기록 6열 표 (2026-11-06 신설).
 
@@ -535,6 +547,13 @@ def designations():
 
     def esc(t):
         return (t.replace('&', r'\&').replace('%', r'\%')
+                 # 2026-11-16. ASTM F2588 행의 사유 세 개. 일반 접두 치환이
+                 # 먼저 걸리면 한글이 남아 조판이 깨진다.
+                 .replace('[수집 불가: 표준 본문 미열람]',
+                          '[not obtained: standard text not read]')
+                 .replace('[수집 불가: 공개 URL 없음]',
+                          '[not obtained: no public URL]')
+                 .replace('[미열람]', '[not read]')
                  .replace('[수집 불가', '[not obtained')
                  .replace('특허 본문 미열람 — Google Patents, Justia, USPTO '
                           '전문 서비스 모두 접근 거부. 서지사항만 확인',
@@ -545,18 +564,27 @@ def designations():
                           'patent text not read; Google Patents and Justia refused')
                  .replace('특허 본문 미열람', 'patent text not retrieved')
                  .replace('공개 기록에서 지정 문서를 찾지 못함',
-                          'no designating document found in the public record'))
+                          'none in the public record'))
 
     lines = []
     for r in rows:
         lines.append(' & '.join(esc(r[k]) for k in
                                 ('compound', 'document', 'agent',
                                  'measurement', 'stated_basis')) + r' \\')
-    head = (r'\begin{tabular}{p{1.9cm}p{3.4cm}p{1.5cm}p{2.3cm}p{4.2cm}}' '\n'
-            r'\hline' '\n'
-            r'Compound & Document & Agent & Measurement & Basis the document '
-            r'states \\' '\n' r'\hline' '\n')
-    return head + '\n'.join(lines) + '\n' + r'\hline' + '\n' + r'\end{tabular}'
+    # 2026-11-16. 3행(malathion, methyl salicylate 두 건)을 더하자 SI 한
+    # 면보다 137pt 길어졌다. longtable 은 float 가 아니므로 면을 넘겨
+    # 조판된다. 캡션과 라벨을 longtable 안으로 옮긴다.
+    _h = ('Compound & Document & Agent & Measurement & '
+          'Basis the document states')
+    head = (r'\begin{longtable}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{4.6cm}}'
+            '\n' + CAP_DESIG + '\n'
+            r'\label{tab:designations}\\' '\n'
+            r'\hline' '\n' + _h + r' \\' '\n'
+            r'\hline' '\n' r'\endfirsthead' '\n'
+            r'\hline' '\n' + _h + r' \\' '\n'
+            r'\hline' '\n' r'\endhead' '\n'
+            r'\hline' '\n' r'\endfoot' '\n')
+    return head + '\n'.join(lines) + '\n' + r'\end{longtable}'
 
 
 def dyepanel():
@@ -827,20 +855,13 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_registers.tex')
     open('outputs/tab_designations.tex', 'w').write(
         hdr + '% 출처: sources/designations_20261106.csv (URL 포함)\n'
-        + '\\begin{table}[htb]\n\\centering\n\\caption{The simulant '
-        'designations we located in the instruments of '
-        'Section~\\ref{res:searchscope}, with the agent each names, the '
-        'measurement it was made against, and the basis the designating '
-        'document itself states. Compounds named in a document without being '
-        'characterised there are marked as listed rather than measured. This '
-        'is what the search returned, not a census of designations. Source '
-        'URLs and the date each document was read are in '
-        '\\texttt{sources/designations\\_20261106.csv} of the deposit.}\n'
-        '\\label{tab:designations}\n\\scriptsize\n\\setlength{\\tabcolsep}{3pt}\n'
-        # 2026-11-14. 청구항 3 두 행을 더하자 1.1pt 넘쳤다. 전역 1.15 를
-        # 이 표에서만 1.0 으로 둔다 (build_paper.sh 의 Float 게이트 적발).
+        + '\\begingroup\n\\scriptsize\n'
+        # 2026-11-16. 한 셀의 괄호 사유 문구가 2.55pt 넘친다. raggedright
+        # 로는 안 잡히므로 단어 간격을 느슨하게 둔다.
+        '\\sloppy\n'
+        '\\setlength{\\tabcolsep}{3pt}\n'
         '\\renewcommand{\\arraystretch}{1.0}\n'
-        + designations() + '\n\\end{table}\n')
+        + designations() + '\n\\endgroup\n')
     print('-> outputs/tab_designations.tex')
     open('outputs/tab_dyepanel.tex', 'w').write(
         hdr + '% 출처: sources/dye_panel_20261106.csv\n'

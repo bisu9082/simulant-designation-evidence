@@ -68,7 +68,7 @@ pool. Moving labels moves the answer both ways: 0.630
 becomes 0.745 or 0.00075 depending on how many move. Volatility, the criterion's
 own axis, returns the one value surviving its registered correction
 ($p = 0.0206$), but it tracks coverage rather than closeness, and restoring
-the three of them this axis can carry moves it to 0.132 and reverses its sign. The corrective
+the three with measured values moves it to 0.132 and reverses its sign. The corrective
 is a declaration, not a replacement compound: a defensible claim must name the
 measurement it rests on and fix panel, space, statistic, comparison pool and
 weighting in advance.
@@ -201,17 +201,16 @@ kind of decision. The thirty-five-compound panel is the primary one, because a
 comparison asking whether three compounds are close to the agents while
 excluding the obvious alternatives is not a test of those three; the
 twenty-eight-compound panel is reported throughout with equal numerical detail,
-because what it shows beside the larger one is the paper's result. All class
-labels were read from a single canonical table and never assigned by hand.
+because what it shows beside the larger one is the paper's result.
 
-Panel, space, statistic, comparison pool and descriptor weighting were not
-fixed before the analysis was run, and this paper's conclusion is that they
+Panel, space, statistic, comparison pool, descriptor weighting and the
+designation set were not fixed before the analysis was run, and this paper's conclusion is that they
 should be; we state
 that here so the standard we recommend can be applied to the work recommending
 it. The thirty-five-compound panel was built, and designated primary, after the
 twenty-eight-compound result was in hand, which is the same post hoc choice this
 paper catalogues in others. Supporting Information
-Section~\ref{S-meth:prespec} sets out each of the five choices, when it was
+Section~\ref{S-meth:prespec} sets out each of these choices, when it was
 made and what the alternative gives, with the block-weighting alternative in
 Table~\ref{S-tab:blockbalance}, the per-panel match counts in
 Table~\ref{S-tab:si-ascl3} and the relabelling null in
@@ -405,9 +404,9 @@ sources.
 Searching for an instrument that designates the three incumbent compounds as
 chemical warfare agent simulants, we found that two carry documented
 designations for purposes other than the one they now serve and the third
-carries none. Supporting Information Table~\ref{S-tab:designations} grades every
-designation we located by what its document does rather than by how
-authoritative it looks, with the source URL and search date for each. Two of the three
+carries none. Supporting Information Table~\ref{S-tab:designations} grades the
+designations we located by what their documents do rather than by how
+authoritative they look. Two of the three
 we located for DMMP concern transport through a barrier: canister and cartridge
 filtration against GB and HD in a NIOSH respirator programme
 \cite{niosh2002simulant}, a document that also states its simulant information
@@ -637,7 +636,7 @@ dimension, admitting 14.8 per cent of all pairs in the electronic space against
 42.1 per cent in the merged one, and the electronic coordinates are
 semi-empirical by a margin larger than the spacing they have to resolve.
 Rebuilding the space at the density-functional level moves the matched count
-from one to five. Crossing the threshold-independent choices instead gives
+from one to five; that control also changes conformer treatment. Crossing the threshold-independent choices instead gives
 twenty-five cells in which the matched set takes seven distinct values, and five
 agents have no valid simulant in any of them (Supporting Information
 Section~\ref{S-meth:failaudit}).
@@ -660,9 +659,9 @@ Volatility is the one axis the stated criterion names that is not a descriptor
 we chose. Four of the eighteen cells reported above also fall below 0.05 before
 correction; what is different here is that the one-sided $p$ of 0.0206 this
 axis returns survives the correction registered for it ($q = 0.0412$) where
-those four do not survive theirs ($q = 0.163$). Three readings of that value,
+those four do not survive theirs ($q = 0.163$). Three readings of it,
 set out below, take it back above 0.05, and the third is the comparison pool:
-restoring the three of them this axis can carry moves it to 0.132 and reverses
+restoring the three with measured values moves it to 0.132 and reverses
 its sign. Two tests were registered in advance of it,
 outside the family of eighteen reported above; only the first was reported in
 the form registered for it, and Supporting Information
@@ -734,19 +733,17 @@ The criterion's second half, that compounds chosen on physicochemical grounds
 present minimal toxicity risk \cite{webb2025}, was tested on the same panel
 (Supporting Information Sections~\ref{S-meth:aegl}, \ref{S-res:safety},
 \ref{S-sec:qsar} and \ref{S-res:h1}). The two incumbents differ in how well
-documented they are and not only in how hazardous: dichloromethane carries an
+documented they are and not only in how hazardous. Dichloromethane carries an
 Acute Exposure Guideline Level at the 96th percentile of a 207-compound pool,
-although that value is an Interim one rather than a Final one, while DMMP is
-absent from the list altogether and the Environmental Protection Agency
-declined to derive an inhalation reference concentration for it. What DMMP does
-carry is weaker and differently derived, and Supporting Information
-Table~\ref{S-tab:registers} gives every register entry we located so that the
-scope of that negative is visible. A model cannot fill the gap: a random forest trained on 230 AEGL chemicals
-reaches $R^{2}=0.458$ and then predicts every one of twenty held-out military
-agents safer than measured, by factors of 2.5 to 2600, while certifying fourteen
-as inside its applicability domain. Fidelity and acute toxicity show no
-detectable monotonic association across the 207 compounds carrying both measured
-axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$).
+and an Interim rather than a Final one. DMMP is absent from that list, the
+Environmental Protection Agency declined an inhalation reference concentration
+for it, and what it does carry is weaker and differently derived; Supporting
+Information Table~\ref{S-tab:registers} gives every register entry we
+located. A model cannot fill the gap: a random forest on 230 AEGL chemicals
+reaches $R^{2}=0.458$ yet predicts all twenty held-out agents safer than
+measured, by 2.5 to 2600 times, certifying fourteen as in-domain. Fidelity and
+acute toxicity show no monotonic association over the 207 compounds carrying
+both axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$).
 
 \section{Discussion}
 \label{sec:discussion}
@@ -767,7 +764,8 @@ twenty-eight-compound structural cell and the electronic space. We withdraw it:
 the cell does not survive its own family ($q = 0.163$), it sits at the 22.4th
 percentile of 2000 arbitrary three-descriptor slices of the same block, and
 rebuilding the electronic space at the density-functional level moves it from
-$p=0.275$ to 0.0368 (Supporting Information Section~\ref{S-meth:dft}).
+$p=0.275$ to 0.0368 on coordinates the deposit marks unbound for nine
+compounds (Supporting Information Section~\ref{S-meth:dft}).
 
 What remains is a claim about comparison rather than about chemistry. On the
 primary panel we can establish neither that the incumbent simulants are closer
@@ -876,10 +874,13 @@ comparison pool.
 
 A simulant result should therefore name the measurement the compound was
 validated against and the comparison set it was tested in, and should fix the
-panel, space, statistic, comparison pool, weighting and treatment of
+panel, space, statistic, comparison pool, weighting, treatment of
 conformer-dependent
-descriptors before the test is run; we add the last because a reproduction check
-caught us not counting it. We propose no replacement compound, because proposing
+descriptors and the designation set before the test is run; we add the last two
+because a reproduction check caught one and a referee the other.
+Fixing them is necessary and not sufficient: the relabelling of
+Section~\ref{res:panels} leaves a declared test conditional on who counts as a
+simulant, the question under study. We propose no replacement compound, because proposing
 one would repeat the error this paper is about.
 
 \begin{suppinfo}

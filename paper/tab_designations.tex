@@ -1,16 +1,23 @@
 % 자동 생성 — make_si_tables.py. 손으로 고치지 말 것.
 % 출처: sources/designations_20261106.csv (URL 포함)
-\begin{table}[htb]
-\centering
-\caption{The simulant designations we located in the instruments of Section~\ref{res:searchscope}, with the agent each names, the measurement it was made against, and the basis the designating document itself states. Compounds named in a document without being characterised there are marked as listed rather than measured. This is what the search returned, not a census of designations. Source URLs and the date each document was read are in \texttt{sources/designations\_20261106.csv} of the deposit.}
-\label{tab:designations}
+\begingroup
 \scriptsize
+\sloppy
 \setlength{\tabcolsep}{3pt}
 \renewcommand{\arraystretch}{1.0}
-\begin{tabular}{p{1.9cm}p{3.4cm}p{1.5cm}p{2.3cm}p{4.2cm}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{2.4cm}>{\raggedright\arraybackslash}p{4.6cm}}
+\caption{The simulant designations we located in the instruments of Section~\ref{res:searchscope}, with the agent each names, the measurement it was made against, and the basis the designating document itself states. Compounds named in a document without being characterised there are marked as listed rather than measured. This is what the search returned, not a census of designations. Source URLs and the date each document was read are in \texttt{sources/designations\_20261106.csv} of the deposit.}
+\label{tab:designations}\\
 \hline
 Compound & Document & Agent & Measurement & Basis the document states \\
 \hline
+\endfirsthead
+\hline
+Compound & Document & Agent & Measurement & Basis the document states \\
+\hline
+\endhead
+\hline
+\endfoot
 DMMP & NIOSH CBRN APR simulant programme (31 July 2002, draft for discussion) & GB and HD & filtration & relatively non-toxic; easily detectable; volatility intermediate between GB and HD \\
 carbon tetrachloride & NIOSH CBRN APR simulant programme (31 July 2002, draft for discussion) & GB and HD & filtration & named with cyclohexane as a GB and HD filtration simulant; no separate basis stated \\
 cyclohexane & NIOSH CBRN APR simulant programme (31 July 2002, draft for discussion) & GB and HD & filtration & named with carbon tetrachloride as a GB and HD filtration simulant; no separate basis stated \\
@@ -18,9 +25,11 @@ DMMP & NRC, Technical Assessment of the Man-in-Simulant Test Program (1997), ch.
 DIMP & NRC, Technical Assessment of the Man-in-Simulant Test Program (1997), ch. 3 & GB & fabric penetration & low toxicity and similarity of certain physical properties \\
 methyl salicylate & NRC, Technical Assessment of the Man-in-Simulant Test Program (1997), ch. 3 & HD & fabric penetration & low toxicity and similarity of certain physical properties \\
 DPGME & US Patent 7129094 B1, chemical agent simulant training composition (2006) & liquid G-agent simulants including VX, and H-agent (mustard-HD) simulants & granted claim 1(a) requires a vapour-generating component with a vapour pressure of about 0.1 to about 30 mm Hg at 25 C, present in an amount sufficient to be detectable by a vapour detection apparatus; claim 3 lists 23 admissible components; claims 4-6 prefer DPGME, methyl salicylate or their mixture; specification names ion mobility spectrometers (CAM), infrared and surface acoustic wave detectors & the patent constrains volatility by a numerical window and requires that a detector respond. It asserts that the vapour characteristics are comparable to G and H agents but presents no measurement of an agent beside the simulant, and it rests the choice of DPGME and methyl salicylate on their having been used as simulants for years. Full text of the granted claims read directly \\
-dichloromethane & [not obtained: no designating document found in the public record] & none found & none found & [not obtained: no designating document found in the public record] \\
+dichloromethane & [not obtained: none in the public record] & none found & none found & [not obtained: none in the public record] \\
 DMMP & US Patent 7129094 B1, chemical agent simulant training composition (2006) & liquid G-agent simulants including VX, and H-agent (mustard-HD) simulants & named in granted claim 3 among the 23 admissible vapour-generating components; subject to the claim 1(a) volatility window and the detectability requirement. Not among the preferred components of claims 4-6 & listed, not characterised: the patent gives no measurement for DMMP specifically and no comparison with an agent response. Full text of the granted claims read directly \\
 methyl salicylate & US Patent 7129094 B1, chemical agent simulant training composition (2006) & H-agent (mustard-HD) simulants & named in granted claim 3 and preferred in claims 5-6; subject to the claim 1(a) volatility window and the detectability requirement & the patent gives no comparison with an agent response and rests the choice on years of prior use as a simulant. Full text of the granted claims read directly \\
-\hline
-\end{tabular}
-\end{table}
+malathion & NIOSH CBRN APR simulant programme (31 July 2002, draft for discussion) & GB & filtration & Reference 1 barrier-material table lists it in the "GB Simulant*" column with breakthrough times by material (MAL >24 h to 3 min); the document states no selection basis for it \\
+methyl salicylate & NIOSH CBRN APR simulant programme (31 July 2002, draft for discussion) & HD and GB & vapour & footnote 10 states that it "has been used as a vapor simulant for HD and GB"; prior use is the only basis given \\
+methyl salicylate & ASTM F2588-12(2020), Standard Test Method for Man-In-Simulant Test (MIST) for Protective Ensembles & [not obtained: standard text not read] & vapour penetration of a protective ensemble (read from the standard title; the text itself is behind a paywall and we did not read it) & [not obtained: standard text not read] \\
+\end{longtable}
+\endgroup

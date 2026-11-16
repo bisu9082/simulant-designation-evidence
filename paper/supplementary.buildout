@@ -26,6 +26,8 @@ For additional information on amsmath, use the `?' option.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def)))
 (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
 (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
@@ -69,73 +71,76 @@ For additional information on amsmath, use the `?' option.
 nts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips
 /base/8r.enc}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 196.
+Package hyperref Warning: Suppressing link with empty target on input line 198.
 
 
-[2] [3]
+[2]
 
-Package hyperref Warning: Suppressing link with empty target on input line 248.
+Package hyperref Warning: Suppressing link with empty target on input line 241.
 
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) [3]
 
-Package hyperref Warning: Suppressing link with empty target on input line 328.
+Package hyperref Warning: Suppressing link with empty target on input line 268.
 
 
 [4]
 
-Package hyperref Warning: Suppressing link with empty target on input line 391.
+Package hyperref Warning: Suppressing link with empty target on input line 348.
+
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 411.
 
 
 [5] [6]
 
-Package hyperref Warning: Suppressing link with empty target on input line 514.
+Package hyperref Warning: Suppressing link with empty target on input line 534.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 520.
+Package hyperref Warning: Suppressing link with empty target on input line 540.
 
 
 [7]
 
-Package hyperref Warning: Suppressing link with empty target on input line 586.
+Package hyperref Warning: Suppressing link with empty target on input line 606.
 
 
 [8] [9] (./tab_sparse.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 764.
+Package hyperref Warning: Suppressing link with empty target on input line 784.
 
 
 [10]
 
-Package hyperref Warning: Suppressing link with empty target on input line 786.
+Package hyperref Warning: Suppressing link with empty target on input line 806.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 787.
+Package hyperref Warning: Suppressing link with empty target on input line 807.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 805.
+Package hyperref Warning: Suppressing link with empty target on input line 825.
 
 
-(./tab_failaudit.tex) [11]
+(./tab_failaudit.tex) [11] [12]
 
-Package hyperref Warning: Suppressing link with empty target on input line 883.
+Package hyperref Warning: Suppressing link with empty target on input line 921.
 
 
-[12] [13] (./tab_dyepanel.tex) [14] [15 <./Fig_spaces.png>] [16]
-(./tab_volatility.tex) [17]
+[13] [14] [15 <./Fig_spaces.png>] (./tab_dyepanel.tex) [16] [17]
+(./tab_volatility.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1209
+Package hyperref Warning: Suppressing link with empty target on input line 1257
 .
 
-[18]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1232
+Package hyperref Warning: Suppressing link with empty target on input line 1280
 .
 
-[19] (./tab_voldecomp.tex
+[18] [19] [20] (./tab_voldecomp.tex
 Underfull \hbox (badness 2460) in paragraph at lines 5--5
 []\OT1/ptm/m/n/10.95 Table S5: []The volatil-ity axis taken apart. For each des
 -ig-na-tion size, the best set in the
@@ -147,242 +152,77 @@ e-specified mean dif-fer-ence (neg-
 Underfull \hbox (badness 2726) in paragraph at lines 5--5
 \OT1/ptm/m/n/10.95 a-tive is bet-ter). Two-sided read-ings and the cov-er-age c
 on-di-tion-ing fol-low. Val-ues are in
-) (./tab_vpairing.tex) [20] [21] (./tab_volniosh.tex) (./tab_designations.tex
-Underfull \hbox (badness 3568) in paragraph at lines 14--14
-\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
+) (./tab_vpairing.tex) [21] (./tab_volniosh.tex) (./tab_designations.tex
+[22] [23])
 
-Underfull \hbox (badness 10000) in paragraph at lines 14--15
-[]\OT1/ptm/m/n/8 relatively non-toxic; eas-ily de-
-
-Underfull \hbox (badness 10000) in paragraph at lines 14--15
-\OT1/ptm/m/n/8 tectable; volatil-ity in-ter-me-di-ate
-
-Underfull \hbox (badness 3568) in paragraph at lines 15--15
-\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
-
-Underfull \hbox (badness 3568) in paragraph at lines 16--16
-\OT1/ptm/m/n/8 pro-gramme (31 July 2002,
-
-Underfull \hbox (badness 1221) in paragraph at lines 17--17
-[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
-
-Underfull \hbox (badness 1221) in paragraph at lines 18--18
-[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
-
-Underfull \hbox (badness 1221) in paragraph at lines 19--19
-[]\OT1/ptm/m/n/8 NRC, Tech-ni-cal As-sess-ment
-
-Underfull \hbox (badness 1783) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-[]\OT1/ptm/m/n/8 liquid
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 G-agent
-
-Underfull \hbox (badness 1769) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 clud-ing VX,
-
-Underfull \hbox (badness 2189) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 and H-agent
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 (mustard-
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 HD) sim-u-
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-[]\OT1/ptm/m/n/8 granted claim
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 1(a) re-quires a
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 vapour-generating
-
-Underfull \hbox (badness 3861) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 com-po-nent with a
-
-Underfull \hbox (badness 1642) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 vapour pres-sure of
-
-Underfull \hbox (badness 2189) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 30 mm Hg at 25
-
-Underfull \hbox (badness 7558) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 C, present in an
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 amount suf-fi-cient
-
-Underfull \hbox (badness 2027) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 a vapour de-tec-tion
-
-Underfull \hbox (badness 1152) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 ap-pa-ra-tus; claim 3
-
-Underfull \hbox (badness 1824) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 lists 23 ad-mis-si-ble
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 methyl sal-i-cy-late
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 or their mix-ture;
-
-Underfull \hbox (badness 2717) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 ion mo-bil-ity spec-
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 trom-e-ters (CAM),
-
-Underfull \hbox (badness 4416) in paragraph at lines 20--20
-\OT1/ptm/m/n/8 acous-tic wave de-
-
-Underfull \hbox (badness 1783) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-[]\OT1/ptm/m/n/8 liquid
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 G-agent
-
-Underfull \hbox (badness 1769) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 clud-ing VX,
-
-Underfull \hbox (badness 2189) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 and H-agent
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 (mustard-
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 HD) sim-u-
-
-Underfull \hbox (badness 6995) in paragraph at lines 22--22
-[]\OT1/ptm/m/n/8 named in granted
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 claim 3 among
-
-Underfull \hbox (badness 6078) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 the 23 ad-mis-si-ble
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 vapour-generating
-
-Underfull \hbox (badness 4467) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 to the claim 1(a)
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 volatil-ity win-dow
-
-Underfull \hbox (badness 2343) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 re-quire-ment. Not
-
-Underfull \hbox (badness 10000) in paragraph at lines 22--22
-\OT1/ptm/m/n/8 com-po-nents of
-
-Underfull \hbox (badness 1043) in paragraph at lines 22--23
-\OT1/ptm/m/n/8 gives no mea-sure-ment for DMMP
-
-Underfull \hbox (badness 1783) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 i-cal agent sim-u-lant train-ing
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-[]\OT1/ptm/m/n/8 H-agent
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 (mustard-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 HD) sim-u-
-
-Underfull \hbox (badness 6995) in paragraph at lines 23--23
-[]\OT1/ptm/m/n/8 named in granted
-
-Underfull \hbox (badness 4954) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 claim 3 and pre-
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 ferred in claims
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 win-dow and the
-
-Underfull \hbox (badness 10000) in paragraph at lines 23--23
-\OT1/ptm/m/n/8 de-tectabil-ity re-
-)
-
-Package hyperref Warning: Suppressing link with empty target on input line 1455
-.
-
-[22]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1517
+Package hyperref Warning: Suppressing link with empty target on input line 1503
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1540
+Package hyperref Warning: Suppressing link with empty target on input line 1565
+.
+
+[24]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1588
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1541
+Package hyperref Warning: Suppressing link with empty target on input line 1589
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1552
+Package hyperref Warning: Suppressing link with empty target on input line 1600
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1558
+Package hyperref Warning: Suppressing link with empty target on input line 1606
 .
 
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [23] [24]
+[25] (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd) [26]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1645
+Package hyperref Warning: Suppressing link with empty target on input line 1693
 .
 
 (./tab_nioshlist.tex) (./tab_niosh.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1658
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1712
-.
-
-[25] [26]
-
-Package hyperref Warning: Suppressing link with empty target on input line 1804
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1820
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1849
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1853
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1879
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1884
+Package hyperref Warning: Suppressing link with empty target on input line 1706
 .
 
 [27]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1918
+Package hyperref Warning: Suppressing link with empty target on input line 1760
+.
+
+[28]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1852
+.
+
+[29]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1868
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1897
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1901
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1927
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 1932
+.
+
+[30]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1966
 .
 
 (./tab_ablation.tex
@@ -398,36 +238,36 @@ Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 Package hyperref Warning: Suppressing link with empty target on input line 25.
 
-) (./tab_family.tex) [28] [29] (./tab_blockbalance.tex) [30] [31]
+) (./tab_family.tex) [31] [32] [33] (./tab_blockbalance.tex) [34] [35]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2254
+Package hyperref Warning: Suppressing link with empty target on input line 2302
 .
 
-[32 <./Fig_mde.png>] (./tab_plocal.tex) [33 <./Fig_plocal.png>]
-(./tab_premisenull.tex) [34]
+(./tab_plocal.tex) [36] [37 <./Fig_mde.png>] [38 <./Fig_plocal.png>]
+(./tab_premisenull.tex) [39]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2465
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 2489
+Package hyperref Warning: Suppressing link with empty target on input line 2513
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 2514
+Package hyperref Warning: Suppressing link with empty target on input line 2537
 .
 
-[35] [36] [37 <./Fig_toxicity.png>] (./tab_registers.tex) [38]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2740
+Package hyperref Warning: Suppressing link with empty target on input line 2562
 .
 
-[39]
-Underfull \hbox (badness 1424) in paragraph at lines 2823--2831
+[40] [41] [42 <./Fig_toxicity.png>] (./tab_registers.tex) [43]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2788
+.
+
+[44] [45 <./Fig_h1.png>]
+Underfull \hbox (badness 1424) in paragraph at lines 2871--2879
 []\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
 t qual-i-fi-ca-tion is not a for-mal-ity.
-[40 <./Fig_h1.png>] [41] (./supplementary.bbl [42] [43] [44] [45]) [46]
-[47] [48] [49] [50] [51] [52] (./supplementary.aux) )
+[46] [47] (./supplementary.bbl [48] [49] [50] [51]) [52] (./supplementary.aux) 
+)
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
@@ -447,5 +287,5 @@ onts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (52 pages, 6775403 bytes).
+Output written on supplementary.pdf (52 pages, 6779612 bytes).
 Transcript written on supplementary.log.
