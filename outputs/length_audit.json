@@ -1,15 +1,15 @@
 {
- "body_words": 8147,
+ "body_words": 8155,
  "caption_words": 145,
- "text_words_tokens": 10305,
- "text_words_norefs": 8613,
- "abstract_words": 245,
+ "text_words_tokens": 10317,
+ "text_words_norefs": 8624,
+ "abstract_words": 248,
  "front_words": 76,
  "figure_words": 500,
- "text_words": 9985,
+ "text_words": 9996,
  "ref_words": 1372,
  "n_figures": 1,
  "n_tables": 0,
  "table_words": 0,
- "acs_pages": 10.48
+ "acs_pages": 10.5
 }
