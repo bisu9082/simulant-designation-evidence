@@ -30,6 +30,12 @@ RULES = [
      r'(manuscript stands at\s*\n?)([\d,]+)( words of text)', 'comma'),
     ('ref_words',
      r'(of which\s*\n?)([\d,]+)( words are references)', 'comma'),
+    # 2026-11-16. 커버레터가 두 번째 셈법(맨정수 포함)과 참고문헌 제외값도
+    # 적는다. 규칙을 걸지 않으면 그 둘만 뒤처진다.
+    ('text_words_tokens',
+     r'(instead gives\s*\n?)([\d,]+)', 'comma'),
+    ('text_words_norefs',
+     r'(manuscript is\s*\n?)([\d,]+)( words)', 'comma'),
     # 2026-11-15. 8면 기준 3개 규칙(text_plus_fig / acs_pages / acs_overage)을
     # 제거했다. 편집부(Jie Fu, Managing Editor, 2026-11-15)가 지배 지침을
     # researcher-resources 판 10,000단어로 지정했고, 그 판에는 도판 환산이

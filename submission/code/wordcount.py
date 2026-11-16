@@ -27,6 +27,14 @@ def words(s):
     return [t for t in TOKEN.findall(s) if not re.fullmatch(r'\d+', t)]
 
 
+def tokens(s):
+    """공백 구분 토큰 전부. words() 는 맨정수('230')를 단어에서 빼는데,
+    워드프로세서 집계는 그것도 센다. 어느 쪽이 ACS 의 셈법인지 지침에
+    적혀 있지 않으므로(2026-11-16 확인) 둘 다 산출해 커버레터에 함께
+    적는다. 유리한 쪽만 적지 않기 위한 것이다."""
+    return TOKEN.findall(s)
+
+
 def pdftext(path):
     r = subprocess.run(['pdftotext', '-layout', path, '-'],
                        capture_output=True, text=True)
@@ -144,17 +152,33 @@ def main():
     print(f'  초록          {_abs:>6} 단어')
     print(f'  ACS 환산 {pages:.2f}면 = (본문{n_body} + 초록{_abs} + 참고문헌{refs}'
           f' + 표제{_front} + 도판{len(figs)}장 x500'
-          f' + 표{sum(tabs)}) / 1000   (TOC 제외, Article 한도 8면)')
-    if pages > 8.0:
-        print(f'  ** 8면 초과 {pages - 8.0:.2f}면 = 약 '
-              f'{int(round((pages - 8.0) * 1000))} 단어 **')
+          f' + 표{sum(tabs)}) / 1000   (TOC 제외)')
+    # 2026-11-16. 8면 한도 경고를 거뒀다. 편집부(Jie Fu, Managing Editor,
+    # 2026-11-15)가 지배 지침을 researcher-resources 판으로 지정했고 그
+    # 판은 10,000단어이며 도판 환산이 없다. 면수 환산은 참고로만 남긴다.
+    if text_words > 10000:
+        print(f'  ** 10,000단어 초과 {text_words - 10000} 단어 **')
 
     # 2026-11-07. 커버레터가 분량을 숫자로 적으므로 그 숫자가 이 측정의
     # 결과여야 한다. verify_consistency.py 가 이 파일을 읽어 대조한다.
     import json as _j
     import os as _o
     _o.makedirs('outputs', exist_ok=True)
+    # 2026-11-16. 두 번째 셈법(맨정수 포함)과 참고문헌 제외값을 함께
+    # 올린다. 커버레터가 세 수치를 모두 적고 sync_cover_length.py 가
+    # 되쓴다. 손으로 적으면 다음 빌드에서 뒤처진다 — 이미 다섯 번 났다.
+    _tok_extra = ((len(tokens(body)) - len(words(body)))
+                  + (len(tokens(txt[txt.index('References'):]))
+                     - len(words(txt[txt.index('References'):]))))
+    text_words_tokens = text_words + _tok_extra
+    text_words_norefs = text_words - refs
+    print(f'  맨정수 포함   {text_words_tokens:>6} 단어 '
+          f'(차 {_tok_extra})')
+    print(f'  참고문헌 제외 {text_words_norefs:>6} 단어')
+
     _j.dump({'body_words': n_body - cap, 'caption_words': cap,
+             'text_words_tokens': text_words_tokens,
+             'text_words_norefs': text_words_norefs,
              'abstract_words': _abs, 'front_words': _front,
              'figure_words': fig_words, 'text_words': text_words,
              'ref_words': refs, 'n_figures': len(figs),

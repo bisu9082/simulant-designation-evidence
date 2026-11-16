@@ -1,6 +1,8 @@
 {
  "body_words": 8074,
  "caption_words": 145,
+ "text_words_tokens": 10236,
+ "text_words_norefs": 8543,
  "abstract_words": 248,
  "front_words": 76,
  "figure_words": 500,
