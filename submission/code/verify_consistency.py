@@ -757,6 +757,25 @@ def preflight():
         # 2026-11-03 (T1-14). 희소 지시자 인코딩 민감도.
         'sparse_indicators.json': 'sparse_indicators.py',
     }
+    # 2026-11-16 (GATE 8 6인 채점, B8 수행). 두 번째 예치물 분류.
+    #
+    # 왜. sources/quotations_20261116.csv 는 계산 산출물이 아니라 원문을
+    # 사람이 옮겨 적은 전사물이다. 생성 스크립트가 있을 수 없는데 위
+    # 검사는 전부 outputs/ 의 스크립트 산출물이라고 가정하고 있어서,
+    # 등록할 자리가 없으면 통과시키거나 인용을 빼는 쪽으로 몰린다.
+    # 그래서 분류를 하나 더 두되 느슨하게 두지 않는다: 원고가
+    # sources/ 접두로 인용한 파일은 여기 등재돼야 하고 디스크에도
+    # 있어야 한다. 값은 '무엇을 옮겨 적었는가' 를 한 줄로 적는다.
+    HAND_TRANSCRIBED = {
+        'quotations_20261116.csv':
+            '원문에서 옮긴 축자 구절과 로케이터. 생성기 없음 — 전사물.',
+        'designations_20261106.csv':
+            '지정 문서의 측정·근거 전사. 생성기 없음 — 전사물.',
+        'registers_20261106.csv':
+            '규제 등재 전사. 생성기 없음 — 전사물.',
+        'dye_panel_20261106.csv':
+            '염료 패널 명세 전사. 생성기 없음 — 전사물.',
+    }
     orphan = []
     _cited = set()
     for _doc in ('paper/main.tex', 'paper/supplementary.tex'):
@@ -769,8 +788,18 @@ def preflight():
         for _m in re.finditer(r'\\texttt\{([^}]*\.(?:json|csv))\}', _t):
             _fn = (_m.group(1).replace('\\allowbreak', '')
                    .replace('\\-', '').replace('\\_', '_'))
-            _cited.add(os.path.basename(''.join(_fn.split())))
-    for _name in sorted(_cited):
+            _cited.add(''.join(_fn.split()))
+    for _path in sorted(_cited):
+        _name = os.path.basename(_path)
+        if _path.startswith('sources/'):
+            if _name not in HAND_TRANSCRIBED:
+                orphan.append(f'{_name} 를 원고가 sources/ 예치물로 '
+                              f'인용하는데 HAND_TRANSCRIBED 에 등재되지 '
+                              f'않았다')
+            elif not os.path.exists(f'sources/{_name}'):
+                orphan.append(f'{_name} 를 원고가 인용하는데 sources/ 에 '
+                              f'없다')
+            continue
         _maker = GENERATED_BY.get(_name)
         if _maker is None:
             orphan.append(f'{_name} 를 원고가 인용하는데 GENERATED_BY 에 '

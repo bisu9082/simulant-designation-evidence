@@ -6,7 +6,7 @@
 \usepackage{times}
 \usepackage[hidelinks]{hyperref}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{8pt}
+\setlength{\parskip}{6.5pt}
 \pagestyle{empty}
 
 \begin{document}
@@ -254,7 +254,7 @@ that ruling. Against that limit the manuscript stands at
 1,372 words are references, and is inside it. Two things about that figure we
 would rather state than let you infer. It counts a bare numeral as part of a
 quantity rather than as a word, and counting every whitespace-separated token
-instead gives 10,317. It also includes the reference list, without which the
+instead gives 10,318. It also includes the reference list, without which the
 manuscript is 8,624 words. We give the three readings rather than the most
 favourable one, and we will cut to whatever figure you apply.
 
@@ -320,12 +320,23 @@ result does not survive either, and the paper no longer carries a statistically
 distinguishable axis. We would rather tell you that than have a referee find
 the one place we had not looked.
 
-The extraction is now cell-based and refuses any row that does not resolve into
-five duration cells, and it is validated over the whole table by a second reader
-that shares neither the text-extraction engine nor the algorithm, reading values
-by character column position rather than by token order. The two readers agree on
-all 250 entries for which both read a value from a table cell, on all 257 that
-resolved to a structure and on all nineteen panel values.
+A sixth correction is of our quotations rather than our numbers. Building a
+deposit that gives every quoted span a locator, we found one attached to the
+wrong antecedent: the Man-in-Simulant Test assessment's sentence that certain
+assumptions have not been tested is about that programme's body-region toxicity
+assumptions, not about the assumptions behind choosing methyl salicylate, and
+the two sentences share a heading and a page. We have withdrawn it for a span
+from that page which bears on the axis this paper tests, that the compound's
+vapour pressure runs approximately two orders of magnitude above the agent's. A
+patent claim we had quoted verbatim we could not re-confirm, and it is now
+reported speech. The deposit is
+\texttt{sources/\allowbreak quotations\_20261116.csv}.
+
+The extraction is now cell-based and is validated over the whole table by a
+second reader that shares neither the text-extraction engine nor the algorithm,
+both given in the Supporting Information. The two readers agree on all 250
+entries for which both read a value from a table cell, on all 257 that resolved
+to a structure and on all nineteen panel values.
 
 \textbf{Dual-use.} The optimisation direction is fixed throughout and stated in
 the manuscript: detection-relevant fidelity is maximised while phosphorus
@@ -359,11 +370,11 @@ remainder are deterministic given the stated seeds.
 
 Thank you for considering this work.
 
-\vspace{10pt}
+\vspace{6pt}
 
 Yours sincerely,
 
-\vspace{14pt}
+\vspace{8pt}
 
 Yoon Jeong Jang, corresponding author\\
 on behalf of Ku Kang, Jeongyun Kim, Miae Kim, Doo-Hee Lee,\\
