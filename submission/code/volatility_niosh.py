@@ -37,8 +37,10 @@ ADDED_VP = {
           'at 25 °C',
           'CRDC(ECBC 전신) 기술보고서의 25 °C 값이므로 T1. Haz-Map 과 '
           'DOE PAC 은 0.28 @25 °C 로 더 높으나 T2 이므로 규칙상 뒤다. '
-          '낮은 값을 채택하는 쪽이 이 화합물을 DMMP 에 더 가깝게 놓지 '
-          '않는다'),
+          '어느 값이 우리에게 유리한지는 단정할 수 없다 — 검정이 반응하는 '
+          '것은 DMMP 와의 거리가 아니라 작용제와의 거리이고, 0.17 은 HD '
+          '쪽에 0.28 은 G 계열 쪽에 가깝다. 그래서 0.28 민감도를 함께 '
+          '돌려 둔다 (dimp028 run)'),
  'TEP': (0.39, 25, 'T1',
          'Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties '
          'of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and '
@@ -75,9 +77,11 @@ NOT_OBTAINED = {
 
 DATED = ['DIMP', 'TEP', '2,4-dichlorophenol']
 UNDATED = ['di-n-butyl sulfide', 'DEEP']
+# T2 값(Haz-Map·DOE PAC 일치 0.28 @25 °C)을 쓰면 결과가 달라지는지.
+DIMP_T2 = 0.28
 
 
-def run(added):
+def run(added, dimp_override=None):
     """28종 패널에 added 를 간섭물로 넣고 같은 전수열거를 돌린다."""
     df = pd.read_csv('descriptor_cache_xtb.csv')
     names = list(df.compound_name) + list(added)
@@ -85,6 +89,8 @@ def run(added):
     vp = dict(V.VP)
     for n in added:
         vp[n] = ADDED_VP[n]
+    if dimp_override is not None and 'DIMP' in added:
+        vp['DIMP'] = (dimp_override,) + ADDED_VP['DIMP'][1:]
     x = np.array([np.log10(vp[n][0]) for n in names], float)
     z = (x - x.mean()) / x.std(ddof=1)
     D = np.abs(z[:, None] - z[None, :])
@@ -117,10 +123,11 @@ def main():
            'n_candidates_in_source': 11,
            'n_on_panel_already': 1,
            'runs': {}}
-    for label, added in (('baseline', []),
-                         ('plus3_dated', DATED),
-                         ('plus5_with_undated', DATED + UNDATED)):
-        r = run(added)
+    for label, added, ov in (('baseline', [], None),
+                             ('plus3_dated', DATED, None),
+                             ('plus5_with_undated', DATED + UNDATED, None),
+                             ('plus3_dimp_T2', DATED, DIMP_T2)):
+        r = run(added, ov)
         out['runs'][label] = r
         p = r['prespecified']
         print(f"  {label:<20} n={r['n_compounds']:>3} "

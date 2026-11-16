@@ -1782,6 +1782,7 @@ def load_facts():
     f['volniosh_nperm_base'] = _vn['baseline']['n_permutations']
     f['volniosh_nperm_plus3'] = _vn['plus3_dated']['n_permutations']
     f['volniosh_nperm_plus5'] = _vn['plus5_with_undated']['n_permutations']
+    f['volniosh_p_dimp028'] = _vn['plus3_dimp_T2']['prespecified']['p']
 
     # 2026-11-14 (GATE 8 12차 선택항목). 새 예치물 두 건의 수치를 등재한다.
     # 등재하지 않으면 원고가 인용하는 값이 대조되지 않는다 — 이 프로젝트의
@@ -3244,9 +3245,12 @@ CHECKS = [
     ('rm_q35lit', [r'Hochberg minima of [\d.]+, [\d.]+ and ([\d.]+)'], 0.00005),
     # 2026-11-16. 휘발성 축 풀 복원의 어법 앵커.
     ('volniosh_p_plus3',
-     [r'restoring the same compounds here moves it to ([\d.]+)',
-      r'restoring those ten compounds here moves it to ([\d.]+)',
-      r'to \$p = ([\d.]+)\$ over 1140'], 0.0005),
+     [r'this axis can carry moves it to ([\d.]+)',
+      r'to \$p = ([\d.]+)\$ over 1140',
+      r'from 0\.0206\s*\n?over 680 designations to ([\d.]+) over 1140'],
+     0.0005),
+    ('volniosh_p_dimp028',
+     [r'at 0\.28 the pre-specified value is\s*\n?([\d.]+)'], 0.0005),
     ('volniosh_p_base',
      [r'from \$p = ([\d.]+)\$ over 680 designations'], 0.0000005),
     ('volniosh_p_plus5',
