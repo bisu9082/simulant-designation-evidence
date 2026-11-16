@@ -1339,6 +1339,56 @@ text now says so.
 \input{tab_vpairing}
 \end{table}
 
+\subsection{Restoring the comparison pool on this axis}
+\label{meth:volniosh}
+
+The pool restoration of Section~\ref{meth:niosh} was not run on this axis in
+the version of this work that first reported $p = 0.0206$. We did not extend the
+descriptor spaces beyond the structural one because the version of the
+\texttt{xtb} binary was not recorded, so an extension there would mix the
+output of two binaries inside one distance calculation. That reason does not
+apply to this axis. This axis is one measured quantity and no semi-empirical calculation
+enters it. We therefore ran it, and report the result whichever way it came
+out.
+
+Vapour pressures for the ten further compounds were collected by the route of
+Section~\ref{meth:vol}, from the same PubChem \textsc{pug-view} heading, and
+adopted under the same three-tier rule fixed before any value was seen. Of the
+ten, five return no \textit{Vapor Pressure} entry at all and are recorded as
+not obtained rather than estimated: 2-chloroethyl phenyl sulfide,
+2-chloroethyl cyclohexyl sulfide, 1,6-dichlorohexane,
+bis(4-chlorobutyl)~ether and diethyl methanephosphonate. Three carry a
+tier-one value at 25~$^{\circ}$C: diisopropyl methylphosphonate at
+0.17~mmHg, triethyl phosphate at 0.39~mmHg and 2,4-dichlorophenol at
+0.09~mmHg. Two more, di-$n$-butyl sulfide at 1.2~mmHg and diethyl
+ethanephosphonate at 0.31~mmHg, are carried by a single source that states no
+temperature; the rule requires a stated 25~$^{\circ}$C value for tier two, so
+those two enter a sensitivity run and not the primary one. Enlarging the pool
+works against the result reported here, so admitting a compound is the choice
+that costs us and withholding one is the choice that pays; we state which way
+each of the five went for that reason.
+
+The result does not depend on which of the two runs is read.
+Table~\ref{tab:volniosh} gives both. On the twenty-eight-compound panel the
+pre-specified statistic moves from $p = 0.020588$ over 680 designations to
+$p = 0.132456$ over 1140 with the three dated compounds admitted, and to
+$p = 0.123377$ over 1540 with all five. The rank of the incumbent triple falls
+from fourteenth to one hundred and fifty-first. Four of the six statistics fall
+below 0.05 before the restoration and none of the six does after it.
+
+What moves is not only the significance. The observed mean difference changes
+sign, from $-0.00151$ to $+0.18672$, so the three compounds go from marginally
+closer to the agents than a triple drawn at random to clearly further from
+them. That figure is close to the $+0.195$ the structural space returns, which
+is to say that once the compounds its own source document lists are in the
+pool, this axis behaves as the descriptor spaces do. The mechanism is the one
+Section~\ref{meth:vol} already reports: the statistic tracks how widely the
+designated set covers the axis, and the three compounds admitted here sit at
+0.17, 0.39 and 0.09~mmHg, inside the range the incumbents span, so they supply
+triples that cover the axis as widely at a lower mean distance.
+
+\input{tab_volniosh}
+
 \section{Scope of the documentary search}
 \label{res:searchscope}
 

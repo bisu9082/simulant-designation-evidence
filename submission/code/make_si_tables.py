@@ -630,6 +630,46 @@ def nioshlist():
     return '\n'.join(L)
 
 
+
+def volniosh():
+    """휘발성 축 비교풀 복원. 세 조건 x 여섯 통계량 (2026-11-16)."""
+    d = json.load(open('outputs/volatility_niosh.json'))
+    LAB = [('baseline', 'as reported'),
+           ('plus3_dated', 'with the three dated'),
+           ('plus5_with_undated', 'with all five')]
+    STATS = [('mean_diff', 'mean difference'),
+             ('median_diff', 'median difference'),
+             ('mean_logratio', 'mean log ratio'),
+             ('mean_dsim', 'mean distance to a simulant'),
+             ('n_closer', 'number closer'),
+             ('n_valid', 'valid matches')]
+    L = ['\\begin{tabular}{lrrrrrr}', '\\hline',
+         ' & \\multicolumn{2}{c}{as reported}'
+         ' & \\multicolumn{2}{c}{with the three dated}'
+         ' & \\multicolumn{2}{c}{with all five} \\\\',
+         '\\cline{2-3}\\cline{4-5}\\cline{6-7}',
+         'Statistic & observed & $p$ & observed & $p$ & observed & $p$ \\\\',
+         '\\hline']
+    for key, name in STATS:
+        row = [name]
+        for lab, _ in LAB:
+            v = d['runs'][lab]['statistics'][key]
+            row.append(f"{v['observed']:.5f}")
+            row.append(f"{v['p']:.5f}")
+        L.append(' & '.join(row) + ' \\\\')
+    L.append('\\hline')
+    r = [d['runs'][lab] for lab, _ in LAB]
+    L.append('compounds in pool & \\multicolumn{2}{c}{'
+             + str(r[0]['n_nonagent']) + '} & \\multicolumn{2}{c}{'
+             + str(r[1]['n_nonagent']) + '} & \\multicolumn{2}{c}{'
+             + str(r[2]['n_nonagent']) + '} \\\\')
+    L.append('designations enumerated & \\multicolumn{2}{c}{'
+             + str(r[0]['n_permutations']) + '} & \\multicolumn{2}{c}{'
+             + str(r[1]['n_permutations']) + '} & \\multicolumn{2}{c}{'
+             + str(r[2]['n_permutations']) + '} \\\\')
+    L += ['\\hline', '\\end{tabular}']
+    return '\n'.join(L)
+
 def niosh():
     """NIOSH 후보 4종을 비교군에 넣을 때 작용제별 최근접 거리 (2026-11-14)."""
     d = json.load(open('outputs/niosh_panel.json'))
@@ -827,6 +867,21 @@ every interferent; count of valid matches.}\\
     print('-> outputs/tab_vpairing.tex')
     open('outputs/tab_premisenull.tex', 'w').write(hdr + premisenull() + '\n')
     print('-> outputs/tab_premisenull.tex')
+    open('outputs/tab_volniosh.tex', 'w').write(
+        hdr + '% 출처: outputs/volatility_niosh.json\n'
+        + '\\begin{table}[htb]\n\\centering\n\\caption{The designation '
+        'test on the volatility axis before and after the compounds the NIOSH '
+        'candidate list names beside DMMP enter the comparison pool. The '
+        'pre-specified statistic is the mean difference. Three of the ten '
+        'further compounds carry a tier-one 25~$^{\\circ}$C vapour pressure; '
+        'two more are carried by a source that states no temperature and enter '
+        'the third column only; five return no entry and are not estimated. '
+        'Section~\\ref{meth:volniosh} gives each adopted value and its '
+        'source.}\n'
+        '\\label{tab:volniosh}\n\\footnotesize\n'
+        '\\setlength{\\tabcolsep}{3pt}\n'
+        + volniosh() + '\n\\end{table}\n')
+    print('-> outputs/tab_volniosh.tex')
     open('outputs/tab_niosh.tex', 'w').write(
         hdr + '% 출처: outputs/niosh_panel.json\n'
         + '\\begin{table}[htb]\n\\centering\n\\caption{Distance from '

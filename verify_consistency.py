@@ -68,6 +68,7 @@ REQUIRED_OUTPUTS = [
     'outputs/acetonitrile_panel.json',
     'outputs/niosh_panel.json',
     'outputs/volatility_decomposition.json',
+    'outputs/volatility_niosh.json',
     'outputs/descriptor_definitions.json',
     'outputs/davidson_external.json',
     'outputs/aegl_parse_validation.json',
@@ -716,6 +717,8 @@ def preflight():
         # 분석자 선택을 열어 본 결과다.
         'niosh_panel.json': 'niosh_panel.py',
         'volatility_decomposition.json': 'volatility_decomposition.py',
+        # 2026-11-16 (GATE 8 6인 채점, 리뷰어 B·C 지적 수행).
+        'volatility_niosh.json': 'volatility_niosh.py',
         'descriptor_definitions.json': 'descriptor_definitions.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
@@ -1764,6 +1767,21 @@ def load_facts():
     # 않는다. 등재만 남기면 '검사 누락' 으로 FAIL 한다. 기준이 다시 바뀌면
     # 이 두 줄과 아래 앵커를 함께 되살릴 것.
     f['len_figs'] = _la['n_figures']
+
+    # 2026-11-16. 휘발성 축 비교풀 복원. 원고의 유일한 생존 결과가 이
+    # 조작에서 죽으므로 초록·§3.4·Discussion·Conclusions 가 전부 이 값을
+    # 인용한다. 등재하지 않으면 그 네 군데가 대조되지 않는다.
+    _vn = json.load(open('outputs/volatility_niosh.json'))['runs']
+    f['volniosh_p_base'] = _vn['baseline']['prespecified']['p']
+    f['volniosh_p_plus3'] = _vn['plus3_dated']['prespecified']['p']
+    f['volniosh_p_plus5'] = _vn['plus5_with_undated']['prespecified']['p']
+    f['volniosh_obs_base'] = _vn['baseline']['prespecified']['observed']
+    f['volniosh_obs_plus3'] = _vn['plus3_dated']['prespecified']['observed']
+    f['volniosh_rank_base'] = _vn['baseline']['prespecified']['rank']
+    f['volniosh_rank_plus3'] = _vn['plus3_dated']['prespecified']['rank']
+    f['volniosh_nperm_base'] = _vn['baseline']['n_permutations']
+    f['volniosh_nperm_plus3'] = _vn['plus3_dated']['n_permutations']
+    f['volniosh_nperm_plus5'] = _vn['plus5_with_undated']['n_permutations']
 
     # 2026-11-14 (GATE 8 12차 선택항목). 새 예치물 두 건의 수치를 등재한다.
     # 등재하지 않으면 원고가 인용하는 값이 대조되지 않는다 — 이 프로젝트의
@@ -3224,6 +3242,21 @@ CHECKS = [
     ('rm_q28', [r'Hochberg minima of ([\d.]+), [\d.]+ and [\d.]+'], 0.00005),
     ('rm_q35', [r'Hochberg minima of [\d.]+, ([\d.]+) and [\d.]+'], 0.00005),
     ('rm_q35lit', [r'Hochberg minima of [\d.]+, [\d.]+ and ([\d.]+)'], 0.00005),
+    # 2026-11-16. 휘발성 축 풀 복원의 어법 앵커.
+    ('volniosh_p_plus3',
+     [r'restoring the same compounds here moves it to ([\d.]+)',
+      r'restoring those ten compounds here moves it to ([\d.]+)',
+      r'to \$p = ([\d.]+)\$ over 1140'], 0.0005),
+    ('volniosh_p_base',
+     [r'from \$p = ([\d.]+)\$ over 680 designations'], 0.0000005),
+    ('volniosh_p_plus5',
+     [r'and to\s*\n?\$p = ([\d.]+)\$ over 1540'], 0.0000005),
+    ('volniosh_obs_base',
+     [r'changes\s*\n?sign, from \$(-[\d.]+)\$ to'], 0.0000005),
+    ('volniosh_obs_plus3',
+     [r'sign, from \$-[\d.]+\$ to \$\+([\d.]+)\$'], 0.0000005),
+    ('volniosh_nperm_plus3', [r'over ([\d]+) with the three dated'], 0),
+    ('volniosh_nperm_plus5', [r'over ([\d]+) with all five'], 0),
     # 2026-11-14 (GATE 8 12차 선택항목). 새 두 예치물의 어법 앵커.
     ('niosh_p28_base',
      [r'nominal structural value from ([\d.]+) to [\d.]+ and the valid',
