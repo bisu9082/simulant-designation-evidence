@@ -1,0 +1,215 @@
+{
+ "generated_by": "volatility_niosh.py",
+ "source_document": "NIOSH CBRN APR simulant programme (31 July 2002)",
+ "adoption_rule": {
+  "T1": "25 °C 증기압 전용 측정·편람값",
+  "T2": "T1 없을 때 정부 편람 25 °C 값",
+  "T3": "25 °C 값이 없으면 최근접 온도 + flag"
+ },
+ "adopted": {
+  "DIMP": {
+   "mmHg": 0.17,
+   "temp_C": 25,
+   "tier": "T1",
+   "source": "Bennett SR et al; Environmental hazards of chemical agent simylants CRDC-TR-84055. Chemical Research and Development Ctr, Aberdeen Proving Ground, MD 1984 | Vapor pressure = 0.17 mmHg at 25 °C",
+   "reason": "CRDC(ECBC 전신) 기술보고서의 25 °C 값이므로 T1. Haz-Map 과 DOE PAC 은 0.28 @25 °C 로 더 높으나 T2 이므로 규칙상 뒤다. 낮은 값을 채택하는 쪽이 이 화합물을 DMMP 에 더 가깝게 놓지 않는다"
+  },
+  "TEP": {
+   "mmHg": 0.39,
+   "temp_C": 25,
+   "tier": "T1",
+   "source": "Daubert, T.E., R.P. Danner. Physical and Thermodynamic Properties of Pure Chemicals Data Compilation. Washington, D.C.: Taylor and Francis, 1989. | 0.39 mm Hg at 25 °C",
+   "reason": "T1 목록에 이름이 있는 편람의 25 °C 값. Haz-Map 과 DOE PAC 도 0.39 로 일치한다"
+  },
+  "2,4-dichlorophenol": {
+   "mmHg": 0.09,
+   "temp_C": 25,
+   "tier": "T1",
+   "source": "Shiu WY et al; Chemosphere 29: 1155-224 (1994) | 0.09 mm Hg at 25 °C",
+   "reason": "HSDB 가 인용하는 1차 문헌의 25 °C 값. DOE PAC 도 0.09 로 일치한다. Haz-Map 만 0.11"
+  },
+  "di-n-butyl sulfide": {
+   "mmHg": 1.2,
+   "temp_C": null,
+   "tier": "T2?",
+   "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases | 1.2 [mmHg]",
+   "reason": "출처가 온도를 적지 않는다. 민감도 전용"
+  },
+  "DEEP": {
+   "mmHg": 0.31,
+   "temp_C": null,
+   "tier": "T2?",
+   "source": "Haz-Map, Information on Hazardous Chemicals and Occupational Diseases | 0.31 [mmHg]",
+   "reason": "출처가 온도를 적지 않는다. 민감도 전용"
+  }
+ },
+ "not_obtained": {
+  "2-chloroethyl phenyl sulfide": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CID 21702)]",
+  "2-chloroethyl cyclohexyl sulfide": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CID 22469748)]",
+  "1,6-dichlorohexane": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CID 16551)]",
+  "bis(4-chlorobutyl) ether": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CID 22800)]",
+  "DEMP": "[수집 불가: PubChem PUG-View 에 Vapor Pressure 항목 없음 (CID 12685)]"
+ },
+ "n_candidates_in_source": 11,
+ "n_on_panel_already": 1,
+ "runs": {
+  "baseline": {
+   "added": [],
+   "n_compounds": 28,
+   "n_nonagent": 17,
+   "n_permutations": 680,
+   "statistics": {
+    "mean_diff": {
+     "observed": -0.0015058125934016967,
+     "p": 0.020588235294117647,
+     "rank": 14
+    },
+    "median_diff": {
+     "observed": -0.11265517137432257,
+     "p": 0.04264705882352941,
+     "rank": 29
+    },
+    "mean_logratio": {
+     "observed": 0.333240704421986,
+     "p": 0.07647058823529412,
+     "rank": 52
+    },
+    "mean_dsim": {
+     "observed": 0.46734020833864987,
+     "p": 0.023529411764705882,
+     "rank": 16
+    },
+    "n_closer": {
+     "observed": -8.0,
+     "p": 0.022058823529411766,
+     "rank": 15
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p": 0.4647058823529412,
+     "rank": 316
+    },
+    "_log_divergent_pairs": 0
+   },
+   "prespecified": {
+    "statistic": "mean_diff",
+    "observed": -0.0015058125934016967,
+    "p": 0.020588235294117647,
+    "rank": 14
+   },
+   "log10_vp_added": {}
+  },
+  "plus3_dated": {
+   "added": [
+    "DIMP",
+    "TEP",
+    "2,4-dichlorophenol"
+   ],
+   "n_compounds": 31,
+   "n_nonagent": 20,
+   "n_permutations": 1140,
+   "statistics": {
+    "mean_diff": {
+     "observed": 0.18672456030386114,
+     "p": 0.1324561403508772,
+     "rank": 151
+    },
+    "median_diff": {
+     "observed": 0.16320590236882027,
+     "p": 0.08771929824561403,
+     "rank": 100
+    },
+    "mean_logratio": {
+     "observed": 1.0558595616541202,
+     "p": 0.1692982456140351,
+     "rank": 193
+    },
+    "mean_dsim": {
+     "observed": 0.46322362979574955,
+     "p": 0.14649122807017545,
+     "rank": 167
+    },
+    "n_closer": {
+     "observed": -4.0,
+     "p": 0.2043859649122807,
+     "rank": 233
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p": 0.5087719298245614,
+     "rank": 580
+    },
+    "_log_divergent_pairs": 0
+   },
+   "prespecified": {
+    "statistic": "mean_diff",
+    "observed": 0.18672456030386114,
+    "p": 0.1324561403508772,
+    "rank": 151
+   },
+   "log10_vp_added": {
+    "DIMP": -0.769551078621726,
+    "TEP": -0.4089353929735008,
+    "2,4-dichlorophenol": -1.0457574905606752
+   }
+  },
+  "plus5_with_undated": {
+   "added": [
+    "DIMP",
+    "TEP",
+    "2,4-dichlorophenol",
+    "di-n-butyl sulfide",
+    "DEEP"
+   ],
+   "n_compounds": 33,
+   "n_nonagent": 22,
+   "n_permutations": 1540,
+   "statistics": {
+    "mean_diff": {
+     "observed": 0.18992889017689052,
+     "p": 0.12337662337662338,
+     "rank": 190
+    },
+    "median_diff": {
+     "observed": 0.16600663488929918,
+     "p": 0.08831168831168831,
+     "rank": 136
+    },
+    "mean_logratio": {
+     "observed": 1.0558595616541202,
+     "p": 0.14155844155844155,
+     "rank": 218
+    },
+    "mean_dsim": {
+     "observed": 0.47117288570740995,
+     "p": 0.1409090909090909,
+     "rank": 217
+    },
+    "n_closer": {
+     "observed": -4.0,
+     "p": 0.18181818181818182,
+     "rank": 280
+    },
+    "n_valid": {
+     "observed": -1.0,
+     "p": 0.4701298701298701,
+     "rank": 724
+    },
+    "_log_divergent_pairs": 0
+   },
+   "prespecified": {
+    "statistic": "mean_diff",
+    "observed": 0.18992889017689052,
+    "p": 0.12337662337662338,
+    "rank": 190
+   },
+   "log10_vp_added": {
+    "DIMP": -0.769551078621726,
+    "TEP": -0.4089353929735008,
+    "2,4-dichlorophenol": -1.0457574905606752,
+    "di-n-butyl sulfide": 0.07918124604762482,
+    "DEEP": -0.5086383061657274
+   }
+  }
+ }
+}
