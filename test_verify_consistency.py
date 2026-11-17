@@ -1145,10 +1145,64 @@ SIDECAR_CASES = _drop_archived(SIDECAR_CASES)
 ANNOT_CASES = _drop_archived(ANNOT_CASES)
 
 
-def run():
+# 2026-11-16 (GATE 8 후속). 판정 오라클 교체.
+#
+# 왜. 종전 오라클은 run() 의 반환코드 하나였다. 그런데 주입은 거의 전부
+# .tex 를 건드리므로, 검사 A-pdf(PDF 가 원고보다 구판)와 B2d(투고 사본
+# 시차)가 주입 내용과 무관하게 반환코드를 1 로 만든다. 즉 'ok' 는
+# '검증기가 그 수치를 잡았다' 가 아니라 '파일을 건드렸다' 의 증거였고,
+# 그래서 초록 전 구간이 미검증인 채로 182건 주입시험을 통과했다.
+# 이 파일 329 행이 같은 기전('생성 표 사본 시차' 가드가 먼저 걸려 시험이
+# FAIL 을 받아 통과한 것처럼 보인다)을 이미 기록해 두고도 설계에
+# 반영되지 않았다.
+#
+# 이제 묻는 것은 '작업 흐름 가드가 아닌 실질 실패가 보고되었는가' 다.
+# 가드만 떴으면 그 주입은 잡히지 않은 것이다.
+WORKFLOW_GUARDS = ('검사 A-pdf', '검사 B2d', '검사 A-tag')
+_FAIL_HEADS = ('[verify] 불일치', '[verify] 근사 불일치',
+               '[verify] 데이터가 반증하는 주장')
+# 사전 점검은 실패하면 그 자리에서 끝나므로 위 블록을 찍지 않는다. 머리글
+# 자체가 실패의 내용이다 (2026-11-16: 이걸 빠뜨려 'seventeen agents' 주입이
+# 미탐지로 집계됐다. 검증기는 preflight 에서 제대로 잡고 있었다).
+
+
+def run_parsed():
+    """(반환코드, 표준출력) 을 돌려준다."""
     r = subprocess.run([sys.executable, 'verify_consistency.py'],
                        capture_output=True, text=True)
-    return r.returncode
+    return r.returncode, r.stdout
+
+
+def run():
+    return run_parsed()[0]
+
+
+def substantive(out):
+    """실패 블록에서 작업 흐름 가드를 뺀 줄만 남긴다."""
+    keep, inblock = [], False
+    for ln in out.splitlines():
+        if ln.startswith('[verify]'):
+            if '사전 점검 실패' in ln:
+                keep.append(ln.strip())
+                inblock = True
+                continue
+            inblock = ln.startswith(_FAIL_HEADS)
+            continue
+        if not inblock:
+            continue
+        s = ln.strip()
+        if not s:
+            continue
+        if any(g in s for g in WORKFLOW_GUARDS):
+            continue
+        if s.startswith('submission/'):      # B2d 의 하위 줄
+            continue
+        keep.append(s)
+    return keep
+
+
+def caught(out):
+    return bool(substantive(out))
 
 
 def selfcheck():
@@ -1218,21 +1272,21 @@ def main():
                     try:
                         for q in _paths:
                             open(q, 'w').write(_bak[q].replace(ra, rb, 1))
-                        rc = run()
+                        _out = run_parsed()[1]
                     finally:
                         for q in _paths:
                             open(q, 'w').write(_bak[q])
-                    if rc == 0:
+                    if not caught(_out):
                         print(f'  FAIL {desc}: 주입했는데 통과했다 (생성표)')
                         bad += 1
                     else:
                         print(f'  ok   {desc}: 잡았다 (생성표 {_name})')
                     continue
             open(tgt, 'w').write(src.replace(ra, rb, 1))
-            rc = run()
+            _out = run_parsed()[1]
             open(tgt, 'w').write(src)
             where = '' if tgt == TEX else ' (SI)'
-            if rc == 0:
+            if not caught(_out):
                 print(f'  FAIL {desc}: 주입했는데 통과했다{where}')
                 bad += 1
             else:
@@ -1254,18 +1308,18 @@ def main():
                     try:
                         for q in _paths:
                             open(q, 'w').write(_bak[q].replace(_ra, _rb, 1))
-                        _rc = run()
+                        _out = run_parsed()[1]
                     finally:
                         for q in _paths:
                             open(q, 'w').write(_bak[q])
-                    if _rc == 0:
+                    if not caught(_out):
                         print(f'  FAIL {desc}: 주입했는데 통과했다 (생성표)')
                         bad += 1
                     else:
                         print(f'  ok   {desc}: 잡았다 (생성표 {_name})')
                     continue
                 open(SUPP, 'w').write(pbak.replace(ra, rb, 1))
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다')
                     bad += 1
                 else:
@@ -1286,7 +1340,7 @@ def main():
                     bad += 1
                     continue
                 open(ACS_CL, 'w').write(cbak.replace(ra, rb, 1))
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다 (커버레터)')
                     bad += 1
                 else:
@@ -1305,7 +1359,7 @@ def main():
                     bad += 1
                     continue
                 open(ACS_SUPP, 'w').write(qbak.replace(ra, rb, 1))
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다 (ACS SI)')
                     bad += 1
                 else:
@@ -1336,7 +1390,7 @@ def main():
                     continue
                 where = 'ACS' if tgt is ACS else 'ACS->SI'
                 open(tgt, 'w').write(bak.replace(ra, rb, 1))
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다 ({where})')
                     bad += 1
                 else:
@@ -1355,7 +1409,7 @@ def main():
                     bad += 1
                     continue
                 open(SIDECAR, 'w').write(sbak.replace(ra, rb, 1))
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다')
                     bad += 1
                 else:
@@ -1370,7 +1424,7 @@ def main():
                 d = json.load(open(ANNOT))
                 d[fig][key] = text
                 json.dump(d, open(ANNOT, 'w'), ensure_ascii=False, indent=1)
-                if run() == 0:
+                if not caught(run_parsed()[1]):
                     print(f'  FAIL {desc}: 주입했는데 통과했다')
                     bad += 1
                 else:

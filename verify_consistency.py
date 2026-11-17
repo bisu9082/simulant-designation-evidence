@@ -63,6 +63,7 @@ EXTRA_TEX = ('paper/supplementary.tex', 'paper/cover_letter.tex',
 # 빠진 것을 한 번에 전부 보고한다. 이 목록은 '저장소가 담아야 하는 산출물'의
 # 계약서 구실도 한다.
 REQUIRED_OUTPUTS = [
+    'outputs/twolabel_panel.json',   # 2026-11-16 (P2)
     'outputs/threshold_sweep.json',
     'outputs/threshold_equivalence.json',
     'outputs/acetonitrile_panel.json',
@@ -2089,6 +2090,17 @@ def load_facts():
     f['j21_possible'] = cf['james2021']['n_possible']
 
     # 네 번째 구성의 다중검정 체계 5종 (2026-10-20). 표 2 네 번째 열.
+    # 2026-11-16 (P2). 두 라벨 구성(0.745)이 사실표에 없었다.
+    #
+    # 왜. 원고는 이 값을 초록(187-188), 본문 666, Conclusions 990, SI 1591
+    # 네 곳에서 말하는데 사실 키도 앵커도 없었다. twolabel_panel.json 은
+    # GENERATED_BY 에만 올라 있어 신선도만 보였고 값은 아무도 안 봤다.
+    # 초록과 결론 헤드라인을 동시에 떠받치는 수가 검증 밖에 있었다.
+    _tl = json.load(open('outputs/twolabel_panel.json'))
+    f['twolabel_bh_q'] = _tl['bh_min_q']
+    f['twolabel_min_p'] = _tl['min_p']
+    f['twolabel_nsim'] = _tl['n_simulants']
+
     pf = json.load(open('outputs/pesticide_family.json'))
     f['pf_min_p'] = pf['min_p']
     f['pf_bh18'] = pf['bh_all_min_q']
@@ -3717,6 +3729,40 @@ CHECKS = [
     ('pf_bh18', [r'classing all seven takes it to ([\d.]+);',
                  r'corrected\s*\n?([\d.]+), the only one of the four',
                  r'and ([\d.]+), and the practice records neither'], 0.000005),
+    # 2026-11-16 (P2). 두 라벨 구성과 그 짝 값들을 자리별로 건다.
+    # 종전에 초록·Conclusions 가 전부 무검사였다. 어법이 자리마다 달라
+    # 한 패턴으로는 덮이지 않으므로 자리별 전용 키를 쓴다 (bh_q35_concl 관례).
+    ('twolabel_bh_q',
+     [r'tests moves from [\d.]+ to ([\d.]+)\. Classing',
+      r'value from [\d.]+ to ([\d.]+)\. The acetonitrile'], 0.0005),
+    ('abs_twolabel_bh_q',
+     [r'becomes ([\d.]+) or [\d.]+ depending on how many move'], 0.0005),
+    ('concl_twolabel_bh_q',
+     [r'from a corrected ([\d.]+) to [\d.]+ on one panel'], 0.0005),
+    ('abs_bh_q35',
+     [r'moves the answer both ways:\s*\n?([\d.]+)\s*\n?becomes'], 0.0005),
+    ('mt_bh_q35_fam',
+     [r'tests moves from ([\d.]+) to [\d.]+\. Classing'], 0.0005),
+    ('mt_bh_q35_acet',
+     [r'panel moves ([\d.]+) to\s*\n?[\d.]+\s*\(\\texttt'], 0.0005),
+    ('supp_bh_q35_fam',
+     [r'value from ([\d.]+) to [\d.]+\. The acetonitrile'], 0.0005),
+    ('abs_pf_bh18',
+     [r'becomes [\d.]+ or ([\d.]+) depending on how many move'], 0.000005),
+    # 2026-11-16 (P2 2차). 초록의 나머지 네 수치. 주입시험에서 0.028·0.360·
+    # 0.0206 세 자리가 전부 통과했다 — 어법이 본문과 달라 (B) 검사가 본문
+    # 쪽에서 먼저 맞고 끝났다. 초록은 이 원고가 반복해서 놓친 구역이다
+    # (커밋 f4e4c86 메시지: '개정이 초록에 도달하지 않았던 것').
+    ('abs_p28_struct',
+     [r'nominal structural \$p\$ of ([\d.]+) that no'], 0.0005),
+    ('abs_niosh_p28_plus',
+     [r'that rises to ([\d.]+), with'], 0.0005),
+    ('abs_vol_p_md',
+     [r'registered correction\s*\n?\(\$p = ([\d.]+)\$\)'], 0.0000005),
+    ('abs_volniosh_plus3',
+     [r'the three measured ones moves it to ([\d.]+) and reverses'], 0.0005),
+    ('concl_pf_bh18',
+     [r'from a corrected [\d.]+ to ([\d.]+) on one panel'], 0.000005),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
                  r'produces an adjusted\s*\n?(?:value of )?(\d+\.\d+)',
                  r'into one with an adjusted value of\s*\n?(\d+\.\d+)'], 0.00005),
@@ -4370,7 +4416,19 @@ def main():
     # 2026-11-02. 커버레터도 본문 수치를 다시 센다. 주입시험에서 0.964,
     # +0.76, +0.77 세 자리가 전부 통과했다 (어법이 본문과 달라 (B) 검사가
     # 본문 쪽에서 이미 맞고 끝났다). 자리마다 키를 따로 둔다.
-    for _dst, _src_key in (('bh_q35_concl', 'bh_q35'),
+    for _dst, _src_key in (('abs_p28_struct', 'p28_struct'),
+                           ('abs_niosh_p28_plus', 'niosh_p28_plus'),
+                           ('abs_vol_p_md', 'vol_p_md'),
+                           ('abs_volniosh_plus3', 'volniosh_p_plus3'),
+                           ('abs_twolabel_bh_q', 'twolabel_bh_q'),
+                           ('concl_twolabel_bh_q', 'twolabel_bh_q'),
+                           ('abs_bh_q35', 'bh_q35'),
+                           ('mt_bh_q35_fam', 'bh_q35'),
+                           ('mt_bh_q35_acet', 'bh_q35'),
+                           ('supp_bh_q35_fam', 'bh_q35'),
+                           ('abs_pf_bh18', 'pf_bh18'),
+                           ('concl_pf_bh18', 'pf_bh18'),
+                           ('bh_q35_concl', 'bh_q35'),
                            ('cl_dmmp_ga', 'dmmp_ga_uv'),
                            ('cl_dmmp_gb', 'dmmp_gb_uv'),
                            ('cl_dmmp_gd', 'dmmp_gd_uv'),
@@ -5183,8 +5241,36 @@ def main():
     unseen = [u for u in unseen if u.split(':')[0] not in matched_keys]
     unexpected = [u for u in unseen
                   if u.split(':')[0] not in UNQUOTED and '도판' not in u]
+    # 2026-11-16 (GATE 8 후속, P1). 미발견을 생성물로 고정한다.
+    #
+    # 왜. 미발견은 UNQUOTED 에 이름이 있으면 통과한다. 그래서 그 명단이
+    # 길어지는 것을 아무도 세지 않았고, 본문을 지우거나 고쳐 앵커가
+    # 끊기면 그 검사는 '면제' 와 구별되지 않은 채 조용히 꺼진다. 이
+    # 파일이 세 번 당한 경로다. 이제 두 가지를 한다.
+    #   (1) 전수 명단을 사유와 함께 outputs/unmatched_anchors.json 에 쓴다.
+    #   (2) 기준선보다 늘면 실패로 올린다. 줄어드는 것은 막지 않는다.
+    #       기준선을 올릴 때는 왜 늘었는지 여기 한 줄로 적을 것.
+    UNSEEN_BASELINE = 105      # 2026-11-16 82c2ddf 기준
+    _inv = []
+    for u in unseen:
+        _k = u.split(':')[0]
+        _inv.append({'key': _k, 'line': u,
+                     'exempt': _k in UNQUOTED,
+                     'reason': UNQUOTED.get(_k, '')})
+    try:
+        json.dump({'baseline': UNSEEN_BASELINE, 'count': len(unseen),
+                   'entries': _inv},
+                  open('outputs/unmatched_anchors.json', 'w'),
+                  ensure_ascii=False, indent=1)
+    except OSError:
+        pass
+    if len(unseen) > UNSEEN_BASELINE:
+        fails.append(f'  문맥 미발견이 기준선을 넘었다 (검사 P1): '
+                     f'{len(unseen)} > {UNSEEN_BASELINE} — 앵커가 끊겼는지 '
+                     f'outputs/unmatched_anchors.json 을 볼 것')
     if unseen:
-        print(f'[verify] 문맥 미발견 {len(unseen)}건 (검사 누락 — 정규식 보강 필요)')
+        print(f'[verify] 문맥 미발견 {len(unseen)}건 / 기준선 {UNSEEN_BASELINE} '
+              f'(검사 누락 — 정규식 보강 필요)')
         for u in unseen:
             print('  ', u)
     if unexpected:

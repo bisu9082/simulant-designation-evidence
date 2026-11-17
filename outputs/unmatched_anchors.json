@@ -1,0 +1,636 @@
+{
+ "baseline": 105,
+ "count": 105,
+ "entries": [
+  {
+   "key": "lit_d1_acc",
+   "line": "lit_d1_acc: 본문에서 문맥을 찾지 못함 (값 100)",
+   "exempt": true,
+   "reason": "선행논문 성능, JHM 서론은 인용만 함"
+  },
+  {
+   "key": "lit_d1_vis",
+   "line": "lit_d1_vis: 본문에서 문맥을 찾지 못함 (값 87.5)",
+   "exempt": true,
+   "reason": "선행논문 성능, JHM 서론은 인용만 함"
+  },
+  {
+   "key": "lit_d2_acc",
+   "line": "lit_d2_acc: 본문에서 문맥을 찾지 못함 (값 0.964)",
+   "exempt": true,
+   "reason": "선행논문 성능, JHM 서론은 인용만 함"
+  },
+  {
+   "key": "lit_d3_acc",
+   "line": "lit_d3_acc: 본문에서 문맥을 찾지 못함 (값 1)",
+   "exempt": true,
+   "reason": "선행논문 성능, JHM 서론은 인용만 함"
+  },
+  {
+   "key": "lit_d3_lod",
+   "line": "lit_d3_lod: 본문에서 문맥을 찾지 못함 (값 10)",
+   "exempt": true,
+   "reason": "선행논문 성능, JHM 서론은 인용만 함"
+  },
+  {
+   "key": "toc_rev_uncentred",
+   "line": "toc_rev_uncentred: 본문에서 문맥을 찾지 못함 (값 28)",
+   "exempt": true,
+   "reason": "퇴역한 ACS TOC 도판 수치"
+  },
+  {
+   "key": "toc_rev_centred",
+   "line": "toc_rev_centred: 본문에서 문맥을 찾지 못함 (값 13)",
+   "exempt": true,
+   "reason": "퇴역한 ACS TOC 도판 수치"
+  },
+  {
+   "key": "toc_rho_min",
+   "line": "toc_rho_min: 본문에서 문맥을 찾지 못함 (값 -0.225)",
+   "exempt": true,
+   "reason": "퇴역한 ACS TOC 도판 수치"
+  },
+  {
+   "key": "toc_rho_max",
+   "line": "toc_rho_max: 본문에서 문맥을 찾지 못함 (값 0.571429)",
+   "exempt": true,
+   "reason": "퇴역한 ACS TOC 도판 수치"
+  },
+  {
+   "key": "toc_cells",
+   "line": "toc_cells: 본문에서 문맥을 찾지 못함 (값 12)",
+   "exempt": true,
+   "reason": "퇴역한 ACS TOC 도판 수치"
+  },
+  {
+   "key": "bh_q35_concl",
+   "line": "bh_q35_concl: 본문에서 문맥을 찾지 못함 (값 0.629941)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "cl_dmmp_ga",
+   "line": "cl_dmmp_ga: 본문에서 문맥을 찾지 못함 (값 0.764107)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "cl_dmmp_gb",
+   "line": "cl_dmmp_gb: 본문에서 문맥을 찾지 못함 (값 0.645463)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "cl_dmmp_gd",
+   "line": "cl_dmmp_gd: 본문에서 문맥을 찾지 못함 (값 -0.49209)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "cl_dmmp_gf",
+   "line": "cl_dmmp_gf: 본문에서 문맥을 찾지 못함 (값 -0.720668)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "cl_dmmp_vx",
+   "line": "cl_dmmp_vx: 본문에서 문맥을 찾지 못함 (값 -0.702006)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "conc_gb_lo",
+   "line": "conc_gb_lo: 본문에서 문맥을 찾지 못함 (값 0.363)",
+   "exempt": true,
+   "reason": "농도 추세 구간값 JHM 미수록"
+  },
+  {
+   "key": "conc_gb_hi",
+   "line": "conc_gb_hi: 본문에서 문맥을 찾지 못함 (값 0.7706)",
+   "exempt": true,
+   "reason": "농도 추세 구간값 JHM 미수록"
+  },
+  {
+   "key": "conc_gf_hi",
+   "line": "conc_gf_hi: 본문에서 문맥을 찾지 못함 (값 0.6999)",
+   "exempt": true,
+   "reason": "농도 추세 구간값 JHM 미수록"
+  },
+  {
+   "key": "trend_monotone",
+   "line": "trend_monotone: 본문에서 문맥을 찾지 못함 (값 3)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "trend_bh_q",
+   "line": "trend_bh_q: 본문에서 문맥을 찾지 못함 (값 0.278)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "rank_obs",
+   "line": "rank_obs: 본문에서 문맥을 찾지 못함 (값 2)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "rank_exp",
+   "line": "rank_exp: 본문에서 문맥을 찾지 못함 (값 2)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "rank_p",
+   "line": "rank_p: 본문에서 문맥을 찾지 못함 (값 0.6242)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dye_null_uv",
+   "line": "dye_null_uv: 본문에서 문맥을 찾지 못함 (값 2)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_null_normal",
+   "line": "dye_null_normal: 본문에서 문맥을 찾지 못함 (값 2.26)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "fisher_minq",
+   "line": "fisher_minq: 본문에서 문맥을 찾지 못함 (값 0.2373)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "h1_safer7",
+   "line": "h1_safer7: 본문에서 문맥을 찾지 못함 (값 7)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "h1_relaxed10",
+   "line": "h1_relaxed10: 본문에서 문맥을 찾지 못함 (값 8)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "sp_mantel_q_drop2",
+   "line": "sp_mantel_q_drop2: 본문에서 문맥을 찾지 못함 (값 0.3)",
+   "exempt": true,
+   "reason": "부호화 변형 Mantel q JHM 미수록"
+  },
+  {
+   "key": "sp_mantel_q_drop4",
+   "line": "sp_mantel_q_drop4: 본문에서 문맥을 찾지 못함 (값 0.294444)",
+   "exempt": true,
+   "reason": "부호화 변형 Mantel q JHM 미수록"
+  },
+  {
+   "key": "sp_mantel_q_drop5",
+   "line": "sp_mantel_q_drop5: 본문에서 문맥을 찾지 못함 (값 0.294444)",
+   "exempt": true,
+   "reason": "부호화 변형 Mantel q JHM 미수록"
+  },
+  {
+   "key": "sp_mantel_q_lowcard",
+   "line": "sp_mantel_q_lowcard: 본문에서 문맥을 찾지 못함 (값 0.322222)",
+   "exempt": true,
+   "reason": "부호화 변형 Mantel q JHM 미수록"
+  },
+  {
+   "key": "sp_mantel_nvar",
+   "line": "sp_mantel_nvar: 본문에서 문맥을 찾지 못함 (값 7)",
+   "exempt": true,
+   "reason": "부호화 변형 Mantel q JHM 미수록"
+  },
+  {
+   "key": "d1_p_min",
+   "line": "d1_p_min: 본문에서 문맥을 찾지 못함 (값 0.229167)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "conc_norm_rho",
+   "line": "conc_norm_rho: 본문에서 문맥을 찾지 못함 (값 1)",
+   "exempt": true,
+   "reason": "농도 추세 구간값 JHM 미수록"
+  },
+  {
+   "key": "mde_rho_mantel_bh",
+   "line": "mde_rho_mantel_bh: 본문에서 문맥을 찾지 못함 (값 0.85)",
+   "exempt": true,
+   "reason": "보정 문턱·비율 JHM 미수록"
+  },
+  {
+   "key": "nopatho_struct_p",
+   "line": "nopatho_struct_p: 본문에서 문맥을 찾지 못함 (값 0.0308824)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "nopatho_elec_p",
+   "line": "nopatho_elec_p: 본문에서 문맥을 찾지 못함 (값 0.275)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "nopatho_merged_p",
+   "line": "nopatho_merged_p: 본문에서 문맥을 찾지 못함 (값 0.025)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "dip_r",
+   "line": "dip_r: 본문에서 문맥을 찾지 못함 (값 0.91952)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "dip_mae",
+   "line": "dip_mae: 본문에서 문맥을 찾지 못함 (값 0.327589)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "dip_dmmp_gfn2",
+   "line": "dip_dmmp_gfn2: 본문에서 문맥을 찾지 못함 (값 2.52339)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "dip_dmmp_b3lyp",
+   "line": "dip_dmmp_b3lyp: 본문에서 문맥을 찾지 못함 (값 4.88255)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "dip_maxdev",
+   "line": "dip_maxdev: 본문에서 문맥을 찾지 못함 (값 2.35916)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "mt_dft_gfn2_p",
+   "line": "mt_dft_gfn2_p: 본문에서 문맥을 찾지 못함 (값 0.275)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "mt_dft_full_p",
+   "line": "mt_dft_full_p: 본문에서 문맥을 찾지 못함 (값 0.0367647)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "mt_dft_full_match",
+   "line": "mt_dft_full_match: 본문에서 문맥을 찾지 못함 (값 5)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "mt_dft_mg_match",
+   "line": "mt_dft_mg_match: 본문에서 문맥을 찾지 못함 (값 3)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "mt_dft_mg_p",
+   "line": "mt_dft_mg_p: 본문에서 문맥을 찾지 못함 (값 0.025)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "mt_dft_mg_gfn2_p",
+   "line": "mt_dft_mg_gfn2_p: 본문에서 문맥을 찾지 못함 (값 0.025)",
+   "exempt": true,
+   "reason": "별칭 키, 원 키가 SI 에서 검사됨"
+  },
+  {
+   "key": "ascl3_a36l_match",
+   "line": "ascl3_a36l_match: 본문에서 문맥을 찾지 못함 (값 6)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "len_pages",
+   "line": "len_pages: 본문에서 문맥을 찾지 못함 (값 10.49)",
+   "exempt": true,
+   "reason": "분량 수치 JHM 커버레터 미수록"
+  },
+  {
+   "key": "len_body",
+   "line": "len_body: 본문에서 문맥을 찾지 못함 (값 8152)",
+   "exempt": true,
+   "reason": "커버레터가 총계와 면수만 적는다 — len_text_words 로 대조"
+  },
+  {
+   "key": "len_figs",
+   "line": "len_figs: 본문에서 문맥을 찾지 못함 (값 1)",
+   "exempt": true,
+   "reason": "분량 수치 JHM 커버레터 미수록"
+  },
+  {
+   "key": "thr_free_28",
+   "line": "thr_free_28: 본문에서 문맥을 찾지 못함 (값 5)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dye_n_fluor",
+   "line": "dye_n_fluor: 본문에서 문맥을 찾지 못함 (값 3)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_top_uv",
+   "line": "dye_top_uv: 본문에서 문맥을 찾지 못함 (값 90.2468)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_top_normal",
+   "line": "dye_top_normal: 본문에서 문맥을 찾지 못함 (값 3.61943)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_top_ratio",
+   "line": "dye_top_ratio: 본문에서 문맥을 찾지 못함 (값 79.5868)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_anthracene_ratio",
+   "line": "dye_anthracene_ratio: 본문에서 문맥을 찾지 못함 (값 24.7066)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dye_pyrene_ratio",
+   "line": "dye_pyrene_ratio: 본문에서 문맥을 찾지 못함 (값 14.7043)",
+   "exempt": true,
+   "reason": "염료 패널 구성 공시 JHM 미수록"
+  },
+  {
+   "key": "dead_d1_uv",
+   "line": "dead_d1_uv: 본문에서 문맥을 찾지 못함 (값 2)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "swap_n_added",
+   "line": "swap_n_added: 본문에서 문맥을 찾지 못함 (값 7)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "swap_common_pairs",
+   "line": "swap_common_pairs: 본문에서 문맥을 찾지 못함 (값 378)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "swap_pair_med",
+   "line": "swap_pair_med: 본문에서 문맥을 찾지 못함 (값 8.56718)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "swap_far_med",
+   "line": "swap_far_med: 본문에서 문맥을 찾지 못함 (값 10.5479)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "swap_inc_med",
+   "line": "swap_inc_med: 본문에서 문맥을 찾지 못함 (값 6.21774)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "swap_inc_max",
+   "line": "swap_inc_max: 본문에서 문맥을 찾지 못함 (값 26.3626)",
+   "exempt": true,
+   "reason": "짝교환 분석 JHM 미수록"
+  },
+  {
+   "key": "mde_below_bh",
+   "line": "mde_below_bh: 본문에서 문맥을 찾지 못함 (값 4)",
+   "exempt": true,
+   "reason": "보정 문턱·비율 JHM 미수록"
+  },
+  {
+   "key": "aegl_n_with",
+   "line": "aegl_n_with: 본문에서 문맥을 찾지 못함 (값 19)",
+   "exempt": true,
+   "reason": "AEGL 개수, 같은 양이 panel_with_aegl3 로 검사됨"
+  },
+  {
+   "key": "lumo_b3lyp_pos",
+   "line": "lumo_b3lyp_pos: 본문에서 문맥을 찾지 못함 (값 9)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "lumo_gfn2_pos",
+   "line": "lumo_gfn2_pos: 본문에서 문맥을 찾지 못함 (값 6)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "lumo_b3lyp_max",
+   "line": "lumo_b3lyp_max: 본문에서 문맥을 찾지 못함 (값 0.542626)",
+   "exempt": true,
+   "reason": "쌍극자·LUMO 통계 JHM 미수록"
+  },
+  {
+   "key": "boot_inc_le1",
+   "line": "boot_inc_le1: 본문에서 문맥을 찾지 못함 (값 85.6)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "struct_GD",
+   "line": "struct_GD: 본문에서 문맥을 찾지 못함 (값 1.60182)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "struct_VX",
+   "line": "struct_VX: 본문에서 문맥을 찾지 못함 (값 3.35441)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "merged_VX",
+   "line": "merged_VX: 본문에서 문맥을 찾지 못함 (값 3.05661)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "struct_CG",
+   "line": "struct_CG: 본문에서 문맥을 찾지 못함 (값 1.75647)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "elec_CG",
+   "line": "elec_CG: 본문에서 문맥을 찾지 못함 (값 2.24691)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "struct_CG_rival",
+   "line": "struct_CG_rival: 본문에서 문맥을 찾지 못함 (값 1.13578)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "merged_CG_rival",
+   "line": "merged_CG_rival: 본문에서 문맥을 찾지 못함 (값 1.11936)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "elec_CG_rival",
+   "line": "elec_CG_rival: 본문에서 문맥을 찾지 못함 (값 1.17107)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "len_pages",
+   "line": "len_pages: 본문에서 문맥을 찾지 못함 (값 10.49)",
+   "exempt": true,
+   "reason": "분량 수치 JHM 커버레터 미수록"
+  },
+  {
+   "key": "pp_bh_q",
+   "line": "pp_bh_q: 본문에서 문맥을 찾지 못함 (값 0.000752579)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j18_identified",
+   "line": "j18_identified: 본문에서 문맥을 찾지 못함 (값 22)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j18_unsuitable",
+   "line": "j18_unsuitable: 본문에서 문맥을 찾지 못함 (값 17)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j21_identified",
+   "line": "j21_identified: 본문에서 문맥을 찾지 못함 (값 171)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j21_discounted",
+   "line": "j21_discounted: 본문에서 문맥을 찾지 못함 (값 78)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j21_suitable",
+   "line": "j21_suitable: 본문에서 문맥을 찾지 못함 (값 39)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "j21_possible",
+   "line": "j21_possible: 본문에서 문맥을 찾지 못함 (값 54)",
+   "exempt": true,
+   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
+  },
+  {
+   "key": "lew_dnorm_E",
+   "line": "lew_dnorm_E: 본문에서 문맥을 찾지 못함 (값 2.47689)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "lew_dnorm_Z",
+   "line": "lew_dnorm_Z: 본문에서 문맥을 찾지 못함 (값 2.48917)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "conc_norm_cells",
+   "line": "conc_norm_cells: 본문에서 문맥을 찾지 못함 (값 6)",
+   "exempt": true,
+   "reason": "농도 추세 구간값 JHM 미수록"
+  },
+  {
+   "key": "pn_exact_n",
+   "line": "pn_exact_n: 본문에서 문맥을 찾지 못함 (값 13824)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "mde_ratio_bh35",
+   "line": "mde_ratio_bh35: 본문에서 문맥을 찾지 못함 (값 1.14548)",
+   "exempt": true,
+   "reason": "보정 문턱·비율 JHM 미수록"
+  },
+  {
+   "key": "mde_ratio_bh28",
+   "line": "mde_ratio_bh28: 본문에서 문맥을 찾지 못함 (값 0.41342)",
+   "exempt": true,
+   "reason": "보정 문턱·비율 JHM 미수록"
+  },
+  {
+   "key": "mde_gap_median_28",
+   "line": "mde_gap_median_28: 본문에서 문맥을 찾지 못함 (값 0.0744156)",
+   "exempt": true,
+   "reason": "보정 문턱·비율 JHM 미수록"
+  },
+  {
+   "key": "nb_dcm",
+   "line": "nb_dcm: 본문에서 문맥을 찾지 못함 (값 47.5)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "n_freedoms",
+   "line": "n_freedoms: 본문에서 문맥을 찾지 못함 (값 7)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "match_range_hi",
+   "line": "match_range_hi: 본문에서 문맥을 찾지 못함 (값 6)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dmmp_g4mean_uv",
+   "line": "dmmp_g4mean_uv: 본문에서 문맥을 찾지 못함 (값 0.0492031)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dmmp_g4mean_nor",
+   "line": "dmmp_g4mean_nor: 본문에서 문맥을 찾지 못함 (값 -0.129293)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dmmp_gmean_uv_3",
+   "line": "dmmp_gmean_uv_3: 본문에서 문맥을 찾지 못함 (값 -0.189098)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  },
+  {
+   "key": "dmmp_gmean_nor_3",
+   "line": "dmmp_gmean_nor_3: 본문에서 문맥을 찾지 못함 (값 -0.135061)",
+   "exempt": true,
+   "reason": "JHM 판본 미수록"
+  }
+ ]
+}
