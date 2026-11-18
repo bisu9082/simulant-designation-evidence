@@ -1296,6 +1296,18 @@ def load_facts():
         for _a in _mbp['panel28_incumbent3']['agents']:
             if _a['agent'] == 'tabun (GA)':
                 f['t3_GA_full'] = _a['d_norm_full']
+        # 2026-11-18 (P2 잔여). TOC 도판의 유효매칭 수.
+        #
+        # 왜. make_toc_acs.py 가 이 세 수를 예치물에서 뽑아 그리고
+        # fig_annot 에 기록까지 하는데, 그 기록을 대조하는 앵커가 없었다.
+        # 주입시험의 'TOC 의 UV 코사인이 구판이다' 가 유일하게 남은
+        # 미탐지였고 원인이 이것이다. TOC 는 독자가 가장 먼저 보고
+        # 투고 패키지에 들어가는 그림이다.
+        f['toc_nmatch_full'] = _mbp['panel35_incumbent3']['n_match']
+        f['toc_nmatch_omit7'] = _mbp['panel28_incumbent3']['n_match']
+        f['toc_nmatch_eight'] = (_mbp['panel35_incumbent_plus_lit8']
+                                 ['n_match'])
+        f['toc_n_agents'] = len(_mbp['panel35_incumbent3']['agents'])
     # 구판 필터의 '원래 열 순서' 결과. order_invariance 는 분포만 담으므로
     # (최대값은 치환으로 나온 다른 값이다) match_rule_audit 의 legacy 팔에서
     # 읽는다. 이 값은 SI 열순서 절이 대조값으로 인용한다.
@@ -1972,9 +1984,16 @@ def load_facts():
     _mj = json.load(open('outputs/mde.json'))['panel35_incumbent3']
     f['mde_below_alpha'] = _mj['n_below_alpha_mde']
     f['mde_below_bh'] = _mj['n_below_bh_mde']
-    f['mde_below_bh18_ns'] = json.load(
-        open('outputs/mde_nullshift.json'))['panel35_incumbent3'][
-            'n_below_mde_bh18']
+    _mns = json.load(open('outputs/mde_nullshift.json'))['panel35_incumbent3']
+    f['mde_below_bh18_ns'] = _mns['n_below_mde_bh18']
+    # 2026-11-18 (P2 잔여). Limitations 의 검출력 세 수가 사실표에 없었다.
+    # 본문 결론('보정 후 검정력 없음')이 이 세 수에 걸려 있는데 무검사였다.
+    f['mde_ns_alpha'] = _mns['mde_alpha']
+    f['mde_ns_bh18'] = _mns['mde_bh18']
+    # 형태 블록 축약 후 구조공간 명목값. 본문 Discussion 이 인용한다.
+    f['sr_struct_reduced_p'] = (
+        json.load(open('outputs/shape_reduction.json'))['variants']['reduced']
+        ['panel28_incumbent3']['structural']['statistics']['mean_diff']['p'])
 
     # 2026-11-07 (12차 R4). AEGL 등급. 편람이 Final/Interim/Proposed 로
     # 나누는데 원고가 등급 없이 한 축에 놓고 있었다.
@@ -3761,6 +3780,71 @@ CHECKS = [
      [r'registered correction\s*\n?\(\$p = ([\d.]+)\$\)'], 0.0000005),
     ('abs_volniosh_plus3',
      [r'the three measured ones moves it to ([\d.]+) and reverses'], 0.0005),
+    # 2026-11-18 (P2 잔여, 2차 묶음). 자리별 앵커 스물한 자리.
+    # 값-키 대응이 모호한 것은 넣지 않았다 (잘못된 별칭은 검증이 아니라
+    # 검증처럼 보이는 것이다). 남은 자리는 anchor_audit.py 가 센다.
+    ('st_nc_fixed', [r'readings give ([\d.]+) and [\d.]+ in the structural'],
+     0.0005),
+    ('st_nc_minus', [r'readings give [\d.]+ and ([\d.]+) in the structural'],
+     0.0005),
+    ('st_p28_vs', [r'structural space against the ([\d.]+) reported here'],
+     0.0005),
+    ('st_p28_abs', [r'rather than the structural ([\d.]+) the abstract'],
+     0.0005),
+    ('st_null3', [r'comparison returns \$p=([\d.]+)\$, the smallest'], 0.0005),
+    ('st_bh28_fam', [r'family leaves that result at ([\d.]+) and the closest'],
+     0.0005),
+    ('st_bh6_p28', [r'brings it without crossing[^.]*? is ([\d.]+)\.'], 0.0005),
+    ('st_bh28_acn', [r'result from a corrected ([\d.]+) to [\d.]+ and the'],
+     0.0005),
+    ('st_acn_q28', [r'from a corrected [\d.]+ to ([\d.]+) and the matched'],
+     0.0005),
+    ('st_p_merged', [r'merged mean difference at ([\d.]+) rather than'], 0.0005),
+    ('st_te_elec', [r'admitting ([\d.]+) per cent of all pairs'], 0.0005),
+    ('st_te_merged', [r'against ([\d.]+) per cent in the merged'], 0.0005),
+    ('st_vol_fam', [r'registered for it \(\$q = ([\d.]+)\$\)'], 0.00005),
+    ('st_bh28_vol', [r'do not survive theirs \(\$q = ([\d.]+)\$\)'], 0.0005),
+    ('st_vol4cell', [r'read as one family giving ([\d.]+);'], 0.00005),
+    ('st_dft_gfn2', [r'level moves it from \$p=([\d.]+)\$ to'], 0.0005),
+    ('st_dft_full', [r'moves it from \$p=[\d.]+\$ to ([\d.]+) on coordinates'],
+     0.00005),
+    ('st_rf_r2', [r'AEGL chemicals reaches \$R\^\{2\}=([\d.]+)\$'], 0.0005),
+    ('st_spearman', [r'\(Spearman \$r=\+([\d.]+)\$'], 0.0005),
+    ('st_n_features', [r'random forest on (\d+) RDKit descriptors'], 0),
+    ('st_n_train', [r'entirely, leaving (\d+) compounds to train'], 0),
+    # 2026-11-18 (P2 잔여). 편집장이 지목한 고위험 구역 아홉 자리.
+    # Figure 1 캡션 / Limitations 검출력 / Conclusions 인접 서술.
+    ('fig1_nperm680',
+     [r'null for that panel\s*\n?over all (\d+) designations'], 0),
+    ('fig1_bh_q28',
+     [r'over the eighteen tests, ([\d.]+)\)\. \(e\)'], 0.0005),
+    ('fig1_vol_gap',
+     [r'DPGME, lies ([\d.]+) decades apart'], 0.00005),
+    ('lim_mde_alpha',
+     [r'incumbents are moved ([\d.]+) typical separations'], 0.005),
+    ('lim_gap_median',
+     [r'median deficit of ([\d.]+), but correcting'], 0.0005),
+    ('lim_mde_bh18',
+     [r'detectable effect to ([\d.]+), above that deficit'], 0.005),
+    ('concl_vol_rank',
+     [r'ranks the designation (\d+)th of \d+\s*\n?on match count'], 0),
+    ('concl_vol_nperm',
+     [r'ranks the designation \d+th of (\d+)\s*\n?on match count'], 0),
+    ('concl_sr_struct',
+     [r'nominal value survives at ([\d.]+)\s*\n?\(Supporting'], 0.0005),
+    # 2026-11-18 (P2 잔여). TOC 도판 주석 여덟 자리.
+    ('toc_n_agents', [r'valid matches of (\d+) agents'], 0),
+    ('toc_nmatch_full', [r'agents: (\d+) \(full panel\)'], 0),
+    ('toc_nmatch_omit7', [r'\(full panel\), (\d+) \(omit seven\)'], 0),
+    ('toc_nmatch_eight', [r'\(omit seven\), (\d+) \(eight desig\.\)'], 0),
+    ('toc_bh_q35',
+     [r'q over 18 tests: ([\d.]+) \(incumbent 3, full panel\)'], 0.0005),
+    ('toc_bh_q35lit',
+     [r'full panel\), ([\d.]+) \(eight designated\)'], 0.0005),
+    ('toc_bh_q28',
+     [r'eight designated\), ([\d.]+) \(incumbent 3, seven omitted\)'], 0.0005),
+    ('toc_pf_bh18',
+     [r'seven omitted\), ([\d.]+) \(seven labels moved\)'], 0.000005),
     ('concl_pf_bh18',
      [r'from a corrected [\d.]+ to ([\d.]+) on one panel'], 0.000005),
     ('pp_bh_q', [r'Benjamini-Hochberg value of ([\d.]+) over the same',
@@ -4416,7 +4500,41 @@ def main():
     # 2026-11-02. 커버레터도 본문 수치를 다시 센다. 주입시험에서 0.964,
     # +0.76, +0.77 세 자리가 전부 통과했다 (어법이 본문과 달라 (B) 검사가
     # 본문 쪽에서 이미 맞고 끝났다). 자리마다 키를 따로 둔다.
-    for _dst, _src_key in (('abs_p28_struct', 'p28_struct'),
+    for _dst, _src_key in (('st_nc_fixed', 'nc_fixed_struct'),
+                           ('st_nc_minus', 'nc_minus_struct'),
+                           ('st_p28_vs', 'p28_struct'),
+                           ('st_p28_abs', 'p28_struct'),
+                           ('st_null3', 'null3_lower'),
+                           ('st_bh28_fam', 'bh_q28'),
+                           ('st_bh6_p28', 'fam_bh6_p28'),
+                           ('st_bh28_acn', 'bh_q28'),
+                           ('st_acn_q28', 'acn_q28'),
+                           ('st_p_merged', 'p_merged'),
+                           ('st_te_elec', 'te_pct_elec'),
+                           ('st_te_merged', 'te_pct_merged'),
+                           ('st_vol_fam', 'vol_fam_pair'),
+                           ('st_bh28_vol', 'bh_q28'),
+                           ('st_vol4cell', 'vol_four_cell_bh'),
+                           ('st_dft_gfn2', 'dft_es_gfn2_p'),
+                           ('st_dft_full', 'dft_es_full_p'),
+                           ('st_rf_r2', 'rf_r2'),
+                           ('st_spearman', 'spearman_r'),
+                           ('st_n_features', 'n_features'),
+                           ('st_n_train', 'n_train'),
+                           ('fig1_nperm680', 'vol_nperm'),
+                           ('fig1_bh_q28', 'bh_q28'),
+                           ('fig1_vol_gap', 'vol_gap'),
+                           ('lim_gap_median', 'mde_gap_median'),
+                           ('lim_mde_alpha', 'mde_ns_alpha'),
+                           ('lim_mde_bh18', 'mde_ns_bh18'),
+                           ('concl_vol_rank', 'vol_rank_nvalid'),
+                           ('concl_vol_nperm', 'vol_nperm'),
+                           ('concl_sr_struct', 'sr_struct_reduced_p'),
+                           ('toc_bh_q35', 'bh_q35'),
+                           ('toc_bh_q35lit', 'bh_q35lit'),
+                           ('toc_bh_q28', 'bh_q28'),
+                           ('toc_pf_bh18', 'pf_bh18'),
+                           ('abs_p28_struct', 'p28_struct'),
                            ('abs_niosh_p28_plus', 'niosh_p28_plus'),
                            ('abs_vol_p_md', 'vol_p_md'),
                            ('abs_volniosh_plus3', 'volniosh_p_plus3'),
@@ -5250,6 +5368,29 @@ def main():
     #   (1) 전수 명단을 사유와 함께 outputs/unmatched_anchors.json 에 쓴다.
     #   (2) 기준선보다 늘면 실패로 올린다. 줄어드는 것은 막지 않는다.
     #       기준선을 올릴 때는 왜 늘었는지 여기 한 줄로 적을 것.
+    # 2026-11-18 (P2 잔여). 위치형 게이트.
+    #
+    # 왜. (B) 검사는 키 단위라 '한 키가 어딘가에서 맞으면 그 양은 검사된다'
+    # 로 회계한다. 그래서 같은 양을 다른 어법으로 적은 자리(초록·결론·
+    # 도판 캡션)가 조용히 빠졌다. 0.745 는 네 자리에서 말해지는데 사실
+    # 키조차 없었고, 초록의 0.028·0.360·0.0206 은 주입해도 불일치 0 건이었다.
+    # anchor_audit.py 가 회계 단위를 '자리' 로 바꿔 세고, 여기서는 그 수가
+    # 늘지 못하게만 한다. 줄이는 것은 앵커를 다는 작업이고 기준선을 내린다.
+    try:
+        import anchor_audit as _aa
+        _unanchored = _aa.run()
+    except Exception as _e:                      # 감사가 깨져도 검증은 돈다
+        _unanchored = None
+        print(f'[verify] 경고: anchor_audit 실행 실패 ({_e})')
+    ANCHOR_BASELINE = 52       # 2026-11-18 기준. 내릴 때마다 여기도 내릴 것
+    if _unanchored is not None:
+        print(f'[verify] 본문 미앵커 수치 {len(_unanchored)}곳 '
+              f'/ 기준선 {ANCHOR_BASELINE}')
+        if len(_unanchored) > ANCHOR_BASELINE:
+            fails.append(f'  본문 미앵커 수치가 기준선을 넘었다 (검사 P2): '
+                         f'{len(_unanchored)} > {ANCHOR_BASELINE} — '
+                         f'python anchor_audit.py 로 자리를 볼 것')
+
     UNSEEN_BASELINE = 105      # 2026-11-16 82c2ddf 기준
     _inv = []
     for u in unseen:

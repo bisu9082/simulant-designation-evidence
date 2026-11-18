@@ -1244,8 +1244,15 @@ def main():
     backup.close()
     bad = 0
     try:
-        if run() != 0:
+        # 2026-11-18. 기준선 검사도 같은 오라클을 쓴다. 종전에는 반환코드를
+        # 봤는데, 푸시 전에는 A-tag 가 늘 걸리므로 정상 본문이 통과하지
+        # 못한다고 보고하고 시험 전체가 멈췄다. 작업 흐름 가드는 원고의
+        # 결함이 아니다.
+        _rc0, _out0 = run_parsed()
+        if caught(_out0):
             print('  FAIL 정상 본문이 통과하지 못한다 — 먼저 그것을 고쳐야 한다')
+            for _l in substantive(_out0)[:5]:
+                print('      ', _l[:110])
             return 1
         print('  ok   정상 본문 통과')
         # 2026-10-15. 절을 SI 로 옮기면 앵커가 main.tex 에서 사라져 시험이
