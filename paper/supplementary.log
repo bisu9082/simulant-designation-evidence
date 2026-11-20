@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  18 NOV 2026 02:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  20 NOV 2026 13:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -466,82 +466,85 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/base/8r.enc}]
 
-Package hyperref Warning: Suppressing link with empty target on input line 200.
+Package hyperref Warning: Suppressing link with empty target on input line 209.
 
 
 [2] [3]
 
-Package hyperref Warning: Suppressing link with empty target on input line 244.
+Package hyperref Warning: Suppressing link with empty target on input line 257.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 271.
+Package hyperref Warning: Suppressing link with empty target on input line 284.
 
 
-[4]
+[4] [5]
 
-Package hyperref Warning: Suppressing link with empty target on input line 351.
-
-
-[5]
-
-Package hyperref Warning: Suppressing link with empty target on input line 414.
-
-
-[6]
-
-Package hyperref Warning: Suppressing link with empty target on input line 537.
+Package hyperref Warning: Suppressing link with empty target on input line 422.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 543.
+Package hyperref Warning: Suppressing link with empty target on input line 485.
 
 
-[7]
+[6] [7]
 
-Package hyperref Warning: Suppressing link with empty target on input line 609.
-
-
-[8] [9] (./tab_sparse.tex)
-
-Package hyperref Warning: Suppressing link with empty target on input line 787.
-
-
-[10]
-
-Package hyperref Warning: Suppressing link with empty target on input line 809.
+Package hyperref Warning: Suppressing link with empty target on input line 616.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 810.
+Package hyperref Warning: Suppressing link with empty target on input line 622.
+
+
+[8]
+
+Package hyperref Warning: Suppressing link with empty target on input line 688.
+
+
+[9] [10] (./tab_sparse.tex) [11]
+
+Package hyperref Warning: Suppressing link with empty target on input line 866.
 
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 828.
+Package hyperref Warning: Suppressing link with empty target on input line 888.
 
 
-(./tab_failaudit.tex) [11] [12]
 
-Package hyperref Warning: Suppressing link with empty target on input line 924.
+Package hyperref Warning: Suppressing link with empty target on input line 889.
 
 
-[13]
-<Fig_spaces.png, id=369, 722.57954pt x 657.77745pt>
+
+Package hyperref Warning: Suppressing link with empty target on input line 907.
+
+
+(./tab_failaudit.tex) [12] [13]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1003
+.
+
+[14]
+<Fig_spaces.png, id=382, 722.57954pt x 657.77745pt>
 File: Fig_spaces.png Graphic file (type png)
 <use Fig_spaces.png>
-Package pdftex.def Info: Fig_spaces.png  used on input line 1041.
+Package pdftex.def Info: Fig_spaces.png  used on input line 1120.
 (pdftex.def)             Requested size: 460.935pt x 419.60109pt.
- [14] [15 <./Fig_spaces.png>] (./tab_dyepanel.tex) [16] [17]
-(./tab_volatility.tex)
+ [15] [16 <./Fig_spaces.png>] (./tab_dyepanel.tex) [17] [18]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1260
+Package hyperref Warning: Suppressing link with empty target on input line 1314
 .
 
+(./tab_volatility.tex) [19]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1283
+Package hyperref Warning: Suppressing link with empty target on input line 1353
 .
 
-[18] [19] [20] (./tab_voldecomp.tex
+[20]
+
+Package hyperref Warning: Suppressing link with empty target on input line 1376
+.
+
+[21] (./tab_voldecomp.tex
 Underfull \hbox (badness 2460) in paragraph at lines 5--5
 []\OT1/ptm/m/n/10.95 Table S5: []The volatil-ity axis taken apart. For each des
 -ig-na-tion size, the best set in the
@@ -559,85 +562,90 @@ Underfull \hbox (badness 2726) in paragraph at lines 5--5
 on-di-tion-ing fol-low. Val-ues are in
  []
 
-) (./tab_vpairing.tex) [21] (./tab_volniosh.tex) (./tab_designations.tex
-[22] [23])
+) (./tab_vpairing.tex) [22] [23] (./tab_volniosh.tex) (./tab_designations.tex
+[24])
 
-Package hyperref Warning: Suppressing link with empty target on input line 1506
+Package hyperref Warning: Suppressing link with empty target on input line 1604
 .
 
-[24] [25]
+[25]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1590
+Package hyperref Warning: Suppressing link with empty target on input line 1699
 .
 
+[26]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1613
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1614
+Package hyperref Warning: Suppressing link with empty target on input line 1722
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1625
+Package hyperref Warning: Suppressing link with empty target on input line 1723
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1631
+Package hyperref Warning: Suppressing link with empty target on input line 1734
 .
 
+
+Package hyperref Warning: Suppressing link with empty target on input line 1740
+.
+
+[27]
 LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 1
-637.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+746.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1637.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 1746.
 
- [26]
+ [28]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1718
+Package hyperref Warning: Suppressing link with empty target on input line 1819
 .
 
-[27] (./tab_nioshlist.tex) (./tab_niosh.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1731
+Package hyperref Warning: Suppressing link with empty target on input line 1867
 .
 
-[28]
+(./tab_nioshlist.tex) (./tab_niosh.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 1785
+Package hyperref Warning: Suppressing link with empty target on input line 1880
 .
 
 [29]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1877
+Package hyperref Warning: Suppressing link with empty target on input line 1934
+.
+
+[30] [31]
+
+Package hyperref Warning: Suppressing link with empty target on input line 2026
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1893
+Package hyperref Warning: Suppressing link with empty target on input line 2042
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1922
+Package hyperref Warning: Suppressing link with empty target on input line 2071
 .
 
-[30]
+[32]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1926
-.
-
-
-Package hyperref Warning: Suppressing link with empty target on input line 1952
+Package hyperref Warning: Suppressing link with empty target on input line 2075
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 1957
+Package hyperref Warning: Suppressing link with empty target on input line 2101
 .
 
-[31]
 
-Package hyperref Warning: Suppressing link with empty target on input line 1991
+Package hyperref Warning: Suppressing link with empty target on input line 2106
+.
+
+
+Package hyperref Warning: Suppressing link with empty target on input line 2140
 .
 
 (./tab_ablation.tex
@@ -653,75 +661,69 @@ Package hyperref Warning: Suppressing link with empty target on input line 25.
 
 Package hyperref Warning: Suppressing link with empty target on input line 25.
 
-) (./tab_family.tex) [32] [33] [34] (./tab_blockbalance.tex) [35] [36]
+) [33] (./tab_family.tex) [34] [35] [36] (./tab_blockbalance.tex) [37] [38]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2327
+Package hyperref Warning: Suppressing link with empty target on input line 2489
 .
 
-<Fig_mde.png, id=598, 603.33405pt x 372.07005pt>
+<Fig_mde.png, id=623, 603.33405pt x 372.07005pt>
 File: Fig_mde.png Graphic file (type png)
 <use Fig_mde.png>
-Package pdftex.def Info: Fig_mde.png  used on input line 2334.
+Package pdftex.def Info: Fig_mde.png  used on input line 2496.
 (pdftex.def)             Requested size: 460.935pt x 284.25795pt.
-<Fig_plocal.png, id=599, 841.9455pt x 499.8675pt>
+<Fig_plocal.png, id=624, 841.9455pt x 499.8675pt>
 File: Fig_plocal.png Graphic file (type png)
 <use Fig_plocal.png>
-Package pdftex.def Info: Fig_plocal.png  used on input line 2351.
+Package pdftex.def Info: Fig_plocal.png  used on input line 2513.
 (pdftex.def)             Requested size: 460.935pt x 273.6542pt.
-[37 <./Fig_mde.png>] (./tab_plocal.tex) [38 <./Fig_plocal.png>] [39]
+[39 <./Fig_mde.png>] (./tab_plocal.tex) [40 <./Fig_plocal.png>] [41]
 (./tab_premisenull.tex)
 
-Package hyperref Warning: Suppressing link with empty target on input line 2538
+Package hyperref Warning: Suppressing link with empty target on input line 2700
 .
 
-[40]
+[42]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2562
+Package hyperref Warning: Suppressing link with empty target on input line 2724
 .
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 2587
+Package hyperref Warning: Suppressing link with empty target on input line 2749
 .
 
-[41]
-<Fig_toxicity.png, id=647, 844.3545pt x 864.831pt>
+[43]
+<Fig_toxicity.png, id=674, 844.3545pt x 864.831pt>
 File: Fig_toxicity.png Graphic file (type png)
 <use Fig_toxicity.png>
-Package pdftex.def Info: Fig_toxicity.png  used on input line 2661.
+Package pdftex.def Info: Fig_toxicity.png  used on input line 2843.
 (pdftex.def)             Requested size: 460.935pt x 472.10873pt.
- [42] [43 <./Fig_toxicity.png>] (./tab_registers.tex) [44]
+ [44] [45 <./Fig_toxicity.png>] (./tab_registers.tex) [46]
 
-Package hyperref Warning: Suppressing link with empty target on input line 2813
+Package hyperref Warning: Suppressing link with empty target on input line 2995
 .
 
-<Fig_h1.png, id=675, 777.26385pt x 834.35715pt>
+<Fig_h1.png, id=701, 777.26385pt x 834.35715pt>
 File: Fig_h1.png Graphic file (type png)
 <use Fig_h1.png>
-Package pdftex.def Info: Fig_h1.png  used on input line 2819.
+Package pdftex.def Info: Fig_h1.png  used on input line 3001.
 (pdftex.def)             Requested size: 460.935pt x 494.79997pt.
-[45]
-Underfull \hbox (badness 1424) in paragraph at lines 2896--2904
-[]\OT1/ptm/m/n/10.95 These are can-di-dates on the axes mea-sured here, and tha
-t qual-i-fi-ca-tion is not a for-mal-ity.
- []
-
-[46 <./Fig_h1.png>] [47] (./supplementary.bbl [48] [49] [50] [51]) [52]
-(./supplementary.aux)
+[47] [48] [49] [50] (./supplementary.bbl [51] [52] [53] [54]) [55] [56 <./Fig_h
+1.png>] (./supplementary.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `supplementary.out' has not changed.
-(rerunfilecheck)             Checksum: E9AF88F477E6239A84113E4AB0E38D60;11102.
+(rerunfilecheck)             Checksum: A8B7C9ABC2F0A8D4296D5E3239CEADC9;11485.
  ) 
 Here is how much of TeX's memory you used:
- 11556 strings out of 476106
- 174644 string characters out of 5793932
- 1958975 words of memory out of 5000000
- 33155 multiletter control sequences out of 15000+600000
+ 11573 strings out of 476106
+ 174875 string characters out of 5793932
+ 1954975 words of memory out of 5000000
+ 33162 multiletter control sequences out of 15000+600000
  591329 words of font info for 109 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,13n,79p,1474b,667s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,13n,79p,1474b,687s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texli
@@ -740,10 +742,10 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
 onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (52 pages, 6780691 bytes).
+Output written on supplementary.pdf (56 pages, 6795179 bytes).
 PDF statistics:
- 863 PDF objects out of 1000 (max. 8388607)
- 736 compressed objects within 8 object streams
- 193 named destinations out of 1000 (max. 500000)
- 354 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 908 PDF objects out of 1000 (max. 8388607)
+ 775 compressed objects within 8 object streams
+ 203 named destinations out of 1000 (max. 500000)
+ 362 words of extra memory for PDF output out of 10000 (max. 10000000)
 

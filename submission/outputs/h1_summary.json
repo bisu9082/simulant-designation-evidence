@@ -35,7 +35,10 @@
       "description": "DCM 대비 10배 안전",
       "n": 0,
       "n_more_faithful_than_dcm": 0,
-      "labels": []
+      "labels": [],
+      "labels_order": "alphabetical",
+      "ordering_withdrawn": true,
+      "ordering_withdrawn_note": "Any fidelity ordering of these compounds is withdrawn: it is not determined within the axis's own method error (see the method-error subsection of the Supporting Information). The safety axis here is acute inhalation only and is not a fitness assessment for any use."
     },
     "incumbent": {
       "bar_log10": 4.62,
@@ -43,7 +46,10 @@
       "description": "DCM 와 동등 이상 안전",
       "n": 0,
       "n_more_faithful_than_dcm": 0,
-      "labels": []
+      "labels": [],
+      "labels_order": "alphabetical",
+      "ordering_withdrawn": true,
+      "ordering_withdrawn_note": "Any fidelity ordering of these compounds is withdrawn: it is not determined within the axis's own method error (see the method-error subsection of the Supporting Information). The safety axis here is acute inhalation only and is not a fitness assessment for any use."
     },
     "relaxed_10": {
       "bar_log10": 3.62,
@@ -52,15 +58,18 @@
       "n": 8,
       "n_more_faithful_than_dcm": 8,
       "labels": [
-        "Trichloroethylene",
-        "HCFC 141b",
         "1,1,1-Trichloroethane",
-        "Trifluorochloroethylene",
-        "Tetrachloroethylene",
+        "HCFC 141b",
         "Hexafluoropropylene",
         "Methyl ethyl ketone",
+        "Tetrachloroethylene",
+        "Trichloroethylene",
+        "Trifluorochloroethylene",
         "Vinyl chloride"
-      ]
+      ],
+      "labels_order": "alphabetical",
+      "ordering_withdrawn": true,
+      "ordering_withdrawn_note": "Any fidelity ordering of these compounds is withdrawn: it is not determined within the axis's own method error (see the method-error subsection of the Supporting Information). The safety axis here is acute inhalation only and is not a fitness assessment for any use."
     },
     "relaxed_100": {
       "bar_log10": 2.62,
@@ -69,22 +78,25 @@
       "n": 15,
       "n_more_faithful_than_dcm": 15,
       "labels": [
-        "Trichloroethylene",
+        "1,1,1-Trichloroethane",
+        "1,2-Dibromoethane",
+        "Acrylic acid",
+        "Carbon disulfide",
+        "Carbon monoxide",
+        "Carbonyl sulfide",
         "Ethyl mercaptan",
         "HCFC 141b",
-        "1,1,1-Trichloroethane",
-        "Acrylic acid",
-        "Trifluorochloroethylene",
-        "Carbon monoxide",
-        "Tetrachloroethylene",
-        "1,2-Dibromoethane",
         "Hexafluoropropylene",
-        "Carbon disulfide",
-        "Methyl ethyl ketone",
         "Methacrylic acid",
-        "Vinyl chloride",
-        "Carbonyl sulfide"
-      ]
+        "Methyl ethyl ketone",
+        "Tetrachloroethylene",
+        "Trichloroethylene",
+        "Trifluorochloroethylene",
+        "Vinyl chloride"
+      ],
+      "labels_order": "alphabetical",
+      "ordering_withdrawn": true,
+      "ordering_withdrawn_note": "Any fidelity ordering of these compounds is withdrawn: it is not determined within the axis's own method error (see the method-error subsection of the Supporting Information). The safety axis here is acute inhalation only and is not a fitness assessment for any use."
     }
   },
   "pool_screen": {

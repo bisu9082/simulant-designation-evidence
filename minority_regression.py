@@ -64,7 +64,14 @@ for key, cs in groups.items():
         print(f'    {r.cas:12s} {str(r.aegl_name)[:30]:30s} '
               f'AEGL-3 {r.aegl3:>10,.3f} mg/m3  오차 {r.err:+.2f} log')
 
-SARIN = 0.366708
+# 2026-11-19 (데이터 정합성 점검). 종전에는 0.366708 을 리터럴로 박아
+# 두었다. 지금 값은 예치물과 같지만, AEGL 파싱이 바뀌면 이 문턱만 낡은
+# 채로 남아 '사린보다 강한 억제제' 집계가 조용히 틀어진다. 예치물에서 읽는다.
+_TX = pd.read_csv('outputs/toxicity_aegl.csv')
+_gb = _TX.loc[_TX.compound_name == 'sarin (GB)', 'AEGL3_10min_mgm3']
+if not len(_gb):
+    raise SystemExit('[중단] toxicity_aegl.csv 에 sarin (GB) 행이 없다')
+SARIN = float(_gb.iloc[0])
 worse = ache[ache.aegl3 < SARIN].sort_values('aegl3')
 print(f'\n[ache]  사린({SARIN:.3f} mg/m3)보다 급성독성이 강한 억제제 {len(worse)}건: '
       + (', '.join(f'{r.aegl_name} {r.aegl3:.3f}' for r in worse.itertuples())

@@ -75,6 +75,81 @@ def collapse_duplicate_channels(D, dy, key):
     return keep
 
 
+def component_share():
+    """단위 정규화한 패턴에서 성분별로 차지하는 분산 지분.
+
+    왜. 본문이 '응답하지 않은 성분이 응답한 성분과 같은 가중으로 거리에
+    들어간다' 고 적었던 적이 있다. 단위 정규화는 그렇게 하지 않는다 —
+    약하게 응답한 성분은 작은 지분으로 들어간다. 그 철회의 근거를 여기서
+    측정해 예치한다. 버리는 것은 성분 간 가중이 아니라 화합물의 응답 크기다.
+    """
+    aud = json.load(open('outputs/dye_panel_audit.json'))
+    names = [c['name'] if isinstance(c, dict) else c
+             for c in aud['components']]
+    out = {}
+    for tag in ('d1', 'd2', 'd3'):
+        for mode in ('uv', 'normal'):
+            key = f'{tag}.{mode}'
+            D = pd.read_csv(f'deltaE/{key}_deltaE_pivot.csv')
+            dy = [c for c in D.columns if c.lower().startswith('dye')]
+            V = D[dy].to_numpy(float)
+            nrm = np.linalg.norm(V, axis=1)
+            U = V[nrm > 0] / nrm[nrm > 0, None]
+            sh = (U ** 2).mean(0)
+            nm = names[:len(dy)] if len(names) >= len(dy) else dy
+            dead = set(aud['dead_channels'][key]['dead'])
+            out[key] = {
+                'in_analysis': tag != 'd3',
+                'n_components': len(dy),
+                'equal_share': 1.0 / len(dy),
+                'max_share': float(sh.max()),
+                'min_share': float(sh.min()),
+                'dead_channel_share': {n: float(sh[i])
+                                       for i, n in enumerate(nm)
+                                       if n in dead},
+            }
+    return out
+
+
+def duplicate_cross_set():
+    """d2.uv 에서 하나로 접히는 열 묶음을 세 UV 판 전부에 대고 본다.
+
+    SI 가 그 묶음의 원인을 염료의 광물리 성질로 적었던 적이 있다. 그것이
+    참이면 세 판 UV 에서 모두 같아야 한다. 여기서 재는 것은 그 반증이다.
+    """
+    CHANNEL_LOG.clear()
+    for tag in ('d1', 'd2', 'd3'):
+        load(tag, 'uv')
+    grp = CHANNEL_LOG['d2.uv']['collapsed']
+    # 가장 큰 묶음 하나 (대표열 + 접힌 열들)
+    head = max(grp, key=lambda k: len(grp[k])) if grp else None
+    if head is None:
+        return dict(group=[], note='d2.uv 에 중복 묶음이 없다')
+    group = [head] + sorted(grp[head])
+    out = dict(group=group, n_group=len(group), per_set={})
+    for tag in ('d1', 'd2', 'd3'):
+        D = pd.read_csv(f'deltaE/{tag}.uv_deltaE_pivot.csv')
+        M = D[group].to_numpy(float)
+        cols = {tuple(M[:, j]) for j in range(M.shape[1])}
+        agree = int(sum(1 for i in range(M.shape[0])
+                        if len(set(M[i, :])) == 1))
+        # 0 µM 행은 정의상 0 이므로 '일치 관측' 이 아니다. 측정 행만 따로
+        # 센다 (2026-11-19: 전체 행으로 세면 d1 의 6, d3 의 4 가 전부
+        # 블랭크여서 자기 대비를 실제보다 약하게 적게 된다).
+        meas = (D['Concentration'].to_numpy(float) > 0)
+        Mm = M[meas]
+        agree_m = int(sum(1 for i in range(Mm.shape[0])
+                          if len(set(Mm[i, :])) == 1))
+        out['per_set'][f'{tag}.uv'] = dict(
+            n_rows=int(M.shape[0]), n_distinct_columns=len(cols),
+            n_rows_all_equal=agree,
+            n_rows_measured=int(Mm.shape[0]),
+            n_rows_all_equal_measured=agree_m,
+            n_all_zero_columns=int(sum(1 for j in range(M.shape[1])
+                                       if not M[:, j].any())))
+    return out
+
+
 def load(tag, mode):
     D = pd.read_csv(f'deltaE/{tag}.{mode}_deltaE_pivot.csv')
     dy = [c for c in D.columns if c.lower().startswith('dye')]
@@ -378,11 +453,16 @@ if __name__ == '__main__':
     dis = discrimination()
     dm = dmmp_question()
     sp = space_test()
+    full_log = dict(CHANNEL_LOG)          # 여섯 셀 전부 (아래 호출이 비운다)
+    dup = duplicate_cross_set()
     json.dump(dict(seed=SEED, bootstrap=N_BOOT,
                    discrimination=dis.to_dict('records'),
                    dmmp=dm.to_dict('records'),
                    space_test=sp.to_dict('records'),
-                   raw_similarity=raw_similarity()),
+                   raw_similarity=raw_similarity(),
+                   duplicate_cross_set=dup,
+                   component_share=component_share(),
+                   channel_log=full_log),
               open('outputs/deltaE_premise.json', 'w'), indent=1, ensure_ascii=False)
     # per_compound 는 중첩 레코드이므로 CSV 에서 뺀다. JSON 에 그대로 있다.
     dis.drop(columns=['per_compound']).to_csv(

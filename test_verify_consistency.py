@@ -9,12 +9,32 @@
 여기 실린 여섯 건은 모두 GATE 8 심사에서 지적된 실제 사례다.
 """
 import atexit
+import json as _json
 import re
 import shutil
 import signal
 import subprocess
 import sys
 import tempfile
+
+# 2026-11-19. 종전 요약줄은 SKIP 을 'bad' 로 함께 세어 '시험 182건, 실패
+# 93건' 이라고 찍었다. 그 93 은 전부 이 판본에 없는 문장에 대한 주입이고
+# 하네스가 놓친 것은 0 건이다. 두 가지를 한 수로 합치면 진짜 미탐지 한 건이
+# 그 소음에 묻힌다. 세 범주를 갈라 세고 산출물로 남긴다 (원고의 하네스
+# 공시가 이 수를 인용하므로 앵커가 걸린다).
+TALLY = {'ok': 0, 'skip': 0, 'miss': 0}
+_builtin_print = print
+
+
+def print(*args, **kwargs):              # noqa: A001
+    _t = ' '.join(str(a) for a in args).lstrip()
+    if _t.startswith('ok '):
+        TALLY['ok'] += 1
+    elif _t.startswith('SKIP '):
+        TALLY['skip'] += 1
+    elif _t.startswith('FAIL '):
+        TALLY['miss'] += 1
+    _builtin_print(*args, **kwargs)
 
 # 2026-11-04 (결정 J-C). JHM 평행본을 archive/jhm_v1/ 로 동결했으므로
 # 주입 대상을 ACS본으로 옮긴다. 종전 JHM 전용 사례는 ACS본에 같은 문장이
@@ -360,6 +380,16 @@ ACS = 'paper/main.tex'
 # '반복측정' 으로 적었다 (원자료는 조합당 한 행). 수행하지 않은 측정을
 # 서술한 것이므로 [C-3] 위반이고, 되돌아오면 잡혀야 한다.
 ACS_CASES = [
+    # 2026-11-19 (GATE 8 4차, B 의 R-a). 본문 쪽 신규 수치.
+    ('DIMP 지정 사전지정 p 오기 (정본 0.207)',
+     'pre-specified mean difference to $p = 0.207$',
+     'pre-specified mean difference to $p = 0.307$'),
+    ('MIST 문서 지칭을 다시 뭉갬',
+     'in the Man-in-Simulant Test assessment that also',
+     'in the same assessment that also'),
+    ('정규화 기전을 구판 거짓으로 되돌림',
+     'so only its shape\nenters the distance and response magnitude is discarded',
+     'so a component that\ndid not respond enters with the same weight as one that did'),
     # --- 2026-11-04 (E1/E3/E6) 신설분 ---
     ('원논문이 말하지 않는 생산 주장으로 되돌림',
      'We made no measurement of our own and handled no\nagent',
@@ -624,6 +654,44 @@ ACS_CL_CASES = [
 
 ACS_SUPP = 'paper/supplementary.tex'
 ACS_SUPP_CASES = [
+    # --- 2026-11-19 (GATE 8 4차). 리뷰어 B 의 R-a.
+    # 이번 회차에 들어온 수치 전부가 주입시험에 없었다. 비교 게이트는
+    # 물고 있었지만 '틀리게 적으면 실패한다' 를 보인 적이 없다. 이번
+    # 회차의 이력이 '오라클이 고장 나 있었고 아무도 몰랐다' 인 만큼,
+    # 새로 들어온 수치야말로 커버리지가 있어야 한다.
+    ('DIMP k=4 열거 수 오기 (정본 17,550)',
+     '\\binom{27}{4} = 17\\,550',
+     '\\binom{27}{4} = 17\\,650'),
+    ('VX 역치 거리 오기 (정본 3.354)',
+     'standing 3.354',
+     'standing 2.354'),
+    ('블록균형 공간 내 BH 오기 (정본 0.0485)',
+     'within a space from 0.0772 to 0.0485',
+     'within a space from 0.0772 to 0.0585'),
+    ('블록균형 최소 명목 오기 (정본 0.0088)',
+     'smallest nominal value from 0.025 to 0.0088',
+     'smallest nominal value from 0.025 to 0.0188'),
+    ('작용제별 간극 상한 세 개를 오기 (정본 1.126/1.540/1.535)',
+     'run from zero to 1.126,\n1.540 and 1.535.',
+     'run from zero to 0.126,\n0.540 and 0.535.'),
+    ('미고정 자유도 수를 일곱으로 되돌림 (정본 eight)',
+     'Each of the\neight is set out here',
+     'Each of the\nseven is set out here'),
+    ('사분면 방법오차 비율 오기 (정본 0.545)',
+     'quadrant non-empty in 0.545 of draws',
+     'quadrant non-empty in 0.745 of draws'),
+    ('형상블록 제거 후 명목값 오기 (정본 0.101)',
+     'nominal\nvalue from 0.032 to 0.101',
+     'nominal\nvalue from 0.032 to 0.021'),
+    ('성분 지분 상한을 배제된 제3세트 값으로 되돌림 (정본 0.368)',
+     'to 0.368 against an equal share',
+     'to 0.504 against an equal share'),
+    ('UV 중복 일치 행을 블랭크 포함으로 되돌림 (정본 none of 측정행)',
+     'they agree with one another in none of\nthe twenty-four measured rows',
+     'they agree with one another in six of\nthe thirty rows'),
+    ('하네스 주입 집계 오기 (정본 89)',
+     'injections, 89 apply to this version',
+     'injections, 95 apply to this version'),
     # --- 2026-11-04 (E1/E2) 신설분 ---
     ('루이사이트 Z 이성질체 거리 오기 (정본 2.4892)',
      'from 2.4769 to 2.4892, leaves CEES',
@@ -1158,19 +1226,27 @@ ANNOT_CASES = _drop_archived(ANNOT_CASES)
 #
 # 이제 묻는 것은 '작업 흐름 가드가 아닌 실질 실패가 보고되었는가' 다.
 # 가드만 떴으면 그 주입은 잡히지 않은 것이다.
-WORKFLOW_GUARDS = ('검사 A-pdf', '검사 B2d', '검사 A-tag')
+WORKFLOW_GUARDS = ('검사 A-pdf', '검사 B2d', '검사 A-tag', '검사 A-inj',
+                   '검사 P2-down')
 _FAIL_HEADS = ('[verify] 불일치', '[verify] 근사 불일치',
-               '[verify] 데이터가 반증하는 주장')
+               '[verify] 데이터가 반증하는 주장', '[verify] 중단')
 # 사전 점검은 실패하면 그 자리에서 끝나므로 위 블록을 찍지 않는다. 머리글
 # 자체가 실패의 내용이다 (2026-11-16: 이걸 빠뜨려 'seventeen agents' 주입이
 # 미탐지로 집계됐다. 검증기는 preflight 에서 제대로 잡고 있었다).
 
 
 def run_parsed():
-    """(반환코드, 표준출력) 을 돌려준다."""
+    """(반환코드, 표준출력 + 표준오류) 를 돌려준다.
+
+    2026-11-19. 종전에는 stdout 만 돌려줬다. verify 에는
+    raise SystemExit('[verify] 중단: ...') 가 일곱 자리 있고 그 메시지는
+    stderr 로 나간다. 지금은 .tex 주입으로 그 경로가 닿지 않아 실해가
+    없었지만, 산출물 주입을 넓히는 순간 '검증기는 멈췄는데 시험은 미탐지로
+    보고' 가 난다. 2026-11-16 에 한 번 겪은 오보와 같은 가족이다.
+    """
     r = subprocess.run([sys.executable, 'verify_consistency.py'],
                        capture_output=True, text=True)
-    return r.returncode, r.stdout
+    return r.returncode, r.stdout + r.stderr
 
 
 def run():
@@ -1243,6 +1319,12 @@ def main():
     backup.write(good)
     backup.close()
     bad = 0
+    # 2026-11-20 (데이터 정합성 점검). 종전에는 SKIP 도 bad 로 셌다.
+    # 판본에 원문이 없는 사례가 94건이므로 반환코드가 늘 1 이었고, 실질
+    # 실패와 구별되지 않았다 — 즉 반환코드만 보는 쪽에서는 가드가 무력해도
+    # 알 수 없었다. 두 범주를 나눈다. SKIP 을 0 으로 흘려보내지도 않는다
+    # (가드가 조용히 꺼졌을 수 있다): 실질 실패 1, SKIP 만 있으면 2.
+    skipped = 0
     try:
         # 2026-11-18. 기준선 검사도 같은 오라클을 쓴다. 종전에는 반환코드를
         # 봤는데, 푸시 전에는 A-tag 가 늘 걸리므로 정상 본문이 통과하지
@@ -1254,7 +1336,7 @@ def main():
             for _l in substantive(_out0)[:5]:
                 print('      ', _l[:110])
             return 1
-        print('  ok   정상 본문 통과')
+        _builtin_print('  ok   정상 본문 통과 (주입 사례 아님 — 집계 제외)')
         # 2026-10-15. 절을 SI 로 옮기면 앵커가 main.tex 에서 사라져 시험이
         # 조용히 SKIP 되었다. 두 파일을 모두 뒤져 앵커가 있는 쪽에 주입한다.
         supp_good = open(SUPP).read()
@@ -1271,7 +1353,7 @@ def main():
                     if _g is None:
                         print(f'  SKIP {desc}: 원문을 찾지 못함 '
                               f'({a[:40]!r})')
-                        bad += 1
+                        skipped += 1
                         continue
                     _name, ra, rb = _g
                     _paths = gen_paths(_name)
@@ -1307,7 +1389,7 @@ def main():
                     if _g is None:
                         print(f'  SKIP {desc}: SI 원문을 찾지 못함 '
                               f'({a[:40]!r})')
-                        bad += 1
+                        skipped += 1
                         continue
                     _name, _ra, _rb = _g
                     _paths = gen_paths(_name)
@@ -1344,7 +1426,7 @@ def main():
                 ra, rb = resolve(a, b, cbak)
                 if not ra:
                     print(f'  SKIP {desc}: 커버레터 원문을 찾지 못함 ({a[:40]!r})')
-                    bad += 1
+                    skipped += 1
                     continue
                 open(ACS_CL, 'w').write(cbak.replace(ra, rb, 1))
                 if not caught(run_parsed()[1]):
@@ -1363,7 +1445,7 @@ def main():
                 ra, rb = resolve(a, b, qbak)
                 if not ra:
                     print(f'  SKIP {desc}: ACS SI 원문을 찾지 못함 ({a[:40]!r})')
-                    bad += 1
+                    skipped += 1
                     continue
                 open(ACS_SUPP, 'w').write(qbak.replace(ra, rb, 1))
                 if not caught(run_parsed()[1]):
@@ -1393,7 +1475,7 @@ def main():
                 if not ra:
                     print(f'  SKIP {desc}: ACS 본문에도 SI 에도 원문이 없다 '
                           f'({a[:40]!r})')
-                    bad += 1
+                    skipped += 1
                     continue
                 where = 'ACS' if tgt is ACS else 'ACS->SI'
                 open(tgt, 'w').write(bak.replace(ra, rb, 1))
@@ -1413,7 +1495,7 @@ def main():
                 ra, rb = resolve(a, b, sbak)
                 if not ra:
                     print(f'  SKIP {desc}: 원문을 찾지 못함')
-                    bad += 1
+                    skipped += 1
                     continue
                 open(SIDECAR, 'w').write(sbak.replace(ra, rb, 1))
                 if not caught(run_parsed()[1]):
@@ -1444,8 +1526,28 @@ def main():
     _n = (len(CASES) + len(SUPP_CASES) + len(ANNOT_CASES)
           + len(SIDECAR_CASES) + len(ACS_CASES) + len(ACS_SUPP_CASES)
           + len(ACS_CL_CASES))
-    print(f'[test_verify] 시험 {_n}건, 실패 {bad}건')
-    return 1 if bad else 0
+    _builtin_print(f'[test_verify] 시험 {_n}건  '
+                   f"잡았다 {TALLY['ok']}  "
+                   f"판본에 없음 {TALLY['skip']}  "
+                   f"미탐지 {TALLY['miss']}")
+    try:
+        _json.dump({'generated_by': 'test_verify_consistency.py',
+                    'n_cases': _n, 'n_caught': TALLY['ok'],
+                    'n_not_in_this_version': TALLY['skip'],
+                    'n_missed': TALLY['miss']},
+                   open('outputs/injection_suite.json', 'w'),
+                   ensure_ascii=False, indent=1)
+    except OSError:
+        pass
+    if bad:
+        _builtin_print(f'[test_verify] 실질 실패 {bad}건 — 가드가 무력하다')
+        return 1
+    if skipped:
+        _builtin_print(f'[test_verify] 실질 실패 0건. 이 판본에 원문이 없어 '
+                       f'건너뛴 사례 {skipped}건 — 종료코드 2. 가드가 조용히 '
+                       f'꺼진 것인지 사람이 확인할 것')
+        return 2
+    return 0
 
 
 if __name__ == '__main__':

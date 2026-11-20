@@ -24,8 +24,15 @@ ROOT=$(pwd)
 if [ "$1" = '--figs' ]; then
   # Fig_main.png / Fig_spaces.png / Fig_plocal.png 은 셋 다
   # make_fig_main.py 가 쓴다. 생성기 수가 도판 수보다 적은 것이 정상이다.
+  # 2026-11-20 (데이터 정합성 점검). make_toc_acs.py 가 [ -f ] 뒤에 숨어
+  # 있었고 make_ga.py 는 목록에 아예 없었다. 바로 위 주석이 금지하는 그
+  # 조용한 건너뛰기였다. toc_acs.png 은 본문이 \includegraphics 하는
+  # 투고 도판이고, graphical_abstract.png 은 검증기가 낡음을 검사하는
+  # 첨부다 — 둘 다 이 목록에 있어야 '분석 재실행 + 빌드' 가 outputs/ 의
+  # 모든 PNG 를 실제로 갱신한다. 종전에는 GA 가 빌드 바깥에 있었으므로
+  # mtime 만 뒤처져 검증기가 멈췄다 (내용은 일치했다).
   for s in make_fig_main.py make_fig_h1.py make_fig_mde.py \
-           make_fig_toxicity.py; do
+           make_fig_toxicity.py make_toc_acs.py make_ga.py; do
     if [ ! -f "$s" ]; then
       echo "[fig] $s 없음 — 목록이 저장소와 어긋났다"; exit 1
     fi
@@ -38,15 +45,6 @@ if [ "$1" = '--figs' ]; then
       exit 1
     fi
   done
-  # Graphical abstract. JHM 은 TOC 도판이 아니라 GA 를 요구한다.
-  if [ -f make_toc_acs.py ]; then
-    printf '[fig] %-26s ' make_toc_acs.py
-    if python3 make_toc_acs.py >"$ROOT/outputs/_log_make_toc_acs.txt" 2>&1; then
-      echo ok
-    else
-      echo FAIL; tail -20 "$ROOT/outputs/_log_make_toc_acs.txt"; exit 1
-    fi
-  fi
 fi
 
 # toc_acs.png 은 ACS 의 TOC 그래픽이다 (3.25 x 1.75 in 실척).

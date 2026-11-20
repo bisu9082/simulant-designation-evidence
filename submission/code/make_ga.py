@@ -76,9 +76,7 @@ def null_panel(a, cond, title, verdict, ok, tx, note=None):
 
 null_panel(ax, 'A_rdkit', 'judged in structural space',
            'beats chance, uncorrected', True, 0.26,
-           note=fig_annot.record(
-               'graphical_abstract', 'panel_a',
-               f'corrected over the 18 tests: $q$ = {Q28:.3f}'))
+           note=f'corrected over the 18 tests: $q$ = {Q28:.3f}')
 null_panel(bx, 'B_electronic', 'judged in electronic space',
            'no better than chance', False, 0.52)
 
@@ -123,13 +121,17 @@ cx.scatter(_best.fidelity_dist, _best.y_tox, s=170, facecolors='none',
            edgecolors='#4E7A3A', lw=2.4, zorder=7,
            label=f'clears the relaxed bar ({len(_best)})')
 
+# 2026-11-18. 이 도판은 JHM 전용 첨부이고 ACS 본은 싣지 않는다. 그래서
+# figure_annotations.json 의 'graphical_abstract' 등재는 verify 가 폐기
+# 주석으로 보고 멈춘다 (2026-11-07 에 등재를 지운 결정). 이 스크립트가
+# 매 실행마다 그것을 되살려 넣고 있었다. 등재를 하지 않는다. 도판 자체는
+# JHM 본을 위해 계속 생성한다.
 cx.text(0.030, 0.715,
-        fig_annot.record('graphical_abstract', 'panel_c',
-        f"Spearman $r$ = {H['spearman_r']:+.3f}   "
-        f"95% CI [{H['spearman_ci'][0]:+.3f}, {H['spearman_ci'][1]:+.3f}]   "
-        f"$n$ = {H['n_candidates']}\n"
-        f"faithful + safe: {_strict} at the incumbent simulant's own bar,\n"
-        f"{len(_best)} one order of magnitude below it"),
+        (f"Spearman $r$ = {H['spearman_r']:+.3f}   "
+         f"95% CI [{H['spearman_ci'][0]:+.3f}, {H['spearman_ci'][1]:+.3f}]   "
+         f"$n$ = {H['n_candidates']}\n"
+         f"faithful + safe: {_strict} at the incumbent simulant's own bar,\n"
+         f"{len(_best)} one order of magnitude below it"),
         transform=cx.transAxes, fontsize=FS_N - 4, color=C_INK, ha='left',
         va='top', zorder=12,
         bbox=dict(fc='white', ec=C_INK, boxstyle='round,pad=0.40', alpha=1.0))

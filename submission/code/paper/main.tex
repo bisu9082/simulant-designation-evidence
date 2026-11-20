@@ -172,8 +172,7 @@ exact permutation test, acute exposure guideline level, dual-use}
 \begin{abstract}
 \noindent
 Chemical warfare agent detection is developed almost entirely on simulants,
-compounds accepted as agent-like and safe. We asked what that acceptance rests
-on. No incumbent carries a public designation validating a detection response
+compounds accepted as agent-like and safe. We asked what that rests on. None of the three carries a public designation validating a detection response
 against an agent's: one is designated for filter breakthrough, one in a training
 patent fixing a volatility window and a detector response, the third not at all,
 and we did not read the Army's selection procedure, which bounds the claim.
@@ -181,17 +180,18 @@ Exact permutation over every designation tested whether the three sit closer to
 eleven agents than other non-agents, in structural and GFN2-xTB electronic
 spaces; a colorimetric array tested the premise separately. On a
 thirty-five-compound panel nothing matches and nothing is significant; a
-twenty-eight-compound panel omitting seven compounds yields three matches and a nominal structural $p$ of 0.028 that no
-correction of the family we ran leaves significant and that rises to 0.360, with
-no match left, once the ten further compounds our own source lists rejoin the
-pool. Moving labels moves the answer both ways: 0.630
-becomes 0.745 or 0.00075 depending on how many move. Volatility, the criterion's
+twenty-eight-compound panel omitting seven yields three matches and a nominal structural $p$ of 0.028 that no
+correction of the family we ran leaves significant and rises to 0.360, with no
+match, once the ten further compounds our own source lists rejoin the pool. Moving labels moves the answer both ways: 0.630
+becomes 0.745 or 0.00075 depending on how many. Volatility, the criterion's
 own axis, returns the one value surviving its registered correction
-($p = 0.0206$), but it tracks coverage rather than closeness, and restoring
+($p = 0.0206$, smaller panel only), but it tracks coverage rather than
+closeness, and restoring
 the three measured ones moves it to 0.132 and reverses its sign. The corrective
-is a declaration, not a replacement compound: a claim must name its measurement
-and fix panel, space, statistic, pool, weighting, conformer treatment and
-designated set, and remains conditional on which compounds count.
+is a declaration, not a replacement compound: name the measurement, fix pool,
+panel, space, statistic, designated set, weighting and the
+redundant-coordinate rule, declare conformer treatment, and stay conditional on
+which compounds count.
 \end{abstract}
 
 \section{Introduction}
@@ -249,13 +249,7 @@ by a formal regulatory process for several hundred chemicals including the
 agents themselves \cite{watson2006}. We ask where simulants and agents sit
 relative to one another, how much of that answer is fixed by the data rather
 than by the analyst's choice of panel, space and statistic, and whether the
-incumbents are safe on a value or on an absence. The first question took a
-different shape than we expected: a difference we found between descriptor
-spaces survived neither extending the panel, nor correcting for the number of
-statistics computed, nor removing a descriptor that was an exact function of two
-others. That earlier reading is reported below alongside what the data support,
-because how a nominal result of this kind arises is part of what a reader of
-this literature needs.
+incumbents are safe on a value or on an absence.
 
 The premise is not ours alone, and the nearest recent work states it. Lawrence
 and Van Houten set out a systems-engineering method for developing simulants,
@@ -323,11 +317,11 @@ excluding the obvious alternatives is not a test of those three; the
 twenty-eight-compound panel is reported throughout with equal numerical detail,
 because what it shows beside the larger one is the paper's result.
 
-Panel, space, statistic, comparison pool, descriptor weighting, conformer
-treatment and the designation set were not fixed before the analysis was run, and this paper's conclusion is that they
-should be; we state
-that here so the standard we recommend can be applied to the work recommending
-it. The thirty-five-compound panel was built, and designated primary, after the
+Panel, space, statistic, comparison pool, descriptor weighting, the rule that
+drops redundant coordinates, conformer treatment and the designation set were
+not fixed before the analysis was run. This paper's conclusion is that all but
+the conformer treatment should be fixed and that one declared; we state
+that here so the standard we recommend applies to the work recommending it. The thirty-five-compound panel was built, and designated primary, after the
 twenty-eight-compound result was in hand, which is the same post hoc choice this
 paper catalogues in others. Supporting Information
 Section~\ref{S-meth:prespec} sets out each of these choices, when it was
@@ -355,9 +349,11 @@ single conformer at \texttt{--opt normal}; an analysis that places both pools
 in one space uses the single-conformer values throughout, because mixing the
 two protocols inside a distance calculation would carry their systematic
 difference into the distance. Coordinates were then reduced by a correlation
-filter, which drops a column whose absolute Pearson correlation with a retained
-one exceeds 0.95, and by an exact-dependence check, which removes a column that
-is an exact function of others or carries no variance; 38 structural coordinates
+filter, which repeatedly drops the more redundant member of the most correlated
+pair until no retained pair exceeds an absolute Pearson correlation of 0.95,
+with the input columns name-sorted so that the order they arrive in cannot
+matter, and by an exact-dependence check, which removes a column that is an
+exact affine function of at most two others or carries no variance; 38 structural coordinates
 remain on the primary panel and 35 on the twenty-eight-compound one. Supporting
 Information Section~\ref{S-meth:descriptors} gives the descriptor list in full,
 the measured agreement between the two conformer protocols, and the column
@@ -373,7 +369,7 @@ The criterion the field states for simulant choice names volatility explicitly
 phase for the same reason, so vapour pressure is carried as a third space in its
 own right rather than left implicit. It is one-dimensional: a single measured
 quantity, $\log_{10}$ of the vapour pressure in mmHg, with no filtering or
-weighting to choose. Values were taken under a three-tier rule fixed before collection, preferring a
+weighting to choose. Values were taken under a three-tier rule, preferring a
 25~$^{\circ}$C value from a vapour-pressure compilation or dedicated measurement
 report, then a 25~$^{\circ}$C government-handbook value, then the nearest
 available temperature recorded with that temperature; twenty-four of the
@@ -405,8 +401,8 @@ so there are no replicates, and an interval reported from this array describes
 variation across the four concentrations rather than agreement between
 independent preparations. No noise floor can be computed from the deposit,
 which holds no repeat exposures and no repeated blank images. Each pattern
-is normalised to unit length before any cosine is taken, so a component that
-did not respond enters the distance with the same weight as one that did. And
+is normalised to unit length before any cosine is taken, so only its shape
+enters the distance and response magnitude is discarded. And
 the raw colour data are not in the deposit, nor do the source reports record
 plate layout, imaging order or illumination in a form we could carry over, so
 the CIEDE2000 conversion is not reproducible from what we publish, and a
@@ -486,10 +482,10 @@ statement about proximity in this descriptor space and nothing further.
 
 \subsection{Reproducibility}
 \label{res:repro}
-All analyses are deterministic given the seed, which is 42 except where a
-script records otherwise. The designation and Mantel permutation tests are
-exhaustive. Seven analyses are sampled rather than enumerated, at between 1000
-and 20000 draws each; Supporting Information
+Every analysis is deterministic given its script's own recorded seed; there is
+no global default. The designation and Mantel permutation tests are
+exhaustive. The sampled analyses run at between
+1000 and 20000 draws each; Supporting Information
 Section~\ref{S-meth:sampling} names them with their draw counts and the pinned
 version of every library the pipeline uses
 \cite{numpy2020,scipy2020,mckinney2010,matplotlib2007,rdkit,pyscf2020}.
@@ -500,9 +496,7 @@ GFN2-xTB binary whose version was not recorded when the cache was built, so
 those columns rest on the deposited cache rather than on a reproducible
 calculation, as do the five further columns the same binary produced, of which
 one is an algebraic function of the orbital energies and four are independent
-outputs; only the three enter any distance reported here; the gate
-\texttt{build\_descriptors.py --verify} regenerates the fifty-three columns
-RDKit can rebuild and exempts the rest by name.
+outputs; only the three enter any distance reported here.
 
 \begingroup\sloppy
 The deposit also carries two consistency harnesses, and their scope is narrower
@@ -575,9 +569,9 @@ hole in it which is the most important document of all. TOP 08-2-196,
 not read it. Its current revision carries a Defense Technical Information Center
 accession and a full-text address in that agency's public repository, so the
 document is reachable in principle; our own attempts to retrieve it
-failed on 14 and again on 15 November 2026: the repository's citation page, the
-direct address of the report's own file and the Army index page for the series
-all returned its scheduled-maintenance notice on both days. What we know of its
+failed on 14, 15 and 18 November 2026, the same three routes returning a
+scheduled-maintenance notice on the first two dates and a client error on the
+third. What we know of its
 role comes from TOP 08-2-188 CN1, which defers simulant selection to it
 \cite{top082188} and itself states a detection criterion rather than a barrier
 one, that the simulant ``should produce a signature signal similar to the one
@@ -590,12 +584,6 @@ response against an agent's, and we cannot say that no such instrument exists.
 A designation is specific to a measurement,
 so a compound chosen because it breaks through a carbon bed like sarin has been
 validated for adsorption and not for an optical or electrochemical response.
-That holds even where the instrument is clearest: methyl salicylate carries a
-consensus standard whose title names the Man-in-Simulant Test and whose text
-we did not read \cite{astmf2588}, yet the National Academies assessment of that
-programme records that its selection ``was based on its historical use as an
-agent simulant'' and that its vapour pressure runs ``approximately 2 orders of
-magnitude higher than VX'' \cite{nrc1997mist}.
 
 \begin{figure}[tp]
 \centering
@@ -634,7 +622,7 @@ does not depend on the threshold: in the structural and merged spaces no
 incumbent is the nearest non-agent compound
 to any of the eleven agents, so the count stays at zero however far the
 threshold is relaxed, and because zero is the smallest attainable count the
-resampling comparison returns $p=0.479$, the smallest value it can ever return
+enumeration over all designations returns $p=0.479$, the smallest it can return
 and a comparison that cannot reach significance whatever the data. Resampling
 the descriptors leaves that contrast in place (Figure~\ref{fig:main}b), and
 Supporting Information Section~\ref{S-res:paneldetail} gives the intervals, the per-agent
@@ -654,7 +642,7 @@ six statistics in the structural space and three of six in the merged space, and
 correcting for the number of times we looked removes almost all of it: over the
 six accounting schemes of Supporting Information
 Section~\ref{S-meth:multiplicity} the eighteen-test family leaves that result at
-0.163 and the closest any scheme brings it without crossing is 0.077. Had the
+0.163 and the closest any scheme brings it without crossing, under the weighting we report, is 0.077. Had the
 mean difference been named in advance as the single statistic it would survive
 at $q=0.042$, but we computed six and chose among them after seeing them,
 which is the circumstance the correction exists for, and that declaration is one
@@ -711,13 +699,20 @@ way on the primary one. Nothing survived correction before the change; what does
 not survive the change is every nominal result the twenty-eight-compound panel
 produced. Diethyl methanephosphonate, the direct homologue of DMMP and a
 compound on the same list, stands nearer to sarin than DMMP does, which removes
-the last match; diisopropyl methylphosphonate displaces the incumbents at soman,
-cyclosarin and VX, and 2-chloroethyl cyclohexyl sulfide at sulfur mustard. This
+the last match; diisopropyl methylphosphonate displaces the nearest incumbent at
+soman, cyclosarin and VX, and 2-chloroethyl cyclohexyl sulfide at sulfur
+mustard. This
 is the mechanism diisopropyl fluorophosphate supplies on the primary panel,
-arriving from a different document. An earlier version of this analysis added
-four of the ten and reported 0.350 with one match; it matched the list against
-our panel by abbreviation, and the abbreviation DCP denotes
-2,4-dichlorophenol there and diethyl chlorophosphate here. We report the
+arriving from a different document. One of the ten is itself designated, for a
+barrier measurement, in the Man-in-Simulant Test assessment that also
+designates DMMP: declaring diisopropyl methylphosphonate a simulant and
+re-enumerating over the four leaves soman and cyclosarin matched, taking the
+pre-specified mean difference to $p = 0.207$, and that is what the declaration
+costs rather than a result we adopt. An earlier version of this analysis added
+only four of the ten, because it matched the list against our panel by
+abbreviation, and the abbreviation DCP denotes 2,4-dichlorophenol there and
+diethyl chlorophosphate here; the values it reported are withdrawn and recorded
+in the Supporting Information. We report the
 extension rather than adopt it. Among the descriptor spaces it reaches the
 structural one only, because the electronic coordinates would need the
 semi-empirical binary whose version we did not record
@@ -793,15 +788,17 @@ fourteenth of all 680 designations on the pre-specified statistic. Its registere
 exemption from the eighteen holds for this one; corrected within the two tests
 registered for this axis it stands at $q = 0.0412$. That registration is a
 statistic named inside the script that computes it, with no external timestamp,
-and Supporting Information Section~\ref{S-meth:vol} sets out what it is worth
-and what the value becomes under wider families. It does not carry to the match criterion
+and against the widest family it could belong to, the eighteen descriptor
+tests and the six on this axis together, it becomes 0.128. It does not carry to the match criterion
 (Figure~\ref{fig:main}e): the valid-match count returns one match at
 $p = 0.4647$, pairing DPGME with soman across a gap smaller than the mismatch between the temperatures
 at which the two vapour pressures were measured, so nothing rests on it. Three
 of the eleven agents have an interferent nearer than any incumbent here as
 well.
 
-Two readings weaken that 0.0206, and both were ours to make. The three
+Two readings weaken that 0.0206, whose margin is 0.0015 standardised units,
+3.4 per cent of this axis's own median nearest-neighbour spacing, and both were
+ours to make. The three
 descriptor spaces above are each reported one-sided and two-sided; this axis was
 reported one-sided only, and under the two conventions used there it stands at
 0.0412 and at 0.182, the second of which does not reach 0.05. What the statistic
@@ -863,7 +860,11 @@ located. A model cannot fill the gap: a random forest on 230 AEGL chemicals
 reaches $R^{2}=0.458$ yet predicts all twenty held-out agents safer than
 measured, by 2.5 to 2600 times, certifying fourteen as in-domain. Fidelity and
 acute toxicity show no monotonic association over the 207 compounds carrying
-both axes (Spearman $r=+0.062$, 95\% CI $-0.077$ to $+0.199$).
+both axes in the three-coordinate electronic space (Spearman $r=+0.062$,
+95\% CI $-0.077$ to $+0.199$, widening to 0.251 once the axis's own method
+reliability of 0.631 is corrected for); the structural space gives $-0.149$ on
+the same pool, so the sign of this association is a property of the space
+(Supporting Information Section~\ref{S-meth:h1stab}).
 
 \section{Discussion}
 \label{sec:discussion}
@@ -996,10 +997,11 @@ comparison pool.
 
 A simulant result should therefore name the measurement the compound was
 validated against and the comparison set it was tested in, and should fix the
-panel, space, statistic, comparison pool, weighting, treatment of
-conformer-dependent
-descriptors and the designation set before the test is run; we add the last two
-because a reproduction check caught one and a referee the other.
+seven that moved ours, which are the comparison pool, the panel, the space,
+the statistic, the designated set, the descriptor weighting and the rule that
+drops redundant coordinates, and should declare the treatment of
+conformer-dependent descriptors, which moved one borderline count here and
+nothing else.
 Fixing them is necessary and not sufficient: the relabelling of
 Section~\ref{res:panels} leaves a declared test conditional on who counts as a
 simulant, the question under study. We propose no replacement compound, because proposing
@@ -1057,7 +1059,9 @@ edited all content and take responsibility for it.
 \begingroup\sloppy
 Descriptor tables, parsed AEGL values with sources, permutation distributions,
 candidate tables, the EPA source document every toxicity value was parsed from,
-and all analysis and figure scripts are in a public repository at
+the quotation ledger with verification dates and routes
+(\texttt{sources/quotations\_20261116.csv}), and all analysis and figure
+scripts are in a public repository at
 \url{https://github.com/bisu9082/simulant-designation-evidence}, and are also
 provided with this article; the release tagged for this submission is the one
 named \texttt{acs-submission-20261112}.

@@ -195,6 +195,20 @@ mu, sd = Z.mean(0), Z.std(0, ddof=1)
 Zz = (Z - mu) / sd
 Az = Zz[(P.compound_class == 'real_agent').to_numpy()]
 P['fidelity_dist'] = [np.sqrt(((Az - z) ** 2).sum(1)).min() for z in Zz]
+# 2026-11-18. 전체 풀을 예치한다. 종전에는 후보만(h1_candidates.csv)
+# 예치했는데, 표준화가 작용제를 포함한 전체 풀에서 이루어지므로 후보만으로는
+# 이 축을 재구성할 수 없다. 공간 민감도(h1_space_sensitivity.py)가 이 파일을
+# 읽는다.
+#
+# 2026-11-19 (데이터 정합성 점검). 이 쓰기가 KEEP_UNPHYSICAL 가드 **앞에**
+# 있었다. 민감도 경로는 정식 산출물을 쓰지 않기로 돼 있는데(아래 SystemExit),
+# 이 한 줄만 그 약속 밖에 있어서 h1_screen_sensitivity.py 가 돌 때마다
+# 정식 h1_pool.csv 가 '물리적 타당성 심사 미적용' 245종 풀로 덮였다.
+# h1_candidates.csv 는 가드 뒤라 237종 기준으로 남으므로 두 파일이 서로
+# 어긋났고, 전체 파이프라인을 돌리면 h1_fidelity_stability.py 의 재현
+# 검사가 편차 0.804 로 멈춘다. 민감도 경로는 자기 이름의 파일에 쓴다.
+P.to_csv('outputs/h1_pool_unphysical.csv' if KEEP_UNPHYSICAL
+         else 'outputs/h1_pool.csv', index=False)
 # 작용제 자신은 거리 0 이므로 후보 풀에서 제외
 Cand = P[(~P.is_cwa) & P.y_tox.notna()].reset_index(drop=True)
 print(f'[H1] 후보 {len(Cand)}종 (군용작용제 {int(P.is_cwa.sum())}종 전량 제외, 실측 독성 보유)')
@@ -279,11 +293,25 @@ for key, bar, desc in TIERS:
     dcm_fid = float(_d.iloc[0]) if len(_d) else None
     more_faithful = (int((sel.fidelity_dist < dcm_fid).sum())
                      if dcm_fid is not None else None)
+    # 2026-11-18 (GATE 8 3차, M4). 종전에는 labels 를 fidelity_dist
+    # 오름차순 그대로 예치했다. SI 는 그 순서를 철회하고 'We do not name
+    # them' 이라 적는데, 공개 예치물에는 순위가 이름째로 남아 있었다.
+    # 삭제하면 재현검사가 깨지므로 지우지 않고, 알파벳순으로 재정렬해
+    # 파일이 순위로 읽히지 못하게 하고 상태를 함께 적는다.
     tier_out[key] = dict(bar_log10=round(float(bar), 4),
                          bar_mgm3=round(float(10 ** bar), 1),
                          description=desc, n=int(len(sel)),
                          n_more_faithful_than_dcm=more_faithful,
-                         labels=sel.label.tolist()[:30])
+                         labels=sorted(sel.label.tolist()[:30]),
+                         labels_order='alphabetical',
+                         ordering_withdrawn=True,
+                         ordering_withdrawn_note=(
+                             'Any fidelity ordering of these compounds is '
+                             'withdrawn: it is not determined within the '
+                             "axis's own method error (see the method-error "
+                             'subsection of the Supporting Information). The '
+                             'safety axis here is acute inhalation only and '
+                             'is not a fitness assessment for any use.'))
     print(f'  {desc:<34} AEGL-3 >= {10**bar:>12,.0f} mg/m3  '
           f'후보 {len(sel):>2}종'
           + (f'  (그중 DCM 보다 충실 {more_faithful}종)'

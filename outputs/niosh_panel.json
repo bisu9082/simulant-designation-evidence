@@ -37,7 +37,7 @@
   "2,4-dichlorophenol": "2,4-dichlorophenol"
  },
  "authority": "NIOSH/NPPTL CWA simulant programme (31 July 2002, draft for discussion), candidate list for barrier-material permeation testing: eleven compounds, of which DMMP alone is on either of our panels. See Supporting Information Section meth:niosh.",
- "designated_set": "unchanged (incumbent three)",
+ "designated_set": "incumbent three in the baseline and the two all-added runs; a fourth run designates DIMP as well — see each run's own designated field",
  "spaces_extended": [
   "structural"
  ],
@@ -64,6 +64,14 @@
     },
     "n_perm": 680,
     "nn_median": 3.3991187408572747,
+    "null_mean": {
+     "mean_diff": 1.338084620962121,
+     "median_diff": 1.502971463998177,
+     "mean_logratio": 0.2207787367160792,
+     "mean_dsim": 7.518717422054632,
+     "n_closer": -1.9411764705882353,
+     "n_valid": -1.2352941176470589
+    },
     "n_valid": 3,
     "observed": {
      "mean_diff": 0.19534354747424018,
@@ -153,7 +161,12 @@
      }
     ],
     "n_compounds": 28,
-    "n_dims": 35
+    "n_dims": 35,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
    },
    "plus_all_recomputed": {
     "p": {
@@ -166,6 +179,14 @@
     },
     "n_perm": 2925,
     "nn_median": 3.1966611811124683,
+    "null_mean": {
+     "mean_diff": 1.799803645892948,
+     "median_diff": 1.7563272263225962,
+     "mean_logratio": 0.31241850230790313,
+     "mean_dsim": 7.438704531931859,
+     "n_closer": -1.2222222222222223,
+     "n_valid": -0.7777777777777778
+    },
     "n_valid": 0,
     "observed": {
      "mean_diff": 1.5668968775517385,
@@ -255,7 +276,12 @@
      }
     ],
     "n_compounds": 38,
-    "n_dims": 36
+    "n_dims": 36,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
    },
    "plus_all_columns_fixed": {
     "p": {
@@ -268,6 +294,14 @@
     },
     "n_perm": 2925,
     "nn_median": 3.213082529073403,
+    "null_mean": {
+     "mean_diff": 1.706663418582124,
+     "median_diff": 1.6226809042245616,
+     "mean_logratio": 0.3018532086426931,
+     "mean_dsim": 7.323833920864479,
+     "n_closer": -1.2222222222222223,
+     "n_valid": -0.7777777777777778
+    },
     "n_valid": 0,
     "observed": {
      "mean_diff": 1.5266492526725548,
@@ -357,7 +391,136 @@
      }
     ],
     "n_compounds": 38,
-    "n_dims": 35
+    "n_dims": 35,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
+   },
+   "plus_all_dimp_designated": {
+    "p": {
+     "mean_diff": 0.20660968660968662,
+     "median_diff": 0.06826210826210827,
+     "mean_logratio": 0.30974358974358973,
+     "mean_dsim": 0.18991452991452992,
+     "n_closer": 0.24649572649572649,
+     "n_valid": 0.31994301994301994
+    },
+    "n_perm": 17550,
+    "nn_median": 3.1966611811124683,
+    "null_mean": {
+     "mean_diff": 1.4745157895872032,
+     "median_diff": 1.41731677208458,
+     "mean_logratio": 0.26228040214765397,
+     "mean_dsim": 7.141060313103762,
+     "n_closer": -1.6296296296296295,
+     "n_valid": -1.037037037037037
+    },
+    "n_valid": 2,
+    "observed": {
+     "mean_diff": 1.025856372974735,
+     "median_diff": 0.2553563858388461,
+     "mean_logratio": 0.21988903009685276,
+     "mean_dsim": 6.677339391036671,
+     "n_closer": -3.0,
+     "n_valid": -2.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.587537433025495,
+      "d_blocker": 4.345593565869142,
+      "blocker": "DEMP",
+      "matched": false
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 4.414231381486565,
+      "d_blocker": 4.7466927694363195,
+      "blocker": "DEMP",
+      "matched": true
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 7.949560554065162,
+      "d_blocker": 7.739339332253469,
+      "blocker": "DEEP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.479477475372849,
+      "d_blocker": 2.609119085577932,
+      "blocker": "2-chloroethyl cyclohexyl sulfide",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 8.89820491715073,
+      "d_blocker": 7.913430257271444,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.40419976130135,
+      "d_blocker": 3.4484267049058244,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.752532151304385,
+      "d_blocker": 3.49414924373055,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 6.56437711745713,
+      "d_blocker": 4.088740320843343,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 9.420031060180664,
+      "d_blocker": 9.164674674341818,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 4.79067365090029,
+      "d_blocker": 4.795253052240728,
+      "blocker": "DEMP",
+      "matched": true
+     },
+     {
+      "agent": "VX",
+      "d_sim": 9.189907799158778,
+      "d_blocker": 9.820894192210744,
+      "blocker": "DEEP",
+      "matched": false
+     }
+    ],
+    "n_compounds": 38,
+    "n_dims": 36,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME",
+     "DIMP"
+    ],
+    "misread_against_k3_null": {
+     "note": "k=3 귀무에 k=4 관측을 대고 읽은 값. 군크기가 다르면 k 개 추출의 최소값 분포가 달라지므로 기준분포가 아니다. 보고값이 아니라 오독의 크기를 적는다.",
+     "observed_k4": 1.025856372974735,
+     "null_mean_k3": 1.799803645892948,
+     "null_mean_k4": 1.4745157895872032,
+     "p_if_read_against_k3": 0.07452991452991453,
+     "p_correct_k4": 0.20660968660968662
+    }
    },
    "columns_only_in_baseline": [
     "chi1v"
@@ -379,6 +542,14 @@
     },
     "n_perm": 2024,
     "nn_median": 3.273286753654107,
+    "null_mean": {
+     "mean_diff": 2.110724892519876,
+     "median_diff": 2.418947819057433,
+     "mean_logratio": 0.3937119779085395,
+     "mean_dsim": 7.16438971322173,
+     "n_closer": -1.375,
+     "n_valid": -1.0
+    },
     "n_valid": 0,
     "observed": {
      "mean_diff": 1.8734659312018977,
@@ -468,7 +639,12 @@
      }
     ],
     "n_compounds": 35,
-    "n_dims": 38
+    "n_dims": 38,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
    },
    "plus_all_recomputed": {
     "p": {
@@ -481,6 +657,14 @@
     },
     "n_perm": 5984,
     "nn_median": 3.0084622826077845,
+    "null_mean": {
+     "mean_diff": 2.0536101502642166,
+     "median_diff": 2.125586401562847,
+     "mean_logratio": 0.38506161039763687,
+     "mean_dsim": 7.278465167173239,
+     "n_closer": -0.9705882352941176,
+     "n_valid": -0.6176470588235294
+    },
     "n_valid": 0,
     "observed": {
      "mean_diff": 1.9876783879364148,
@@ -570,7 +754,12 @@
      }
     ],
     "n_compounds": 45,
-    "n_dims": 37
+    "n_dims": 37,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
    },
    "plus_all_columns_fixed": {
     "p": {
@@ -583,6 +772,14 @@
     },
     "n_perm": 5984,
     "nn_median": 3.0084622826077845,
+    "null_mean": {
+     "mean_diff": 2.124587048266431,
+     "median_diff": 2.204311589115743,
+     "mean_logratio": 0.39383023119413774,
+     "mean_dsim": 7.350249540371604,
+     "n_closer": -0.9705882352941176,
+     "n_valid": -0.6176470588235294
+    },
     "n_valid": 0,
     "observed": {
      "mean_diff": 2.022177190063042,
@@ -672,7 +869,136 @@
      }
     ],
     "n_compounds": 45,
-    "n_dims": 38
+    "n_dims": 38,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME"
+    ]
+   },
+   "plus_all_dimp_designated": {
+    "p": {
+     "mean_diff": 0.3284457478005865,
+     "median_diff": 0.09168535449370364,
+     "mean_logratio": 0.41185095739175437,
+     "mean_dsim": 0.25219941348973607,
+     "n_closer": 0.6776349836122132,
+     "n_valid": 1.0
+    },
+    "n_perm": 46376,
+    "nn_median": 3.0084622826077845,
+    "null_mean": {
+     "mean_diff": 1.7300482710037208,
+     "median_diff": 1.7877764874319055,
+     "mean_logratio": 0.3323331896735383,
+     "mean_dsim": 6.9840019970579545,
+     "n_closer": -1.2941176470588236,
+     "n_valid": -0.8235294117647058
+    },
+    "n_valid": 0,
+    "observed": {
+     "mean_diff": 1.5034951206543687,
+     "median_diff": 0.8592455338415306,
+     "mean_logratio": 0.3224026893613856,
+     "mean_dsim": 6.655816249354573,
+     "n_closer": -1.0,
+     "n_valid": 0.0
+    },
+    "agents": [
+     {
+      "agent": "sarin (GB)",
+      "d_sim": 4.390019699114533,
+      "d_blocker": 3.5447240245942178,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "soman (GD)",
+      "d_sim": 4.16251083489839,
+      "d_blocker": 3.359690211869211,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "tabun (GA)",
+      "d_sim": 9.584425805834412,
+      "d_blocker": 6.89894478286884,
+      "blocker": "DCNP",
+      "matched": false
+     },
+     {
+      "agent": "sulfur mustard (HD)",
+      "d_sim": 5.241547182513808,
+      "d_blocker": 1.7764096837310963,
+      "blocker": "CEES",
+      "matched": false
+     },
+     {
+      "agent": "lewisite 1 (L)",
+      "d_sim": 9.117104612443358,
+      "d_blocker": 8.257859078601827,
+      "blocker": "p-dichlorobenzene",
+      "matched": false
+     },
+     {
+      "agent": "hydrogen cyanide (AC)",
+      "d_sim": 6.448709716210726,
+      "d_blocker": 3.657243320877635,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "cyanogen chloride (CK)",
+      "d_sim": 5.799361910880805,
+      "d_blocker": 3.691202766236108,
+      "blocker": "acetonitrile",
+      "matched": false
+     },
+     {
+      "agent": "phosgene (CG)",
+      "d_sim": 6.162688668239131,
+      "d_blocker": 4.239070852532465,
+      "blocker": "ethyl acetate",
+      "matched": false
+     },
+     {
+      "agent": "chloropicrin (PS)",
+      "d_sim": 9.834620400228266,
+      "d_blocker": 9.437959945053098,
+      "blocker": "chloroform",
+      "matched": false
+     },
+     {
+      "agent": "cyclosarin (GF)",
+      "d_sim": 4.541446123233919,
+      "d_blocker": 3.756465917275266,
+      "blocker": "DFP",
+      "matched": false
+     },
+     {
+      "agent": "VX",
+      "d_sim": 7.931543789302955,
+      "d_blocker": 8.055961832062481,
+      "blocker": "malathion",
+      "matched": false
+     }
+    ],
+    "n_compounds": 45,
+    "n_dims": 37,
+    "designated": [
+     "DMMP",
+     "dichloromethane",
+     "DPGME",
+     "DIMP"
+    ],
+    "misread_against_k3_null": {
+     "note": "k=3 귀무에 k=4 관측을 대고 읽은 값. 군크기가 다르면 k 개 추출의 최소값 분포가 달라지므로 기준분포가 아니다. 보고값이 아니라 오독의 크기를 적는다.",
+     "observed_k4": 1.5034951206543687,
+     "null_mean_k3": 2.0536101502642166,
+     "null_mean_k4": 1.7300482710037208,
+     "p_if_read_against_k3": 0.15023395721925134,
+     "p_correct_k4": 0.3284457478005865
+    }
    },
    "columns_only_in_baseline": [
     "is_organophosphorus"

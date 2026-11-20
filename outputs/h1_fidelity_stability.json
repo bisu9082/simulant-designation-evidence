@@ -1,0 +1,101 @@
+{
+ "generated_by": "h1_fidelity_stability.py",
+ "seed": 49374,
+ "n_draws": 4000,
+ "note": "전자구조 방법오차(GFN2->B3LYP)의 비아핀 잔차를 이 축에 전파한 결과. 계통(아핀) 성분은 좌표별 표준화가 흡수한다.",
+ "calibration": {
+  "n": 28,
+  "intercept": [
+   4.419761121017219,
+   0.30717108112062946,
+   0.3418126730109468
+  ],
+  "slope": [
+   1.0841781464210163,
+   0.2102713307930449,
+   0.8919882513766934
+  ],
+  "residual_sd": [
+   0.47804784606115586,
+   0.7759499506776324,
+   0.7166868566980902
+  ],
+  "coords": [
+   "E_HOMO_eV",
+   "E_LUMO_eV",
+   "dipole_moment_D"
+  ]
+ },
+ "affine_invariance": {
+  "max_axis_shift": 1.7763568394002505e-15,
+  "spearman_before": 0.06170729908898399,
+  "spearman_after": 0.06170729908898399
+ },
+ "reliability_lambda": 0.6314496033029662,
+ "spearman_under_residual": {
+  "median": 0.01693079601397835,
+  "ci95": [
+   -0.1278382827570038,
+   0.1569709481397825
+  ],
+  "frac_abs_gt_published_ci": 0.0065
+ },
+ "attenuation_corrected": {
+  "rho": 0.0776546006301313,
+  "ci_upper": 0.25099819944650825
+ },
+ "quadrant_at_incumbent_bar_under_residual": {
+  "bar_log10": 4.619978847075851,
+  "published_count": 0,
+  "quartile_cut_published": 0.7112516615840441,
+  "quartile_cut_under_residual": {
+   "median": 0.6779253447717292,
+   "ci95": [
+    0.5794151675590724,
+    0.8081657952809209
+   ]
+  },
+  "frac_draws_nonempty": 0.5455,
+  "mean_occupancy": 0.717,
+  "frac_draws_nonempty_excluding_incumbent": 0.314,
+  "entry_rate_by_compound": {
+   "dichloromethane": 0.334,
+   "HFC 134A": 0.09525,
+   "1,3-Butadiene": 0.068,
+   "methanol": 0.0545,
+   "Methyl-tertiary-butyl ether (MTBE)": 0.05275,
+   "n-hexane": 0.04525,
+   "Butane": 0.03475,
+   "Propane": 0.0325
+  }
+ },
+ "shortlist_quartile_retention": {
+  "1,1,1-Trichloroethane": 0.44375,
+  "HCFC 141b": 0.474,
+  "Hexafluoropropylene": 0.198,
+  "Methyl ethyl ketone": 0.35975,
+  "Tetrachloroethylene": 0.19975,
+  "Trichloroethylene": 0.284,
+  "Trifluorochloroethylene": 0.41575,
+  "Vinyl chloride": 0.25925
+ },
+ "shortlist_mean_retention": 0.32928124999999997,
+ "shortlist_p_more_faithful_than_dcm": {
+  "1,1,1-Trichloroethane": 0.57425,
+  "HCFC 141b": 0.6065,
+  "Hexafluoropropylene": 0.32475,
+  "Methyl ethyl ketone": 0.46875,
+  "Tetrachloroethylene": 0.29625,
+  "Trichloroethylene": 0.40775,
+  "Trifluorochloroethylene": 0.53975,
+  "Vinyl chloride": 0.4095
+ },
+ "n_candidates_beating_dcm_at_90pct": 0,
+ "most_frequent_top1": {
+  "Peracetic Acid": 0.025,
+  "Isopropyl chloroformate": 0.023,
+  "acetonitrile": 0.0213,
+  "Diketene": 0.0192,
+  "Isobutyl chloroformate": 0.0175
+ }
+}

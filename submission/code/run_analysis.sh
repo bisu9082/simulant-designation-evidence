@@ -158,6 +158,10 @@ run_strict "order_invariance.py --n 40" match_rule_audit.py deltaE_noise.py \
            null_convention.py niosh_panel.py volatility_decomposition.py \
            descriptor_definitions.py \
            mde_nullshift.py shape_match.py
+# 2026-11-19 (GATE 8 4차, 데이터 정합성 점검). volatility_niosh.py 가 이
+# 목록에 없었다. 초록이 인용하는 volniosh_p_plus3 의 출처인데 빈 outputs/
+# 로 클론하면 생성되지 않는다. volatility_space 와 niosh_panel 뒤에 둔다.
+run_strict volatility_niosh.py
 # 2026-11-07 (11차). conformer_sensitivity.py 는 --single 이 있을 때만
 # conformer_sensitivity_single.json 을 쓴다. 호출이 한 번뿐이어서 SI 가
 # 인용하는 두 예치물 중 하나가 파이프라인에서 아예 생성되지 않았고,
@@ -212,6 +216,12 @@ fi
 
 run_strict pca_facts.py qsar_tox.py h1_decoupling.py h1_screen_sensitivity.py \
            minority_regression.py validate_aegl_parse.py
+# 2026-11-19 (GATE 8 4차, 데이터 정합성 점검). 이 두 스크립트가 목록에
+# 없었다. SI 의 방법오차 소절 전체와 구조공간 민감도가 그 예치물에서
+# 나오는데 빈 outputs/ 로 클론하면 생성되지 않는다. 생성기 미등록 사고가
+# 이 프로젝트에서 다섯 번째이고 둘은 이번 회차에 내가 만든 것이다.
+# h1_decoupling(h1_pool.csv, h1_summary.json)과 shape_reduction 뒤여야 한다.
+run_strict h1_fidelity_stability.py h1_space_sensitivity.py
 
 # 다중검정 보정은 rollback_c 의 결과에서 파생된다.
 python3 - <<'PY'

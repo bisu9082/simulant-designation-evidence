@@ -44,12 +44,20 @@ NUMTOK = re.compile(r'(?<![\d.A-Za-z\\])\d(?:[\d,]|\\,)*(?:\.\d+)?')
 IDENT = [
     r'TOP\s*\d+-\d+-\d+[A-Z0-9]*',        # 시험절차 번호
     r'acs-submission-\d+',                  # 예치 태그 이름
+    r'quotations\\?_\d+\.csv',               # 인용 대장 파일명
     r'CIEDE\d+',                            # 색차식 이름
     r'_\{\d+\}',                            # 수식 첨자 (\Delta E_{00})
     r'(?<=\d),(?=\d-)',                     # 화학 위치번호 2,4-
     r'(?<=[A-Za-z])~\d+',                    # lewisite~1
     r'AD\d+',                               # DTIC 접수번호
     r'US\s*\d[\d,]*',                       # 특허번호
+    # 2026-11-18. 달력 날짜는 측정값이 아니라 이름이다. 앵커를 달 대상이
+    # 아니므로 토큰화 전에 가린다 (연도까지 한 덩어리로).
+    r'\d{1,2}(?:,\s*\d{1,2})*(?:\s+and\s+(?:again\s+on\s+)?\d{1,2})?'
+    r'\s+(?:January|February|March|April|May|June|July|August|September'
+    r'|October|November|December)(?:\s+\d{4})?',
+    r'(?:January|February|March|April|May|June|July|August|September'
+    r'|October|November|December)\s+\d{4}',
 ]
 
 

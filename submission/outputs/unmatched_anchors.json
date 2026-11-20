@@ -1,6 +1,6 @@
 {
- "baseline": 105,
- "count": 105,
+ "baseline": 99,
+ "count": 99,
  "entries": [
   {
    "key": "lit_d1_acc",
@@ -255,24 +255,6 @@
    "reason": "쌍극자·LUMO 통계 JHM 미수록"
   },
   {
-   "key": "dip_dmmp_gfn2",
-   "line": "dip_dmmp_gfn2: 본문에서 문맥을 찾지 못함 (값 2.52339)",
-   "exempt": true,
-   "reason": "쌍극자·LUMO 통계 JHM 미수록"
-  },
-  {
-   "key": "dip_dmmp_b3lyp",
-   "line": "dip_dmmp_b3lyp: 본문에서 문맥을 찾지 못함 (값 4.88255)",
-   "exempt": true,
-   "reason": "쌍극자·LUMO 통계 JHM 미수록"
-  },
-  {
-   "key": "dip_maxdev",
-   "line": "dip_maxdev: 본문에서 문맥을 찾지 못함 (값 2.35916)",
-   "exempt": true,
-   "reason": "쌍극자·LUMO 통계 JHM 미수록"
-  },
-  {
    "key": "mt_dft_gfn2_p",
    "line": "mt_dft_gfn2_p: 본문에서 문맥을 찾지 못함 (값 0.275)",
    "exempt": true,
@@ -322,7 +304,7 @@
   },
   {
    "key": "len_body",
-   "line": "len_body: 본문에서 문맥을 찾지 못함 (값 8152)",
+   "line": "len_body: 본문에서 문맥을 찾지 못함 (값 8171)",
    "exempt": true,
    "reason": "커버레터가 총계와 면수만 적는다 — len_text_words 로 대조"
   },
@@ -525,18 +507,6 @@
    "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
   },
   {
-   "key": "j21_identified",
-   "line": "j21_identified: 본문에서 문맥을 찾지 못함 (값 171)",
-   "exempt": true,
-   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
-  },
-  {
-   "key": "j21_discounted",
-   "line": "j21_discounted: 본문에서 문맥을 찾지 못함 (값 78)",
-   "exempt": true,
-   "reason": "ACS본 미수록 (J-C) — JHM 동결본 전용 수치"
-  },
-  {
    "key": "j21_suitable",
    "line": "j21_suitable: 본문에서 문맥을 찾지 못함 (값 39)",
    "exempt": true,
@@ -593,12 +563,6 @@
   {
    "key": "nb_dcm",
    "line": "nb_dcm: 본문에서 문맥을 찾지 못함 (값 47.5)",
-   "exempt": true,
-   "reason": "JHM 판본 미수록"
-  },
-  {
-   "key": "n_freedoms",
-   "line": "n_freedoms: 본문에서 문맥을 찾지 못함 (값 7)",
    "exempt": true,
    "reason": "JHM 판본 미수록"
   },

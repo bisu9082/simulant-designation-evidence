@@ -711,5 +711,166 @@
    "between": 0.8667607102702414,
    "between_exceeds_within": true
   }
- ]
+ ],
+ "duplicate_cross_set": {
+  "group": [
+   "Dye22",
+   "Dye23",
+   "Dye24",
+   "Dye25",
+   "Dye26",
+   "Dye27"
+  ],
+  "n_group": 6,
+  "per_set": {
+   "d1.uv": {
+    "n_rows": 30,
+    "n_distinct_columns": 6,
+    "n_rows_all_equal": 6,
+    "n_rows_measured": 24,
+    "n_rows_all_equal_measured": 0,
+    "n_all_zero_columns": 0
+   },
+   "d2.uv": {
+    "n_rows": 35,
+    "n_distinct_columns": 1,
+    "n_rows_all_equal": 35,
+    "n_rows_measured": 28,
+    "n_rows_all_equal_measured": 28,
+    "n_all_zero_columns": 0
+   },
+   "d3.uv": {
+    "n_rows": 20,
+    "n_distinct_columns": 6,
+    "n_rows_all_equal": 4,
+    "n_rows_measured": 16,
+    "n_rows_all_equal_measured": 0,
+    "n_all_zero_columns": 1
+   }
+  }
+ },
+ "component_share": {
+  "d1.uv": {
+   "in_analysis": true,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.368419368552443,
+   "min_share": 1.8507974260171142e-05,
+   "dead_channel_share": {
+    "Nile Red": 0.002790900699829154,
+    "Rhodamine 6G": 0.014471798272174369
+   }
+  },
+  "d1.normal": {
+   "in_analysis": true,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.1853200537656469,
+   "min_share": 0.0015961720628991094,
+   "dead_channel_share": {
+    "Pyrene": 0.138887974292816
+   }
+  },
+  "d2.uv": {
+   "in_analysis": true,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.21545357171575327,
+   "min_share": 0.0,
+   "dead_channel_share": {
+    "Rhodamine 6G": 0.016327733402322485
+   }
+  },
+  "d2.normal": {
+   "in_analysis": true,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.13349037772851066,
+   "min_share": 0.0019811660449441213,
+   "dead_channel_share": {}
+  },
+  "d3.uv": {
+   "in_analysis": false,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.5037337774490676,
+   "min_share": 0.0,
+   "dead_channel_share": {
+    "Nile Red": 0.0002109082841502089
+   }
+  },
+  "d3.normal": {
+   "in_analysis": false,
+   "n_components": 29,
+   "equal_share": 0.034482758620689655,
+   "max_share": 0.22134374539862617,
+   "min_share": 0.0003474434454753293,
+   "dead_channel_share": {}
+  }
+ },
+ "channel_log": {
+  "d1.uv": {
+   "n_declared": 29,
+   "n_effective": 29,
+   "collapsed": {},
+   "all_zero": []
+  },
+  "d1.normal": {
+   "n_declared": 29,
+   "n_effective": 29,
+   "collapsed": {},
+   "all_zero": []
+  },
+  "d2.uv": {
+   "n_declared": 29,
+   "n_effective": 23,
+   "collapsed": {
+    "Dye8": [
+     "Dye14"
+    ],
+    "Dye22": [
+     "Dye23",
+     "Dye24",
+     "Dye25",
+     "Dye26",
+     "Dye27"
+    ]
+   },
+   "all_zero": [
+    "Dye8",
+    "Dye14"
+   ]
+  },
+  "d2.normal": {
+   "n_declared": 29,
+   "n_effective": 29,
+   "collapsed": {},
+   "all_zero": []
+  },
+  "d3.uv": {
+   "n_declared": 29,
+   "n_effective": 25,
+   "collapsed": {
+    "Dye4": [
+     "Dye6",
+     "Dye8",
+     "Dye26",
+     "Dye29"
+    ]
+   },
+   "all_zero": [
+    "Dye4",
+    "Dye6",
+    "Dye8",
+    "Dye26",
+    "Dye29"
+   ]
+  },
+  "d3.normal": {
+   "n_declared": 29,
+   "n_effective": 29,
+   "collapsed": {},
+   "all_zero": []
+  }
+ }
 }

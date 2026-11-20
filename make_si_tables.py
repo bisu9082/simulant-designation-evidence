@@ -156,6 +156,10 @@ FAM_COLS = [('panel35_incumbent3', '35 cpd.,', 'incumbent 3', '(primary)'),
             ('panel28_incumbent3', '28 cpd.,', 'incumbent 3',
              '(omits the seven)'),
             ('pesticide', '35 cpd.,', 'ten designated', '(pesticides in)')]
+# 2026-11-18. 행 이름에 오류율을 적으려다 되돌렸다. 생성 표의 행 이름은
+# 앵커 35개가 어구로 물고 있어서, 이름을 바꾸면 그 검사들이 한꺼번에
+# 꺼진다 (실측: 문맥 대조 694 -> 649, 미발견 105 -> 140). FDR/FWER 구분은
+# 값이 아니라 읽는 법의 문제이므로 캡션에서 가른다.
 FAM_ROWS = [('Smallest nominal $p$ (18 tests)', 'min_p'),
             ('Benjamini-Hochberg over 18', 'bh_all_min_q'),
             ('Benjamini-Hochberg over 6, per space', 'bh_by_space_min_q'),

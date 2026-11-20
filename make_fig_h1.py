@@ -49,7 +49,13 @@ clean = D[~D.alert_flag]
 flag = D[D.alert_flag]
 from matplotlib.patches import Rectangle
 RELAX = tox - 1.0                     # 현행 모사체 DCM 의 1/10 안전 기준
-ax.add_patch(Rectangle((-0.12, RELAX), fid + 0.12, 50, fc='#EDF3E9', ec='none',
+# 2026-11-19 (GATE 8 4차). 음영의 아래 경계가 RELAX 였는데 캡션은 그 구역을
+# '현행 모사체 자신의 기준에서 충실하고 안전한 사분면' 이라 불렀다. 즉 그림은
+# 완화 사분면을 칠하고 캡션은 현행 사분면을 말했고, 그 위에 한정 없는
+# 'FAITHFUL + SAFE' 라벨이 얹혀 철회된 여덟 종을 그 안에 담고 있었다.
+# 경계를 tox 로 올린다. 그러면 음영 사분면이 실제로 비고, 캡션이 참이 되며,
+# 현행 기준에서 0종이라는 발견을 그림이 주장하는 대신 보여 준다.
+ax.add_patch(Rectangle((-0.12, tox), fid + 0.12, 50, fc='#EDF3E9', ec='none',
                        zorder=0))
 ax.axvline(fid, color=C_INK, ls=(0, (5, 3)), lw=1.2, zorder=1)
 ax.axhline(tox, color=C_INK, ls=(0, (5, 3)), lw=1.2, zorder=1)
@@ -63,8 +69,13 @@ ax.scatter(own.fidelity_dist, own.y_tox, s=59, c=C_SIM, edgecolors='white',
            lw=1.3, zorder=6, label='compound already in this study')
 t = [ax.text(r.fidelity_dist, r.y_tox, r.label, fontsize=FS_ANNOT - 1, color=C_INK,
              zorder=7) for r in own.itertuples()]
+# 2026-11-19 (GATE 8 4차). 종전에는 fidelity_dist 오름차순으로 정렬해
+# 번호 1~8 을 매겼다. 그 순서는 meth:h1stab 이 철회한 충실도 순위 그 자체이고,
+# 1번 자리에 논문이 'called one of them the best' 로 철회한 화합물이 그대로
+# 있었다. 산문·표·예치물에서 닫은 철회가 독자가 가장 먼저 보는 자리에서
+# 열려 있었다. 예치물의 labels_order: alphabetical 과 맞춘다.
 best = clean[(clean.fidelity_dist <= fid) & (clean.y_tox >= RELAX)] \
-    .sort_values('fidelity_dist')
+    .sort_values('label', key=lambda s: s.str.lower())
 ax.scatter(best.fidelity_dist, best.y_tox, s=56, facecolors='none',
            edgecolors='#4E7A3A', lw=1.7, zorder=5,
            label=f'clears the relaxed bar ({len(best)})')
@@ -77,11 +88,28 @@ KEY = [(i + 1, r.label.split('(')[0].strip(), r.fidelity_dist)
 # 번호 위치는 adjustText 에 맡기지 않고 점마다 고정 오프셋으로 둔다. 여덟 점이
 # x 0.25~0.70 에 모여 있어 자동 배치는 지시선이 판을 가로지르거나 번호가
 # 서로 겹친다 (5 와 6 은 y 가 같고 x 가 0.021 밖에 차이나지 않는다).
-NUMOFF = {1: (0, 12), 2: (0, -14), 3: (-13, 4), 4: (0, -14),
-          5: (-14, 3), 6: (5, -15), 7: (-5, 13), 8: (14, -3)}
-for (i, _, _), r in zip(KEY, best.itertuples()):
+# 2026-11-19. 오프셋은 번호가 아니라 '점' 에 묶여 있어야 한다. 종전에는
+# 번호 1~8 로 키를 두었는데, 번호가 충실도 순이던 시절에 손으로 맞춘
+# 값이다. 알파벳순으로 바꾸자 번호가 다른 점으로 옮겨 가면서 서로
+# 겹쳤다(5·3·7 이 한 덩어리가 됐다). 화합물 이름으로 키를 바꾼다.
+# 2026-11-19. 음영을 tox 로 올린 뒤, 위로 밀던 두 라벨이 '비어 있는'
+# 사분면 안에 들어가 독자가 그 안에 후보가 있다고 읽게 됐다. 둘 다 내린다.
+NUMOFF = {'Trichloroethylene': (-15, 1),
+          'HCFC 141b': (0, -14),
+          '1,1,1-Trichloroethane': (-13, 4),
+          'Trifluorochloroethylene': (0, -14),
+          'Tetrachloroethylene': (-14, 3),
+          'Hexafluoropropylene': (5, -15),
+          'Methyl ethyl ketone': (9, -15),
+          'Vinyl chloride': (14, -3)}
+_missing = [nm for _, nm, _ in KEY if nm not in NUMOFF]
+if _missing:
+    raise SystemExit(f'[중단] 번호 오프셋이 없는 화합물: {_missing} — '
+                     f'make_fig_h1.py 의 NUMOFF 를 갱신하고 도판을 눈으로 '
+                     f'확인할 것')
+for (i, nm, _), r in zip(KEY, best.itertuples()):
     ax.annotate(str(i), xy=(r.fidelity_dist, r.y_tox),
-                xytext=NUMOFF[i], textcoords='offset points',
+                xytext=NUMOFF[nm], textcoords='offset points',
                 fontsize=FS_ANNOT - 1, color='#3C5E2E', fontweight='bold',
                 ha='center', va='center', zorder=8)
 XMAX = float(np.percentile(D.fidelity_dist, 97)) * 1.12      # 이상치 클립

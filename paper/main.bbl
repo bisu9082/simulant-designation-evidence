@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{49}
+\begin{mcitethebibliography}{48}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -459,14 +459,6 @@ Sun,~Q. \latin{et~al.}  Recent developments in the {PySCF} program package.
 {US Army Test and Evaluation Command} \emph{Test Operations Procedure (TOP)
   08-2-188 CN1: Chemical Point Detector Vapor Testing}; 2019; Approved for
   public release; Defense Technical Information Center AD1072837\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
-\bibitem[{ASTM International}(2020)]{astmf2588}
-{ASTM International} Standard Test Method for Man-In-Simulant Test {(MIST)} for
-  Protective Ensembles. ASTM F2588-12(2020), 2020; Designation F2588-12,
-  reapproved 2020\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

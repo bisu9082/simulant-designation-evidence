@@ -168,8 +168,12 @@ def _dropped_periods():
              '숫자 뒤 환경/절 명령'),
             (_r.compile(r'\d\s+[A-Z][a-z]'), '숫자 뒤 대문자 단어')]
     # 날짜 블록과 저자 블록은 숫자로 끝나고 다음 줄이 대문자로 시작한다.
-    exempt = _r.compile(r'(?:January|February|March|April|May|June|July|'
-                        r'August|September|October|November|December)\s+\d{4}|'
+    # 2026-11-18. 연도 없는 '18 November' 꼴도 면제한다 (DTIC 회수 시도를
+    # 날짜별 관측으로 바꾸면서 이 가드가 오탐을 냈다).
+    _MONTH = (r'(?:January|February|March|April|May|June|July|'
+              r'August|September|October|November|December)')
+    exempt = _r.compile(_MONTH + r'\s+\d{4}|'
+                        r'\d{1,2}\s+' + _MONTH + r'|'
                         r'vspace|\\author|\\affiliation|\\email|'
                         r'Republic of Korea')
     out = []
@@ -651,8 +655,9 @@ def preflight():
     missing = [p for p in REQUIRED_OUTPUTS if not os.path.exists(p)]
     figless = [p for p in REQUIRED_FOR_FIGURES if not os.path.exists(p)]
     nofig = [f for f in FIGURES if not os.path.exists(f'paper/{f}')]
-    # 그래픽 초록은 build_paper.sh 바깥에 있어서 분석을 다시 돌려도 갱신되지
-    # 않았다. 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
+    # 그래픽 초록은 2026-11-20 까지 build_paper.sh 바깥에 있어서 분석을
+    # 다시 돌려도 갱신되지 않았다 (지금은 --figs 목록에 있고 검사 P5 가
+    # 그 등록을 지킨다). 2026-10-22 투고 직전에 p=0.297, Spearman r=-0.022, n=214 를
     # 그대로 들고 있는 10-11 판이 발견됐다. 산출물보다 오래되면 멈춘다.
     if os.path.exists('outputs/graphical_abstract.png'):
         _ga = os.path.getmtime('outputs/graphical_abstract.png')
@@ -665,8 +670,12 @@ def preflight():
             # 호출부가 'paper_acs/' 를 붙여 출력하고 있었다. paper_acs 에는
             # 그런 파일이 없으므로(투고 시스템에 따로 올리는 첨부다) 읽는
             # 사람이 없는 경로를 찾게 된다. 9차에서 세 번 헛돌았다.
+            # 2026-11-20. 안내를 고친다. make_ga.py 를 이제
+            # build_paper.sh --figs 가 부르므로 (검사 P5 가 그 등록을
+            # 지킨다), 손으로 그 스크립트를 부르라고 할 이유가 없다.
             nofig.append('[outputs/] graphical_abstract.png 가 산출물보다 '
-                         '오래됐다 — python3 make_ga.py 로 재생성할 것')
+                         '오래됐다 — sh build_paper.sh --figs 로 '
+                         '재생성할 것')
     # 2026-10-20 신설. figure_annotations.json 은 누적만 하므로, 폐기된 도판의
     # 주석이 남아 본문 검사를 대신 통과시킬 수 있다. 등재부에 현행 도판이 아닌
     # 항목이 하나라도 있으면 멈춘다.
@@ -708,6 +717,10 @@ def preflight():
     # 새 파일을 인용하면 여기에 생성자를 등록해야 통과한다. 등록을 강제하는
     # 것이 이 검사의 요점이다.
     GENERATED_BY = {
+        # 2026-11-19. 하네스 공시가 두 감사 산출물을 이름으로 부른다.
+        # 둘 다 이 스크립트가 쓴다.
+        'unmatched_anchors.json': 'verify_consistency.py',
+        'unanchored_positions.json': 'verify_consistency.py',
         # 2026-11-08. 본문 4.3 임계값 스윕의 출처.
         'threshold_sweep.json': 'threshold_sweep.py',
         'mde.json': 'mde.py',
@@ -722,6 +735,10 @@ def preflight():
         'volatility_niosh.json': 'volatility_niosh.py',
         # 2026-11-16. B5(Tier A 에 염화물 누락) 공시가 이 파일을 인용한다.
         'h1_candidates.csv': 'h1_decoupling.py',
+        # 2026-11-18 (C 항목). 충실도 축의 방법오차·공간 민감도.
+        'h1_pool.csv': 'h1_decoupling.py',
+        'h1_fidelity_stability.json': 'h1_fidelity_stability.py',
+        'h1_space_sensitivity.json': 'h1_space_sensitivity.py',
         'descriptor_definitions.json': 'descriptor_definitions.py',
         'davidson_external.json': 'davidson_external.py',
         # 2026-11-12 (패널 6인 심사 후 Phase 0). 세 건 모두
@@ -1840,6 +1857,171 @@ def load_facts():
     f['niosh_p35_base'] = _np_['panel35_incumbent3']['baseline']['p']['mean_diff']
     f['niosh_p35_plus'] = (_np_['panel35_incumbent3']['plus_all_recomputed']
                            ['p']['mean_diff'])
+    # 2026-11-18 (C 항목). 충실도 축의 방법오차와 공간 민감도.
+    _hs = json.load(open('outputs/h1_fidelity_stability.json'))
+    f['h1_lambda'] = _hs['reliability_lambda']
+    f['h1_rho_median'] = _hs['spearman_under_residual']['median']
+    f['h1_rho_exceed'] = (100.0 *
+                          _hs['spearman_under_residual']
+                          ['frac_abs_gt_published_ci'])
+    f['h1_ci_corrected'] = _hs['attenuation_corrected']['ci_upper']
+    f['h1_retention'] = _hs['shortlist_mean_retention']
+    f['h1_beat_dcm90'] = _hs['n_candidates_beating_dcm_at_90pct']
+    f['h1_res_homo'] = _hs['calibration']['residual_sd'][0]
+    f['h1_res_lumo'] = _hs['calibration']['residual_sd'][1]
+    f['h1_res_dip'] = _hs['calibration']['residual_sd'][2]
+    # (P4) 2026-11-19. h1_pool.csv 와 h1_candidates.csv 는 같은 실행에서
+    # 파생되므로 공통 화합물의 fidelity 가 같아야 한다. 달라지면 둘 중
+    # 하나가 다른 경로(민감도 실행 등)에서 덮인 것이다. 실제로 그 사고가
+    # 났다: 민감도 경로가 정식 풀을 245종으로 덮었고 후보는 237종 기준으로
+    # 남아, 전체 파이프라인에서 재현 검사가 편차 0.804 로 멈췄다.
+    _pl = pd.read_csv('outputs/h1_pool.csv')
+    _cd = pd.read_csv('outputs/h1_candidates.csv')
+    _mg = _cd[['label', 'fidelity_dist']].merge(
+        _pl[['label', 'fidelity_dist']], on='label', suffixes=('_c', '_p'))
+    _dv = float((_mg['fidelity_dist_c'] - _mg['fidelity_dist_p']).abs().max())
+    if len(_mg) != len(_cd) or _dv > 1e-9:
+        raise SystemExit(
+            f'[verify] 중단: h1_pool.csv 와 h1_candidates.csv 가 어긋난다 '
+            f'(검사 P4) — 공통 {len(_mg)}/{len(_cd)}종, 최대편차 {_dv:.3e}. '
+            f'민감도 경로가 정식 풀을 덮었는지 확인하고 h1_decoupling.py 를 '
+            f'다시 돌릴 것')
+
+    # 2026-11-18 (GATE 8 3차). 현행 경계 사분면의 방법오차.
+    _hq = _hs['quadrant_at_incumbent_bar_under_residual']
+    f['h1q_nonempty'] = _hq['frac_draws_nonempty']
+    f['h1q_nonempty_nodcm'] = _hq['frac_draws_nonempty_excluding_incumbent']
+    f['h1q_occupancy'] = _hq['mean_occupancy']
+    f['h1q_cut_pub'] = _hq['quartile_cut_published']
+    f['h1q_cut_med'] = _hq['quartile_cut_under_residual']['median']
+    f['h1q_cut_lo'] = _hq['quartile_cut_under_residual']['ci95'][0]
+    f['h1q_cut_hi'] = _hq['quartile_cut_under_residual']['ci95'][1]
+    f['h1q_dcm_entry'] = _hq['entry_rate_by_compound']['dichloromethane']
+
+    _ss = json.load(open('outputs/h1_space_sensitivity.json'))
+    f['h1_rho_struct'] = _ss['structural']['spearman_rho']
+    f['h1_rho_struct_p'] = _ss['structural']['spearman_p']
+    f['h1_rho_elec'] = _ss['electronic']['spearman_rho']
+    f['h1_axis_agree'] = _ss['axis_agreement']['spearman_rho']
+    f['h1_sl_pct_lo'] = _ss['shortlist_structural_percentile_range'][0]
+    f['h1_sl_pct_hi'] = _ss['shortlist_structural_percentile_range'][1]
+    f['h1_quad_struct'] = len(_ss['structural']['faithful_and_safe'])
+    # 2026-11-18. 구조공간 음계수가 어느 블록에 기대는가.
+    _bd = _ss['structural_block_dependence']
+    f['h1_bd_der_rho'] = _bd['shape_derived_removed']['spearman_rho']
+    f['h1_bd_der_p'] = _bd['shape_derived_removed']['spearman_p']
+    f['h1_bd_blk_rho'] = _bd['shape_block_removed']['spearman_rho']
+    f['h1_bd_blk_p'] = _bd['shape_block_removed']['spearman_p']
+    f['h1_bd_kap_rho'] = _bd['kappa_removed']['spearman_rho']
+    f['h1_bd_kap_p'] = _bd['kappa_removed']['spearman_p']
+
+    # 2026-11-18. 휘발성 축: 넓은 가족 보정값과 효과크기.
+    _vs = json.load(open('outputs/volatility_space.json'))
+    f['vol_fam_widest'] = _vs['family_corrections'][
+        'with_eighteen_plus_axis_six_bh']
+    _vmd = _vs['valid_match_detail']['nn_median_distance']
+    _vobs = json.load(open('outputs/volatility_niosh.json'))['runs'][
+        'baseline']['statistics']['mean_diff']['observed']
+    f['vol_margin'] = abs(_vobs)
+    f['vol_margin_pct'] = 100.0 * abs(_vobs) / _vmd
+
+    # 2026-11-18. 블록균형 panel28. 예치돼 있었고 보고되지 않았다.
+    _bb = json.load(open('outputs/blockbalance.json'))['panel28_incumbent3']
+
+    def _bh_min_local(ps):
+        ps = sorted(ps)
+        m = len(ps)
+        run, out = 1.0, 1.0
+        for i in range(m - 1, -1, -1):
+            run = min(run, ps[i] * m / (i + 1))
+            out = run
+        return out
+    f['bb28_nominal_eq'] = min(_bb['equal_per_descriptor']['p'].values())
+    f['bb28_nominal_bal'] = min(_bb['block_balanced']['p'].values())
+    f['bb28_bh6_eq'] = _bh_min_local(_bb['equal_per_descriptor']['p'].values())
+    f['bb28_bh6_bal'] = _bh_min_local(_bb['block_balanced']['p'].values())
+
+    # 2026-11-18. DIMP 지정 변형. 지정집합 자유도를 실제로 행사한 값이다.
+    _nd28 = _np_['panel28_incumbent3']['plus_all_dimp_designated']
+    _nd35 = _np_['panel35_incumbent3']['plus_all_dimp_designated']
+    f['nioshd_p28'] = _nd28['p']['mean_diff']
+    f['nioshd_nvalid28'] = _nd28['n_valid']
+    f['nioshd_nperm28'] = _nd28['n_perm']
+    f['nioshd_p35'] = _nd35['p']['mean_diff']
+    f['nioshd_nperm35'] = _nd35['n_perm']
+    _mis = _nd28['misread_against_k3_null']
+    f['nioshd_null_k3'] = _mis['null_mean_k3']
+    f['nioshd_null_k4'] = _mis['null_mean_k4']
+    f['nioshd_obs_k4'] = _mis['observed_k4']
+    f['nioshd_misread_p'] = _mis['p_if_read_against_k3']
+    _nd28_bh = sorted(_nd28['p'].values())
+    f['nioshd_bh28'] = min(v * len(_nd28_bh) / (i + 1)
+                           for i, v in enumerate(_nd28_bh))
+    # VX 가 기준선에서 애초에 역치 밖이었다는 SI 주장의 근거.
+    _b28 = _np_['panel28_incumbent3']['baseline']
+    _vx_b = [a for a in _b28['agents'] if a['agent'] == 'VX'][0]
+    f['nioshd_vx_nn_base'] = _vx_b['d_sim'] / _b28['nn_median']
+    # 2026-11-19 (E 의 권고). struct_VX 가 같은 양을 다른 경로로 센다.
+    # 별칭으로 묶으면 한쪽이 바뀌어도 모른다. 어긋나면 멈춘다.
+    if 'struct_VX' in f and abs(f['struct_VX']
+                                - f['nioshd_vx_nn_base']) > 1e-9:
+        raise SystemExit('[중단] struct_VX 와 nioshd_vx_nn_base 가 같은 '
+                         '양인데 값이 다르다 — 한쪽 산출 경로가 바뀌었다')
+
+    # 2026-11-18. 비형광 기전 철회의 근거. 같은 여섯 열이 d1/d3 에서는
+    # 서로 다르다는 사실이 '염료의 성질' 설명을 반증한다.
+    _dup = json.load(open('outputs/deltaE_premise.json'))['duplicate_cross_set']
+    f['uvdup_ngroup'] = _dup['n_group']
+    # 2026-11-19. 하네스 공시가 인용하는 수. 기준선 둘은 모듈 상수,
+    # 주입 집계는 test_verify_consistency.py 의 산출물에서 읽는다.
+    f['hn_anchor_baseline'] = ANCHOR_BASELINE_CONST
+    f['hn_unseen_baseline'] = UNSEEN_BASELINE_CONST
+    try:
+        _is = json.load(open('outputs/injection_suite.json'))
+        # 사례 수·잡은 수·건너뛴 수는 사례를 더할 때마다 바뀌므로 원고가
+        # 인용하지 않는다. 미탐지 0 은 검사 A-inj 가 기록에서 직접 읽으므로
+        # 사실표에 떠돌이 키를 남기지 않는다.
+        _ = _is['n_missed']
+    except (OSError, ValueError, KeyError):
+        pass
+    # 2026-11-18. 단위 정규화가 성분을 균등화하지 않는다는 철회의 근거.
+    _cs = json.load(open('outputs/deltaE_premise.json'))['component_share']
+    # 분석하는 네 셀만 본다 (제3세트는 어느 분석에도 들어가지 않는다).
+    f['cs_share_max'] = max(_v['max_share'] for _v in _cs.values()
+                            if _v['in_analysis'])
+    f['cs_share_equal'] = list(_cs.values())[0]['equal_share']
+    # 2026-11-18 (B 의 R5 잔여). 작용제별 거리 간극의 구간.
+    _pa = (json.load(open('outputs/stat_supplement2.json'))
+           ['distance_bootstrap'])
+    f['pag_n_excl_zero'] = _pa['n_gap_excluding_zero']
+    for _a, _k in (('sarin (GB)', 'gb'), ('soman (GD)', 'gd'),
+                   ('cyclosarin (GF)', 'gf')):
+        _r = next(r for r in _pa['per_agent_gap'] if r['agent'] == _a)
+        f[f'pag_hi_{_k}'] = _r['gap_ci'][1]
+
+    # 2026-11-18. d1 에서 구조공간과 병합공간이 같은 값을 준다는 공시.
+    # 같은 값이어야 공시가 참이므로 두 공간을 각각 걸어 둔다.
+    _sp = {(r['dataset'], r['mode'], r['space']): r['spearman']
+           for r in json.load(open('outputs/deltaE_premise.json'))['space_test']}
+    for _lbl, _mode in (('uv', 'uv'), ('nor', 'normal')):
+        _s, _m = _sp[('d1', _mode, 'structural')], _sp[('d1', _mode, 'merged')]
+        if abs(_s - _m) > 1e-9:
+            raise SystemExit('[중단] d1 구조/병합이 더는 같지 않다 — SI '
+                             'res:arraydetail 의 공시를 고칠 것')
+        f[f'sp_d1_{_lbl}_same'] = _s
+    # 2026-11-19. 0 µM 행은 정의상 0 이므로 '일치 관측' 이 아니다.
+    # 측정 행만 센 수치로 바꿨다 (전체 행으로 세면 d1 의 6, d3 의 4 가
+    # 전부 블랭크여서 자기 대비를 실제보다 약하게 적게 된다).
+    for _t in ('d1', 'd2', 'd3'):
+        _s = _dup['per_set'][f'{_t}.uv']
+        f[f'uvdup_distinct_{_t}'] = _s['n_distinct_columns']
+        f[f'uvdup_meas_{_t}'] = _s['n_rows_measured']
+        f[f'uvdup_agree_meas_{_t}'] = _s['n_rows_all_equal_measured']
+
+    # 2026-11-18 (GATE 8 3차, M6). 본문이 세 자리에서 인용하는 관측 평균차.
+    f['obs_md28_struct'] = (_np_['panel28_incumbent3']['baseline']
+                            ['observed']['mean_diff'])
+
     f['niosh_nvalid28_base'] = _np_['panel28_incumbent3']['baseline']['n_valid']
     f['niosh_nvalid28_plus'] = (_np_['panel28_incumbent3']
                                 ['plus_all_recomputed']['n_valid'])
@@ -1931,7 +2113,13 @@ def load_facts():
     # 2026-11-07 (12차 A-2). 비교군이 일곱째다. 실험절이 적는 문자
     # 그대로의 판독(작용제 포함)은 감사된 적이 없었고, 재보니 이
     # 목록에서 가장 크게 움직인다 (28종 3->0, 문헌8 5->2).
-    f['n_freedoms'] = 7
+    # 2026-11-18 (GATE 8 3차, M8). 본문·SI·결론이 세 가지로 적고 있었고,
+    # 이 키의 패턴('Seven analyst choices therefore move')은 현행 산문에
+    # 없어서 검사가 잠들어 있었다. 이제 두 양을 가른다: 사전에 고정되지
+    # 않은 자유도는 여덟이고, 결론이 고정하라고 요구하는 것은 그중 일곱,
+    # 나머지 하나(형태좌표 처리)는 선언하라고만 요구한다.
+    f['n_freedoms'] = 8
+    f['n_freedoms_fix'] = 7
     f['match_range_hi'] = _V['drop_cardinality_le_5']['n_match'] \
         if 'drop_cardinality_le_5' in _V else 6
 
@@ -2164,6 +2352,9 @@ def load_facts():
                    ('rand3_med28', 'rand3_med28_2'),
                    ('white_med28', 'white_med28_2'),
                    ('pct_struct', 'pct_struct_2'),
+                   ('pct_struct', 'concl_pct_struct'),
+                   ('n_freedoms_fix', 'n_freedoms_fix2'),
+                   ('n_freedoms_fix', 'n_freedoms_other'),
                    ('fam_bh18_p28', 'fam_bh18_p28_2'),
                    ('mantel_d2nor_elec', 'mantel_d2nor_elec_2'),
                    ('struct_kept_28', 'struct_kept_28_2')]:
@@ -2206,6 +2397,9 @@ def load_facts():
         _run = min(_run, _vps[_i] * _vn / (_i + 1))
         _vq.append(_run)
     f['vol_four_cell_bh'] = _vq[-1]
+    # 2026-11-18 (M6). 본문이 '0.05 밑 유일한 셀' 로 인용하는 값.
+    f['vol_cell_min_p'] = min(_c['p_mantel'] for _c
+                              in _vs['agreement']['cells'])
     _lw = _vol['lewisite_isomer_sensitivity']
     f['vol_lew_cis_p'] = _lw['cis']['p']
     f['vol_lew_cis_rank'] = _lw['cis']['rank']
@@ -2460,8 +2654,6 @@ UNQUOTED = {
     'pp_bh_q': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j18_identified': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j18_unsuitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
-    'j21_identified': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
-    'j21_discounted': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_suitable': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
     'j21_possible': 'ACS본 미수록 (J-C) — JHM 동결본 전용 수치',
 
@@ -2649,10 +2841,7 @@ UNQUOTED = {
     # 쌍극자·LUMO 검증 (dip_, lumo_) — 8건
     # JHM SI 의 밀도함수 점검 절(377행)은 친전자성축만 다룬다. 쌍극자 회귀
     # 통계와 LUMO 양수 개수는 싣지 않는다.
-    'dip_dmmp_b3lyp': '쌍극자·LUMO 통계 JHM 미수록',
-    'dip_dmmp_gfn2': '쌍극자·LUMO 통계 JHM 미수록',
     'dip_mae': '쌍극자·LUMO 통계 JHM 미수록',
-    'dip_maxdev': '쌍극자·LUMO 통계 JHM 미수록',
     'dip_r': '쌍극자·LUMO 통계 JHM 미수록',
     'lumo_b3lyp_max': '쌍극자·LUMO 통계 JHM 미수록',
     'lumo_b3lyp_pos': '쌍극자·LUMO 통계 JHM 미수록',
@@ -2700,7 +2889,6 @@ UNQUOTED = {
     'lew_dnorm_E': 'JHM 판본 미수록',
     'lew_dnorm_Z': 'JHM 판본 미수록',
     'match_range_hi': 'JHM 판본 미수록',
-    'n_freedoms': 'JHM 판본 미수록',
     'nb_dcm': 'JHM 판본 미수록',
     'pn_exact_n': 'JHM 판본 미수록',
     'rank_exp': 'JHM 판본 미수록',
@@ -2862,8 +3050,10 @@ CHECKS = [
      [r'certifies (\w+) of the twenty\s+as inside the domain',
      r'(Fourteen|Thirteen|Fifteen) of the twenty lie inside',
       r'(fourteen|thirteen|fifteen) of them pass the domain check'], 0),
-    ('tce_ratio', [r'trichloroethylene[, ]+is ([\d.]+) times closer',
-                   r'trichloroethylene ([\d.]+) times closer'], 0.05),
+    # 2026-11-18 (C 항목) 은퇴. '최충실 후보가 현행보다 3.1배 가깝다' 는
+    # 주장을 철회했다. 방법오차를 전파하면 그 서열이 유지되지 않는다
+    # (meth:h1stab: 사분위 유지율 0.329, DCM 우위 90% 신뢰 0종). 원고가
+    # 더는 이 수를 말하지 않으므로 검사도 뺀다. 사실 키와 예치물은 남는다.
     ('dcm_above', [r'with (seven|eight|two) compounds\s*\n?above it',
                    r'all but (seven|eight|two) of the 214 compounds'], 0),
     ('panel_without', [r'inhalation\s*\n?\s*value exists for any of these (\d+)'], 0),
@@ -3360,7 +3550,7 @@ CHECKS = [
      [r'stands at [\d.]+ and at ([\d.]+), the second of which',
       r'twice the smaller tail, and at ([\d.]+), the proportion'], 0.0005),
     ('voldec_rho',
-     [r'Spearman correlation of \$-([\d.]+)\$'], 0.0005),
+     [r'of\s*\n?\$-([\d.]+)\$\. The incumbent three span'], 0.0005),
     ('voldec_span',
      [r'incumbent three span ([\d.]+) standardised units'], 0.0005),
     ('voldec_nperm',
@@ -3682,12 +3872,12 @@ CHECKS = [
     # 그래서 그 값은 검사 대상 밖이었다. 리터럴을 지우고 두 값을 각각
     # 자기 사실에 건다.
     ('bb_minp35', [r'lowers that value to ([\d.]+)',
-                   r'nominal value from [\d.]+ to ([\d.]+)',
+                   r"primary panel's\s*\n?smallest nominal value from [\d.]+ to ([\d.]+)",
                    r'Thirty-five, incumbent three & \d+/11 & \d+/11 & [\d.]+ & (\d+\.\d+) &',
                    r'with equal weight per descriptor and ([\d.]+) with'],
      0.0005),
     ('bb_minpdesc35',
-     [r'nominal value from ([\d.]+) to [\d.]+',
+     [r"primary panel's\s*\n?smallest nominal value from ([\d.]+) to [\d.]+",
       r'Thirty-five, incumbent three & \d+/11 & \d+/11 & (\d+\.\d+) &',
       r'([\d.]+) with equal weight per descriptor and'],
      0.0005),
@@ -3755,7 +3945,7 @@ CHECKS = [
      [r'tests moves from [\d.]+ to ([\d.]+)\. Classing',
       r'value from [\d.]+ to ([\d.]+)\. The acetonitrile'], 0.0005),
     ('abs_twolabel_bh_q',
-     [r'becomes ([\d.]+) or [\d.]+ depending on how many move'], 0.0005),
+     [r'becomes ([\d.]+) or [\d.]+ depending on how many\.'], 0.0005),
     ('concl_twolabel_bh_q',
      [r'from a corrected ([\d.]+) to [\d.]+ on one panel'], 0.0005),
     ('abs_bh_q35',
@@ -3767,7 +3957,7 @@ CHECKS = [
     ('supp_bh_q35_fam',
      [r'value from ([\d.]+) to [\d.]+\. The acetonitrile'], 0.0005),
     ('abs_pf_bh18',
-     [r'becomes [\d.]+ or ([\d.]+) depending on how many move'], 0.000005),
+     [r'becomes [\d.]+ or ([\d.]+) depending on how many\.'], 0.000005),
     # 2026-11-16 (P2 2차). 초록의 나머지 네 수치. 주입시험에서 0.028·0.360·
     # 0.0206 세 자리가 전부 통과했다 — 어법이 본문과 달라 (B) 검사가 본문
     # 쪽에서 먼저 맞고 끝났다. 초록은 이 원고가 반복해서 놓친 구역이다
@@ -3775,11 +3965,188 @@ CHECKS = [
     ('abs_p28_struct',
      [r'nominal structural \$p\$ of ([\d.]+) that no'], 0.0005),
     ('abs_niosh_p28_plus',
-     [r'that rises to ([\d.]+), with'], 0.0005),
+     [r'and rises to ([\d.]+), with no match'], 0.0005),
     ('abs_vol_p_md',
-     [r'registered correction\s*\n?\(\$p = ([\d.]+)\$\)'], 0.0000005),
+     [r'registered correction\s*\n?\(\$p = ([\d.]+)\$, smaller panel'],
+     0.0000005),
     ('abs_volniosh_plus3',
      [r'the three measured ones moves it to ([\d.]+) and reverses'], 0.0005),
+    # 2026-11-18 (C 항목). 충실도 축 방법오차·공간 민감도. 본문 두 자리,
+    # SI 열한 자리. 이 축은 서술자 거리를 유일하게 건설적으로 쓰는 자리인데
+    # 종전에는 방법오차도 공간 민감도도 통과하지 않았다.
+    ('h1_bd_der_rho',
+     [r'from \$-0\.149\$ to \$(-[\d.]+)\$'], 0.0005),
+    ('h1_bd_der_p',
+     [r'nominal\s*\n?value from 0\.032 to ([\d.]+);'], 0.0005),
+    ('h1_bd_blk_rho',
+     [r'whole shape block gives \$(-[\d.]+)\$'], 0.0005),
+    ('h1_bd_blk_p',
+     [r'whole shape block gives \$-[\d.]+\$ at\s*\n?([\d.]+),'], 0.0005),
+    ('h1_bd_kap_rho',
+     [r'kappa indices alone gives \$(-[\d.]+)\$'], 0.0005),
+    ('h1_bd_kap_p',
+     [r'kappa indices alone gives \$-[\d.]+\$ at ([\d.]+)\.'], 0.0005),
+    ('h1q_nonempty',
+     [r'quadrant non-empty in ([\d.]+) of draws'], 0.0005),
+    ('h1q_nonempty_tab',
+     [r'non-empty under method residual & ([\d.]+) of draws'], 0.0005),
+    ('h1q_nonempty_cap',
+     [r'not empty in ([\d.]+) of the\s*\n?method-error draws'], 0.0005),
+    ('h1q_nonempty_nodcm',
+     [r'([\d.]+) once dichloromethane itself is set aside'], 0.0005),
+    ('h1q_occupancy',
+     [r'mean occupancy of ([\d.]+)\s*\n?compounds'], 0.0005),
+    ('h1q_cut_pub',
+     [r'moves from the published\s*\n?([\d.]+) to a median'], 0.0005),
+    ('h1q_cut_med',
+     [r'to a median of ([\d.]+) with a 95 per cent'], 0.0005),
+    ('h1q_cut_lo',
+     [r'95 per cent interval of ([\d.]+) to'], 0.0005),
+    ('h1q_cut_hi',
+     [r'interval of [\d.]+ to ([\d.]+)\.'], 0.0005),
+    ('h1q_dcm_entry',
+     [r'is the incumbent, in ([\d.]+) of draws'], 0.0005),
+    ('h1_lambda',
+     [r'reliability of ([\d.]+) is corrected for',
+      r'gives a reliability of ([\d.]+): that fraction'], 0.0005),
+    ('h1_ci_corrected',
+     [r'widening to ([\d.]+) once the axis'], 0.0005),
+    ('h1_rho_struct',
+     [r'the structural space gives \$(-[\d.]+)\$ on',
+      r'Spearman correlation of \$(-[\d.]+)\$\s*\n?against the \$\+'], 0.0005),
+    ('h1_rho_median',
+     [r'has a median of \$\+([\d.]+)\$ under the residual'], 0.0005),
+    ('h1_rho_exceed',
+     [r"published interval's upper bound in\s*\n?([\d.]+) per cent"], 0.05),
+    ('h1_retention',
+     [r'top fidelity quartile in ([\d.]+) of draws',
+      r'leaves each of them in the top quartile\s*\n?in a third of draws, '
+      r'([\d.]+) on average'], 0.0005),
+    ('h1_res_homo',
+     [r'those three fits are\s*\n?([\d.]+)~eV'], 0.0005),
+    ('h1_res_lumo',
+     [r'~eV, ([\d.]+)~eV and'], 0.0005),
+    ('h1_res_dip',
+     [r'~eV and ([\d.]+)~D\.'], 0.0005),
+    ('h1_rho_elec',
+     [r'against the \$\+([\d.]+)\$ the electronic space gives'], 0.0005),
+    ('h1_axis_agree',
+     [r'orderings agree\s*\n?only at \$\+([\d.]+)\$'], 0.0005),
+    ('h1_rho_struct_p',
+     [r'nominal significance of ([\d.]+) does not'], 0.0005),
+    # 2026-11-18 (B 항목). 휘발성 축의 넓은 가족과 효과크기. 유일하게
+    # 교정을 통과하는 결과가 가장 좁은 가족정의로만 보고되고 있었고,
+    # 효과크기가 그 축 자신의 간격 대비 얼마인지 적히지 않았다.
+    ('vol_fam_widest',
+     [r'on this axis together, it becomes ([\d.]+)\.'], 0.0005),
+    ('vol_margin', [r'whose margin is ([\d.]+) standardised units'], 0.00005),
+    ('vol_margin_pct',
+     [r'units,\s*\n?([\d.]+) per cent of this axis'], 0.05),
+    # 2026-11-18 (B 항목). 블록균형 panel28 공시. 이 값들이 예치물에
+    # 있는데 보고되지 않았고, SI 가 그 규약을 '여기서는 무해하다' 로 닫고
+    # 있었다. 공간별 BH 최소가 0.0772 -> 0.0485 로 0.05 를 건넌다.
+    ('bb28_nominal_eq',
+     [r'smallest nominal value from ([\d.]+) to [\d.]+ and the smallest'],
+     0.0005),
+    ('bb28_nominal_bal',
+     [r'smallest nominal value from [\d.]+ to ([\d.]+) and the smallest'],
+     0.00005),
+    ('bb28_bh6_eq',
+     [r'value within a space from ([\d.]+) to [\d.]+, so a weighting'],
+     0.00005),
+    ('bb28_bh6_bal',
+     [r'value within a space from [\d.]+ to ([\d.]+), so a weighting'],
+     0.00005),
+    # 2026-11-18 (B 항목). DIMP 지정 변형. 본문 한 자리, SI 아홉 자리.
+    ('nioshd_p28',
+     [r'pre-specified mean difference to \$p = ([\d.]+)\$',
+      r'panel returns \$p = ([\d.]+)\$ on the pre-specified'], 0.0005),
+    ('nioshd_bh28',
+     [r'Benjamini--Hochberg value of \$([\d.]+)\$ over the six'], 0.0005),
+    ('nioshd_nperm28',
+     [r'gives \$\\binom\{27\}\{4\} = ([\d\\,]+)\$'], 0),
+    ('nioshd_nperm35',
+     [r'\$\\binom\{34\}\{4\} = ([\d\\,]+)\$'], 0),
+    ('nioshd_p35',
+     [r'the same move gives \$p = ([\d.]+)\$ and no match'], 0.0005),
+    ('nioshd_null_k3',
+     [r'designations is \$\+([\d.]+)\$ at \$k=3\$'], 0.0005),
+    ('nioshd_null_k4',
+     [r'at \$k=3\$ and \$\+([\d.]+)\$ at \$k=4\$'], 0.0005),
+    ('nioshd_obs_k4',
+     [r'four-designation\s*\n?observation of \$\+([\d.]+)\$'], 0.0005),
+    ('nioshd_misread_p',
+     [r'would return\s*\n?\$p = ([\d.]+)\$ instead of the correct'], 0.0005),
+    ('nioshd_nvalid28',
+     [r'(two) valid\s*\n?matches of eleven'], 0),
+    ('nioshd_vx_nn_base',
+     [r'standing ([\d.]+)\s*\n?nearest-neighbour separations'], 0.0005),
+    # 2026-11-18 (GATE 8 3차, M6). 결과를 논증하는 본문 자리들이 무앵커로
+    # 남아 있었다. 0.0206 은 이 논문이 끝까지 지키는 유일한 생존 결과인데
+    # 세 자리 전부 검사 밖이었다. 자리마다 키를 따로 둔다.
+    ('vol_p_md_res',
+     [r'one-sided \$p\$ of ([\d.]+) this'], 0.0005),
+    ('vol_p_md_weak',
+     [r'Two readings weaken that ([\d.]+),'], 0.0005),
+    ('vol_p_md_cov',
+     [r'so\s*\n?([\d.]+) is largely a comparison'], 0.0005),
+    ('vol_cell_min_p',
+     [r'\$p = ([\d.]+)\$, comes from the plate'], 0.0005),
+    ('obs_md28_struct',
+     [r'structural space is \$\+([\d.]+)\$:'], 0.0005),
+    ('obs_md28_struct_si1',
+     [r'close to the \$\+([\d.]+)\$ the structural'], 0.0005),
+    ('obs_md28_struct_si2',
+     [r'observed mean difference is \$\+([\d.]+)\$, so'], 0.0005),
+    ('concl_bh_q28',
+     [r'its own family \(\$q = ([\d.]+)\$\)'], 0.0005),
+    ('concl_pct_struct',
+     [r'sits at the ([\d.]+)th\s*\n?percentile of 2000'], 0.06),
+    ('pag_n_excl_zero',
+     [r'(\w+) of the eleven agents have intervals that exclude zero'], 0),
+    ('pag_hi_gb',
+     [r'their intervals run from zero to ([\d.]+),'], 0.0005),
+    ('pag_hi_gd',
+     [r'run from zero to [\d.]+,\s*\n?([\d.]+) and'], 0.0005),
+    ('pag_hi_gf',
+     [r'zero to [\d.]+,\s*\n?[\d.]+ and ([\d.]+)\.'], 0.0005),
+    ('sp_d1_uv_same',
+     [r'six figures,\s*\n?\$\+([\d.]+)\$ under ultraviolet excitation'], 0.00005),
+    ('sp_d1_nor_same',
+     [r'and \$\+([\d.]+)\$ under reflectance'], 0.00005),
+    # 2026-11-19 (GATE 8 4차, E 의 ⓐ). 세 값이 SI 979-980 에 인쇄되는데
+    # 'JHM 미수록' 으로 면제돼 있었다. 면제 불변식을 주장하는 문장이 바로
+    # 아래 소절에 있으므로, 그 문장이 참이 되려면 이 셋이 검사돼야 한다.
+    ('dip_maxdev',
+     [r'dipole of DMMP differs by ([\d.]+)~D'], 0.005),
+    ('dip_dmmp_gfn2',
+     [r'differs by [\d.]+~D, from ([\d.]+) to'], 0.005),
+    ('dip_dmmp_b3lyp',
+     [r'from [\d.]+ to\s*\n?([\d.]+), which is about'], 0.005),
+    ('hn_anchor_baseline',
+     [r'(\d+) numeric positions in the main text are not yet'], 0),
+    ('hn_unseen_baseline',
+     [r'A further (\d+)\s*\n?quantities have a check written'], 0),
+    ('cs_share_max',
+     [r'to ([\d.]+) against an equal share'], 0.0005),
+    ('uvdup_agree_meas_d2',
+     [r'against all ([\w-]+) measured rows of the second'], 0),
+    ('cs_share_equal',
+     [r'against an equal share of ([\d.]+),'], 0.0005),
+    ('uvdup_distinct_d1',
+     [r'pairwise distinct,\s*\n?(\w+) distinct columns of'], 0),
+    ('uvdup_ngroup',
+     [r'distinct columns of (\w+) in each'], 0),
+    ('uvdup_agree_meas_d1',
+     [r'they agree with one another in (\w+) of'], 0),
+    ('uvdup_meas_d1',
+     [r'in none of\s*\n?the ([\w-]+) measured rows of the first set'], 0),
+    ('uvdup_agree_meas_d3',
+     [r'first set and (\w+) of the sixteen'], 0),
+    ('uvdup_meas_d3',
+     [r'and none of the (\w+) of the\s*\n?third'], 0),
+    ('uvdup_meas_d2',
+     [r'against all ([\w-]+) measured rows of the second'], 0),
     # 2026-11-18 (P2 잔여, 2차 묶음). 자리별 앵커 스물한 자리.
     # 값-키 대응이 모호한 것은 넣지 않았다 (잘못된 별칭은 검증이 아니라
     # 검증처럼 보이는 것이다). 남은 자리는 anchor_audit.py 가 센다.
@@ -3791,7 +4158,8 @@ CHECKS = [
      0.0005),
     ('st_p28_abs', [r'rather than the structural ([\d.]+) the abstract'],
      0.0005),
-    ('st_null3', [r'comparison returns \$p=([\d.]+)\$, the smallest'], 0.0005),
+    ('st_null3',
+     [r'all designations returns \$p=([\d.]+)\$, the smallest'], 0.0005),
     ('st_bh28_fam', [r'family leaves that result at ([\d.]+) and the closest'],
      0.0005),
     ('st_bh6_p28', [r'brings it without crossing[^.]*? is ([\d.]+)\.'], 0.0005),
@@ -3832,6 +4200,8 @@ CHECKS = [
      [r'ranks the designation \d+th of (\d+)\s*\n?on match count'], 0),
     ('concl_sr_struct',
      [r'nominal value survives at ([\d.]+)\s*\n?\(Supporting'], 0.0005),
+    ('prespec_sr_struct',
+     [r'nominal value becomes ([\d.]+)\.'], 0.0005),
     # 2026-11-18 (P2 잔여). TOC 도판 주석 여덟 자리.
     ('toc_n_agents', [r'valid matches of (\d+) agents'], 0),
     ('toc_nmatch_full', [r'agents: (\d+) \(full panel\)'], 0),
@@ -3853,8 +4223,11 @@ CHECKS = [
     # 인용 문헌의 수치 (2026-10-20). outputs/cite_facts.json 이 단일 출처다.
     ('j18_identified', [r'identified\s*\n?(\d+) simulants'], 0),
     ('j18_unsuitable', [r'judged (\d+) unsuitable'], 0),
-    ('j21_identified', [r'a later one screened (\d+) chemicals'], 0),
-    ('j21_discounted', [r'discounted (\d+) on the risk'], 0),
+    # 2026-11-18 (GATE 8 3차, M7). 두 패턴이 현행 산문에 0건 매치였고
+    # 면제 사유('ACS본 미수록')가 거짓이었다 — main.tex 가 둘을 인쇄한다.
+    # 산문이 재서술되는 동안 패턴이 늙었고 면제가 그 사실을 가렸다.
+    ('j21_identified', [r'discounting \d+ of (\d+) chemicals'], 0),
+    ('j21_discounted', [r'discounting (\d+) of \d+ chemicals'], 0),
     ('j21_suitable', [r'repository of (\d+) suitable'], 0),
     ('j21_possible', [r'suitable and (\d+) provisional'], 0),
     # ------------------------------------------- 휘발성 축 (2026-11-03 신설)
@@ -3991,8 +4364,14 @@ CHECKS = [
     ('vol_p_nvalid_main',
      [r'valid-match count returns one match at \$p = (0\.\d+)\$'], 0.00005),
     ('n_freedoms',
-     [r'(\w+) analyst choices therefore move',
-      r'the (\w+) analyst freedoms in full'], 0),
+     [r'Each of the\s*\n?(\w+) is set out here'], 0),
+    ('n_freedoms_other',
+     [r'fixing the other (\w+) in advance'], 0),
+    ('n_freedoms_fix',
+     [r'one of the (\w+) degrees of freedom this paper asks others to fix'],
+     0),
+    ('n_freedoms_fix2',
+     [r'asks that the first (\w+) be fixed'], 0),
     ('match_range_hi',
      [r'arbitrary choices move between zero and\s*\n?(\w+)'], 0),
     ('vol_gap_cg', [r'sits (0\.\d+) decades from phosgene',
@@ -4189,7 +4568,29 @@ CHECKS = _merged
 # ----------------------------------------------------------------------
 
 
-WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+# 2026-11-19. 원고의 하네스 공시가 이 두 수를 인용하므로 모듈 상수로 올려
+# 사실표에 올린다. 내릴 때는 여기 한 곳만 고친다.
+def strip_comments(s):
+    """LaTeX 주석 제거. PDF 에 들어가지 않는 줄은 대조 대상이 아니다.
+
+    주석을 읽으면 '보관용' 문구가 검증 통과의 그림자 출처가 된다. \\% 는
+    보존한다. 2026-11-19: 모듈 수준으로 올렸다. anchor_audit.py 가 이
+    로직의 두 번째 사본을 들고 있었고, 그 사본이 조용히 늙는 것이 이
+    저장소의 반복 결함이다. 이제 양쪽이 같은 함수를 쓴다.
+    """
+    out = []
+    for line in s.split('\n'):
+        if line.lstrip().startswith('%'):
+            continue
+        out.append(re.sub(r'(?<!\\)%.*$', '', line))
+    return '\n'.join(out)
+
+
+ANCHOR_BASELINE_CONST = 38     # 2026-11-18 GATE8-3차 M6·M7 후
+UNSEEN_BASELINE_CONST = 99     # 2026-11-19 GATE8-4차 (쌍극자 3건 등재)
+
+# 2026-11-19. 'none' 은 이 원고가 0 을 적는 또 하나의 어법이다.
+WORDS = {'none': 0, 'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12,
          'thirteen': 13, 'fourteen': 14, 'fifteen': 15, 'sixteen': 16,
          'seventeen': 17, 'eighteen': 18, 'nineteen': 19, 'twenty': 20,
@@ -4219,6 +4620,32 @@ WORDS.update({
 # 폐기값 블랙리스트. 재분석으로 값이 바뀔 때마다 구판을 여기에 넣는다.
 # 본문이 구판임을 밝히고 인용하는 문장은 면제 패턴으로 통과시킨다.
 SUPERSEDED = [
+    # 2026-11-19 (GATE 8 4차). 수치 없는 거짓 문장 둘이 되돌아와도 값 검사가
+    # 못 본다는 것을 내가 새로 넣은 주입시험이 보여 줬다 (미탐지 2건).
+    # 이 검증기는 수를 대조하지, 문장을 대조하지 않는다. 철회된 어법 자체를
+    # 금지해 되돌아오지 못하게 한다.
+    #
+    # (1) 정규화 기전. 단위 정규화는 성분을 균등화하지 않는다 — 실측 지분
+    #     0 ~ 0.368, 균등 0.0345 (deltaE_premise.json/component_share).
+    #     버리는 것은 성분 간 가중이 아니라 화합물의 응답 크기다.
+    ('단위 정규화가 성분을 균등화한다는 철회된 기전',
+     [r'did not respond enters[\s\S]{0,60}same weight',
+      r'same weight as one that did'],
+     [r'An earlier version', r'is wrong']),
+    # (2) DIMP 지정 문서. NIOSH 호흡보호구 문서가 아니라 NRC MIST
+    #     assessment 다 (designations_20261106.csv 6행). 직전 문장이 NIOSH
+    #     문서를 명명하므로 'the same assessment' 는 오독을 부른다.
+    ('DIMP 지정 문서를 명명하지 않는 철회된 어법',
+     [r'in the same assessment that also designates DMMP',
+      r'in the same assessment that designates DMMP'],
+     [r'An earlier version', r'we withdraw', r'read it as']),
+    # (3) 비형광 기전. 세 판 UV 중 한 판에서만 나타나므로 염료의 성질이
+    #     아니다 (deltaE_premise.json/duplicate_cross_set).
+    ('여섯 염료가 UV 에서 형광하지 않는다는 철회된 기전',
+     [r'six dyes do not\s*\n?fluoresce under ultraviolet illumination and the',
+      r'six dyes that do\s*\n?not fluoresce under ultraviolet'],
+     [r'An earlier version', r'we withdraw', r'refutes that']),
+
     # 2026-11-12 (반전). 위 항목은 2026-11-10 에 "DPGME 특허 본문 미열람" 을
     # 근거로 IMS 서술을 금지했다. 그 근거가 틀렸다.
     # sources/designations_20261106.csv 7행은 '[수집 불가: Google Patents,
@@ -4410,8 +4837,14 @@ SUPERSEDED = [
       r'19\\% after whitening', r'18\.9\\?%'], []),
     # 2026-11-02. 정본이 0.0419 (3자리로 0.042) 가 되었으므로 0.042 를
     # 금지할 수 없다. 금지 대상을 그 앞 두 판본으로 옮긴다.
+    # 2026-11-18 (GATE 8 3차). 벗은 0.046 금지가 새 정본
+    # vol_cell_min_p = 0.0458333 의 3자리 반올림과 충돌해 B2a 가 잡았다.
+    # 금지를 그 값이 실제로 쓰이던 어구로 한정한다. 전역 금지는 옳은 값을
+    # 적을 때 실패를 내고, 그 실패를 피하려 틀린 값을 되돌리는 경로를 만든다.
     ('사전지정 BH q, 결정적 필터 이전 (정본 0.042)',
-     [r'0\.046\b', r'0\.0397\b'], []),
+     [r'pre-specified[\s\S]{0,160}0\.046\b',
+      r'0\.046\b[\s\S]{0,160}pre-specified',
+      r'0\.0397\b'], []),
     ('28종 BH over 18, 결정적 필터 이전 (정본 0.163)',
      [r'adjusted value is 0\.159', r'eighteen tests is 0\.159',
       r'over 18\s+& [\d.]+ & [\d.]+ & 0\.159',
@@ -4530,6 +4963,7 @@ def main():
                            ('concl_vol_rank', 'vol_rank_nvalid'),
                            ('concl_vol_nperm', 'vol_nperm'),
                            ('concl_sr_struct', 'sr_struct_reduced_p'),
+                           ('prespec_sr_struct', 'sr_struct_reduced_p'),
                            ('toc_bh_q35', 'bh_q35'),
                            ('toc_bh_q35lit', 'bh_q35lit'),
                            ('toc_bh_q28', 'bh_q28'),
@@ -4537,6 +4971,14 @@ def main():
                            ('abs_p28_struct', 'p28_struct'),
                            ('abs_niosh_p28_plus', 'niosh_p28_plus'),
                            ('abs_vol_p_md', 'vol_p_md'),
+                           ('vol_p_md_res', 'vol_p_md'),
+                           ('vol_p_md_weak', 'vol_p_md'),
+                           ('vol_p_md_cov', 'vol_p_md'),
+                           ('obs_md28_struct_si1', 'obs_md28_struct'),
+                           ('obs_md28_struct_si2', 'obs_md28_struct'),
+                           ('concl_bh_q28', 'bh_q28'),
+                           ('h1q_nonempty_tab', 'h1q_nonempty'),
+                           ('h1q_nonempty_cap', 'h1q_nonempty'),
                            ('abs_volniosh_plus3', 'volniosh_p_plus3'),
                            ('abs_twolabel_bh_q', 'twolabel_bh_q'),
                            ('concl_twolabel_bh_q', 'twolabel_bh_q'),
@@ -4563,16 +5005,6 @@ def main():
                            ('mt_dft_mg_gfn2_p', 'dft_mg_gfn2_p')):
         if _src_key in f:
             f[_dst] = f[_src_key]
-    def strip_comments(s):
-        # LaTeX 주석은 PDF 에 들어가지 않는다. 주석을 읽으면 '보관용' 문구가
-        # 검증 통과의 그림자 출처가 되므로 대조 전에 제거한다. \% 는 보존.
-        out = []
-        for line in s.split('\n'):
-            if line.lstrip().startswith('%'):
-                continue
-            out.append(re.sub(r'(?<!\\)%.*$', '', line))
-        return '\n'.join(out)
-
     tex = strip_comments(open(TEX).read())
     body = tex[tex.index('\\begin{abstract}'):]
     # 2026-10-13. 종전에는 main.tex 만 읽었다. 그래서 커버레터와 하이라이트가
@@ -4748,6 +5180,174 @@ def main():
     if _stale:
         fails.append('블랙리스트가 정본 값을 금지한다 (검사 B2a):')
         fails.extend(sorted(set(_stale)))
+
+    # (B2b) 면제 사유의 유효성 (2026-11-18 신설, GATE 8 3차 M7 에서 드러남).
+    #
+    # 왜 필요한가. j21_identified(171)·j21_discounted(78) 가 'ACS본 미수록'
+    # 으로 면제돼 있었는데 main.tex 가 둘을 인쇄한다. 게다가 두 키의 CHECKS
+    # 패턴은 현행 산문에 0건 매치였다. 산문이 재서술되는 동안 패턴이 늙었고
+    # 면제가 그 사실을 가렸다. 면제는 사유를 적으면 끝이었고 그 사유가
+    # 참인지는 아무도 보지 않았다. 이제 기계가 본다.
+    #
+    # 판정 범위. 'ACS본 미수록' = 지금 검증하는 판본에 없다는 선언이므로
+    # 그 선언만 반증할 수 있다 ('JHM 판본 미수록' 은 다른 판본에 대한
+    # 선언이라 여기서 참거짓을 가릴 수 없다). 정수 100 이상만 본다 —
+    # 두 자리 이하는 다른 양과 우연히 겹친다. 쌍 중 하나가 잡히면
+    # 분석자가 둘을 함께 고친다 (171 은 잡히고 78 은 잡히지 않는다).
+    _falseexempt = []
+    for _k, _why in UNQUOTED.items():
+        if 'ACS본 미수록' not in _why or _k not in f:
+            continue
+        _fv = f[_k]
+        if not isinstance(_fv, int) or isinstance(_fv, bool) or _fv < 100:
+            continue
+        if _fv % 10 == 0:        # 1000, 2000, 500 같은 자리수는 재현·추출
+            continue             # 횟수로 어디서나 쓰인다. 판정하지 않는다.
+        if re.search(r'(?<![\d.,])' + str(_fv) + r'(?![\d.,])', body):
+            _falseexempt.append(
+                f'  면제 사유가 본문에 반증된다 (검사 B2b): {_k} 는 '
+                f'"{_why}" 로 면제됐으나 본문이 {_fv} 를 인쇄한다 — '
+                f'면제를 해제하고 앵커를 달거나 사유를 고칠 것')
+    if _falseexempt:
+        fails.append('면제 목록이 본문과 어긋난다 (검사 B2b):')
+        fails.extend(sorted(set(_falseexempt)))
+
+    # (P3) 검증기가 읽는 적치물을 파이프라인이 만드는가 (2026-11-19 신설).
+    #
+    # 왜 필요한가. 이 저장소의 재발 결함은 계산 오류가 아니라 '생성기
+    # 미등록' 이다 — 어떤 스크립트가 만들기는 하는데 run_analysis.sh 에
+    # 없어서, 빈 outputs/ 로 클론하면 그 적치물이 생기지 않는다.
+    # run_analysis.sh 머리주석이 네 번을 세고 있고, 이번 점검에서 세 개를
+    # 더 찾았다 (volatility_niosh, h1_fidelity_stability,
+    # h1_space_sensitivity — 뒤의 둘은 이번 회차에 내가 만든 것이다).
+    # 초록이 인용하는 volniosh_p_plus3 가 그중 하나의 출처였다.
+    #
+    # 판정 범위. '쓰는 스크립트를 찾았는데 그것이 파이프라인에 없다' 만
+    # 실패로 본다. 쓰는 스크립트를 못 찾은 것은 변수 경로 등으로 정규식이
+    # 놓친 것일 수 있으므로 판정하지 않는다 (없는 결함을 만들지 않는다).
+    _BUILD_TIME = {              # 분석이 아니라 빌드·시험 단계가 만든다
+        'outputs/length_audit.json': 'wordcount.py (build_paper.sh)',
+        'outputs/injection_suite.json': 'test_verify_consistency.py',
+        'outputs/fig_label_counts.json': 'make_fig_toxicity.py (--figs)',
+        'outputs/unmatched_anchors.json': 'verify_consistency.py',
+        'outputs/unanchored_positions.json': 'verify_consistency.py',
+    }
+    try:
+        _pipe_src = open('run_analysis.sh', encoding='utf-8').read()
+        # 파일명에 대문자가 있다 (deltaE_premise.py). 소문자만 받으면
+        # 파이프라인에 있는 스크립트를 없다고 보고한다 (2026-11-19 실측).
+        _pipe = set(re.findall(r'([A-Za-z_0-9]+\.py)', _pipe_src))
+        _writers = {}
+        for _p in glob.glob('*.py'):
+            _t = open(_p, encoding='utf-8', errors='ignore').read()
+            for _f in (set(re.findall(r"open\('(outputs/[^']+)',\s*'w'", _t))
+                       | set(re.findall(r"to_csv\('(outputs/[^']+)'", _t))
+                       | set(re.findall(r"np\.save\('(outputs/[^']+)'", _t))):
+                _writers.setdefault(_f, set()).add(_p)
+        _self = open(__file__, encoding='utf-8').read()
+        _read = (set(re.findall(r"open\('(outputs/[^']+)'", _self))
+                 | set(re.findall(r"read_csv\('(outputs/[^']+)'", _self)))
+        _unpiped = []
+        for _f in sorted(_read):
+            if _f in _BUILD_TIME:
+                continue
+            _w = _writers.get(_f)
+            if _w and not (_w & _pipe):
+                _unpiped.append(f'  {_f} <- {", ".join(sorted(_w))} '
+                                f'(run_analysis.sh 에 없다)')
+        if _unpiped:
+            fails.append('파이프라인이 만들지 않는 적치물을 검증기가 읽는다 '
+                         '(검사 P3): 빈 outputs/ 로 클론하면 재현되지 '
+                         '않는다. run_analysis.sh 에 의존 순서대로 넣을 것:')
+            fails.extend(_unpiped)
+    except OSError:
+        pass
+
+    # (P5) 투고 도판을 빌드가 만드는가 (2026-11-20 신설).
+    #
+    # 왜 필요한가. P3 는 검증기가 읽는 적치물만 본다. 도판은 그 범위
+    # 밖이었고, 실제로 두 건이 새어 있었다 — make_toc_acs.py 는
+    # build_paper.sh 안에서 [ -f ] 뒤에 숨어 있었고 (그 파일 자신의
+    # 머리주석이 금지하는 패턴이다), make_ga.py 는 목록에 아예 없어서
+    # 분석을 다시 돌리면 graphical_abstract.png 의 mtime 만 뒤처졌다.
+    # 2026-10-22 에는 같은 구조 때문에 내용까지 묵은 판이 투고 직전까지
+    # 남아 있었다 (p=0.297, Spearman r=-0.022, n=214).
+    #
+    # 판정 범위. P3 와 같다. '쓰는 스크립트를 찾았는데 그것이 --figs
+    # 목록에 없다' 만 실패로 본다. 못 찾은 것은 판정하지 않는다.
+    try:
+        _b = open('build_paper.sh', encoding='utf-8').read()
+        _m = re.search(r"--figs'\s*\];\s*then(.*?)\n\s*for f in",
+                       _b, re.S)
+        _figs_block = _m.group(1) if _m else _b
+        # 2026-11-20. 주석을 먼저 걷어낸다. 바로 위 설명주석이
+        # make_ga.py 와 make_toc_acs.py 를 글자로 담고 있어서, 등록을
+        # 지워도 이 검사가 통과했다 (음성시험에서 실측). 검사가 자기
+        # 주석에 속으면 통과는 아무것도 뜻하지 않는다.
+        _figs_block = '\n'.join(l for l in _figs_block.splitlines()
+                                if not l.lstrip().startswith('#'))
+        _figs_reg = set(re.findall(r'([A-Za-z_0-9]+\.py)', _figs_block))
+        _png_writers = {}
+        for _p in glob.glob('*.py'):
+            _t = open(_p, encoding='utf-8', errors='ignore').read()
+            for _f in re.findall(r"savefig\('(outputs/[^']+\.png)'", _t):
+                _png_writers.setdefault(_f, set()).add(_p)
+        # 원고가 실제로 넣는 도판 + 검증기가 낡음을 보는 첨부.
+        # FIGURES 만 쓰면 범위가 좁다. toc_acs.png 는 본문이
+        # \includegraphics 하는 투고 도판인데 FIGURES 에 없다 (JHM 본에
+        # 안 들어가서 제외돼 있다). .tex 에서 직접 읽는다.
+        _want = {f'outputs/{x}' for x in FIGURES}
+        _want.add('outputs/graphical_abstract.png')
+        for _tex in ('paper/main.tex', 'paper/supplementary.tex'):
+            if os.path.exists(_tex):
+                _tt = open(_tex, encoding='utf-8').read()
+                for _g in re.findall(r'\\includegraphics[^{]*\{([^}]+)\}',
+                                     _tt):
+                    if _g.endswith('.png'):
+                        _want.add(f'outputs/{os.path.basename(_g)}')
+        _unbuilt = []
+        for _f in sorted(_want):
+            _w = _png_writers.get(_f)
+            if _w and not (_w & _figs_reg):
+                _unbuilt.append(f'  {_f} <- {", ".join(sorted(_w))} '
+                                f'(build_paper.sh --figs 에 없다)')
+        if _unbuilt:
+            fails.append('빌드가 만들지 않는 도판을 투고물이 쓴다 '
+                         '(검사 P5): 분석을 다시 돌려도 이 도판은 갱신되지 '
+                         '않는다. build_paper.sh --figs 목록에 넣을 것:')
+            fails.extend(_unbuilt)
+    except OSError:
+        pass
+
+    # (A-inj) 하네스 공시의 '미탐지 없음' 주장과 마지막 주입시험 기록의 대조.
+    #
+    # 왜 작업흐름 가드인가. 원고가 '놓친 것은 없다' 고 적는데 마지막 실행이
+    # 2건을 놓쳤다면 그 주장이 낡은 것이고, 그것은 PDF 가 낡은 것과 같은
+    # 부류다 — 내용의 오류가 아니라 빌드 상태다. 주입시험이 이것을 내용
+    # 실패로 세면, 기록이 낡아 있는 동안 스위트가 청결트리에서 멈춰 기록을
+    # 갱신할 수 없는 교착이 생긴다 (2026-11-19 실측).
+    # 2026-11-19 (E 의 ⓒ). 세 경로로 조용히 꺼지던 것을 닫는다.
+    #   (i) 기록 파일이 없거나 깨지면 조용했다 → 실패.
+    #   (ii) 감시 대상 문장을 재서술하면 꺼졌다 → 문장 부재도 실패.
+    #        가드가 자기가 감시하는 문장으로 꺼지면 가드가 아니다.
+    #   (iii) 주장 문장과 무관하게 미탐지는 0 이어야 한다.
+    _CLAIM = ('version contains is caught, and none is'
+              + chr(92) + 's*' + chr(92) + 'n?missed')
+    try:
+        _ij = json.load(open('outputs/injection_suite.json'))
+    except (OSError, ValueError) as _e:
+        _ij = None
+        fails.append(f'주입시험 기록을 읽지 못했다 (검사 A-inj): {_e!r} — '
+                     f'python3 test_verify_consistency.py 를 돌릴 것')
+    if _ij is not None:
+        if _ij.get('n_missed'):
+            fails.append(
+                f'주입시험이 놓친 사례가 있다 (검사 A-inj): 마지막 실행 '
+                f"미탐지 {_ij['n_missed']}건 — 놓친 자리에 검사를 붙일 것")
+        if not re.search(_CLAIM, body):
+            fails.append(
+                '하네스 공시의 미탐지 주장 문장이 없다 (검사 A-inj): '
+                'SI 의 공시를 지웠거나 재서술했다면 이 검사도 함께 고칠 것')
 
     superseded = []
     for why, pats, exempt in SUPERSEDED:
@@ -5376,22 +5976,52 @@ def main():
     # 키조차 없었고, 초록의 0.028·0.360·0.0206 은 주입해도 불일치 0 건이었다.
     # anchor_audit.py 가 회계 단위를 '자리' 로 바꿔 세고, 여기서는 그 수가
     # 늘지 못하게만 한다. 줄이는 것은 앵커를 다는 작업이고 기준선을 내린다.
+    # 2026-11-18 (GATE 8 3차). 이 블록이 열린 채 실패했다 (fail-open).
+    #
+    # 왜 고치는가. 종전에는 except 에서 경고만 찍고 _unanchored = None 으로
+    # 넘어갔고, 아래 분기가 None 을 건너뛰었다. 그래서 anchor_audit 의
+    # import 가 깨지거나 정규식이 터지면 게이트가 꺼진 채 판정이 PASS 로
+    # 났다. 바로 위 주석이 '꺼진 검사는 없는 검사보다 나쁘다' 고 적고
+    # 미발견을 실패로 올린 것과 같은 논리가 여기에는 적용되지 않았다.
+    # 이제 감사를 돌리지 못한 것 자체가 실패다.
+    ANCHOR_BASELINE = ANCHOR_BASELINE_CONST
+    _unanchored = None
     try:
         import anchor_audit as _aa
         _unanchored = _aa.run()
-    except Exception as _e:                      # 감사가 깨져도 검증은 돈다
-        _unanchored = None
-        print(f'[verify] 경고: anchor_audit 실행 실패 ({_e})')
-    ANCHOR_BASELINE = 52       # 2026-11-18 기준. 내릴 때마다 여기도 내릴 것
+    except Exception as _e:
+        fails.append(f'  위치형 감사를 돌리지 못했다 (검사 P2): {_e!r} — '
+                     f'anchor_audit.py 를 고칠 것. 돌지 않는 게이트는 '
+                     f'없는 게이트와 같다')
     if _unanchored is not None:
         print(f'[verify] 본문 미앵커 수치 {len(_unanchored)}곳 '
               f'/ 기준선 {ANCHOR_BASELINE}')
+        try:
+            json.dump({'baseline': ANCHOR_BASELINE,
+                       'count': len(_unanchored),
+                       'entries': _unanchored},
+                      open('outputs/unanchored_positions.json', 'w'),
+                      ensure_ascii=False, indent=1, default=str)
+        except OSError:
+            pass
         if len(_unanchored) > ANCHOR_BASELINE:
             fails.append(f'  본문 미앵커 수치가 기준선을 넘었다 (검사 P2): '
                          f'{len(_unanchored)} > {ANCHOR_BASELINE} — '
                          f'python anchor_audit.py 로 자리를 볼 것')
+        elif len(_unanchored) < ANCHOR_BASELINE:
+            # 래칫 방지. 내려간 만큼 상수도 내려야 다음 회차가 그 여유를
+            # 다시 써 버리지 못한다.
+            # 2026-11-19 (E 의 ⓓ). 하향은 '내용 오류' 가 아니라 '기준선을
+            # 갱신하라' 는 작업 상태다. substantive 로 두면 수치를 지우거나
+            # 낱말로 바꾸는 주입이 '잡았다' 로 집계된다 — 이 저장소가 이미
+            # 한 번 당한 '파일을 건드리면 잡았다' 의 축소판이다.
+            fails.append(f'  미앵커가 줄었으니 기준선을 내릴 것 '
+                         f'(검사 P2-down): '
+                         f'{len(_unanchored)} < {ANCHOR_BASELINE} — '
+                         f'ANCHOR_BASELINE_CONST 를 {len(_unanchored)} 로 '
+                         f'고칠 것')
 
-    UNSEEN_BASELINE = 105      # 2026-11-16 82c2ddf 기준
+    UNSEEN_BASELINE = UNSEEN_BASELINE_CONST
     _inv = []
     for u in unseen:
         _k = u.split(':')[0]

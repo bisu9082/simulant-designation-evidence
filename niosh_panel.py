@@ -144,7 +144,11 @@ def exact_perm(D, kl, sim_idx, names):
                    matched=bool(ds[r] / nn_med <= 2.0 and ds[r] <= di[r]))
               for r in range(len(i_real))]
     print(f'    {len(ALL):,} 지정 전수, {time.time() - t0:.1f}s')
+    # 2026-11-18. k 가 바뀌면 귀무 자체가 이동한다는 것을 수치로 남긴다.
+    # mean_diff 귀무 평균과 전체 분포를 함께 돌려준다 (교차 판독용).
     return dict(p=p, n_perm=len(ALL), nn_median=nn_med,
+                null_mean={s: float(null[s].mean()) for s in STATS},
+                _null_mean_diff=null['mean_diff'],
                 n_valid=int(-null['n_valid'][ti]),
                 observed={s: float(null[s][ti]) for s in STATS},
                 agents=agents)
@@ -160,20 +164,59 @@ def one_panel(label, path, four):
     ext = pd.concat([base, four], ignore_index=True)
     cols1 = spaces_of(ext)['structural']
     rec = {}
+    _nulls = {}
+    # 2026-11-18 (GATE 8 후속, 리뷰어 D·B 지적). 네 번째 구성을 추가한다.
+    #
+    # 왜. 복원한 열 종 가운데 DIMP 는 이 논문 자신의 지정표
+    # (sources/designations_20261106.csv) 가 NRC 1997 MIST 3장의 GB 직물투과
+    # 지정 모사체로 기록한 화합물이다. DMMP(VX)·methyl salicylate(HD) 와
+    # 같은 문서, 같은 측정 범주, 같은 근거 서술이다. 그런데 위 세 구성은
+    # DIMP 를 비지정 경쟁자로 세우고, 그 상태에서 DIMP 가 소만·사이클로사린·
+    # VX 의 매칭을 깬다. 지정집합은 이 논문이 선언을 요구하는 일곱 자유도
+    # 가운데 하나이므로, 선언만 하고 민감도를 돌리지 않을 수 없다.
+    #
+    # k 가 3 에서 4 로 커지면 귀무도 함께 바뀐다. k 개 추출의 최소값은 k 가
+    # 커질수록 확률적으로 작아지므로 k=3 귀무는 k=4 관측의 기준분포가
+    # 아니다. 이것이 2.6 절이 전수열거를 도입한 군크기 교란 그 자체다.
+    # exact_perm 은 sim_idx 길이로 k 를 정하므로 재열거가 자동으로 된다.
+    DIMP_DESIG = 'plus_all_dimp_designated'
     for tag, df, cols in (('baseline', base, cols0),
                           ('plus_all_recomputed', ext, cols1),
-                          ('plus_all_columns_fixed', ext, cols0)):
+                          ('plus_all_columns_fixed', ext, cols0),
+                          (DIMP_DESIG, ext, cols1)):
         kl = df.compound_class.tolist()
         nm = df.compound_name.tolist()
         sim_idx = [i for i, k in enumerate(kl) if k == 'simulant']
-        print(f'  {label}/{tag}: {len(df)}종, 좌표 {len(cols)}개')
+        if tag == DIMP_DESIG:
+            if 'DIMP' not in nm:
+                sys.exit('DIMP 가 확장 프레임에 없다')
+            sim_idx = sorted(sim_idx + [nm.index('DIMP')])
+        print(f'  {label}/{tag}: {len(df)}종, 좌표 {len(cols)}개, '
+              f'지정 {len(sim_idx)}종')
         r = exact_perm(dmat(df, cols), kl, sim_idx, nm)
         r['n_compounds'] = len(df)
         r['n_dims'] = len(cols)
+        r['designated'] = [nm[i] for i in sim_idx]
+        _nulls[tag] = r.pop('_null_mean_diff')
         rec[tag] = r
         print(f'      사전지정 mean_diff p = {r["p"]["mean_diff"]:.5f}  '
               f'유효매칭 {r["n_valid"]}/11  '
               f'6통계량 BH 최소 q {bh_min(list(r["p"].values())):.4f}')
+    # k=3 귀무에 k=4 관측을 대고 읽으면 어떤 값이 나오는가. 이 수치는
+    # 채택값이 아니라 오독의 크기를 적기 위한 것이다.
+    if DIMP_DESIG in rec and 'plus_all_recomputed' in rec:
+        _obs4 = rec[DIMP_DESIG]['observed']['mean_diff']
+        _n3 = _nulls['plus_all_recomputed']
+        rec[DIMP_DESIG]['misread_against_k3_null'] = {
+            'note': ('k=3 귀무에 k=4 관측을 대고 읽은 값. 군크기가 다르면 '
+                     'k 개 추출의 최소값 분포가 달라지므로 기준분포가 아니다. '
+                     '보고값이 아니라 오독의 크기를 적는다.'),
+            'observed_k4': float(_obs4),
+            'null_mean_k3': float(_n3.mean()),
+            'null_mean_k4': float(rec[DIMP_DESIG]['null_mean']['mean_diff']),
+            'p_if_read_against_k3': float((_n3 <= _obs4).sum() / len(_n3)),
+            'p_correct_k4': float(rec[DIMP_DESIG]['p']['mean_diff']),
+        }
     rec['columns_only_in_baseline'] = sorted(set(cols0) - set(cols1))
     rec['columns_only_in_extended'] = sorted(set(cols1) - set(cols0))
     return rec
@@ -188,7 +231,9 @@ def main():
            'smiles': {n: s for n, s, _ in NIOSH_CANDIDATES},
            'iupac_like': {n: i for n, _, i in NIOSH_CANDIDATES},
            'authority': SOURCE,
-           'designated_set': 'unchanged (incumbent three)',
+           'designated_set': ('incumbent three in the baseline and the two '
+                              'all-added runs; a fourth run designates DIMP as '
+                              'well — see each run\'s own designated field'),
            'spaces_extended': ['structural'],
            'spaces_not_extended': ['electronic3', 'merged'],
            'why_not_extended': ('전자 좌표는 xtb 반경험 계산이 필요하고 그 '
