@@ -590,7 +590,23 @@ def _label_scope_guards():
     # 또 생긴다. 주석까지 포함해 추적 파일 전부를 훑고, 투고본에 실리는
     # 교신저자 주소 하나만 통과시킨다. 본인 아닌 분들 정보라 수치 오류와
     # 같은 급으로 두지 않는다.
-    _ALLOWED_MAIL = ('yjjangchem@korea.kr',)
+    #
+    # 2026-11-20. Ku 지시로 Jin Yoo 가 공동교신이 됐다 (5·6 공동교신).
+    # 투고본에 실리는 주소가 둘이 되었으므로 목록에 추가한다. 이 목록은
+    # '본문에 \email 로 실리는 주소' 와 같아야 한다 — 아래 검사가 그
+    # 일치를 확인하므로, 저자 블록만 고치고 여기를 잊으면 멈춘다.
+    _ALLOWED_MAIL = ('yjjangchem@korea.kr', 'tysonyj@snu.ac.kr')
+    # 목록과 저자 블록의 대조. 둘 중 하나만 고치는 것을 막는다.
+    try:
+        _mt = open('paper/main.tex', encoding='utf-8').read()
+        _declared = set(_r.findall(r'\\email\{([^}]+)\}', _mt))
+        if _declared and _declared != set(_ALLOWED_MAIL):
+            bad.append(
+                '  교신저자 허용 목록이 저자 블록과 어긋난다 (검사 B0d): '
+                f'본문 \\email {sorted(_declared)} 대 목록 '
+                f'{sorted(_ALLOWED_MAIL)}. 둘을 맞출 것')
+    except OSError:
+        pass
     _MAIL = _r.compile(r'[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}')
     if _files is None:
         print('[verify] 검사 B0d: git 을 쓸 수 없어 건너뛴다.')

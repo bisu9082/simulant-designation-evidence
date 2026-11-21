@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  20 NOV 2026 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.30)  20 NOV 2026 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -719,7 +719,7 @@ Package rerunfilecheck Info: File `supplementary.out' has not changed.
 Here is how much of TeX's memory you used:
  11573 strings out of 476106
  174875 string characters out of 5793932
- 1954975 words of memory out of 5000000
+ 1953975 words of memory out of 5000000
  33162 multiletter control sequences out of 15000+600000
  591329 words of font info for 109 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
@@ -742,7 +742,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf
 onts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on supplementary.pdf (56 pages, 6795179 bytes).
+Output written on supplementary.pdf (56 pages, 6795188 bytes).
 PDF statistics:
  908 PDF objects out of 1000 (max. 8388607)
  775 compressed objects within 8 object streams
